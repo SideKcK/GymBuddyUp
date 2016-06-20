@@ -7,14 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E8721CC35C49BDD6A300500 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBDFD785FE9C214CAEE5823 /* Pods_GymBuddyUp.framework */; };
+		C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */; };
+		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
+		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
 		C649C54D1CE2C31C00258994 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54C1CE2C31C00258994 /* ViewController.swift */; };
 		C649C5501CE2C31C00258994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C54E1CE2C31C00258994 /* Main.storyboard */; };
 		C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C649C5511CE2C31C00258994 /* Assets.xcassets */; };
 		C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */; };
+		C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */; };
+		C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C5601CE3C08700258994 /* ColorScheme.swift */; };
+		C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C5631CE3C48B00258994 /* LandingScreenVC.swift */; };
+		C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C5661CE3C68800258994 /* BorderedButton.swift */; };
+		C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C5681CE3EB1A00258994 /* SignupLoginNavVC.swift */; };
+		C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C56A1CE3EE0800258994 /* SignupVC.swift */; };
+		C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C56C1CE3F55E00258994 /* SetGoalVC.swift */; };
+		C64EC1F81D123304000DA37A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC1F71D123304000DA37A /* LoginVC.swift */; };
+		C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC1F91D124FC3000DA37A /* TestViewController.swift */; };
+		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09F1A3EC70E0713D3A6EEE40 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
+		ABBDFD785FE9C214CAEE5823 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerAPI.swift; path = Models/ServerAPI.swift; sourceTree = "<group>"; };
+		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54C1CE2C31C00258994 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +41,17 @@
 		C649C5511CE2C31C00258994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C649C5541CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C649C5561CE2C31C00258994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C649C55D1CE3BBD900258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SignupLogin.storyboard; sourceTree = "<group>"; };
+		C649C5601CE3C08700258994 /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorScheme.swift; path = Helpers/ColorScheme.swift; sourceTree = "<group>"; };
+		C649C5631CE3C48B00258994 /* LandingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingScreenVC.swift; path = VCs/LandingScreenVC.swift; sourceTree = "<group>"; };
+		C649C5661CE3C68800258994 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BorderedButton.swift; path = Views/BorderedButton.swift; sourceTree = "<group>"; };
+		C649C5681CE3EB1A00258994 /* SignupLoginNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupLoginNavVC.swift; path = VCs/SignupLoginNavVC.swift; sourceTree = "<group>"; };
+		C649C56A1CE3EE0800258994 /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupVC.swift; path = VCs/SignupVC.swift; sourceTree = "<group>"; };
+		C649C56C1CE3F55E00258994 /* SetGoalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetGoalVC.swift; path = VCs/SetGoalVC.swift; sourceTree = "<group>"; };
+		C64EC1F71D123304000DA37A /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = VCs/LoginVC.swift; sourceTree = "<group>"; };
+		C64EC1F91D124FC3000DA37A /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestViewController.swift; path = VCs/TestViewController.swift; sourceTree = "<group>"; };
+		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
+		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +59,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E8721CC35C49BDD6A300500 /* Pods_GymBuddyUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C246C47005EBE768DADEE528 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */,
+				09F1A3EC70E0713D3A6EEE40 /* Pods-GymBuddyUp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C60986531CEEBAC300A0AFE3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */,
+				C60986561CEEC00D00A0AFE3 /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
 				C649C5491CE2C31C00258994 /* GymBuddyUp */,
 				C649C5481CE2C31C00258994 /* Products */,
+				C246C47005EBE768DADEE528 /* Pods */,
+				F97DB85B0205C0F1A6238ED4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +105,58 @@
 		C649C5491CE2C31C00258994 /* GymBuddyUp */ = {
 			isa = PBXGroup;
 			children = (
+				C60986531CEEBAC300A0AFE3 /* Models */,
+				C649C5651CE3C64F00258994 /* Views */,
+				C649C55F1CE3C04600258994 /* Helpers */,
+				C649C5621CE3C45400258994 /* VCs */,
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
-				C649C54C1CE2C31C00258994 /* ViewController.swift */,
 				C649C54E1CE2C31C00258994 /* Main.storyboard */,
+				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
 				C649C5511CE2C31C00258994 /* Assets.xcassets */,
 				C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */,
 				C649C5561CE2C31C00258994 /* Info.plist */,
 			);
 			path = GymBuddyUp;
+			sourceTree = "<group>";
+		};
+		C649C55F1CE3C04600258994 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C649C5601CE3C08700258994 /* ColorScheme.swift */,
+				C60986581CEEC25200A0AFE3 /* Utils.swift */,
+				C65301E31D01F51E00DEF7A0 /* Validation.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		C649C5621CE3C45400258994 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				C64EC1F91D124FC3000DA37A /* TestViewController.swift */,
+				C649C5681CE3EB1A00258994 /* SignupLoginNavVC.swift */,
+				C649C54C1CE2C31C00258994 /* ViewController.swift */,
+				C649C5631CE3C48B00258994 /* LandingScreenVC.swift */,
+				C649C56A1CE3EE0800258994 /* SignupVC.swift */,
+				C649C56C1CE3F55E00258994 /* SetGoalVC.swift */,
+				C64EC1F71D123304000DA37A /* LoginVC.swift */,
+			);
+			name = VCs;
+			sourceTree = "<group>";
+		};
+		C649C5651CE3C64F00258994 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C649C5661CE3C68800258994 /* BorderedButton.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F97DB85B0205C0F1A6238ED4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABBDFD785FE9C214CAEE5823 /* Pods_GymBuddyUp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +166,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "GymBuddyUp" */;
 			buildPhases = (
+				4E4240DCB0632DE50963DC7B /* Check Pods Manifest.lock */,
 				C649C5431CE2C31C00258994 /* Sources */,
 				C649C5441CE2C31C00258994 /* Frameworks */,
 				C649C5451CE2C31C00258994 /* Resources */,
+				7F2A634278E4D56515EFB077 /* Embed Pods Frameworks */,
+				7961B2E10148015E6DEB574B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
@@ -131,12 +230,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4E4240DCB0632DE50963DC7B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7961B2E10148015E6DEB574B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F2A634278E4D56515EFB077 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C649C5431CE2C31C00258994 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
+				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
+				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
+				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C649C54D1CE2C31C00258994 /* ViewController.swift in Sources */,
+				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
+				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
+				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
+				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
+				C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */,
+				C64EC1F81D123304000DA37A /* LoginVC.swift in Sources */,
+				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
+				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +317,14 @@
 				C649C5541CE2C31C00258994 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C649C55D1CE3BBD900258994 /* Base */,
+			);
+			name = SignupLogin.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -248,6 +415,7 @@
 		};
 		C649C55A1CE2C31C00258994 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
@@ -259,6 +427,7 @@
 		};
 		C649C55B1CE2C31C00258994 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09F1A3EC70E0713D3A6EEE40 /* Pods-GymBuddyUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
@@ -287,6 +456,7 @@
 				C649C55B1CE2C31C00258994 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

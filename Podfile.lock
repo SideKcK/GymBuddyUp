@@ -1,0 +1,21 @@
+PODS:
+  - Alamofire (3.4.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - CryptoSwift (0.4.1)
+  - GoogleMaps (1.13.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - ChameleonFramework/Swift (~> 2.1.0)
+  - CryptoSwift
+  - GoogleMaps
+
+SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
+  GoogleMaps: b20a103ff307f58392e603cf142e59d7e30374c1
+
+COCOAPODS: 0.39.0

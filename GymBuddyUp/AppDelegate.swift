@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
+        let signSB = UIStoryboard(name: "SignupLogin", bundle: nil)
+        let vc = signSB.instantiateViewControllerWithIdentifier("LandingScreenVC")
+        window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
         return true
     }
 

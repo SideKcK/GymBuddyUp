@@ -15,6 +15,8 @@ class LandingScreenVC: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var signUpButton: BorderedButton!
     @IBOutlet weak var loginButton: BorderedButton!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,25 @@ class LandingScreenVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onLoginButton(sender: AnyObject) {
+        //check if username valid
+        ServerAPI.sharedInstance.userLogin(usernameField.text!, password: passwordField.text!) { (error) in
+            if error == nil {
+                self.performSegueWithIdentifier("toMainSegue", sender: sender)
+            }else {
+                let alert = UIAlertController(title: "Login Failed", message: error?.message, preferredStyle: .Alert)
+                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(OKAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+        }
+    }
+    
+    @IBAction func unwindToLandingVC(segue: UIStoryboardSegue) {
+        
     }
 
 }

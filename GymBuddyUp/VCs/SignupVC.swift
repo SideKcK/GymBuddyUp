@@ -10,8 +10,6 @@ import UIKit
 import ChameleonFramework
 
 class SignupVC: UIViewController {
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -26,7 +24,6 @@ class SignupVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         let textColor = ColorScheme.sharedInstance.lightText
-        infoLabel.textColor = textColor
         loginLabel.textColor = textColor
         loginButton.titleLabel?.textColor = ColorScheme.sharedInstance.contrastText
         setTextField(emailField)
@@ -75,10 +72,8 @@ class SignupVC: UIViewController {
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
             alertController.title = "Sign Up Failed"
             alertController.message = "All fields must be entered."
-            self.presentViewController(alertController, animated: true) {
-                
-            }
-
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
         }
         
         if Validation.isValidEmail(emailField.text!) {
@@ -86,9 +81,11 @@ class SignupVC: UIViewController {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
                         ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
+                            if error == nil {
                             print("Sign Up Succeed")
                             //send activate email
-                            self.performSegueWithIdentifier("toSetGoalSegue", sender: self)
+                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
+                            }
                         })
                     
 
@@ -99,26 +96,20 @@ class SignupVC: UIViewController {
                     }else {
                         alertController.message = "Your password must contain both digits and letters."
                     }
-                    self.presentViewController(alertController, animated: true) {
-                        
-                    }
-
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    return
                 }
             }else {
                 alertController.title = "Sign Up Failed"
                 alertController.message = "Please confirm password."
-                self.presentViewController(alertController, animated: true) {
-                    
-                }
-
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
             }
         }else {
             alertController.title = "Sign Up Failed"
             alertController.message = "Invalid Email."
-            self.presentViewController(alertController, animated: true) {
-                
-            }
-
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
         }
     }
     /*

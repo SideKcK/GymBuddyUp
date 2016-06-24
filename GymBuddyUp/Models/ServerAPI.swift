@@ -12,9 +12,14 @@ import CryptoSwift
 
 let appid = "10001"
 let secret = "123456"
-let serverURL = "http://148.74.20.89:8106"
+let serverURL = "http://108.59.82.159:8106"
 
 class ServerAPI {
+    
+    struct Error {
+        var code: Int!
+        var message: String!
+    }
     
     class var sharedInstance: ServerAPI {
         struct Static {
@@ -23,47 +28,52 @@ class ServerAPI {
         return Static.instance
     }
     
-    func userSignUp(username: String!, email: String!, password: String!, completion: (user: User?, error: NSError?) -> ()) {
+    func userSignUp(username: String!, email: String!, password: String!, completion: (user: User?, error: Error?) -> ()) {
         
         //calculate MD5 sign
         let pwhash = password.md5().md5()
-        var params: [String: AnyObject] = ["username": username, "email": email, "password": pwhash, "lng": 0, "lat": 0]
+        var params: [String: AnyObject] = ["username": username, "email": email, "password": pwhash]
         generateQueryParams(&params)
-        Alamofire.request(.POST, NSURL(string: serverURL+"/user/reg")!, parameters: params)
+        print(params)
+        Alamofire.request(.GET, NSURL(string: serverURL+"/user/reg")!, parameters: params)
             .responseJSON { response in
+                print(response)
                 if let JSON = response.result.value as? NSDictionary {
-                    if let code = JSON["code"] as? Int {
+                    if let code = JSON["rcode"] as? Int {
                         if code == 1 {
                             User.currentUser = User(response: JSON["data"] as! NSDictionary)
                             completion(user: User.currentUser, error: nil)
+                        }else {
+                            completion(user: nil, error: Error(code: abs(code), message: JSON["message"] as! String))
                         }
                     }
                 }
-                //TBD
-                completion(user: nil, error: response.result.error)
+                completion(user: nil, error: Error(code: 0, message: "Network Error"))
         }
     }
 
-    func userLogin(username: String!, password: String!, completion: ( error: NSError?) -> ()) {
+    func userLogin(username: String!, password: String!, completion: ( error: Error?) -> ()) {
         let pwhash = password.md5().md5()
-        var params: [String: AnyObject] = ["username": username, "password": pwhash, "lng": 0, "lat": 0]
+        var params: [String: AnyObject] = ["username": username, "password": pwhash]
         generateQueryParams(&params)
-        Alamofire.request(.POST, NSURL(string: serverURL+"/user/login")!, parameters: params)
+        Alamofire.request(.GET, NSURL(string: serverURL+"/user/login")!, parameters: params)
             .responseJSON { response in
+                print(response)
                 if let JSON = response.result.value as? NSDictionary {
-                    if let code = JSON["code"] as? Int {
+                    if let code = JSON["rcode"] as? Int {
                         if code == 1 {
                             User.currentUser = User(userID: "", token: JSON["data"] as! String)
                             completion(error: nil)
+                        }else {
+                            completion(error: Error(code: abs(code), message: JSON["message"] as! String))
                         }
                     }
                 }
-                //TBD
-                completion(error: response.result.error)
+                completion(error: Error(code: 0, message: "Network Error"))
         }
     }
     
-    func parseResponseCode
+    //func parseResponseCode
     
     func generateQueryParams(inout params: [String: AnyObject]) {
         //get t in long form

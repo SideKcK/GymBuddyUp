@@ -68,6 +68,10 @@ class SignupVC: UIViewController {
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
+        //for testing
+        self.performSegueWithIdentifier("toGenderSegue", sender: self)
+        return
+        
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
             alertController.title = "Sign Up Failed"
@@ -80,15 +84,15 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                        ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
+                    
+                    ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
                             if error == nil {
                             print("Sign Up Succeed")
                             //send activate email
-                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
+                            //self.performSegueWithIdentifier("toGenderSegue", sender: self)
                             }
                         })
                     
-
                 }else{
                     alertController.title = "Sign Up Failed"
                     if pwStatus == .countError {

@@ -64,6 +64,9 @@ class GenderVC: UIViewController {
             
             alertController.addAction(OKAction)
             alertController.addAction(SkipAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+
         }else {
             self.performSegueWithIdentifier("toSetGoalSegue", sender: sender)
         }

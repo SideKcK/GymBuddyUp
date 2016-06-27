@@ -24,7 +24,7 @@ class GenderVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        selected = .Male
         // Do any additional setup after loading the view.
     }
 

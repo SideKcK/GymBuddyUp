@@ -31,6 +31,11 @@
 		C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2091D207D69000DA37A /* PlanLibVC.swift */; };
 		C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC20B1D20B317000DA37A /* PlanEditVC.swift */; };
 		C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC20D1D20B3B1000DA37A /* PlanDetailVC.swift */; };
+		C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC20F1D20D82B000DA37A /* Inbox.storyboard */; };
+		C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2121D20D83D000DA37A /* Me.storyboard */; };
+		C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2151D20D997000DA37A /* TabBarVC.swift */; };
+		C64EC2191D235F95000DA37A /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2171D235F95000DA37A /* Create.storyboard */; };
+		C64EC21B1D235FCF000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +67,11 @@
 		C64EC2091D207D69000DA37A /* PlanLibVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibVC.swift; path = VCs/PlanLibVC.swift; sourceTree = "<group>"; };
 		C64EC20B1D20B317000DA37A /* PlanEditVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanEditVC.swift; path = VCs/PlanEditVC.swift; sourceTree = "<group>"; };
 		C64EC20D1D20B3B1000DA37A /* PlanDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanDetailVC.swift; path = VCs/PlanDetailVC.swift; sourceTree = "<group>"; };
+		C64EC2101D20D82B000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Inbox.storyboard; sourceTree = "<group>"; };
+		C64EC2131D20D83D000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Me.storyboard; sourceTree = "<group>"; };
+		C64EC2151D20D997000DA37A /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = VCs/TabBarVC.swift; sourceTree = "<group>"; };
+		C64EC2181D235F95000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Create.storyboard; sourceTree = "<group>"; };
+		C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateMainVC.swift; path = VCs/CreateMainVC.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +133,9 @@
 				C649C5621CE3C45400258994 /* VCs */,
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				C649C54E1CE2C31C00258994 /* Main.storyboard */,
+				C64EC2171D235F95000DA37A /* Create.storyboard */,
+				C64EC20F1D20D82B000DA37A /* Inbox.storyboard */,
+				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
 				C64EC1FD1D20412B000DA37A /* Plan.storyboard */,
 				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
@@ -150,6 +163,8 @@
 				C64EC2051D207CE6000DA37A /* Plan */,
 				C64EC1F91D124FC3000DA37A /* TestViewController.swift */,
 				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
+				C64EC2151D20D997000DA37A /* TabBarVC.swift */,
+				C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -256,10 +271,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
+				C64EC2191D235F95000DA37A /* Create.storyboard in Resources */,
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
+				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
+				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,11 +346,13 @@
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
+				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
 				C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */,
+				C64EC21B1D235FCF000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
@@ -381,6 +401,30 @@
 				C64EC2011D207373000DA37A /* Base */,
 			);
 			name = Discover.storyboard;
+			sourceTree = "<group>";
+		};
+		C64EC20F1D20D82B000DA37A /* Inbox.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C64EC2101D20D82B000DA37A /* Base */,
+			);
+			name = Inbox.storyboard;
+			sourceTree = "<group>";
+		};
+		C64EC2121D20D83D000DA37A /* Me.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C64EC2131D20D83D000DA37A /* Base */,
+			);
+			name = Me.storyboard;
+			sourceTree = "<group>";
+		};
+		C64EC2171D235F95000DA37A /* Create.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C64EC2181D235F95000DA37A /* Base */,
+			);
+			name = Create.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

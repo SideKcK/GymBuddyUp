@@ -24,7 +24,7 @@ class GenderVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        selected = .Male
         // Do any additional setup after loading the view.
     }
 
@@ -64,6 +64,9 @@ class GenderVC: UIViewController {
             
             alertController.addAction(OKAction)
             alertController.addAction(SkipAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+
         }else {
             self.performSegueWithIdentifier("toSetGoalSegue", sender: sender)
         }

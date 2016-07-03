@@ -34,6 +34,10 @@ class LandingScreenVC: UIViewController {
     }
     
     @IBAction func onLoginButton(sender: AnyObject) {
+        //testing
+        self.performSegueWithIdentifier("toMainSegue", sender: sender)
+        
+        /*
         //check if username valid
         //        ServerAPI.sharedInstance.userLogin(usernameField.text!, password: passwordField.text!) { (error) in
         //            if error == nil {
@@ -63,6 +67,7 @@ class LandingScreenVC: UIViewController {
                 return
             }
         }
+         */
     }
     
     @IBAction func unwindToLandingVC(segue: UIStoryboardSegue) {

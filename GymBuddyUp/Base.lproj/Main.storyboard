@@ -49,5 +49,95 @@
             </objects>
             <point key="canvasLocation" x="358" y="184"/>
         </scene>
+        <!--Tab BarVC-->
+        <scene sceneID="B53-7g-LK7">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tra-hG-gXW" customClass="TabBarVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="nfM-cA-DWx">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <outlet property="tabBar" destination="nfM-cA-DWx" id="Sd6-1p-TZ0"/>
+                        <outlet property="thisTabBar" destination="nfM-cA-DWx" id="F94-6j-whf"/>
+                        <segue destination="3hP-iH-4AI" kind="relationship" relationship="viewControllers" id="hI6-hM-Vlf"/>
+                        <segue destination="5Xr-OL-hGf" kind="relationship" relationship="viewControllers" id="Ebc-b6-xqP"/>
+                        <segue destination="2vF-hG-Vm0" kind="relationship" relationship="viewControllers" id="XX5-sK-rEo"/>
+                        <segue destination="peD-vf-BxC" kind="relationship" relationship="viewControllers" id="zQi-Fi-aV1"/>
+                        <segue destination="7mT-MW-Nwe" kind="relationship" relationship="viewControllers" id="jLB-Ff-YHj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9sp-rN-30H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="439" y="102"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="mcY-oq-xZk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" id="3hP-iH-4AI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Discover" image="Discover" id="UcH-d4-UDe"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYt-x4-Bor" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850.5" y="-87"/>
+        </scene>
+        <!--Plan-->
+        <scene sceneID="TBj-7t-8G7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Plan" id="5Xr-OL-hGf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Plan" image="Plan" id="0oJ-TR-Vov"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ood-he-csB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837.5" y="2"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="Sg6-Cv-wd4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Inbox" id="peD-vf-BxC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Inbox" image="Inbox" id="XgE-1t-pOS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dg6-Nh-UtC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="841" y="215"/>
+        </scene>
+        <!--Create-->
+        <scene sceneID="flW-5P-cpI">
+            <objects>
+                <viewController title="Create" id="2vF-hG-Vm0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uB1-cE-OMe"/>
+                        <viewControllerLayoutGuide type="bottom" id="cNN-nv-zMq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OSk-i6-PYQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" id="5ue-7b-hkh"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wff-6O-mK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1202" y="102"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="aD4-dd-c2n">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" id="7mT-MW-Nwe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" image="Me" id="hX9-qA-NJf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VL7-Dn-8sn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833.5" y="284"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Discover" width="30" height="30"/>
+        <image name="Inbox" width="30" height="30"/>
+        <image name="Me" width="30" height="30"/>
+        <image name="Plan" width="30" height="30"/>
+    </resources>
 </document>

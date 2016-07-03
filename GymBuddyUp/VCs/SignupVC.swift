@@ -69,6 +69,10 @@ class SignupVC: UIViewController {
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
+        //for testing
+        self.performSegueWithIdentifier("toGenderSegue", sender: self)
+        return
+        
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
             alertController.title = "Sign Up Failed"

@@ -21,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = signSB.instantiateViewControllerWithIdentifier("LandingScreenVC")
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
+        
+        var navigationBarAppearace = UINavigationBar.appearance()
+        
+        navigationBarAppearace.tintColor = UIColor.flatBlueColor()  // Back buttons and such
+        navigationBarAppearace.barTintColor = UIColor.flatWhiteColor()  // Bar's background color
+        
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color
+        
         return true
     }
 

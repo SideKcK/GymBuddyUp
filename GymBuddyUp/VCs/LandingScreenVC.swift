@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import Firebase
 
 class LandingScreenVC: UIViewController {
     @IBOutlet weak var overlayView: UIView!
@@ -24,7 +25,7 @@ class LandingScreenVC: UIViewController {
         overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         titleLabel.textColor = ColorScheme.sharedInstance.lightText
         infoLabel.textColor = ColorScheme.sharedInstance.lightText
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,11 +35,28 @@ class LandingScreenVC: UIViewController {
     
     @IBAction func onLoginButton(sender: AnyObject) {
         //check if username valid
-        ServerAPI.sharedInstance.userLogin(usernameField.text!, password: passwordField.text!) { (error) in
+        //        ServerAPI.sharedInstance.userLogin(usernameField.text!, password: passwordField.text!) { (error) in
+        //            if error == nil {
+        //                self.performSegueWithIdentifier("toMainSegue", sender: sender)
+        //            }else {
+        //                let alert = UIAlertController(title: "Login Failed", message: error?.message, preferredStyle: .Alert)
+        //                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        //                alert.addAction(OKAction)
+        //                self.presentViewController(alert, animated: true, completion: nil)
+        //                return
+        //            }
+        //        }
+        
+        FIRAuth.auth()?.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
+            // ...
+            
             if error == nil {
                 self.performSegueWithIdentifier("toMainSegue", sender: sender)
+                
+                
+                
             }else {
-                let alert = UIAlertController(title: "Login Failed", message: error?.message, preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Login Failed", message: error?.description, preferredStyle: .Alert)
                 let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(OKAction)
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -50,5 +68,5 @@ class LandingScreenVC: UIViewController {
     @IBAction func unwindToLandingVC(segue: UIStoryboardSegue) {
         
     }
-
+    
 }

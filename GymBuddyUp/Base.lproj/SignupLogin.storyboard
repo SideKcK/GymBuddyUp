@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="glM-uA-6HV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="glM-uA-6HV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -103,6 +103,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKy-8p-uKt" customClass="BorderedButton" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="38" y="116" width="245" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="207" id="E1c-iw-5oe"/>
+                                            <constraint firstAttribute="width" secondItem="dKy-8p-uKt" secondAttribute="height" multiplier="7:1" id="LmK-bh-2SZ"/>
+                                            <constraint firstAttribute="height" constant="35" id="qOb-sm-gjC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Sign in with Facebook"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="E1c-iw-5oe"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onLoginButton:" destination="ptp-9i-vIs" eventType="touchUpInside" id="RUS-Xt-dqg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -112,6 +130,7 @@
                                     <constraint firstItem="9cI-El-mz0" firstAttribute="centerX" secondItem="75t-uF-dO6" secondAttribute="centerX" id="5n4-sx-g1O"/>
                                     <constraint firstItem="HO0-vI-6Uz" firstAttribute="centerX" secondItem="75t-uF-dO6" secondAttribute="centerX" id="TFx-T7-1zg"/>
                                     <constraint firstItem="vUy-xO-Vvc" firstAttribute="top" secondItem="HO0-vI-6Uz" secondAttribute="bottom" constant="8" id="UjO-it-c9T"/>
+                                    <constraint firstItem="dKy-8p-uKt" firstAttribute="width" secondItem="dKy-8p-uKt" secondAttribute="height" multiplier="7:1" id="V0s-NA-i5M"/>
                                     <constraint firstItem="vUy-xO-Vvc" firstAttribute="centerX" secondItem="75t-uF-dO6" secondAttribute="centerX" id="VWB-uJ-G7X"/>
                                     <constraint firstItem="Pf0-yI-Oxj" firstAttribute="centerX" secondItem="75t-uF-dO6" secondAttribute="centerX" id="XVv-Br-j9x"/>
                                     <constraint firstItem="gmk-Ax-rdt" firstAttribute="top" secondItem="lG1-RZ-Tva" secondAttribute="bottom" constant="28" id="akg-oj-BN4"/>

@@ -9,6 +9,14 @@ target 'GymBuddyUp' do
     pod 'Alamofire', '~> 3.4'
     pod 'CryptoSwift'
     pod 'GoogleMaps'
+    pod 'Firebase'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Messaging'
     
-end
+    # These are pods used for the auth providers.
+    pod 'FBSDKLoginKit'
+    pod 'GoogleSignIn'
+    pod 'TwitterKit'
 
+
+end

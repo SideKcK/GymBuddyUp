@@ -8,16 +8,17 @@
 
 import UIKit
 import ChameleonFramework
+import Firebase
 
 class SignupVC: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmField: UITextField!
-
+    
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
-
+    
     var alertController: UIAlertController!
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class SignupVC: UIViewController {
             // ...
         }
         alertController.addAction(OKAction)
-
+        
     }
     
     func setTextField(textField: UITextField) {
@@ -56,7 +57,7 @@ class SignupVC: UIViewController {
         textField.layer.masksToBounds = true
         textField.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,7 +65,7 @@ class SignupVC: UIViewController {
     
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(false)
-
+        
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
@@ -80,19 +81,32 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                        ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
-                            if error == nil {
+                    print("got here")
+                    //                        ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
+                    //                            if error == nil {
+                    //                            print("Sign Up Succeed")
+                    //                            //send activate email
+                    //                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
+                    //                            }
+                    //                        })
+                    FIRAuth.auth()?.createUserWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
+                        if error == nil {
                             print("Sign Up Succeed")
                             //send activate email
+                            user!.sendEmailVerificationWithCompletion(nil)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
-                            }
-                        })
+                        }
+                        
+                        else {
+                            print(error)
+                        }
+                    }
                     
-
                 }else{
+                    
                     alertController.title = "Sign Up Failed"
                     if pwStatus == .countError {
-                    alertController.message = "Your password must be 5-20 charaters."
+                        alertController.message = "Your password must be 5-20 charaters."
                     }else {
                         alertController.message = "Your password must contain both digits and letters."
                     }
@@ -113,15 +127,15 @@ class SignupVC: UIViewController {
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension SignupVC:UITextFieldDelegate {

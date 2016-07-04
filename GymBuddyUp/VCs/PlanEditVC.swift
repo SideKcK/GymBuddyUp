@@ -13,8 +13,8 @@ class PlanEditVC: UIViewController {
     var showDateVisible = false
     var showRepeatVisible = false
 
-    var cells = ["titleCell", "dateCell", "repeatCell", "detailCell"]
-    var cellNum = 11
+    var cells = ["titleCell", "repeatCell", "detailCell"]
+    var cellNum = 9
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -50,8 +50,7 @@ extension PlanEditVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(indexPath.row)
-        if indexPath.row < cellNum - 7 {
+        if indexPath.row < cellNum - 6 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
             return cell
         }else if indexPath.row < cellNum - 1 {
@@ -66,28 +65,15 @@ extension PlanEditVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 1 {
-            showDateVisible = !showDateVisible
-            if !showDateVisible {
-                cells.removeAtIndex(2)
-            cellNum -= 1
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
-            }else {
-                cellNum += 1
-                cells.insert("datePickerCell", atIndex: 2)
-                tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
-            }
-
-        }
-        if indexPath.row == 2 {
             showRepeatVisible = !showRepeatVisible
             if !showRepeatVisible {
                 cellNum -= 1
-                cells.removeAtIndex(3)
-                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+                cells.removeAtIndex(2)
+                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
             }else {
                 cellNum += 1
-                cells.insert("repeatWeeklyCell", atIndex: 3)
-                tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+                cells.insert("repeatWeeklyCell", atIndex: 2)
+                tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
             }
 
         }

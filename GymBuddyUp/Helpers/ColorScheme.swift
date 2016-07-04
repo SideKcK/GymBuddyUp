@@ -17,6 +17,8 @@ class ColorScheme {
     var lightText:UIColor
     var darkText: UIColor
     var contrastText: UIColor
+    var navTint: UIColor
+    var navBg: UIColor
     
     init (){
         bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
@@ -24,5 +26,7 @@ class ColorScheme {
         lightText = ContrastColorOf(FlatBlack(), returnFlat: true)
         darkText = ContrastColorOf(FlatWhite(), returnFlat: true)
         contrastText = ComplementaryFlatColorOf(bgGradientOut)
+        navTint = UIColor.flatSkyBlueColor()
+        navBg = UIColor.flatWhiteColor()
         }
 }

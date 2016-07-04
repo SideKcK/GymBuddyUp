@@ -36,6 +36,8 @@
 		C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2121D20D83D000DA37A /* Me.storyboard */; };
 		C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2151D20D997000DA37A /* TabBarVC.swift */; };
 		C64EC2191D235F95000DA37A /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2171D235F95000DA37A /* Create.storyboard */; };
+		C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
+		C64EC21F1D2AC014000DA37A /* PlanTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64EC21E1D2AC014000DA37A /* PlanTableView.xib */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,7 @@
 		C64EC2151D20D997000DA37A /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = VCs/TabBarVC.swift; sourceTree = "<group>"; };
 		C64EC2181D235F95000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Create.storyboard; sourceTree = "<group>"; };
 		C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateMainVC.swift; path = VCs/CreateMainVC.swift; sourceTree = "<group>"; };
+		C64EC21E1D2AC014000DA37A /* PlanTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlanTableView.xib; path = Views/PlanTableView.xib; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +179,7 @@
 			children = (
 				C64EC21C1D289DCA000DA37A /* Cells */,
 				C649C5661CE3C68800258994 /* BorderedButton.swift */,
+				C64EC21E1D2AC014000DA37A /* PlanTableView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -284,6 +288,7 @@
 				C64EC2191D235F95000DA37A /* Create.storyboard in Resources */,
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
+				C64EC21F1D2AC014000DA37A /* PlanTableView.xib in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
@@ -363,6 +368,7 @@
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
 				C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */,
+				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,

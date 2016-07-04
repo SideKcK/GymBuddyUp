@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.tintColor = UIColor.flatBlueColor()  // Back buttons and such
-        navigationBarAppearace.barTintColor = UIColor.flatWhiteColor()  // Bar's background color
+        navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
+        navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color        
         
         // Firebase Initialization

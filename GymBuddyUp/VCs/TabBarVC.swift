@@ -15,6 +15,8 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        self.thisTabBar.tintColor = ColorScheme.sharedInstance.navTint
+        self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -26,7 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         
-        // Firebase initialization
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.flatBlueColor()  // Back buttons and such
+        navigationBarAppearace.barTintColor = UIColor.flatWhiteColor()  // Bar's background color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color        
+        
+        // Firebase Initialization
         
         // Register for remote notifications
         // TODO: wwang: this only works for ios 8 and above. A fallback should be considered if to deploy to ios 8 is planned.
@@ -34,7 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
+
         
+
         FIRApp.configure()
         
         // Add observer for InstanceID token refresh callback.

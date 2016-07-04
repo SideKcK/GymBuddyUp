@@ -16,11 +16,22 @@ class PlanMainVC: UIViewController {
         calCollectionView.dataSource = self
         calCollectionView.delegate = self
         // Do any additional setup after loading the view.
+        setNavBar()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setNavBar() {
+        let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        space.width = 50
+        let prevButton = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        let nextButton = UIBarButtonItem(title: ">", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        let calButton = UIBarButtonItem(title: "Cal", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        self.navigationItem.setLeftBarButtonItems([space, prevButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([calButton, space, nextButton], animated: true)
     }
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
@@ -41,7 +52,7 @@ class PlanMainVC: UIViewController {
 
 extension PlanMainVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 14
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let dateCell = collectionView.dequeueReusableCellWithReuseIdentifier("DateCell", forIndexPath: indexPath)

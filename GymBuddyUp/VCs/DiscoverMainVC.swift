@@ -13,7 +13,11 @@ class DiscoverMainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let segment: UISegmentedControl = UISegmentedControl(items: ["All", "Friends"])
+        segment.sizeToFit()
+        segment.tintColor = UIColor.flatSkyBlueColor()
+        segment.selectedSegmentIndex = 0
+        self.navigationItem.titleView = segment
     }
 
     override func didReceiveMemoryWarning() {

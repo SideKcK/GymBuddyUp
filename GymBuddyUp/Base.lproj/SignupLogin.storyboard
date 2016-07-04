@@ -204,7 +204,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="NA5-nt-fHD">
-                                <rect key="frame" x="38" y="206" width="245" height="227"/>
+                                <rect key="frame" x="38" y="198" width="245" height="235"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5o-UX-kqS">
                                         <rect key="frame" x="18" y="0.0" width="210" height="30"/>
@@ -222,7 +222,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-Zy-1OP">
-                                        <rect key="frame" x="18" y="48" width="210" height="30"/>
+                                        <rect key="frame" x="18" y="50" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="8SZ-Zy-1OP" secondAttribute="height" multiplier="7:1" id="fzT-k9-wGE"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="jIy-tm-atX"/>
@@ -237,7 +237,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kvs-30-Vrt">
-                                        <rect key="frame" x="18" y="96" width="210" height="30"/>
+                                        <rect key="frame" x="18" y="100" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kvs-30-Vrt" secondAttribute="height" multiplier="7:1" id="4IN-We-o6k"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="sgJ-Hk-aTk"/>
@@ -252,7 +252,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xTp-6q-LSu" userLabel="Confirm Field">
-                                        <rect key="frame" x="18" y="144" width="210" height="30"/>
+                                        <rect key="frame" x="18" y="150" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ERd-4R-xDn"/>
                                             <constraint firstAttribute="width" secondItem="xTp-6q-LSu" secondAttribute="height" multiplier="7:1" id="hGf-WF-oim"/>
@@ -267,7 +267,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4y-cS-1om" customClass="BorderedButton" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="192" width="245" height="35"/>
+                                        <rect key="frame" x="0.0" y="200" width="245" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="5vT-q7-mS0"/>
                                             <constraint firstAttribute="width" secondItem="J4y-cS-1om" secondAttribute="height" multiplier="7:1" id="7S3-wO-aco"/>
@@ -280,31 +280,31 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vew-9V-hhR">
-                                <rect key="frame" x="120.5" y="99" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFw-vv-CYc">
+                                <rect key="frame" x="135" y="114" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="OMd-98-ltp"/>
-                                    <constraint firstAttribute="width" constant="80" id="b8u-py-TH7"/>
+                                    <constraint firstAttribute="height" constant="50" id="0m3-XS-Vtn"/>
+                                    <constraint firstAttribute="width" constant="50" id="u3N-qu-a2a"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
+                                <color key="tintColor" red="0.1960784314" green="0.74901960779999999" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Plus"/>
+                                <connections>
+                                    <action selector="onProfileButton:" destination="403-DD-fB4" eventType="touchUpInside" id="cn6-kA-DqZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.19607843137254902" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="NA5-nt-fHD" firstAttribute="top" secondItem="vew-9V-hhR" secondAttribute="bottom" constant="27" id="471-DF-dmK"/>
                             <constraint firstItem="NA5-nt-fHD" firstAttribute="centerX" secondItem="pqz-Le-I5C" secondAttribute="centerX" id="A7d-9y-UyA"/>
-                            <constraint firstItem="vew-9V-hhR" firstAttribute="top" secondItem="vNN-av-B28" secondAttribute="bottom" constant="35" id="JpK-WR-6uC"/>
                             <constraint firstItem="3Ud-AX-sfl" firstAttribute="top" secondItem="PwJ-h8-Vek" secondAttribute="bottom" constant="8" id="RpW-c4-s1B"/>
                             <constraint firstItem="PwJ-h8-Vek" firstAttribute="centerX" secondItem="pqz-Le-I5C" secondAttribute="centerX" id="SFr-iH-5Zt"/>
                             <constraint firstItem="taC-Ai-IO1" firstAttribute="top" secondItem="3Ud-AX-sfl" secondAttribute="bottom" constant="50" id="Xns-oA-uwb"/>
                             <constraint firstItem="PwJ-h8-Vek" firstAttribute="top" relation="lessThanOrEqual" secondItem="NA5-nt-fHD" secondAttribute="bottom" constant="30" id="bro-QM-Xx3"/>
+                            <constraint firstItem="OFw-vv-CYc" firstAttribute="centerX" secondItem="pqz-Le-I5C" secondAttribute="centerX" id="jvb-2M-w5H"/>
                             <constraint firstItem="3Ud-AX-sfl" firstAttribute="centerX" secondItem="pqz-Le-I5C" secondAttribute="centerX" id="mBk-lW-Pnm"/>
-                            <constraint firstItem="vew-9V-hhR" firstAttribute="centerX" secondItem="pqz-Le-I5C" secondAttribute="centerX" id="pwt-jR-89O"/>
+                            <constraint firstItem="OFw-vv-CYc" firstAttribute="top" relation="lessThanOrEqual" secondItem="vNN-av-B28" secondAttribute="bottom" constant="50" id="rSX-Qa-YGG"/>
+                            <constraint firstItem="NA5-nt-fHD" firstAttribute="top" secondItem="OFw-vv-CYc" secondAttribute="bottom" constant="34" id="zjl-Ru-YNG"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nsf-PV-F8E" appends="YES" id="iYm-JF-bIG"/>
@@ -319,6 +319,7 @@
                         <outlet property="loginButton" destination="3Ud-AX-sfl" id="Pt4-sz-Vib"/>
                         <outlet property="loginLabel" destination="PwJ-h8-Vek" id="bEb-xe-IJw"/>
                         <outlet property="passwordField" destination="kvs-30-Vrt" id="qah-9j-vT6"/>
+                        <outlet property="profileButton" destination="OFw-vv-CYc" id="70K-QN-lGn"/>
                         <outlet property="usernameField" destination="8SZ-Zy-1OP" id="4Pc-4a-KnT"/>
                         <segue destination="wlD-yF-FTG" kind="show" identifier="toGenderSegue" id="fTd-Kx-fez"/>
                     </connections>
@@ -605,6 +606,7 @@
     </scenes>
     <resources>
         <image name="Checkmark" width="30" height="30"/>
+        <image name="Plus" width="50" height="50"/>
         <image name="gym" width="960" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -10,6 +10,7 @@ import UIKit
 import ChameleonFramework
 
 class SignupVC: UIViewController {
+    @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -22,6 +23,8 @@ class SignupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         let textColor = ColorScheme.sharedInstance.lightText
         loginLabel.textColor = textColor
@@ -60,6 +63,15 @@ class SignupVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func onProfileButton(sender: AnyObject) {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     @IBAction func onTap(sender: AnyObject) {
@@ -125,6 +137,21 @@ class SignupVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        //            let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+        let profileImage = resize(originalImage, newSize: CGSize(width: 70, height: 70))
+        profileButton.setImage(profileImage, forState: .Normal)
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }
 

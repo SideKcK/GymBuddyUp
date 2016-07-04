@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsl-tv-blT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="184"/>
+            <point key="canvasLocation" x="233" y="165"/>
         </scene>
         <!--Tab BarVC-->
         <scene sceneID="B53-7g-LK7">
@@ -71,7 +71,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sp-rN-30H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439" y="102"/>
+            <point key="canvasLocation" x="473" y="102"/>
         </scene>
         <!--Discover-->
         <scene sceneID="mcY-oq-xZk">

@@ -11,6 +11,7 @@ import GoogleMaps
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,13 +42,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         
-
         FIRApp.configure()
         
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification, object: nil)
-        return true
+        
+        // Facebook app Initialization
+        let fbInitSucceeded = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        return fbInitSucceeded
+    }
+    
+    func application(application: UIApplication,
+                     openURL url: NSURL,
+                             sourceApplication: String?,
+                             annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            openURL: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation)
     }
 
     // [START receive_message]
@@ -83,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // [START refresh_token]
     func tokenRefreshNotification(notification: NSNotification) {
-        let refreshedToken = FIRInstanceID.instanceID().token()!
+        let refreshedToken = FIRInstanceID.instanceID().token()
         print("InstanceID token: \(refreshedToken)")
         
         // Connect to FCM since connection may have failed when attempted before having a token.
@@ -102,11 +117,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     // [END connect_to_fcm]
+
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
+        // activate facebook app for tracking
+        FBSDKAppEvents.activateApp()
     }
+    
     
     // [START disconnect_from_fcm]
     func applicationDidEnterBackground(application: UIApplication) {

@@ -97,7 +97,6 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                    print("got here")
                     //                        ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
                     //                            if error == nil {
                     //                            print("Sign Up Succeed")

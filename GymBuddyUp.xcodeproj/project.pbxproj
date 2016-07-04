@@ -36,7 +36,6 @@
 		C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2121D20D83D000DA37A /* Me.storyboard */; };
 		C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2151D20D997000DA37A /* TabBarVC.swift */; };
 		C64EC2191D235F95000DA37A /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2171D235F95000DA37A /* Create.storyboard */; };
-		C64EC21B1D235FCF000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 

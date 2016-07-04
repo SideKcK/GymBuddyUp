@@ -14,9 +14,9 @@ target 'GymBuddyUp' do
     pod 'Firebase/Messaging'
     
     # These are pods used for the auth providers.
+    pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
-    pod 'GoogleSignIn'
-    pod 'TwitterKit'
+    pod 'FBSDKShareKit'
 
 
 end

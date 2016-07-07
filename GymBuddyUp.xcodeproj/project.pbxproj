@@ -38,6 +38,7 @@
 		C64EC2191D235F95000DA37A /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2171D235F95000DA37A /* Create.storyboard */; };
 		C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
 		C64EC21F1D2AC014000DA37A /* PlanTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64EC21E1D2AC014000DA37A /* PlanTableView.xib */; };
+		C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2201D2DE81E000DA37A /* MeMainVC.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		C64EC2181D235F95000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Create.storyboard; sourceTree = "<group>"; };
 		C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateMainVC.swift; path = VCs/CreateMainVC.swift; sourceTree = "<group>"; };
 		C64EC21E1D2AC014000DA37A /* PlanTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlanTableView.xib; path = Views/PlanTableView.xib; sourceTree = "<group>"; };
+		C64EC2201D2DE81E000DA37A /* MeMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeMainVC.swift; path = VCs/MeMainVC.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +172,7 @@
 				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
 				C64EC2151D20D997000DA37A /* TabBarVC.swift */,
 				C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */,
+				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
+				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,

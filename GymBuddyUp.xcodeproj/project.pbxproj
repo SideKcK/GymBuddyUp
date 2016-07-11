@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E8721CC35C49BDD6A300500 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBDFD785FE9C214CAEE5823 /* Pods_GymBuddyUp.framework */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
-		C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */; };
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
@@ -39,6 +38,8 @@
 		C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
 		C64EC21F1D2AC014000DA37A /* PlanTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64EC21E1D2AC014000DA37A /* PlanTableView.xib */; };
 		C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2201D2DE81E000DA37A /* MeMainVC.swift */; };
+		C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2221D332F2C000DA37A /* UserProfileCell.swift */; };
+		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +47,6 @@
 		09F1A3EC70E0713D3A6EEE40 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		ABBDFD785FE9C214CAEE5823 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerAPI.swift; path = Models/ServerAPI.swift; sourceTree = "<group>"; };
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +78,8 @@
 		C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateMainVC.swift; path = VCs/CreateMainVC.swift; sourceTree = "<group>"; };
 		C64EC21E1D2AC014000DA37A /* PlanTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlanTableView.xib; path = Views/PlanTableView.xib; sourceTree = "<group>"; };
 		C64EC2201D2DE81E000DA37A /* MeMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeMainVC.swift; path = VCs/MeMainVC.swift; sourceTree = "<group>"; };
+		C64EC2221D332F2C000DA37A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = Views/UserProfileCell.swift; sourceTree = "<group>"; };
+		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,8 +108,6 @@
 		C60986531CEEBAC300A0AFE3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C60986541CEEBAF500A0AFE3 /* ServerAPI.swift */,
-				C60986561CEEC00D00A0AFE3 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -133,6 +133,7 @@
 		C649C5491CE2C31C00258994 /* GymBuddyUp */ = {
 			isa = PBXGroup;
 			children = (
+				C64EC2241D334097000DA37A /* API */,
 				C60986531CEEBAC300A0AFE3 /* Models */,
 				C649C5651CE3C64F00258994 /* Views */,
 				C649C55F1CE3C04600258994 /* Helpers */,
@@ -213,8 +214,18 @@
 		C64EC21C1D289DCA000DA37A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C64EC2221D332F2C000DA37A /* UserProfileCell.swift */,
+				C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		C64EC2241D334097000DA37A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C60986561CEEC00D00A0AFE3 /* User.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		F97DB85B0205C0F1A6238ED4 /* Frameworks */ = {
@@ -356,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
@@ -370,8 +382,8 @@
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
+				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
-				C60986551CEEBAF500A0AFE3 /* ServerAPI.swift in Sources */,
 				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,

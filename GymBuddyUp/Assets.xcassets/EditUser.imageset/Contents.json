@@ -9,6 +9,10 @@
       "idiom" : "universal",
       "filename" : "EditUser@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

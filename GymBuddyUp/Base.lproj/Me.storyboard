@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="230" id="T3H-3H-6Vq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="230" id="T3H-3H-6Vq" customClass="UserProfileCell" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3H-3H-6Vq" id="IxG-Yx-V54">
@@ -136,8 +136,17 @@
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Pkk-6c-JY9" secondAttribute="bottom" constant="28.5" id="zSd-lv-PQO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="Pkk-6c-JY9" id="HOE-Oq-tED"/>
+                                            <outlet property="goalLabel" destination="kKe-Vg-dLq" id="vAk-z7-MPD"/>
+                                            <outlet property="gymLabel" destination="TmN-YZ-Bxg" id="NPM-85-uZD"/>
+                                            <outlet property="likeNumLabel" destination="Ruv-fp-Vq2" id="Ikq-ld-Zau"/>
+                                            <outlet property="nameLabel" destination="dPH-0v-j13" id="EOd-3q-xAj"/>
+                                            <outlet property="starNumLabel" destination="eGV-Kp-StT" id="aYm-Lk-dyq"/>
+                                            <outlet property="workoutNumLabel" destination="mDx-5O-Dfb" id="0ox-Q1-RKv"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="52" id="RPv-S6-u31">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="52" id="RPv-S6-u31" customClass="UserBuddyOverviewCell" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="322" width="320" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RPv-S6-u31" id="0mV-Mu-unB">
@@ -176,6 +185,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1960784314" green="0.74901960779999999" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="buddyNumLabel" destination="yCJ-n8-UJV" id="auc-XO-TqX"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutCell" rowHeight="49" id="FIy-Yg-Dg7">
                                         <rect key="frame" x="0.0" y="374" width="320" height="49"/>
@@ -269,7 +281,29 @@
                     <view key="view" contentMode="scaleToFill" id="G6e-C7-cZy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Cy-Qi-aXW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="nLU-ls-y6D">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nLU-ls-y6D" id="jOo-zV-w9K">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6Cy-Qi-aXW" secondAttribute="trailing" id="5sd-jD-gnw"/>
+                            <constraint firstItem="6Cy-Qi-aXW" firstAttribute="leading" secondItem="G6e-C7-cZy" secondAttribute="leading" id="fZU-Ot-Emp"/>
+                            <constraint firstItem="Ae7-Uq-uiK" firstAttribute="top" secondItem="6Cy-Qi-aXW" secondAttribute="bottom" id="vXJ-tb-pHp"/>
+                            <constraint firstItem="6Cy-Qi-aXW" firstAttribute="top" secondItem="G6e-C7-cZy" secondAttribute="top" id="x2e-Vi-rYh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Buddies" id="LHE-hy-Sl6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

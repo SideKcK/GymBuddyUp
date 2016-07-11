@@ -88,16 +88,30 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row < 4 {
+        if indexPath.row == 0{
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
+            cell.user = User.currentUser
+            cell.selectionStyle = .None
+            return cell
+        }else if indexPath.row == 1{
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserBuddyOverviewCell
+            cell.user = User.currentUser
+            cell.selectionStyle = .None
+            return cell
+        }else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath)
+            cell.selectionStyle = .None
             return cell
         }
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
         if indexPath.row == 1 {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
         }

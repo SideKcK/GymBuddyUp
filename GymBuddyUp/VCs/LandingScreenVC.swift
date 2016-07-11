@@ -52,6 +52,7 @@ class LandingScreenVC: UIViewController {
     
     @IBAction func onLoginButton(sender: AnyObject) {
         //testing
+        User.currentUser = User()
         self.performSegueWithIdentifier("toMainSegue", sender: sender)
         
         /*

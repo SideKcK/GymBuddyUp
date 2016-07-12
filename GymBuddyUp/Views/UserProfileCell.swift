@@ -31,7 +31,7 @@ class UserProfileCell: UITableViewCell {
                 self.workoutNumLabel.text = String(workoutNum)
                 self.likeNumLabel.text = String(likeNum)
                 self.starNumLabel.text = String(starNum)
-                self.goalLabel.text = User.toString(goal)
+                self.goalLabel.text = goal.description
                 self.gymLabel.text = gym
                 self.descriptionLabel.text = description
                 

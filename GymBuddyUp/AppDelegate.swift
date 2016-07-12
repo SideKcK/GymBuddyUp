@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        if (FIRAuth.auth()?.currentUser) != nil {
+        if (User.currentUser) != nil {
             // User is signed in.
             userDidLogin()
         } else {
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userDidLogin() {
-        print("=========== User logged in!")
+        print("=========== User logged in! UID \(User.currentUser?.userId)")
         let mainSB = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainSB.instantiateInitialViewController()
         window?.rootViewController = vc

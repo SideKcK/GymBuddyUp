@@ -8,7 +8,6 @@
 
 import UIKit
 import ChameleonFramework
-import Firebase
 import FBSDKLoginKit
 
 class LandingScreenVC: UIViewController {
@@ -30,17 +29,15 @@ class LandingScreenVC: UIViewController {
         
         loginWithFacebookButton = FBSDKLoginButton()
         
-        // facebook login related
-        // Set current token to nil so that fb login view will always present. WuYou: Remove this line if you no longer need to test login view.
-        FBSDKAccessToken.setCurrentAccessToken(nil)
-        
-        if (FBSDKAccessToken.currentAccessToken() != nil) // TODO: replace with firebase auth check
-        {
-            // User is already logged in, do work such as go to next view controller.
-            print("already logged in")
-            self.performSegueWithIdentifier("toMainSegue", sender: nil)
-            
-        }
+//        // facebook login related
+//        // Set current token to nil so that fb login view will always present. WuYou: Remove this line if you no longer need to test login view.        
+//        if (FBSDKAccessToken.currentAccessToken() != nil) // TODO: replace with firebase auth check
+//        {
+//            // User is already logged in, do work such as go to next view controller.
+//            print("already logged in")
+//            self.performSegueWithIdentifier("toMainSegue", sender: nil)
+//            
+//        }
 
     }
 
@@ -52,61 +49,30 @@ class LandingScreenVC: UIViewController {
     
     @IBAction func onLoginButton(sender: AnyObject) {
         
-        FIRAuth.auth()?.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
-            // ...
-            
-            if let firUser = user {
-                User.currentUser = User(user: firUser)
-                self.performSegueWithIdentifier("toMainSegue", sender: sender)
-                
-            }else {
-                let alert = UIAlertController(title: "Login Failed", message: error?.description, preferredStyle: .Alert)
+        User.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
+            if (error != nil){
+                // handle error here
+                let alert = UIAlertController(title: "Login Failed", message: error?.localizedFailureReason, preferredStyle: .Alert)
                 let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(OKAction)
                 self.presentViewController(alert, animated: true, completion: nil)
-                return
+            }
+            else {
+                self.performSegueWithIdentifier("toMainSegue", sender: sender)
             }
         }
- 
     }
-    
+
     @IBAction func onLoginWithFacebookButton(sender: AnyObject) {
-        print("Login button tapped")
-        
-        let loginManager = FBSDKLoginManager()
-        
-        let facebookReadPermissions = ["public_profile", "email"]
-        loginManager.logInWithReadPermissions(facebookReadPermissions, fromViewController: self, handler: { (result, error) in
-            if error != nil {
-                print("FBLogin failed")
-                print(error.localizedDescription);
-            } else if(result.isCancelled) {
-                print("FBLogin cancelled")
-            } else {
-                print(result.grantedPermissions)
-                print(result.token.tokenString)
-                
-                // [START headless_facebook_auth]
-                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-                // [END headless_facebook_auth]
-               FIRAuth.auth()?.signInWithCredential(credential, completion: { (user, error) in
-                if let firUser = user {
-                    User.currentUser = User(user: firUser)
-                    print(firUser.displayName)
-                    print(firUser.photoURL)
-                    print(firUser.providerID)
-                    print(firUser.getTokenWithCompletion({ (tokenString, err) in
-                        print(tokenString);
-                    }))
-                    self.performSegueWithIdentifier("toMainSegue", sender: sender)
-                }
-                else {
-                    print("FB Sign in error")
-                    print(error?.localizedDescription);
-                }
-               })
+    
+        User.signInWithFacebook(self){ (user, error) in
+            if (error != nil) {
+                // handle error here
             }
-        })
+            else {
+                self.performSegueWithIdentifier("toMainSegue", sender: sender)
+            }
+        }
     }
     
     
@@ -131,10 +97,7 @@ class LandingScreenVC: UIViewController {
         })
     }
     
-
-    
     @IBAction func unwindToLandingVC(segue: UIStoryboardSegue) {
         
     }
-    
 }

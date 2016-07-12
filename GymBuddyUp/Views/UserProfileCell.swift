@@ -36,7 +36,7 @@ class UserProfileCell: UITableViewCell {
                 self.descriptionLabel.text = description
                 
             } else {
-                    print("error") //TBD error class
+                    print("error cannot get user profile") //TBD error class
                     return
             }
         }

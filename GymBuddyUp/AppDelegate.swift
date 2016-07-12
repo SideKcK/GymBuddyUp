@@ -20,12 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        if (FIRAuth.auth()?.currentUser) != nil {
+            // User is signed in.
+            userDidLogin()
+        } else {
+            // No user is signed in.
+            userDidLogout()
+        }
+
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
-        let signSB = UIStoryboard(name: "SignupLogin", bundle: nil)
-        let vc = signSB.instantiateViewControllerWithIdentifier("LandingScreenVC")
-        window?.rootViewController = vc
-        self.window?.makeKeyAndVisible()
         
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
@@ -52,6 +57,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fbInitSucceeded = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return fbInitSucceeded
+    }
+    
+    func userDidLogin() {
+        print("=========== User logged in!")
+        let mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainSB.instantiateInitialViewController()
+        window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+        User.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+    }
+    
+    func userDidLogout() {
+        print("=========== User logged out!")
+        User.currentUser = nil
+        let signSB = UIStoryboard(name: "SignupLogin", bundle: nil)
+        let vc = signSB.instantiateInitialViewController()
+        window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+
     }
     
     func application(application: UIApplication,

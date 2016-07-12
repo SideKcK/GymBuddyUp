@@ -81,9 +81,6 @@ class SignupVC: UIViewController {
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
-        //for testing
-        self.performSegueWithIdentifier("toGenderSegue", sender: self)
-        return
         
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
@@ -97,21 +94,16 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                    //                        ServerAPI.sharedInstance.userSignUp(usernameField.text, email: emailField.text, password: passwordField.text, completion: { (user, error) in
-                    //                            if error == nil {
-                    //                            print("Sign Up Succeed")
-                    //                            //send activate email
-                    //                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
-                    //                            }
-                    //                        })
+                
                     FIRAuth.auth()?.createUserWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
-                        if error == nil {
+                        if let firUser = user {
                             print("Sign Up Succeed")
                             //send activate email
-                            user!.sendEmailVerificationWithCompletion(nil)
+                            User.currentUser = User(user: firUser)
+                            User.setDisplayName(self.usernameField.text)
+                            firUser.sendEmailVerificationWithCompletion(nil)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
                         }
-                        
                         else {
                             print(error)
                         }

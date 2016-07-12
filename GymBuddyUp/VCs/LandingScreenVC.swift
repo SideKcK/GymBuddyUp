@@ -51,31 +51,13 @@ class LandingScreenVC: UIViewController {
     }
     
     @IBAction func onLoginButton(sender: AnyObject) {
-        //testing
-        User.currentUser = User()
-        self.performSegueWithIdentifier("toMainSegue", sender: sender)
-        
-        /*
-        //check if username valid
-        //        ServerAPI.sharedInstance.userLogin(usernameField.text!, password: passwordField.text!) { (error) in
-        //            if error == nil {
-        //                self.performSegueWithIdentifier("toMainSegue", sender: sender)
-        //            }else {
-        //                let alert = UIAlertController(title: "Login Failed", message: error?.message, preferredStyle: .Alert)
-        //                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        //                alert.addAction(OKAction)
-        //                self.presentViewController(alert, animated: true, completion: nil)
-        //                return
-        //            }
-        //        }
         
         FIRAuth.auth()?.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
             // ...
             
-            if error == nil {
+            if let firUser = user {
+                User.currentUser = User(user: firUser)
                 self.performSegueWithIdentifier("toMainSegue", sender: sender)
-                
-                
                 
             }else {
                 let alert = UIAlertController(title: "Login Failed", message: error?.description, preferredStyle: .Alert)
@@ -85,7 +67,7 @@ class LandingScreenVC: UIViewController {
                 return
             }
         }
-         */
+ 
     }
     
     @IBAction func onLoginWithFacebookButton(sender: AnyObject) {
@@ -108,18 +90,19 @@ class LandingScreenVC: UIViewController {
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
                 // [END headless_facebook_auth]
                FIRAuth.auth()?.signInWithCredential(credential, completion: { (user, error) in
-                if let error = error {
-                    print("FB Sign in error")
-                    print(error.localizedDescription);
-                }
-                else {
-                    print(user?.displayName);
-                    print(user?.photoURL);
-                    print(user?.providerID);
-                    print(user?.getTokenWithCompletion({ (tokenString, err) in
+                if let firUser = user {
+                    User.currentUser = User(user: firUser)
+                    print(firUser.displayName)
+                    print(firUser.photoURL)
+                    print(firUser.providerID)
+                    print(firUser.getTokenWithCompletion({ (tokenString, err) in
                         print(tokenString);
                     }))
                     self.performSegueWithIdentifier("toMainSegue", sender: sender)
+                }
+                else {
+                    print("FB Sign in error")
+                    print(error?.localizedDescription);
                 }
                })
             }

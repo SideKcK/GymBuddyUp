@@ -133,12 +133,12 @@
 		C649C5491CE2C31C00258994 /* GymBuddyUp */ = {
 			isa = PBXGroup;
 			children = (
+				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				C64EC2241D334097000DA37A /* API */,
 				C60986531CEEBAC300A0AFE3 /* Models */,
 				C649C5651CE3C64F00258994 /* Views */,
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
-				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				C649C54E1CE2C31C00258994 /* Main.storyboard */,
 				C64EC2171D235F95000DA37A /* Create.storyboard */,
 				C64EC20F1D20D82B000DA37A /* Inbox.storyboard */,

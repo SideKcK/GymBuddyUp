@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class User {
 
@@ -23,9 +24,8 @@ class User {
         case Fun
     }
     
-    var id: String!
-    
-    var userName: String?//to WW: replace some of these variables with FirebaseUser when neccessary. for example i think email might be accessible from the FireBaseUser instance
+    var userId: String!
+    var firUser: FIRUser?
     var email: String?
     var screenName: String?
     var isActivated: Bool?
@@ -51,9 +51,14 @@ class User {
     
     static var currentUser: User?
     
-    init () {
-        self.userName = "test"
-        self.screenName = "TEST"
+    init (user: FIRUser) {
+        print(user)
+        self.firUser = user
+        self.userId = user.uid
+        self.email = user.email
+        self.screenName = user.displayName
+        //for testing
+        //to WW: connect these custom fields to backend
         self.workoutNum = 11
         self.starNum = 21
         self.buddyNum = 10
@@ -62,13 +67,22 @@ class User {
         self.gym = "Life Fitness"
         self.description = "Test description"
     }
-    //to WW: change it to init func from FireBaseUser to user
-    //so it should be init (response: FireBaseUserClass/FireBaseUserLoginResponse)
-    init (response: NSDictionary) {
-        self.id = response["id"] as! String
-        self.userName = response["userName"] as? String
-    }
     
+    class func setDisplayName(name: String?) {
+        currentUser?.screenName = name
+        if let changeRequest = FIRAuth.auth()?.currentUser!.profileChangeRequest() {
+            changeRequest.displayName = name
+            changeRequest.commitChangesWithCompletion { error in
+                if let error = error {
+                    // An error happened.
+                    print(error)
+                } else {
+                    // Profile updated.
+                    print("User display name updated")
+                }
+            }
+        }
+    }
     class func toString(goal: Goal) -> String{
         var goalString = ""
         switch goal {

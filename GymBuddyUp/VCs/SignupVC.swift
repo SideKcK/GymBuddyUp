@@ -8,7 +8,6 @@
 
 import UIKit
 import ChameleonFramework
-import Firebase
 
 class SignupVC: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
@@ -94,22 +93,17 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                
-                    FIRAuth.auth()?.createUserWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
-                        if let firUser = user {
-                            print("Sign Up Succeed")
-                            //send activate email
-                            User.currentUser = User(user: firUser)
-                            User.setDisplayName(self.usernameField.text)
-                            firUser.sendEmailVerificationWithCompletion(nil)
-                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
+                    
+                    User.signUpWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
+                        if error != nil {
+                            // handle error here
                         }
                         else {
-                            print(error)
+                            self.performSegueWithIdentifier("toGenderSegue", sender: self)
                         }
                     }
-                    
-                }else{
+                
+                }else {
                     
                     alertController.title = "Sign Up Failed"
                     if pwStatus == .countError {

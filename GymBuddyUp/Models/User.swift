@@ -2,38 +2,63 @@
 //  User.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 5/19/16.
-//  Copyright © 2016 You Wu. All rights reserved.
+//  Created by you wu on 7/11/16.
+//  Copyright © 2016 Wei Wang. All rights reserved.
 //
 
 import UIKit
+import CoreLocation
 import Firebase
+import FBSDKLoginKit
+
+
+// callbacks
+typealias UserAuthCallback = (user:User?, error: NSError?) -> Void
 
 class User {
-
-    enum Gender {
-        case Male
-        case Female
-        case Unspecified
+    
+    enum Gender:Int {
+        case Female = 0
+        case Male = 1
+        case Unspecified = 2
     }
     
     enum Goal {
-        case Fit
-        case Weight
-        case Muscle
-        case Fun
+        case KeepFit
+        case LoseWeight
+        case BuildMuscle
+        case HaveFun
+        
+        var description: String {
+            switch self {
+            case KeepFit:
+                return "Keep Fit"
+            case LoseWeight:
+                return "Lose Weight"
+            case BuildMuscle:
+                return "Build Muscle"
+            case HaveFun:
+                return "Have Fun"
+            }
+        }
+    }
+    
+    enum AuthProvider {
+        case Facebook
+        case Email
+        case Anonymous
     }
     
     var userId: String!
-    var firUser: FIRUser?
+    var photoURL: NSURL?
     var email: String?
     var screenName: String?
-    var isActivated: Bool?
-    var isMember: Bool?
-    var memberExpireDate: String?
-    var memberAutoUpdate: Bool?
+    
+    private var firUser: FIRUser?
+    
     var gender: Gender?
-    //to WW: possible variable for profile image file?
+    
+    var authProvider: AuthProvider
     
     var workoutNum: Int?
     var starNum: Int?
@@ -52,24 +77,103 @@ class User {
     static var currentUser: User?
     
     init (user: FIRUser) {
-        print(user)
-        self.firUser = user
+        // FIRUser properties
+        self.firUser = user;
         self.userId = user.uid
         self.email = user.email
         self.screenName = user.displayName
-        //for testing
-        //to WW: connect these custom fields to backend
-        self.workoutNum = 11
+        self.photoURL = user.photoURL
+        
+        self.authProvider = AuthProvider.Email
+        
+        // custom properties
+        self.workoutNum = 100
         self.starNum = 21
-        self.buddyNum = 10
-        self.likeNum = 19
-        self.goal = .Fit
+        self.dislikeNum = 10
+        self.buddyNum = 19
+        self.goal = .KeepFit
         self.gym = "Life Fitness"
         self.description = "Test description"
+        
     }
     
-    class func setDisplayName(name: String?) {
-        currentUser?.screenName = name
+    class func signUpWithEmail(email: String, password: String, completion: UserAuthCallback) {
+        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (firebaseUser, error) in
+            if error != nil {
+                completion(user: nil, error: error)
+            }
+            else
+                // sign up succeeded. Create and cache current user.
+            {
+                User.currentUser = User(user: firebaseUser!)
+                completion(user: User.currentUser, error: nil)
+            }
+        })
+    }
+    
+    class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
+        FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (firebaseUser, error) in
+            if error != nil {
+                completion(user: nil, error: error)
+            }
+            else {
+                User.currentUser = User(user: firebaseUser!)
+                completion(user: User.currentUser, error: nil)
+            }
+        })
+    }
+    
+    class func signInAsAnonymous (completion: UserAuthCallback)
+    {
+        FIRAuth.auth()?.signInAnonymouslyWithCompletion({ (firebaseUser, error) in
+            if error != nil {
+                completion(user: nil, error: error)
+            }
+            else {
+                User.currentUser = User(user: firebaseUser!)
+                completion(user: User.currentUser, error: nil)
+            }
+        })
+    }
+    
+    class func signInWithFacebook (fromViewController: UIViewController!, completion: UserAuthCallback) {
+        let loginManager = FBSDKLoginManager()
+        let facebookReadPermissions = ["public_profile", "email"]
+        loginManager.logInWithReadPermissions(facebookReadPermissions, fromViewController: fromViewController) { (result, error) in
+            if error != nil {
+                completion(user: nil, error: error)
+                
+            } else if(result.isCancelled) {
+                print("FBLogin cancelled")
+            } else {
+                // [START headless_facebook_auth]
+                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                // [END headless_facebook_auth]
+                FIRAuth.auth()?.signInWithCredential(credential, completion: { (firebaseUser, error) in
+                    
+                    if error != nil {
+                        completion(user: nil, error: error)
+                    }
+                    else {
+                        User.currentUser = User(user: firebaseUser!)
+                        completion(user: User.currentUser, error: nil)
+                    }})
+            }
+        }
+    }
+    
+    // TODO
+    func updateLastSeenLocation(location: CLLocation) {
+        // to be implemented
+    }
+    
+    func updateProfilePicture(photo: UIImage) {
+        // to be implemented
+    }
+    
+    
+    func setDisplayName(name: String?) {
+        self.screenName = name
         if let changeRequest = FIRAuth.auth()?.currentUser!.profileChangeRequest() {
             changeRequest.displayName = name
             changeRequest.commitChangesWithCompletion { error in
@@ -82,23 +186,5 @@ class User {
                 }
             }
         }
-    }
-    class func toString(goal: Goal) -> String{
-        var goalString = ""
-        switch goal {
-        case User.Goal.Fit:
-            goalString = "Keep Fit"
-            break
-        case User.Goal.Weight:
-            goalString = "Lose Weight"
-            break
-        case User.Goal.Muscle:
-            goalString = "Build Muscle"
-            break
-        case User.Goal.Fun:
-            goalString = "Have Fun"
-            break
-        }
-        return goalString
     }
 }

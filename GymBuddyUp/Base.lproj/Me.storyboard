@@ -259,7 +259,13 @@
                             <constraint firstItem="9Jz-Wu-TxM" firstAttribute="top" secondItem="O72-1S-Afe" secondAttribute="top" id="kJG-21-YSb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Me" id="o9D-uG-dts"/>
+                    <navigationItem key="navigationItem" title="Me" id="o9D-uG-dts">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="17N-bx-XZ1">
+                            <connections>
+                                <action selector="onLogout:" destination="mv2-Eg-HHb" id="LWL-AN-rqV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="9Jz-Wu-TxM" id="NPJ-oI-0P0"/>

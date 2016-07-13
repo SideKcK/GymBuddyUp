@@ -232,7 +232,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-Zy-1OP">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-Zy-1OP">
                                         <rect key="frame" x="18" y="50" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="8SZ-Zy-1OP" secondAttribute="height" multiplier="7:1" id="fzT-k9-wGE"/>
@@ -470,6 +470,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Complete"/>
                                 <connections>
+                                    <action selector="onCompleteButton:" destination="KoT-Bl-ayP" eventType="touchUpInside" id="Zs7-ND-cEG"/>
                                     <segue destination="tgc-fB-0Js" kind="presentation" modalTransitionStyle="flipHorizontal" id="50U-d8-CRs"/>
                                 </connections>
                             </button>

@@ -97,7 +97,9 @@ class SignupVC: UIViewController {
                     User.signUpWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
                         if let user = user{
                             //upload photo
-                            user.updateProfilePicture(self.profileImage)
+                            user.updateProfilePicture(self.profileImage){error in
+                                print("Error setting profile picture \(error?.localizedFailureReason)")
+                            }
                             //update screen name
                             user.updateProfile("screenName", value: self.usernameField.text)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)

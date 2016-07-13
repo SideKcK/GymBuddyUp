@@ -9,11 +9,13 @@
 import UIKit
 import CoreLocation
 import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 import FBSDKLoginKit
-
 
 // callbacks
 typealias UserAuthCallback = (user:User?, error: NSError?) -> Void
+
 
 class User {
     
@@ -49,16 +51,19 @@ class User {
         case Anonymous
     }
     
+    private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("users")
+    private let storageRef = FIRStorage.storage().reference()
+    
     var userId: String!
     var photoURL: NSURL?
     var email: String?
     var screenName: String?
     
-    private var firUser: FIRUser?
+    private let firUser: FIRUser?
+    private let userRef: FIRDatabaseReference?
     
     var gender: Gender?
-    
-    var authProvider: AuthProvider
+    var cachedPhoto:UIImage?
     
     var workoutNum: Int?
     var starNum: Int?
@@ -74,6 +79,7 @@ class User {
     var sameInterestNum: Int?
     var interestList: NSDictionary?
     
+    
     static var currentUser: User?
     
     init (user: FIRUser) {
@@ -84,7 +90,7 @@ class User {
         self.screenName = user.displayName
         self.photoURL = user.photoURL
         
-        self.authProvider = AuthProvider.Email
+        self.userRef = ref.child(user.uid)
         
         // custom properties
         self.workoutNum = 100
@@ -95,20 +101,8 @@ class User {
         self.gym = "Life Fitness"
         self.description = "Test description"
         
-    }
-    
-    class func signUpWithEmail(email: String, password: String, completion: UserAuthCallback) {
-        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (firebaseUser, error) in
-            if error != nil {
-                completion(user: nil, error: error)
-            }
-            else
-                // sign up succeeded. Create and cache current user.
-            {
-                User.currentUser = User(user: firebaseUser!)
-                completion(user: User.currentUser, error: nil)
-            }
-        })
+        // TODO: figure out bast logic for photo caching.
+        updateProfilePicture(self.photoURL) { error in }
     }
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
@@ -130,6 +124,20 @@ class User {
                 completion(user: nil, error: error)
             }
             else {
+                User.currentUser = User(user: firebaseUser!)
+                completion(user: User.currentUser, error: nil)
+            }
+        })
+    }
+    
+    class func signUpWithEmail(email: String, password: String, completion: UserAuthCallback) {
+        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (firebaseUser, error) in
+            if error != nil {
+                completion(user: nil, error: error)
+            }
+            else
+                // sign up succeeded. Create and cache current user.
+            {
                 User.currentUser = User(user: firebaseUser!)
                 completion(user: User.currentUser, error: nil)
             }
@@ -167,27 +175,70 @@ class User {
         // to be implemented
     }
     
-    func updateProfilePicture(photo: UIImage!) {
-        // to be implemented
+    func updateProfilePicture(photo: UIImage!, errorHandler: (NSError?)->Void) {
+        self.cachedPhoto = photo.imageScaledToSize(CGSizeMake(500, 500))
+        // Create a reference to the file you want to upload
+        let pngImageData = UIImagePNGRepresentation(self.cachedPhoto!)
+        let filePath = self.userId + "/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000)).png"
+        let photoRef = storageRef.child(filePath)
+        
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = photoRef.putData(pngImageData!, metadata: nil) { metadata, error in
+            if (error != nil) {
+                // Uh-oh, an error occurred!
+            } else {
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                self.photoURL = metadata!.downloadURL()
+                let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+                changeRequest?.photoURL = self.photoURL!
+                changeRequest?.commitChangesWithCompletion({ (error) in
+                    if error != nil {
+                        errorHandler(error)
+                    }
+                })
+            }
+        }
+    }
+    
+    func cacheUserPhoto(url: NSURL)
+    {
+        let data = NSData(contentsOfURL: url)
+        self.cachedPhoto = UIImage(data: data!)?.imageScaledToSize(CGSizeMake(500, 500))
+    }
+    
+    func updateProfilePicture(photoURL: NSURL?, errorHandler: (NSError?)->Void) {
+        if photoURL != nil {
+            let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+            changeRequest?.photoURL = photoURL!
+            changeRequest?.commitChangesWithCompletion({ (error) in
+                if error != nil {
+                    errorHandler(error)
+                }
+                else {
+                    self.cacheUserPhoto(photoURL!)
+                }
+            })
+        }
     }
     
     func updateProfile(attr: AnyObject?, value: AnyObject?) {
         
     }
     
-    func setDisplayName(name: String?) {
-        self.screenName = name
-        if let changeRequest = FIRAuth.auth()?.currentUser!.profileChangeRequest() {
-            changeRequest.displayName = name
-            changeRequest.commitChangesWithCompletion { error in
-                if let error = error {
-                    // An error happened.
-                    print(error)
-                } else {
-                    // Profile updated.
-                    print("User display name updated")
-                }
-            }
-        }
+    func update() {
+        
     }
+    
+    func signOut(completion: (NSError?)->()) {
+        do {
+            try FIRAuth.auth()?.signOut()
+            completion(nil)
+        }
+        catch {
+            completion(nil)
+        }
+        
+        User.currentUser = nil
+    }
+    
 }

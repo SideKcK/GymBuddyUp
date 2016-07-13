@@ -29,16 +29,6 @@ class LandingScreenVC: UIViewController {
         infoLabel.textColor = ColorScheme.sharedInstance.lightText
         
         loginWithFacebookButton = FBSDKLoginButton()
-        
-//        // facebook login related
-//        // Set current token to nil so that fb login view will always present. WuYou: Remove this line if you no longer need to test login view.        
-//        if (FBSDKAccessToken.currentAccessToken() != nil) // TODO: replace with firebase auth check
-//        {
-//            // User is already logged in, do work such as go to next view controller.
-//            print("already logged in")
-//            self.performSegueWithIdentifier("toMainSegue", sender: nil)
-//            
-//        }
 
     }
 

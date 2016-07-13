@@ -11,6 +11,8 @@ target 'GymBuddyUp' do
     pod 'GoogleMaps'
     pod 'Firebase'
     pod 'Firebase/Auth'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
     pod 'Firebase/Messaging'
     
     # These are pods used for the auth providers.

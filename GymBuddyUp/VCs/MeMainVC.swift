@@ -28,8 +28,8 @@ class MeMainVC: UIViewController {
         setHeader()
     }
     func setHeader() {
-        titleBGView.image = UIImage(named: "selfie")
-        profileView.image = UIImage(named: "selfie")
+        titleBGView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
+        profileView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
         let headerW = CGRectGetWidth(self.view.frame)
 
         
@@ -68,7 +68,9 @@ class MeMainVC: UIViewController {
     }
     
     @IBAction func onLogout(sender: AnyObject) {
-        //User.currentuser.signOut()
+        User.currentUser!.signOut(){ _ in
+        self.performSegueWithIdentifier("toSignUpLogin", sender: self)
+        }
     }
 
     /*

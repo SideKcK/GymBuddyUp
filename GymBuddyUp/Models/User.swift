@@ -23,11 +23,11 @@ class User {
         case Unspecified = 2
     }
     
-    enum Goal {
-        case KeepFit
-        case LoseWeight
-        case BuildMuscle
-        case HaveFun
+    enum Goal: Int {
+        case KeepFit = 1
+        case LoseWeight = 0
+        case BuildMuscle = 3
+        case HaveFun = 2
         
         var description: String {
             switch self {
@@ -176,10 +176,13 @@ class User {
         // to be implemented
     }
     
-    func updateProfilePicture(photo: UIImage) {
+    func updateProfilePicture(photo: UIImage!) {
         // to be implemented
     }
     
+    func updateProfile(attr: AnyObject?, value: AnyObject?) {
+        
+    }
     
     func setDisplayName(name: String?) {
         self.screenName = name

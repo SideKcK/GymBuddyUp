@@ -20,10 +20,10 @@ class SignupVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     var alertController: UIAlertController!
-    
+    var profileImage: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        profileImage = UIImage(named: "Me")
         
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         let textColor = ColorScheme.sharedInstance.lightText
@@ -95,11 +95,14 @@ class SignupVC: UIViewController {
                 if  pwStatus == .succeed {
                     
                     User.signUpWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
-                        if error != nil {
-                            // handle error here
-                        }
-                        else {
+                        if let user = user{
+                            //upload photo
+                            user.updateProfilePicture(self.profileImage)
+                            //update screen name
+                            user.updateProfile("screenName", value: self.usernameField.text)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
+                        }else {
+                            print(error)
                         }
                     }
                 
@@ -142,12 +145,12 @@ extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     func imagePickerController(picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // Get the image captured by the UIImagePickerController
-        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //            let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        //let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        let profileImage = resize(originalImage, newSize: CGSize(width: 70, height: 70))
-        profileButton.setImage(profileImage, forState: .Normal)
+        profileImage = resize(editedImage, newSize: CGSize(width: 400, height: 400))
+        profileButton.setImage(resize(profileImage, newSize: CGSize(width: 30, height: 30)), forState: .Normal)
         // Dismiss UIImagePickerController to go back to your original view controller
         dismissViewControllerAnimated(true, completion: nil)
     }

@@ -20,11 +20,17 @@ class SetGoalVC: UIViewController {
     @IBOutlet weak var muscleView: UIImageView!
     
     
-    var buttonViewMap = [UIButton: UIImageView]()
+    var buttonViewMap = [Int: UIImageView]()
+    var selected = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
+        
+        loseWeightButton.tag = 0
+        keepFitButton.tag = 1
+        haveFunButton.tag = 2
+        muscleButton.tag = 3
         setButton(loseWeightButton, image: loseWeightView)
         setButton(keepFitButton, image: keepFitView)
         setButton(haveFunButton, image: haveFunView)
@@ -33,7 +39,7 @@ class SetGoalVC: UIViewController {
     }
 
     func setButton (button: UIButton, image: UIImageView) {
-        buttonViewMap[button] = image
+        buttonViewMap[button.tag] = image
         let darkColor = ColorScheme.sharedInstance.darkText
         let lightColor = ColorScheme.sharedInstance.lightText
         image.tintColor = lightColor
@@ -57,12 +63,16 @@ class SetGoalVC: UIViewController {
     {
         sender.selected = !sender.selected
         if (sender.selected) {
-            buttonViewMap[sender]?.tintColor = ColorScheme.sharedInstance.darkText
+            selected.append(sender.tag)
+            buttonViewMap[sender.tag]?.tintColor = ColorScheme.sharedInstance.darkText
         }else {
-            buttonViewMap[sender]?.tintColor = ColorScheme.sharedInstance.lightText
+            buttonViewMap[sender.tag]?.tintColor = ColorScheme.sharedInstance.lightText
         }
     }
     
+    @IBAction func onCompleteButton(sender: AnyObject) {
+        User.currentUser?.updateProfile("goal", value: self.selected)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

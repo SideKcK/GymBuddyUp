@@ -22,7 +22,8 @@ class LandingScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBarHidden = true
+
         overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         titleLabel.textColor = ColorScheme.sharedInstance.lightText
         infoLabel.textColor = ColorScheme.sharedInstance.lightText
@@ -41,6 +42,11 @@ class LandingScreenVC: UIViewController {
 
     }
 
+    override func viewWillDisappear(animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBarHidden = false
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,7 +58,7 @@ class LandingScreenVC: UIViewController {
         User.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
             if (error != nil){
                 // handle error here
-                let alert = UIAlertController(title: "Login Failed", message: error?.localizedFailureReason, preferredStyle: .Alert)
+                let alert = UIAlertController(title: "Login Failed", message: error?.localizedDescription, preferredStyle: .Alert)
                 let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(OKAction)
                 self.presentViewController(alert, animated: true, completion: nil)

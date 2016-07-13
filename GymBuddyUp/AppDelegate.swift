@@ -32,10 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
         
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
-        navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
-        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color        
+        
         
         // Firebase Initialization
         
@@ -66,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+        
     }
     
     func userDidLogout() {

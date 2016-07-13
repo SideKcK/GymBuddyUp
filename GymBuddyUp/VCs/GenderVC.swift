@@ -13,14 +13,9 @@ class GenderVC: UIViewController {
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var unspecifiedButton: UIButton!
     
-    var selected: Gender!
+    var selected: User.Gender?
     var checked = [false, false, false]
-    
-    enum Gender {
-        case Male
-        case Female
-        case Unspecified
-    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +44,9 @@ class GenderVC: UIViewController {
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
-        if selected == Gender.Unspecified {
+        if selected == User.Gender.Unspecified {
             //pop up alert
-            let alertController = UIAlertController(title: "We recommend gym buddies based on your information", message: "Specify your gender so we can provide you better match. ", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "We recommend gym buddies based on your information", message: "Specify your gender so we can provide you with better match. ", preferredStyle: .Alert)
             
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
@@ -59,6 +54,7 @@ class GenderVC: UIViewController {
             }
             let SkipAction = UIAlertAction(title: "Skip", style: .Default) { (action) in
                 //go to next screen
+                User.currentUser?.updateProfile("gender", value: self.selected?.hashValue)
                 self.performSegueWithIdentifier("toSetGoalSegue", sender: sender)
             }
             
@@ -68,6 +64,7 @@ class GenderVC: UIViewController {
             return
 
         }else {
+            User.currentUser?.updateProfile("gender", value: self.selected?.hashValue)
             self.performSegueWithIdentifier("toSetGoalSegue", sender: sender)
         }
     }

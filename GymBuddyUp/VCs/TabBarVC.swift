@@ -17,6 +17,11 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         self.thisTabBar.tintColor = ColorScheme.sharedInstance.navTint
         self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
+        navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color
     }
     
     override func viewDidAppear(animated: Bool) {

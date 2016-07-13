@@ -67,6 +67,9 @@ class MeMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLogout(sender: AnyObject) {
+        //User.currentuser.signOut()
+    }
 
     /*
     // MARK: - Navigation

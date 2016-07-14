@@ -51,6 +51,7 @@ class User {
         case Anonymous
     }
     
+    
     private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("users")
     private let storageRef = FIRStorage.storage().reference()
     
@@ -73,7 +74,11 @@ class User {
     
     var goal: Goal?
     var gym: String? //to WW: or change it to CLLocationCoordinates if thats better for backend
-    var description: String?
+    var description: String? {
+        get {
+            return self.userRef?.valueForKey("description") as? String
+        }
+    }
     
     var distance: Double?
     var sameInterestNum: Int?
@@ -93,16 +98,17 @@ class User {
         self.userRef = ref.child(user.uid)
         
         // custom properties
-        self.workoutNum = 100
+        self.workoutNum = 50
         self.starNum = 21
         self.dislikeNum = 10
-        self.buddyNum = 19
+        self.buddyNum = 20
         self.goal = .KeepFit
         self.gym = "Life Fitness"
-        self.description = "Test description"
         
         // TODO: figure out bast logic for photo caching.
-        updateProfilePicture(self.photoURL) { error in }
+        if (self.photoURL != nil) {
+            updateProfilePicture(self.photoURL) { error in }
+        }
     }
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
@@ -170,6 +176,16 @@ class User {
         }
     }
     
+    class func hasAuthenticatedUser () -> Bool {
+        if (FIRAuth.auth()?.currentUser != nil) {
+            self.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     // TODO
     func updateLastSeenLocation(location: CLLocation) {
         // to be implemented
@@ -229,13 +245,14 @@ class User {
         
     }
     
+    
     func signOut(completion: (NSError?)->()) {
         do {
             try FIRAuth.auth()?.signOut()
             completion(nil)
         }
-        catch {
-            completion(nil)
+        catch let error as NSError {
+            completion(error)
         }
         
         User.currentUser = nil

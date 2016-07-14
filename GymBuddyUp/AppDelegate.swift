@@ -20,14 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        if (User.currentUser) != nil {
-            // User is signed in.
-            userDidLogin()
-        } else {
-            // No user is signed in.
-            userDidLogout()
-        }
 
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
@@ -46,6 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         
+        // This cannot be called before FIRApp is initialized.
+        
+        if (User.hasAuthenticatedUser()) {
+            // User is signed in.
+            userDidLogin()
+        } else {
+            // No user is signed in.
+            userDidLogout()
+        }
+        
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification, object: nil)
@@ -62,8 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = mainSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
-        User.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
-        
     }
     
     func userDidLogout() {

@@ -66,7 +66,6 @@ class User {
     var dislikeNum: Int?
     var buddyNum: Int?
     
-    
     var goal: Goal?
     var gym: String? //to WW: or change it to CLLocationCoordinates if thats better for backend
     var description: String?
@@ -79,7 +78,7 @@ class User {
     
     init (user: FIRUser) {
         // FIRUser properties
-        self.firUser = user
+        self.firUser = user;
         self.userId = user.uid
         self.email = user.email
         self.screenName = user.displayName
@@ -98,7 +97,6 @@ class User {
         
     }
     
-    
     class func signUpWithEmail(email: String, password: String, completion: UserAuthCallback) {
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (firebaseUser, error) in
             if error != nil {
@@ -109,8 +107,6 @@ class User {
             {
                 User.currentUser = User(user: firebaseUser!)
                 completion(user: User.currentUser, error: nil)
-                // TODO: move this to cloud.
-                firebaseUser?.sendEmailVerificationWithCompletion(nil)
             }
         })
     }
@@ -140,7 +136,6 @@ class User {
         })
     }
     
-    
     class func signInWithFacebook (fromViewController: UIViewController!, completion: UserAuthCallback) {
         let loginManager = FBSDKLoginManager()
         let facebookReadPermissions = ["public_profile", "email"]
@@ -166,10 +161,6 @@ class User {
             }
         }
     }
-    
-    func signOut() {
-    }
-    
     
     // TODO
     func updateLastSeenLocation(location: CLLocation) {

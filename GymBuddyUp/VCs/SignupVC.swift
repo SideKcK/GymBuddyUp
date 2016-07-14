@@ -15,6 +15,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmField: UITextField!
+    @IBOutlet weak var nextButton: BorderedButton!
     
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
@@ -23,6 +24,8 @@ class SignupVC: UIViewController {
     var profileImage: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         profileImage = UIImage(named: "Me")
         
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
@@ -33,13 +36,14 @@ class SignupVC: UIViewController {
         setTextField(passwordField)
         setTextField(usernameField)
         setTextField(confirmField)
-        
+        nextButton.enabled = true
+
         //alert controller
         alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
         
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
+            self.nextButton.enabled = true
         }
         alertController.addAction(OKAction)
         
@@ -74,13 +78,8 @@ class SignupVC: UIViewController {
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
-    @IBAction func onTap(sender: AnyObject) {
-        view.endEditing(false)
-        
-    }
-    
     @IBAction func onNextButton(sender: AnyObject) {
-        
+        nextButton.enabled = false
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
             alertController.title = "Sign Up Failed"

@@ -41,6 +41,7 @@
 		C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2221D332F2C000DA37A /* UserProfileCell.swift */; };
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
+		C6CD01DE1D37290200D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01DD1D37290200D64A06 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		C64EC2221D332F2C000DA37A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = Views/UserProfileCell.swift; sourceTree = "<group>"; };
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
+		C6CD01DD1D37290200D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		D1026416F0B8214F0B969DEE /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +159,7 @@
 		C649C55F1CE3C04600258994 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C6CD01DD1D37290200D64A06 /* Extensions.swift */,
 				C649C5601CE3C08700258994 /* ColorScheme.swift */,
 				C60986581CEEC25200A0AFE3 /* Utils.swift */,
 				C65301E31D01F51E00DEF7A0 /* Validation.swift */,
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6CD01DE1D37290200D64A06 /* Extensions.swift in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,

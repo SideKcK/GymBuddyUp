@@ -317,9 +317,6 @@
                             <constraint firstItem="OFw-vv-CYc" firstAttribute="top" relation="lessThanOrEqual" secondItem="vNN-av-B28" secondAttribute="bottom" constant="50" id="rSX-Qa-YGG"/>
                             <constraint firstItem="NA5-nt-fHD" firstAttribute="top" secondItem="OFw-vv-CYc" secondAttribute="bottom" constant="34" id="zjl-Ru-YNG"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="nsf-PV-F8E" appends="YES" id="iYm-JF-bIG"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Sign Up" id="fln-jq-Imo"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -329,6 +326,7 @@
                         <outlet property="emailField" destination="Q5o-UX-kqS" id="vG4-6f-f6W"/>
                         <outlet property="loginButton" destination="3Ud-AX-sfl" id="Pt4-sz-Vib"/>
                         <outlet property="loginLabel" destination="PwJ-h8-Vek" id="bEb-xe-IJw"/>
+                        <outlet property="nextButton" destination="J4y-cS-1om" id="eHl-sh-f1f"/>
                         <outlet property="passwordField" destination="kvs-30-Vrt" id="qah-9j-vT6"/>
                         <outlet property="profileButton" destination="OFw-vv-CYc" id="70K-QN-lGn"/>
                         <outlet property="usernameField" destination="8SZ-Zy-1OP" id="4Pc-4a-KnT"/>
@@ -337,11 +335,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qrv-sa-OYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FJQ-2y-siw" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="nsf-PV-F8E">
-                    <connections>
-                        <action selector="onTap:" destination="403-DD-fB4" id="5a7-3F-bPH"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="994" y="342"/>
         </scene>

@@ -32,6 +32,17 @@ class LandingScreenVC: UIViewController {
         loginWithFacebookButton = FBSDKLoginButton()
 
     }
+    
+    func addAlertView (button: UIButton, error: NSError) -> UIAlertController {
+        let errorAlert = UIAlertController(title: "Login Failed", message: error.localizedDescription, preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            button.enabled = true
+            button.alpha = 1.0
+        }
+        
+        errorAlert.addAction(OKAction)
+        return errorAlert
+    }
 
     override func viewWillDisappear(animated: Bool)
     {
@@ -45,13 +56,12 @@ class LandingScreenVC: UIViewController {
     }
     
     @IBAction func onLoginButton(sender: AnyObject) {
-        
+        loginButton.enabled = false
+        loginButton.alpha = 0.3
         User.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
             if (error != nil){
                 // handle error here
-                let alert = UIAlertController(title: "Login Failed", message: error?.localizedDescription, preferredStyle: .Alert)
-                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(OKAction)
+                let alert = self.addAlertView(self.loginButton, error: error!)
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             else {
@@ -61,10 +71,13 @@ class LandingScreenVC: UIViewController {
     }
 
     @IBAction func onLoginWithFacebookButton(sender: AnyObject) {
-    
+
         User.signInWithFacebook(self){ (user, error) in
             if (error != nil) {
                 // handle error here
+                let alert = self.addAlertView(self.loginButton, error: error!)
+                self.presentViewController(alert, animated: true, completion: nil)
+
             }
             else {
                 self.performSegueWithIdentifier("toMainSegue", sender: sender)

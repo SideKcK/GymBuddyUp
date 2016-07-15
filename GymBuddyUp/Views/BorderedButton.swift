@@ -17,7 +17,7 @@ class BorderedButton: UIButton {
         layer.cornerRadius = 15
         layer.borderWidth = 1
         layer.borderColor = titleLabel?.textColor.CGColor
-
+        
     }
     
     override var highlighted: Bool {
@@ -26,6 +26,15 @@ class BorderedButton: UIButton {
                 backgroundColor = ColorScheme.sharedInstance.lightText
 
             } else {
+                backgroundColor = UIColor.clearColor()
+            }
+        }
+    }
+    override var selected: Bool {
+        didSet {
+            if selected {
+                backgroundColor = ColorScheme.sharedInstance.lightText
+            }else {
                 backgroundColor = UIColor.clearColor()
             }
         }

@@ -41,6 +41,7 @@
 		C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2221D332F2C000DA37A /* UserProfileCell.swift */; };
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
+		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		C64EC2221D332F2C000DA37A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = Views/UserProfileCell.swift; sourceTree = "<group>"; };
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
+		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -113,13 +115,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C60986531CEEBAC300A0AFE3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +138,6 @@
 			children = (
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				C64EC2241D334097000DA37A /* API */,
-				C60986531CEEBAC300A0AFE3 /* Models */,
 				C649C5651CE3C64F00258994 /* Views */,
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
@@ -165,6 +159,7 @@
 		C649C55F1CE3C04600258994 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C6CD01E11D3890E300D64A06 /* Extensions.swift */,
 				C649C5601CE3C08700258994 /* ColorScheme.swift */,
 				C60986581CEEC25200A0AFE3 /* Utils.swift */,
 				C65301E31D01F51E00DEF7A0 /* Validation.swift */,
@@ -367,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,

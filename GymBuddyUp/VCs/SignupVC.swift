@@ -36,7 +36,7 @@ class SignupVC: UIViewController {
         setTextField(passwordField)
         setTextField(usernameField)
         setTextField(confirmField)
-        nextButton.enabled = true
+        //nextButton.enabled = true
 
         //alert controller
         alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
@@ -44,6 +44,7 @@ class SignupVC: UIViewController {
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             self.nextButton.enabled = true
+            self.nextButton.alpha = 1.0
         }
         alertController.addAction(OKAction)
         
@@ -80,6 +81,8 @@ class SignupVC: UIViewController {
     
     @IBAction func onNextButton(sender: AnyObject) {
         nextButton.enabled = false
+        nextButton.alpha = 0.3
+        
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
             alertController.title = "Sign Up Failed"
@@ -130,6 +133,7 @@ class SignupVC: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+ 
     }
     /*
      // MARK: - Navigation

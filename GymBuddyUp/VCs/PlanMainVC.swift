@@ -16,7 +16,6 @@ class PlanMainVC: UIViewController {
         calCollectionView.dataSource = self
         calCollectionView.delegate = self
         // Do any additional setup after loading the view.
-        setNavBar()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,18 +23,31 @@ class PlanMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setNavBar() {
-        let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
-        space.width = 50
-        let prevButton = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        let nextButton = UIBarButtonItem(title: ">", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        let calButton = UIBarButtonItem(title: "Cal", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        self.navigationItem.setLeftBarButtonItems([space, prevButton], animated: true)
-        self.navigationItem.setRightBarButtonItems([calButton, space, nextButton], animated: true)
-    }
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
         
+    }
+    @IBAction func onNewPlanButton(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let BuildAction = UIAlertAction(title: "Build your own", style: .Default) { (action) in
+            self.performSegueWithIdentifier("toBuildPlanSegue", sender: self)
+        }
+        alertController.addAction(BuildAction)
+        
+        let LibAction = UIAlertAction(title: "SicdKck training library", style: .Default) { (action) in
+            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
+        }
+        alertController.addAction(LibAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
     }
 
     /*
@@ -59,3 +71,6 @@ extension PlanMainVC: UICollectionViewDataSource, UICollectionViewDelegate {
         return dateCell
     }
 }
+
+extension PlanMainVC: UIActionSheetDelegate {
+    }

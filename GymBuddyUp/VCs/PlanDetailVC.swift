@@ -10,6 +10,7 @@ import UIKit
 
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var selectPlanButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,29 @@ class PlanDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onSelectPlanButton(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: "Repeat this plan?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let WeeklyAction = UIAlertAction(title: "Weekly", style: .Default) { (action) in
+            // ...
+        }
+        alertController.addAction(WeeklyAction)
+        
+        let NoneAction = UIAlertAction(title: "None", style: .Default) { (action) in
+            // ...
+        }
+        alertController.addAction(NoneAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        selectPlanButton.titleLabel?.text = "Finish"
+    }
 
     /*
     // MARK: - Navigation

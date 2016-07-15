@@ -186,6 +186,7 @@ class User {
         }
     }
     
+
     // TODO
     func updateLastSeenLocation(location: CLLocation) {
         // to be implemented

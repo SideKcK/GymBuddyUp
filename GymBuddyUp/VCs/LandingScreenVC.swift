@@ -23,6 +23,7 @@ class LandingScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = true
+        self.hideKeyboardWhenTappedAround()
 
         overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
         titleLabel.textColor = ColorScheme.sharedInstance.lightText

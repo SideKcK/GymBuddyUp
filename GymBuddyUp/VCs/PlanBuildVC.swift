@@ -1,22 +1,19 @@
 //
-//  PlanDetailVC.swift
+//  PlanBuildVC.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 6/26/16.
+//  Created by you wu on 7/16/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class PlanDetailVC: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var selectPlanButton: UIButton!
-    @IBOutlet weak var usePlanButton: UIButton!
+class PlanBuildVC: UIViewController {
+    @IBOutlet weak var finishButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+
         // Do any additional setup after loading the view.
     }
 
@@ -31,8 +28,8 @@ class PlanDetailVC: UIViewController {
         //unwind to plan main
         self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: self)
     }
-    
-    @IBAction func onSelectPlanButton(sender: AnyObject) {
+
+    @IBAction func onFinishButton(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: "Repeat this plan?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
@@ -49,7 +46,7 @@ class PlanDetailVC: UIViewController {
             self.setPlan(false)
         }
         alertController.addAction(NoneAction)
-
+        
         self.presentViewController(alertController, animated: true) {
             // ...
         }
@@ -65,15 +62,4 @@ class PlanDetailVC: UIViewController {
     }
     */
 
-}
-
-extension PlanDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let detailCell = collectionView.dequeueReusableCellWithReuseIdentifier("PlanDetailCell", forIndexPath: indexPath)
-        return detailCell
-    }
 }

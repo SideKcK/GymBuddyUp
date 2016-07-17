@@ -42,6 +42,10 @@
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
+		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
+		C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */; };
+		C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */; };
+		C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +87,10 @@
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
+		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
+		C6CD01EC1D3AC0E300D64A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PlanAddExercise.storyboard; sourceTree = "<group>"; };
+		C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddMainVC.swift; path = VCs/PlanAddMainVC.swift; sourceTree = "<group>"; };
+		C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddDetailVC.swift; path = VCs/PlanAddDetailVC.swift; sourceTree = "<group>"; };
 		F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +155,7 @@
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
 				C64EC1FD1D20412B000DA37A /* Plan.storyboard */,
+				C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */,
 				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
 				C649C5511CE2C31C00258994 /* Assets.xcassets */,
 				C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */,
@@ -170,6 +179,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C6CD01EE1D3B34B000D64A06 /* PlanAdd */,
 				C64EC2061D207CF2000DA37A /* SignupLogin */,
 				C64EC2051D207CE6000DA37A /* Plan */,
 				C64EC1F91D124FC3000DA37A /* TestViewController.swift */,
@@ -194,6 +204,7 @@
 		C64EC2051D207CE6000DA37A /* Plan */ = {
 			isa = PBXGroup;
 			children = (
+				C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */,
 				C64EC2031D207CDA000DA37A /* PlanMainVC.swift */,
 				C64EC2091D207D69000DA37A /* PlanLibVC.swift */,
 				C64EC20B1D20B317000DA37A /* PlanEditVC.swift */,
@@ -229,6 +240,15 @@
 				C60986561CEEC00D00A0AFE3 /* User.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		C6CD01EE1D3B34B000D64A06 /* PlanAdd */ = {
+			isa = PBXGroup;
+			children = (
+				C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */,
+				C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */,
+			);
+			name = PlanAdd;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +318,7 @@
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C64EC21F1D2AC014000DA37A /* PlanTableView.xib in Resources */,
+				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
@@ -362,7 +383,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */,
 				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
+				C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
@@ -376,6 +399,7 @@
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
+				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
@@ -453,6 +477,14 @@
 				C64EC2181D235F95000DA37A /* Base */,
 			);
 			name = Create.storyboard;
+			sourceTree = "<group>";
+		};
+		C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6CD01EC1D3AC0E300D64A06 /* Base */,
+			);
+			name = PlanAddExercise.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

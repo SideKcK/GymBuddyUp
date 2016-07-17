@@ -1,18 +1,19 @@
 //
-//  DiscoverMainVC.swift
+//  PlanAddDetailVC.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 6/26/16.
+//  Created by you wu on 7/16/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class DiscoverMainVC: UIViewController {
+class PlanAddDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

@@ -22,6 +22,9 @@ class PlanBuildVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindToPlanBuildVC(segue: UIStoryboardSegue) {
+    }
+    
     func setPlan(repeating: Bool) {
         //set plan in Firebase
         

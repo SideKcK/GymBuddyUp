@@ -41,11 +41,13 @@
 		C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2221D332F2C000DA37A /* UserProfileCell.swift */; };
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
+		C661382B1D419C8100DFD406 /* PlanCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661382A1D419C8100DFD406 /* PlanCategoryCell.swift */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
 		C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */; };
 		C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */; };
 		C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */; };
+		C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,11 +88,13 @@
 		C64EC2221D332F2C000DA37A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = Views/UserProfileCell.swift; sourceTree = "<group>"; };
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
+		C661382A1D419C8100DFD406 /* PlanCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanCategoryCell.swift; path = Views/PlanCategoryCell.swift; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
 		C6CD01EC1D3AC0E300D64A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PlanAddExercise.storyboard; sourceTree = "<group>"; };
 		C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddMainVC.swift; path = VCs/PlanAddMainVC.swift; sourceTree = "<group>"; };
 		C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddDetailVC.swift; path = VCs/PlanAddDetailVC.swift; sourceTree = "<group>"; };
+		C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExerciseNumberedCell.swift; path = Views/ExerciseNumberedCell.swift; sourceTree = "<group>"; };
 		F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,6 +150,7 @@
 			children = (
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				C64EC2241D334097000DA37A /* API */,
+				C6CD01F31D3DD1AB00D64A06 /* Models */,
 				C649C5651CE3C64F00258994 /* Views */,
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
@@ -230,6 +235,8 @@
 			children = (
 				C64EC2221D332F2C000DA37A /* UserProfileCell.swift */,
 				C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */,
+				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
+				C661382A1D419C8100DFD406 /* PlanCategoryCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -249,6 +256,13 @@
 				C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */,
 			);
 			name = PlanAdd;
+			sourceTree = "<group>";
+		};
+		C6CD01F31D3DD1AB00D64A06 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +403,7 @@
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
+				C661382B1D419C8100DFD406 /* PlanCategoryCell.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
@@ -396,6 +411,7 @@
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
+				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,

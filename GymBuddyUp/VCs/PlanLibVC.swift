@@ -29,7 +29,6 @@ class PlanLibVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toPlanLibDetail" {
-            print(sender)
         }
     }
     
@@ -48,5 +47,26 @@ extension PlanLibVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("toPlanLibDetail", sender: indexPath.row)
+    }
+    
+
+    //Use for size
+    func collectionView(collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let width = self.view.frame.width / 3.0 - 5.0
+        return CGSize( width: width, height: width)
+    }
+    //Use for interspacing
+    func collectionView(collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 1.0
     }
 }

@@ -10,12 +10,30 @@ import UIKit
 
 class PlanMainVC: UIViewController {
     @IBOutlet weak var calCollectionView: UICollectionView!
+    @IBOutlet weak var planView: UIView!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var repeatPrevButton: UIButton!
 
+    var showPlan = false
+    var exercises = ["Jogging", "Barbell", "Bench Press"] //TMP
     override func viewDidLoad() {
         super.viewDidLoad()
+        repeatPrevButton.enabled = false
+        repeatPrevButton.hidden = true
+        
         calCollectionView.dataSource = self
         calCollectionView.delegate = self
         // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        planView.hidden = !showPlan
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,27 +45,51 @@ class PlanMainVC: UIViewController {
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
         
     }
-    @IBAction func onNewPlanButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
-        
+    
+    @IBAction func onMoreButton(sender: AnyObject) {
+         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
         alertController.addAction(cancelAction)
         
-        let BuildAction = UIAlertAction(title: "Build your own", style: .Default) { (action) in
-            self.performSegueWithIdentifier("toBuildPlanSegue", sender: self)
+        let DeleteAction = UIAlertAction(title: "Delete Plan", style: .Destructive) { (action) in
+            self.planView.hidden = true
         }
-        alertController.addAction(BuildAction)
+        alertController.addAction(DeleteAction)
         
-        let LibAction = UIAlertAction(title: "SicdKck training library", style: .Default) { (action) in
-            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
+        let RepeatAction = UIAlertAction(title: "Repeat Plan", style: .Default) { (action) in
+            //set plan as repeat
         }
-        alertController.addAction(LibAction)
+        alertController.addAction(RepeatAction)
         
         self.presentViewController(alertController, animated: true) {
             // ...
         }
+    }
+    
+    @IBAction func onNewPlanButton(sender: AnyObject) {
+        self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
+//        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
+//        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+//            // ...
+//        }
+//        alertController.addAction(cancelAction)
+//        
+//        let BuildAction = UIAlertAction(title: "Build your own", style: .Default) { (action) in
+//            self.performSegueWithIdentifier("toBuildPlanSegue", sender: self)
+//        }
+//        alertController.addAction(BuildAction)
+//        
+//        let LibAction = UIAlertAction(title: "SideKck training library", style: .Default) { (action) in
+//            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
+//        }
+//        alertController.addAction(LibAction)
+//        
+//        self.presentViewController(alertController, animated: true) {
+//            // ...
+//        }
     }
 
     /*
@@ -72,5 +114,16 @@ extension PlanMainVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 }
 
-extension PlanMainVC: UIActionSheetDelegate {
+extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exercises.count
     }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
+        cell.numLabel.text = String(indexPath.row+1)
+        cell.thumbnailView.image = UIImage(named: "dumbbell")
+        cell.nameLabel.text = exercises[indexPath.row]
+        return cell
+    }
+}
+

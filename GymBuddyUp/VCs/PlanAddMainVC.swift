@@ -10,12 +10,18 @@ import UIKit
 
 class PlanAddMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-
+    var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view.
+        
+        searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        
+        navigationItem.titleView = searchBar
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +33,9 @@ class PlanAddMainVC: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func unwindToAddExerciseVC(segue: UIStoryboardSegue) {
+    }
+    
     /*
     // MARK: - Navigation
 

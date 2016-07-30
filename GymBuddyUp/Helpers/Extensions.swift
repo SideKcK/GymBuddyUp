@@ -18,3 +18,14 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+extension UIImageView {
+    func makeThumbnail() {
+        self.backgroundColor = UIColor.flatGrayColor()
+        self.layer.borderWidth = 1
+        self.layer.masksToBounds = false
+        self.layer.borderColor = UIColor.flatGrayColor().CGColor
+        self.layer.cornerRadius = self.frame.height/2.0
+        self.clipsToBounds = true
+    }
+}

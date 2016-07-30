@@ -9,6 +9,7 @@
 import UIKit
 
 class PlanAddDetailVC: UIViewController {
+    @IBOutlet weak var addPlanButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,28 @@ class PlanAddDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onAddPlanButton(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: "Add more exercise?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let FinishAction = UIAlertAction(title: "Finish", style: .Default) { (action) in
+            self.performSegueWithIdentifier("unwindToPlanBuildSegue", sender: self)
+        }
+        alertController.addAction(FinishAction)
+        
+        let AddAction = UIAlertAction(title: "Add another", style: .Default) { (action) in
+            self.performSegueWithIdentifier("unwindToAddExerciseSegue", sender: self)
+        }
+        alertController.addAction(AddAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+    }
 
     /*
     // MARK: - Navigation

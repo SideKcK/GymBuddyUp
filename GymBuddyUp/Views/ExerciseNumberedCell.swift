@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ExerciseNumberedCell: UITableViewCell {
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
+    var exercise: Exercise! {
+        didSet {
+            let downloadURL = exercise.thumbURL
+            self.thumbnailView.af_setImageWithURL(downloadURL)
+            self.nameLabel.text = exercise.name
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,7 +29,7 @@ class ExerciseNumberedCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 

@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (3.4.0)
+  - AlamofireImage (2.4.0):
+    - Alamofire (~> 3.3)
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
     - Bolts/Tasks (= 1.7.0)
@@ -68,6 +70,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - AlamofireImage (~> 2.4)
   - ChameleonFramework/Swift (~> 2.1.0)
   - CryptoSwift
   - FBSDKCoreKit
@@ -82,6 +85,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
@@ -102,6 +106,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: b0a38e3fbac1207e85ce298dea5df00bf40f172e
+PODFILE CHECKSUM: 6732a89965afe266f27bfcf9ca3eac7a34d5972b
 
 COCOAPODS: 1.0.1

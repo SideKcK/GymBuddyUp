@@ -7,6 +7,7 @@ use_frameworks!
 target 'GymBuddyUp' do
     pod 'ChameleonFramework/Swift', '~> 2.1.0'
     pod 'Alamofire', '~> 3.4'
+    pod 'AlamofireImage', '~> 2.4'
     pod 'CryptoSwift'
     pod 'GoogleMaps'
     pod 'Firebase'

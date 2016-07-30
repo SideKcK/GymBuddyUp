@@ -9,12 +9,17 @@
 import UIKit
 
 class PlanLibVC: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    var cats: [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        cats = Library.getCategoryNames()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,44 +34,32 @@ class PlanLibVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toPlanLibDetail" {
+            if let detailVC = segue.destinationViewController as? PlanDetailVC {
+                detailVC.plans = Library.getPlans(sender as! Int)
+            }
         }
     }
     
 
 }
 
-extension PlanLibVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let cats = cats {
+            return cats.count
+        }else {
+            return 0
+        }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let categoryCell = collectionView.dequeueReusableCellWithReuseIdentifier("CategoryCell", forIndexPath: indexPath)
-        return categoryCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
+        cell.textLabel?.text = cats?[indexPath.row]
+        return cell
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         self.performSegueWithIdentifier("toPlanLibDetail", sender: indexPath.row)
-    }
     
-
-    //Use for size
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = self.view.frame.width / 3.0 - 5.0
-        return CGSize( width: width, height: width)
-    }
-    //Use for interspacing
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 1.0
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 1.0
     }
 }

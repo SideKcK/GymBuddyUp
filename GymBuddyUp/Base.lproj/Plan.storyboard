@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-i4-Hlq">
-                                <rect key="frame" x="0.0" y="138" width="320" height="430"/>
+                                <rect key="frame" x="0.0" y="134" width="320" height="434"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZL-18-aJo">
                                         <rect key="frame" x="99" y="191" width="123" height="30"/>
@@ -32,10 +32,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IH3-sA-KL7">
-                                <rect key="frame" x="0.0" y="138" width="320" height="430"/>
+                                <rect key="frame" x="0.0" y="134" width="320" height="434"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-we-C7j">
-                                        <rect key="frame" x="0.0" y="78" width="320" height="352"/>
+                                        <rect key="frame" x="0.0" y="78" width="320" height="356"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExerciseCell" rowHeight="60" id="mR8-yB-xhO" customClass="ExerciseNumberedCell" customModule="GymBuddyUp" customModuleProvider="target">
@@ -102,26 +102,26 @@
                                     <constraint firstItem="yMp-Hz-Ukh" firstAttribute="centerX" secondItem="IH3-sA-KL7" secondAttribute="centerX" id="zRy-Tk-qJT"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5s-uS-fOb" customClass="CVCalendarMenuView" customModule="CVCalendar">
-                                <rect key="frame" x="0.0" y="64" width="320" height="24"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsF-Er-TfO" customClass="CVCalendarView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="64" width="320" height="70"/>
                                 <color key="backgroundColor" red="0.23539169130000001" green="0.115438737" blue="0.25115793939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="usH-zE-QXC"/>
+                                    <constraint firstAttribute="height" constant="70" id="cPk-Gl-fe3"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsF-Er-TfO" customClass="CVCalendarView" customModule="CVCalendar">
-                                <rect key="frame" x="0.0" y="88" width="320" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5s-uS-fOb" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="64" width="320" height="15"/>
                                 <color key="backgroundColor" red="0.23539169130000001" green="0.115438737" blue="0.25115793939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="cPk-Gl-fe3"/>
+                                    <constraint firstAttribute="height" constant="15" id="usH-zE-QXC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bsF-Er-TfO" firstAttribute="top" secondItem="hSZ-Zk-hIe" secondAttribute="bottom" id="64p-8o-Wtt"/>
                             <constraint firstItem="4Ir-i4-Hlq" firstAttribute="top" secondItem="bsF-Er-TfO" secondAttribute="bottom" id="AiH-Bk-dKW"/>
                             <constraint firstItem="0aJ-FB-Buv" firstAttribute="top" secondItem="IH3-sA-KL7" secondAttribute="bottom" id="B6U-o0-PUo"/>
-                            <constraint firstItem="bsF-Er-TfO" firstAttribute="top" secondItem="m5s-uS-fOb" secondAttribute="bottom" id="CJ3-vw-cNV"/>
                             <constraint firstItem="bsF-Er-TfO" firstAttribute="leading" secondItem="Mmy-k9-LZQ" secondAttribute="leading" id="TWV-mq-nGL"/>
                             <constraint firstItem="m5s-uS-fOb" firstAttribute="leading" secondItem="Mmy-k9-LZQ" secondAttribute="leading" id="av5-fR-DdV"/>
                             <constraint firstItem="4Ir-i4-Hlq" firstAttribute="leading" secondItem="Mmy-k9-LZQ" secondAttribute="leading" id="gMb-un-LaJ"/>

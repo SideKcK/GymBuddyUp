@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CVCalendar
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
@@ -27,5 +28,17 @@ extension UIImageView {
         self.layer.borderColor = UIColor.flatGrayColor().CGColor
         self.layer.cornerRadius = self.frame.height/2.0
         self.clipsToBounds = true
+    }
+}
+
+extension CVDate {
+    public var monthDescription: String {
+        get {
+            var month = globalDescription
+            if let dotRange = month.rangeOfString(",") {
+                month.removeRange(dotRange.startIndex..<month.endIndex)
+            }
+            return month
+        }
     }
 }

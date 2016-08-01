@@ -51,8 +51,7 @@ class PlanMainVC: UIViewController {
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
-        
-        monthButton.title = "< "+CVDate(date: NSDate()).globalDescription
+        monthButton.title = "< "+CVDate(date: NSDate()).monthDescription
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,8 +80,11 @@ class PlanMainVC: UIViewController {
     }
     @IBAction func onMonthButton(sender: AnyObject) {
         calendarView.changeMode(.MonthView)
-        planView.hidden = true
-        emptyView.hidden = true
+        UIView.animateWithDuration(0.3, animations: {
+
+        self.planView.alpha = 0
+        self.emptyView.alpha = 0
+        })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
         calendarView.toggleCurrentDayView()
@@ -188,22 +190,26 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         selectedDay = dayView
-        
         calendarView.changeMode(.WeekView)
-        planView.hidden = false
-        emptyView.hidden = false
+        UIView.animateWithDuration(0.3, animations: {
+
+        self.planView.alpha = 1
+        self.emptyView.alpha = 1
+        })
     }
     
     func presentedDateUpdated(date: CVDate) {
-        if monthButton.title != date.globalDescription {
-            monthButton.title = "< "+date.globalDescription
+        if monthButton.title != date.monthDescription {
+            //monthButton.alpha = 0
+            UIView.animateWithDuration(0.3, animations: {
+                self.monthButton.title = "< "+date.monthDescription
+            })
         }
     }
     
     func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
         let day = dayView.date.day
-        let randomDay = Int(arc4random_uniform(31))
-        if day == randomDay {
+        if day == 1 {
             return true
         }
         
@@ -231,6 +237,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
 }
 
 extension PlanMainVC: CVCalendarViewAppearanceDelegate {
+
     func dayLabelWeekdayInTextColor() -> UIColor {
         return ColorScheme.sharedInstance.calText
     }
@@ -258,6 +265,9 @@ extension PlanMainVC: CVCalendarViewAppearanceDelegate {
         return ColorScheme.sharedInstance.calText
     }
 
+    func dotMarkerOffset() -> CGFloat {
+        return 0
+    }
     
 }
 

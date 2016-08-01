@@ -20,6 +20,8 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
         
         let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 
         navigationBarAppearace.translucent = false
         navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such

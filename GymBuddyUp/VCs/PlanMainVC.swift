@@ -7,35 +7,60 @@
 //
 
 import UIKit
+import CVCalendar
 
 class PlanMainVC: UIViewController {
-    @IBOutlet weak var calCollectionView: UICollectionView!
+    @IBOutlet weak var menuView: CVCalendarMenuView!
+    @IBOutlet weak var calendarView: CVCalendarView!
+    
+    @IBOutlet weak var monthButton: UIBarButtonItem!
+    
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
     var plan: Plan?
+    var selectedDay: DayView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setCalendar()
         planView.hidden = true
-        calCollectionView.dataSource = self
-        calCollectionView.delegate = self
-        // Do any additional setup after loading the view.
+        emptyView.hidden = true
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
-            if error == nil {
+            if plan != nil {
                 self.plan = plan
                 self.tableView.reloadData()
                 self.planView.hidden = false
+            }else {
+                self.emptyView.hidden = false
             }
         }
     }
     
-
+    
+    func setCalendar() {
+        calendarView.backgroundColor = ColorScheme.sharedInstance.calBg
+        menuView.backgroundColor = ColorScheme.sharedInstance.calBg
+        calendarView.calendarAppearanceDelegate = self
+        menuView.delegate = self
+        calendarView.delegate = self
+        
+        monthButton.title = "< "+CVDate(date: NSDate()).globalDescription
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        menuView.commitMenuViewUpdate()
+        calendarView.commitCalendarViewUpdate()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,12 +69,24 @@ class PlanMainVC: UIViewController {
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
         Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
-            if error == nil {
+            if plan != nil {
                 self.plan = plan
                 self.tableView.reloadData()
                 self.planView.hidden = false
+            }else {
+                self.emptyView.hidden = false
             }
         }
+
+    }
+    @IBAction func onMonthButton(sender: AnyObject) {
+        calendarView.changeMode(.MonthView)
+        planView.hidden = true
+        emptyView.hidden = true
+    }
+    @IBAction func onTodayButton(sender: AnyObject) {
+        calendarView.toggleCurrentDayView()
+        calendarView.changeMode(.WeekView)
 
     }
     
@@ -127,14 +164,101 @@ class PlanMainVC: UIViewController {
 
 }
 
-extension PlanMainVC: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+    func presentationMode() -> CalendarMode {
+        return .WeekView
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let dateCell = collectionView.dequeueReusableCellWithReuseIdentifier("DateCell", forIndexPath: indexPath)
-        return dateCell
+    
+    /// Required method to implement!
+    func firstWeekday() -> Weekday {
+        return .Sunday
     }
+    
+    // MARK: Optional methods
+    
+    func shouldShowWeekdaysOut() -> Bool {
+        return true
+    }
+    
+    func shouldAnimateResizing() -> Bool {
+        return true // Default value is true
+    }
+    
+
+    func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
+        print("\(dayView.date.commonDescription) is selected!")
+        selectedDay = dayView
+        
+        calendarView.changeMode(.WeekView)
+        planView.hidden = false
+        emptyView.hidden = false
+    }
+    
+    func presentedDateUpdated(date: CVDate) {
+        if monthButton.title != date.globalDescription {
+            monthButton.title = "< "+date.globalDescription
+        }
+    }
+    
+    func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
+        let day = dayView.date.day
+        let randomDay = Int(arc4random_uniform(31))
+        if day == randomDay {
+            return true
+        }
+        
+        return false
+    }
+    
+    func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
+        
+        let color = ColorScheme.sharedInstance.calText
+        
+        return [color] // return 1 dot
+        
+    }
+
+    func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
+        return 13
+    }
+    
+    func dayOfWeekTextColor() -> UIColor {
+        return ColorScheme.sharedInstance.calText
+    }
+    
+
+
+}
+
+extension PlanMainVC: CVCalendarViewAppearanceDelegate {
+    func dayLabelWeekdayInTextColor() -> UIColor {
+        return ColorScheme.sharedInstance.calText
+    }
+    
+    func dayLabelWeekdayOutTextColor() -> UIColor {
+        return ColorScheme.sharedInstance.calTextDark
+    }
+    
+    func dayLabelWeekdaySelectedTextColor() -> UIColor {
+        return ColorScheme.sharedInstance.calBg
+    }
+    func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
+        return ColorScheme.sharedInstance.calBg
+    }
+    
+    func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
+        return ColorScheme.sharedInstance.calText
+    }
+    
+    func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
+        return ColorScheme.sharedInstance.calText
+    }
+    
+    func dotMarkerColor() -> UIColor {
+        return ColorScheme.sharedInstance.calText
+    }
+
+    
 }
 
 extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {

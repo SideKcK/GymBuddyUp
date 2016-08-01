@@ -15,13 +15,24 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        self.thisTabBar.translucent = false
         self.thisTabBar.tintColor = ColorScheme.sharedInstance.navTint
         self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
         
         let navigationBarAppearace = UINavigationBar.appearance()
+
+        navigationBarAppearace.translucent = false
         navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
         navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
-        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:ColorScheme.sharedInstance.navTint]  // Title's text color
+        
+//        for parent in UINavigationBar().subviews {
+//            for childView in parent.subviews {
+//                if(childView is UIImageView) {
+//                    childView.removeFromSuperview()
+//                }
+//            }
+//        }
     }
     
     override func viewDidAppear(animated: Bool) {

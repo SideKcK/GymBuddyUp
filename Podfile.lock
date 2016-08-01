@@ -12,6 +12,7 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - CryptoSwift (0.4.1)
+  - CVCalendar (1.2.9)
   - FBSDKCoreKit (4.13.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.13.1):
@@ -73,6 +74,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 2.4)
   - ChameleonFramework/Swift (~> 2.1.0)
   - CryptoSwift
+  - CVCalendar (~> 1.2.9)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -89,6 +91,7 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
+  CVCalendar: 0799256e0bc3b43e83b7e86c0729ce9ff0624cb6
   FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
   FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
@@ -106,6 +109,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: 6732a89965afe266f27bfcf9ca3eac7a34d5972b
+PODFILE CHECKSUM: 10c1c9376dc2a26f42a9b6b07cbfa4baae0dd73e
 
 COCOAPODS: 1.0.1

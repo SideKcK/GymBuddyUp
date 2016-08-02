@@ -18,8 +18,12 @@ class PlanLibVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        cats = Library.getCategoryNames()
-        tableView.reloadData()
+        // TODO: 吴悠：这是读取library里数据的方法，API 返回的是完整的dictionary数据，
+        // 你要用的时候做一个mapping 读你想要的数据，比如NAME, ID等等。
+        Library.getTopCategory({ (content, error) in
+            self.cats = content?.flatMap({ ($0["name"] as? String)})
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {

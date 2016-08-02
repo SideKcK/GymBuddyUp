@@ -62,13 +62,13 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         button.setBackgroundImage(highlightImage, forState: UIControlState.Highlighted)
         button.addTarget(self, action: #selector(TabBarVC.buttonEvent), forControlEvents: UIControlEvents.TouchUpInside)
         
-        let heightDifference: CGFloat = buttonImage.size.height - self.tabBar.frame.size.height
+        let heightDifference: CGFloat = 0//buttonImage.size.height - self.tabBar.frame.size.height
         
         if (heightDifference < 0){
             button.center = self.tabBar.center
         }else{
             var center: CGPoint = self.tabBar.center
-            center.y = center.y - self.tabBar.frame.origin.y - heightDifference/2.0 - button.bounds.height / 4.0
+            center.y = center.y - self.tabBar.frame.origin.y - heightDifference/2.0
             button.center = center
         }
         

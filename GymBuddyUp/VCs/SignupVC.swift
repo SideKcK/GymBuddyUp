@@ -51,16 +51,6 @@ class SignupVC: UIViewController {
     }
     
     func setTextField(textField: UITextField) {
-        let textColor = ColorScheme.sharedInstance.lightText
-        textField.textColor = textColor
-        textField.attributedPlaceholder = NSAttributedString(string:textField.placeholder!,attributes: [NSForegroundColorAttributeName: textColor])
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = textColor.CGColor
-        border.frame = CGRect(x: 0, y: textField.frame.size.height - width, width:  textField.frame.size.width, height: textField.frame.size.height)
-        
-        border.borderWidth = width
-        textField.layer.addSublayer(border)
         textField.layer.masksToBounds = true
         textField.delegate = self
     }

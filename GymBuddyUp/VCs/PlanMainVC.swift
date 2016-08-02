@@ -15,11 +15,14 @@ class PlanMainVC: UIViewController {
     
     @IBOutlet weak var monthButton: UIBarButtonItem!
     
+    @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var timeLocView: UIStackView!
+    
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-
+    
     var plan: Plan?
     var selectedDay: DayView!
     
@@ -42,6 +45,8 @@ class PlanMainVC: UIViewController {
                 self.emptyView.hidden = false
             }
         }
+        
+        timeLocView.hidden = true
     }
     
     
@@ -67,6 +72,7 @@ class PlanMainVC: UIViewController {
     
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
+        onTodayButton(self)
         Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
             if plan != nil {
                 self.plan = plan
@@ -76,24 +82,24 @@ class PlanMainVC: UIViewController {
                 self.emptyView.hidden = false
             }
         }
-
+        
     }
     @IBAction func onMonthButton(sender: AnyObject) {
         calendarView.changeMode(.MonthView)
         UIView.animateWithDuration(0.3, animations: {
-
-        self.planView.alpha = 0
-        self.emptyView.alpha = 0
+            
+            self.planView.alpha = 0
+            self.emptyView.alpha = 0
         })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
         calendarView.toggleCurrentDayView()
         calendarView.changeMode(.WeekView)
-
+        
     }
     
     @IBAction func onMoreButton(sender: AnyObject) {
-         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -127,31 +133,31 @@ class PlanMainVC: UIViewController {
     
     @IBAction func onNewPlanButton(sender: AnyObject) {
         self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
-//        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-//            // ...
-//        }
-//        alertController.addAction(cancelAction)
-//        
-//        let BuildAction = UIAlertAction(title: "Build your own", style: .Default) { (action) in
-//            self.performSegueWithIdentifier("toBuildPlanSegue", sender: self)
-//        }
-//        alertController.addAction(BuildAction)
-//        
-//        let LibAction = UIAlertAction(title: "SideKck training library", style: .Default) { (action) in
-//            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
-//        }
-//        alertController.addAction(LibAction)
-//        
-//        self.presentViewController(alertController, animated: true) {
-//            // ...
-//        }
+        //        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
+        //
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        //            // ...
+        //        }
+        //        alertController.addAction(cancelAction)
+        //
+        //        let BuildAction = UIAlertAction(title: "Build your own", style: .Default) { (action) in
+        //            self.performSegueWithIdentifier("toBuildPlanSegue", sender: self)
+        //        }
+        //        alertController.addAction(BuildAction)
+        //
+        //        let LibAction = UIAlertAction(title: "SideKck training library", style: .Default) { (action) in
+        //            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
+        //        }
+        //        alertController.addAction(LibAction)
+        //
+        //        self.presentViewController(alertController, animated: true) {
+        //            // ...
+        //        }
     }
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier ==  "toExerciseDetailSegue" {
@@ -162,8 +168,8 @@ class PlanMainVC: UIViewController {
             }
         }
     }
- 
-
+    
+    
 }
 
 extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
@@ -186,15 +192,21 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         return true // Default value is true
     }
     
-
+    
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         selectedDay = dayView
+        Plan.getPlan(User.currentUser, date: selectedDay.date.convertedDate()) { (plan, error) in
+            if error == nil {
+                self.plan = plan
+                self.tableView.reloadData()
+            }
+        }
         calendarView.changeMode(.WeekView)
         UIView.animateWithDuration(0.3, animations: {
-
-        self.planView.alpha = 1
-        self.emptyView.alpha = 1
+            
+            self.planView.alpha = 1
+            self.emptyView.alpha = 1
         })
     }
     
@@ -223,7 +235,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         return [color] // return 1 dot
         
     }
-
+    
     func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
         return 13
     }
@@ -232,12 +244,12 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         return ColorScheme.sharedInstance.calText
     }
     
-
-
+    
+    
 }
 
 extension PlanMainVC: CVCalendarViewAppearanceDelegate {
-
+    
     func dayLabelWeekdayInTextColor() -> UIColor {
         return ColorScheme.sharedInstance.calText
     }
@@ -264,7 +276,7 @@ extension PlanMainVC: CVCalendarViewAppearanceDelegate {
     func dotMarkerColor() -> UIColor {
         return ColorScheme.sharedInstance.calText
     }
-
+    
     func dotMarkerOffset() -> CGFloat {
         return 0
     }

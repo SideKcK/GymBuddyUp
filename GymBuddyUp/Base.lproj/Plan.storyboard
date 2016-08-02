@@ -83,13 +83,49 @@
                                             <action selector="onMoreButton:" destination="31H-FZ-iqh" eventType="touchUpInside" id="Sjp-oE-KNx"/>
                                         </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="obl-fZ-Ed1">
+                                        <rect key="frame" x="50" y="40" width="220" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-xi-Zau">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="D7F-KC-nbz"/>
+                                                    <constraint firstAttribute="width" constant="30" id="Hrj-tZ-omM"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:00PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yk1-CG-4vQ">
+                                                <rect key="frame" x="32" y="0.0" width="44" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSR-xM-tKh">
+                                                <rect key="frame" x="78" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="YUs-RZ-4qM"/>
+                                                    <constraint firstAttribute="height" constant="30" id="jgP-hV-I21"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NYSC, White Plains" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-b9-ruc">
+                                                <rect key="frame" x="110" y="0.0" width="110" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMp-Hz-Ukh">
                                         <rect key="frame" x="98" y="40" width="125" height="30"/>
                                         <state key="normal" title="Find your SideKcK"/>
+                                        <connections>
+                                            <segue destination="jcf-nu-vuj" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="bTs-V8-eL8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="obl-fZ-Ed1" firstAttribute="centerX" secondItem="IH3-sA-KL7" secondAttribute="centerX" id="0P0-oo-b21"/>
+                                    <constraint firstItem="obl-fZ-Ed1" firstAttribute="top" secondItem="3pe-6k-qTB" secondAttribute="bottom" constant="8" id="0Vm-Ry-CQI"/>
                                     <constraint firstItem="3pe-6k-qTB" firstAttribute="top" secondItem="IH3-sA-KL7" secondAttribute="top" constant="8" id="DA5-fn-oDz"/>
                                     <constraint firstItem="yMp-Hz-Ukh" firstAttribute="top" secondItem="3pe-6k-qTB" secondAttribute="bottom" constant="8" id="JXY-U5-ooL"/>
                                     <constraint firstAttribute="trailing" secondItem="sTd-we-C7j" secondAttribute="trailing" id="MXI-pi-Cm5"/>
@@ -153,11 +189,13 @@
                     <connections>
                         <outlet property="calendarView" destination="bsF-Er-TfO" id="ddd-uG-AQk"/>
                         <outlet property="emptyView" destination="4Ir-i4-Hlq" id="nzX-hm-2wI"/>
+                        <outlet property="findButton" destination="yMp-Hz-Ukh" id="lCI-9Z-vE6"/>
                         <outlet property="menuView" destination="m5s-uS-fOb" id="6tJ-AX-aAp"/>
                         <outlet property="monthButton" destination="adI-Bc-KYD" id="YNL-qm-3Fi"/>
                         <outlet property="moreButton" destination="hZO-Xs-XS2" id="Njj-bB-cDi"/>
                         <outlet property="planView" destination="IH3-sA-KL7" id="t8l-iu-t8U"/>
                         <outlet property="tableView" destination="sTd-we-C7j" id="vqb-2c-1mZ"/>
+                        <outlet property="timeLocView" destination="obl-fZ-Ed1" id="sZN-eU-IGf"/>
                         <segue destination="iEy-Fi-h0E" kind="presentation" identifier="toPlanLibrarySegue" id="SCd-Gh-eem"/>
                         <segue destination="OJA-WL-q0A" kind="presentation" identifier="toBuildPlanSegue" id="OzF-Ls-qyD"/>
                         <segue destination="cEc-hT-IZq" kind="show" identifier="toExerciseDetailSegue" id="5lU-Sx-9vS"/>
@@ -166,6 +204,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iod-Ld-dte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1261" y="878"/>
+        </scene>
+        <!--Plan InviteVC-->
+        <scene sceneID="G0T-KX-tbx">
+            <objects>
+                <viewController id="jcf-nu-vuj" customClass="PlanInviteVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nW2-75-q7L"/>
+                        <viewControllerLayoutGuide type="bottom" id="zaI-ff-jhR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OXZ-zj-PnR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wid-vM-jb5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojp-aF-mcR">
+                                <rect key="frame" x="20" y="184" width="280" height="199"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bv1-Yz-Uef">
+                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <state key="normal" title="X"/>
+                                        <connections>
+                                            <segue destination="SY6-fQ-PtU" kind="unwind" unwindAction="unwindToPlanMainVC:" id="6xh-w2-0Q4"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find your SideKcK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3h-uU-SEQ">
+                                        <rect key="frame" x="71" y="13" width="139" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfp-l9-8yC">
+                                        <rect key="frame" x="236" y="8" width="36" height="30"/>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="onSendButton:" destination="jcf-nu-vuj" eventType="touchUpInside" id="MUM-At-zW7"/>
+                                            <segue destination="SY6-fQ-PtU" kind="unwind" unwindAction="unwindToPlanMainVC:" id="NkR-y4-t6G"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start Time:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HBJ-YV-NdP" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="23" y="64" width="234" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Location:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePu-la-lwt" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="23" y="102" width="234" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jpk-lM-DKc" customClass="MultilineSegControl" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="27" y="151" width="227" height="29"/>
+                                        <segments>
+                                            <segment title="to Public"/>
+                                            <segment title="to Friends"/>
+                                            <segment title="Invite"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m0Y-Lx-aUk">
+                                        <rect key="frame" x="0.0" y="42" width="280" height="2"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W9m-rF-k6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SY6-fQ-PtU" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1662" y="878"/>
         </scene>
         <!--Build-->
         <scene sceneID="Hp6-2m-aHi">
@@ -268,7 +379,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25h-C1-bhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Hd8-j0-c4P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="188"/>
+            <point key="canvasLocation" x="2120" y="-536"/>
         </scene>
         <!--PlanAddExercise-->
         <scene sceneID="qkQ-PL-j0K">
@@ -276,7 +387,7 @@
                 <viewControllerPlaceholder storyboardName="PlanAddExercise" id="7Qn-yP-aNl" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOj-Pg-3Rw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2530" y="188"/>
+            <point key="canvasLocation" x="2558" y="-536"/>
         </scene>
         <!--SideKcK Library-->
         <scene sceneID="QYZ-dR-pYV">
@@ -328,7 +439,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXo-nF-G3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="x74-CG-R7a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2079" y="878"/>
+            <point key="canvasLocation" x="2488" y="878"/>
         </scene>
         <!--Plan ExerciseVC-->
         <scene sceneID="58H-vK-2hk">
@@ -620,7 +731,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M8v-qY-ZrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8gL-VT-xxv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2467" y="874"/>
+            <point key="canvasLocation" x="2876" y="874"/>
         </scene>
         <!--Edit Plan-->
         <scene sceneID="rXZ-b2-azn">
@@ -916,7 +1027,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttQ-Ix-ZAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2530.5" y="-533.5"/>
+            <point key="canvasLocation" x="2558.5" y="-1257.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y2a-ba-pxk">
@@ -934,7 +1045,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tA-uz-1KV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1683" y="878"/>
+            <point key="canvasLocation" x="2092" y="878"/>
         </scene>
         <!--Previous Plans-->
         <scene sceneID="tQZ-ti-jsN">
@@ -1165,7 +1276,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G55-aX-NKM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dAn-Cf-M6o" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2104" y="-533"/>
+            <point key="canvasLocation" x="2132" y="-1257"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nE5-FE-bF9">
@@ -1183,7 +1294,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyW-Jo-QPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1675" y="188"/>
+            <point key="canvasLocation" x="1703" y="-536"/>
         </scene>
         <!--Plan-->
         <scene sceneID="rth-jq-ckf">
@@ -1221,7 +1332,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aw-3A-2d1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687" y="-533"/>
+            <point key="canvasLocation" x="1715" y="-1257"/>
         </scene>
     </scenes>
     <resources>

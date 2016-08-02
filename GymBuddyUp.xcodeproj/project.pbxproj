@@ -44,6 +44,8 @@
 		C66B081B1D502269003B0872 /* PlanInviteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081A1D502269003B0872 /* PlanInviteVC.swift */; };
 		C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081C1D502378003B0872 /* UnderlineField.swift */; };
 		C66B081F1D502B8B003B0872 /* MultilineSegControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081E1D502B8B003B0872 /* MultilineSegControl.swift */; };
+		C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66B08201D50346F003B0872 /* Tracking.storyboard */; };
+		C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08241D503ADF003B0872 /* TrackMainVC.swift */; };
 		C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D950F1D4CFFBA00FAD103 /* Plan.swift */; };
 		C67D95121D4D020300FAD103 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D95111D4D020300FAD103 /* Exercise.swift */; };
 		C67D95141D4D2B5C00FAD103 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D95131D4D2B5C00FAD103 /* Library.swift */; };
@@ -97,6 +99,8 @@
 		C66B081A1D502269003B0872 /* PlanInviteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanInviteVC.swift; path = VCs/PlanInviteVC.swift; sourceTree = "<group>"; };
 		C66B081C1D502378003B0872 /* UnderlineField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlineField.swift; path = Views/UnderlineField.swift; sourceTree = "<group>"; };
 		C66B081E1D502B8B003B0872 /* MultilineSegControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultilineSegControl.swift; path = Views/MultilineSegControl.swift; sourceTree = "<group>"; };
+		C66B08211D50346F003B0872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tracking.storyboard; sourceTree = "<group>"; };
+		C66B08241D503ADF003B0872 /* TrackMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMainVC.swift; path = VCs/TrackMainVC.swift; sourceTree = "<group>"; };
 		C67D950F1D4CFFBA00FAD103 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plan.swift; path = Models/Plan.swift; sourceTree = "<group>"; };
 		C67D95111D4D020300FAD103 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exercise.swift; path = Models/Exercise.swift; sourceTree = "<group>"; };
 		C67D95131D4D2B5C00FAD103 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Library.swift; path = Models/Library.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
 				C64EC1FD1D20412B000DA37A /* Plan.storyboard */,
+				C66B08201D50346F003B0872 /* Tracking.storyboard */,
 				C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */,
 				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
 				C649C5511CE2C31C00258994 /* Assets.xcassets */,
@@ -195,6 +200,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C66B08231D503AB1003B0872 /* Tracking */,
 				C6CD01EE1D3B34B000D64A06 /* PlanAdd */,
 				C64EC2061D207CF2000DA37A /* SignupLogin */,
 				C64EC2051D207CE6000DA37A /* Plan */,
@@ -264,6 +270,14 @@
 				C67D95131D4D2B5C00FAD103 /* Library.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		C66B08231D503AB1003B0872 /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
+			);
+			name = Tracking;
 			sourceTree = "<group>";
 		};
 		C6CD01EE1D3B34B000D64A06 /* PlanAdd */ = {
@@ -346,6 +360,7 @@
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
+				C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */,
 				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
@@ -413,6 +428,7 @@
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C67D95121D4D020300FAD103 /* Exercise.swift in Sources */,
+				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
@@ -509,6 +525,14 @@
 				C64EC2181D235F95000DA37A /* Base */,
 			);
 			name = Create.storyboard;
+			sourceTree = "<group>";
+		};
+		C66B08201D50346F003B0872 /* Tracking.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C66B08211D50346F003B0872 /* Base */,
+			);
+			name = Tracking.storyboard;
 			sourceTree = "<group>";
 		};
 		C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */ = {

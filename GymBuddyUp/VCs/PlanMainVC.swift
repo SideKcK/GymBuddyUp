@@ -22,6 +22,7 @@ class PlanMainVC: UIViewController {
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var workoutButton: UIButton!
     
     var plan: Plan?
     var selectedDay: DayView!
@@ -30,8 +31,7 @@ class PlanMainVC: UIViewController {
         super.viewDidLoad()
         
         setCalendar()
-        planView.hidden = true
-        emptyView.hidden = true
+        reset()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,14 +41,20 @@ class PlanMainVC: UIViewController {
                 self.plan = plan
                 self.tableView.reloadData()
                 self.planView.hidden = false
+                self.workoutButton.hidden = false
             }else {
                 self.emptyView.hidden = false
             }
         }
         
-        timeLocView.hidden = true
     }
     
+    func reset() {
+        workoutButton.hidden = true
+        timeLocView.hidden = true
+        planView.hidden = true
+        emptyView.hidden = true
+    }
     
     func setCalendar() {
         calendarView.backgroundColor = ColorScheme.sharedInstance.calBg
@@ -72,16 +78,6 @@ class PlanMainVC: UIViewController {
     
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
-        onTodayButton(self)
-        Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
-            if plan != nil {
-                self.plan = plan
-                self.tableView.reloadData()
-                self.planView.hidden = false
-            }else {
-                self.emptyView.hidden = false
-            }
-        }
         
     }
     @IBAction func onMonthButton(sender: AnyObject) {

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-i4-Hlq">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-i4-Hlq">
                                 <rect key="frame" x="0.0" y="134" width="320" height="434"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZL-18-aJo">
@@ -31,10 +31,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IH3-sA-KL7">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IH3-sA-KL7">
                                 <rect key="frame" x="0.0" y="134" width="320" height="434"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-we-C7j">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-we-C7j">
                                         <rect key="frame" x="0.0" y="78" width="320" height="356"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -121,6 +121,16 @@
                                             <segue destination="jcf-nu-vuj" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="bTs-V8-eL8"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-eH-aLF">
+                                        <rect key="frame" x="8" y="334" width="304" height="40"/>
+                                        <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="START WORKOUT">
+                                            <color key="titleColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="bNx-wC-M3x" kind="presentation" id="Qvq-JC-LHa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -184,7 +194,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="calendarView" destination="bsF-Er-TfO" id="ddd-uG-AQk"/>
@@ -196,6 +206,7 @@
                         <outlet property="planView" destination="IH3-sA-KL7" id="t8l-iu-t8U"/>
                         <outlet property="tableView" destination="sTd-we-C7j" id="vqb-2c-1mZ"/>
                         <outlet property="timeLocView" destination="obl-fZ-Ed1" id="sZN-eU-IGf"/>
+                        <outlet property="workoutButton" destination="gkJ-eH-aLF" id="po7-8m-5dw"/>
                         <segue destination="iEy-Fi-h0E" kind="presentation" identifier="toPlanLibrarySegue" id="SCd-Gh-eem"/>
                         <segue destination="OJA-WL-q0A" kind="presentation" identifier="toBuildPlanSegue" id="OzF-Ls-qyD"/>
                         <segue destination="cEc-hT-IZq" kind="show" identifier="toExerciseDetailSegue" id="5lU-Sx-9vS"/>
@@ -204,6 +215,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iod-Ld-dte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1261" y="878"/>
+        </scene>
+        <!--Tracking-->
+        <scene sceneID="3jd-5o-ycP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tracking" id="bNx-wC-M3x" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xsg-Ib-e8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1643.5" y="1081"/>
         </scene>
         <!--Plan InviteVC-->
         <scene sceneID="G0T-KX-tbx">
@@ -276,7 +295,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9m-rF-k6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SY6-fQ-PtU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="878"/>
+            <point key="canvasLocation" x="1286" y="1625"/>
         </scene>
         <!--Build-->
         <scene sceneID="Hp6-2m-aHi">
@@ -444,7 +463,7 @@
         <!--Plan ExerciseVC-->
         <scene sceneID="58H-vK-2hk">
             <objects>
-                <tableViewController id="cEc-hT-IZq" customClass="PlanExerciseVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExerciseVC" id="cEc-hT-IZq" customClass="PlanExerciseVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bST-aC-kg3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

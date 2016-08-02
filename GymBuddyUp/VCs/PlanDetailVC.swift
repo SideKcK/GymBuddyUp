@@ -68,7 +68,20 @@ class PlanDetailVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let desVC = segue.destinationViewController as? PlanMainVC {
+            let day = desVC.selectedDay
+            Plan.getPlan(User.currentUser, date: day.date.convertedDate(), completion: { (plan:Plan!, error: NSError!) in
+                if plan != nil {
+                    desVC.plan = plan
+                    desVC.tableView.reloadData()
+                    desVC.planView.hidden = false
+                    desVC.workoutButton.hidden = false
+                }else {
+                    desVC.emptyView.hidden = false
+                }
+            })
         // Pass the selected object to the new view controller.
+        }
     }
  
 

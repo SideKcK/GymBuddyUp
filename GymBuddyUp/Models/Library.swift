@@ -21,6 +21,19 @@ private let subCategoryRef = ref.child("gym_sub_category")
 
 class Library {
     
+    struct Exercise {
+        let id: String!
+        var name: String!
+        var thumbURL: NSURL!
+        var gifURL: NSURL!
+        var description: String!
+        var setEnabled: Bool!
+        
+        var duration: NSDate?
+        var numSets: Int?
+
+    }
+    
     class func getPlans(catID: Int) -> [Plan]{
         return [Plan(), Plan()]
     }

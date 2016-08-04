@@ -420,17 +420,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kJ7-H1-TY2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kJ7-H1-TY2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="center" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" id="Gaj-jB-bXp">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="center" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="50" id="Gaj-jB-bXp" customClass="LibraryCatCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gaj-jB-bXp" id="5NV-SO-uUU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdK-Yw-7ch">
+                                                    <rect key="frame" x="136.5" y="11" width="47" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AdK-Yw-7ch" firstAttribute="centerY" secondItem="5NV-SO-uUU" secondAttribute="centerY" id="CNx-bj-7o0"/>
+                                                <constraint firstItem="AdK-Yw-7ch" firstAttribute="centerX" secondItem="5NV-SO-uUU" secondAttribute="centerX" id="CsC-4U-Auq"/>
+                                                <constraint firstItem="AdK-Yw-7ch" firstAttribute="top" secondItem="5NV-SO-uUU" secondAttribute="topMargin" constant="3" id="tXm-IO-NA5"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="AdK-Yw-7ch" id="b2L-Om-hwD"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -721,7 +737,7 @@
                                             <outlet property="desLabel" destination="6A4-5J-MgX" id="Nha-nq-4hF"/>
                                             <outlet property="levelLabel" destination="FSv-qL-ka3" id="VIc-og-gL4"/>
                                             <outlet property="nameLabel" destination="OUy-TC-qEb" id="3Bf-tG-qc2"/>
-                                            <outlet property="tableView" destination="5bu-ey-B2a" id="UmX-90-RG5"/>
+                                            <outlet property="tableView" destination="5bu-ey-B2a" id="WKo-Qw-NcI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -40,6 +40,19 @@ class Plan {
         level = .Beginner
     }
     
+    init (dict: NSDictionary) {
+        //parse nsdict to plan
+    }
+    
+    class func plansWithArray(array: [NSDictionary]) -> [Plan] {
+        var plans = [Plan]()
+        
+        for dictionary in array {
+            plans.append(Plan(dict: dictionary))
+        }
+        return plans
+    }
+
     //assign this plan as user's today plan
     //replace if plan exists
     func setTodayPlan (rep: Bool, completion:  (NSError?)->Void) {

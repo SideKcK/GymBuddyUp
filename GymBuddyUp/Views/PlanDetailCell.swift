@@ -14,7 +14,7 @@ class PlanDetailCell: UICollectionViewCell {
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var exercises = [Exercise]()
-    
+
     var plan: Plan! {
         didSet {
             nameLabel.text = plan.name
@@ -31,28 +31,19 @@ class PlanDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-}
-
-extension PlanDetailCell : UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercises.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
-        cell.numLabel.text = String(indexPath.row+1)
-        if let plan = plan, exercises = plan.exercises {
-            cell.exercise = exercises[indexPath.row]
-        }
-        return cell
 
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+    func setCollectionViewDataSourceDelegate
+        <D: protocol<UITableViewDataSource, UITableViewDelegate>>
+        (dataSourceDelegate: D, forRow row: Int) {
+        tableView.delegate = dataSourceDelegate
+        tableView.dataSource = dataSourceDelegate
+        tableView.tag = row
+        tableView.reloadData()
     }
+
+    
 }
+
+

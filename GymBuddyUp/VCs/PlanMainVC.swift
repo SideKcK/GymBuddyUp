@@ -105,6 +105,7 @@ class PlanMainVC: UIViewController {
             Plan.deleteTodayPlan({ (error) in
                 print("deleting plan: \(error)")
                 self.planView.hidden = true
+                self.emptyView.hidden = false
             })
         }
         alertController.addAction(DeleteAction)

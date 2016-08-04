@@ -11,17 +11,15 @@ import UIKit
 class PlanLibVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var cats: [String]?
-
+    var cats: [MidCat]?
+    var selectedCat: MidCat?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
-        // TODO: 吴悠：这是读取library里数据的方法，API 返回的是完整的dictionary数据，
-        // 你要用的时候做一个mapping 读你想要的数据，比如NAME, ID等等。
-        Library.getTopCategory({ (content, error) in
-            self.cats = content?.flatMap({ ($0["name"] as? String)})
+        Library.getMidCategory({ (content, error) in
+            self.cats = content
             self.tableView.reloadData()
         })
     }
@@ -38,8 +36,13 @@ class PlanLibVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toPlanLibDetail" {
-            if let detailVC = segue.destinationViewController as? PlanDetailVC {
-                detailVC.plans = Library.getPlans(sender as! Int)
+            if let detailVC = segue.destinationViewController as? PlanDetailVC,
+                plans = (sender as? [Plan]) {
+                guard let title = selectedCat?.name else {
+                    return
+                }
+                detailVC.title = title
+                detailVC.plans = plans
             }
         }
     }
@@ -57,13 +60,30 @@ extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
-        cell.textLabel?.text = cats?[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as! LibraryCatCell
+        cell.nameLabel.text = cats?[indexPath.row].name
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("============ \(cats?[indexPath.row].name)")
+        if let cat = cats?[indexPath.row] {
+            selectedCat = cat
+        }
+        guard let midid = selectedCat?.id else {
+            print("error")
+            return
+        }
         
-        self.performSegueWithIdentifier("toPlanLibDetail", sender: indexPath.row)
+        Library.getPlansById(midid, completion: { (plans, error) in
+            if error == nil {
+                self.performSegueWithIdentifier("toPlanLibDetail", sender: plans)
+            }else {
+                print(error)
+            }
+        })
+        
+
+        
     
     }
 }

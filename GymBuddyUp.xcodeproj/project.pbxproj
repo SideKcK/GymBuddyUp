@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8D7644699F3B8F0F14170050 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
+		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
+		C607BA291D53040600B1348B /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA281D53040600B1348B /* MidCat.swift */; };
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
@@ -62,6 +64,8 @@
 		2FD626101F4C762D8B89D1AD /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		657616B4DA5D3B32B4AAAD21 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
+		C607BA281D53040600B1348B /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = Models/MidCat.swift; sourceTree = "<group>"; };
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +261,7 @@
 				C64EC2221D332F2C000DA37A /* UserProfileCell.swift */,
 				C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */,
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
+				C607BA261D52CE7900B1348B /* LibraryCatCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				C67D950F1D4CFFBA00FAD103 /* Plan.swift */,
 				C67D95111D4D020300FAD103 /* Exercise.swift */,
 				C67D95131D4D2B5C00FAD103 /* Library.swift */,
+				C607BA281D53040600B1348B /* MidCat.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				C67D95121D4D020300FAD103 /* Exercise.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
+				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
@@ -455,6 +462,7 @@
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
+				C607BA291D53040600B1348B /* MidCat.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 			);

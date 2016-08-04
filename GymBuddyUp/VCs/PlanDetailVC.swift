@@ -12,10 +12,13 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectPlanButton: UIButton!
 
-    var plans: [Plan]!
+    var plans = [Plan]()
+    var midcat = MidCat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = midcat.name
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
@@ -98,6 +101,11 @@ extension PlanDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
         return detailCell
     }
     
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        guard let detailCell = cell as? PlanDetailCell else { return }
+        
+        detailCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+    }
     //Use for size
     func collectionView(collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
@@ -115,5 +123,30 @@ extension PlanDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
         collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.0
+    }
+}
+
+extension PlanDetailVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let exercises = plans[tableView.tag].exercises {
+            return exercises.count
+        }else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
+        cell.numLabel.text = String(indexPath.row+1)
+        if let exercises = plans[tableView.tag].exercises {
+            cell.exercise = exercises[indexPath.row]
+        }
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
+        self.performSegueWithIdentifier("toExerciseDetailSegue", sender: cell.exercise)
     }
 }

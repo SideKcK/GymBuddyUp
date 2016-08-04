@@ -27,4 +27,20 @@ class Exercise {
         setEnabled = true
         numSets = 3
     }
+    
+    
+    init (dict: NSDictionary) {
+        //parse nsdict to exer
+    }
+    
+    class func exersWithArray(array: [NSDictionary]) -> [Exercise] {
+        var exers = [Exercise]()
+        
+        for dictionary in array {
+            exers.append(Exercise(dict: dictionary))
+        }
+        return exers
+    }
+    
+
 }

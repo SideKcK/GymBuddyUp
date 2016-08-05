@@ -25,7 +25,8 @@ class Library {
         var dictArray = [NSDictionary]()
         //TODO: get [NSDictionary]
         
-        let plans = Plan.plansWithArray(dictArray)
+        //let plans = Plan.plansWithArray(dictArray)
+        let plans = [Plan(), Plan()]
         completion(plans: plans, error: nil)
     }
     

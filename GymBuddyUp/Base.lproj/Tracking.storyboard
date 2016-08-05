@@ -130,8 +130,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VNU-dh-9Oo">
-                        <barButtonItem key="leftBarButtonItem" title="X" id="FmT-ta-MTL"/>
-                        <barButtonItem key="rightBarButtonItem" title="done" id="Z5R-c6-E63"/>
+                        <barButtonItem key="leftBarButtonItem" title="X" id="FmT-ta-MTL">
+                            <connections>
+                                <action selector="onExitButton:" destination="Eaj-m7-41E" id="Xc0-Br-7l5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="done" id="Z5R-c6-E63">
+                            <connections>
+                                <action selector="onDoneButton:" destination="Eaj-m7-41E" id="p8W-H5-tB9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

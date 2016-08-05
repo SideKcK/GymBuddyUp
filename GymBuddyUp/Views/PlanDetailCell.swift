@@ -31,7 +31,8 @@ class PlanDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
     }
     
     func setCollectionViewDataSourceDelegate

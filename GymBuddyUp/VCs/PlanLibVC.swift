@@ -17,7 +17,8 @@ class PlanLibVC: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
         Library.getMidCategory({ (content, error) in
             self.cats = content
             self.tableView.reloadData()
@@ -29,8 +30,6 @@ class PlanLibVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -38,10 +37,9 @@ class PlanLibVC: UIViewController {
         if segue.identifier == "toPlanLibDetail" {
             if let detailVC = segue.destinationViewController as? PlanDetailVC,
                 plans = (sender as? [Plan]) {
-                guard let title = selectedCat?.name else {
-                    return
-                }
-                detailVC.title = title
+                
+                print(selectedCat?.name)
+                detailVC.title = selectedCat?.name
                 detailVC.plans = plans
             }
         }
@@ -61,7 +59,11 @@ extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as! LibraryCatCell
-        cell.nameLabel.text = cats?[indexPath.row].name
+        guard let cat = cats?[indexPath.row].name else {
+            return cell
+        }
+        cell.nameLabel.text = cat.uppercaseString
+        cell.layoutMargins = UIEdgeInsetsZero
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -81,9 +83,10 @@ extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
                 print(error)
             }
         })
-        
-
-        
     
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
 }

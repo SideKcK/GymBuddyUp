@@ -11,18 +11,21 @@ import UIKit
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectPlanButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
 
     var plans = [Plan]()
-    var midcat = MidCat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = midcat.name
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
         collectionView.reloadData()
+        
+        pageControl?.numberOfPages = plans.count
+        pageControl?.currentPage = 0
+        pageControl?.userInteractionEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,25 +69,32 @@ class PlanDetailVC: UIViewController {
         }
     }
 
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        // Get the current page based on the scroll offset
+        let page : Int = Int(round(scrollView.contentOffset.x / self.view.frame.width))
+        
+        // Set the current page, so the dots will update
+        pageControl.currentPage = page
+    }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let desVC = segue.destinationViewController as? PlanMainVC {
-            let day = desVC.selectedDay
-            Plan.getPlan(User.currentUser, date: day.date.convertedDate(), completion: { (plan:Plan!, error: NSError!) in
-                if plan != nil {
-                    desVC.plan = plan
-                    desVC.tableView.reloadData()
-                    desVC.planView.hidden = false
-                    desVC.workoutButton.hidden = false
-                }else {
-                    desVC.emptyView.hidden = false
-                }
-            })
-        // Pass the selected object to the new view controller.
-        }
+//        if let desVC = segue.destinationViewController as? PlanMainVC {
+//            let day = desVC.selectedDay
+//            Plan.getPlan(User.currentUser, date: day.date.convertedDate(), completion: { (plan:Plan!, error: NSError!) in
+//                if plan != nil {
+//                    desVC.plan = plan
+//                    desVC.tableView.reloadData()
+//                    desVC.planView.hidden = false
+//                    desVC.workoutButton.hidden = false
+//                }else {
+//                    desVC.emptyView.hidden = false
+//                }
+//            })
+//        // Pass the selected object to the new view controller.
+//        }
     }
  
 
@@ -141,6 +151,8 @@ extension PlanDetailVC : UITableViewDelegate, UITableViewDataSource {
         if let exercises = plans[tableView.tag].exercises {
             cell.exercise = exercises[indexPath.row]
         }
+        cell.layoutMargins = UIEdgeInsetsZero
+
         return cell
         
     }

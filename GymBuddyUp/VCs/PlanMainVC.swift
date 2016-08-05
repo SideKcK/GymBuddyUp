@@ -35,6 +35,8 @@ class PlanMainVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
         
         Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
             if plan != nil {
@@ -294,6 +296,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         if let plan = plan, exercises = plan.exercises {
             cell.exercise = exercises[indexPath.row]
         }
+        cell.layoutMargins = UIEdgeInsetsZero
         return cell
     }
     

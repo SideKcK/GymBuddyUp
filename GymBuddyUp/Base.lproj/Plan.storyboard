@@ -127,7 +127,7 @@
                                         <rect key="frame" x="98" y="40" width="125" height="30"/>
                                         <state key="normal" title="Find your SideKcK"/>
                                         <connections>
-                                            <segue destination="jcf-nu-vuj" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="bTs-V8-eL8"/>
+                                            <segue destination="AZZ-Zq-cl7" kind="presentation" id="bTs-V8-eL8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-eH-aLF">
@@ -232,79 +232,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xsg-Ib-e8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1643.5" y="1081"/>
-        </scene>
-        <!--Plan InviteVC-->
-        <scene sceneID="G0T-KX-tbx">
-            <objects>
-                <viewController id="jcf-nu-vuj" customClass="PlanInviteVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nW2-75-q7L"/>
-                        <viewControllerLayoutGuide type="bottom" id="zaI-ff-jhR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OXZ-zj-PnR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wid-vM-jb5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojp-aF-mcR">
-                                <rect key="frame" x="20" y="184" width="280" height="199"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bv1-Yz-Uef">
-                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
-                                        <state key="normal" title="X"/>
-                                        <connections>
-                                            <segue destination="SY6-fQ-PtU" kind="unwind" unwindAction="unwindToPlanMainVC:" id="6xh-w2-0Q4"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find your SideKcK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3h-uU-SEQ">
-                                        <rect key="frame" x="71" y="13" width="139" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfp-l9-8yC">
-                                        <rect key="frame" x="236" y="8" width="36" height="30"/>
-                                        <state key="normal" title="Send"/>
-                                        <connections>
-                                            <action selector="onSendButton:" destination="jcf-nu-vuj" eventType="touchUpInside" id="MUM-At-zW7"/>
-                                            <segue destination="SY6-fQ-PtU" kind="unwind" unwindAction="unwindToPlanMainVC:" id="NkR-y4-t6G"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start Time:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HBJ-YV-NdP" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="23" y="64" width="234" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Location:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePu-la-lwt" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="23" y="102" width="234" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jpk-lM-DKc" customClass="MultilineSegControl" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="27" y="151" width="227" height="29"/>
-                                        <segments>
-                                            <segment title="to Public"/>
-                                            <segment title="to Friends"/>
-                                            <segment title="Invite"/>
-                                        </segments>
-                                    </segmentedControl>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m0Y-Lx-aUk">
-                                        <rect key="frame" x="0.0" y="42" width="280" height="2"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W9m-rF-k6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="SY6-fQ-PtU" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1286" y="1625"/>
         </scene>
         <!--Build-->
         <scene sceneID="Hp6-2m-aHi">
@@ -630,7 +557,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLa-Fp-3gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1703" y="1625"/>
+            <point key="canvasLocation" x="2235" y="1625"/>
         </scene>
         <!--Chest-->
         <scene sceneID="niG-gM-Xau">
@@ -1388,11 +1315,19 @@
             </objects>
             <point key="canvasLocation" x="1715" y="-1257"/>
         </scene>
+        <!--Invitation-->
+        <scene sceneID="OSC-fc-c8u">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Invitation" id="AZZ-Zq-cl7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="loe-1C-J1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1237.5" y="1355"/>
+        </scene>
     </scenes>
     <resources>
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gmL-tt-qef"/>
+        <segue reference="5lU-Sx-9vS"/>
     </inferredMetricsTieBreakers>
 </document>

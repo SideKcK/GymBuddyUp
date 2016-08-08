@@ -20,6 +20,19 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    func addShadow() {
+        let lightColor = ColorScheme.sharedInstance.lightText
+        let darkColor = ColorScheme.sharedInstance.darkText
+        self.backgroundColor = lightColor
+        self.layer.cornerRadius = 5
+        //button.clipsToBounds = true
+        self.layer.shadowColor = darkColor.CGColor
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 1
+    }
+}
 extension UIImageView {
     func makeThumbnail() {
         self.backgroundColor = UIColor.flatGrayColor()
@@ -39,6 +52,18 @@ extension CVDate {
                 month.removeRange(dotRange.startIndex..<month.endIndex)
             }
             return month
+        }
+    }
+}
+
+extension UISegmentedControl
+{
+    func makeMultiline(numberOfLines: Int)
+    {
+        for segment in self.subviews
+        {
+            let labels = segment.subviews.filter { $0 is UILabel }	// [AnyObject]
+            labels.map { ($0 as! UILabel).numberOfLines = numberOfLines }
         }
     }
 }

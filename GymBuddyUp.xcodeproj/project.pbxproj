@@ -18,6 +18,7 @@
 		C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */; };
 		C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4F1D582A6100B1348B /* BuddyCell.swift */; };
 		C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA511D5830DD00B1348B /* GoogleAPI.swift */; };
+		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
@@ -50,7 +51,6 @@
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 		C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */; };
-		C66B081B1D502269003B0872 /* PlanInviteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081A1D502269003B0872 /* PlanInviteVC.swift */; };
 		C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081C1D502378003B0872 /* UnderlineField.swift */; };
 		C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66B08201D50346F003B0872 /* Tracking.storyboard */; };
 		C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08241D503ADF003B0872 /* TrackMainVC.swift */; };
@@ -79,6 +79,7 @@
 		C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeBuddiesVC.swift; path = VCs/MeBuddiesVC.swift; sourceTree = "<group>"; };
 		C607BA4F1D582A6100B1348B /* BuddyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuddyCell.swift; path = Views/BuddyCell.swift; sourceTree = "<group>"; };
 		C607BA511D5830DD00B1348B /* GoogleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAPI.swift; path = Models/GoogleAPI.swift; sourceTree = "<group>"; };
+		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +114,6 @@
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanExerciseVC.swift; path = VCs/PlanExerciseVC.swift; sourceTree = "<group>"; };
-		C66B081A1D502269003B0872 /* PlanInviteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanInviteVC.swift; path = VCs/PlanInviteVC.swift; sourceTree = "<group>"; };
 		C66B081C1D502378003B0872 /* UnderlineField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlineField.swift; path = Views/UnderlineField.swift; sourceTree = "<group>"; };
 		C66B08211D50346F003B0872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tracking.storyboard; sourceTree = "<group>"; };
 		C66B08241D503ADF003B0872 /* TrackMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMainVC.swift; path = VCs/TrackMainVC.swift; sourceTree = "<group>"; };
@@ -268,7 +268,6 @@
 				C64EC20B1D20B317000DA37A /* PlanEditVC.swift */,
 				C64EC20D1D20B3B1000DA37A /* PlanDetailVC.swift */,
 				C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */,
-				C66B081A1D502269003B0872 /* PlanInviteVC.swift */,
 			);
 			name = Plan;
 			sourceTree = "<group>";
@@ -294,6 +293,7 @@
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
 				C607BA261D52CE7900B1348B /* LibraryCatCell.swift */,
 				C607BA4F1D582A6100B1348B /* BuddyCell.swift */,
+				C607BA551D5AE80800B1348B /* GymCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -484,8 +484,8 @@
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
+				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
-				C66B081B1D502269003B0872 /* PlanInviteVC.swift in Sources */,
 				C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */,
 				C607BA4B1D57E3F100B1348B /* Gym.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,

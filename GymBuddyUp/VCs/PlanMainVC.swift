@@ -17,6 +17,8 @@ class PlanMainVC: UIViewController {
     
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var emptyView: UIView!
@@ -26,12 +28,15 @@ class PlanMainVC: UIViewController {
     
     var plan: Plan?
     var selectedDay: DayView!
+    var sendTo = 2
+    var invited =  true //for testing
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setCalendar()
         reset()
+        setStatusBar()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -44,10 +49,14 @@ class PlanMainVC: UIViewController {
                 self.tableView.reloadData()
                 self.planView.hidden = false
                 self.workoutButton.hidden = false
-            }else {
+                //get plan invitation status
+                self.toggleInvitation()
+                }else {
                 self.emptyView.hidden = false
             }
         }
+        
+        
         
     }
     
@@ -56,6 +65,9 @@ class PlanMainVC: UIViewController {
         timeLocView.hidden = true
         planView.hidden = true
         emptyView.hidden = true
+        statusView.hidden = true
+        statusView.addShadow()
+        findButton.hidden = true
     }
     
     func setCalendar() {
@@ -65,6 +77,30 @@ class PlanMainVC: UIViewController {
         menuView.delegate = self
         calendarView.delegate = self
         monthButton.title = "< "+CVDate(date: NSDate()).monthDescription
+    }
+    
+    func setStatusBar() {
+        if sendTo == 1 {
+            statusLabel.text = "Searching SideKcK in Buddy List"
+        } else if sendTo == 2 {
+            statusLabel.text = "Searching SideKcK in Public"
+        } else {
+            statusLabel.text = " invited"
+        }
+    }
+    
+    func toggleInvitation() {
+        invited = !invited
+        if invited {
+            self.timeLocView.hidden = false
+            self.findButton.hidden = true
+            self.statusView.hidden = false
+            self.sendTo = 1
+            self.setStatusBar()
+        }else {
+            self.findButton.hidden = false
+        }
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -128,6 +164,27 @@ class PlanMainVC: UIViewController {
         self.presentViewController(alertController, animated: true) {
             // ...
         }
+    }
+    @IBAction func onCancelInviteButton(sender: AnyObject) {
+        print("cancel invite")
+        var message = ""
+        if sendTo == 1 || sendTo == 2{
+            message = "Cancel broadcasting?"
+        }else {
+            message = "Cancel invitation?"
+        }
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "No, Keep it", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        let confirmAction = UIAlertAction(title: "Yes", style: .Destructive) { (action) in
+            //cancel invitation
+            self.toggleInvitation()
+        }
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction func onNewPlanButton(sender: AnyObject) {

@@ -223,7 +223,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GymCell" rowHeight="70" id="MGk-ge-tvQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GymCell" rowHeight="70" id="MGk-ge-tvQ" customClass="GymCell" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MGk-ge-tvQ" id="daV-sG-u93">
@@ -233,24 +233,25 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="D0Q-PC-1Vt">
                                                     <rect key="frame" x="16" y="10" width="50" height="50"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="UPU-UI-C85"/>
                                                         <constraint firstAttribute="width" secondItem="D0Q-PC-1Vt" secondAttribute="height" multiplier="1:1" id="bi3-d8-tBF"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeN-2s-P4m">
-                                                    <rect key="frame" x="74" y="10" width="47" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeN-2s-P4m">
+                                                    <rect key="frame" x="74" y="10" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last workout's gym" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoM-e8-v8K">
-                                                    <rect key="frame" x="74" y="42" width="131" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <rect key="frame" x="74" y="44" width="116" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REA-iF-PvH">
-                                                    <rect key="frame" x="257" y="39" width="55" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="268" y="44" width="43.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -258,15 +259,29 @@
                                             <constraints>
                                                 <constraint firstItem="XoM-e8-v8K" firstAttribute="bottom" secondItem="D0Q-PC-1Vt" secondAttribute="bottom" id="5tu-4b-EFu"/>
                                                 <constraint firstItem="IeN-2s-P4m" firstAttribute="top" secondItem="D0Q-PC-1Vt" secondAttribute="top" id="Bth-uI-MSk"/>
+                                                <constraint firstItem="XoM-e8-v8K" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IeN-2s-P4m" secondAttribute="bottom" constant="5" id="L2p-mv-NVM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="XoM-e8-v8K" secondAttribute="bottom" constant="2" id="L6r-0g-TPd"/>
                                                 <constraint firstItem="D0Q-PC-1Vt" firstAttribute="top" secondItem="daV-sG-u93" secondAttribute="topMargin" constant="2" id="TUY-cc-CGq"/>
                                                 <constraint firstItem="D0Q-PC-1Vt" firstAttribute="leading" secondItem="daV-sG-u93" secondAttribute="leadingMargin" constant="8" id="Yid-Dc-RCf"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="IeN-2s-P4m" secondAttribute="trailing" constant="12" id="ZjE-br-TwK"/>
                                                 <constraint firstItem="IeN-2s-P4m" firstAttribute="leading" secondItem="D0Q-PC-1Vt" secondAttribute="trailing" constant="8" id="i3L-Ma-H65"/>
                                                 <constraint firstItem="XoM-e8-v8K" firstAttribute="leading" secondItem="IeN-2s-P4m" secondAttribute="leading" id="nsB-kE-H5H"/>
                                                 <constraint firstAttribute="trailing" secondItem="REA-iF-PvH" secondAttribute="trailing" constant="8" id="udQ-CO-zm9"/>
                                                 <constraint firstItem="REA-iF-PvH" firstAttribute="bottom" secondItem="XoM-e8-v8K" secondAttribute="bottom" id="vyW-G5-aEu"/>
                                                 <constraint firstItem="D0Q-PC-1Vt" firstAttribute="centerY" secondItem="daV-sG-u93" secondAttribute="centerY" id="xB4-Cf-Ef6"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="5tu-4b-EFu"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="desLabel" destination="XoM-e8-v8K" id="FP5-b9-MDG"/>
+                                            <outlet property="distanceLabel" destination="REA-iF-PvH" id="NRb-wg-ziw"/>
+                                            <outlet property="nameLabel" destination="IeN-2s-P4m" id="9mb-mj-GQl"/>
+                                            <outlet property="thumbView" destination="D0Q-PC-1Vt" id="XsU-D3-ZeX"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

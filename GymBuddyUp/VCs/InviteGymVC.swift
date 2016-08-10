@@ -7,19 +7,34 @@
 //
 
 import UIKit
+import CoreLocation
 
 class InviteGymVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var lastGym = Gym()
     var defaultGyms = [Gym(), Gym()]
-    var nearbyGyms = [Gym(), Gym(), Gym()]
+    var nearbyGyms = [Gym]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.reloadData()
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableViewAutomaticDimension
+        GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(CLLocationCoordinate2D(latitude: 30.562, longitude: -96.313), radius: 5000, name: "gym") { (gyms, error) in
+            if gyms != nil {
+                print(gyms)
+                self.nearbyGyms = gyms
+                self.tableView.reloadData()
+            }else {
+                print(error)
+            }
+            }
+
+
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +69,11 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("GymCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("GymCell", forIndexPath: indexPath) as! GymCell
+        if indexPath.section == 1 {
+            cell.gym = nearbyGyms[indexPath.row]
+            cell.desLabel.text = "Nearby gym"
+        }
         return cell
     }
     

@@ -41,7 +41,8 @@ class TestViewController: UIViewController {
         var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=\(apiServerKey)&location=\(coordinate.latitude),\(coordinate.longitude)&radius=\(radius)&rankby=prominence&sensor=true"
         urlString += "&name=\(name)"
         Alamofire.request(.GET, NSURL(string: urlString)!)
-            .responseJSON { response in
+            .responseJSON {                 
+                response in
                 if let JSON = response.result.value as? NSDictionary {
                     if let places = JSON["results"] as? [NSDictionary] {
                         for i in places {

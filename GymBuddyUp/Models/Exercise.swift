@@ -9,38 +9,41 @@
 import UIKit
 
 let testURL = NSURL(string: "http://www.building-muscle101.com/images/bench_press.jpg")
+
 class Exercise {
+    var id: Int!
     var name: String!
-    var thumbURL: NSURL!
+    var thumbnailURL: NSURL!
     var gifURL: NSURL!
-    var description: String!
-    var setEnabled: Bool!
+    var description: String?
+    var sort_order: Int?
+    var unitType: UnitType!
+    var amount: Int? 
+    var intermission: Int?
+    var order: Int?
     
-    var duration: NSDate?
-    var numSets: Int?
+    enum UnitType : Int {
+        case Repetition = 0
+        case DurationInSeconds = 1
+        case DistanceInMiles = 2
+        case RepByWeight = 3
+    }
     
     init () {
+        id = 1111
         name = "test exercise"
-        thumbURL = testURL
+        thumbnailURL = testURL
         gifURL = testURL
         description = "this is a test exercise: The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps."
-        setEnabled = true
-        numSets = 3
     }
-    
-    
-    init (dict: NSDictionary) {
-        //parse nsdict to exer
-    }
-    
-    class func exersWithArray(array: [NSDictionary]) -> [Exercise] {
-        var exers = [Exercise]()
         
-        for dictionary in array {
-            exers.append(Exercise(dict: dictionary))
-        }
-        return exers
+    init (id: Int, dict: NSDictionary) {
+        self.id = id
+        self.name = dict.valueForKey("name") as? String
+        self.sort_order = dict.valueForKey("sort_order") as? Int
+        self.description = dict.valueForKey("description") as? String
+        self.thumbnailURL = testURL
+        self.gifURL = testURL
+        self.unitType = UnitType.Repetition
     }
-    
-
 }

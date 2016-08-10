@@ -144,7 +144,7 @@ extension PlanDetailVC : UITableViewDelegate, UITableViewDataSource {
         return cell
         
     }
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         self.performSegueWithIdentifier("toExerciseDetailSegue", sender: cell.exercise)

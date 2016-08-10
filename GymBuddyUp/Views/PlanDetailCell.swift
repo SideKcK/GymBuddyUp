@@ -19,7 +19,7 @@ class PlanDetailCell: UICollectionViewCell {
         didSet {
             nameLabel.text = plan.name
             desLabel.text = plan.description
-            levelLabel.text = "Level: " + plan.level.description
+            levelLabel.text = "Level: " + plan.difficulty!.description
             if let ex = plan.exercises {
                 exercises = ex
             }else {

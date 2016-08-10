@@ -17,7 +17,7 @@ class ExerciseNumberedCell: UITableViewCell {
 
     var exercise: Exercise! {
         didSet {
-            let downloadURL = exercise.thumbURL
+            let downloadURL = exercise.thumbnailURL
             self.thumbnailView.af_setImageWithURL(downloadURL)
             self.nameLabel.text = exercise.name
         }

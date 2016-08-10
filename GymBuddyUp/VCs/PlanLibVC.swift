@@ -74,7 +74,7 @@ extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        Library.getPlansById(midid, completion: { (plans, error) in
+        Library.getPlansByMidId(midid, completion: { (plans, error) in
             if error == nil {
                 self.performSegueWithIdentifier("toPlanLibDetail", sender: plans)
             }else {

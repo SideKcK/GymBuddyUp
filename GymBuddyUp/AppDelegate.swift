@@ -38,8 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         
-        // This cannot be called before FIRApp is initialized.
-        
         if (User.hasAuthenticatedUser()) {
             // User is signed in.
             userDidLogin()
@@ -48,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDidLogout()
         }
         
+
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification, object: nil)
@@ -64,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = mainSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
+        
+        User.currentUser?.sessionInitiated()
+        
     }
     
     func userDidLogout() {

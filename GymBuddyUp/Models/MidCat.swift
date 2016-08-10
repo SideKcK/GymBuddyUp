@@ -9,12 +9,12 @@
 import UIKit
 
 class MidCat {
-    var id: String?
+    var id: Int?
     var name: String?
     
     init () {
         self.name = "test cat"
-        self.id = "-1"
+        self.id = -1
     }
     
     init (dict: NSDictionary) {
@@ -22,7 +22,7 @@ class MidCat {
         if let name = dict["name"] as? String,
             id = dict["id"] as? Int {
             self.name = name
-            self.id = String(id)
+            self.id = id
         }
     }
     

@@ -186,6 +186,15 @@ class User {
         }
     }
     
+    func sessionInitiated () -> Void {
+        userRef!.child("last_login").setValue(FIRServerValue.timestamp()) { (error
+            , ref) in
+            if (error != nil){
+                print (error)
+            }
+        }
+    }
+    
 
     // TODO
     func updateLastSeenLocation(location: CLLocation) {

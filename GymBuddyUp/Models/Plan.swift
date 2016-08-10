@@ -17,14 +17,6 @@ private let ref: FIRDatabaseReference! = FIRDatabase.database().reference()
 private let workoutCalendar = ref.child("user_workout_calendar")
 
 
-struct Gym {
-    var name: String
-    var placeId : String
-    var latlong: CLLocation
-    var address: CLPlacemark
-}
-
-
 struct ScheduledWorkout {
     var id : String
     var startDate : NSDate

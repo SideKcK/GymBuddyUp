@@ -17,6 +17,7 @@ class InviteMainVC: UITableViewController {
     var showDatePicker = false
     var showPlan = false
     var seg: UISegmentedControl!
+    var segViews: [UIView]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +45,10 @@ class InviteMainVC: UITableViewController {
         seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
         
         seg.addShadow()
-        
         seg.tintColor = ColorScheme.sharedInstance.buttonTint
-        seg.selectedSegmentIndex = 2
+        //seg.selectedSegmentIndex = 2
+        segViews = seg.subviews
+        seg.momentary = true
         seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
     }
     
@@ -92,10 +94,23 @@ class InviteMainVC: UITableViewController {
     }
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
-        print("seg control")
         if sender.selectedSegmentIndex == 0 {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
         }
+        
+        for (index, _) in segViews.enumerate() {
+            if index == sender.selectedSegmentIndex {
+                segViews[index].backgroundColor = sender.tintColor
+                segViews[index].tintColor = sender.backgroundColor
+                sender.selectedSegmentIndex = UISegmentedControlNoSegment
+            }else {
+                segViews[index].backgroundColor = sender.backgroundColor
+                segViews[index].tintColor = sender.tintColor
+            }
+        }
+        
+        
+
     }
     
     // MARK: - Table view data source

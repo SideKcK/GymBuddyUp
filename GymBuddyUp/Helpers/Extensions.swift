@@ -31,6 +31,7 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 1
+        self.clipsToBounds = true
     }
 }
 extension UIImageView {
@@ -41,6 +42,20 @@ extension UIImageView {
         self.layer.borderColor = UIColor.flatGrayColor().CGColor
         self.layer.cornerRadius = self.frame.height/2.0
         self.clipsToBounds = true
+    }
+}
+
+extension UIImage {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image.CGImage else { return nil }
+        self.init(CGImage: cgImage)
     }
 }
 
@@ -58,6 +73,7 @@ extension CVDate {
 
 extension UISegmentedControl
 {
+    
     func makeMultiline(numberOfLines: Int)
     {
         for segment in self.subviews

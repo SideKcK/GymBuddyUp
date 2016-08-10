@@ -181,7 +181,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Find your SideKcK" id="WKz-y1-MNl">
                         <barButtonItem key="backBarButtonItem" title=" " id="y9t-fR-Fgb"/>
-                        <barButtonItem key="leftBarButtonItem" title="X" id="VN5-Et-rRt"/>
+                        <barButtonItem key="leftBarButtonItem" title="X" id="VN5-Et-rRt">
+                            <connections>
+                                <action selector="onCancelButton:" destination="21R-Ob-rct" id="dxx-E1-2bJ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

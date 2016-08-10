@@ -12,18 +12,37 @@ class InviteMainVC: UITableViewController {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var gymButton: UIButton!
-
+    var sendButton:UIButton!
+    
     var sendButtonHeight : CGFloat = 50.0
     var showDatePicker = false
     var showPlan = false
     var seg: UISegmentedControl!
     var segViews: [UIView]!
     
+    var time: NSDate!
+    var gym: Gym!
+    var sendTo: Int!
+    var sent = false
+    
+    var tintColor = ColorScheme.sharedInstance.buttonTint
+    var darkText = ColorScheme.sharedInstance.darkText
+    var greyText = ColorScheme.sharedInstance.greyText
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //load default gym, show on gym label
+        
+        //default time
+        time = NSDate()
+        sendTo = 2
         setSendButton()
         setDate()
         setButtons()
+        
+        if gym != nil {
+            enableSendButton()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,23 +51,31 @@ class InviteMainVC: UITableViewController {
     }
     
     @IBAction func unwindToInviteMainVC (segue: UIStoryboardSegue) {
-        
+        if gym != nil {
+            enableSendButton()
+        }
     }
     
+    @IBAction func onCancelButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     func setButtons() {
         dateButton.addShadow()
         gymButton.addShadow()
-        dateButton.tintColor = ColorScheme.sharedInstance.buttonTint
-        gymButton.tintColor = ColorScheme.sharedInstance.buttonTint
+        dateButton.tintColor = tintColor
+        gymButton.tintColor = tintColor
         
         UILabel.appearanceWhenContainedInInstancesOfClasses([UISegmentedControl.self]).numberOfLines = 0
         seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
         
         seg.addShadow()
-        seg.tintColor = ColorScheme.sharedInstance.buttonTint
-        //seg.selectedSegmentIndex = 2
+        seg.tintColor = ColorScheme.sharedInstance.greyText
+        seg.removeBorders()
         segViews = seg.subviews
+        seg.selectedSegmentIndex = sendTo
         seg.momentary = true
+        segViews[sendTo].tintColor = tintColor
+        seg.selectedSegmentIndex = UISegmentedControlNoSegment
         seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
     }
     
@@ -64,14 +91,27 @@ class InviteMainVC: UITableViewController {
     }
     
     func setSendButton () {
-        let button:UIButton = UIButton(frame: CGRectMake(0, self.view.frame.height - sendButtonHeight, self.view.frame.width, sendButtonHeight))
-        button.backgroundColor = UIColor.flatGrayColor()
-        button.setTitle("Send", forState: UIControlState.Normal)
-        button.addTarget(self, action:#selector(self.buttonClicked), forControlEvents: .TouchUpInside)
-        self.navigationController!.view.addSubview(button)
+        sendButton = UIButton(frame: CGRectMake(0, self.view.frame.height - sendButtonHeight, self.view.frame.width, sendButtonHeight))
+        sendButton.backgroundColor = greyText
+        sendButton.setTitle("Send", forState: UIControlState.Normal)
+        sendButton.addTarget(self, action:#selector(self.sendButtonClicked), forControlEvents: .TouchUpInside)
+        self.navigationController!.view.addSubview(sendButton)
+        sendButton.enabled = false
     }
     
-    func buttonClicked() {
+    func enableSendButton() {
+        sendButton.backgroundColor = tintColor
+        sendButton.enabled = true
+    }
+    
+    func sendButtonClicked() {
+        //send out invitation
+//        sendInvitation(time: time, loc: gym, audience: sendTo, completion: ({
+//            
+//        })
+//        )
+        sent = true
+        self.dismissViewControllerAnimated(true, completion: nil)
         print("Button Clicked")
     }
     
@@ -100,11 +140,11 @@ class InviteMainVC: UITableViewController {
         
         for (index, _) in segViews.enumerate() {
             if index == sender.selectedSegmentIndex {
-                segViews[index].backgroundColor = sender.tintColor
-                segViews[index].tintColor = sender.backgroundColor
+                //segViews[index].backgroundColor = sender.tintColor
+                segViews[index].tintColor = ColorScheme.sharedInstance.buttonTint
                 sender.selectedSegmentIndex = UISegmentedControlNoSegment
             }else {
-                segViews[index].backgroundColor = sender.backgroundColor
+                //segViews[index].backgroundColor = sender.backgroundColor
                 segViews[index].tintColor = sender.tintColor
             }
         }
@@ -188,6 +228,7 @@ class InviteMainVC: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(segue.destinationViewController)
         if let desVC = segue.destinationViewController as? MeBuddiesVC {
             desVC.inviting = true
         }

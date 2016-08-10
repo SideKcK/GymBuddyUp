@@ -73,6 +73,11 @@ extension CVDate {
 
 extension UISegmentedControl
 {
+    func removeBorders() {
+        setBackgroundImage(UIImage(color: backgroundColor!), forState: .Normal, barMetrics: .Default)
+        setDividerImage(UIImage(color: tintColor), forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)
+
+    }
     
     func makeMultiline(numberOfLines: Int)
     {

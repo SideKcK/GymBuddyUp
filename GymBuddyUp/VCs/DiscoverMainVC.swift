@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import CoreLocation
 
 class DiscoverMainVC: UIViewController {
-
+    var locationManager: CLLocationManager!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 200
+        locationManager.requestWhenInUseAuthorization()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,4 +38,18 @@ class DiscoverMainVC: UIViewController {
     }
     */
 
+}
+
+extension DiscoverMainVC: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            //upload user location
+        }
+        
+    }
 }

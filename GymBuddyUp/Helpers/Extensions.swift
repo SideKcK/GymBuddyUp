@@ -20,6 +20,20 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    func addShadow() {
+        let lightColor = ColorScheme.sharedInstance.lightText
+        let darkColor = ColorScheme.sharedInstance.darkText
+        self.backgroundColor = lightColor
+        self.layer.cornerRadius = 5
+        //button.clipsToBounds = true
+        self.layer.shadowColor = darkColor.CGColor
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 1
+        self.clipsToBounds = true
+    }
+}
 extension UIImageView {
     func makeThumbnail() {
         self.backgroundColor = UIColor.flatGrayColor()
@@ -31,6 +45,20 @@ extension UIImageView {
     }
 }
 
+extension UIImage {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image.CGImage else { return nil }
+        self.init(CGImage: cgImage)
+    }
+}
+
 extension CVDate {
     public var monthDescription: String {
         get {
@@ -39,6 +67,24 @@ extension CVDate {
                 month.removeRange(dotRange.startIndex..<month.endIndex)
             }
             return month
+        }
+    }
+}
+
+extension UISegmentedControl
+{
+    func removeBorders() {
+        setBackgroundImage(UIImage(color: backgroundColor!), forState: .Normal, barMetrics: .Default)
+        setDividerImage(UIImage(color: tintColor), forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)
+
+    }
+    
+    func makeMultiline(numberOfLines: Int)
+    {
+        for segment in self.subviews
+        {
+            let labels = segment.subviews.filter { $0 is UILabel }	// [AnyObject]
+            labels.map { ($0 as! UILabel).numberOfLines = numberOfLines }
         }
     }
 }

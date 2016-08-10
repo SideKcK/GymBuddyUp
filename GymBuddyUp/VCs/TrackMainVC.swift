@@ -52,6 +52,13 @@ class TrackMainVC: UIViewController {
         }
     }
     
+    @IBAction func onExitButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func onDoneButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

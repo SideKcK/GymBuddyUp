@@ -31,3 +31,13 @@ func secondToMin(sec: Float) -> String {
     let minutes = Int(sec) / 60 % 60
     return String(minutes)+" mins"
 }
+
+func dateTimeFormatter () -> NSDateFormatter {
+    let dateFormatter = NSDateFormatter()
+    
+    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    
+    return dateFormatter
+}

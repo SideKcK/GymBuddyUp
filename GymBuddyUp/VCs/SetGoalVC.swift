@@ -40,20 +40,13 @@ class SetGoalVC: UIViewController {
 
     func setButton (button: UIButton, image: UIImageView) {
         buttonViewMap[button.tag] = image
-        let darkColor = ColorScheme.sharedInstance.darkText
+        button.addShadow()
         let lightColor = ColorScheme.sharedInstance.lightText
         image.tintColor = lightColor
         image.layer.cornerRadius = image.frame.width/2.0
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
         
-        button.backgroundColor = lightColor
-        button.layer.cornerRadius = 5
-        //button.clipsToBounds = true
-        button.layer.shadowColor = darkColor.CGColor
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 1
         button.addTarget(self, action: #selector(SetGoalVC.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
 

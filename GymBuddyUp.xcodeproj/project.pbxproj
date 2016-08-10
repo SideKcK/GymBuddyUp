@@ -11,6 +11,14 @@
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA291D53040600B1348B /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA281D53040600B1348B /* MidCat.swift */; };
+		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
+		C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA441D57A3A100B1348B /* InviteMainVC.swift */; };
+		C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA481D57E14500B1348B /* InviteGymVC.swift */; };
+		C607BA4B1D57E3F100B1348B /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4A1D57E3F100B1348B /* Gym.swift */; };
+		C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */; };
+		C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4F1D582A6100B1348B /* BuddyCell.swift */; };
+		C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA511D5830DD00B1348B /* GoogleAPI.swift */; };
+		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
@@ -43,9 +51,7 @@
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
 		C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65301E31D01F51E00DEF7A0 /* Validation.swift */; };
 		C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */; };
-		C66B081B1D502269003B0872 /* PlanInviteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081A1D502269003B0872 /* PlanInviteVC.swift */; };
 		C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081C1D502378003B0872 /* UnderlineField.swift */; };
-		C66B081F1D502B8B003B0872 /* MultilineSegControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081E1D502B8B003B0872 /* MultilineSegControl.swift */; };
 		C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66B08201D50346F003B0872 /* Tracking.storyboard */; };
 		C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08241D503ADF003B0872 /* TrackMainVC.swift */; };
 		C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D950F1D4CFFBA00FAD103 /* Plan.swift */; };
@@ -66,6 +72,14 @@
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA281D53040600B1348B /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = Models/MidCat.swift; sourceTree = "<group>"; };
+		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
+		C607BA441D57A3A100B1348B /* InviteMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteMainVC.swift; path = VCs/InviteMainVC.swift; sourceTree = "<group>"; };
+		C607BA481D57E14500B1348B /* InviteGymVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteGymVC.swift; path = VCs/InviteGymVC.swift; sourceTree = "<group>"; };
+		C607BA4A1D57E3F100B1348B /* Gym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gym.swift; path = Models/Gym.swift; sourceTree = "<group>"; };
+		C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeBuddiesVC.swift; path = VCs/MeBuddiesVC.swift; sourceTree = "<group>"; };
+		C607BA4F1D582A6100B1348B /* BuddyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuddyCell.swift; path = Views/BuddyCell.swift; sourceTree = "<group>"; };
+		C607BA511D5830DD00B1348B /* GoogleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAPI.swift; path = Models/GoogleAPI.swift; sourceTree = "<group>"; };
+		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,9 +114,7 @@
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
 		C65301E31D01F51E00DEF7A0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Helpers/Validation.swift; sourceTree = "<group>"; };
 		C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanExerciseVC.swift; path = VCs/PlanExerciseVC.swift; sourceTree = "<group>"; };
-		C66B081A1D502269003B0872 /* PlanInviteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanInviteVC.swift; path = VCs/PlanInviteVC.swift; sourceTree = "<group>"; };
 		C66B081C1D502378003B0872 /* UnderlineField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlineField.swift; path = Views/UnderlineField.swift; sourceTree = "<group>"; };
-		C66B081E1D502B8B003B0872 /* MultilineSegControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultilineSegControl.swift; path = Views/MultilineSegControl.swift; sourceTree = "<group>"; };
 		C66B08211D50346F003B0872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tracking.storyboard; sourceTree = "<group>"; };
 		C66B08241D503ADF003B0872 /* TrackMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMainVC.swift; path = VCs/TrackMainVC.swift; sourceTree = "<group>"; };
 		C67D950F1D4CFFBA00FAD103 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plan.swift; path = Models/Plan.swift; sourceTree = "<group>"; };
@@ -147,6 +159,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C607BA431D57A37600B1348B /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				C607BA441D57A3A100B1348B /* InviteMainVC.swift */,
+				C607BA481D57E14500B1348B /* InviteGymVC.swift */,
+			);
+			name = Invitation;
+			sourceTree = "<group>";
+		};
+		C607BA4C1D58230B00B1348B /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
+				C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */,
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +209,7 @@
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
 				C64EC1FD1D20412B000DA37A /* Plan.storyboard */,
+				C607BA401D57A31700B1348B /* Invitation.storyboard */,
 				C66B08201D50346F003B0872 /* Tracking.storyboard */,
 				C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */,
 				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
@@ -204,6 +235,8 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C607BA4C1D58230B00B1348B /* Me */,
+				C607BA431D57A37600B1348B /* Invitation */,
 				C66B08231D503AB1003B0872 /* Tracking */,
 				C6CD01EE1D3B34B000D64A06 /* PlanAdd */,
 				C64EC2061D207CF2000DA37A /* SignupLogin */,
@@ -212,7 +245,6 @@
 				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
 				C64EC2151D20D997000DA37A /* TabBarVC.swift */,
 				C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */,
-				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -223,7 +255,6 @@
 				C64EC21C1D289DCA000DA37A /* Cells */,
 				C649C5661CE3C68800258994 /* BorderedButton.swift */,
 				C66B081C1D502378003B0872 /* UnderlineField.swift */,
-				C66B081E1D502B8B003B0872 /* MultilineSegControl.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -237,7 +268,6 @@
 				C64EC20B1D20B317000DA37A /* PlanEditVC.swift */,
 				C64EC20D1D20B3B1000DA37A /* PlanDetailVC.swift */,
 				C66B08181D4D55D3003B0872 /* PlanExerciseVC.swift */,
-				C66B081A1D502269003B0872 /* PlanInviteVC.swift */,
 			);
 			name = Plan;
 			sourceTree = "<group>";
@@ -262,6 +292,8 @@
 				C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */,
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
 				C607BA261D52CE7900B1348B /* LibraryCatCell.swift */,
+				C607BA4F1D582A6100B1348B /* BuddyCell.swift */,
+				C607BA551D5AE80800B1348B /* GymCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -274,6 +306,8 @@
 				C67D95111D4D020300FAD103 /* Exercise.swift */,
 				C67D95131D4D2B5C00FAD103 /* Library.swift */,
 				C607BA281D53040600B1348B /* MidCat.swift */,
+				C607BA4A1D57E3F100B1348B /* Gym.swift */,
+				C607BA511D5830DD00B1348B /* GoogleAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -360,6 +394,7 @@
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
 				C64EC2191D235F95000DA37A /* Create.storyboard in Resources */,
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
+				C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
@@ -427,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */,
 				C67D951A1D4D3B3100FAD103 /* PlanDetailCell.swift in Sources */,
 				C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */,
 				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
@@ -440,7 +476,6 @@
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
-				C66B081F1D502B8B003B0872 /* MultilineSegControl.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
@@ -449,28 +484,41 @@
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
+				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
-				C66B081B1D502269003B0872 /* PlanInviteVC.swift in Sources */,
 				C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */,
+				C607BA4B1D57E3F100B1348B /* Gym.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
 				C67D95141D4D2B5C00FAD103 /* Library.swift in Sources */,
+				C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */,
 				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
+				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C607BA291D53040600B1348B /* MidCat.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
+				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
+				C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C607BA401D57A31700B1348B /* Invitation.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C607BA411D57A31700B1348B /* Base */,
+			);
+			name = Invitation.storyboard;
+			sourceTree = "<group>";
+		};
 		C649C54E1CE2C31C00258994 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -66,6 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         User.currentUser?.sessionInitiated()
         
+        // wuyou: 这是calendar的用法，第一行是加workout到calendar
+        
+        ScheduledWorkout.addWorkoutToCalendar("-KOnpCBmGTjhEfqmfPy0", startDate: stringToDate("2099-12-31")!) { (error) in
+            print(error)
+        }
+        
+        // 这是读
+        ScheduledWorkout.getScheduledWorkoutsForDate(stringToDate("2099-12-31")!, complete: { (workouts) in
+            print("Retrieved your scheduled workout for today",workouts)
+        })
+        
     }
     
     func userDidLogout() {
@@ -75,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = signSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
-
     }
     
     func application(application: UIApplication,

@@ -11,6 +11,8 @@ target 'GymBuddyUp' do
     pod 'CVCalendar', '~> 1.2.9'
     pod 'CryptoSwift'
     pod 'GoogleMaps'
+    pod "SwiftDate"
+    
     pod 'Firebase'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'

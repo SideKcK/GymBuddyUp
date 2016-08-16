@@ -12,6 +12,11 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import FBSDKLoginKit
+import Alamofire
+
+enum APIError : ErrorType{
+    case OperationFailed
+}
 
 // callbacks
 typealias UserAuthCallback = (user:User?, error: NSError?) -> Void
@@ -258,13 +263,25 @@ class User {
         }
     }
     
-    func sendFriendRequest(userId: String, completion: (NSError?) -> Void) {
+    func sendFriendRequest(recipientId: String, completion: (NSError?) -> Void) {
         self.firUser?.getTokenForcingRefresh(true) {idToken, error in
-            if let error = error {
-                // Handle error
-                return;
+            if error != nil {
+                return completion(error)
             }
-            print(idToken)
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "send",
+                "recipientId": recipientId
+            ]
+                        
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+            .responseJSON { response in
+                if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                    debugPrint("failure", response.result.value)
+                    completion(nil)
+                }
+            }
         }
     }
     

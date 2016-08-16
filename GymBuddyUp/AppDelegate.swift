@@ -60,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser?.sessionInitiated()
+
+        User.currentUser?.sendFriendRequest("Ok0V3oWU9cOfCzbCDSGD9Nl9mRx1", completion: { (error) in
+            print("err", error)
+        })
     }
     
     func userDidLogout() {

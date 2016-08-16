@@ -162,7 +162,6 @@ class ScheduledWorkout {
                 let results = initFromQueryResults(dataSnapshot.value as? NSDictionary)
                 complete(results)
         }
-        
     }
     
     /**

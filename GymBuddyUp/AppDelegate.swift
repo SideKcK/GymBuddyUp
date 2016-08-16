@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.currentUser?.userBecameActive()
         
         // test push notification : send yourself a friend request
-        Invite.sendFriendRequest("Noh5cGUfhbSSTnS2IDApRmqcSs82") { (error) in
+        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
             if (error != nil){
                 print(error)
             }

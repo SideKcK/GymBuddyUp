@@ -12,7 +12,7 @@ target 'GymBuddyUp' do
 
     pod 'GoogleMaps'
     pod "SwiftDate"
-    pod 'KRProgressHUD'
+    pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
     
     pod 'Firebase'
     pod 'Firebase/Auth'

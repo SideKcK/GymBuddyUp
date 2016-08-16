@@ -109,6 +109,8 @@ class User {
         if (self.photoURL != nil) {
             updateProfilePicture(self.photoURL) { error in }
         }
+        
+        userBecameActive()
     }
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
@@ -178,7 +180,9 @@ class User {
     
     class func hasAuthenticatedUser () -> Bool {
         if (FIRAuth.auth()?.currentUser != nil) {
-            self.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+            if (User.currentUser == nil){
+                self.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+            }
             return true
         }
         else {
@@ -186,6 +190,23 @@ class User {
         }
     }
     
+    func updateFCMToken(token: String?) {
+        if token != nil {
+            userRef!.child("FCM_token").setValue(token)
+        }
+    }
+    
+    func userBecameActive () -> Void {
+        updateFCMToken(FIRInstanceID.instanceID().token())
+        userRef!.child("last_login").setValue(FIRServerValue.timestamp()) { (error
+            , ref) in
+            if (error != nil){
+                print (error)
+            }
+        }
+    }
+    
+
     // TODO
     func updateLastSeenLocation(location: CLLocation) {
         // to be implemented
@@ -243,6 +264,12 @@ class User {
     
     func update() {
         
+    }
+    
+    func getTokenForcingRefresh(completion: (token:String?, error:NSError?) -> Void) {
+        firUser?.getTokenForcingRefresh(true) {idToken, error in
+            completion(token: idToken, error: error)
+        }
     }
     
     

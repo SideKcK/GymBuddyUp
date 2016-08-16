@@ -15,6 +15,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmField: UITextField!
+    @IBOutlet weak var nextButton: BorderedButton!
     
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
@@ -23,6 +24,8 @@ class SignupVC: UIViewController {
     var profileImage: UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         profileImage = UIImage(named: "Me")
         
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
@@ -33,29 +36,21 @@ class SignupVC: UIViewController {
         setTextField(passwordField)
         setTextField(usernameField)
         setTextField(confirmField)
-        
+        //nextButton.enabled = true
+
         //alert controller
         alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
         
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
+            self.nextButton.enabled = true
+            self.nextButton.alpha = 1.0
         }
         alertController.addAction(OKAction)
         
     }
     
     func setTextField(textField: UITextField) {
-        let textColor = ColorScheme.sharedInstance.lightText
-        textField.textColor = textColor
-        textField.attributedPlaceholder = NSAttributedString(string:textField.placeholder!,attributes: [NSForegroundColorAttributeName: textColor])
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = textColor.CGColor
-        border.frame = CGRect(x: 0, y: textField.frame.size.height - width, width:  textField.frame.size.width, height: textField.frame.size.height)
-        
-        border.borderWidth = width
-        textField.layer.addSublayer(border)
         textField.layer.masksToBounds = true
         textField.delegate = self
     }
@@ -74,12 +69,9 @@ class SignupVC: UIViewController {
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
-    @IBAction func onTap(sender: AnyObject) {
-        view.endEditing(false)
-        
-    }
-    
     @IBAction func onNextButton(sender: AnyObject) {
+        nextButton.enabled = false
+        nextButton.alpha = 0.3
         
         //check validation
         if emailField.text!.isEmpty || passwordField.text!.isEmpty || usernameField.text!.isEmpty || confirmField.text!.isEmpty{
@@ -131,6 +123,7 @@ class SignupVC: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+ 
     }
     /*
      // MARK: - Navigation

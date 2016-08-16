@@ -15,13 +15,26 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        self.thisTabBar.translucent = false
         self.thisTabBar.tintColor = ColorScheme.sharedInstance.navTint
         self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
         
         let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+
+        navigationBarAppearace.translucent = false
         navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
         navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
-        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.flatBlackColorDark()]  // Title's text color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:ColorScheme.sharedInstance.navTint]  // Title's text color
+        
+//        for parent in UINavigationBar().subviews {
+//            for childView in parent.subviews {
+//                if(childView is UIImageView) {
+//                    childView.removeFromSuperview()
+//                }
+//            }
+//        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -49,13 +62,13 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         button.setBackgroundImage(highlightImage, forState: UIControlState.Highlighted)
         button.addTarget(self, action: #selector(TabBarVC.buttonEvent), forControlEvents: UIControlEvents.TouchUpInside)
         
-        let heightDifference: CGFloat = buttonImage.size.height - self.tabBar.frame.size.height
+        let heightDifference: CGFloat = 0//buttonImage.size.height - self.tabBar.frame.size.height
         
         if (heightDifference < 0){
             button.center = self.tabBar.center
         }else{
             var center: CGPoint = self.tabBar.center
-            center.y = center.y - self.tabBar.frame.origin.y - heightDifference/2.0 - button.bounds.height / 4.0
+            center.y = center.y - self.tabBar.frame.origin.y - heightDifference/2.0
             button.center = center
         }
         

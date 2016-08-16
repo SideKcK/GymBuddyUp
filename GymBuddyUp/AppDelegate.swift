@@ -24,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
         
-        
-        
         // Firebase Initialization
         
         // Register for remote notifications
@@ -34,20 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-
         
         FIRApp.configure()
         
-        // This cannot be called before FIRApp is initialized.
-        
-        if (User.hasAuthenticatedUser()) {
-            // User is signed in.
+        if User.hasAuthenticatedUser() {
             userDidLogin()
-        } else {
-            // No user is signed in.
+        }
+        else {
             userDidLogout()
         }
-        
+
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification, object: nil)
@@ -64,6 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = mainSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
+        User.currentUser?.userBecameActive()
+        
+        // test push notification : send yourself a friend request
+        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
+            if (error != nil){
+                print(error)
+            }
+        }
+
     }
     
     func userDidLogout() {
@@ -73,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = signSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
-
     }
     
     func application(application: UIApplication,
@@ -111,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        //print("Message ID: \(userInfo["gcm.message_id"]!)")
         
         // Print full message.
         print("%@", userInfo)
@@ -121,13 +123,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [START refresh_token]
     func tokenRefreshNotification(notification: NSNotification) {
         let refreshedToken = FIRInstanceID.instanceID().token()
-        print("InstanceID token: \(refreshedToken)")
+        print("refreshed token: ", refreshedToken);
+        if User.hasAuthenticatedUser() {
+            User.currentUser!.updateFCMToken(refreshedToken);
+        }
         
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
     // [END refresh_token]
-    
+
     // [START connect_to_fcm]
     func connectToFcm() {
         FIRMessaging.messaging().connectWithCompletion { (error) in
@@ -144,8 +149,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
+        // clear badge number
+        application.applicationIconBadgeNumber = 0;
         // activate facebook app for tracking
         FBSDKAppEvents.activateApp()
+        // Update User data
+        User.currentUser?.userBecameActive()
     }
     
     

@@ -15,18 +15,30 @@ class ColorScheme {
     var bgGradientCenter: UIColor
     var bgGradientOut: UIColor
     var lightText:UIColor
+    var greyText:UIColor
     var darkText: UIColor
     var contrastText: UIColor
     var navTint: UIColor
     var navBg: UIColor
     
+    var calBg: UIColor
+    var calText: UIColor
+    var calTextDark: UIColor
+    
+    var buttonTint: UIColor
     init (){
         bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
         bgGradientOut = UIColor(red: 63/255.0, green: 203/255.0, blue: 213/255.0, alpha: 1.0)
-        lightText = ContrastColorOf(FlatBlack(), returnFlat: true)
-        darkText = ContrastColorOf(FlatWhite(), returnFlat: true)
+        lightText = UIColor.whiteColor()
+        greyText = UIColor.flatWhiteColorDark()
+        darkText = ContrastColorOf(lightText, returnFlat: true)
         contrastText = ComplementaryFlatColorOf(bgGradientOut)
-        navTint = UIColor.flatSkyBlueColor()
-        navBg = UIColor.flatWhiteColor()
+        navTint = UIColor.flatWhiteColor()
+        navBg = UIColor.flatPlumColorDark()
+        
+        calBg = UIColor.flatPlumColorDark()
+        calText = UIColor.flatWhiteColor()
+        calTextDark = UIColor.flatWhiteColorDark()
+        buttonTint = UIColor.flatMintColor()
         }
 }

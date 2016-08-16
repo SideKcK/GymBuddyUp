@@ -7,8 +7,13 @@ use_frameworks!
 target 'GymBuddyUp' do
     pod 'ChameleonFramework/Swift', '~> 2.1.0'
     pod 'Alamofire', '~> 3.4'
-    pod 'CryptoSwift'
+    pod 'AlamofireImage', '~> 2.4'
+    pod 'CVCalendar', :git => 'https://github.com/Mozharovsky/CVCalendar.git'
+
     pod 'GoogleMaps'
+    pod "SwiftDate"
+    pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
+    
     pod 'Firebase'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="glM-uA-6HV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="glM-uA-6HV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -59,7 +59,7 @@
                                             <action selector="onLoginButton:" destination="ptp-9i-vIs" eventType="touchUpInside" id="vJ7-8m-Vml"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cI-El-mz0">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cI-El-mz0">
                                         <rect key="frame" x="114" y="194" width="146" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rDc-uY-vsf"/>
@@ -217,7 +217,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="NA5-nt-fHD">
                                 <rect key="frame" x="38" y="198" width="245" height="235"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5o-UX-kqS">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5o-UX-kqS" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="18" y="0.0" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="5z8-4a-hkX"/>
@@ -232,7 +232,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-Zy-1OP">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-Zy-1OP" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="18" y="50" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="8SZ-Zy-1OP" secondAttribute="height" multiplier="7:1" id="fzT-k9-wGE"/>
@@ -247,7 +247,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kvs-30-Vrt">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kvs-30-Vrt" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="18" y="100" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kvs-30-Vrt" secondAttribute="height" multiplier="7:1" id="4IN-We-o6k"/>
@@ -262,7 +262,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xTp-6q-LSu" userLabel="Confirm Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xTp-6q-LSu" userLabel="Confirm Field" customClass="UnderlineField" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="18" y="150" width="210" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ERd-4R-xDn"/>
@@ -317,9 +317,6 @@
                             <constraint firstItem="OFw-vv-CYc" firstAttribute="top" relation="lessThanOrEqual" secondItem="vNN-av-B28" secondAttribute="bottom" constant="50" id="rSX-Qa-YGG"/>
                             <constraint firstItem="NA5-nt-fHD" firstAttribute="top" secondItem="OFw-vv-CYc" secondAttribute="bottom" constant="34" id="zjl-Ru-YNG"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="nsf-PV-F8E" appends="YES" id="iYm-JF-bIG"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Sign Up" id="fln-jq-Imo"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -329,6 +326,7 @@
                         <outlet property="emailField" destination="Q5o-UX-kqS" id="vG4-6f-f6W"/>
                         <outlet property="loginButton" destination="3Ud-AX-sfl" id="Pt4-sz-Vib"/>
                         <outlet property="loginLabel" destination="PwJ-h8-Vek" id="bEb-xe-IJw"/>
+                        <outlet property="nextButton" destination="J4y-cS-1om" id="eHl-sh-f1f"/>
                         <outlet property="passwordField" destination="kvs-30-Vrt" id="qah-9j-vT6"/>
                         <outlet property="profileButton" destination="OFw-vv-CYc" id="70K-QN-lGn"/>
                         <outlet property="usernameField" destination="8SZ-Zy-1OP" id="4Pc-4a-KnT"/>
@@ -337,11 +335,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qrv-sa-OYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FJQ-2y-siw" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="nsf-PV-F8E">
-                    <connections>
-                        <action selector="onTap:" destination="403-DD-fB4" id="5a7-3F-bPH"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="994" y="342"/>
         </scene>
@@ -622,6 +615,6 @@
         <image name="gym" width="960" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wWJ-7J-eXk"/>
+        <segue reference="50U-d8-CRs"/>
     </inferredMetricsTieBreakers>
 </document>

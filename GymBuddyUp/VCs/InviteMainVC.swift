@@ -62,6 +62,7 @@ class InviteMainVC: UITableViewController {
     @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     func setButtons() {
         dateButton.addShadow()
         gymButton.addShadow()
@@ -115,7 +116,6 @@ class InviteMainVC: UITableViewController {
 //        )
         sent = true
         self.dismissViewControllerAnimated(true, completion: nil)
-        print("Button Clicked")
     }
     
     func dismissPicker () {

@@ -35,14 +35,24 @@ class PlanDetailVC: UIViewController {
     
     func setPlan(repeating: Bool) {
         //get current displayed plan
-        //set plan in Firebase
-        let cell = collectionView.visibleCells()[0] as! PlanDetailCell
-        cell.plan.setTodayPlan(repeating) { (error: NSError?) in
-            //unwind to plan main
-            self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: self)
+        //get current date
+        guard let navVC = self.navigationController as? PlanLibNavVC else{
+            print("navVC not plan lib nav")
+            return
         }
         
-        
+        //set if recurring
+        let recur = repeating ? 7:0
+        //set plan in Firebase
+        let cell = collectionView.visibleCells()[0] as! PlanDetailCell
+        ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (error) in
+            if error == nil {
+                //unwind to plan main
+                self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: self)
+            }else {
+                print(error)
+            }
+        }
         
     }
     
@@ -81,20 +91,9 @@ class PlanDetailVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let desVC = segue.destinationViewController as? PlanMainVC {
-//            let day = desVC.selectedDay
-//            Plan.getPlan(User.currentUser, date: day.date.convertedDate(), completion: { (plan:Plan!, error: NSError!) in
-//                if plan != nil {
-//                    desVC.plan = plan
-//                    desVC.tableView.reloadData()
-//                    desVC.planView.hidden = false
-//                    desVC.workoutButton.hidden = false
-//                }else {
-//                    desVC.emptyView.hidden = false
-//                }
-//            })
-//        // Pass the selected object to the new view controller.
-//        }
+        if let desVC = segue.destinationViewController as? PlanMainVC {
+            desVC.getPlans()
+        }
     }
  
 
@@ -107,13 +106,23 @@ extension PlanDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let detailCell = collectionView.dequeueReusableCellWithReuseIdentifier("PlanDetailCell", forIndexPath: indexPath) as! PlanDetailCell
-            detailCell.plan = plans[indexPath.row]
+        let plan = plans[indexPath.row]
+        Library.getExercisesByPlanId(plans[indexPath.row].id) { (exercises, error) in
+            print("get exercises")
+            if let exer = exercises {
+                plan.exercises = exer
+                detailCell.plan = plan
+                detailCell.tableView.reloadData()
+            }else {
+                print(error)
+            }
+        }
+
         return detailCell
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let detailCell = cell as? PlanDetailCell else { return }
-        
         detailCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
     }
     //Use for size
@@ -148,9 +157,7 @@ extension PlanDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         cell.numLabel.text = String(indexPath.row+1)
-        if let exercises = plans[tableView.tag].exercises {
-            cell.exercise = exercises[indexPath.row]
-        }
+        cell.exercise = plans[tableView.tag].exercises![indexPath.row]
         cell.layoutMargins = UIEdgeInsetsZero
 
         return cell

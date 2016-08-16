@@ -18,6 +18,7 @@ class GymCell: UITableViewCell {
     var gym : Gym! {
         didSet {
             nameLabel.text = gym.name
+            desLabel.text = gym.address
         }
     }
 }

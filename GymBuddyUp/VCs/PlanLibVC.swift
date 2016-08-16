@@ -38,7 +38,6 @@ class PlanLibVC: UIViewController {
             if let detailVC = segue.destinationViewController as? PlanDetailVC,
                 plans = (sender as? [Plan]) {
                 
-                print(selectedCat?.name)
                 detailVC.title = selectedCat?.name
                 detailVC.plans = plans
             }

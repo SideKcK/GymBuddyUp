@@ -34,7 +34,7 @@ class Plan {
         }
     }
     
-    var id: String
+    var id: String!
     var name: String?
     var enabled: Bool
     var difficulty: Difficulty?
@@ -59,33 +59,5 @@ class Plan {
         self.enabled = dict.valueForKey("enabled") as! Bool
     }
 
-    //////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////
     
-    
-    func setTodayPlan(repeatPlan: Bool, completion: (NSError!) -> Void) {
-        completion(nil);
-    }
-    
-    class func getTodayPlan(completion: (Plan!, NSError!) -> Void) {
-        completion(Plan(), nil);
-    }
-    
-    class func deleteTodayPlan(completion: (NSError!) -> Void) {
-        
-    }
-    
-    class func repeatTodayPlan(completion: (NSError!) -> Void) {
-        getTodayPlan { (plan, error) in
-            if plan != nil {
-                completion(nil)
-                }
-        }
-
-    }
-    
-    class func getPlan(user: User!, date: NSDate!, completion: (Plan!, NSError!) -> Void) {
-        print("Get plan of \(user.screenName) \(date.description)")
-        completion (Plan(), nil)
-    }
 }

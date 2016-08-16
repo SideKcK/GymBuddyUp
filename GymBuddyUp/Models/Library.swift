@@ -56,7 +56,7 @@ class Library {
         systemPlanRef.child(planId).observeSingleEventOfType(.Value, withBlock: {
             (snapshot) in
             if let jsonData = snapshot.value as? NSDictionary {
-                let plan = Plan(id: planId, dict: jsonData);
+                let plan = Plan(id: planId, dict: jsonData)
                 completion(plan: plan, error: nil)
             }
         }) {

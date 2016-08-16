@@ -13,18 +13,13 @@ class PlanDetailCell: UICollectionViewCell {
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var exercises = [Exercise]()
 
     var plan: Plan! {
         didSet {
             nameLabel.text = plan.name
             desLabel.text = plan.description
             levelLabel.text = "Level: " + plan.difficulty!.description
-            if let ex = plan.exercises {
-                exercises = ex
-            }else {
-                print("No exercises available")
-            }
+           
         }
     }
     

@@ -125,19 +125,24 @@ class ScheduledWorkout {
         }
     }
     
-    class func skipScheduledWorkoutForDate(scheduledWorkoutId: String, date: NSDate, repeatPlan: Bool, completion: (NSError?)) -> Void {
+    class func skipScheduledWorkoutForDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("skip_on")
         workoutRef.setValue(true, forKey: dateToString(date))
+        completion(nil)
     }
     
-    class func deleteRecurringWorkout(scheduledWorkoutId: String, date: NSDate, repeatPlan: Bool, completion: (NSError?)) -> Void {
+    
+    class func deleteRecurringWorkout(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("skip_on")
         workoutRef.setValue(true, forKey: dateToString(date))
+        //where's error handling??
+        completion(nil)
     }
-    
-    class func stopRecurringWorkoutOnDate(planId: String, stopOnDate: NSDate, completion: (NSError?)) -> Void {
-        let workoutRef = workoutCalendarRef.child(planId)
+ 
+    class func stopRecurringWorkoutOnDate(scheduledWorkoutId: String, stopOnDate: NSDate, completion: (NSError?) -> Void) {
+        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId)
         workoutRef.setValue(dateToString(stopOnDate), forKey: "end_date")
+        completion(nil)
     }
     
     /**

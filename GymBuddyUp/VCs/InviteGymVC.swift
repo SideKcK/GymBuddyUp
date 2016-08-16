@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import KRProgressHUD
 
 class InviteGymVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -23,12 +24,15 @@ class InviteGymVC: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
+        KRProgressHUD.show()
         GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(CLLocationCoordinate2D(latitude: 30.562, longitude: -96.313), radius: 5000, name: "gym") { (gyms, error) in
             if gyms != nil {
                 print(gyms)
                 self.nearbyGyms = gyms
                 self.tableView.reloadData()
+                KRProgressHUD.dismiss()
             }else {
+                KRProgressHUD.showError()
                 print(error)
             }
             }
@@ -43,15 +47,20 @@ class InviteGymVC: UIViewController {
     }
     
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if let desVC = segue.destinationViewController as? InviteMainVC {
+            guard let selectedGym = sender as? Gym else {
+                return
+            }
+            desVC.gym = selectedGym
+            desVC.gymButton.setTitle(selectedGym.name, forState: .Normal)
+        }
      }
-     */
+    
     
 }
 
@@ -72,7 +81,6 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("GymCell", forIndexPath: indexPath) as! GymCell
         if indexPath.section == 1 {
             cell.gym = nearbyGyms[indexPath.row]
-            cell.desLabel.text = "Nearby gym"
         }
         return cell
     }
@@ -90,12 +98,12 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
             profileView.image = UIImage(named: "dumbbell")
             headerView.addSubview(profileView)
             
-            let userNameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 300, height: 30))
-            userNameLabel.clipsToBounds = true
-            userNameLabel.text = "Gym Nearby"
+            let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 300, height: 30))
+            nameLabel.clipsToBounds = true
+            nameLabel.text = "Gym Nearby"
             
-            userNameLabel.font = UIFont.systemFontOfSize(12)
-            headerView.addSubview(userNameLabel)
+            nameLabel.font = UIFont.systemFontOfSize(12)
+            headerView.addSubview(nameLabel)
             return headerView
         }
         return nil
@@ -107,5 +115,11 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
             return 40
         }
         return 0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            self.performSegueWithIdentifier("unwindToInviteMainVC", sender: nearbyGyms[indexPath.row])
+        }
     }
 }

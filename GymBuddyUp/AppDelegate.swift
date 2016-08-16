@@ -60,21 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser?.sessionInitiated()
-        
-         //wuyou: 这是calendar的用法，第一行是加workout到calendar
-        User.currentUser?.sendFriendRequest("123", completion: { (error) in
-            print(error)
-        })
-        
-//        ScheduledWorkout.addWorkoutToCalendar("-KOnpCBmGTjhEfqmfPy0", startDate: stringToDate("2099-12-31")!) { (error) in
-//            print(error)
-//        }
-//        
-//            // 这是读
-//            ScheduledWorkout.getScheduledWorkoutsForDate(stringToDate("2099-12-31")!, complete: { (workouts) in
-//                print("Retrieved your scheduled workout for today",workouts)
-//            })
-        
     }
     
     func userDidLogout() {

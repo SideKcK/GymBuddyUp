@@ -24,6 +24,7 @@
 		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
+		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
 		C649C5501CE2C31C00258994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C54E1CE2C31C00258994 /* Main.storyboard */; };
 		C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C649C5511CE2C31C00258994 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
+		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54F1CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
 				C64EC2151D20D997000DA37A /* TabBarVC.swift */,
 				C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */,
+				C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
+				C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
 				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,

@@ -8,66 +8,64 @@
 
 import UIKit
 import CVCalendar
+import KRProgressHUD
 
 class PlanMainVC: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var monthButton: UIBarButtonItem!
     
+    @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var planView: UIView!
-    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var workoutButton: UIButton!
     
+    var dots = [NSDate]() {
+        didSet{
+            self.calendarView?.contentController.refreshPresentedMonth()
+        }
+    }
+    var workouts: [ScheduledWorkout]?
     var plan: Plan?
-    var selectedDay: DayView!
+    var selectedDate: NSDate!
+    var visibleDate = NSDate()
     var sendTo = 2
-    var invited =  true //for testing
     
+    let insetColor = ColorScheme.sharedInstance.greyText
+    let tintColor = ColorScheme.sharedInstance.buttonTint
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setCalendar()
-        reset()
-        setStatusBar()
-        
+        self.emptyView.hidden = true
+        self.planView.hidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
         
-        Plan.getTodayPlan { (plan:Plan!, error: NSError!) in
-            if plan != nil {
-                self.plan = plan
-                self.tableView.reloadData()
-                self.planView.hidden = false
-                self.workoutButton.hidden = false
-                //get plan invitation status
-                self.toggleInvitation()
-                }else {
-                self.emptyView.hidden = false
-            }
-        }
-        
-        
-        
+        getPlans()
     }
     
-    func reset() {
-        workoutButton.hidden = true
-        timeLocView.hidden = true
-        planView.hidden = true
-        emptyView.hidden = true
-        statusView.hidden = true
-        statusView.addShadow()
-        findButton.hidden = true
+    func setViews(hasPlan: Bool, invited: Bool) {
+        workoutButton.hidden = !hasPlan
+        timeLocView.hidden = !invited
+        emptyView.hidden = hasPlan
+        planView.hidden = !hasPlan
+        statusView.hidden = !invited
+        statusViewHeight.priority = invited ? 250:999
+        findButton.hidden = invited
+        setStatusBar()
+        
     }
     
     func setCalendar() {
@@ -77,6 +75,9 @@ class PlanMainVC: UIViewController {
         menuView.delegate = self
         calendarView.delegate = self
         monthButton.title = "< "+CVDate(date: NSDate()).monthDescription
+        selectedDate = NSDate()
+        getCalendarWorkouts(selectedDate)
+
     }
     
     func setStatusBar() {
@@ -89,18 +90,62 @@ class PlanMainVC: UIViewController {
         }
     }
     
-    func toggleInvitation() {
-        invited = !invited
-        if invited {
-            self.timeLocView.hidden = false
-            self.findButton.hidden = true
-            self.statusView.hidden = false
-            self.sendTo = 1
-            self.setStatusBar()
-        }else {
-            self.findButton.hidden = false
-        }
+    func getPlans() {
+        KRProgressHUD.show()
+        
+        ScheduledWorkout.getScheduledWorkoutsForDate(selectedDate, complete: { (workouts) in
+            print("Retrieved your scheduled workout for date \(self.selectedDate.day)",workouts)
+            if workouts.count != 0 {
+                self.workouts = workouts
+                //get first workout plan detail
+                Library.getPlanById(workouts[0].planId, completion: { (plan, error) in
+                    guard let plan = plan else {
+                        print(error)
+                        KRProgressHUD.showError()
+                        return
+                    }
+                    self.plan = plan
+                    self.planLabel.text = plan.name
+                    Library.getExercisesByPlanId(plan.id, completion: { (exercises, error) in
+                        if error == nil {
+                            self.plan?.exercises = exercises
+                            self.tableView.reloadData()
+                            //get plan invitation status
+                            self.setViews(true, invited: false)
+                            KRProgressHUD.dismiss()
+                        }else {
+                            KRProgressHUD.showError()
+                        }
+                    })
+                    
+                })
+                
+            }else {
+                self.setViews(false, invited: false)
+                
+                KRProgressHUD.dismiss()
+            }
+            
+        })
+    }
+    
+    func getCalendarWorkouts (date: NSDate) {
+        print("getting calendar dots \(date.month)")
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Year, .Month, .Day], fromDate: date)
+        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: date)
+        let numDays = range.length
+        
+        for day in 1...numDays {
+            components.day = day
+            guard let thisday = calendar.dateFromComponents(components) else {return}
+            ScheduledWorkout.getScheduledWorkoutsForDate(thisday) { (workouts) in
+                if workouts.count != 0 {
+                    self.dots.append(thisday)
+                }
+            }
 
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -121,15 +166,13 @@ class PlanMainVC: UIViewController {
     @IBAction func onMonthButton(sender: AnyObject) {
         calendarView.changeMode(.MonthView)
         UIView.animateWithDuration(0.3, animations: {
-            
-            self.planView.alpha = 0
             self.emptyView.alpha = 0
+            self.planView.alpha = 0
         })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
-        calendarView.toggleCurrentDayView()
         calendarView.changeMode(.WeekView)
-        
+        calendarView.toggleCurrentDayView()
     }
     
     @IBAction func onMoreButton(sender: AnyObject) {
@@ -138,13 +181,38 @@ class PlanMainVC: UIViewController {
             // ...
         }
         alertController.addAction(cancelAction)
+        let repeating = self.workouts![0].recur == 7
         
         let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
-            Plan.deleteTodayPlan({ (error) in
-                print("deleting plan: \(error)")
-                self.planView.hidden = true
-                self.emptyView.hidden = false
-            })
+            //delete
+            if repeating {
+                let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                deleteController.addAction(cancelAction)
+                let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
+                    ScheduledWorkout.stopRecurringWorkoutOnDate(self.workouts![0].id, stopOnDate: self.selectedDate, completion: { (error) in
+                        print("deleted all future plans")
+                        self.getPlans()
+                    })
+                }
+                deleteController.addAction(DeleteAllAction)
+                let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
+                    ScheduledWorkout.skipScheduledWorkoutForDate(self.workouts![0].id, date: self.selectedDate, completion: { (error) in
+                        print("deleye this plan only")
+                        self.getPlans()
+                    })
+                }
+                deleteController.addAction(DeleteThisAction)
+                self.presentViewController(deleteController, animated: true, completion: nil)
+            }else {
+                //should call delete instead
+                ScheduledWorkout.stopRecurringWorkoutOnDate(self.workouts![0].id, stopOnDate: self.selectedDate, completion: { (error) in
+                    print("deleted all future plans")
+                    self.getPlans()
+                })
+            }
         }
         alertController.addAction(DeleteAction)
         
@@ -155,15 +223,13 @@ class PlanMainVC: UIViewController {
         
         let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
             //set plan as repeat
-            Plan.repeatTodayPlan({ (error) in
-                print("set repeat: \(error)")
-            })
+            
         }
-        alertController.addAction(RepeatAction)
+        if !repeating {
+            alertController.addAction(RepeatAction)
+        }
         
-        self.presentViewController(alertController, animated: true) {
-            // ...
-        }
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     @IBAction func onCancelInviteButton(sender: AnyObject) {
         print("cancel invite")
@@ -181,7 +247,7 @@ class PlanMainVC: UIViewController {
         alertController.addAction(cancelAction)
         let confirmAction = UIAlertAction(title: "Yes", style: .Destructive) { (action) in
             //cancel invitation
-            self.toggleInvitation()
+            self.setViews(true, invited: false)
         }
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -223,6 +289,12 @@ class PlanMainVC: UIViewController {
                 }
             }
         }
+        if segue.identifier == "toPlanLibrarySegue" {
+            if let desVC = segue.destinationViewController as? PlanLibNavVC {
+                desVC.selectedDate = selectedDate
+            }
+        }
+        
     }
     
     
@@ -239,7 +311,10 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     // MARK: Optional methods
-    
+    func shouldAutoSelectDayOnMonthChange() -> Bool {
+        return false
+    }
+
     func shouldShowWeekdaysOut() -> Bool {
         return true
     }
@@ -251,23 +326,19 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
-        selectedDay = dayView
-        Plan.getPlan(User.currentUser, date: selectedDay.date.convertedDate()) { (plan, error) in
-            if error == nil {
-                self.plan = plan
-                self.tableView.reloadData()
-            }
-        }
+        selectedDate = dayView.date.convertedDate()
+        getPlans()
         calendarView.changeMode(.WeekView)
         UIView.animateWithDuration(0.3, animations: {
-            
-            self.planView.alpha = 1
             self.emptyView.alpha = 1
+            self.planView.alpha = 1
         })
     }
     
     func presentedDateUpdated(date: CVDate) {
+        visibleDate = date.convertedDate()!
         if monthButton.title != date.monthDescription {
+            getCalendarWorkouts(date.convertedDate()!)
             //monthButton.alpha = 0
             UIView.animateWithDuration(0.3, animations: {
                 self.monthButton.title = "< "+date.monthDescription
@@ -276,11 +347,12 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func dotMarker(shouldShowOnDayView dayView: CVCalendarDayView) -> Bool {
-        let day = dayView.date.day
-        if day == 1 {
-            return true
+        if dayView.date.month == visibleDate.month {
+            let date = dayView.date.convertedDate()
+            if self.dots.contains(date!) {
+                return true
+            }
         }
-        
         return false
     }
     
@@ -293,7 +365,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
-        return 13
+        return 5
     }
     
     func dayOfWeekTextColor() -> UIColor {
@@ -331,10 +403,6 @@ extension PlanMainVC: CVCalendarViewAppearanceDelegate {
     
     func dotMarkerColor() -> UIColor {
         return ColorScheme.sharedInstance.calText
-    }
-    
-    func dotMarkerOffset() -> CGFloat {
-        return 0
     }
     
 }

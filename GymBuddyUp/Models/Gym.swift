@@ -13,6 +13,7 @@ class Gym {
     var placeid: String?
     var name: String?
     var location: CLLocation?
+    var address: String?
     
     init () {
         self.name = "test gym"
@@ -21,9 +22,9 @@ class Gym {
     
     init(dict: NSDictionary) {
         if let address = dict["vicinity"] as? String {
+            self.address = address
             if let name = dict["name"] as? String {
                 self.name = name
-                print(name)
             }
         }
         //self.name =

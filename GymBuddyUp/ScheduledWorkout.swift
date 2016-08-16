@@ -115,22 +115,14 @@ class ScheduledWorkout {
         // If workout is not recurring, set end_date same as start_date, else use specified end_date. if specified enddate is nil, use 9999-12-31.
         
         newWorkoutRef.setValue(data) { (error, ref) in
-            if (error != nil) {
-                print(error)
-                completion(error)
-            }
-            else {
-                completion(nil)
-            }
+            completion(error)
         }
     }
     
     class func skipScheduledWorkoutForDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("skip_on").child(dateToString(date))
         workoutRef.setValue(true) { (error, ref) in
-            if (error != nil) {
-                completion(nil)
-            }
+            completion(error)
         }
     }
     
@@ -138,14 +130,14 @@ class ScheduledWorkout {
     class func deleteScheduledWorkout(scheduledWorkoutId: String, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("repeat")
         workoutRef.setValue(-1) { (error, ref) in
-        completion(error)
+            completion(error)
         }
     }
 
     class func stopRecurringWorkoutOnDate(scheduledWorkoutId: String, stopOnDate: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("end_date")
         workoutRef.setValue(dateToString(stopOnDate)) { (error, ref) in
-        completion(error)
+            completion(error)
         }
     }
     
@@ -168,7 +160,7 @@ class ScheduledWorkout {
         getActiveWorkoutsForDate(date) {(workouts) in
             var results = [ScheduledWorkout]()
             for workout in workouts {
-                if workout.startDate.isInSameDayAsDate(date) && workout.recur >= 0 {
+                if workout.startDate.isInSameDayAsDate(date) && workout.recur >= 0 && !isDateInArray(date, dateArray: workout.skipOn){
                     results.append(workout)
                 }
                     

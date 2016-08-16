@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-
         
         FIRApp.configure()
         
@@ -59,11 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = mainSB.instantiateInitialViewController()
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
-        User.currentUser?.sessionInitiated()
+        User.currentUser?.userBecameActive()
+        
+        // test push notification : send yourself a friend request
+        Invite.sendFriendRequest("Noh5cGUfhbSSTnS2IDApRmqcSs82") { (error) in
+            if (error != nil){
+                print(error)
+            }
+        }
 
-        User.currentUser?.sendFriendRequest("Noh5cGUfhbSSTnS2IDApRmqcSs82", completion: { (error) in
-            print("err", error)
-        })
     }
     
     func userDidLogout() {
@@ -151,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // activate facebook app for tracking
         FBSDKAppEvents.activateApp()
         // Update User data
-        User.currentUser?.sessionInitiated()
+        User.currentUser?.userBecameActive()
     }
     
     

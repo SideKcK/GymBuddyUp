@@ -12,11 +12,6 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import FBSDKLoginKit
-import Alamofire
-
-enum APIError : ErrorType{
-    case OperationFailed
-}
 
 // callbacks
 typealias UserAuthCallback = (user:User?, error: NSError?) -> Void
@@ -115,7 +110,7 @@ class User {
             updateProfilePicture(self.photoURL) { error in }
         }
         
-        sessionInitiated()
+        userBecameActive()
     }
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
@@ -201,7 +196,7 @@ class User {
         }
     }
     
-    func sessionInitiated () -> Void {
+    func userBecameActive () -> Void {
         updateFCMToken(FIRInstanceID.instanceID().token())
         userRef!.child("last_login").setValue(FIRServerValue.timestamp()) { (error
             , ref) in
@@ -263,35 +258,18 @@ class User {
         }
     }
     
-    func sendFriendRequest(recipientId: String, completion: (NSError?) -> Void) {
-        self.firUser?.getTokenForcingRefresh(true) {idToken, error in
-            if error != nil {
-                return completion(error)
-            }
-            
-            let parameters = [
-                "token": idToken!,
-                "operation": "send",
-                "recipientId": recipientId
-            ]
-                        
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
-            .responseJSON { response in
-                if !(Range(200..<300).contains((response.response?.statusCode)!)) {
-                    debugPrint("failure", response.result.value)
-                    //let error = NSError(domain: "API Error", code: (response.response?.statusCode)!, userInfo: response.result.value)
-                    completion(nil)
-                }
-            }
-        }
-    }
-    
     func updateProfile(attr: AnyObject?, value: AnyObject?) {
         
     }
     
     func update() {
         
+    }
+    
+    func getTokenForcingRefresh(completion: (token:String?, error:NSError?) -> Void) {
+        firUser?.getTokenForcingRefresh(true) {idToken, error in
+            completion(token: idToken, error: error)
+        }
     }
     
     

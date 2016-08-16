@@ -48,7 +48,7 @@ class PlanMainVC: UIViewController {
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
         
-        getPlans(selectedDate)
+        getPlansThisWeek(selectedDate)
     }
     
     func setViews(hasPlan: Bool, invited: Bool) {
@@ -84,12 +84,37 @@ class PlanMainVC: UIViewController {
             statusLabel.text = " invited"
         }
     }
-    
     func getPlans(date: NSDate) {
         KRProgressHUD.show()
-        let sWeek = date.startOf(.WeekOfMonth)
-        let eWeek = date.endOf(.WeekOfMonth)
-        
+
+        ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
+            self.workouts[date] = workouts
+            if let planIds = Plan.planIDsWithArray(workouts) {
+                Library.getPlansById(planIds, completion: { (plans, error) in
+                    if let dayplans = plans {
+                        self.plans[date] = dayplans
+                        if dayplans.count == 0 {
+                            self.setViews(false, invited: false)
+                        }else {
+                        self.tableView.reloadData()
+                        self.setViews(true, invited: false)
+                        }
+                    }else {
+                        print(error)
+                        KRProgressHUD.showError()
+                    }
+                    KRProgressHUD.dismiss()
+                })
+            }
+        }
+    }
+    
+    func getPlansThisWeek(date: NSDate) {
+        KRProgressHUD.show()
+        let sWeek = date.startOf(.WeekOfYear)
+        let eWeek = date.endOf(.WeekOfYear)
+        print(sWeek.toString())
+        print(eWeek.toString())
         ScheduledWorkout.getScheduledWorkoutsInRange(sWeek, endDate: eWeek) { (workouts, error) in
             if let workouts = workouts {
                 for (workoutdate, workout) in workouts {
@@ -98,7 +123,6 @@ class PlanMainVC: UIViewController {
                 }
                 let myGroup = dispatch_group_create()
                 for (date, dayworkouts) in workouts {
-                    print(date.toString())
                     dispatch_group_enter(myGroup)
                     if let planIds = Plan.planIDsWithArray(dayworkouts) {
                         Library.getPlansById(planIds, completion: { (plans, error) in
@@ -115,13 +139,17 @@ class PlanMainVC: UIViewController {
                 }
                 
                 dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-                    print("getPlans: Finished all requests.")
-                    //self.planLabel.text = self.plans[self.selectedDate]![0].name
-                    if self.plans[self.selectedDate] != nil {
-                        self.tableView.reloadData()
-                        self.setViews(true, invited: false)
-                    }else {
-                        self.setViews(false, invited: false)
+                    print("getPlansThisWeek: Finished all requests.")
+                    
+                    if let plans = self.plans[self.selectedDate] {
+                        if plans.count == 0 {
+                            self.setViews(false, invited: false)
+                        }else {
+                            self.planLabel.text = plans[0].name
+                            self.tableView.reloadData()
+                            self.setViews(true, invited: false)
+                        }
+
                     }
                     KRProgressHUD.dismiss()
                 })
@@ -188,7 +216,8 @@ class PlanMainVC: UIViewController {
             // ...
         }
         alertController.addAction(cancelAction)
-        let repeating = self.workouts[selectedDate]![0].recur == 7
+        let workout = self.workouts[selectedDate]![0]
+        let repeating = workout.recur == 7
         
         let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
             //delete
@@ -199,25 +228,30 @@ class PlanMainVC: UIViewController {
                 }
                 deleteController.addAction(cancelAction)
                 let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
-                    ScheduledWorkout.stopRecurringWorkoutOnDate(self.workouts[self.selectedDate]![0].id, stopOnDate: self.selectedDate, completion: { (error) in
+                    ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                        if error == nil {
                         print("deleted all future plans")
                         self.getPlans(self.selectedDate)
+                        }
                     })
                 }
                 deleteController.addAction(DeleteAllAction)
                 let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
-                    ScheduledWorkout.skipScheduledWorkoutForDate(self.workouts[self.selectedDate]![0].id, date: self.selectedDate, completion: { (error) in
+                    ScheduledWorkout.skipScheduledWorkoutForDate(workout.id, date: self.selectedDate, completion: { (error) in
+                        if error == nil {
                         print("deleye this plan only")
                         self.getPlans(self.selectedDate)
+                        }
                     })
                 }
                 deleteController.addAction(DeleteThisAction)
                 self.presentViewController(deleteController, animated: true, completion: nil)
             }else {
-                //should call delete instead
-                ScheduledWorkout.stopRecurringWorkoutOnDate(self.workouts[self.selectedDate]![0].id, stopOnDate: self.selectedDate, completion: { (error) in
-                    print("deleted all future plans")
+                ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                    if error == nil {
+                    print("deleted plan")
                     self.getPlans(self.selectedDate)
+                    }
                 })
             }
         }
@@ -350,9 +384,10 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         print("\(dayView.date.commonDescription) is selected!")
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
         if plans[selectedDate] == nil {
-            getPlans(selectedDate)
+            getPlansThisWeek(selectedDate)
         }else if plans[selectedDate]?.count != 0{
             tableView.reloadData()
+            setViews(true, invited: false)
         }else {
             setViews(false, invited: false)
         }

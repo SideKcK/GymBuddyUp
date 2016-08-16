@@ -46,7 +46,7 @@ extension Library {
 extension ScheduledWorkout {
     class func getScheduledWorkoutsInRange(startDate: NSDate, endDate: NSDate, completion: (workouts:[NSDate: [ScheduledWorkout]]?, error: NSError?) -> Void) {
         let dateRange = DateRange(calendar: NSCalendar.currentCalendar(),
-                                  startDate: startDate,
+                                  startDate: (1.days).agoFromDate(startDate),
                                   endDate: endDate,
                                   stepUnits: NSCalendarUnit.Day,
                                   stepValue: 1)

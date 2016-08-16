@@ -138,18 +138,14 @@ class ScheduledWorkout {
     class func deleteScheduledWorkout(scheduledWorkoutId: String, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("repeat")
         workoutRef.setValue(-1) { (error, ref) in
-            if (error != nil) {
-                completion(nil)
-            }
+        completion(error)
         }
     }
 
     class func stopRecurringWorkoutOnDate(scheduledWorkoutId: String, stopOnDate: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("end_date")
         workoutRef.setValue(dateToString(stopOnDate)) { (error, ref) in
-            if (error != nil) {
-                completion(nil)
-            }
+        completion(error)
         }
     }
     

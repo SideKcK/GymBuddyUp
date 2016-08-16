@@ -394,6 +394,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)
         }else if plans[selectedDate]?.count != 0{
+            self.planLabel.text = plans[selectedDate]![0].name
             tableView.reloadData()
             setViews(true, invited: false)
         }else {

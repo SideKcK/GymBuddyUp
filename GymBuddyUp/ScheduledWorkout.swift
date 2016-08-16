@@ -128,9 +128,7 @@ class ScheduledWorkout {
     class func skipScheduledWorkoutForDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void) {
         let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("skip_on").child(dateToString(date))
         workoutRef.setValue(true) { (error, ref) in
-            if (error != nil) {
-                completion(nil)
-            }
+            completion(error)
         }
     }
     

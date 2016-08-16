@@ -35,7 +35,6 @@ extension Library {
         }
         
         dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-            print("get plans by ids: Finished all requests.")
             completion(plans: plans, error: nil)
         })
         

@@ -59,5 +59,17 @@ class Plan {
         self.enabled = dict.valueForKey("enabled") as! Bool
     }
 
+    class func planIDsWithArray(array: [ScheduledWorkout]?) -> [String]? {
+        var res = [String]()
+        
+        guard let arr = array else {
+            return res
+        }
+        for workout in arr {
+            res.append(workout.planId)
+        }
+        return res
+    }
+
     
 }

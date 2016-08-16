@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         User.currentUser?.sessionInitiated()
 
-        User.currentUser?.sendFriendRequest("Ok0V3oWU9cOfCzbCDSGD9Nl9mRx1", completion: { (error) in
+        User.currentUser?.sendFriendRequest("Noh5cGUfhbSSTnS2IDApRmqcSs82", completion: { (error) in
             print("err", error)
         })
     }
@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        //print("Message ID: \(userInfo["gcm.message_id"]!)")
         
         // Print full message.
         print("%@", userInfo)

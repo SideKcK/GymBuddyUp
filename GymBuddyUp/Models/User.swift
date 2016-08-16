@@ -279,6 +279,7 @@ class User {
             .responseJSON { response in
                 if !(Range(200..<300).contains((response.response?.statusCode)!)) {
                     debugPrint("failure", response.result.value)
+                    //let error = NSError(domain: "API Error", code: (response.response?.statusCode)!, userInfo: response.result.value)
                     completion(nil)
                 }
             }

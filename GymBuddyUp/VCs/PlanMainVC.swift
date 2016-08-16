@@ -84,7 +84,7 @@ class PlanMainVC: UIViewController {
             statusLabel.text = " invited"
         }
     }
-    func getPlans(date: NSDate) {
+    func reloadPlans(date: NSDate) {
         KRProgressHUD.show()
 
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
@@ -104,6 +104,9 @@ class PlanMainVC: UIViewController {
                         KRProgressHUD.showError()
                     }
                     KRProgressHUD.dismiss()
+                    self.dots.removeAll()
+                    self.getCalendarWorkouts(date)
+
                 })
             }
         }
@@ -231,7 +234,9 @@ class PlanMainVC: UIViewController {
                     ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
                         if error == nil {
                         print("deleted all future plans")
-                        self.getPlans(self.selectedDate)
+                        self.reloadPlans(self.selectedDate)
+                        }else {
+                            print(error)
                         }
                     })
                 }
@@ -239,8 +244,10 @@ class PlanMainVC: UIViewController {
                 let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
                     ScheduledWorkout.skipScheduledWorkoutForDate(workout.id, date: self.selectedDate, completion: { (error) in
                         if error == nil {
-                        print("deleye this plan only")
-                        self.getPlans(self.selectedDate)
+                        print("delete this plan only")
+                        self.reloadPlans(self.selectedDate)
+                        }else {
+                            print(error)
                         }
                     })
                 }
@@ -250,7 +257,9 @@ class PlanMainVC: UIViewController {
                 ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
                     if error == nil {
                     print("deleted plan")
-                    self.getPlans(self.selectedDate)
+                    self.reloadPlans(self.selectedDate)
+                    }else {
+                        print(error)
                     }
                 })
             }

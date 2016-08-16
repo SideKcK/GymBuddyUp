@@ -48,7 +48,7 @@ class PlanDetailVC: UIViewController {
         ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (error) in
             if error == nil {
                 //unwind to plan main
-                self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: self)
+                self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: navVC.selectedDate)
             }else {
                 print(error)
             }
@@ -92,7 +92,7 @@ class PlanDetailVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? PlanMainVC {
-            desVC.getPlans(desVC.selectedDate)
+            desVC.reloadPlans(sender as! NSDate)
         }
     }
  

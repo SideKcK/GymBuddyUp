@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8D7644699F3B8F0F14170050 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */; };
+		B6AB2C601D6142F900D4AD2A /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB2C5F1D6142F900D4AD2A /* Messaging.swift */; };
+		B6AB2C621D61C34F00D4AD2A /* Buddy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB2C611D61C34F00D4AD2A /* Buddy.swift */; };
 		B6AE8A151D5C858B00236F05 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
@@ -72,6 +74,8 @@
 /* Begin PBXFileReference section */
 		2FD626101F4C762D8B89D1AD /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		657616B4DA5D3B32B4AAAD21 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
+		B6AB2C5F1D6142F900D4AD2A /* Messaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
+		B6AB2C611D61C34F00D4AD2A /* Buddy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buddy.swift; sourceTree = "<group>"; };
 		B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 				C607BA281D53040600B1348B /* MidCat.swift */,
 				C607BA4A1D57E3F100B1348B /* Gym.swift */,
 				C607BA511D5830DD00B1348B /* GoogleAPI.swift */,
+				B6AB2C5F1D6142F900D4AD2A /* Messaging.swift */,
+				B6AB2C611D61C34F00D4AD2A /* Buddy.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,
+				B6AB2C601D6142F900D4AD2A /* Messaging.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
@@ -502,6 +509,7 @@
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
+				B6AB2C621D61C34F00D4AD2A /* Buddy.swift in Sources */,
 				B6AE8A151D5C858B00236F05 /* ScheduledWorkout.swift in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,

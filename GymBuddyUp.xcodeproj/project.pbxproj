@@ -24,6 +24,7 @@
 		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
+		C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
 		C649C5501CE2C31C00258994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C54E1CE2C31C00258994 /* Main.storyboard */; };
 		C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C649C5511CE2C31C00258994 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
+		C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAPI.swift; path = Helpers/ExtensionsAPI.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54F1CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				C6CD01E11D3890E300D64A06 /* Extensions.swift */,
+				C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */,
 				C649C5601CE3C08700258994 /* ColorScheme.swift */,
 				C60986581CEEC25200A0AFE3 /* Utils.swift */,
 				C65301E31D01F51E00DEF7A0 /* Validation.swift */,
@@ -479,6 +482,7 @@
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C67D95121D4D020300FAD103 /* Exercise.swift in Sources */,
+				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,

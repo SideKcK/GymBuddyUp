@@ -109,6 +109,8 @@ class User {
         if (self.photoURL != nil) {
             updateProfilePicture(self.photoURL) { error in }
         }
+        
+        sessionInitiated()
     }
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
@@ -178,7 +180,9 @@ class User {
     
     class func hasAuthenticatedUser () -> Bool {
         if (FIRAuth.auth()?.currentUser != nil) {
-            self.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+            if (User.currentUser == nil){
+                self.currentUser = User(user: (FIRAuth.auth()?.currentUser)!)
+            }
             return true
         }
         else {
@@ -186,7 +190,14 @@ class User {
         }
     }
     
+    func updateFCMToken(token: String?) {
+        if token != nil {
+            userRef!.child("FCM_token").setValue(token)
+        }
+    }
+    
     func sessionInitiated () -> Void {
+        updateFCMToken(FIRInstanceID.instanceID().token())
         userRef!.child("last_login").setValue(FIRServerValue.timestamp()) { (error
             , ref) in
             if (error != nil){
@@ -244,6 +255,16 @@ class User {
                     self.cacheUserPhoto(photoURL!)
                 }
             })
+        }
+    }
+    
+    func sendFriendRequest(userId: String, completion: (NSError?) -> Void) {
+        self.firUser?.getTokenForcingRefresh(true) {idToken, error in
+            if let error = error {
+                // Handle error
+                return;
+            }
+            print(idToken)
         }
     }
     

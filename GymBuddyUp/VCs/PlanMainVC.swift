@@ -165,9 +165,8 @@ class PlanMainVC: UIViewController {
     }
     
     func getCalendarWorkouts (date: NSDate) {
-        print("getting calendar dots \(date.month)")
-        let sMonth = date.startOf(.Month)
-        let eMonth = date.endOf(.Month)
+        let sMonth = (1.weeks).agoFromDate(date.startOf(.Month))
+        let eMonth = (1.weeks).fromDate(date.endOf(.Month))
         ScheduledWorkout.getScheduledWorkoutsInRange(sMonth, endDate: eMonth) { (workouts, error) in
             if let workouts = workouts {
                 for (date, dayworkouts) in workouts {

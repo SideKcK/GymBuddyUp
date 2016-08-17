@@ -10,16 +10,30 @@ import UIKit
 import CoreLocation
 
 class DiscoverMainVC: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
     var locationManager: CLLocationManager!
+    var events = [Plan(), Plan()]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupLocation()
+        setupTableView()
+    }
+    
+    func setupLocation () {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
-        
+    }
+    
+    func setupTableView () {
+        tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,5 +65,29 @@ extension DiscoverMainVC: CLLocationManagerDelegate {
             //upload user location
         }
         
+    }
+}
+
+extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
+    // MARK: - UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return events.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+        cell.event = events[indexPath.row]
+        cell.showProfileView()
+        cell.showTimeView()
+        cell.showLocView()
+        cell.setNeedsUpdateConstraints()
+        cell.updateConstraintsIfNeeded()
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
 }

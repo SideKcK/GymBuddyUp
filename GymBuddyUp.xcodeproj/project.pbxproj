@@ -26,6 +26,7 @@
 		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
 		C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */; };
 		C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6304E191D6387C700EE7110 /* WorkoutCell.xib */; };
+		C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
 		C649C5501CE2C31C00258994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C54E1CE2C31C00258994 /* Main.storyboard */; };
 		C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C649C5511CE2C31C00258994 /* Assets.xcassets */; };
@@ -92,6 +93,7 @@
 		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
 		C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAPI.swift; path = Helpers/ExtensionsAPI.swift; sourceTree = "<group>"; };
 		C6304E191D6387C700EE7110 /* WorkoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WorkoutCell.xib; path = Views/WorkoutCell.xib; sourceTree = "<group>"; };
+		C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutCell.swift; path = Views/WorkoutCell.swift; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54F1CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				C607BA4F1D582A6100B1348B /* BuddyCell.swift */,
 				C607BA551D5AE80800B1348B /* GymCell.swift */,
 				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
+				C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
+				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
 				B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,

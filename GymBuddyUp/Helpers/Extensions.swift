@@ -26,12 +26,11 @@ extension UIView {
         let darkColor = ColorScheme.sharedInstance.darkText
         self.backgroundColor = lightColor
         self.layer.cornerRadius = 5
-        //button.clipsToBounds = true
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 1
-        self.clipsToBounds = true
+        //self.clipsToBounds = true
     }
 }
 extension UIImageView {

@@ -44,7 +44,7 @@ class Plan {
     
     init () {
         id = "SAMPLEID"
-        exercises = [Exercise()]
+        exercises = [Exercise(), Exercise()]
         name = "test plan"
         description = "this is a test plan description........ "
         difficulty = .Beginner

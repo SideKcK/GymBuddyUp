@@ -16,6 +16,7 @@ class TrackMainVC: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var botButton: UIButton!
 
+    var trackedPlan: TrackedPlan?
     var seconds: Float = 0.0
     var secondTotal: Float = 0.0
     var timer = NSTimer()

@@ -23,18 +23,32 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
     var imageViews = [UIImageView]()
-
     var event: Plan! {
         didSet {
             nameLabel.text = event.name
             if let exers = event.exercises {
+                if exers.count == 0 {
+                    exercisesStackView.removeAllSubviews()
+                    exercisesHeightConstraint.priority = 999
+                }else {
+                    for imageView in imageViews {
+                        exercisesStackView.addArrangedSubview(imageView)
+                    }
+                    exercisesHeightConstraint.priority = 250
+                }
                 for (index, exer) in exers.enumerate() {
-                    let downloadURL = exer.thumbnailURL
-                    let imageView = imageViews[index]
-                    imageView.af_setImageWithURL(downloadURL)
-                    imageView.makeThumbnail()
+                    if index > 5 {
+                        //change last imageView
+                        break
+                    }else {
+                        let downloadURL = exer.thumbnailURL
+                        let imageView = imageViews[index]
+                        imageView.af_setImageWithURL(downloadURL)
+                        imageView.makeThumbnail()
+                    }
                 }
             }
         }
@@ -53,6 +67,7 @@ class WorkoutCell: UITableViewCell {
             exercisesStackView.addArrangedSubview(imageView)
             imageViews.append(imageView)
         }
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -93,4 +108,6 @@ class WorkoutCell: UITableViewCell {
     func showStatusView() {
         statusHeightConstraint.priority = 250
     }
+    
+    
 }

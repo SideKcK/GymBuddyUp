@@ -48,7 +48,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40i-ut-rxu">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40i-ut-rxu">
                                         <rect key="frame" x="263" y="0.0" width="8" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -141,11 +141,14 @@
                                 <rect key="frame" x="8" y="66" width="271" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="DaA-yO-Hjd"/>
+                                    <constraint firstAttribute="height" priority="990" constant="45" id="SZg-yW-JzW"/>
                                     <constraint firstAttribute="width" secondItem="h2q-hu-A5N" secondAttribute="height" multiplier="6:1" id="cCa-5Q-8mw"/>
+                                    <constraint firstAttribute="height" priority="250" id="cnK-Rg-sYK"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="DaA-yO-Hjd"/>
+                                        <exclude reference="cCa-5Q-8mw"/>
                                     </mask>
                                 </variation>
                             </stackView>
@@ -205,6 +208,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="borderView" destination="fao-4E-MQ4" id="5mk-Xu-ghf"/>
+                <outlet property="exercisesHeightConstraint" destination="cnK-Rg-sYK" id="YPt-xR-bmJ"/>
                 <outlet property="exercisesStackView" destination="h2q-hu-A5N" id="1HN-CQ-Z7K"/>
                 <outlet property="locHeightConstraint" destination="Z5X-FR-va0" id="sRC-dL-1oB"/>
                 <outlet property="locStackView" destination="7mL-Iu-eka" id="EQt-en-yBF"/>

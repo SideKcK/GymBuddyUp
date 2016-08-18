@@ -29,7 +29,7 @@ class ColorScheme {
     
     var trackingNavigationButtonBg: UIColor
     var trackingNavigationButtonTx: UIColor
-
+    var trackingNavigationParamsLabel: UIColor
     
     init (){
         bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
@@ -47,5 +47,7 @@ class ColorScheme {
         buttonTint = UIColor.flatMintColor()
         trackingNavigationButtonBg = UIColor.flatMintColor()
         trackingNavigationButtonTx = UIColor.flatWhiteColor()
+        
+        trackingNavigationParamsLabel = UIColor.flatBlackColor()
     }
 }

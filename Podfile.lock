@@ -1,4 +1,5 @@
 PODS:
+  - AKPickerView-Swift (1.0.1)
   - Alamofire (3.4.1)
   - AlamofireImage (2.4.1):
     - Alamofire (~> 3.3)
@@ -80,6 +81,7 @@ PODS:
   - SwiftDate (3.0.8)
 
 DEPENDENCIES:
+  - AKPickerView-Swift
   - Alamofire (~> 3.4)
   - AlamofireImage (~> 2.4)
   - ChameleonFramework/Swift (~> 2.1.0)
@@ -111,6 +113,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/krimpedance/KRProgressHUD.git
 
 SPEC CHECKSUMS:
+  AKPickerView-Swift: 8509d472bb257649383c276506334a7373d3cb33
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -136,6 +139,6 @@ SPEC CHECKSUMS:
   KRProgressHUD: 1448cfd94b2fb540b994234cceac85dcd695be8d
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
 
-PODFILE CHECKSUM: 73a71a6bf32b0ada378cc9dae877a33de50e3fb0
+PODFILE CHECKSUM: 3eb26e9bd82179c36c3e8bade948488181022e91
 
 COCOAPODS: 1.0.1

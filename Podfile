@@ -11,7 +11,7 @@ target 'GymBuddyUp' do
     pod 'CVCalendar', :git => 'https://github.com/Mozharovsky/CVCalendar.git'
 
     pod 'GoogleMaps'
-    pod "SwiftDate"
+    pod 'SwiftDate'
     pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
     
     pod 'Firebase'
@@ -19,6 +19,8 @@ target 'GymBuddyUp' do
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
     pod 'Firebase/Messaging'
+    
+    pod 'AKPickerView-Swift'
     
     # These are pods used for the auth providers.
     pod 'FBSDKCoreKit'

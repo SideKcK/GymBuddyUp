@@ -61,12 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.currentUser?.userBecameActive()
         
         // test push notification : send yourself a friend request
-        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
-            if (error != nil){
-                print(error)
-            }
-        }
-
+//        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
+//            if (error != nil){
+//                print(error)
+//            }
+//        }
     }
     
     func userDidLogout() {

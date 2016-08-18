@@ -11,6 +11,11 @@
 		B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB2C631D6309E200D4AD2A /* Invite.swift */; };
 		B6AE8A151D5C858B00236F05 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
+		B6F00B6A1D65940600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B611D65940600B09177 /* GeoFire.m */; };
+		B6F00B6B1D65940600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B631D65940600B09177 /* GFBase32Utils.m */; };
+		B6F00B6C1D65940600B09177 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B651D65940600B09177 /* GFGeoHash.m */; };
+		B6F00B6D1D65940600B09177 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B671D65940600B09177 /* GFGeoHashQuery.m */; };
+		B6F00B6E1D65940600B09177 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B691D65940600B09177 /* GFQuery.m */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA291D53040600B1348B /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA281D53040600B1348B /* MidCat.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
@@ -77,6 +82,23 @@
 		B6AB2C631D6309E200D4AD2A /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GymBuddyUp-Bridging-Header.h"; path = "../GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		B6F00B5A1D65940600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		B6F00B5B1D65940600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		B6F00B5C1D65940600B09177 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		B6F00B5D1D65940600B09177 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		B6F00B5E1D65940600B09177 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		B6F00B601D65940600B09177 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		B6F00B611D65940600B09177 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		B6F00B621D65940600B09177 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		B6F00B631D65940600B09177 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		B6F00B641D65940600B09177 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		B6F00B651D65940600B09177 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		B6F00B661D65940600B09177 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		B6F00B671D65940600B09177 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		B6F00B681D65940600B09177 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		B6F00B691D65940600B09177 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		B6F00B6F1D65952A00B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA281D53040600B1348B /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = Models/MidCat.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
@@ -169,6 +191,45 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B6F00B581D65940600B09177 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				B6F00B591D65940600B09177 /* API */,
+				B6F00B5E1D65940600B09177 /* GeoFire-Prefix.pch */,
+				B6F00B5F1D65940600B09177 /* Implementation */,
+			);
+			name = GeoFire;
+			path = "../../../Desktop/geofire-objc-master/GeoFire";
+			sourceTree = "<group>";
+		};
+		B6F00B591D65940600B09177 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B6F00B5A1D65940600B09177 /* GeoFire.h */,
+				B6F00B5B1D65940600B09177 /* GFCircleQuery.h */,
+				B6F00B5C1D65940600B09177 /* GFQuery.h */,
+				B6F00B5D1D65940600B09177 /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B6F00B5F1D65940600B09177 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				B6F00B601D65940600B09177 /* GeoFire+Private.h */,
+				B6F00B611D65940600B09177 /* GeoFire.m */,
+				B6F00B621D65940600B09177 /* GFBase32Utils.h */,
+				B6F00B631D65940600B09177 /* GFBase32Utils.m */,
+				B6F00B641D65940600B09177 /* GFGeoHash.h */,
+				B6F00B651D65940600B09177 /* GFGeoHash.m */,
+				B6F00B661D65940600B09177 /* GFGeoHashQuery.h */,
+				B6F00B671D65940600B09177 /* GFGeoHashQuery.m */,
+				B6F00B681D65940600B09177 /* GFQuery+Private.h */,
+				B6F00B691D65940600B09177 /* GFQuery.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +251,8 @@
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
+				B6F00B6F1D65952A00B09177 /* GymBuddyUp-Bridging-Header.h */,
+				B6F00B581D65940600B09177 /* GeoFire */,
 				C649C5491CE2C31C00258994 /* GymBuddyUp */,
 				C649C5481CE2C31C00258994 /* Products */,
 				0F5C97F101D8CA6AD7B54D10 /* Pods */,
@@ -227,6 +290,7 @@
 				C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */,
 				B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */,
 				C649C5561CE2C31C00258994 /* Info.plist */,
+				B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */,
 			);
 			path = GymBuddyUp;
 			sourceTree = "<group>";
@@ -483,7 +547,10 @@
 				C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */,
 				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
 				C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */,
+				B6F00B6B1D65940600B09177 /* GFBase32Utils.m in Sources */,
+				B6F00B6A1D65940600B09177 /* GeoFire.m in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
+				B6F00B6D1D65940600B09177 /* GFGeoHashQuery.m in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C67D95121D4D020300FAD103 /* Exercise.swift in Sources */,
 				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
@@ -518,6 +585,7 @@
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
+				B6F00B6C1D65940600B09177 /* GFGeoHash.m in Sources */,
 				B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C607BA291D53040600B1348B /* MidCat.swift in Sources */,
@@ -525,6 +593,7 @@
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 				C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */,
+				B6F00B6E1D65940600B09177 /* GFQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,11 +781,31 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Headers",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleIPhoneUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleMaps\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleNetworkingUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+				);
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -727,11 +816,31 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Headers",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleIPhoneUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleMaps\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleNetworkingUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+				);
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp-Bridging-Header.h";
 			};
 			name = Release;
 		};

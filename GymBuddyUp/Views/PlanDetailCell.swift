@@ -33,10 +33,15 @@ class PlanDetailCell: UICollectionViewCell {
     func setCollectionViewDataSourceDelegate
         <D: protocol<UITableViewDataSource, UITableViewDelegate>>
         (dataSourceDelegate: D, forRow row: Int) {
+        tableView.registerNib(UINib(nibName: "ExerciseNumberedCell", bundle: nil), forCellReuseIdentifier: "ExerciseNumberedCell")
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         tableView.delegate = dataSourceDelegate
         tableView.dataSource = dataSourceDelegate
         tableView.tag = row
         tableView.reloadData()
+        
     }
 
     

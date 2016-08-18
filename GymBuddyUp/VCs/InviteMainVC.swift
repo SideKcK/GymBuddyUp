@@ -43,6 +43,7 @@ class InviteMainVC: UITableViewController {
         if gym != nil {
             enableSendButton()
         }
+
     }
     override func viewWillAppear(animated: Bool) {
         self.sendButton.hidden = false
@@ -175,10 +176,11 @@ class InviteMainVC: UITableViewController {
         if indexPath.row == 3 && !showPlan {
             return 0
         }
+        
         return  super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         
     }
-    
+
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
         

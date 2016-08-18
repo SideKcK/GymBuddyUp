@@ -11,8 +11,9 @@ import UIKit
 extension Library {
     class func getPlansById (planId: [String], completion: (plans: [Plan]?, error: NSError?) -> Void) {
         let myGroup = dispatch_group_create()
-        var plans = [Plan]()
-        for id in planId {
+        let numPlan = planId.count
+        var plans = [Plan](count: numPlan, repeatedValue: Plan())
+        for (index, id) in planId.enumerate() {
             dispatch_group_enter(myGroup)
             Library.getPlanById(id, completion: { (plan, error) in
                 guard let plan = plan else {
@@ -23,7 +24,7 @@ extension Library {
                 Library.getExercisesByPlanId(id, completion: { (exercises, error) in
                     if error == nil {
                         plan.exercises = exercises
-                        plans.append(plan)
+                        plans[index] = plan
                         dispatch_group_leave(myGroup)
                     }else {
                         print(error)
@@ -60,7 +61,6 @@ extension ScheduledWorkout {
             
         }
         dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-            print("get workouts in range: Finished all requests.")
             completion(workouts: allworkouts, error: nil)
         })
 

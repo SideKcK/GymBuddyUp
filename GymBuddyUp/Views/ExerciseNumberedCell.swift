@@ -14,6 +14,7 @@ class ExerciseNumberedCell: UITableViewCell {
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
 
     var exercise: Exercise! {
         didSet {

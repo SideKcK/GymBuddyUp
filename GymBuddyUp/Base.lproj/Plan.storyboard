@@ -144,6 +144,7 @@
                                         <state key="normal" title=". . ."/>
                                         <connections>
                                             <action selector="onMoreButton:" destination="31H-FZ-iqh" eventType="touchUpInside" id="Sjp-oE-KNx"/>
+                                            <action selector="onMoreButton:" destination="6RH-aL-G0u" eventType="touchUpInside" id="cu9-6D-hMc"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="obl-fZ-Ed1">
@@ -843,8 +844,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WiG-DE-LST">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WiG-DE-LST">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="489197598.93875402">
                                                         <!--2016-07-03 00:13:18 +0000-->
                                                     </date>

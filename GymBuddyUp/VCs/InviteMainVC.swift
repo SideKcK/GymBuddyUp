@@ -234,9 +234,7 @@ class InviteMainVC: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.sendButton.hidden = true
-        if let desVC = segue.destinationViewController as? MeBuddiesVC {
-            desVC.inviting = true
-        }
+        
     }
  
 

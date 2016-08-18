@@ -20,6 +20,33 @@ func resize(image: UIImage, newSize: CGSize) -> UIImage {
     return newImage
 }
 
+class Log {
+    /* A simple logger written by Yi Huang */
+    class func info(content: String?) {
+        if let content = content {
+            print("[Log][INFO]: \(content)")
+        } else {
+            print("[Log][INFO]: nil")
+        }
+    }
+    
+    class func error(content: String?) {
+        if let content = content {
+            print("[Log][ERROR]: \(content)")
+        } else {
+            print("[Log][ERROR]: nil")
+        }
+    }
+    
+    class func warning(content: String?) {
+        if let content = content {
+            print("[Log][WARN]: \(content)")
+        } else {
+            print("[Log][WARN]: nil")
+        }
+    }
+}
+
 func secondToString(sec: Float) -> String {
     let hours = Int(sec) / 3600
     let minutes = Int(sec) / 60 % 60

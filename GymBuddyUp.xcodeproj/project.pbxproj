@@ -13,6 +13,7 @@
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
+		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA291D53040600B1348B /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA281D53040600B1348B /* MidCat.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
@@ -82,6 +83,7 @@
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
+		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA281D53040600B1348B /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = Models/MidCat.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 				6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C1388BA41D65184000513C05 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
+			);
+			name = Button;
 			sourceTree = "<group>";
 		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
@@ -259,6 +269,7 @@
 		C649C5651CE3C64F00258994 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C1388BA41D65184000513C05 /* Button */,
 				C64EC21C1D289DCA000DA37A /* Cells */,
 				C649C5661CE3C68800258994 /* BorderedButton.swift */,
 				C66B081C1D502378003B0872 /* UnderlineField.swift */,
@@ -532,6 +543,7 @@
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
+				C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */,
 				C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

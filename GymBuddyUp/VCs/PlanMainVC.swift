@@ -331,6 +331,7 @@ class PlanMainVC: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        /* Yi Huang: should return in each branch to terminate extra comparisons*/
         if segue.identifier == "startWorkoutSegue" {
             if let desVC = segue.destinationViewController as? TrackMainVC {
                 if let _plans = plans[selectedDate] {

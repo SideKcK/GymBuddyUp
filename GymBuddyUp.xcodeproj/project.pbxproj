@@ -8,25 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		8D7644699F3B8F0F14170050 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F67F476ED2D151CC1F907907 /* Pods_GymBuddyUp.framework */; };
-		B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB2C631D6309E200D4AD2A /* Invite.swift */; };
-		B6AE8A151D5C858B00236F05 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
-		B6F00B6A1D65940600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B611D65940600B09177 /* GeoFire.m */; };
-		B6F00B6B1D65940600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B631D65940600B09177 /* GFBase32Utils.m */; };
-		B6F00B6C1D65940600B09177 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B651D65940600B09177 /* GFGeoHash.m */; };
-		B6F00B6D1D65940600B09177 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B671D65940600B09177 /* GFGeoHashQuery.m */; };
-		B6F00B6E1D65940600B09177 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B691D65940600B09177 /* GFQuery.m */; };
+		B6F00B821D66B34600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B791D66B34600B09177 /* GeoFire.m */; };
+		B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */; };
+		B6F00B841D66B34600B09177 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7D1D66B34600B09177 /* GFGeoHash.m */; };
+		B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7F1D66B34600B09177 /* GFGeoHashQuery.m */; };
+		B6F00B861D66B34600B09177 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B811D66B34600B09177 /* GFQuery.m */; };
+		B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B9B1D66B3E400B09177 /* Exercise.swift */; };
+		B6F00BA51D66B3E400B09177 /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */; };
+		B6F00BA61D66B3E400B09177 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B9D1D66B3E400B09177 /* Gym.swift */; };
+		B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B9E1D66B3E400B09177 /* Invite.swift */; };
+		B6F00BA81D66B3E400B09177 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B9F1D66B3E400B09177 /* Library.swift */; };
+		B6F00BA91D66B3E400B09177 /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA01D66B3E400B09177 /* MidCat.swift */; };
+		B6F00BAA1D66B3E400B09177 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA11D66B3E400B09177 /* Plan.swift */; };
+		B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */; };
+		B6F00BAC1D66B3E400B09177 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA31D66B3E400B09177 /* User.swift */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
-		C607BA291D53040600B1348B /* MidCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA281D53040600B1348B /* MidCat.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
 		C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA441D57A3A100B1348B /* InviteMainVC.swift */; };
 		C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA481D57E14500B1348B /* InviteGymVC.swift */; };
-		C607BA4B1D57E3F100B1348B /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4A1D57E3F100B1348B /* Gym.swift */; };
 		C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */; };
 		C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA4F1D582A6100B1348B /* BuddyCell.swift */; };
-		C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA511D5830DD00B1348B /* GoogleAPI.swift */; };
 		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
-		C60986571CEEC00D00A0AFE3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986561CEEC00D00A0AFE3 /* User.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
 		C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */; };
@@ -63,9 +66,6 @@
 		C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B081C1D502378003B0872 /* UnderlineField.swift */; };
 		C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66B08201D50346F003B0872 /* Tracking.storyboard */; };
 		C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66B08241D503ADF003B0872 /* TrackMainVC.swift */; };
-		C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D950F1D4CFFBA00FAD103 /* Plan.swift */; };
-		C67D95121D4D020300FAD103 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D95111D4D020300FAD103 /* Exercise.swift */; };
-		C67D95141D4D2B5C00FAD103 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D95131D4D2B5C00FAD103 /* Library.swift */; };
 		C67D951A1D4D3B3100FAD103 /* PlanDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D95191D4D3B3100FAD103 /* PlanDetailCell.swift */; };
 		C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68165031D64C94400FC63FD /* PlanDetailVC.swift */; };
 		C68165091D65280600FC63FD /* BuddyCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68165081D65280600FC63FD /* BuddyCardCell.xib */; };
@@ -85,37 +85,39 @@
 /* Begin PBXFileReference section */
 		2FD626101F4C762D8B89D1AD /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		657616B4DA5D3B32B4AAAD21 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
-		B6AB2C631D6309E200D4AD2A /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
-		B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GymBuddyUp-Bridging-Header.h"; path = "../GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
-		B6F00B5A1D65940600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
-		B6F00B5B1D65940600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
-		B6F00B5C1D65940600B09177 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
-		B6F00B5D1D65940600B09177 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
-		B6F00B5E1D65940600B09177 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
-		B6F00B601D65940600B09177 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
-		B6F00B611D65940600B09177 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
-		B6F00B621D65940600B09177 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
-		B6F00B631D65940600B09177 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
-		B6F00B641D65940600B09177 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
-		B6F00B651D65940600B09177 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
-		B6F00B661D65940600B09177 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
-		B6F00B671D65940600B09177 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
-		B6F00B681D65940600B09177 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
-		B6F00B691D65940600B09177 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
-		B6F00B6F1D65952A00B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		B6F00B741D66B34600B09177 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		B6F00B751D66B34600B09177 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		B6F00B761D66B34600B09177 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		B6F00B781D66B34600B09177 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		B6F00B791D66B34600B09177 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		B6F00B7A1D66B34600B09177 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		B6F00B7C1D66B34600B09177 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		B6F00B7D1D66B34600B09177 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		B6F00B7E1D66B34600B09177 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		B6F00B7F1D66B34600B09177 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		B6F00B801D66B34600B09177 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		B6F00B811D66B34600B09177 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		B6F00B9B1D66B3E400B09177 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPI.swift; sourceTree = "<group>"; };
+		B6F00B9D1D66B3E400B09177 /* Gym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
+		B6F00B9E1D66B3E400B09177 /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
+		B6F00B9F1D66B3E400B09177 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		B6F00BA01D66B3E400B09177 /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidCat.swift; sourceTree = "<group>"; };
+		B6F00BA11D66B3E400B09177 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
+		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
-		C607BA281D53040600B1348B /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = Models/MidCat.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
 		C607BA441D57A3A100B1348B /* InviteMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteMainVC.swift; path = VCs/InviteMainVC.swift; sourceTree = "<group>"; };
 		C607BA481D57E14500B1348B /* InviteGymVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteGymVC.swift; path = VCs/InviteGymVC.swift; sourceTree = "<group>"; };
-		C607BA4A1D57E3F100B1348B /* Gym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gym.swift; path = Models/Gym.swift; sourceTree = "<group>"; };
 		C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeBuddiesVC.swift; path = VCs/MeBuddiesVC.swift; sourceTree = "<group>"; };
 		C607BA4F1D582A6100B1348B /* BuddyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuddyCell.swift; path = Views/BuddyCell.swift; sourceTree = "<group>"; };
-		C607BA511D5830DD00B1348B /* GoogleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAPI.swift; path = Models/GoogleAPI.swift; sourceTree = "<group>"; };
 		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
-		C60986561CEEC00D00A0AFE3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
 		C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAPI.swift; path = Helpers/ExtensionsAPI.swift; sourceTree = "<group>"; };
@@ -154,9 +156,6 @@
 		C66B081C1D502378003B0872 /* UnderlineField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderlineField.swift; path = Views/UnderlineField.swift; sourceTree = "<group>"; };
 		C66B08211D50346F003B0872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tracking.storyboard; sourceTree = "<group>"; };
 		C66B08241D503ADF003B0872 /* TrackMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackMainVC.swift; path = VCs/TrackMainVC.swift; sourceTree = "<group>"; };
-		C67D950F1D4CFFBA00FAD103 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plan.swift; path = Models/Plan.swift; sourceTree = "<group>"; };
-		C67D95111D4D020300FAD103 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exercise.swift; path = Models/Exercise.swift; sourceTree = "<group>"; };
-		C67D95131D4D2B5C00FAD103 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Library.swift; path = Models/Library.swift; sourceTree = "<group>"; };
 		C67D95191D4D3B3100FAD103 /* PlanDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanDetailCell.swift; path = Views/PlanDetailCell.swift; sourceTree = "<group>"; };
 		C68165031D64C94400FC63FD /* PlanDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanDetailVC.swift; path = VCs/PlanDetailVC.swift; sourceTree = "<group>"; };
 		C68165081D65280600FC63FD /* BuddyCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BuddyCardCell.xib; path = Views/BuddyCardCell.xib; sourceTree = "<group>"; };
@@ -203,43 +202,59 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B6F00B581D65940600B09177 /* GeoFire */ = {
+		B6F00B701D66B34600B09177 /* GeoFire */ = {
 			isa = PBXGroup;
 			children = (
-				B6F00B591D65940600B09177 /* API */,
-				B6F00B5E1D65940600B09177 /* GeoFire-Prefix.pch */,
-				B6F00B5F1D65940600B09177 /* Implementation */,
+				B6F00B711D66B34600B09177 /* API */,
+				B6F00B761D66B34600B09177 /* GeoFire-Prefix.pch */,
+				B6F00B771D66B34600B09177 /* Implementation */,
 			);
 			name = GeoFire;
-			path = "../../../Desktop/geofire-objc-master/GeoFire";
+			path = GymBuddyUp/GeoFire;
 			sourceTree = "<group>";
 		};
-		B6F00B591D65940600B09177 /* API */ = {
+		B6F00B711D66B34600B09177 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				B6F00B5A1D65940600B09177 /* GeoFire.h */,
-				B6F00B5B1D65940600B09177 /* GFCircleQuery.h */,
-				B6F00B5C1D65940600B09177 /* GFQuery.h */,
-				B6F00B5D1D65940600B09177 /* GFRegionQuery.h */,
+				B6F00B721D66B34600B09177 /* GeoFire.h */,
+				B6F00B731D66B34600B09177 /* GFCircleQuery.h */,
+				B6F00B741D66B34600B09177 /* GFQuery.h */,
+				B6F00B751D66B34600B09177 /* GFRegionQuery.h */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
-		B6F00B5F1D65940600B09177 /* Implementation */ = {
+		B6F00B771D66B34600B09177 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				B6F00B601D65940600B09177 /* GeoFire+Private.h */,
-				B6F00B611D65940600B09177 /* GeoFire.m */,
-				B6F00B621D65940600B09177 /* GFBase32Utils.h */,
-				B6F00B631D65940600B09177 /* GFBase32Utils.m */,
-				B6F00B641D65940600B09177 /* GFGeoHash.h */,
-				B6F00B651D65940600B09177 /* GFGeoHash.m */,
-				B6F00B661D65940600B09177 /* GFGeoHashQuery.h */,
-				B6F00B671D65940600B09177 /* GFGeoHashQuery.m */,
-				B6F00B681D65940600B09177 /* GFQuery+Private.h */,
-				B6F00B691D65940600B09177 /* GFQuery.m */,
+				B6F00B781D66B34600B09177 /* GeoFire+Private.h */,
+				B6F00B791D66B34600B09177 /* GeoFire.m */,
+				B6F00B7A1D66B34600B09177 /* GFBase32Utils.h */,
+				B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */,
+				B6F00B7C1D66B34600B09177 /* GFGeoHash.h */,
+				B6F00B7D1D66B34600B09177 /* GFGeoHash.m */,
+				B6F00B7E1D66B34600B09177 /* GFGeoHashQuery.h */,
+				B6F00B7F1D66B34600B09177 /* GFGeoHashQuery.m */,
+				B6F00B801D66B34600B09177 /* GFQuery+Private.h */,
+				B6F00B811D66B34600B09177 /* GFQuery.m */,
 			);
 			path = Implementation;
+			sourceTree = "<group>";
+		};
+		B6F00B9A1D66B3E400B09177 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
+				B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */,
+				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
+				B6F00B9E1D66B3E400B09177 /* Invite.swift */,
+				B6F00B9F1D66B3E400B09177 /* Library.swift */,
+				B6F00BA01D66B3E400B09177 /* MidCat.swift */,
+				B6F00BA11D66B3E400B09177 /* Plan.swift */,
+				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
+				B6F00BA31D66B3E400B09177 /* User.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
@@ -265,8 +280,7 @@
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
-				B6F00B6F1D65952A00B09177 /* GymBuddyUp-Bridging-Header.h */,
-				B6F00B581D65940600B09177 /* GeoFire */,
+				B6F00B701D66B34600B09177 /* GeoFire */,
 				C649C5491CE2C31C00258994 /* GymBuddyUp */,
 				C649C5481CE2C31C00258994 /* Products */,
 				0F5C97F101D8CA6AD7B54D10 /* Pods */,
@@ -286,7 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
-				C64EC2241D334097000DA37A /* API */,
+				B6F00B9A1D66B3E400B09177 /* API */,
 				C649C5651CE3C64F00258994 /* Views */,
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
@@ -299,11 +313,11 @@
 				C66B08201D50346F003B0872 /* Tracking.storyboard */,
 				C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */,
 				C649C55C1CE3BBD900258994 /* SignupLogin.storyboard */,
-				C649C5511CE2C31C00258994 /* Assets.xcassets */,
 				C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */,
+				C649C5511CE2C31C00258994 /* Assets.xcassets */,
+				B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */,
 				B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */,
 				C649C5561CE2C31C00258994 /* Info.plist */,
-				B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */,
 			);
 			path = GymBuddyUp;
 			sourceTree = "<group>";
@@ -385,22 +399,6 @@
 				C607BA551D5AE80800B1348B /* GymCell.swift */,
 			);
 			name = Cells;
-			sourceTree = "<group>";
-		};
-		C64EC2241D334097000DA37A /* API */ = {
-			isa = PBXGroup;
-			children = (
-				C60986561CEEC00D00A0AFE3 /* User.swift */,
-				B6AB2C631D6309E200D4AD2A /* Invite.swift */,
-				B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */,
-				C67D950F1D4CFFBA00FAD103 /* Plan.swift */,
-				C67D95111D4D020300FAD103 /* Exercise.swift */,
-				C67D95131D4D2B5C00FAD103 /* Library.swift */,
-				C607BA281D53040600B1348B /* MidCat.swift */,
-				C607BA4A1D57E3F100B1348B /* Gym.swift */,
-				C607BA511D5830DD00B1348B /* GoogleAPI.swift */,
-			);
-			name = API;
 			sourceTree = "<group>";
 		};
 		C66B08231D503AB1003B0872 /* Tracking */ = {
@@ -578,62 +576,63 @@
 			buildActionMask = 2147483647;
 			files = (
 				C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */,
+				B6F00BA61D66B3E400B09177 /* Gym.swift in Sources */,
+				B6F00BA91D66B3E400B09177 /* MidCat.swift in Sources */,
 				C67D951A1D4D3B3100FAD103 /* PlanDetailCell.swift in Sources */,
+				B6F00BAA1D66B3E400B09177 /* Plan.swift in Sources */,
 				C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */,
 				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
 				C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */,
-				B6F00B6B1D65940600B09177 /* GFBase32Utils.m in Sources */,
-				B6F00B6A1D65940600B09177 /* GeoFire.m in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
-				B6F00B6D1D65940600B09177 /* GFGeoHashQuery.m in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
-				C67D95121D4D020300FAD103 /* Exercise.swift in Sources */,
 				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
+				B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */,
 				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanLibDetailVC.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
+				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
+				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
+				B6F00B821D66B34600B09177 /* GeoFire.m in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
 				C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
 				C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */,
+				B6F00BA51D66B3E400B09177 /* GoogleAPI.swift in Sources */,
 				C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */,
+				B6F00BAC1D66B3E400B09177 /* User.swift in Sources */,
 				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
-				C67D95101D4CFFBA00FAD103 /* Plan.swift in Sources */,
-				C607BA4B1D57E3F100B1348B /* Gym.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
-				B6AE8A151D5C858B00236F05 /* ScheduledWorkout.swift in Sources */,
+				B6F00B841D66B34600B09177 /* GFGeoHash.m in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
-				C67D95141D4D2B5C00FAD103 /* Library.swift in Sources */,
 				C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
+				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
+				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
-				B6F00B6C1D65940600B09177 /* GFGeoHash.m in Sources */,
-				B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
-				C607BA291D53040600B1348B /* MidCat.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
+				B6F00BA81D66B3E400B09177 /* Library.swift in Sources */,
+				B6F00B861D66B34600B09177 /* GFQuery.m in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
-				C607BA521D5830DD00B1348B /* GoogleAPI.swift in Sources */,
-				B6F00B6E1D65940600B09177 /* GFQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,7 +836,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -872,7 +871,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
 			};
 			name = Release;
 		};

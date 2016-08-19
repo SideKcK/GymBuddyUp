@@ -36,6 +36,9 @@
 		C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6304E191D6387C700EE7110 /* WorkoutCell.xib */; };
 		C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */; };
 		C64942FE1D6775B3002C9D49 /* GymMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64942FD1D6775B3002C9D49 /* GymMapVC.swift */; };
+		C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64943001D67B3BB002C9D49 /* InboxMainVC.swift */; };
+		C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64943021D67B45D002C9D49 /* MessageCell.swift */; };
+		C64943051D67B45D002C9D49 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64943031D67B45D002C9D49 /* MessageCell.xib */; };
 		C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C54A1CE2C31C00258994 /* AppDelegate.swift */; };
 		C649C5501CE2C31C00258994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C649C54E1CE2C31C00258994 /* Main.storyboard */; };
 		C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C649C5511CE2C31C00258994 /* Assets.xcassets */; };
@@ -125,6 +128,9 @@
 		C6304E191D6387C700EE7110 /* WorkoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WorkoutCell.xib; path = Views/WorkoutCell.xib; sourceTree = "<group>"; };
 		C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutCell.swift; path = Views/WorkoutCell.swift; sourceTree = "<group>"; };
 		C64942FD1D6775B3002C9D49 /* GymMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymMapVC.swift; path = VCs/GymMapVC.swift; sourceTree = "<group>"; };
+		C64943001D67B3BB002C9D49 /* InboxMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InboxMainVC.swift; path = VCs/InboxMainVC.swift; sourceTree = "<group>"; };
+		C64943021D67B45D002C9D49 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
+		C64943031D67B45D002C9D49 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = Views/MessageCell.xib; sourceTree = "<group>"; };
 		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54F1CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -279,6 +285,14 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		C64942FF1D67B39A002C9D49 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				C64943001D67B3BB002C9D49 /* InboxMainVC.swift */,
+			);
+			name = Inbox;
+			sourceTree = "<group>";
+		};
 		C649C53E1CE2C31C00258994 = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +353,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C64942FF1D67B39A002C9D49 /* Inbox */,
 				C68165141D66831D00FC63FD /* Discover */,
 				C607BA4C1D58230B00B1348B /* Me */,
 				C607BA431D57A37600B1348B /* Invitation */,
@@ -421,6 +436,8 @@
 				C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */,
 				C68165081D65280600FC63FD /* BuddyCardCell.xib */,
 				C681650A1D65282500FC63FD /* BuddyCardCell.swift */,
+				C64943021D67B45D002C9D49 /* MessageCell.swift */,
+				C64943031D67B45D002C9D49 /* MessageCell.xib */,
 			);
 			name = Reuse;
 			sourceTree = "<group>";
@@ -510,6 +527,7 @@
 				C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */,
 				C68165091D65280600FC63FD /* BuddyCardCell.xib in Resources */,
 				C649C5551CE2C31C00258994 /* LaunchScreen.storyboard in Resources */,
+				C64943051D67B45D002C9D49 /* MessageCell.xib in Resources */,
 				C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
@@ -619,6 +637,7 @@
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
+				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				B6F00B841D66B34600B09177 /* GFGeoHash.m in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
@@ -628,6 +647,7 @@
 				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
+				C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */,
 				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,

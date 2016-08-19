@@ -186,8 +186,9 @@ class InviteMainVC: UITableViewController {
         
         if indexPath.row == 7 {
             //set as center
-            seg.frame = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 50)
+            seg.bounds = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 50)
             cell.addSubview(seg)
+
         }
     }
     

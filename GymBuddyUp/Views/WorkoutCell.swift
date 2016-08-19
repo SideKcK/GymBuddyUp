@@ -41,6 +41,8 @@ class WorkoutCell: UITableViewCell {
                 }
                 for (index, exer) in exers.enumerate() {
                     if index > 5 {
+                        print("reassign image view")
+                        imageViews[5].image = UIImage(named: "dumbbell")
                         //change last imageView
                         break
                     }else {
@@ -59,10 +61,12 @@ class WorkoutCell: UITableViewCell {
         borderView.addShadow()
         clearAllViews()
         for _ in 0...5 {
-            let width = exercisesStackView.frame.width / 6.0 - 4.0
+            let width = exercisesStackView.frame.height - 4.0
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
-            imageView.heightAnchor.constraintEqualToConstant(width).active = true
+            //imageView.heightAnchor.constraintEqualToConstant(width).active = true
             imageView.widthAnchor.constraintEqualToConstant(width).active = true
+            imageView.heightAnchor.constraintEqualToAnchor(imageView.widthAnchor).active = true
+            imageView.contentMode = .ScaleAspectFill
             exercisesStackView.addArrangedSubview(imageView)
             imageViews.append(imageView)
         }
@@ -71,7 +75,6 @@ class WorkoutCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        selectionStyle = .None
         // Configure the view for the selected state
     }
     

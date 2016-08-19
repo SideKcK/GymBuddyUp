@@ -140,5 +140,6 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ToInviteDetailSegue", sender: events[indexPath.row])
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }

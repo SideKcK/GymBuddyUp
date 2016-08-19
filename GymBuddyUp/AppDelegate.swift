@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        //for DEBUG
+        NSUserDefaults.standardUserDefaults().setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+
+        
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
         

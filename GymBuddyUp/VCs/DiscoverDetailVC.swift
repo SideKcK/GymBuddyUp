@@ -20,19 +20,31 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var gymButton: UIButton!
     
+    @IBOutlet weak var borderView: UIView!
+    @IBOutlet weak var planView: UIView!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
     var event: Plan!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        
+        borderView.layer.cornerRadius = 5
+        planNameLabel.text = event.name
+        statusLabel.text = "Broadcast to Public"
+        planDifLabel.text = "Beginner"
         setupTableView()
     }
     
-    func setupViews() {
-        statusView.addUnderline()
+    override func viewDidAppear(animated: Bool) {
+        setupViews()
     }
+    
+    func setupViews() {
+        statusView.layer.addBorder(.Bottom, color: ColorScheme.sharedInstance.greyText, thickness: 0.5)
+        planView.layer.addBorder(.Bottom, color: ColorScheme.sharedInstance.greyText, thickness: 0.5)
+    }
+    
     func setupTableView() {
         tableView.registerNib(UINib(nibName: "ExerciseNumberedCell", bundle: nil), forCellReuseIdentifier: "ExerciseNumberedCell")
         tableView.estimatedRowHeight = 120
@@ -42,6 +54,7 @@ class DiscoverDetailVC: UIViewController {
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,6 +62,9 @@ class DiscoverDetailVC: UIViewController {
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

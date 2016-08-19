@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import AKPickerView_Swift
 
-class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource{
+class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource {
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -26,16 +25,18 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
 
     @IBOutlet weak var lbsPickerContainer: UIView!
     @IBOutlet weak var repsPickerContainer: UIView!
-    
     @IBOutlet weak var gifContainer: UIView!
-    
+    @IBOutlet weak var timerContainer: UIView!
+    @IBOutlet weak var paramsContainer: UIView!
     @IBOutlet weak var gifIcon: UIButton!
     
+    @IBOutlet weak var exerciseLabel: UILabel!
     
     var trackedPlan: TrackedPlan?
     var seconds: Float = 0.0
     var secondTotal: Float = 0.0
     var timer = NSTimer()
+    var currentTrackedIndex = 0
     
     var repsRange = [1, 2, 3, 4, 5, 6, 7, 8]
     var lbsRange = [10, 15, 20, 25, 30, 35, 40]
@@ -79,6 +80,26 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         
         let closePicker: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.closePickerResponse(_:)))
         view.addGestureRecognizer(closePicker)
+        Log.info(String(trackedPlan?.trackingItems.count))
+        if let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType {
+            Log.info(String(_currentUnitType))
+            if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
+                timerContainer.hidden = true
+                paramsContainer.hidden = false
+            } else {
+                timerContainer.hidden = false
+                paramsContainer.hidden = true
+            }
+        }
+        
+        if let _currentExpectedAmount = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.amount {
+            Log.info(String(_currentExpectedAmount))
+        }
+        
+        if let _currentExerciseName = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.name {
+            exerciseLabel.text = _currentExerciseName
+        }
+        
 
         // Do any additional setup after loading the view.
     }

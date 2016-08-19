@@ -13,6 +13,7 @@
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */; };
 		C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */; };
+		C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */; };
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
@@ -85,6 +86,7 @@
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KKParamsLabel.swift; sourceTree = "<group>"; };
+		C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneModalViewController.swift; sourceTree = "<group>"; };
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
+				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
 			);
 			name = Tracking;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */,
 				C64EC20E1D20B3B1000DA37A /* PlanDetailVC.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
+				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,

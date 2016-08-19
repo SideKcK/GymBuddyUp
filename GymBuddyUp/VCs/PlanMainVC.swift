@@ -333,13 +333,13 @@ class PlanMainVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         /* Yi Huang: should return in each branch to terminate extra comparisons*/
         if segue.identifier == "startWorkoutSegue" {
-            if let desVC = segue.destinationViewController as? TrackMainVC {
+            let desVC = segue.destinationViewController as! TrackMainVC
                 if let _plans = plans[selectedDate] {
                     if _plans.count > 0 {
                         desVC.trackedPlan = TrackedPlan(plan: _plans[0])
                     }
                 }
-            }
+            
         }
         
         if segue.identifier ==  "toExerciseDetailSegue" {

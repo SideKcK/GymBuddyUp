@@ -59,26 +59,6 @@
             </objects>
             <point key="canvasLocation" x="841" y="215"/>
         </scene>
-        <!--Create-->
-        <scene sceneID="flW-5P-cpI">
-            <objects>
-                <viewController title="Create" id="2vF-hG-Vm0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uB1-cE-OMe"/>
-                        <viewControllerLayoutGuide type="bottom" id="cNN-nv-zMq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OSk-i6-PYQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" id="5ue-7b-hkh"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wff-6O-mK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1202" y="102"/>
-        </scene>
         <!--Me-->
         <scene sceneID="aD4-dd-c2n">
             <objects>

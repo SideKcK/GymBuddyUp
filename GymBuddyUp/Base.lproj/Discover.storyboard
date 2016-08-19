@@ -7,6 +7,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--MeMainVC-->
+        <scene sceneID="RtD-Sf-hLu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeMainVC" id="Yvk-ng-d4x" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7mB-eY-m0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1022" y="-136"/>
+        </scene>
         <!--Discover-->
         <scene sceneID="HT5-D0-xwQ">
             <objects>
@@ -71,6 +79,8 @@
                         <outlet property="segView" destination="Tzd-hT-WiO" id="5k5-2I-ZrJ"/>
                         <outlet property="tableView" destination="wFk-iV-I3j" id="vpw-9H-AdG"/>
                         <segue destination="bEV-N7-E7k" kind="presentation" identifier="ToInviteDetailSegue" id="R1f-EG-ydh"/>
+                        <segue destination="uOh-pp-EBu" kind="show" identifier="toGymMapSegue" id="Kla-ff-Gr2"/>
+                        <segue destination="Yvk-ng-d4x" kind="show" identifier="toProfileSegue" id="eJB-Nl-MSy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8l-rV-BqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,6 +179,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="NYSC"/>
+                                                <connections>
+                                                    <segue destination="uOh-pp-EBu" kind="show" identifier="toGymMapSegue" id="8si-lg-1Ru"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -307,6 +320,7 @@
                         <outlet property="statusView" destination="Es5-ga-csj" id="ZMp-1h-Flb"/>
                         <outlet property="tableView" destination="aD6-cO-5gS" id="4n3-Qf-OLi"/>
                         <outlet property="timeLabel" destination="Mut-w6-q0U" id="Gjn-fI-nIx"/>
+                        <segue destination="Yvk-ng-d4x" kind="show" identifier="toProfileSegue" id="vwh-6C-eR7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jw1-Vh-kBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,7 +333,40 @@
                 <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeFindVC" id="fpL-A3-ZUW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jl0-hx-3Tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665.5" y="731"/>
+            <point key="canvasLocation" x="673" y="782"/>
+        </scene>
+        <!--Gym MapVC-->
+        <scene sceneID="hlB-n0-gv0">
+            <objects>
+                <viewController storyboardIdentifier="GymMapVC" id="uOh-pp-EBu" customClass="GymMapVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CAI-Mg-95d"/>
+                        <viewControllerLayoutGuide type="bottom" id="hc3-Z0-gQ4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OQY-Nc-Cmc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KW9-Le-4dG">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KW9-Le-4dG" firstAttribute="leading" secondItem="OQY-Nc-Cmc" secondAttribute="leading" id="5Ua-ep-miQ"/>
+                            <constraint firstItem="KW9-Le-4dG" firstAttribute="top" secondItem="CAI-Mg-95d" secondAttribute="bottom" id="AZL-PD-QqY"/>
+                            <constraint firstAttribute="trailing" secondItem="KW9-Le-4dG" secondAttribute="trailing" id="WZq-GQ-t4u"/>
+                            <constraint firstItem="hc3-Z0-gQ4" firstAttribute="top" secondItem="KW9-Le-4dG" secondAttribute="bottom" id="dNx-MX-K0I"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapView" destination="KW9-Le-4dG" id="FLZ-HP-1HK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xv-C9-Z4O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1310" y="1074"/>
         </scene>
         <!--Discover-->
         <scene sceneID="mYm-6L-vie">
@@ -364,4 +411,8 @@
         <image name="Me" width="30" height="30"/>
         <image name="dumbbell" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="8si-lg-1Ru"/>
+        <segue reference="vwh-6C-eR7"/>
+    </inferredMetricsTieBreakers>
 </document>

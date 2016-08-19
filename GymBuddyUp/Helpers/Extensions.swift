@@ -66,7 +66,7 @@ extension CALayer {
 
 extension UIImageView {
     func makeThumbnail() {
-        self.backgroundColor = UIColor.flatGrayColor()
+        //self.backgroundColor = UIColor.flatGrayColor()
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
         self.layer.borderColor = UIColor.flatGrayColor().CGColor

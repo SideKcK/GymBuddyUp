@@ -36,12 +36,12 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="New York Sports Bar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-6h-J4j">
-                                        <rect key="frame" x="34" y="8" width="189" height="15"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJP-Fu-hkG">
+                                        <rect key="frame" x="34" y="2" width="189" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="New York Sports Club"/>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="1 mile" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75n-ov-kwU">
                                         <rect key="frame" x="227" y="8" width="33" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -57,18 +57,14 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="75n-ov-kwU" firstAttribute="leading" secondItem="zqM-6h-J4j" secondAttribute="trailing" id="Yva-1u-vRd"/>
                                     <constraint firstAttribute="height" priority="250" id="Z5X-FR-va0"/>
                                     <constraint firstItem="z1M-wj-t95" firstAttribute="top" secondItem="7mL-Iu-eka" secondAttribute="top" id="eNJ-wx-pXR"/>
                                     <constraint firstAttribute="height" priority="990" constant="30" id="h6f-65-9Ul"/>
                                     <constraint firstAttribute="bottom" secondItem="z1M-wj-t95" secondAttribute="bottom" id="hT6-Mc-al3"/>
-                                    <constraint firstItem="zqM-6h-J4j" firstAttribute="leading" secondItem="z1M-wj-t95" secondAttribute="trailing" id="jzh-7c-kn1"/>
                                     <constraint firstAttribute="trailing" secondItem="75n-ov-kwU" secondAttribute="trailing" id="pJa-Ny-iPs"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="jzh-7c-kn1"/>
-                                        <exclude reference="Yva-1u-vRd"/>
                                         <exclude reference="pJa-Ny-iPs"/>
                                     </mask>
                                 </variation>
@@ -93,12 +89,18 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lql-Rd-gC4">
-                                        <rect key="frame" x="34" y="0.0" width="237" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Invitation sent to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lql-Rd-gC4">
+                                        <rect key="frame" x="34" y="0.0" width="95" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-JZ-TZn">
+                                        <rect key="frame" x="133" y="0.0" width="139" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Jerry"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="990" constant="30" id="Cm4-nO-MZC"/>
@@ -198,25 +200,40 @@
                             </mask>
                         </variation>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IN-Hm-X2D">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="6x7-yT-RyU"/>
+                            <constraint firstAttribute="width" constant="150" id="814-MR-SFs"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fao-4E-MQ4" firstAttribute="leading" secondItem="1ab-qU-wON" secondAttribute="leadingMargin" constant="8" id="063-uY-oD0"/>
+                    <constraint firstItem="1IN-Hm-X2D" firstAttribute="leading" secondItem="1ab-qU-wON" secondAttribute="leading" id="U2d-ed-GTr"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fao-4E-MQ4" secondAttribute="bottom" constant="8" id="UeK-tZ-tvt"/>
                     <constraint firstItem="fao-4E-MQ4" firstAttribute="centerX" secondItem="1ab-qU-wON" secondAttribute="centerX" id="Uhz-6Y-Uoy"/>
+                    <constraint firstItem="1IN-Hm-X2D" firstAttribute="top" secondItem="1ab-qU-wON" secondAttribute="top" id="auY-Cx-vS2"/>
                     <constraint firstItem="fao-4E-MQ4" firstAttribute="top" secondItem="1ab-qU-wON" secondAttribute="topMargin" constant="40" id="z9C-iE-CaT"/>
                 </constraints>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <connections>
                 <outlet property="borderView" destination="fao-4E-MQ4" id="5mk-Xu-ghf"/>
+                <outlet property="buddyButton" destination="a1N-JZ-TZn" id="7pJ-ya-aZg"/>
                 <outlet property="exercisesHeightConstraint" destination="cnK-Rg-sYK" id="YPt-xR-bmJ"/>
                 <outlet property="exercisesStackView" destination="h2q-hu-A5N" id="1HN-CQ-Z7K"/>
+                <outlet property="gymButton" destination="JJP-Fu-hkG" id="YFl-31-Khw"/>
+                <outlet property="gymDisLabel" destination="75n-ov-kwU" id="rDp-ce-eQU"/>
                 <outlet property="locHeightConstraint" destination="Z5X-FR-va0" id="sRC-dL-1oB"/>
                 <outlet property="locStackView" destination="7mL-Iu-eka" id="EQt-en-yBF"/>
                 <outlet property="moreButton" destination="LRa-Bz-ywe" id="qaj-bO-CGG"/>
                 <outlet property="nameLabel" destination="qvT-mw-OoB" id="gdx-mx-mAF"/>
                 <outlet property="profileLabel" destination="Xv2-R6-g0o" id="pOw-FJ-ion"/>
+                <outlet property="profileTapView" destination="1IN-Hm-X2D" id="J0C-IO-5Nt"/>
                 <outlet property="profileView" destination="kUE-fv-CEY" id="c0F-HK-II1"/>
                 <outlet property="statusHeightConstraint" destination="bUA-zm-FXN" id="DQh-CQ-NNv"/>
+                <outlet property="statusLabel" destination="lql-Rd-gC4" id="xQp-UB-AVl"/>
                 <outlet property="statusStackView" destination="37j-Sc-Fgm" id="Q36-mF-TH3"/>
                 <outlet property="timeHeightConstraint" destination="VIk-mw-2nu" id="Gvi-ql-ltK"/>
                 <outlet property="timeLabel" destination="Hru-YV-phh" id="hV4-aU-Dxs"/>

@@ -7,6 +7,22 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--MeMainVC-->
+        <scene sceneID="UUO-tT-wYG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeMainVC" id="iMU-Tv-E5Z" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6u-rN-blb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1157" y="1328"/>
+        </scene>
+        <!--GymMapVC-->
+        <scene sceneID="fLh-Se-OkH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="GymMapVC" id="F4j-M4-uu5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wsu-U2-h3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1261" y="1403"/>
+        </scene>
         <!--Plan-->
         <scene sceneID="uQf-Cg-qoz">
             <objects>
@@ -108,11 +124,21 @@
                         <segue destination="OJA-WL-q0A" kind="presentation" identifier="toBuildPlanSegue" id="OzF-Ls-qyD"/>
                         <segue destination="6RH-aL-G0u" kind="show" identifier="toPlanDetailSegue" id="ZhO-h7-1nY"/>
                         <segue destination="AZZ-Zq-cl7" kind="presentation" identifier="toInvitationSegue" id="Qhw-uT-cFT"/>
+                        <segue destination="iMU-Tv-E5Z" kind="show" identifier="toProfileSegue" id="d3k-s4-egd"/>
+                        <segue destination="F4j-M4-uu5" kind="show" identifier="toGymMapSegue" id="jZI-HZ-uPX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iod-Ld-dte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1261" y="878"/>
+        </scene>
+        <!--GymMapVC-->
+        <scene sceneID="N6d-cq-Zn2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="GymMapVC" id="6K1-uK-7kJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iza-3W-y1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2120.5" y="674"/>
         </scene>
         <!--FRIDAY, AUG 8-->
         <scene sceneID="tnT-Rg-sO1">
@@ -170,12 +196,16 @@
                                                     <constraint firstAttribute="height" constant="30" id="jgP-hV-I21"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NYSC, White Plains" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-b9-ruc">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYc-1X-e5B">
                                                 <rect key="frame" x="110" y="0.0" width="110" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="NYSC, White Plains"/>
+                                                <connections>
+                                                    <action selector="onGymButton:" destination="6RH-aL-G0u" eventType="touchUpInside" id="ZFl-3q-euq"/>
+                                                    <segue destination="6K1-uK-7kJ" kind="show" id="YeF-Dd-egC"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMp-Hz-Ukh">
@@ -296,6 +326,7 @@
                     <connections>
                         <outlet property="cancelInviteButton" destination="okO-rm-nXe" id="loz-8N-l9v"/>
                         <outlet property="findButton" destination="yMp-Hz-Ukh" id="7EO-dp-nzL"/>
+                        <outlet property="gymButton" destination="kYc-1X-e5B" id="TNs-if-pSH"/>
                         <outlet property="moreButton" destination="hZO-Xs-XS2" id="D31-8j-RFy"/>
                         <outlet property="planLabel" destination="3pe-6k-qTB" id="tsB-qI-mJH"/>
                         <outlet property="statusLabel" destination="4CK-xB-eKA" id="3DX-57-yUE"/>
@@ -1392,7 +1423,7 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bTs-V8-eL8"/>
-        <segue reference="gmL-tt-qef"/>
+        <segue reference="Qhw-uT-cFT"/>
+        <segue reference="rgS-nG-orv"/>
     </inferredMetricsTieBreakers>
 </document>

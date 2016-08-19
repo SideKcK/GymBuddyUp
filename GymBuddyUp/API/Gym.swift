@@ -18,6 +18,8 @@ class Gym {
     init () {
         self.name = "test gym"
         self.placeid = "-1"
+        self.address = "XXX University Dr, College Station"
+        self.location = CLLocation(latitude: 30.563, longitude: -96.311)
     }
     
     init(dict: NSDictionary) {

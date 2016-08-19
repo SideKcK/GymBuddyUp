@@ -158,7 +158,10 @@ extension PlanLibDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         cell.numLabel.text = String(indexPath.row+1)
-        cell.exercise = plans[tableView.tag].exercises![indexPath.row]
+        guard let exercises = plans[tableView.tag].exercises else {
+            return cell
+        }
+        cell.exercise = exercises[indexPath.row]
         cell.layoutMargins = UIEdgeInsetsZero
 
         return cell

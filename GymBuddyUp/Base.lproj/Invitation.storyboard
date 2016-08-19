@@ -7,10 +7,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Create-->
+        <!--Navigation Controller-->
         <scene sceneID="CuX-kx-kve">
             <objects>
-                <navigationController title="Create" automaticallyAdjustsScrollViewInsets="NO" id="s9k-o9-SP4" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s9k-o9-SP4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

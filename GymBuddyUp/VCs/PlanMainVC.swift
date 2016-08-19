@@ -160,6 +160,15 @@ class PlanMainVC: UIViewController {
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
         
     }
+    
+    func onGymButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toGymMapSegue", sender: self)
+    }
+    
+    func onProfileButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    }
+    
     @IBAction func onMonthButton(sender: AnyObject) {
         calendarView.changeMode(.MonthView)
         UIView.animateWithDuration(0.3, animations: {
@@ -294,7 +303,14 @@ class PlanMainVC: UIViewController {
                 desVC.selectedDate = selectedDate
             }
         }
-        
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.gym = Gym()
+            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+        }
+        if let desVC = segue.destinationViewController as? MeMainVC {
+            //for testing
+            //desVC.user = User()
+        }
     }
     
     
@@ -443,6 +459,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         cell.showMoreButton()
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)
+        //add gym segue
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

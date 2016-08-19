@@ -12,14 +12,23 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var topContraint: NSLayoutConstraint!
+    @IBOutlet weak var profileTapView: UIView!
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var exercisesStackView: UIStackView!
     @IBOutlet weak var locStackView: UIStackView!
+    
+    @IBOutlet weak var gymButton: UIButton!
+    @IBOutlet weak var gymDisLabel: UILabel!
+    @IBOutlet weak var buddyButton: UIButton!
+    @IBOutlet weak var statusLabel: UILabel!
+    
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var statusStackView: UIStackView!
     @IBOutlet weak var borderView: UIView!
+    
+    
     @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
@@ -35,35 +44,40 @@ class WorkoutCell: UITableViewCell {
                     exercisesHeightConstraint.priority = 999
                 }else {
                     for imageView in imageViews {
+                        imageView.image = UIImage()
+                        imageView.layer.borderWidth = 0.0
                         exercisesStackView.addArrangedSubview(imageView)
                     }
                     exercisesHeightConstraint.priority = 250
-                }
-                for (index, exer) in exers.enumerate() {
-                    if index > 5 {
-                        print("reassign image view")
-                        imageViews[5].image = UIImage(named: "dumbbell")
+                
+                    for index in 0...(exers.count - 1) {
+                    imageViews[index].makeThumbnail()
+                    if exers.count > 6 && index == 5 {
+                        imageViews[index].image = UIImage(named: "dumbbell")
                         //change last imageView
                         break
                     }else {
-                        let downloadURL = exer.thumbnailURL
-                        let imageView = imageViews[index]
-                        imageView.af_setImageWithURL(downloadURL)
-                        imageView.makeThumbnail()
+                        let downloadURL = exers[index].thumbnailURL
+                        imageViews[index].af_setImageWithURL(downloadURL)
                     }
+
+                }
                 }
             }
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         borderView.addShadow()
         clearAllViews()
+        profileTapView.userInteractionEnabled = true
+        selectionStyle = .None
         for _ in 0...5 {
             let width = exercisesStackView.frame.height - 4.0
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
-            //imageView.heightAnchor.constraintEqualToConstant(width).active = true
+
             imageView.widthAnchor.constraintEqualToConstant(width).active = true
             imageView.heightAnchor.constraintEqualToAnchor(imageView.widthAnchor).active = true
             imageView.contentMode = .ScaleAspectFill
@@ -83,6 +97,8 @@ class WorkoutCell: UITableViewCell {
         profileLabel.hidden = true
         topContraint.constant = 8
         moreButton.hidden = true
+        buddyButton.hidden = true
+        gymButton.hidden = true
         timeHeightConstraint.priority = 999
         statusHeightConstraint.priority = 999
         locHeightConstraint.priority = 999
@@ -106,11 +122,13 @@ class WorkoutCell: UITableViewCell {
     func showLocView() {
         exercisesStackView.alignment = .Center
         locHeightConstraint.priority = 250
+        gymButton.hidden = false
     }
     
     func showStatusView() {
         exercisesStackView.alignment = .Center
         statusHeightConstraint.priority = 250
+        buddyButton.hidden = false
     }
     
     

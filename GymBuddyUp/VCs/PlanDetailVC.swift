@@ -14,6 +14,9 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
+    @IBOutlet weak var gymButton: UIButton!
+    
+    
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
@@ -174,10 +177,14 @@ class PlanDetailVC: UIViewController {
         }
         if let desVC = segue.destinationViewController as? PlanMainVC {
             if let send = sender as? String {
-                if send == "delete"{
+                if send == "delete" || send == "repeat"{
                     desVC.reloadPlans(desVC.selectedDate)
                 }
             }
+        }
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.gym = Gym()
+            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
 
     }

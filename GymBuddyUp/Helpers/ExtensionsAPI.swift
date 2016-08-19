@@ -23,7 +23,7 @@ extension Library {
                 }
                 Library.getExercisesByPlanId(id, completion: { (exercises, error) in
                     if error == nil {
-                        plan.exercises = exercises
+                        plan.exercises = exercises!
                         plans[index] = plan
                         dispatch_group_leave(myGroup)
                     }else {

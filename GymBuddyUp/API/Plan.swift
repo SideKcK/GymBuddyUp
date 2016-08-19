@@ -44,8 +44,11 @@ class Plan {
     
     init () {
         id = "SAMPLEID"
-        exercises = [Exercise(), Exercise(), Exercise(), Exercise(), Exercise(), Exercise(), Exercise()]
-        name = "test plan"
+        
+        let random = Int(arc4random_uniform(10))
+        exercises = [Exercise](count: random, repeatedValue: Exercise())
+
+        name = "Test plan"
         description = "this is a test plan description........ "
         difficulty = .Beginner
         enabled = true

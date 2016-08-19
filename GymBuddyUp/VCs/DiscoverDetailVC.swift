@@ -29,11 +29,19 @@ class DiscoverDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DiscoverDetailVC.profileTapped(_:)))
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target:self, action:#selector(DiscoverDetailVC.profileTapped(_:)))
+        profileView.addGestureRecognizer(tapGestureRecognizer)
+        nameLabel.addGestureRecognizer(tapGestureRecognizer2)
+        profileView.userInteractionEnabled = true
+        nameLabel.userInteractionEnabled = true
+        
         borderView.layer.cornerRadius = 5
         planNameLabel.text = event.name
         statusLabel.text = "Broadcast to Public"
         planDifLabel.text = "Beginner"
         setupTableView()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -68,32 +76,37 @@ class DiscoverDetailVC: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
+    func profileTapped (sender: AnyObject?) {
+        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.gym = Gym()
+            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+        }
     }
-    */
+ 
 
 }
 
 extension DiscoverDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let exercises = event.exercises {
-            return exercises.count
-        }else {
+        guard let exers = event.exercises else{
             return 0
         }
+        return exers.count
+
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         cell.numLabel.text = String(indexPath.row+1)
-        if let exercises = event.exercises {
-            cell.exercise = exercises[indexPath.row]
+        guard let exers = event.exercises else {
+            return cell
         }
+        cell.exercise = exers[indexPath.row]
         cell.layoutMargins = UIEdgeInsetsZero
         return cell
     }

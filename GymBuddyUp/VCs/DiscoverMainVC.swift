@@ -17,7 +17,7 @@ class DiscoverMainVC: UIViewController {
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
     
     var locationManager: CLLocationManager!
-    var events = [Plan](count: 20, repeatedValue: Plan())
+    var events = [Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +67,15 @@ class DiscoverMainVC: UIViewController {
         tableView.reloadData()
         findButton.hidden = (sender.selectedSegmentIndex == 1)
     }
+    
+    func onGymButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toGymMapSegue", sender: events[sender.tag])
+    }
+    
+    func profileTapped (sender: AnyObject? ) {
+        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
         if (yDirection < 0) {
@@ -96,8 +105,12 @@ class DiscoverMainVC: UIViewController {
             let desVC = navVC.topViewController as? DiscoverDetailVC {
                 desVC.event = sender as? Plan
             }
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.userLocation = locationManager.location
+            desVC.gym = Gym()
         }
- 
+    }
+
 
 }
 
@@ -125,6 +138,12 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
         cell.event = events[indexPath.row]
+        cell.gymButton.tag = indexPath.row
+        cell.gymButton.addTarget(self, action: #selector(DiscoverMainVC.onGymButton), forControlEvents: .TouchUpInside)
+        cell.profileTapView.tag = indexPath.row
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DiscoverMainVC.profileTapped(_:)))
+        cell.profileTapView.addGestureRecognizer(tapGestureRecognizer)
+        
         cell.showProfileView()
         cell.showTimeView()
         cell.showLocView()
@@ -140,6 +159,13 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ToInviteDetailSegue", sender: events[indexPath.row])
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? WorkoutCell {
+            cell.borderView.backgroundColor = ColorScheme.sharedInstance.greyText
+            UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {
+                    cell.borderView.backgroundColor = UIColor.whiteColor()
+                }, completion: nil)
+        }
+        
     }
+
 }

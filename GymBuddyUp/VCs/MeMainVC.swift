@@ -16,7 +16,6 @@ class MeMainVC: UIViewController {
     let profileView : UIImageView = UIImageView()
 
     var user = User.currentUser
-    
     var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     
     override func viewDidLoad() {

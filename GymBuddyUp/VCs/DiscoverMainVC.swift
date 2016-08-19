@@ -8,16 +8,29 @@
 
 import UIKit
 import CoreLocation
+import HMSegmentedControl
 
 class DiscoverMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segView: UIView!
+    @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
+    
     var locationManager: CLLocationManager!
-    var events = [Plan(), Plan()]
+    var events = [Plan](count: 20, repeatedValue: Plan())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         setupLocation()
         setupTableView()
+        addSegControl(segView)
+    }
+    
+    func setupNavBar() {
+        let logo = UIImage(named: "dumbbell")!
+        let imageView = UIImageView(image:logo.resize(CGSize(width: 30, height: 30)))
+        self.navigationItem.titleView = imageView
     }
     
     func setupLocation () {
@@ -36,12 +49,63 @@ class DiscoverMainVC: UIViewController {
         tableView.dataSource = self
     }
 
+    func addSegControl (view: UIView) {
+        let segControl = HMSegmentedControl(sectionTitles: ["Buddies", "Public"])
+        segControl.customize()
+        segControl.backgroundColor = UIColor.whiteColor()
+        segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
+        view.addSubview(segControl)
+        segControl.addTarget(self, action: #selector(DiscoverMainVC.onSegControl(_:)), forControlEvents: .ValueChanged)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func onSegControl (sender: HMSegmentedControl) {
+        tableView.reloadData()
+        findButton.hidden = (sender.selectedSegmentIndex == 1)
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
+        if (yDirection < 0) {
+            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
+                self.findButton.alpha = 0
+                self.segHeightConstraint.priority = 999
+                self.segView.alpha = 0
+                }, completion: nil)
+        }
+        else if (yDirection > 0) {
+            UIView.animateWithDuration(0.1, delay: 0.2, options: .CurveEaseIn, animations: {
+                self.findButton.alpha = 1
+                self.segHeightConstraint.priority = 250
+                self.segView.alpha = 1
+                }, completion: nil)
+            
+        }
 
+    }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let yPos: CGFloat = scrollView.contentOffset.y
+//        
+//        if (yPos > 0) {
+//            UIView.animateWithDuration(1.0, delay: 3.0, options: .CurveEaseIn, animations: { 
+//                self.findButton.alpha = 0
+//                self.segHeightConstraint.priority = 999
+//                self.segView.alpha = 0
+//                }, completion: nil)
+//        }
+//        if (yPos < 0) {
+//            UIView.animateWithDuration(1.0, delay: 3.0, options: .CurveEaseIn, animations: {
+//                self.findButton.alpha = 1
+//                self.segHeightConstraint.priority = 250
+//                self.segView.alpha = 1
+//                }, completion: nil)
+//
+//        }
+//    }
+    
     /*
     // MARK: - Navigation
 

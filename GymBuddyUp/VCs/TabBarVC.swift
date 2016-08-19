@@ -78,7 +78,7 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     }
     
     func buttonEvent() {
-        let storyboard = UIStoryboard(name: "Create", bundle: nil)
+        let storyboard = UIStoryboard(name: "Invitation", bundle: nil)
         
         let vc = storyboard.instantiateInitialViewController()
         self.presentViewController(vc!, animated: true, completion: nil)

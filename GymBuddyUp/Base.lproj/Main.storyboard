@@ -20,7 +20,7 @@
                         <outlet property="thisTabBar" destination="nfM-cA-DWx" id="F94-6j-whf"/>
                         <segue destination="3hP-iH-4AI" kind="relationship" relationship="viewControllers" id="hI6-hM-Vlf"/>
                         <segue destination="5Xr-OL-hGf" kind="relationship" relationship="viewControllers" id="Ebc-b6-xqP"/>
-                        <segue destination="2vF-hG-Vm0" kind="relationship" relationship="viewControllers" id="XX5-sK-rEo"/>
+                        <segue destination="MYS-Nk-fjE" kind="relationship" relationship="viewControllers" id="uwz-eY-udo"/>
                         <segue destination="peD-vf-BxC" kind="relationship" relationship="viewControllers" id="zQi-Fi-aV1"/>
                         <segue destination="7mT-MW-Nwe" kind="relationship" relationship="viewControllers" id="jLB-Ff-YHj"/>
                     </connections>
@@ -88,6 +88,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VL7-Dn-8sn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="833.5" y="284"/>
+        </scene>
+        <!--Invitation-->
+        <scene sceneID="9hn-AZ-Btg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Invitation" id="MYS-Nk-fjE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="J5f-9V-gFe"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgX-MB-4nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="983.5" y="102"/>
         </scene>
     </scenes>
     <resources>

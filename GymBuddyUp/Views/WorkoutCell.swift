@@ -58,9 +58,8 @@ class WorkoutCell: UITableViewCell {
         // Initialization code
         borderView.addShadow()
         clearAllViews()
-        
         for _ in 0...5 {
-            let width = exercisesStackView.frame.width / 6.0 - 8.0
+            let width = exercisesStackView.frame.width / 6.0 - 4.0
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
             imageView.heightAnchor.constraintEqualToConstant(width).active = true
             imageView.widthAnchor.constraintEqualToConstant(width).active = true
@@ -102,10 +101,12 @@ class WorkoutCell: UITableViewCell {
     }
     
     func showLocView() {
+        exercisesStackView.alignment = .Center
         locHeightConstraint.priority = 250
     }
     
     func showStatusView() {
+        exercisesStackView.alignment = .Center
         statusHeightConstraint.priority = 250
     }
     

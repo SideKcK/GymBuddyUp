@@ -15,10 +15,17 @@ class MeMainVC: UIViewController {
     let titleBGView: UIImageView = UIImageView()
     let profileView : UIImageView = UIImageView()
 
-    let cells = ["ProfileCell", "BuddyCell", "WorkoutCell", "WorkoutHistoryCell"]
+    var user = User.currentUser
+    
+    var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if user?.userId != User.currentUser?.userId {
+            cells.removeAtIndex(1)
+            
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 230
@@ -95,31 +102,33 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
-            cell.user = User.currentUser
+            cell.user = user
             cell.selectionStyle = .None
             return cell
-        }else if indexPath.row == 1{
+        }else if indexPath.row == cells.count - 3{
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserBuddyOverviewCell
-            cell.user = User.currentUser
+            cell.user = user
             cell.selectionStyle = .None
             return cell
-        }else if indexPath.row == 2 {
+        }else if indexPath.row == cells.count - 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
             cell.selectionStyle = .None
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath)
-            cell.selectionStyle = .None
             return cell
         }
+        
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.row == 1 {
+        if let _ = tableView.cellForRowAtIndexPath(indexPath) as? UserBuddyOverviewCell {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

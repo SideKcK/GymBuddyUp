@@ -7,10 +7,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Create-->
         <scene sceneID="CuX-kx-kve">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s9k-o9-SP4" sceneMemberID="viewController">
+                <navigationController title="Create" automaticallyAdjustsScrollViewInsets="NO" id="s9k-o9-SP4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -265,20 +265,12 @@
                         <outlet property="dateButton" destination="gNT-75-caS" id="IVG-J2-bwa"/>
                         <outlet property="datePicker" destination="rkZ-o5-yOn" id="DVX-2x-hCJ"/>
                         <outlet property="gymButton" destination="Iar-E8-1Fk" id="3Uz-eI-6rs"/>
-                        <segue destination="P2F-Wu-szF" kind="show" identifier="toBuddySegue" id="lqo-8o-QPj"/>
+                        <segue destination="5tf-jQ-3lk" kind="show" identifier="toBuddySegue" id="VBc-gm-31Z"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZy-Qa-xsg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1762" y="1709"/>
-        </scene>
-        <!--MeBuddiesVC-->
-        <scene sceneID="CHZ-BB-IXM">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeBuddiesVC" id="P2F-Wu-szF" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x7l-IB-PpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1698" y="2087"/>
         </scene>
         <!--Location-->
         <scene sceneID="xCr-wT-n05">
@@ -380,8 +372,84 @@
             </objects>
             <point key="canvasLocation" x="2216" y="1625"/>
         </scene>
+        <!--Buddies-->
+        <scene sceneID="uMb-M5-WwJ">
+            <objects>
+                <viewController storyboardIdentifier="MeBuddiesVC" id="5tf-jQ-3lk" customClass="InviteBuddiesVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ADM-US-akT"/>
+                        <viewControllerLayoutGuide type="bottom" id="n60-ea-DWc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hdc-07-Nmg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-46-BcI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="80" id="tHG-4p-QLg" customClass="BuddyCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tHG-4p-QLg" id="oLz-IK-j2t">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Me" translatesAutoresizingMaskIntoConstraints="NO" id="Dv3-DA-ppo">
+                                                    <rect key="frame" x="15" y="8" width="50" height="50"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jesiah Bruce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etO-Tu-fad">
+                                                    <rect key="frame" x="73" y="8" width="99" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goal: Muscle Build" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNy-Ix-tjO">
+                                                    <rect key="frame" x="73" y="37" width="111" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gym: Crunch, White Plains" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prm-Ro-0lN">
+                                                    <rect key="frame" x="73" y="54" width="159" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="goalLabel" destination="MNy-Ix-tjO" id="Hg8-Hb-WaJ"/>
+                                            <outlet property="gymLabel" destination="Prm-Ro-0lN" id="n0E-8D-EE9"/>
+                                            <outlet property="nameLabel" destination="etO-Tu-fad" id="pIF-d0-OeK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0V0-46-BcI" firstAttribute="top" secondItem="hdc-07-Nmg" secondAttribute="top" id="HoR-Fr-YJJ"/>
+                            <constraint firstItem="n60-ea-DWc" firstAttribute="top" secondItem="0V0-46-BcI" secondAttribute="bottom" id="WYf-rh-ILT"/>
+                            <constraint firstItem="0V0-46-BcI" firstAttribute="leading" secondItem="hdc-07-Nmg" secondAttribute="leading" id="Zmw-AA-eql"/>
+                            <constraint firstAttribute="trailing" secondItem="0V0-46-BcI" secondAttribute="trailing" id="p5W-wR-Jqq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Buddies" id="Xsg-az-gGj"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="0V0-46-BcI" id="yPY-P0-xm4"/>
+                        <segue destination="7iH-Lm-KIW" kind="unwind" identifier="unwindToInviteMainVC" unwindAction="unwindToInviteMainVC:" id="OU4-WT-xtY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dli-I9-SLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7iH-Lm-KIW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="2531"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Me" width="30" height="30"/>
         <image name="dumbbell" width="512" height="512"/>
     </resources>
 </document>

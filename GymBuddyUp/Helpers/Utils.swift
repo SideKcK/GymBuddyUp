@@ -8,18 +8,6 @@
 
 import UIKit
 
-func resize(image: UIImage, newSize: CGSize) -> UIImage {
-    let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
-    resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
-    resizeImageView.image = image
-    
-    UIGraphicsBeginImageContext(resizeImageView.frame.size)
-    resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return newImage
-}
-
 func secondToString(sec: Float) -> String {
     let hours = Int(sec) / 3600
     let minutes = Int(sec) / 60 % 60

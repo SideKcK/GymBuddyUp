@@ -83,7 +83,6 @@
 		2FD626101F4C762D8B89D1AD /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		657616B4DA5D3B32B4AAAD21 /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GymBuddyUp-Bridging-Header.h"; path = "../GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		B6F00B741D66B34600B09177 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
@@ -310,7 +309,6 @@
 				C649C5531CE2C31C00258994 /* LaunchScreen.storyboard */,
 				C649C5511CE2C31C00258994 /* Assets.xcassets */,
 				B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */,
-				B6F00B571D658FC700B09177 /* GymBuddyUp-Bridging-Header.h */,
 				B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */,
 				C649C5561CE2C31C00258994 /* Info.plist */,
 			);

@@ -8,7 +8,7 @@
 
 import UIKit
 import CVCalendar
-
+import HMSegmentedControl
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -26,17 +26,47 @@ extension UIView {
         let darkColor = ColorScheme.sharedInstance.darkText
         self.backgroundColor = lightColor
         self.layer.cornerRadius = 5
-        //button.clipsToBounds = true
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 1
-        self.clipsToBounds = true
+        //self.clipsToBounds = true
+    }
+
+}
+
+extension CALayer {
+    
+    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        
+        let border = CALayer()
+        
+        switch edge {
+        case UIRectEdge.Top:
+            border.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), thickness)
+            break
+        case UIRectEdge.Bottom:
+            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, CGRectGetWidth(self.frame), thickness)
+            break
+        case UIRectEdge.Left:
+            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        case UIRectEdge.Right:
+            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
+            break
+        default:
+            break
+        }
+        
+        border.backgroundColor = color.CGColor;
+        
+        self.addSublayer(border)
     }
 }
+
 extension UIImageView {
     func makeThumbnail() {
-        self.backgroundColor = UIColor.flatGrayColor()
+        //self.backgroundColor = UIColor.flatGrayColor()
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
         self.layer.borderColor = UIColor.flatGrayColor().CGColor
@@ -56,6 +86,18 @@ extension UIImage {
         
         guard let cgImage = image.CGImage else { return nil }
         self.init(CGImage: cgImage)
+    }
+    
+    func resize(newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeImageView.image = self
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
 
@@ -89,6 +131,22 @@ extension UISegmentedControl
     }
 }
 
+extension HMSegmentedControl {
+    func customize() {
+        self.selectionIndicatorColor = ColorScheme.sharedInstance.buttonTint
+        self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
+        
+        self.titleTextAttributes = [
+            NSForegroundColorAttributeName: ColorScheme.sharedInstance.darkText,
+            NSFontAttributeName: UIFont.systemFontOfSize(13)]
+        self.backgroundColor = UIColor.clearColor()
+        self.borderType = HMSegmentedControlBorderType.Bottom
+        self.borderColor = ColorScheme.sharedInstance.greyText
+        self.borderWidth = 1.5
+        self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+    }
+}
 struct DateRange : SequenceType {
     
     var calendar: NSCalendar

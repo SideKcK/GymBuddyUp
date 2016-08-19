@@ -13,27 +13,15 @@ import KRProgressHUD
 class PlanMainVC: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
-    
-    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var monthButton: UIBarButtonItem!
-    
-    @IBOutlet weak var planLabel: UILabel!
-    @IBOutlet weak var findButton: UIButton!
-    @IBOutlet weak var timeLocView: UIStackView!
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var planView: UIView!
-    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var workoutButton: UIButton!
+    @IBOutlet weak var addPlanButton: UIButton!
+    @IBOutlet weak var addPlanView: UIView!
     
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
     var selectedDate: NSDate!
-    var sendTo = 2
     
     let insetColor = ColorScheme.sharedInstance.greyText
     let tintColor = ColorScheme.sharedInstance.buttonTint
@@ -41,26 +29,19 @@ class PlanMainVC: UIViewController {
         super.viewDidLoad()
         
         setCalendar()
-        self.emptyView.hidden = true
-        self.planView.hidden = true
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.layoutMargins = UIEdgeInsetsZero
-        tableView.separatorInset = UIEdgeInsetsZero
-        
+        setTableView()
+        addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
     }
     
-    func setViews(hasPlan: Bool, invited: Bool) {
-        workoutButton.hidden = !hasPlan
-        timeLocView.hidden = !invited
-        emptyView.hidden = hasPlan
-        planView.hidden = !hasPlan
-        statusView.hidden = !invited
-        statusViewHeight.priority = invited ? 250:999
-        findButton.hidden = invited
-        setStatusBar()
         
+    func setTableView() {
+        tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+
     }
     
     func setCalendar() {
@@ -75,16 +56,7 @@ class PlanMainVC: UIViewController {
         
     }
     
-    func setStatusBar() {
-        if sendTo == 1 {
-            statusLabel.text = "Searching SideKcK in Buddy List"
-        } else if sendTo == 2 {
-            statusLabel.text = "Searching SideKcK in Public"
-        } else {
-            statusLabel.text = " invited"
-        }
-    }
-    func reloadPlans(date: NSDate) {
+        func reloadPlans(date: NSDate) {
         KRProgressHUD.show()
 
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
@@ -93,12 +65,11 @@ class PlanMainVC: UIViewController {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if let dayplans = plans {
                         self.plans[date] = dayplans
-                        if dayplans.count == 0 {
-                            self.setViews(false, invited: false)
-                        }else {
-                        self.tableView.reloadData()
-                        self.setViews(true, invited: false)
+                        //reload tableview with plans
+                        if date == self.selectedDate {
+                            self.tableView.reloadData()
                         }
+                        
                     }else {
                         print(error)
                         KRProgressHUD.showError()
@@ -142,18 +113,9 @@ class PlanMainVC: UIViewController {
                 }
                 
                 dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-                    print("getPlansThisWeek: Finished all requests.")
                     
-                    if let plans = self.plans[self.selectedDate] {
-                        if plans.count == 0 {
-                            self.setViews(false, invited: false)
-                        }else {
-                            self.planLabel.text = plans[0].name
-                            self.tableView.reloadData()
-                            self.setViews(true, invited: false)
-                        }
-
-                    }
+                    //reload tableview with plans
+                    self.tableView.reloadData()
                     KRProgressHUD.dismiss()
                 })
                 
@@ -198,11 +160,20 @@ class PlanMainVC: UIViewController {
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
         
     }
+    
+    func onGymButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toGymMapSegue", sender: self)
+    }
+    
+    func onProfileButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    }
+    
     @IBAction func onMonthButton(sender: AnyObject) {
         calendarView.changeMode(.MonthView)
         UIView.animateWithDuration(0.3, animations: {
-            self.emptyView.alpha = 0
-            self.planView.alpha = 0
+            self.tableView.alpha = 0
+            self.addPlanView.alpha = 0
         })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
@@ -212,96 +183,7 @@ class PlanMainVC: UIViewController {
         
     }
     
-    @IBAction func onMoreButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        let workout = self.workouts[selectedDate]![0]
-        let repeating = workout.recur == 7
-        
-        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
-            //delete
-            if repeating {
-                let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-                    // ...
-                }
-                deleteController.addAction(cancelAction)
-                let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
-                    ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
-                        if error == nil {
-                        print("deleted all future plans")
-                        self.reloadPlans(self.selectedDate)
-                        }else {
-                            print(error)
-                        }
-                    })
-                }
-                deleteController.addAction(DeleteAllAction)
-                let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
-                    ScheduledWorkout.skipScheduledWorkoutForDate(workout.id, date: self.selectedDate, completion: { (error) in
-                        if error == nil {
-                        print("delete this plan only")
-                        self.reloadPlans(self.selectedDate)
-                        }else {
-                            print(error)
-                        }
-                    })
-                }
-                deleteController.addAction(DeleteThisAction)
-                self.presentViewController(deleteController, animated: true, completion: nil)
-            }else {
-                ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
-                    if error == nil {
-                    print("deleted plan")
-                    self.reloadPlans(self.selectedDate)
-                    }else {
-                        print(error)
-                    }
-                })
-            }
-        }
-        alertController.addAction(DeleteAction)
-        
-        let ReplaceAction = UIAlertAction(title: "Replace", style: .Default) { (action) in
-            self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
-        }
-        alertController.addAction(ReplaceAction)
-        
-        let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
-            //set plan as repeat
-            
-        }
-        if !repeating {
-            alertController.addAction(RepeatAction)
-        }
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    @IBAction func onCancelInviteButton(sender: AnyObject) {
-        print("cancel invite")
-        var message = ""
-        if sendTo == 1 || sendTo == 2{
-            message = "Cancel broadcasting?"
-        }else {
-            message = "Cancel invitation?"
-        }
-        
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "No, Keep it", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        let confirmAction = UIAlertAction(title: "Yes", style: .Destructive) { (action) in
-            //cancel invitation
-            self.setViews(true, invited: false)
-        }
-        alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
+
     @IBAction func onNewPlanButton(sender: AnyObject) {
         self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
         //        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
@@ -326,24 +208,109 @@ class PlanMainVC: UIViewController {
         //        }
     }
     
-    
+    func onMoreButton(sender: UIButton!) {
+        guard let workout = workouts[selectedDate]?[sender.tag] else {
+            print("on more button error")
+            return
+        }
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let inviteAction = UIAlertAction(title: "Find Your SideKcK", style: .Default) { (action) in
+            self.performSegueWithIdentifier("toInvitationSegue", sender: workout)
+        }
+        alertController.addAction(inviteAction)
+        let repeating = workout.recur == 7
+        let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
+            //set plan as repeat
+            ScheduledWorkout.repeatScheduledWorkout(workout.id, recur: 7, completion: { (error) in
+                if error == nil {
+                    print("repeat weekly")
+                    self.reloadPlans(self.selectedDate)
+                }else {
+                    print(error)
+                }
+
+            })
+        }
+        if !repeating {
+            alertController.addAction(RepeatAction)
+        }
+        
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            //delete
+            if repeating {
+                let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                deleteController.addAction(cancelAction)
+                let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
+                    ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                        if error == nil {
+                            print("deleted all future plans")
+                            self.reloadPlans(self.selectedDate)
+                        }else {
+                            print(error)
+                        }
+                    })
+                }
+                deleteController.addAction(DeleteAllAction)
+                let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
+                    ScheduledWorkout.skipScheduledWorkoutForDate(workout.id, date: self.selectedDate, completion: { (error) in
+                        if error == nil {
+                            print("delete this plan only")
+                            self.reloadPlans(self.selectedDate)
+                        }else {
+                            print(error)
+                        }
+                    })
+                }
+                deleteController.addAction(DeleteThisAction)
+                self.presentViewController(deleteController, animated: true, completion: nil)
+            }else {
+                ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                    if error == nil {
+                        print("deleted plan")
+                        self.reloadPlans(self.selectedDate)
+                    }else {
+                        print(error)
+                    }
+                })
+            }
+        }
+        alertController.addAction(DeleteAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier ==  "toExerciseDetailSegue" {
-            if let desVC = segue.destinationViewController as? PlanExerciseVC {
-                if let plans = plans[selectedDate], exercises = plans[0].exercises {
-                    desVC.exercise = exercises[sender as! Int]
-                }
+        if let desVC = segue.destinationViewController as? PlanDetailVC {
+            desVC.selectedDate = selectedDate
+            if let row = sender as? Int {
+            desVC.plan =  plans[selectedDate]![row]
+            desVC.workout = workouts[selectedDate]![row]
             }
         }
-        if segue.identifier == "toPlanLibrarySegue" {
+            if segue.identifier == "toPlanLibrarySegue" {
             if let desVC = segue.destinationViewController as? PlanLibNavVC {
                 desVC.selectedDate = selectedDate
             }
         }
-        
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.gym = Gym()
+            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+        }
+        if let desVC = segue.destinationViewController as? MeMainVC {
+            //for testing
+            //desVC.user = User()
+        }
     }
     
     
@@ -393,17 +360,13 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)
-        }else if plans[selectedDate]?.count != 0{
-            self.planLabel.text = plans[selectedDate]![0].name
-            tableView.reloadData()
-            setViews(true, invited: false)
         }else {
-            setViews(false, invited: false)
+            tableView.reloadData()
         }
         calendarView.changeMode(.WeekView)
         UIView.animateWithDuration(0.3, animations: {
-            self.emptyView.alpha = 1
-            self.planView.alpha = 1
+            self.tableView.alpha = 1
+            self.addPlanView.alpha = 1
         })
     }
     
@@ -480,25 +443,29 @@ extension PlanMainVC: CVCalendarViewAppearanceDelegate {
 
 extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let plans = plans[selectedDate],
-            exercises = plans[0].exercises {
-            return exercises.count
+        if let plans = plans[selectedDate] {
+            return plans.count
         }else {
             return 0
         }
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
-        cell.numLabel.text = String(indexPath.row+1)
-        if let plans = plans[selectedDate], exercises = plans[0].exercises {
-            cell.exercise = exercises[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+        guard let dayPlans = plans[selectedDate] else {
+            return cell
         }
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.event = dayPlans[indexPath.row]
+        cell.showMoreButton()
+        cell.moreButton.tag = indexPath.row
+        cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)
+        //add gym segue
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("toExerciseDetailSegue", sender: indexPath.row)
+        self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.row)
     }
 }
 

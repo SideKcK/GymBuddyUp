@@ -11,6 +11,9 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 
+private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
+private let storageRef = FIRStorage.storage().reference()
+
 class Invite {
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)

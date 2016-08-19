@@ -27,7 +27,6 @@ class InviteGymVC: UIViewController {
         KRProgressHUD.show()
         GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(CLLocationCoordinate2D(latitude: 30.562, longitude: -96.313), radius: 5000, name: "gym") { (gyms, error) in
             if gyms != nil {
-                print(gyms)
                 self.nearbyGyms = gyms
                 self.tableView.reloadData()
                 KRProgressHUD.dismiss()

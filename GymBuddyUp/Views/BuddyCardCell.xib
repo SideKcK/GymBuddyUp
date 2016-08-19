@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="lBm-3n-5zC" customClass="BuddyCardCell" customModule="GymBuddyUp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="308" height="116"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lBm-3n-5zC" id="jzz-HG-lFd">
+                <rect key="frame" x="0.0" y="0.0" width="308" height="115.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oea-VE-Bhm">
+                        <rect key="frame" x="15" y="8" width="278" height="100"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me" translatesAutoresizingMaskIntoConstraints="NO" id="s4H-Mz-VDB">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ccc-QC-WNg"/>
+                                    <constraint firstAttribute="width" constant="50" id="arz-dm-tq3"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesiah Bruce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bv-6j-wcz">
+                                <rect key="frame" x="73" y="8" width="99" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal: Muscle Build" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVM-WL-7qP">
+                                <rect key="frame" x="73" y="49" width="111" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gym: Crunch, White Plains" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-XA-ovQ">
+                                <rect key="frame" x="73" y="66" width="159" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXL-hE-WD7">
+                                <rect key="frame" x="240" y="8" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2 mile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3s-ZK-0bD">
+                                <rect key="frame" x="73" y="30" width="46" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" id="qyK-eX-dwF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Bv-6j-wcz" firstAttribute="leading" secondItem="s4H-Mz-VDB" secondAttribute="trailing" constant="15" id="5fQ-8W-9cH"/>
+                            <constraint firstItem="s4H-Mz-VDB" firstAttribute="top" secondItem="Oea-VE-Bhm" secondAttribute="top" constant="8" id="GdX-sQ-Ch9"/>
+                            <constraint firstAttribute="trailing" secondItem="zXL-hE-WD7" secondAttribute="trailing" constant="8" id="Mus-PH-qkT"/>
+                            <constraint firstItem="zXL-hE-WD7" firstAttribute="top" secondItem="2Bv-6j-wcz" secondAttribute="top" id="ODY-CU-U4N"/>
+                            <constraint firstItem="QNh-XA-ovQ" firstAttribute="top" secondItem="TVM-WL-7qP" secondAttribute="bottom" constant="1" id="ONL-si-BLK"/>
+                            <constraint firstItem="TVM-WL-7qP" firstAttribute="leading" secondItem="2Bv-6j-wcz" secondAttribute="leading" id="Qvx-Wz-nhj"/>
+                            <constraint firstItem="TVM-WL-7qP" firstAttribute="top" secondItem="H3s-ZK-0bD" secondAttribute="bottom" constant="3" id="TZ1-NE-iuK"/>
+                            <constraint firstItem="zXL-hE-WD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Bv-6j-wcz" secondAttribute="trailing" constant="12" id="UMG-HU-urQ"/>
+                            <constraint firstItem="H3s-ZK-0bD" firstAttribute="leading" secondItem="2Bv-6j-wcz" secondAttribute="leading" id="WXR-H6-Ic2"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QNh-XA-ovQ" secondAttribute="bottom" constant="15" id="ZGj-Pr-kyj"/>
+                            <constraint firstItem="H3s-ZK-0bD" firstAttribute="top" secondItem="2Bv-6j-wcz" secondAttribute="bottom" constant="1" id="ba3-AM-wt7"/>
+                            <constraint firstItem="QNh-XA-ovQ" firstAttribute="leading" secondItem="2Bv-6j-wcz" secondAttribute="leading" id="jVe-2F-qKq"/>
+                            <constraint firstItem="s4H-Mz-VDB" firstAttribute="leading" secondItem="Oea-VE-Bhm" secondAttribute="leading" constant="8" id="k3l-X2-cll"/>
+                            <constraint firstItem="2Bv-6j-wcz" firstAttribute="top" secondItem="s4H-Mz-VDB" secondAttribute="top" id="wwF-T9-bf6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Oea-VE-Bhm" firstAttribute="top" secondItem="jzz-HG-lFd" secondAttribute="top" constant="8" id="OT5-EO-a1g"/>
+                    <constraint firstItem="Oea-VE-Bhm" firstAttribute="leading" secondItem="jzz-HG-lFd" secondAttribute="leading" constant="15" id="bKs-lX-hy5"/>
+                    <constraint firstItem="Oea-VE-Bhm" firstAttribute="centerX" secondItem="jzz-HG-lFd" secondAttribute="centerX" id="niG-qK-fzn"/>
+                    <constraint firstItem="Oea-VE-Bhm" firstAttribute="centerY" secondItem="jzz-HG-lFd" secondAttribute="centerY" id="tCM-I6-XTP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addButton" destination="zXL-hE-WD7" id="xtn-HM-ozu"/>
+                <outlet property="borderView" destination="Oea-VE-Bhm" id="SkW-oG-KlM"/>
+                <outlet property="disHeightConstraint" destination="qyK-eX-dwF" id="L5S-eo-6YE"/>
+                <outlet property="disLabel" destination="H3s-ZK-0bD" id="ikl-ac-ZUI"/>
+                <outlet property="goalLabel" destination="TVM-WL-7qP" id="FhN-g8-4lO"/>
+                <outlet property="gymLabel" destination="QNh-XA-ovQ" id="30o-OU-0OH"/>
+                <outlet property="nameLabel" destination="2Bv-6j-wcz" id="w6X-ri-Ry5"/>
+                <outlet property="profileView" destination="s4H-Mz-VDB" id="zIl-j8-aON"/>
+            </connections>
+            <point key="canvasLocation" x="122" y="259"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Me" width="30" height="30"/>
+    </resources>
+</document>

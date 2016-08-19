@@ -2,30 +2,40 @@
 //  PlanDetailVC.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 6/26/16.
+//  Created by you wu on 8/17/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
 class PlanDetailVC: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var selectPlanButton: UIButton!
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var tableView: UITableView!
 
-    var plans = [Plan]()
+    @IBOutlet weak var planLabel: UILabel!
+    @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var timeLocView: UIStackView!
+    @IBOutlet weak var gymButton: UIButton!
+    
+    
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var cancelInviteButton: UIButton!
+    
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var workoutButton: UIButton!
+    
+    var selectedDate: NSDate!
+    var workout: ScheduledWorkout!
+    var plan: Plan!
+    var sendTo = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        self.title = selectedDate.toString()
+        setTableView()
+        setViews(false)
         // Do any additional setup after loading the view.
-        collectionView.reloadData()
-        
-        pageControl?.numberOfPages = plans.count
-        pageControl?.currentPage = 0
-        pageControl?.userInteractionEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,140 +43,174 @@ class PlanDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setPlan(repeating: Bool) {
-        //get current displayed plan
-        //get current date
-        guard let navVC = self.navigationController as? PlanLibNavVC else{
-            print("navVC not plan lib nav")
-            return
-        }
-        
-        //set if recurring
-        let recur = repeating ? 7:0
-        //set plan in Firebase
-        let cell = collectionView.visibleCells()[0] as! PlanDetailCell
-        ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (error) in
-            if error == nil {
-                //unwind to plan main
-                self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: navVC.selectedDate)
-            }else {
-                print(error)
-            }
-        }
+    func setTableView() {
+        tableView.registerNib(UINib(nibName: "ExerciseNumberedCell", bundle: nil), forCellReuseIdentifier: "ExerciseNumberedCell")
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsetsZero
+    }
+
+    func setViews(invited: Bool) {
+        timeLocView.hidden = !invited
+        statusView.hidden = !invited
+        statusViewHeight.priority = invited ? 250:999
+        findButton.hidden = invited
+        setStatusBar()
         
     }
-    
-    @IBAction func onSelectPlanButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: nil, message: "Repeat this plan?", preferredStyle: .ActionSheet)
-        
+
+    func setStatusBar() {
+        if sendTo == 1 {
+            statusLabel.text = "Searching SideKcK in Buddy List"
+        } else if sendTo == 2 {
+            statusLabel.text = "Searching SideKcK in Public"
+        } else {
+            statusLabel.text = " invited"
+        }
+    }
+
+    @IBAction func onMoreButton(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
         alertController.addAction(cancelAction)
+        let repeating = workout.recur == 7
         
-        let WeeklyAction = UIAlertAction(title: "Weekly", style: .Default) { (action) in
-            self.setPlan(true)
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            //delete
+            if repeating {
+                let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                deleteController.addAction(cancelAction)
+                let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
+                    ScheduledWorkout.deleteScheduledWorkout(self.workout.id, completion: { (error) in
+                        if error == nil {
+                            print("deleted all future plans")
+                        }else {
+                            print(error)
+                        }
+                    })
+                }
+                deleteController.addAction(DeleteAllAction)
+                let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
+                    ScheduledWorkout.skipScheduledWorkoutForDate(self.workout.id, date: self.selectedDate, completion: { (error) in
+                        if error == nil {
+                            print("delete this plan only")
+                            self.performSegueWithIdentifier("unwindToPlanMainVC", sender: "delete")
+                        }else {
+                            print(error)
+                        }
+                    })
+                }
+                deleteController.addAction(DeleteThisAction)
+                self.presentViewController(deleteController, animated: true, completion: nil)
+            }else {
+                ScheduledWorkout.deleteScheduledWorkout(self.workout.id, completion: { (error) in
+                    if error == nil {
+                        print("deleted plan")
+                        self.performSegueWithIdentifier("unwindToPlanMainVC", sender: "delete")
+                    }else {
+                        print(error)
+                    }
+                })
+            }
         }
-        alertController.addAction(WeeklyAction)
+        alertController.addAction(DeleteAction)
         
-        let NoneAction = UIAlertAction(title: "None", style: .Default) { (action) in
-            self.setPlan(false)
+        if !repeating {
+            let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
+                //set plan as repeat
+                ScheduledWorkout.repeatScheduledWorkout(self.workout.id, recur: 7, completion: { (error) in
+                    if error == nil {
+                        print("repeat plan")
+                        self.performSegueWithIdentifier("unwindToPlanMainVC", sender: "repeat")
+                    }else {
+                        print(error)
+                    }
+                })
+            }
+            alertController.addAction(RepeatAction)
         }
-        alertController.addAction(NoneAction)
-
-        self.presentViewController(alertController, animated: true) {
-            // ...
-        }
-    }
-
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        // Get the current page based on the scroll offset
-        let page : Int = Int(round(scrollView.contentOffset.x / self.view.frame.width))
         
-        // Set the current page, so the dots will update
-        pageControl.currentPage = page
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func onCancelInviteButton(sender: AnyObject) {
+        print("cancel invite")
+        var message = ""
+        if sendTo == 1 || sendTo == 2{
+            message = "Cancel broadcasting?"
+        }else {
+            message = "Cancel invitation?"
+        }
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "No, Keep it", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        let confirmAction = UIAlertAction(title: "Yes", style: .Destructive) { (action) in
+            //cancel invitation
+            self.setViews(false)
+        }
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let desVC = segue.destinationViewController as? PlanMainVC {
-            desVC.plans.removeAll()
-            desVC.reloadPlans(sender as! NSDate)
+        if segue.identifier ==  "toExerciseDetailSegue" {
+            if let desVC = segue.destinationViewController as? PlanExerciseVC {
+                if let exercises = plan.exercises {
+                    desVC.exercise = exercises[sender as! Int]
+                }
+            }
         }
+        if let desVC = segue.destinationViewController as? PlanMainVC {
+            if let send = sender as? String {
+                if send == "delete" || send == "repeat"{
+                    desVC.reloadPlans(desVC.selectedDate)
+                }
+            }
+        }
+        if let desVC = segue.destinationViewController as? GymMapVC {
+            desVC.gym = Gym()
+            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+        }
+
     }
  
 
 }
 
-extension PlanDetailVC: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return plans.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let detailCell = collectionView.dequeueReusableCellWithReuseIdentifier("PlanDetailCell", forIndexPath: indexPath) as! PlanDetailCell
-        let plan = plans[indexPath.row]
-        Library.getExercisesByPlanId(plans[indexPath.row].id) { (exercises, error) in
-            print("get exercises")
-            if let exer = exercises {
-                plan.exercises = exer
-                detailCell.plan = plan
-                detailCell.tableView.reloadData()
-            }else {
-                print(error)
-            }
-        }
-
-        return detailCell
-    }
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        guard let detailCell = cell as? PlanDetailCell else { return }
-        detailCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-    }
-    //Use for size
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return collectionView.frame.size
-    }
-    //Use for interspacing
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 0.0
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout
-        collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 0.0
-    }
-}
-
-extension PlanDetailVC : UITableViewDelegate, UITableViewDataSource {
+extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let exercises = plans[tableView.tag].exercises {
+        if let exercises = plan.exercises {
             return exercises.count
         }else {
             return 0
         }
     }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         cell.numLabel.text = String(indexPath.row+1)
-        cell.exercise = plans[tableView.tag].exercises![indexPath.row]
+        if let exercises = plan.exercises {
+            cell.exercise = exercises[indexPath.row]
+        }
         cell.layoutMargins = UIEdgeInsetsZero
-
         return cell
-        
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath) as! ExerciseNumberedCell
-        self.performSegueWithIdentifier("toExerciseDetailSegue", sender: cell.exercise)
+        self.performSegueWithIdentifier("toExerciseDetailSegue", sender: indexPath.row)
     }
 }

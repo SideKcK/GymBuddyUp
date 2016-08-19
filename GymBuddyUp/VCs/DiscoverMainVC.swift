@@ -86,35 +86,18 @@ class DiscoverMainVC: UIViewController {
         }
 
     }
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        let yPos: CGFloat = scrollView.contentOffset.y
-//        
-//        if (yPos > 0) {
-//            UIView.animateWithDuration(1.0, delay: 3.0, options: .CurveEaseIn, animations: { 
-//                self.findButton.alpha = 0
-//                self.segHeightConstraint.priority = 999
-//                self.segView.alpha = 0
-//                }, completion: nil)
-//        }
-//        if (yPos < 0) {
-//            UIView.animateWithDuration(1.0, delay: 3.0, options: .CurveEaseIn, animations: {
-//                self.findButton.alpha = 1
-//                self.segHeightConstraint.priority = 250
-//                self.segView.alpha = 1
-//                }, completion: nil)
-//
-//        }
-//    }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        if let navVC = segue.destinationViewController as? UINavigationController,
+            let desVC = navVC.topViewController as? DiscoverDetailVC {
+                desVC.event = sender as? Plan
+            }
+        }
+ 
 
 }
 
@@ -153,5 +136,9 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("ToInviteDetailSegue", sender: events[indexPath.row])
     }
 }

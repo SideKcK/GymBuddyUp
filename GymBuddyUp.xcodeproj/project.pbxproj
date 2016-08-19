@@ -55,7 +55,6 @@
 		C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC20F1D20D82B000DA37A /* Inbox.storyboard */; };
 		C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2121D20D83D000DA37A /* Me.storyboard */; };
 		C64EC2161D20D997000DA37A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2151D20D997000DA37A /* TabBarVC.swift */; };
-		C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */; };
 		C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2201D2DE81E000DA37A /* MeMainVC.swift */; };
 		C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2221D332F2C000DA37A /* UserProfileCell.swift */; };
 		C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */; };
@@ -73,6 +72,7 @@
 		C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650A1D65282500FC63FD /* BuddyCardCell.swift */; };
 		C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */; };
 		C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650E1D665BC700FC63FD /* MeFindVC.swift */; };
+		C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
@@ -146,7 +146,6 @@
 		C64EC2101D20D82B000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Inbox.storyboard; sourceTree = "<group>"; };
 		C64EC2131D20D83D000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Me.storyboard; sourceTree = "<group>"; };
 		C64EC2151D20D997000DA37A /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = VCs/TabBarVC.swift; sourceTree = "<group>"; };
-		C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateMainVC.swift; path = VCs/CreateMainVC.swift; sourceTree = "<group>"; };
 		C64EC2201D2DE81E000DA37A /* MeMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeMainVC.swift; path = VCs/MeMainVC.swift; sourceTree = "<group>"; };
 		C64EC2221D332F2C000DA37A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = Views/UserProfileCell.swift; sourceTree = "<group>"; };
 		C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserBuddyOverviewCell.swift; path = Views/UserBuddyOverviewCell.swift; sourceTree = "<group>"; };
@@ -164,6 +163,7 @@
 		C681650A1D65282500FC63FD /* BuddyCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuddyCardCell.swift; path = Views/BuddyCardCell.swift; sourceTree = "<group>"; };
 		C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteBuddiesVC.swift; path = VCs/InviteBuddiesVC.swift; sourceTree = "<group>"; };
 		C681650E1D665BC700FC63FD /* MeFindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeFindVC.swift; path = VCs/MeFindVC.swift; sourceTree = "<group>"; };
+		C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverDetailVC.swift; path = VCs/DiscoverDetailVC.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
@@ -323,6 +323,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C68165141D66831D00FC63FD /* Discover */,
 				C607BA4C1D58230B00B1348B /* Me */,
 				C607BA431D57A37600B1348B /* Invitation */,
 				C66B08231D503AB1003B0872 /* Tracking */,
@@ -330,9 +331,7 @@
 				C64EC2061D207CF2000DA37A /* SignupLogin */,
 				C64EC2051D207CE6000DA37A /* Plan */,
 				C64EC1F91D124FC3000DA37A /* TestViewController.swift */,
-				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
 				C64EC2151D20D997000DA37A /* TabBarVC.swift */,
-				C64EC21A1D235FCF000DA37A /* CreateMainVC.swift */,
 				C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */,
 			);
 			name = VCs;
@@ -423,6 +422,15 @@
 				C681650A1D65282500FC63FD /* BuddyCardCell.swift */,
 			);
 			name = Reuse;
+			sourceTree = "<group>";
+		};
+		C68165141D66831D00FC63FD /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */,
+				C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */,
+			);
+			name = Discover;
 			sourceTree = "<group>";
 		};
 		C6CD01EE1D3B34B000D64A06 /* PlanAdd */ = {
@@ -594,6 +602,7 @@
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
+				C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
@@ -611,7 +620,6 @@
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
 				C67D95141D4D2B5C00FAD103 /* Library.swift in Sources */,
 				C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */,
-				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,

@@ -217,7 +217,15 @@ class PlanMainVC: UIViewController {
         let repeating = workout.recur == 7
         let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
             //set plan as repeat
-            
+            ScheduledWorkout.repeatScheduledWorkout(workout.id, recur: 7, completion: { (error) in
+                if error == nil {
+                    print("repeat weekly")
+                    self.reloadPlans(self.selectedDate)
+                }else {
+                    print(error)
+                }
+
+            })
         }
         if !repeating {
             alertController.addAction(RepeatAction)

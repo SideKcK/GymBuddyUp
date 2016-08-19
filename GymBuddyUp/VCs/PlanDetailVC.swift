@@ -123,7 +123,14 @@ class PlanDetailVC: UIViewController {
         if !repeating {
             let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
                 //set plan as repeat
-                
+                ScheduledWorkout.repeatScheduledWorkout(self.workout.id, recur: 7, completion: { (error) in
+                    if error == nil {
+                        print("repeat plan")
+                        self.performSegueWithIdentifier("unwindToPlanMainVC", sender: "repeat")
+                    }else {
+                        print(error)
+                    }
+                })
             }
             alertController.addAction(RepeatAction)
         }

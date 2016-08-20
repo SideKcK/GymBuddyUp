@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource {
+class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource, UIPopoverPresentationControllerDelegate, DropDownTitleNavButtonDelegate {
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -37,6 +37,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var secondTotal: Float = 0.0
     var timer = NSTimer()
     var currentTrackedIndex = 0
+    var popoverVC: UIViewController?
+    var itemsCount = 0
     
     var repsRange = [1, 2, 3, 4, 5, 6, 7, 8]
     var lbsRange = [10, 15, 20, 25, 30, 35, 40]
@@ -80,7 +82,12 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         
         let closePicker: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.closePickerResponse(_:)))
         view.addGestureRecognizer(closePicker)
-        Log.info(String(trackedPlan?.trackingItems.count))
+        Log.info("trackingItems in TrackMainVC \(trackedPlan?.trackingItems.count)")
+        
+        if let _count = trackedPlan?.trackingItems.count {
+            itemsCount += _count
+        }
+        
         if let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType {
             Log.info(String(_currentUnitType))
             if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
@@ -100,11 +107,41 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             exerciseLabel.text = _currentExerciseName
         }
         
-
+        popoverVC = storyboard!.instantiateViewControllerWithIdentifier("trackingTodo")
+        popoverVC?.modalPresentationStyle = .Popover
+        
+        let dropDownTitleNavButton = DropDownTitleNavButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        Log.info("\(currentTrackedIndex + 1)/\(itemsCount)")
+        dropDownTitleNavButton.title = "\(currentTrackedIndex + 1)/\(itemsCount)"
+        dropDownTitleNavButton.delegate = self
+        self.navigationItem.titleView = dropDownTitleNavButton
+        
         // Do any additional setup after loading the view.
     }
     
+    func dropDownTitleNavButton(button: DropDownTitleNavButton) {
+        if let _popoverVC = popoverVC {
+            if let popoverController = _popoverVC.popoverPresentationController {
+                let desVC = _popoverVC as! TrackingPopOverViewController
+                desVC.trackedPlan = trackedPlan
+                var itemCount: CGFloat = 0.0
+                if let _itemCount = trackedPlan?.trackingItems.count {
+                    itemCount += CGFloat(_itemCount)
+                }
+                desVC.preferredContentSize =  CGSizeMake(320, itemCount * 55)
+                popoverController.sourceView = button
+                popoverController.sourceRect = button.bounds
+                popoverController.permittedArrowDirections = .Up
+                popoverController.delegate = self
+                presentViewController(_popoverVC, animated: true, completion: nil)
+            }
+            
+        }
+    }
     
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
     
     
     func closePickerResponse(recognizer: UITapGestureRecognizer) {
@@ -195,14 +232,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     @IBAction func onDoneButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        
+//    }
 
 }

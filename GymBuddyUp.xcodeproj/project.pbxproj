@@ -14,6 +14,10 @@
 		C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */; };
 		C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */; };
 		C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */; };
+		C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */; };
+		C11F64E71D6785EF00FFF5DB /* TrackedItemPopoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E51D6785EF00FFF5DB /* TrackedItemPopoverCell.swift */; };
+		C11F64E81D6785EF00FFF5DB /* TrackedItemPopoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */; };
+		C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */; };
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
@@ -87,6 +91,10 @@
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KKParamsLabel.swift; sourceTree = "<group>"; };
 		C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneModalViewController.swift; sourceTree = "<group>"; };
+		C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingPopOverViewController.swift; sourceTree = "<group>"; };
+		C11F64E51D6785EF00FFF5DB /* TrackedItemPopoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedItemPopoverCell.swift; path = Views/TrackedItemPopoverCell.swift; sourceTree = "<group>"; };
+		C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrackedItemPopoverCell.xib; path = Views/TrackedItemPopoverCell.xib; sourceTree = "<group>"; };
+		C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTitleNavButton.swift; sourceTree = "<group>"; };
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
@@ -183,6 +191,7 @@
 		C1388BA41D65184000513C05 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */,
 				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
 			);
 			name = Button;
@@ -329,6 +338,8 @@
 				C607BA4F1D582A6100B1348B /* BuddyCell.swift */,
 				C607BA551D5AE80800B1348B /* GymCell.swift */,
 				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
+				C11F64E51D6785EF00FFF5DB /* TrackedItemPopoverCell.swift */,
+				C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -356,6 +367,7 @@
 			children = (
 				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
 				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
+				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
 			);
 			name = Tracking;
 			sourceTree = "<group>";
@@ -440,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C11F64E81D6785EF00FFF5DB /* TrackedItemPopoverCell.xib in Resources */,
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
 				C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */,
 				C64EC2191D235F95000DA37A /* Create.storyboard in Resources */,
@@ -515,6 +528,7 @@
 				C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */,
 				C67D951A1D4D3B3100FAD103 /* PlanDetailCell.swift in Sources */,
 				C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */,
+				C11F64E71D6785EF00FFF5DB /* TrackedItemPopoverCell.swift in Sources */,
 				C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */,
 				C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */,
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
@@ -534,6 +548,7 @@
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
+				C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
@@ -553,6 +568,7 @@
 				C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */,
 				C64EC21D1D2AB97D000DA37A /* CreateMainVC.swift in Sources */,
 				C60986571CEEC00D00A0AFE3 /* User.swift in Sources */,
+				C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
 				B6AB2C641D6309E200D4AD2A /* Invite.swift in Sources */,

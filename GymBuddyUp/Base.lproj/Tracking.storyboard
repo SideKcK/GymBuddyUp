@@ -349,6 +349,39 @@
             </objects>
             <point key="canvasLocation" x="915" y="-335"/>
         </scene>
+        <!--Tracking Pop Over View Controller-->
+        <scene sceneID="wKz-EQ-9AG">
+            <objects>
+                <viewController storyboardIdentifier="trackingTodo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9v-5Y-B2V" customClass="TrackingPopOverViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pue-YZ-3GJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="cll-tR-fb6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qW2-O9-W2Y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BuX-bI-aJm">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cll-tR-fb6" firstAttribute="top" secondItem="BuX-bI-aJm" secondAttribute="bottom" id="FMJ-AE-drh"/>
+                            <constraint firstItem="BuX-bI-aJm" firstAttribute="top" secondItem="Pue-YZ-3GJ" secondAttribute="bottom" id="GT2-kj-W4H"/>
+                            <constraint firstAttribute="trailing" secondItem="BuX-bI-aJm" secondAttribute="trailing" id="JTP-Ik-Yc2"/>
+                            <constraint firstItem="BuX-bI-aJm" firstAttribute="leading" secondItem="qW2-O9-W2Y" secondAttribute="leading" id="Sm3-ca-uE9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="BuX-bI-aJm" id="ML2-0R-p2R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qsS-Tf-bP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="915" y="314"/>
+        </scene>
         <!--Done Modal View Controller-->
         <scene sceneID="Br2-9J-E0p">
             <objects>

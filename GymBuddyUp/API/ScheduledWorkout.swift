@@ -141,6 +141,14 @@ class ScheduledWorkout {
         }
     }
     
+    class func repeatScheduledWorkout(scheduledWorkoutId: String, recur: Int, endDate: NSDate? = stringToDate("9999-12-31"), completion: (NSError?) -> Void) {
+        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId)
+        let data = ["end_date": dateToString(endDate!), "repeat": recur]
+        workoutRef.updateChildValues(data as [NSObject : AnyObject]) { (error, ref) in
+            completion(error)
+        }
+    }
+    
     /**
      Get all scheduled workouts that are active on the date. (Not necessarily scheduled for that date. A workout will be counted as active as long as it didn't stop before the date.)
      */

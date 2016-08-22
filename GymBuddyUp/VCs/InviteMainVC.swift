@@ -43,6 +43,7 @@ class InviteMainVC: UITableViewController {
         if gym != nil {
             enableSendButton()
         }
+
     }
     override func viewWillAppear(animated: Bool) {
         self.sendButton.hidden = false
@@ -175,17 +176,19 @@ class InviteMainVC: UITableViewController {
         if indexPath.row == 3 && !showPlan {
             return 0
         }
+        
         return  super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         
     }
-    
+
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
         
         if indexPath.row == 7 {
             //set as center
-            seg.frame = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 50)
+            seg.bounds = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 50)
             cell.addSubview(seg)
+
         }
     }
     
@@ -232,9 +235,7 @@ class InviteMainVC: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.sendButton.hidden = true
-        if let desVC = segue.destinationViewController as? MeBuddiesVC {
-            desVC.inviting = true
-        }
+        
     }
  
 

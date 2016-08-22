@@ -47,6 +47,7 @@ class Log {
     }
 }
 
+
 func secondToString(sec: Float) -> String {
     let hours = Int(sec) / 3600
     let minutes = Int(sec) / 60 % 60

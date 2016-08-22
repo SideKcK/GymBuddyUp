@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YXP-ut-qJb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yf1-ry-gGw">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <!--Inbox-->
         <scene sceneID="PjU-Ft-fOk">
             <objects>
-                <viewController title="Inbox" id="YXP-ut-qJb" sceneMemberID="viewController">
+                <viewController title="Inbox" id="YXP-ut-qJb" customClass="InboxMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fob-lm-JYW"/>
                         <viewControllerLayoutGuide type="bottom" id="Qpg-2c-aq6"/>
@@ -16,12 +16,73 @@
                     <view key="view" contentMode="scaleToFill" id="uCB-Hq-Z2O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exC-0d-KOU">
+                                <rect key="frame" x="0.0" y="64" width="320" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="cK2-JD-7hM"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QRq-3e-xpl">
+                                <rect key="frame" x="0.0" y="99" width="320" height="420"/>
+                                <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="exC-0d-KOU" firstAttribute="leading" secondItem="uCB-Hq-Z2O" secondAttribute="leading" id="3Sl-2H-q3D"/>
+                            <constraint firstItem="Qpg-2c-aq6" firstAttribute="top" secondItem="QRq-3e-xpl" secondAttribute="bottom" id="4XA-Tl-Maf"/>
+                            <constraint firstItem="exC-0d-KOU" firstAttribute="top" secondItem="Fob-lm-JYW" secondAttribute="bottom" id="Kre-Nh-tYc"/>
+                            <constraint firstAttribute="trailing" secondItem="QRq-3e-xpl" secondAttribute="trailing" id="Xfm-y2-DrX"/>
+                            <constraint firstItem="QRq-3e-xpl" firstAttribute="leading" secondItem="uCB-Hq-Z2O" secondAttribute="leading" id="kwN-6B-4Ke"/>
+                            <constraint firstAttribute="trailing" secondItem="exC-0d-KOU" secondAttribute="trailing" id="uB3-kD-ZxI"/>
+                            <constraint firstItem="QRq-3e-xpl" firstAttribute="top" secondItem="exC-0d-KOU" secondAttribute="bottom" id="uPH-46-6mr"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Inbox" id="N58-2o-4Pj">
+                        <barButtonItem key="rightBarButtonItem" title="Clear All" id="u0f-zh-NYj">
+                            <connections>
+                                <action selector="onClearButton:" destination="YXP-ut-qJb" id="exY-4Z-I5x"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="segView" destination="exC-0d-KOU" id="hvh-kJ-x4B"/>
+                        <outlet property="tableView" destination="QRq-3e-xpl" id="Fdb-Dp-NbE"/>
+                        <segue destination="yZP-yI-NB7" kind="presentation" identifier="ToMessageDetailSegue" id="I7k-qs-cAX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN3-0O-dCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="761" y="392"/>
+        </scene>
+        <!--DiscoverDetailVC-->
+        <scene sceneID="xbs-gy-y0a">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="DiscoverDetailVC" id="yZP-yI-NB7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mji-iF-hDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1095" y="392"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="Jeb-M6-yLI">
+            <objects>
+                <navigationController title="Inbox" automaticallyAdjustsScrollViewInsets="NO" id="Yf1-ry-gGw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EzU-L3-5Ty">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YXP-ut-qJb" kind="relationship" relationship="rootViewController" id="Rd4-ap-Mbq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k8h-cr-Ipd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="332" y="392"/>
         </scene>

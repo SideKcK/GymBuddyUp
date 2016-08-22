@@ -34,8 +34,8 @@ class PlanLibVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toPlanLibDetail" {
-            if let detailVC = segue.destinationViewController as? PlanDetailVC,
+        if segue.identifier == "toPlanLibDetailSegue" {
+            if let detailVC = segue.destinationViewController as? PlanLibDetailVC,
                 plans = (sender as? [Plan]) {
                 
                 detailVC.title = selectedCat?.name
@@ -77,7 +77,7 @@ extension PlanLibVC: UITableViewDelegate, UITableViewDataSource {
         
         Library.getPlansByMidId(midid, completion: { (plans, error) in
             if error == nil {
-                self.performSegueWithIdentifier("toPlanLibDetail", sender: plans)
+                self.performSegueWithIdentifier("toPlanLibDetailSegue", sender: plans)
             }else {
                 print(error)
             }

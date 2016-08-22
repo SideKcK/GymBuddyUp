@@ -20,6 +20,7 @@ class TrackedPlan {
     
     init(plan: Plan) {
         if let exercises = plan.exercises {
+            Log.info("if let exercises = plan.exercises {")
             for exercise in exercises {
                 let trackingItem =  TrackedItem(_exercise: exercise)
                 trackingItems.append(trackingItem)

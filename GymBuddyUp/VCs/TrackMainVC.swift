@@ -124,6 +124,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             itemsCount += _count
         }
         
+        Log.info("itemsCount \(itemsCount)")
+        
         loadTrackingItem()
         
         // init popoverVC

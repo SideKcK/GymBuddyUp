@@ -101,8 +101,6 @@
 		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
-		B6AB2C631D6309E200D4AD2A /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
-		B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
@@ -456,8 +454,8 @@
 		C66B08231D503AB1003B0872 /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
-				B6AB2C631D6309E200D4AD2A /* Invite.swift */,
-				B6AE8A141D5C858B00236F05 /* ScheduledWorkout.swift */,
+				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
+				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
 				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
 				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
@@ -468,8 +466,6 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
-				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
 				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,

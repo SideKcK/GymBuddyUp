@@ -23,6 +23,7 @@
 		B6F00BAA1D66B3E400B09177 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA11D66B3E400B09177 /* Plan.swift */; };
 		B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */; };
 		B6F00BAC1D66B3E400B09177 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA31D66B3E400B09177 /* User.swift */; };
+		B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
 		C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA441D57A3A100B1348B /* InviteMainVC.swift */; };
@@ -115,6 +116,7 @@
 		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
 		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
 		C607BA441D57A3A100B1348B /* InviteMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteMainVC.swift; path = VCs/InviteMainVC.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
 				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
 				B6F00BA31D66B3E400B09177 /* User.swift */,
+				B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				C64EC20E1D20B3B1000DA37A /* PlanLibDetailVC.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
+				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,

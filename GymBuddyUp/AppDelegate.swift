@@ -70,6 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print(error)
 //            }
 //        }
+        
+//        Invite.sendWorkoutInviteToPublic("-KPHMEB3SLHgJ-v39B3Y", workoutTime: NSDate(), gymId: "gymId123") { (error) in
+//            print(error)
+//        }
+        
+//        Library.getExercisesByPlanId("-KOZM75q5bh0DtN4AvzM") { (exercises, error) in
+//            print(exercises)
+//        }
     }
     
     func userDidLogout() {

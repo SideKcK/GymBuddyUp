@@ -65,7 +65,7 @@
                 <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="DiscoverDetailVC" id="yZP-yI-NB7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mji-iF-hDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1172.5" y="218"/>
+            <point key="canvasLocation" x="1095" y="392"/>
         </scene>
         <!--Inbox-->
         <scene sceneID="Jeb-M6-yLI">

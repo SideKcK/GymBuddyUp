@@ -11,6 +11,29 @@ import UIKit
 let testURL = NSURL(string: "http://www.building-muscle101.com/images/bench_press.jpg")
 
 class Exercise {
+    
+    struct Set {
+        var amount: Int?
+        var intermission: Int?
+        var weight: Int?
+        
+        init (dict: NSDictionary) {
+            self.amount = dict.valueForKey("amount") as? Int
+            self.intermission = dict.valueForKey("intermission") as? Int
+            self.weight = dict.valueForKey("weight") as? Int
+        }
+        
+        static func setArrayFromDictArray(data:[NSDictionary]?) -> [Set?] {
+            var sets = [Set?]()
+            if data != nil {
+                for dict in data! {
+                    sets.append(Set(dict: dict))
+                    }
+            }
+            return sets
+        }
+    }
+    
     var id: Int!
     var name: String!
     var thumbnailURL: NSURL!
@@ -18,9 +41,7 @@ class Exercise {
     var description: String?
     var sort_order: Int?
     var unitType: UnitType!
-    var amount: Int? 
-    var intermission: Int?
-    var order: Int?
+    var set: [Set?]
     
     enum UnitType : Int {
         case Repetition = 0
@@ -35,6 +56,7 @@ class Exercise {
         thumbnailURL = testURL
         gifURL = testURL
         description = "this is a test exercise: The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps."
+        set = []
     }
         
     init (id: Int, dict: NSDictionary) {
@@ -44,6 +66,8 @@ class Exercise {
         self.description = dict.valueForKey("description") as? String
         self.thumbnailURL = testURL
         self.gifURL = testURL
-        self.unitType = UnitType.Repetition
+        let typeVal = dict.valueForKey("type") as? Int
+        self.unitType = UnitType(rawValue: (typeVal != nil ? typeVal!:0))
+        self.set = Set.setArrayFromDictArray((dict.valueForKey("set") as? [NSDictionary]))
     }
 }

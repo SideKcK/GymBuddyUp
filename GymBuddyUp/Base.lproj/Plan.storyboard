@@ -1423,7 +1423,7 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qhw-uT-cFT"/>
         <segue reference="rgS-nG-orv"/>
+        <segue reference="bTs-V8-eL8"/>
     </inferredMetricsTieBreakers>
 </document>

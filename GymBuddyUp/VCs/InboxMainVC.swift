@@ -12,14 +12,17 @@ import HMSegmentedControl
 class InboxMainVC: UIViewController {
     @IBOutlet weak var segView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    
     var messages = [String](count: 10, repeatedValue: "Test")
     var showInvites = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         setupTableView()
         addSegControl(segView)
+
         // Do any additional setup after loading the view.
     }
 
@@ -46,9 +49,33 @@ class InboxMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    
     func onSegControl (sender: HMSegmentedControl) {
         showInvites = !showInvites
         tableView.reloadData()
+    }
+    
+    func onAcceptButton (sender: UIButton) {
+        let row = sender.tag
+        messages.removeAtIndex(row)
+        tableView.reloadData()
+    }
+    
+    func onCancelButton (sender: UIButton) {
+        let row = sender.tag
+        messages.removeAtIndex(row)
+        tableView.reloadData()
+    }
+    
+    func onDeleteButton (sender: UIButton) {
+        let row = sender.tag
+        print("delete row \(row)")
+        self.tableView.beginUpdates()
+        messages.removeAtIndex(row)
+        let indexPath = NSIndexPath(forRow: row, inSection: 0)
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        self.tableView.endUpdates()
     }
     
     @IBAction func onClearButton(sender: AnyObject) {
@@ -87,9 +114,14 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
         }else {
             cell.showButtons()
         }
+        //get cancel/accept button from cell.message
         //cell.acceptButton.tag = indexPath.row
-        //cell.acceptButton.addTarget(self, action: #selector(DiscoverMainVC.onGymButton), forControlEvents: .TouchUpInside)
-        
+        cell.acceptButton.addTarget(self, action: #selector(InboxMainVC.onAcceptButton), forControlEvents: .TouchUpInside)
+        //cell.cancelButton.tag = indexPath.row
+        cell.cancelButton.addTarget(self, action: #selector(InboxMainVC.onCancelButton), forControlEvents: .TouchUpInside)
+        cell.deleteButton.tag = indexPath.row
+        print("assigning cell \(indexPath.row)")
+        cell.deleteButton.addTarget(self, action: #selector(InboxMainVC.onDeleteButton), forControlEvents: .TouchUpInside)
         cell.setNeedsUpdateConstraints()
         cell.updateConstraintsIfNeeded()
         return cell

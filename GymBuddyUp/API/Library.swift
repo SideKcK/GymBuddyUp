@@ -107,19 +107,14 @@ class Library {
                 let exerciseData = exerciseSnapshot.value as? NSDictionary
                 
                 let exerciseId = exerciseData?.valueForKey("exercise") as? Int
-                let amount = exerciseData?.valueForKey("amount") as? Int
-                let intermission = exerciseData?.valueForKey("intermission") as? Int
-                let order = Int(exerciseSnapshot.key)
+                let setData = exerciseData?.valueForKey("set") as? [NSDictionary]
                 
                 if (exerciseId != nil) {
                     dispatch_group_enter(getExercisesTaskGroup)
                     getExerciseById(exerciseId!,completion: { (exercise, error) in
                         if let exercise = exercise {
                             
-                            exercise.amount = amount
-                            exercise.intermission = intermission
-                            exercise.order = order
-                            
+                            exercise.set = Exercise.Set.setArrayFromDictArray(setData)
                             exercises.append(exercise)
                             dispatch_group_leave(getExercisesTaskGroup)
                         }

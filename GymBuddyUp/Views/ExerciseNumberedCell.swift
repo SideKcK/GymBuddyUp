@@ -17,6 +17,7 @@ class ExerciseNumberedCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
 
     var exercise: Exercise! {
+        
         didSet {
             let downloadURL = exercise.thumbnailURL
             self.thumbnailView.af_setImageWithURL(downloadURL)

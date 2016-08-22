@@ -53,14 +53,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dn0-oi-tMH">
-                                <rect key="frame" x="75" y="84" width="112" height="22.5"/>
+                                <rect key="frame" x="75" y="84" width="112" height="23"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRO-Ma-E3P">
-                                        <rect key="frame" x="0.0" y="0.0" width="49" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="23"/>
                                         <state key="normal" title="Accept"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrd-u3-LQd">
-                                        <rect key="frame" x="64" y="0.0" width="48" height="22.5"/>
+                                        <rect key="frame" x="64" y="0.0" width="48" height="23"/>
                                         <state key="normal" title="Cancel"/>
                                     </button>
                                 </subviews>
@@ -68,10 +68,22 @@
                                     <constraint firstAttribute="height" priority="250" id="mSS-C2-jGQ"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oD-TY-lgk">
+                                <rect key="frame" x="324" y="38" width="70" height="40"/>
+                                <color key="backgroundColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="M6k-PC-CTj"/>
+                                    <constraint firstAttribute="width" constant="70" id="ywS-Ku-U56"/>
+                                </constraints>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CUM-i9-PWM" firstAttribute="top" secondItem="AO3-nF-Ffz" secondAttribute="top" constant="8" id="1xj-FD-8Ts"/>
+                            <constraint firstAttribute="trailing" secondItem="1oD-TY-lgk" secondAttribute="trailing" constant="-92" id="4cG-xZ-gty"/>
                             <constraint firstItem="tbl-52-dI4" firstAttribute="top" secondItem="tN8-id-bEw" secondAttribute="bottom" constant="2" id="8Xa-Jf-eRo"/>
                             <constraint firstItem="MeU-bz-qyf" firstAttribute="top" secondItem="AO3-nF-Ffz" secondAttribute="top" id="9cW-mP-735"/>
                             <constraint firstItem="S81-sM-zrP" firstAttribute="top" secondItem="tbl-52-dI4" secondAttribute="bottom" constant="1" id="DQi-8W-Ahi"/>
@@ -86,6 +98,7 @@
                             <constraint firstItem="tN8-id-bEw" firstAttribute="leading" secondItem="CUM-i9-PWM" secondAttribute="trailing" constant="15" id="ffn-KY-fdi"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tN8-id-bEw" secondAttribute="trailing" constant="12" id="jvM-xP-w24"/>
                             <constraint firstAttribute="bottom" secondItem="MeU-bz-qyf" secondAttribute="bottom" id="q9d-za-vCD"/>
+                            <constraint firstItem="1oD-TY-lgk" firstAttribute="centerY" secondItem="AO3-nF-Ffz" secondAttribute="centerY" id="ybH-D4-Rfn"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -97,8 +110,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="acceptButton" destination="rRO-Ma-E3P" id="KgU-8Q-V9P"/>
                 <outlet property="borderView" destination="AO3-nF-Ffz" id="S71-7R-kL7"/>
                 <outlet property="buttonHeight" destination="mSS-C2-jGQ" id="stP-Pj-HJx"/>
+                <outlet property="cancelButton" destination="lrd-u3-LQd" id="Ppm-FP-srA"/>
+                <outlet property="deleteButton" destination="1oD-TY-lgk" id="TG9-gb-t7P"/>
+                <outlet property="deleteLeading" destination="4cG-xZ-gty" id="IgH-dX-ZfM"/>
                 <outlet property="indicatorView" destination="MeU-bz-qyf" id="RNH-3Z-oWR"/>
                 <outlet property="nameLabel" destination="tN8-id-bEw" id="lgM-eN-shc"/>
                 <outlet property="profileView" destination="CUM-i9-PWM" id="t91-vv-r8f"/>

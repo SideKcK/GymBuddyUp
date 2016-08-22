@@ -40,11 +40,6 @@ class MessageCell: UITableViewCell {
         deleteButton.layer.cornerRadius = 5
         reset()
         
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(MessageCell.handlePan(_:)))
-        recognizer.delegate = self
-        addGestureRecognizer(recognizer)
-        
-        deleteLeading.constant = -deleteButton.bounds.width - 20
         selectionStyle = .None
     }
 
@@ -59,6 +54,8 @@ class MessageCell: UITableViewCell {
         timeHeight.priority = 999
         buttonHeight.priority = 999
         indicatorView.hidden = true
+        acceptButton.hidden = true
+        cancelButton.hidden = true
     }
     
     func showIndicator(positive: Bool) {
@@ -68,6 +65,8 @@ class MessageCell: UITableViewCell {
     
     func showButtons() {
         buttonHeight.priority = 250
+        acceptButton.hidden = false
+        cancelButton.hidden = false
     }
     
     func showTime() {
@@ -75,46 +74,4 @@ class MessageCell: UITableViewCell {
 
     }
     
-}
-
-extension MessageCell {
-    func handlePan(recognizer: UIPanGestureRecognizer) {
-        // 1
-        if recognizer.state == .Began {
-            // when the gesture begins, record the current center location
-            originalLeading = deleteLeading.constant
-            
-        }
-        // 2
-        if recognizer.state == .Changed {
-            let translation = recognizer.translationInView(self)
-            deleteLeading.constant = originalLeading - translation.x
-            //center = CGPointMake(originalCenter.x + translation.x, originalCenter.y)
-            // has the user dragged the item far enough to initiate a delete/complete?
-            deleteOnDragRelease = translation.x < -frame.size.width / 4.0
-            cancelOnDragRelease = translation.x > frame.size.width / 8.0
-            
-        }
-        // 3
-        if recognizer.state == .Ended {
-            // the frame this cell had before user dragged it
-            
-            // if the item is not being deleted, snap back to the original location
-            UIView.animateWithDuration(0.3, animations: {
-                self.deleteLeading.constant = self.deleteOnDragRelease && !self.cancelOnDragRelease ? 20.0 : -self.deleteButton.bounds.width - 20
-            })
-            
-        }
-    }
-
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = panGestureRecognizer.translationInView(superview!)
-            if fabs(translation.x) > fabs(translation.y) {
-                return true
-            }
-            return false
-        }
-        return false
-    }
 }

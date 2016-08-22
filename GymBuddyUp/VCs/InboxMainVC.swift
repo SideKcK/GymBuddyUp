@@ -13,6 +13,7 @@ class InboxMainVC: UIViewController {
     @IBOutlet weak var segView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    var actions = [String] (count: 3, repeatedValue: "Action")
     var messages = [String](count: 10, repeatedValue: "Test")
     var showInvites = true
     
@@ -49,7 +50,6 @@ class InboxMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     
     func onSegControl (sender: HMSegmentedControl) {
         showInvites = !showInvites
@@ -66,16 +66,6 @@ class InboxMainVC: UIViewController {
         let row = sender.tag
         messages.removeAtIndex(row)
         tableView.reloadData()
-    }
-    
-    func onDeleteButton (sender: UIButton) {
-        let row = sender.tag
-        print("delete row \(row)")
-        self.tableView.beginUpdates()
-        messages.removeAtIndex(row)
-        let indexPath = NSIndexPath(forRow: row, inSection: 0)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        self.tableView.endUpdates()
     }
     
     @IBAction func onClearButton(sender: AnyObject) {
@@ -99,29 +89,38 @@ class InboxMainVC: UIViewController {
 extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return actions.count
+        }else {
+            return messages.count
+        }
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
         cell.reset()
-        cell.message = messages[indexPath.row]
+        if indexPath.section == 0 {
+            cell.message = actions[indexPath.row]
+            cell.showButtons()
+            //get cancel/accept button from cell.message
+            //cell.acceptButton.tag = indexPath.row
+            cell.acceptButton.addTarget(self, action: #selector(InboxMainVC.onAcceptButton), forControlEvents: .TouchUpInside)
+            //cell.cancelButton.tag = indexPath.row
+            cell.cancelButton.addTarget(self, action: #selector(InboxMainVC.onCancelButton), forControlEvents: .TouchUpInside)
+        }else {
+            cell.message = messages[indexPath.row]
+        }
         if showInvites {
             cell.showTime()
             cell.showIndicator(true)
-            cell.showButtons()
-        }else {
-            cell.showButtons()
         }
-        //get cancel/accept button from cell.message
-        //cell.acceptButton.tag = indexPath.row
-        cell.acceptButton.addTarget(self, action: #selector(InboxMainVC.onAcceptButton), forControlEvents: .TouchUpInside)
-        //cell.cancelButton.tag = indexPath.row
-        cell.cancelButton.addTarget(self, action: #selector(InboxMainVC.onCancelButton), forControlEvents: .TouchUpInside)
-        cell.deleteButton.tag = indexPath.row
-        print("assigning cell \(indexPath.row)")
-        cell.deleteButton.addTarget(self, action: #selector(InboxMainVC.onDeleteButton), forControlEvents: .TouchUpInside)
+        
         cell.setNeedsUpdateConstraints()
         cell.updateConstraintsIfNeeded()
         return cell
@@ -132,7 +131,11 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("ToMessageDetailSegue", sender: messages[indexPath.row])
+        if showInvites {
+            self.performSegueWithIdentifier("toPlanDetailSegue", sender: messages[indexPath.row])
+        }else {
+            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: messages[indexPath.row])
+        }
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MessageCell {
             cell.borderView.backgroundColor = ColorScheme.sharedInstance.greyText
             UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {

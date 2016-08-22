@@ -26,6 +26,13 @@ class ColorScheme {
     var calTextDark: UIColor
     
     var buttonTint: UIColor
+    
+    var trackingNavigationButtonBg: UIColor
+    var trackingNavigationButtonTx: UIColor
+    var trackingNavigationParamsLabel: UIColor
+    
+    var trackingDoneModalBg: UIColor
+    
     init (){
         bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
         bgGradientOut = UIColor(red: 63/255.0, green: 203/255.0, blue: 213/255.0, alpha: 1.0)
@@ -40,5 +47,10 @@ class ColorScheme {
         calText = UIColor.flatWhiteColor()
         calTextDark = UIColor.flatWhiteColorDark()
         buttonTint = UIColor.flatMintColor()
-        }
+        trackingNavigationButtonBg = UIColor.flatMintColor()
+        trackingNavigationButtonTx = UIColor.flatWhiteColor()
+        
+        trackingNavigationParamsLabel = UIColor.flatBlackColor()
+        trackingDoneModalBg = UIColor ( red: 0.08, green: 0.0, blue: 0.0, alpha: 0.68 )
+    }
 }

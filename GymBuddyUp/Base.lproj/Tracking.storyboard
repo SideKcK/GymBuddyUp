@@ -31,6 +31,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="&gt;&gt;"/>
+                                                <connections>
+                                                    <action selector="nextItemOnClick:" destination="Eaj-m7-41E" eventType="touchUpInside" id="xbw-hb-xyU"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhY-xm-k8U" customClass="TrackingNavigationButton" customModule="GymBuddyUp" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="5" width="30" height="30"/>
@@ -40,6 +43,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="&lt;&lt;"/>
+                                                <connections>
+                                                    <action selector="previousItemOnClick:" destination="Eaj-m7-41E" eventType="touchUpInside" id="bb5-nQ-M5g"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274509803926" green="0.94509803921568625" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,8 +265,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzq-DQ-59B" userLabel="ButtonContainer">
                                         <rect key="frame" x="0.0" y="426" width="320" height="122"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oLK-gi-eHd" customClass="TrackingNavigationButton" customModule="GymBuddyUp" customModuleProvider="target">
-                                                <rect key="frame" x="125" y="8" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oLK-gi-eHd" customClass="TrackingNavigationButton" customModule="GymBuddyUp" customModuleProvider="target">
+                                                <rect key="frame" x="135" y="8" width="50" height="50"/>
                                                 <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="qNo-61-EGS"/>
@@ -270,6 +276,9 @@
                                                 <state key="normal" title="||">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="bottomButtonOnClick:" destination="Eaj-m7-41E" eventType="touchUpInside" id="2a6-ba-WqJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -334,6 +343,7 @@
                         <outlet property="lbsPicker" destination="5tp-o6-Qxm" id="lFH-Rp-wL6"/>
                         <outlet property="lbsPickerContainer" destination="lD3-Qo-mC4" id="ak5-qu-zQc"/>
                         <outlet property="paramsContainer" destination="lf9-tg-lzR" id="wD1-gI-9og"/>
+                        <outlet property="progressIndicatorLabel" destination="PGI-0z-boU" id="xkA-Vi-3Zd"/>
                         <outlet property="progressLabel" destination="kbx-eb-35g" id="ah5-hv-LsZ"/>
                         <outlet property="progressView" destination="Ctc-CP-jRO" id="TMl-Ov-1pd"/>
                         <outlet property="redoButton" destination="IhY-xm-k8U" id="3b0-Uk-Fpu"/>

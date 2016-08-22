@@ -425,7 +425,7 @@
 				TargetAttributes = {
 					C649C5461CE2C31C00258994 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MT7235KFGL;
+						DevelopmentTeam = F697GBXU4H;
 					};
 				};
 			};
@@ -770,7 +770,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
+				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -785,7 +785,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test;
+				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

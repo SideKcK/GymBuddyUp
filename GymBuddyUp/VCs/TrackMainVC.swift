@@ -16,6 +16,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var botButton: UIButton!
     
+    @IBOutlet weak var progressIndicatorLabel: UILabel!
     @IBOutlet weak var lbsPicker: AKPickerView!
     
     @IBOutlet weak var repsPicker: AKPickerView!
@@ -32,6 +33,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     @IBOutlet weak var exerciseLabel: UILabel!
     
+    
+    
     var trackedPlan: TrackedPlan?
     var seconds: Float = 0.0
     var secondTotal: Float = 0.0
@@ -40,12 +43,45 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var popoverVC: UIViewController?
     var itemsCount = 0
     
+    var finishedSets = 0 {
+        didSet {
+            guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
+            Log.info("\(_currentUnitType)")
+
+            guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+            if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
+                Log.info("finishedSets for Rep and RepByWeight")
+                progressIndicatorLabel.text = "\(finishedSets + 1) SET"
+                progressLabel.text = "\(finishedSets)/\(_currentTrackedItem.setsAmount)"
+                let progressValue = (Float(finishedSets))/(Float(_currentTrackedItem.setsAmount))
+                    progressView.setProgress(progressValue, animated: false)
+            }
+        }
+    }
+    
+    var finishedAmount = 0 {
+        didSet {
+            guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
+            Log.info("\(_currentUnitType)")
+            guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+            if !((_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight)) {
+                if let amount = _currentTrackedItem.exercise?.amount {
+                    Log.info("finishedAmount for Rep and RepByWeight")
+                    progressLabel.text = secondsToHoursMinutesSeconds(amount)
+                    timerLabel.text = secondToString(Float(finishedAmount))
+                    let progressValue = (Float(finishedAmount))/(Float(amount))
+                    progressView.setProgress(progressValue, animated: true)
+                }
+            }
+        }
+    }
+    var currentUnitType: Exercise.UnitType?
+    
     var repsRange = [1, 2, 3, 4, 5, 6, 7, 8]
     var lbsRange = [10, 15, 20, 25, 30, 35, 40]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTimer()
         
         lbsPicker.dataSource = self
         lbsPicker.delegate = self
@@ -88,25 +124,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             itemsCount += _count
         }
         
-        if let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType {
-            Log.info(String(_currentUnitType))
-            if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
-                timerContainer.hidden = true
-                paramsContainer.hidden = false
-            } else {
-                timerContainer.hidden = false
-                paramsContainer.hidden = true
-            }
-        }
+        loadTrackingItem()
         
-        if let _currentExpectedAmount = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.amount {
-            Log.info(String(_currentExpectedAmount))
-        }
-        
-        if let _currentExerciseName = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.name {
-            exerciseLabel.text = _currentExerciseName
-        }
-        
+        // init popoverVC
         popoverVC = storyboard!.instantiateViewControllerWithIdentifier("trackingTodo")
         popoverVC?.modalPresentationStyle = .Popover
         
@@ -119,6 +139,87 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         // Do any additional setup after loading the view.
     }
     
+    func exerciseContextSave(onFinishedAmount: Int, onFinishedSets: Int) {
+        // save current context
+        if let currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] {
+            currentTrackedItem.saveOnNextExercise(finishedAmount, onFinishedSets: finishedSets)
+        }
+        
+        loadTrackingItem()
+    }
+    
+    @IBAction func previousItemOnClick(sender: AnyObject) {
+        if currentTrackedIndex > 0 {
+            currentTrackedIndex -= 1
+            exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+        }
+    }
+    
+
+    @IBAction func nextItemOnClick(sender: AnyObject) {
+        if currentTrackedIndex < itemsCount - 1 {
+            currentTrackedIndex += 1
+            exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+        }
+    }
+    
+    
+    
+    @IBAction func bottomButtonOnClick(sender: AnyObject) {
+        guard let _currentUnitType = self.currentUnitType, currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
+            // save current context
+            guard let reps = repsLabel.text, weight = lbsLabel.text else {return}
+            guard let repsValue = Int(reps), weightValue = Int(weight) else {return}
+            currentTrackedItem.saveOnNextSet(repsValue, weight: weightValue)
+            if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount {
+                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+            }
+        } else {
+            
+        
+        }
+    }
+    
+    
+    func loadTrackingItem() {
+        
+        // reset context
+        finishedSets = 0
+        finishedAmount = 0
+        
+        // reload views needed
+        lbsPickerContainer.hidden = true
+        repsPickerContainer.hidden = true
+        gifContainer.hidden = false
+        gifIcon.hidden = false
+        
+        guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
+        guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        currentUnitType = _currentUnitType
+
+        if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
+            timerContainer.hidden = true
+            paramsContainer.hidden = false
+        } else {
+            timerContainer.hidden = false
+            paramsContainer.hidden = true
+        }
+        
+        
+        if let _currentExpectedAmount = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.amount {
+            Log.info(String(_currentExpectedAmount))
+        }
+        
+        if let _currentExerciseName = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.name {
+            exerciseLabel.text = _currentExerciseName
+        }
+        
+        // reload progress
+        
+        
+    }
+    
     func dropDownTitleNavButton(button: DropDownTitleNavButton) {
         if let _popoverVC = popoverVC {
             if let popoverController = _popoverVC.popoverPresentationController {
@@ -126,6 +227,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
                 desVC.trackedPlan = trackedPlan
                 var itemCount: CGFloat = 0.0
                 if let _itemCount = trackedPlan?.trackingItems.count {
+                    itemCount = 0
                     itemCount += CGFloat(_itemCount)
                 }
                 desVC.preferredContentSize =  CGSizeMake(320, itemCount * 55)
@@ -205,20 +307,18 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func setTimer() {
-        seconds = 100.0
         secondTotal = seconds
         progressView.setProgress(1.0, animated: true)
         progressLabel.text = secondToMin(secondTotal)
         timerLabel.text = secondToString(seconds)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(TrackMainVC.subtractTime), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(TrackMainVC.addTime), userInfo: nil, repeats: true)
     }
 
-    func subtractTime() {
-        seconds -= 1.0
-        timerLabel.text = secondToString(seconds)
-        progressView.setProgress((seconds/secondTotal), animated: true)
-
-        if(seconds == 0)  {
+    func addTime() {
+        guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        guard let currentExercise = _currentTrackedItem.exercise else {return}
+        finishedAmount += 1
+        if(finishedAmount == currentExercise.amount)  {
             timer.invalidate()
             botButton.titleLabel?.text = ">>"
             //go to next exercise

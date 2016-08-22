@@ -24,23 +24,34 @@ import FirebaseStorage
 
 
 class TrackedItem {
-    var finishedAmount: Int
-    var finishedSets: Int
-    var exercise: Exercise?
+    var setsAmount: Int
+    var finishedAmount: Int // for timed sensitive item like running
+    var finishedSets: Int   // for mechanical item like pressing
+    var exercise: Exercise? // reference for Exercise
     var maxReps: Int
     var maxWeight: Int
+    var isFinalized: Bool
+    var reps: [Int]
+    var weights: [Int]
     
+    // TODO: read set from exercise
     init(_exercise: Exercise) {
+        setsAmount = 3
         exercise = _exercise
+//        need to set setsAmount
+//        setsAmount = exercise.set
         finishedAmount = 0
         finishedSets = 0
         maxReps = 0
         maxWeight = 0
+        isFinalized = false
+        reps = [Int](count: setsAmount, repeatedValue: 0)
+        weights = [Int](count: setsAmount, repeatedValue: 0)
     }
     
-    func saveOnNextExercise(_finishedAmount: Int, _finishedSets: Int) {
-        finishedAmount = _finishedAmount
-        finishedSets = _finishedSets
+    func saveOnNextExercise(onFinishedAmount: Int, onFinishedSets: Int) {
+        finishedAmount = onFinishedAmount
+        finishedSets = onFinishedSets
     }
     
     func saveOnNextSet(reps: Int, weight: Int) {

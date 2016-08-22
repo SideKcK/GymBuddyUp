@@ -59,6 +59,10 @@ func secondToMin(sec: Float) -> String {
     return String(minutes)+" mins"
 }
 
+func secondsToHoursMinutesSeconds (seconds : Int) -> String {
+    return "\((seconds % (3600 * 24)) / 60)min\((seconds % 3600) % 60)s"
+}
+
 func dateTimeFormatter () -> NSDateFormatter {
     let dateFormatter = NSDateFormatter()
     

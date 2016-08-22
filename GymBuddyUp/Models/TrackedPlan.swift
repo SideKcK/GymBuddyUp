@@ -15,6 +15,7 @@ import FirebaseStorage
 
 class TrackedPlan {
     var trackingId: String?
+    var user: User?
     var trackingItems = [TrackedItem]()
     
     init(plan: Plan) {

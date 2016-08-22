@@ -44,17 +44,17 @@ class DropDownTitleNavButton: UIView {
     
     
     func setupButton() {
-        label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width - 20, height: frame.height))
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         label.text = title
         label.textAlignment = .Center
         label.textColor = UIColor.whiteColor()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.addSubview(label)
-
-        dropDownButton = UIImageView(frame: CGRect(x: frame.width - 20, y: frame.height/3, width: 12, height: 12))
-        dropDownButton.image = UIImage(named: "expand-arrow")
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dropDownAction(_:)))
-        self.addGestureRecognizer(tapGesture)
-        self.addSubview(dropDownButton)
+//
+//        dropDownButton = UIImageView(frame: CGRect(x: frame.width - 20, y: frame.height/3, width: 12, height: 12))
+//        dropDownButton.image = UIImage(named: "expand-arrow")
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dropDownAction(_:)))
+//        self.addGestureRecognizer(tapGesture)
+//        self.addSubview(dropDownButton)
     }
 }

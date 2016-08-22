@@ -34,14 +34,14 @@ class PlanMainVC: UIViewController {
         getPlansThisWeek(selectedDate)
     }
     
-        
+    
     func setTableView() {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-
+        
     }
     
     func setCalendar() {
@@ -56,9 +56,9 @@ class PlanMainVC: UIViewController {
         
     }
     
-        func reloadPlans(date: NSDate) {
+    func reloadPlans(date: NSDate) {
         KRProgressHUD.show()
-
+        
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
             self.workouts[date] = workouts
             if let planIds = Plan.planIDsWithArray(workouts) {
@@ -77,7 +77,7 @@ class PlanMainVC: UIViewController {
                     KRProgressHUD.dismiss()
                     self.dots.removeAll()
                     self.getCalendarWorkouts(date)
-
+                    
                 })
             }
         }
@@ -183,7 +183,7 @@ class PlanMainVC: UIViewController {
         
     }
     
-
+    
     @IBAction func onNewPlanButton(sender: AnyObject) {
         self.performSegueWithIdentifier("toPlanLibrarySegue", sender: self)
         //        let alertController = UIAlertController(title: nil, message: "New Plan", preferredStyle: .ActionSheet)
@@ -233,7 +233,7 @@ class PlanMainVC: UIViewController {
                 }else {
                     print(error)
                 }
-
+                
             })
         }
         if !repeating {
@@ -294,27 +294,23 @@ class PlanMainVC: UIViewController {
         /* Yi Huang: should return in each branch to terminate extra comparisons*/
         if segue.identifier == "startWorkoutSegue" {
             let desVC = segue.destinationViewController as! TrackMainVC
-                if let _plans = plans[selectedDate] {
-                    if _plans.count > 0 {
-                        desVC.trackedPlan = TrackedPlan(plan: _plans[0])
-                    }
+            if let _plans = plans[selectedDate] {
+                if _plans.count > 0 {
+                    desVC.trackedPlan = TrackedPlan(plan: _plans[0])
                 }
+            }
             
         }
         
-        if segue.identifier ==  "toExerciseDetailSegue" {
-            if let desVC = segue.destinationViewController as? PlanExerciseVC {
-                if let plans = plans[selectedDate], exercises = plans[0].exercises {
-                    desVC.exercise = exercises[sender as! Int]
-                }
+        
         if let desVC = segue.destinationViewController as? PlanDetailVC {
             desVC.selectedDate = selectedDate
             if let row = sender as? Int {
-            desVC.plan =  plans[selectedDate]![row]
-            desVC.workout = workouts[selectedDate]![row]
+                desVC.plan =  plans[selectedDate]![row]
+                desVC.workout = workouts[selectedDate]![row]
             }
         }
-            if segue.identifier == "toPlanLibrarySegue" {
+        if segue.identifier == "toPlanLibrarySegue" {
             if let desVC = segue.destinationViewController as? PlanLibNavVC {
                 desVC.selectedDate = selectedDate
             }
@@ -369,7 +365,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     //        return UIView()
     //
     //    }
-
+    
     
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
@@ -484,4 +480,3 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.row)
     }
 }
-

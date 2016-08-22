@@ -65,7 +65,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             Log.info("\(_currentUnitType)")
             guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
             if !((_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight)) {
-                if let amount = _currentTrackedItem.exercise?.amount {
+                if let amount = _currentTrackedItem.exercise?.set[0]?.amount {
                     Log.info("finishedAmount for Rep and RepByWeight")
                     progressLabel.text = secondsToHoursMinutesSeconds(amount)
                     timerLabel.text = secondToString(Float(finishedAmount))
@@ -207,7 +207,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         }
         
         
-        if let _currentExpectedAmount = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.amount {
+        if let _currentExpectedAmount = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.set[0]?.amount {
             Log.info(String(_currentExpectedAmount))
         }
         
@@ -318,7 +318,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
         guard let currentExercise = _currentTrackedItem.exercise else {return}
         finishedAmount += 1
-        if(finishedAmount == currentExercise.amount)  {
+        if(finishedAmount == currentExercise.set[0]?.amount)  {
             timer.invalidate()
             botButton.titleLabel?.text = ">>"
             //go to next exercise

@@ -20,8 +20,6 @@ target 'GymBuddyUp' do
     pod 'Firebase/Storage'
     pod 'Firebase/Messaging'
     
-    pod 'AKPickerView-Swift'
-    
     # These are pods used for the auth providers.
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'

@@ -11,20 +11,10 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 
+private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
 private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
-private let storageRef = FIRStorage.storage().reference()
 
 class Invite {
-    
-    struct WorkoutInvite {
-        var id: String
-        var gymId : String
-        var time: NSDate
-        var gymLocation: CLLocation
-        var planId: String
-        var publishedBy: String
-        var publishedAt: String
-    }
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
     
@@ -62,25 +52,51 @@ class Invite {
         
     }
     
-    class func sendWorkoutInvite(recipientId: String, completion: (NSError?) -> Void ) {
+    class func sendWorkoutInviteToUser(recipientId: String, completion: (NSError?) -> Void ) {
         
     }
     
-    class func sendWorkoutInviteToPublic(planId: String, gymId: String, gymLocation: CLLocation, time: NSDate, completion: (NSError?) -> Void ) {
+    class func publishWorkoutInviteToPublic(PlanId: String, scheduledWorkoutId: String, gymPlaceId: String, gymLocation: CLLocation, workoutTime: NSDate, completion: (NSError?) -> Void ) {
         let workoutRef = publishedWorkoutRef.childByAutoId()
-        var data = [String: AnyObject]()
-        data["time"] = time.toString(.ISO8601Format(.Full))
-        data["published_at"] = FIRServerValue.timestamp()
-        data["published_by"] = User.currentUser?.userId
-        data["gym_id"] = gymId
-        //data["location"] =
+        let workoutId = workoutRef.key
+        let workoutPath = "/published_workout/\(workoutId)"
+        var workoutData = [String:AnyObject]();
         
-        workoutRef.setValue(data) { (error, ref) in
-            completion(error)
+        workoutData["gym_place_id"] = gymPlaceId
+        workoutData["workout_time"] = workoutTime.timeIntervalSince1970
+        workoutData["plan"] = PlanId
+        workoutData["scheduled_workout"] = scheduledWorkoutId
+        workoutData["published_at"] = FIRServerValue.timestamp()
+        workoutData["published_by"] = User.currentUser?.userId
+        
+        var userInviteData = [String:AnyObject]();
+        let userInvitePath = "/user_workout_invite/\(User.currentUser!.userId)/\(workoutId)"
+        userInviteData["access"] = "public"
+        userInviteData["scheduled_workout"] = scheduledWorkoutId
+        
+        var inviteData = [String:AnyObject]();
+        let invitePath = "/workout_invite/\(workoutId)"
+        inviteData["inviter"] = User.currentUser?.userId
+        inviteData["invitee"] = nil
+        inviteData["accepted"] = false
+        inviteData["confirmed"] = false
+        inviteData["scheduled_workout"] = scheduledWorkoutId
+        
+        let fanoutObject = [workoutPath: workoutData, userInvitePath: userInviteData, invitePath: inviteData]
+        
+        ref.updateChildValues(fanoutObject) { (error, ref) in
+            if (error != nil) {
+                return completion(error)
+            }
+            
+            let geofire = GeoFire(firebaseRef: workoutRef)
+            geofire.setLocation(gymLocation, forKey: "gym_location") { (error) in
+                completion(error)
+            }
         }
     }
     
-    class func sendWorkoutInviteToFriends(completion: (NSError?) -> Void ) {
+    class func publishWorkoutInviteToFriends(completion: (NSError?) -> Void ) {
         
     }
 }

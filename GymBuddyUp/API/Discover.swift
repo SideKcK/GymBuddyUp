@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+struct PublishedWorkout {
+    var planId: String
+    var gymPlaceId: String
+    var gymLocation: CLLocation
+    var publishedBy: String
+    var workoutTime: NSDate
+    var publishedAt: NSDate
+}
+
+class Discover {
+    class func getPublicWorkout(maxDistance: Float) {
+        
+    }
+}

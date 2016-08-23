@@ -71,13 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-//        Invite.sendWorkoutInviteToPublic("-KPHMEB3SLHgJ-v39B3Y", workoutTime: NSDate(), gymId: "gymId123") { (error) in
+//        Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gymPlaceId: "place_id", gymLocation: CLLocation(latitude: 30.563, longitude: -96.311), workoutTime: NSDate()) { (error) in
 //            print(error)
 //        }
-        
-//        Library.getExercisesByPlanId("-KOZM75q5bh0DtN4AvzM") { (exercises, error) in
-//            print(exercises)
-//        }
+
     }
     
     func userDidLogout() {

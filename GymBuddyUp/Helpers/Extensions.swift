@@ -29,9 +29,19 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 1
+        if let button = self as? UIButton {
+            button.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
+        }
         //self.clipsToBounds = true
     }
-
+    func makeBorderButton (color: UIColor) {
+        self.layer.cornerRadius = self.frame.height / 2.0
+        self.backgroundColor = ColorScheme.s4Bg
+        self.tintColor = color
+        self.layer.borderColor = color.CGColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+    }
 }
 
 extension CALayer {
@@ -73,6 +83,24 @@ extension UIButton {
         self.contentMode = UIViewContentMode.ScaleAspectFill
         self.clipsToBounds = true
     }
+
+    func makeBotButton () {
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.titleLabel?.font = UIFont.systemFontOfSize(20, weight: UIFontWeightMedium)
+    }
+    
+    func makeActionButton () {
+        self.layer.cornerRadius = 8
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.tintColor = ColorScheme.g4Text
+        self.titleLabel?.font = FontScheme.T2
+    }
+    
+
 }
 
 extension UIImageView {
@@ -113,6 +141,14 @@ extension UIImage {
     }
 }
 
+extension UIAlertController {
+    func customize() {
+        let backView = self.view.subviews.last?.subviews.last
+        //backView?.layer.cornerRadius = 10.0
+        backView?.alpha = 1.0
+        self.view.tintColor = ColorScheme.p1Tint
+    }
+}
 extension CVDate {
     public var monthDescription: String {
         get {
@@ -206,15 +242,6 @@ extension UIView {
         BottomBorder.backgroundColor = color.CGColor
         self.layer.addSublayer(BottomBorder)
         return BottomBorder
-    }
-    
-    func setTopBorder(color color: UIColor) {
-        let TopBorder = CALayer()
-        TopBorder.frame = CGRectMake(0.0, 0.0, self.frame.size.width, 1.5)
-        TopBorder.backgroundColor = color.CGColor
-        TopBorder.opacity = 0.3
-        
-        self.layer.addSublayer(TopBorder)
     }
     
     func applyPlainShadow() {

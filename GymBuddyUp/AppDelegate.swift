@@ -107,7 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let notification = userInfo["aps"] as? NSDictionary,
             let alert = notification["alert"] as? String {
             let alertCtrl = UIAlertController(title: "Message Received", message: alert as String, preferredStyle: UIAlertControllerStyle.Alert)
+            alertCtrl.customize()
             alertCtrl.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
             // Find the presented VC...
             var presentedVC = self.window?.rootViewController
             while (presentedVC!.presentedViewController != nil)  {

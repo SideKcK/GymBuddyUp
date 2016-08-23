@@ -24,6 +24,7 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var joinButton: UIButton!
 
     var event: Plan!
     override func viewDidLoad() {
@@ -53,9 +54,10 @@ class DiscoverDetailVC: UIViewController {
         profileView.makeThumbnail(ColorScheme.p1Tint)
         statusLabel.textColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
+        joinButton.makeBotButton()
         tableView.separatorColor = ColorScheme.g3Text
         
-        let heading = FontScheme.H1
+        let heading = FontScheme.H2
         let text = FontScheme.T3
         nameLabel.font = heading
         goalLabel.font = text

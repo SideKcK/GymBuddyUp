@@ -35,6 +35,7 @@ class LandingScreenVC: UIViewController {
     
     func addAlertView (button: UIButton, error: NSError) -> UIAlertController {
         let errorAlert = UIAlertController(title: "Login Failed", message: error.localizedDescription, preferredStyle: .Alert)
+        errorAlert.customize()
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             button.enabled = true
             button.alpha = 1.0

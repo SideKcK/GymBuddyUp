@@ -56,7 +56,8 @@ class Exercise {
         thumbnailURL = testURL
         gifURL = testURL
         description = "this is a test exercise: The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps."
-        set = []
+        let tmpSet = Set(dict: ["amount": "10", "intermission": "10", "weight":"30"])
+        set = [tmpSet]
     }
         
     init (id: Int, dict: NSDictionary) {

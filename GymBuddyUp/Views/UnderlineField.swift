@@ -12,7 +12,7 @@ class UnderlineField: UITextField {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        let textColor = ColorScheme.sharedInstance.lightText
+        let textColor = ColorScheme.g4Text
         self.textColor = textColor
         if let placeholder = self.placeholder {
         self.attributedPlaceholder = NSAttributedString(string:placeholder,attributes: [NSForegroundColorAttributeName: textColor])

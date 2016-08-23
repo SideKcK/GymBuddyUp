@@ -17,11 +17,23 @@ class ExerciseNumberedCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
 
     var exercise: Exercise! {
+        
         didSet {
             let downloadURL = exercise.thumbnailURL
             self.thumbnailView.af_setImageWithURL(downloadURL)
-            self.thumbnailView.makeThumbnail()
+            self.thumbnailView.makeThumbnail(ColorScheme.g2Text)
             self.nameLabel.text = exercise.name
+            guard let amount = exercise.set[0]?.amount else{
+                return
+            }
+            switch exercise.unitType! {
+            case Exercise.UnitType.Repetition, Exercise.UnitType.RepByWeight:
+                self.amountLabel.text = String(exercise.set.count) + " sets"
+            case Exercise.UnitType.DurationInSeconds:
+                self.amountLabel.text = String(amount) + " seconds"
+            case Exercise.UnitType.DistanceInMiles:
+                self.amountLabel.text = String(amount) + " miles"
+            }
         }
     }
     override func awakeFromNib() {

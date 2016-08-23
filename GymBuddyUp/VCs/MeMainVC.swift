@@ -40,11 +40,7 @@ class MeMainVC: UIViewController {
 
         
         profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight/2, width: headerW/3, height: headerW/3)
-        profileView.clipsToBounds = true
-        profileView.contentMode = UIViewContentMode.ScaleAspectFill
-        profileView.layer.cornerRadius = headerW/6
-        profileView.layer.borderWidth = 2.0
-        profileView.layer.borderColor = ColorScheme.sharedInstance.navTint.CGColor
+        profileView.makeThumbnail(ColorScheme.p1Tint)
         
         //title background
         self.titleBGView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kHeaderHeight)
@@ -59,7 +55,7 @@ class MeMainVC: UIViewController {
         self.titleBGView.addSubview(blurEffectView)
         
         let tableHeaderView = UIView(frame: CGRectMake(0, 0, headerW, kHeaderHeight))
-        tableHeaderView.backgroundColor = UIColor.flatWhiteColor()
+        tableHeaderView.backgroundColor = ColorScheme.s3Bg
         tableHeaderView.addSubview(self.titleBGView)
         tableHeaderView.addSubview(self.profileView)
         
@@ -112,9 +108,11 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         }else if indexPath.row == cells.count - 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
             cell.selectionStyle = .None
+            cell.backgroundColor = ColorScheme.s3Bg
             return cell
         }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath) as! UserWorkoutHistoryCell
+            
             return cell
         }
         

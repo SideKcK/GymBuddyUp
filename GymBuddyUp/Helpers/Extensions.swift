@@ -22,9 +22,8 @@ extension UIViewController {
 
 extension UIView {
     func addShadow() {
-        let lightColor = ColorScheme.sharedInstance.lightText
-        let darkColor = ColorScheme.sharedInstance.darkText
-        self.backgroundColor = lightColor
+        let darkColor = ColorScheme.s2Shadow
+        self.backgroundColor = ColorScheme.s4Bg
         self.layer.cornerRadius = 5
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -65,12 +64,13 @@ extension CALayer {
 }
 
 extension UIImageView {
-    func makeThumbnail() {
+    func makeThumbnail(color: UIColor) {
         //self.backgroundColor = UIColor.flatGrayColor()
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
-        self.layer.borderColor = UIColor.flatGrayColor().CGColor
+        self.layer.borderColor = color.CGColor
         self.layer.cornerRadius = self.frame.height/2.0
+        self.contentMode = UIViewContentMode.ScaleAspectFill
         self.clipsToBounds = true
     }
 }
@@ -133,16 +133,16 @@ extension UISegmentedControl
 
 extension HMSegmentedControl {
     func customize() {
-        self.selectionIndicatorColor = ColorScheme.sharedInstance.buttonTint
+        self.selectionIndicatorColor = ColorScheme.buttonTint
         self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
         
         self.titleTextAttributes = [
-            NSForegroundColorAttributeName: ColorScheme.sharedInstance.darkText,
-            NSFontAttributeName: UIFont.systemFontOfSize(13)]
+            NSForegroundColorAttributeName: ColorScheme.g3Text,
+            NSFontAttributeName: UIFont.systemFontOfSize(14)]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
-        self.borderColor = ColorScheme.sharedInstance.greyText
+        self.borderColor = ColorScheme.greyText
         self.borderWidth = 1.5
         self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
     }
@@ -176,5 +176,47 @@ struct DateRange : SequenceType {
                 return nextDate
             }
         }
+    }
+}
+
+extension UIView {
+    func setBottomBorder(color color: UIColor) -> UIView {
+        let BottomBorder = UIView()
+        BottomBorder.frame = CGRectMake(0.0, self.frame.size.height - 1, self.frame.size.width, 1.0)
+        BottomBorder.backgroundColor = color
+        self.addSubview(BottomBorder)
+        return BottomBorder
+    }
+    
+    func setBottomBorderCA(color color: UIColor) -> CALayer {
+        let BottomBorder = CALayer()
+        BottomBorder.frame = CGRectMake(0.0, self.frame.size.height - 1, self.frame.size.width, 1.0)
+        BottomBorder.backgroundColor = color.CGColor
+        self.layer.addSublayer(BottomBorder)
+        return BottomBorder
+    }
+    
+    func setTopBorder(color color: UIColor) {
+        let TopBorder = CALayer()
+        TopBorder.frame = CGRectMake(0.0, 0.0, self.frame.size.width, 1.5)
+        TopBorder.backgroundColor = color.CGColor
+        TopBorder.opacity = 0.3
+        
+        self.layer.addSublayer(TopBorder)
+    }
+    
+    func applyPlainShadow() {
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOffset = CGSize(width: 1.3, height: 1.3)
+        layer.shadowOpacity = 0.4
+        layer.shadowRadius = 1
+        
+    }
+    
+    func applySharpShadow(color: UIColor) {
+        layer.shadowColor = color.CGColor
+        layer.shadowOffset = CGSize(width: 1.3, height: 1.3)
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 0.2
     }
 }

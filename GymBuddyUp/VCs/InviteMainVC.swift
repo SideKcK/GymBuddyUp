@@ -25,9 +25,8 @@ class InviteMainVC: UITableViewController {
     var sendTo: Int!
     var sent = false
     
-    var tintColor = ColorScheme.sharedInstance.buttonTint
-    var darkText = ColorScheme.sharedInstance.darkText
-    var greyText = ColorScheme.sharedInstance.greyText
+    var tintColor = ColorScheme.buttonTint
+    var greyText = ColorScheme.greyText
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +73,7 @@ class InviteMainVC: UITableViewController {
         seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
         
         seg.addShadow()
-        seg.tintColor = ColorScheme.sharedInstance.greyText
+        seg.tintColor = ColorScheme.greyText
         seg.removeBorders()
         segViews = seg.subviews
         seg.selectedSegmentIndex = sendTo
@@ -145,7 +144,7 @@ class InviteMainVC: UITableViewController {
         for (index, _) in segViews.enumerate() {
             if index == sender.selectedSegmentIndex {
                 //segViews[index].backgroundColor = sender.tintColor
-                segViews[index].tintColor = ColorScheme.sharedInstance.buttonTint
+                segViews[index].tintColor = ColorScheme.buttonTint
                 sender.selectedSegmentIndex = UISegmentedControlNoSegment
             }else {
                 //segViews[index].backgroundColor = sender.backgroundColor

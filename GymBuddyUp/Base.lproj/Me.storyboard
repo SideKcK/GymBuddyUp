@@ -127,6 +127,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="actionButton" destination="MXh-C5-cZb" id="VMR-Bv-zfa"/>
                                             <outlet property="descriptionLabel" destination="Pkk-6c-JY9" id="HOE-Oq-tED"/>
                                             <outlet property="goalLabel" destination="kKe-Vg-dLq" id="vAk-z7-MPD"/>
                                             <outlet property="gymLabel" destination="TmN-YZ-Bxg" id="NPM-85-uZD"/>
@@ -174,7 +175,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="buddyLabel" destination="lxZ-WE-COQ" id="r5C-aw-NR5"/>
                                             <outlet property="buddyNumLabel" destination="yCJ-n8-UJV" id="auc-XO-TqX"/>
+                                            <outlet property="buddyView" destination="s8y-t1-Jh5" id="f92-Sl-wwM"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutCell" rowHeight="49" id="FIy-Yg-Dg7">
@@ -207,7 +210,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutHistoryCell" id="7T0-OP-S1c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutHistoryCell" id="7T0-OP-S1c" customClass="UserWorkoutHistoryCell" customModule="GymBuddyUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="458" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7T0-OP-S1c" id="zDS-Cz-ddH">
@@ -220,19 +223,25 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chest workout with Jake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E56-uI-hYh">
-                                                    <rect key="frame" x="71" y="12" width="168" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chest workout with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E56-uI-hYh">
+                                                    <rect key="frame" x="71" y="12" width="133" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaj-K7-cmg">
+                                                    <rect key="frame" x="206" y="6" width="46" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2IB-CA-NE6" firstAttribute="centerY" secondItem="zDS-Cz-ddH" secondAttribute="centerY" id="3eT-xr-jHU"/>
                                                 <constraint firstItem="2IB-CA-NE6" firstAttribute="top" secondItem="zDS-Cz-ddH" secondAttribute="topMargin" constant="4" id="MIy-Bj-EBH"/>
                                                 <constraint firstItem="E56-uI-hYh" firstAttribute="centerY" secondItem="2IB-CA-NE6" secondAttribute="centerY" id="Rn0-x1-tk1"/>
                                                 <constraint firstItem="2IB-CA-NE6" firstAttribute="leading" secondItem="zDS-Cz-ddH" secondAttribute="leadingMargin" constant="7" id="UW8-Rt-kXZ"/>
+                                                <constraint firstItem="Gaj-K7-cmg" firstAttribute="centerY" secondItem="E56-uI-hYh" secondAttribute="centerY" id="Xor-yW-Kli"/>
                                                 <constraint firstItem="E56-uI-hYh" firstAttribute="leading" secondItem="2IB-CA-NE6" secondAttribute="trailing" constant="7" id="qBf-y3-wyk"/>
+                                                <constraint firstItem="Gaj-K7-cmg" firstAttribute="leading" secondItem="E56-uI-hYh" secondAttribute="trailing" constant="2" id="w3k-jC-SZu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

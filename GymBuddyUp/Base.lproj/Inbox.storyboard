@@ -52,12 +52,21 @@
                     <connections>
                         <outlet property="segView" destination="exC-0d-KOU" id="hvh-kJ-x4B"/>
                         <outlet property="tableView" destination="QRq-3e-xpl" id="Fdb-Dp-NbE"/>
-                        <segue destination="yZP-yI-NB7" kind="presentation" identifier="ToMessageDetailSegue" id="I7k-qs-cAX"/>
+                        <segue destination="yZP-yI-NB7" kind="presentation" identifier="toPlanDetailSegue" id="I7k-qs-cAX"/>
+                        <segue destination="wHD-jM-hLI" kind="show" identifier="toBuddyProfileSegue" id="HVr-A2-SBh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN3-0O-dCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="761" y="392"/>
+        </scene>
+        <!--MeMainVC-->
+        <scene sceneID="LXf-cW-WG9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeMainVC" id="wHD-jM-hLI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2wC-k2-G6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1074" y="304"/>
         </scene>
         <!--DiscoverDetailVC-->
         <scene sceneID="xbs-gy-y0a">

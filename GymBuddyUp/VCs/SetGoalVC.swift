@@ -25,7 +25,7 @@ class SetGoalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
+        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
         
         loseWeightButton.tag = 0
         keepFitButton.tag = 1
@@ -41,11 +41,7 @@ class SetGoalVC: UIViewController {
     func setButton (button: UIButton, image: UIImageView) {
         buttonViewMap[button.tag] = image
         button.addShadow()
-        let lightColor = ColorScheme.sharedInstance.lightText
-        image.tintColor = lightColor
-        image.layer.cornerRadius = image.frame.width/2.0
-        image.layer.borderWidth = 1
-        image.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
+        image.makeThumbnail(ColorScheme.s4Bg)
         
         button.addTarget(self, action: #selector(SetGoalVC.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
@@ -57,9 +53,9 @@ class SetGoalVC: UIViewController {
         sender.selected = !sender.selected
         if (sender.selected) {
             selected.append(sender.tag)
-            buttonViewMap[sender.tag]?.tintColor = ColorScheme.sharedInstance.darkText
+            buttonViewMap[sender.tag]?.tintColor = ColorScheme.p1Tint
         }else {
-            buttonViewMap[sender.tag]?.tintColor = ColorScheme.sharedInstance.lightText
+            buttonViewMap[sender.tag]?.tintColor = ColorScheme.s4Bg
         }
     }
     

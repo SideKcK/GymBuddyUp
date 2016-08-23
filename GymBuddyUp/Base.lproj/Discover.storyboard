@@ -32,11 +32,11 @@
                                 <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6o-7w-yyS">
-                                <rect key="frame" x="70" y="469" width="180" height="30"/>
+                                <rect key="frame" x="50" y="455" width="220" height="44"/>
                                 <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6ZV-Fc-6jE"/>
-                                    <constraint firstAttribute="width" secondItem="n6o-7w-yyS" secondAttribute="height" multiplier="6:1" id="J17-le-tyD"/>
+                                    <constraint firstAttribute="height" constant="44" id="6ZV-Fc-6jE"/>
+                                    <constraint firstAttribute="width" secondItem="n6o-7w-yyS" secondAttribute="height" multiplier="5:1" id="J17-le-tyD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Find New Buddies">
@@ -321,11 +321,20 @@
                         <outlet property="tableView" destination="aD6-cO-5gS" id="4n3-Qf-OLi"/>
                         <outlet property="timeLabel" destination="Mut-w6-q0U" id="Gjn-fI-nIx"/>
                         <segue destination="Yvk-ng-d4x" kind="show" identifier="toProfileSegue" id="vwh-6C-eR7"/>
+                        <segue destination="322-mP-U9V" kind="show" identifier="toExerciseDetailSegue" id="R70-2J-nWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jw1-Vh-kBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1588" y="319"/>
+        </scene>
+        <!--ExerciseVC-->
+        <scene sceneID="XQV-cm-Jep">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Plan" referencedIdentifier="ExerciseVC" id="322-mP-U9V" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LOs-lp-9BG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1987.5" y="319"/>
         </scene>
         <!--MeFindVC-->
         <scene sceneID="cYL-Wx-qVK">
@@ -347,7 +356,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KW9-Le-4dG">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KW9-Le-4dG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                             </mapView>
                         </subviews>

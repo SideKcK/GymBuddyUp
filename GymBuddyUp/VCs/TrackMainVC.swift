@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
-class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource, UIPopoverPresentationControllerDelegate, DropDownTitleNavButtonDelegate {
+class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSource, UIPopoverPresentationControllerDelegate, DropDownTitleNavButtonDelegate, TrackingPopOverViewDelegate {
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -46,7 +48,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var currentTrackedIndex = 0
     var currentSetIndex = 0
     var currentSetsAmount = 0
-    var popoverVC: UIViewController?
+    var popoverVC: TrackingPopOverViewController?
     var itemsCount = 0
     
     var finishedSets = 0 {
@@ -151,8 +153,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         
         
         // init popoverVC
-        popoverVC = storyboard!.instantiateViewControllerWithIdentifier("trackingTodo")
+        popoverVC = storyboard!.instantiateViewControllerWithIdentifier("trackingTodo") as? TrackingPopOverViewController
         popoverVC?.modalPresentationStyle = .Popover
+        popoverVC?.delegate = self
         
         dropDownTitleNavButton = DropDownTitleNavButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
         Log.info("\(currentTrackedIndex + 1)/\(itemsCount)")
@@ -171,18 +174,31 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             timer.invalidate()
         }
     }
+
+    func trackingPopOverView(tableView: UITableView, didSelectItem indexPath: NSIndexPath) {
+        let index = indexPath.row
+        guard let _currentTrackedItem =  trackedPlan?.trackingItems[index] else {return}
+        Log.info("exercise name =\(_currentTrackedItem.exercise?.name)")
+        exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+        popoverVC?.dismissViewControllerAnimated(true, completion: nil)
+        currentTrackedIndex = index
+        loadTrackingItem()
+        
+    }
     
     @IBAction func listiconOnClick(sender: AnyObject) {
         if let _popoverVC = popoverVC {
             if let popoverController = _popoverVC.popoverPresentationController {
-                let desVC = _popoverVC as! TrackingPopOverViewController
+                let desVC = _popoverVC
                 desVC.trackedPlan = trackedPlan
+                desVC.currentTrackedIndex = currentTrackedIndex
                 let _itemsCount: CGFloat = CGFloat(itemsCount)
                 desVC.preferredContentSize =  CGSizeMake(320, _itemsCount * 55)
-                popoverController.sourceView = sender as? UIView
-                popoverController.sourceRect = sender.bounds
-                popoverController.permittedArrowDirections = .Up
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds),0,0)
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection()
                 popoverController.delegate = self
+                popoverController.popoverBackgroundViewClass = TrackingPopOverBackgroundView.self
                 presentViewController(_popoverVC, animated: true, completion: nil)
             }
             
@@ -259,6 +275,19 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         
         dropDownTitleNavButton.title = "\(currentTrackedIndex + 1)/\(itemsCount)"
         
+        if let gifUrl = _currentTrackedItem.exercise?.gifURL {
+            gifIcon.imageView?.af_setImageWithURL(gifUrl)
+            Alamofire.request(.GET, gifUrl)
+                .responseImage { response in
+                    if let image = response.result.value {
+                    self.gifIcon.makeThumbnail(ColorScheme.g2Text)
+                    self.gifIcon.setImage(image, forState: .Normal)
+                }
+            }
+            
+        }
+
+
         if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
             timerContainer.hidden = true
             paramsContainer.hidden = false

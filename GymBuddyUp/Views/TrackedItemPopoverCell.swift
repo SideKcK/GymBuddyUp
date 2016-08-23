@@ -11,9 +11,8 @@ import UIKit
 class TrackedItemPopoverCell: UITableViewCell {
     
     @IBOutlet weak var exerciseIconImageView: UIImageView!
-    
     @IBOutlet weak var exerciseName: UILabel!
-    
+    @IBOutlet weak var progressDescriptionLabel: UILabel!
     @IBOutlet weak var statusIndicatorImageView: UIImageView!
 
     override func awakeFromNib() {

@@ -65,7 +65,6 @@ class Library {
         }
     }
     
-    
 
     class func getPlansByMidId(catID: Int, completion: (plans:[Plan]?, error:NSError?) -> Void) {
         midCategoryRef.child("\(catID)/system_plans").observeSingleEventOfType(.Value, withBlock: {

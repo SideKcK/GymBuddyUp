@@ -13,14 +13,14 @@ let testURL = NSURL(string: "http://www.building-muscle101.com/images/bench_pres
 class Exercise {
     
     struct Set {
-        var amount: Int?
+        var amount: Float?
+        var weight: Float?
         var intermission: Int?
-        var weight: Int?
         
         init (dict: NSDictionary) {
-            self.amount = dict.valueForKey("amount") as? Int
+            self.amount = dict.valueForKey("amount") as? Float
+            self.weight = dict.valueForKey("weight") as? Float
             self.intermission = dict.valueForKey("intermission") as? Int
-            self.weight = dict.valueForKey("weight") as? Int
         }
         
         static func setArrayFromDictArray(data:[NSDictionary]?) -> [Set?] {

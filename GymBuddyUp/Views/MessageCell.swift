@@ -39,7 +39,7 @@ class MessageCell: UITableViewCell {
         profileView.makeThumbnail(ColorScheme.s4Bg)
         deleteButton.layer.cornerRadius = 5
         reset()
-        
+        setupVisual()
         selectionStyle = .None
     }
 
@@ -49,6 +49,11 @@ class MessageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupVisual() {
+        acceptButton.tintColor = ColorScheme.p1Tint
+        cancelButton.tintColor = ColorScheme.e1Tint
+        borderView.backgroundColor = ColorScheme.s4Bg
+    }
     
     func reset() {
         timeHeight.priority = 999
@@ -60,7 +65,7 @@ class MessageCell: UITableViewCell {
     
     func showIndicator(positive: Bool) {
         indicatorView.hidden = false
-        indicatorView.backgroundColor = positive ? ColorScheme.buttonTint : UIColor.flatRedColor()
+        indicatorView.backgroundColor = positive ? ColorScheme.p1Tint : ColorScheme.e1Tint
     }
     
     func showButtons() {

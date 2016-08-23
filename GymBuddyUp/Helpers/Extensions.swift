@@ -70,6 +70,7 @@ extension UIImageView {
         self.layer.masksToBounds = false
         self.layer.borderColor = color.CGColor
         self.layer.cornerRadius = self.frame.height/2.0
+        self.contentMode = UIViewContentMode.ScaleAspectFill
         self.clipsToBounds = true
     }
 }

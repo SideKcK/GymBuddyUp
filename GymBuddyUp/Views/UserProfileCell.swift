@@ -16,6 +16,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var gymLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var actionButton: UIButton!
 
     var user: User! {
         didSet {
@@ -44,8 +45,11 @@ class UserProfileCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setupVisual()
     }
 
-
-
+    func setupVisual() {
+        actionButton.tintColor = ColorScheme.g2Text
+        
+    }
 }

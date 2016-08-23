@@ -169,7 +169,8 @@ class PlanDetailVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "startWorkoutSegue" {
-            let desVC = segue.destinationViewController as! TrackMainVC
+            let desNC = segue.destinationViewController as! UINavigationController
+            let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(plan: plan)
         }
         

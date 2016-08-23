@@ -33,6 +33,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     @IBOutlet weak var exerciseLabel: UILabel!
     
+    @IBOutlet weak var listViewIcon: UIButton!
+    
+    
     var dropDownTitleNavButton: DropDownTitleNavButton!
     
     
@@ -169,6 +172,24 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         }
     }
     
+    @IBAction func listiconOnClick(sender: AnyObject) {
+        if let _popoverVC = popoverVC {
+            if let popoverController = _popoverVC.popoverPresentationController {
+                let desVC = _popoverVC as! TrackingPopOverViewController
+                desVC.trackedPlan = trackedPlan
+                let _itemsCount: CGFloat = CGFloat(itemsCount)
+                desVC.preferredContentSize =  CGSizeMake(320, _itemsCount * 55)
+                popoverController.sourceView = sender as? UIView
+                popoverController.sourceRect = sender.bounds
+                popoverController.permittedArrowDirections = .Up
+                popoverController.delegate = self
+                presentViewController(_popoverVC, animated: true, completion: nil)
+            }
+            
+        }
+    }
+    
+    
     func exerciseContextSave(onFinishedAmount: Int, onFinishedSets: Int) {
         // save current context
         if let currentTrackedItem = trackedPlan?.trackingItems[currentTrackedIndex] {
@@ -259,24 +280,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func dropDownTitleNavButton(button: DropDownTitleNavButton) {
-        if let _popoverVC = popoverVC {
-            if let popoverController = _popoverVC.popoverPresentationController {
-                let desVC = _popoverVC as! TrackingPopOverViewController
-                desVC.trackedPlan = trackedPlan
-                var itemCount: CGFloat = 0.0
-                if let _itemCount = trackedPlan?.trackingItems.count {
-                    itemCount = 0
-                    itemCount += CGFloat(_itemCount)
-                }
-                desVC.preferredContentSize =  CGSizeMake(320, itemCount * 55)
-                popoverController.sourceView = button
-                popoverController.sourceRect = button.bounds
-                popoverController.permittedArrowDirections = .Up
-                popoverController.delegate = self
-                presentViewController(_popoverVC, animated: true, completion: nil)
-            }
-            
-        }
+
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

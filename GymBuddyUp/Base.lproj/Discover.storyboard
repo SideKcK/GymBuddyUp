@@ -54,9 +54,20 @@
                                     <constraint firstAttribute="height" priority="250" id="u8D-cd-y3u"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start looking for buddies to workout together!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-xg-8RU">
+                                <rect key="frame" x="60" y="519" width="200" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="KGB-zi-vvz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3z0-xg-8RU" firstAttribute="centerX" secondItem="n6o-7w-yyS" secondAttribute="centerX" id="1hq-u3-FjM"/>
+                            <constraint firstItem="3z0-xg-8RU" firstAttribute="top" secondItem="n6o-7w-yyS" secondAttribute="bottom" constant="20" id="4As-as-cFt"/>
                             <constraint firstItem="wFk-iV-I3j" firstAttribute="top" secondItem="Tzd-hT-WiO" secondAttribute="bottom" id="4vO-Du-LiV"/>
                             <constraint firstItem="Tzd-hT-WiO" firstAttribute="leading" secondItem="nfk-Zc-ne0" secondAttribute="leading" id="GNw-R5-o8S"/>
                             <constraint firstAttribute="trailing" secondItem="wFk-iV-I3j" secondAttribute="trailing" id="RPb-nk-iPb"/>
@@ -75,6 +86,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="findButton" destination="n6o-7w-yyS" id="kZN-PX-SaZ"/>
+                        <outlet property="findButtonConstraint" destination="qgx-Bx-Fsh" id="IXJ-ro-QLg"/>
+                        <outlet property="findLabel" destination="3z0-xg-8RU" id="lNR-PU-5sA"/>
                         <outlet property="segHeightConstraint" destination="u8D-cd-y3u" id="R7c-SD-OtJ"/>
                         <outlet property="segView" destination="Tzd-hT-WiO" id="5k5-2I-ZrJ"/>
                         <outlet property="tableView" destination="wFk-iV-I3j" id="vpw-9H-AdG"/>

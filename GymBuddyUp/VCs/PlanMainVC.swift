@@ -229,6 +229,7 @@ class PlanMainVC: UIViewController {
             return
         }
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -260,6 +261,7 @@ class PlanMainVC: UIViewController {
             //delete
             if repeating {
                 let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                deleteController.customize()
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                     // ...
                 }
@@ -374,7 +376,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
-        todayButton.tintColor = selectedDate != NSDate() ? ColorScheme.g4Text : ColorScheme.s1Tint
+        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)

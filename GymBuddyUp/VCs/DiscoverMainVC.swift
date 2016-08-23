@@ -14,7 +14,11 @@ class DiscoverMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segView: UIView!
     @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var findLabel: UILabel!
+    
+    
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var findButtonConstraint: NSLayoutConstraint!
     
     var locationManager: CLLocationManager!
     var events = [Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan(), Plan()]
@@ -22,15 +26,20 @@ class DiscoverMainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        setupButton()
+        setupVisual()
         setupLocation()
         setupTableView()
         addSegControl(segView)
+        
+        if events.count == 0 {
+            findButtonConstraint.constant = self.view.frame.height / 3.0
+        }
     }
     
-    func setupButton() {
+    func setupVisual() {
         tableView.backgroundColor = ColorScheme.s3Bg
         findButton.makeActionButton()
+        findLabel.textColor = ColorScheme.g2Text
     }
     
     func setupNavBar() {

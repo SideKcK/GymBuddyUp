@@ -58,7 +58,7 @@ class PlanLibDetailVC: UIViewController {
     
     @IBAction func onSelectPlanButton(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: "Repeat this plan?", preferredStyle: .ActionSheet)
-        
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }

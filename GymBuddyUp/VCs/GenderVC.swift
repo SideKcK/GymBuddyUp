@@ -47,7 +47,7 @@ class GenderVC: UIViewController {
         if selected == User.Gender.Unspecified {
             //pop up alert
             let alertController = UIAlertController(title: "We recommend gym buddies based on your information", message: "Specify your gender so we can provide you with better match. ", preferredStyle: .Alert)
-            
+            alertController.customize()
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                 // ...

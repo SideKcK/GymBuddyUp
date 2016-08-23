@@ -40,7 +40,7 @@ class SignupVC: UIViewController {
 
         //alert controller
         alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
-        
+        alertController.customize()
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             self.nextButton.enabled = true

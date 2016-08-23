@@ -47,6 +47,9 @@ class InviteMainVC: UITableViewController {
         self.sendButton.hidden = false
 
     }
+    override func viewDidDisappear(animated: Bool) {
+        self.sendButton.hidden = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

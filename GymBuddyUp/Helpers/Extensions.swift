@@ -27,7 +27,7 @@ extension UIView {
         self.layer.cornerRadius = 5
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 1
         //self.clipsToBounds = true
     }
@@ -65,7 +65,7 @@ extension CALayer {
 
 extension UIImageView {
     func makeThumbnail(color: UIColor) {
-        //self.backgroundColor = UIColor.flatGrayColor()
+        //self.backgroundColor = color
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
         self.layer.borderColor = color.CGColor
@@ -139,7 +139,7 @@ extension HMSegmentedControl {
         
         self.titleTextAttributes = [
             NSForegroundColorAttributeName: ColorScheme.g3Text,
-            NSFontAttributeName: UIFont.systemFontOfSize(14, weight: UIFontWeightMedium)]
+            NSFontAttributeName: FontScheme.T2 ]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
         self.borderColor = ColorScheme.greyText

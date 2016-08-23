@@ -26,7 +26,7 @@ class SignupVC: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
 
-        profileImage = UIImage(named: "Me")
+        profileImage = UIImage(named: "dumbbell")
         
         self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
         let textColor = ColorScheme.g4Text

@@ -53,6 +53,11 @@ class MessageCell: UITableViewCell {
         acceptButton.tintColor = ColorScheme.p1Tint
         cancelButton.tintColor = ColorScheme.e1Tint
         borderView.backgroundColor = ColorScheme.s4Bg
+        
+        nameLabel.font = FontScheme.H2
+        timeLabel.font = FontScheme.T2
+        statusLabel.font = FontScheme.T3
+        
     }
     
     func reset() {

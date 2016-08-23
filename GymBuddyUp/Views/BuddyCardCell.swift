@@ -43,6 +43,11 @@ class BuddyCardCell: UITableViewCell {
     func setupVisual() {
         addButton.tintColor = ColorScheme.p1Tint
         borderView.backgroundColor = ColorScheme.s4Bg
+        
+        nameLabel.font = FontScheme.H2
+        disLabel.font = FontScheme.T2
+        goalLabel.font = FontScheme.T3
+        gymLabel.font = FontScheme.T3
     }
     
     func showDistance() {

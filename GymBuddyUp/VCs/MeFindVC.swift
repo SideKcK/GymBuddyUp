@@ -19,6 +19,7 @@ class MeFindVC: UIViewController {
         super.viewDidLoad()
         
         addSegControl(segView)
+        setupVisual()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
@@ -26,6 +27,11 @@ class MeFindVC: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    func setupVisual() {
+        segView.backgroundColor = ColorScheme.s3Bg
+        tableView.backgroundColor = ColorScheme.s3Bg
+    }
+    
     func addSegControl (view: UIView) {
         let segControl = HMSegmentedControl(sectionTitles: ["Nearby", "Facebook("+String(fbNum)+")"])
         segControl.customize()

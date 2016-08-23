@@ -10,6 +10,8 @@ import UIKit
 
 class MeBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var findView: UIView!
 
     var buddies = ["Jesiah", "You", "Aaron"]//TODO change to User
     override func viewDidLoad() {
@@ -21,6 +23,7 @@ class MeBuddiesVC: UIViewController {
         tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
+        setupVisual()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +31,15 @@ class MeBuddiesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupVisual() {
+        findView.backgroundColor = ColorScheme.s3Bg
+        tableView.backgroundColor = ColorScheme.s3Bg
+        findButton.layer.cornerRadius = 8
+        findButton.backgroundColor = ColorScheme.p1Tint
+        findButton.titleLabel?.textColor = ColorScheme.g4Text
+        
+        findButton.titleLabel?.font = FontScheme.T2
+    }
     
     // MARK: - Navigation
 

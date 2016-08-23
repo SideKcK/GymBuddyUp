@@ -54,6 +54,16 @@ class DiscoverDetailVC: UIViewController {
         statusLabel.textColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
         tableView.separatorColor = ColorScheme.g3Text
+        
+        let heading = FontScheme.H1
+        let text = FontScheme.T3
+        nameLabel.font = heading
+        goalLabel.font = text
+        statusLabel.font = text
+        planNameLabel.font = heading
+        planDifLabel.font = text
+        timeLabel.font = text
+        gymButton.titleLabel?.font = FontScheme.T2
     }
     
     func setupViews() {

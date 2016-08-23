@@ -71,7 +71,7 @@ class WorkoutCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         for _ in 0...5 {
-            let width = exercisesStackView.frame.height - 4.0
+            let width = CGFloat(35.0)
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
 
             imageView.widthAnchor.constraintEqualToConstant(width).active = true
@@ -97,6 +97,16 @@ class WorkoutCell: UITableViewCell {
         gymButton.tintColor = ColorScheme.p1Tint
         buddyButton.tintColor = ColorScheme.p1Tint
         borderView.backgroundColor = ColorScheme.s4Bg
+        
+        profileView.layer.borderWidth = 0.5
+        profileLabel.font = FontScheme.T3
+        nameLabel.font = FontScheme.H2
+        timeLabel.font = FontScheme.H2
+        gymButton.titleLabel?.font = FontScheme.T2
+        gymDisLabel.font = FontScheme.T3
+        statusLabel.font = FontScheme.T3
+        buddyButton.titleLabel?.font = FontScheme.T2
+        
     }
 
     func clearAllViews() {

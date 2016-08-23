@@ -33,6 +33,8 @@ class DiscoverMainVC: UIViewController {
         findButton.layer.cornerRadius = 8
         findButton.backgroundColor = ColorScheme.p1Tint
         findButton.titleLabel?.textColor = ColorScheme.g4Text
+        
+        findButton.titleLabel?.font = FontScheme.T2
     }
     
     func setupNavBar() {

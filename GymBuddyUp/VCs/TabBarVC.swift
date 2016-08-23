@@ -10,23 +10,23 @@ import UIKit
 
 class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     @IBOutlet weak var thisTabBar: UITabBar!
-    let images = ["Discover", "Plan", "","Inbox", "Me"]
+    let images = ["discover", "plan", "","inbox", "me"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         self.thisTabBar.translucent = false
-        self.thisTabBar.tintColor = ColorScheme.sharedInstance.navTint
-        self.thisTabBar.barTintColor = ColorScheme.sharedInstance.navBg
+        self.thisTabBar.tintColor = ColorScheme.s1Tint
+        self.thisTabBar.barTintColor = ColorScheme.s4Bg
         
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 
         navigationBarAppearace.translucent = false
-        navigationBarAppearace.tintColor = ColorScheme.sharedInstance.navTint  // Back buttons and such
-        navigationBarAppearace.barTintColor = ColorScheme.sharedInstance.navBg  // Bar's background color
-        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:ColorScheme.sharedInstance.navTint]  // Title's text color
+        navigationBarAppearace.tintColor = ColorScheme.g4Text  // Back buttons and such
+        navigationBarAppearace.barTintColor = ColorScheme.s1Tint  // Bar's background color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:ColorScheme.g4Text]  // Title's text color
         
 //        for parent in UINavigationBar().subviews {
 //            for childView in parent.subviews {
@@ -45,7 +45,7 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
             }
             i += 1
         }
-        self.addCenterButtonWithImage(UIImage(named: "Plus")!, highlightImage: nil)
+        self.addCenterButtonWithImage(UIImage(named: "ActionButton")!, highlightImage: nil)
     }
     
     override func didReceiveMemoryWarning() {

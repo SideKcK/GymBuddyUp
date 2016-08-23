@@ -10,6 +10,8 @@ import UIKit
 
 class UserBuddyOverviewCell: UITableViewCell {
     @IBOutlet weak var buddyNumLabel: UILabel!
+    @IBOutlet weak var buddyLabel: UILabel!
+    @IBOutlet weak var buddyView: UIImageView!
 
     var user: User! {
         didSet {
@@ -24,6 +26,10 @@ class UserBuddyOverviewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = ColorScheme.p1Tint
+        buddyNumLabel.textColor = ColorScheme.g4Text
+        buddyLabel.textColor = ColorScheme.g4Text
+        buddyView.tintColor = ColorScheme.s4Bg
     }
 
 }

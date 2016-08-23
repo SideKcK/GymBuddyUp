@@ -26,7 +26,7 @@ class KKParamsLabel: UILabel {
     }
     
     override func awakeFromNib() {
-        self.bottomBorderCA = self.setBottomBorderCA(color: ColorScheme.sharedInstance.trackingNavigationParamsLabel)
+        self.bottomBorderCA = self.setBottomBorderCA(color: ColorScheme.trackingNavigationParamsLabel)
     }
 
 }

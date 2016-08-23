@@ -28,10 +28,10 @@ class SignupVC: UIViewController {
 
         profileImage = UIImage(named: "Me")
         
-        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
-        let textColor = ColorScheme.sharedInstance.lightText
+        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
+        let textColor = ColorScheme.g4Text
         loginLabel.textColor = textColor
-        loginButton.titleLabel?.textColor = ColorScheme.sharedInstance.contrastText
+        loginButton.titleLabel?.textColor = ColorScheme.contrastText
         setTextField(emailField)
         setTextField(passwordField)
         setTextField(usernameField)

@@ -23,8 +23,8 @@ class PlanMainVC: UIViewController {
     var plans = [NSDate: [Plan]]()
     var selectedDate: NSDate!
     
-    let insetColor = ColorScheme.sharedInstance.greyText
-    let tintColor = ColorScheme.sharedInstance.buttonTint
+    let insetColor = ColorScheme.greyText
+    let tintColor = ColorScheme.buttonTint
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +45,8 @@ class PlanMainVC: UIViewController {
     }
     
     func setCalendar() {
-        calendarView.backgroundColor = ColorScheme.sharedInstance.calBg
-        menuView.backgroundColor = ColorScheme.sharedInstance.calBg
+        calendarView.backgroundColor = ColorScheme.calBg
+        menuView.backgroundColor = ColorScheme.calBg
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
@@ -393,7 +393,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
         
-        let color = ColorScheme.sharedInstance.calText
+        let color = ColorScheme.calText
         
         return [color] // return 1 dot
         
@@ -404,7 +404,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func dayOfWeekTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.calText
     }
     
     
@@ -414,30 +414,30 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
 extension PlanMainVC: CVCalendarViewAppearanceDelegate {
     
     func dayLabelWeekdayInTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.calText
     }
     
     func dayLabelWeekdayOutTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calTextDark
+        return ColorScheme.calTextDark
     }
     
     func dayLabelWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calBg
+        return ColorScheme.calBg
     }
     func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calBg
+        return ColorScheme.calBg
     }
     
     func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.calText
     }
     
     func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.calText
     }
     
     func dotMarkerColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.calText
     }
     
 }

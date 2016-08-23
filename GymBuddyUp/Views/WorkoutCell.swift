@@ -51,7 +51,7 @@ class WorkoutCell: UITableViewCell {
                     exercisesHeightConstraint.priority = 250
                 
                     for index in 0...(exers.count - 1) {
-                    imageViews[index].makeThumbnail()
+                    imageViews[index].makeThumbnail(ColorScheme.g3Text)
                     if exers.count > 6 && index == 5 {
                         imageViews[index].image = UIImage(named: "dumbbell")
                         //change last imageView
@@ -70,10 +70,6 @@ class WorkoutCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        borderView.addShadow()
-        clearAllViews()
-        profileTapView.userInteractionEnabled = true
-        selectionStyle = .None
         for _ in 0...5 {
             let width = exercisesStackView.frame.height - 4.0
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
@@ -84,7 +80,11 @@ class WorkoutCell: UITableViewCell {
             exercisesStackView.addArrangedSubview(imageView)
             imageViews.append(imageView)
         }
-        
+        borderView.addShadow()
+        clearAllViews()
+        setupVisual()
+        profileTapView.userInteractionEnabled = true
+        selectionStyle = .None
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -92,6 +92,13 @@ class WorkoutCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupVisual() {
+        moreButton.tintColor = ColorScheme.g2Text
+        gymButton.tintColor = ColorScheme.p1Tint
+        buddyButton.tintColor = ColorScheme.p1Tint
+        borderView.backgroundColor = ColorScheme.s4Bg
+    }
+
     func clearAllViews() {
         profileView.hidden = true
         profileLabel.hidden = true
@@ -112,7 +119,7 @@ class WorkoutCell: UITableViewCell {
         profileView.hidden = false
         profileLabel.hidden = false
         topContraint.constant = 40
-        profileView.makeThumbnail()
+        profileView.makeThumbnail(ColorScheme.p1Tint)
     }
     
     func showTimeView() {

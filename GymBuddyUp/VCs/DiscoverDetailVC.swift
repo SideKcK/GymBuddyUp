@@ -49,8 +49,8 @@ class DiscoverDetailVC: UIViewController {
     }
     
     func setupViews() {
-        statusView.layer.addBorder(.Bottom, color: ColorScheme.sharedInstance.greyText, thickness: 0.5)
-        planView.layer.addBorder(.Bottom, color: ColorScheme.sharedInstance.greyText, thickness: 0.5)
+        statusView.layer.addBorder(.Bottom, color: ColorScheme.greyText, thickness: 0.5)
+        planView.layer.addBorder(.Bottom, color: ColorScheme.greyText, thickness: 0.5)
     }
     
     func setupTableView() {

@@ -31,6 +31,7 @@ class BuddyCardCell: UITableViewCell {
         disHeightConstraint.priority = 999
         addButton.hidden = true
         borderView.addShadow()
+        setupVisual()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -39,6 +40,11 @@ class BuddyCardCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setupVisual() {
+        addButton.tintColor = ColorScheme.p1Tint
+        borderView.backgroundColor = ColorScheme.s4Bg
+    }
+    
     func showDistance() {
         disHeightConstraint.priority = 250
     }

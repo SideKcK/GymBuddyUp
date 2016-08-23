@@ -26,8 +26,8 @@ class TrackingNavigationButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = self.frame.width / 2
-        self.layer.backgroundColor = ColorScheme.sharedInstance.trackingNavigationButtonBg.CGColor
-        self.tintColor = ColorScheme.sharedInstance.trackingNavigationButtonTx
+        self.layer.backgroundColor = ColorScheme.trackingNavigationButtonBg.CGColor
+        self.tintColor = ColorScheme.trackingNavigationButtonTx
 //        self.titleLabel?.font = UIFont(name: "Helvetica Neue-Condensed Bold", size: self.frame.height * 0.65)
     }
 

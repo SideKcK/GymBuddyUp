@@ -321,11 +321,20 @@
                         <outlet property="tableView" destination="aD6-cO-5gS" id="4n3-Qf-OLi"/>
                         <outlet property="timeLabel" destination="Mut-w6-q0U" id="Gjn-fI-nIx"/>
                         <segue destination="Yvk-ng-d4x" kind="show" identifier="toProfileSegue" id="vwh-6C-eR7"/>
+                        <segue destination="322-mP-U9V" kind="show" identifier="toExerciseDetailSegue" id="R70-2J-nWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jw1-Vh-kBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1588" y="319"/>
+        </scene>
+        <!--ExerciseVC-->
+        <scene sceneID="XQV-cm-Jep">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Plan" referencedIdentifier="ExerciseVC" id="322-mP-U9V" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LOs-lp-9BG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1987.5" y="319"/>
         </scene>
         <!--MeFindVC-->
         <scene sceneID="cYL-Wx-qVK">
@@ -412,7 +421,7 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kla-ff-Gr2"/>
-        <segue reference="eJB-Nl-MSy"/>
+        <segue reference="8si-lg-1Ru"/>
+        <segue reference="vwh-6C-eR7"/>
     </inferredMetricsTieBreakers>
 </document>

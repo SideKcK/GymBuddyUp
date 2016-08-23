@@ -9,10 +9,10 @@
 import UIKit
 
 class BorderedButton: UIButton {
-
+    var textColor = ColorScheme.g4Text
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        titleLabel?.textColor = ColorScheme.sharedInstance.lightText
+        titleLabel?.textColor = textColor
         backgroundColor = UIColor.clearColor()
         layer.cornerRadius = 15
         layer.borderWidth = 1
@@ -23,7 +23,7 @@ class BorderedButton: UIButton {
     override var highlighted: Bool {
         didSet {
             if highlighted {
-                backgroundColor = ColorScheme.sharedInstance.lightText
+                backgroundColor = textColor
 
             } else {
                 backgroundColor = UIColor.clearColor()
@@ -33,7 +33,7 @@ class BorderedButton: UIButton {
     override var selected: Bool {
         didSet {
             if selected {
-                backgroundColor = ColorScheme.sharedInstance.lightText
+                backgroundColor = textColor
             }else {
                 backgroundColor = UIColor.clearColor()
             }

@@ -16,8 +16,8 @@ class SignupLoginNavVC: UINavigationController {
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.translucent = true
-        self.navigationBar.tintColor = ColorScheme.sharedInstance.lightText
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.sharedInstance.lightText]
+        self.navigationBar.tintColor = ColorScheme.g4Text
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.g4Text]
         
     }
 

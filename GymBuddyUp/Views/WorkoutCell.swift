@@ -51,7 +51,7 @@ class WorkoutCell: UITableViewCell {
                     exercisesHeightConstraint.priority = 250
                 
                     for index in 0...(exers.count - 1) {
-                    imageViews[index].makeThumbnail()
+                    imageViews[index].makeThumbnail(ColorScheme.g3Text)
                     if exers.count > 6 && index == 5 {
                         imageViews[index].image = UIImage(named: "dumbbell")
                         //change last imageView
@@ -112,7 +112,7 @@ class WorkoutCell: UITableViewCell {
         profileView.hidden = false
         profileLabel.hidden = false
         topContraint.constant = 40
-        profileView.makeThumbnail()
+        profileView.makeThumbnail(ColorScheme.p1Tint)
     }
     
     func showTimeView() {

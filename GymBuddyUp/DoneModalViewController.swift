@@ -23,7 +23,7 @@ class DoneModalViewController: UIViewController {
         super.viewDidLoad()
 
         UIApplication.sharedApplication().statusBarHidden = true
-        contentView.backgroundColor = ColorScheme.sharedInstance.trackingDoneModalBg
+        contentView.backgroundColor = ColorScheme.trackingDoneModalBg
         let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.frame

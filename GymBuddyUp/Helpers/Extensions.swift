@@ -22,9 +22,8 @@ extension UIViewController {
 
 extension UIView {
     func addShadow() {
-        let lightColor = ColorScheme.sharedInstance.lightText
-        let darkColor = ColorScheme.sharedInstance.darkText
-        self.backgroundColor = lightColor
+        let darkColor = ColorScheme.s2Shadow
+        self.backgroundColor = ColorScheme.s4Bg
         self.layer.cornerRadius = 5
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -65,11 +64,11 @@ extension CALayer {
 }
 
 extension UIImageView {
-    func makeThumbnail() {
+    func makeThumbnail(color: UIColor) {
         //self.backgroundColor = UIColor.flatGrayColor()
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
-        self.layer.borderColor = UIColor.flatGrayColor().CGColor
+        self.layer.borderColor = color.CGColor
         self.layer.cornerRadius = self.frame.height/2.0
         self.clipsToBounds = true
     }
@@ -133,16 +132,16 @@ extension UISegmentedControl
 
 extension HMSegmentedControl {
     func customize() {
-        self.selectionIndicatorColor = ColorScheme.sharedInstance.buttonTint
+        self.selectionIndicatorColor = ColorScheme.buttonTint
         self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
         
         self.titleTextAttributes = [
-            NSForegroundColorAttributeName: ColorScheme.sharedInstance.darkText,
-            NSFontAttributeName: UIFont.systemFontOfSize(13)]
+            NSForegroundColorAttributeName: ColorScheme.g3Text,
+            NSFontAttributeName: UIFont.systemFontOfSize(14)]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
-        self.borderColor = ColorScheme.sharedInstance.greyText
+        self.borderColor = ColorScheme.greyText
         self.borderWidth = 1.5
         self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
     }

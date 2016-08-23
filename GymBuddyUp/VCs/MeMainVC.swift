@@ -44,7 +44,7 @@ class MeMainVC: UIViewController {
         profileView.contentMode = UIViewContentMode.ScaleAspectFill
         profileView.layer.cornerRadius = headerW/6
         profileView.layer.borderWidth = 2.0
-        profileView.layer.borderColor = ColorScheme.sharedInstance.navTint.CGColor
+        profileView.layer.borderColor = ColorScheme.navTint.CGColor
         
         //title background
         self.titleBGView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kHeaderHeight)

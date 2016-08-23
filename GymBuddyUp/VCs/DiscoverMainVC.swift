@@ -22,11 +22,17 @@ class DiscoverMainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        setupButton()
         setupLocation()
         setupTableView()
         addSegControl(segView)
     }
     
+    func setupButton() {
+        findButton.layer.cornerRadius = 8
+        findButton.backgroundColor = ColorScheme.p1Tint
+        findButton.titleLabel?.textColor = ColorScheme.g4Text
+    }
     func setupNavBar() {
         let logo = UIImage(named: "dumbbell")!
         let imageView = UIImageView(image:logo.resize(CGSize(width: 30, height: 30)))
@@ -160,7 +166,7 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ToInviteDetailSegue", sender: events[indexPath.row])
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? WorkoutCell {
-            cell.borderView.backgroundColor = ColorScheme.sharedInstance.greyText
+            cell.borderView.backgroundColor = ColorScheme.greyText
             UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {
                     cell.borderView.backgroundColor = UIColor.whiteColor()
                 }, completion: nil)

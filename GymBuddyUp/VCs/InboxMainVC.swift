@@ -137,7 +137,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             self.performSegueWithIdentifier("toBuddyProfileSegue", sender: messages[indexPath.row])
         }
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MessageCell {
-            cell.borderView.backgroundColor = ColorScheme.sharedInstance.greyText
+            cell.borderView.backgroundColor = ColorScheme.greyText
             UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {
                 cell.borderView.backgroundColor = UIColor.whiteColor()
                 }, completion: nil)

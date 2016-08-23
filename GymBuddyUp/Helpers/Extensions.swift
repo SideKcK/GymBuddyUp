@@ -133,17 +133,17 @@ extension UISegmentedControl
 
 extension HMSegmentedControl {
     func customize() {
-        self.selectionIndicatorColor = ColorScheme.buttonTint
+        self.selectionIndicatorColor = ColorScheme.p1Tint
         self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
         
         self.titleTextAttributes = [
             NSForegroundColorAttributeName: ColorScheme.g3Text,
-            NSFontAttributeName: UIFont.systemFontOfSize(14)]
+            NSFontAttributeName: UIFont.systemFontOfSize(14, weight: UIFontWeightMedium)]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
         self.borderColor = ColorScheme.greyText
-        self.borderWidth = 1.5
+        self.borderWidth = 1
         self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
     }
 }

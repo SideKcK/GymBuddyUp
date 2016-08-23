@@ -23,14 +23,19 @@ class InboxMainVC: UIViewController {
         tableView.dataSource = self
         setupTableView()
         addSegControl(segView)
-
+        setupVisual()
         // Do any additional setup after loading the view.
     }
 
+    func setupVisual() {
+        tableView.backgroundColor = ColorScheme.s3Bg
+        segView.backgroundColor = ColorScheme.s4Bg
+    }
+    
     func addSegControl (view: UIView) {
         let segControl = HMSegmentedControl(sectionTitles: ["Workout Invites", "Buddy Requests"])
         segControl.customize()
-        segControl.backgroundColor = UIColor.whiteColor()
+        segControl.backgroundColor = ColorScheme.s4Bg
         segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
         view.addSubview(segControl)
         segControl.addTarget(self, action: #selector(InboxMainVC.onSegControl(_:)), forControlEvents: .ValueChanged)

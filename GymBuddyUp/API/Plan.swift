@@ -9,10 +9,6 @@
 import UIKit
 import CoreLocation
 
-import Firebase
-import FirebaseDatabase
-import FirebaseStorage
-
 
 
 class Plan {

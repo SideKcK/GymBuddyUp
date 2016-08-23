@@ -126,8 +126,8 @@
 		B6F00B9F1D66B3E400B09177 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		B6F00BA01D66B3E400B09177 /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = API/MidCat.swift; sourceTree = "<group>"; };
 		B6F00BA11D66B3E400B09177 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plan.swift; path = API/Plan.swift; sourceTree = "<group>"; };
-		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduledWorkout.swift; path = API/ScheduledWorkout.swift; sourceTree = "<group>"; };
-		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = API/User.swift; sourceTree = "<group>"; };
+		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
+		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
@@ -261,6 +261,8 @@
 		B6F00B9A1D66B3E400B09177 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
+				B6F00BA31D66B3E400B09177 /* User.swift */,
 				B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */,
 				B6F00B9E1D66B3E400B09177 /* Invite.swift */,
 				B6F00B9F1D66B3E400B09177 /* Library.swift */,
@@ -475,8 +477,6 @@
 				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
-				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
-				B6F00BA31D66B3E400B09177 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";

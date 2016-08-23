@@ -25,7 +25,7 @@ class InviteMainVC: UITableViewController {
     var sendTo: Int!
     var sent = false
     
-    var tintColor = ColorScheme.buttonTint
+    var tintColor = ColorScheme.p1Tint
     var greyText = ColorScheme.greyText
     
     override func viewDidLoad() {
@@ -144,7 +144,7 @@ class InviteMainVC: UITableViewController {
         for (index, _) in segViews.enumerate() {
             if index == sender.selectedSegmentIndex {
                 //segViews[index].backgroundColor = sender.tintColor
-                segViews[index].tintColor = ColorScheme.buttonTint
+                segViews[index].tintColor = ColorScheme.p1Tint
                 sender.selectedSegmentIndex = UISegmentedControlNoSegment
             }else {
                 //segViews[index].backgroundColor = sender.backgroundColor

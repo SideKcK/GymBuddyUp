@@ -41,16 +41,24 @@ class DiscoverDetailVC: UIViewController {
         statusLabel.text = "Broadcast to Public"
         planDifLabel.text = "Beginner"
         setupTableView()
-        
+        setupVisual()
     }
     
     override func viewDidAppear(animated: Bool) {
         setupViews()
     }
     
+    func setupVisual() {
+        self.view.backgroundColor = ColorScheme.s3Bg
+        profileView.makeThumbnail(ColorScheme.p1Tint)
+        statusLabel.textColor = ColorScheme.g2Text
+        gymButton.tintColor = ColorScheme.p1Tint
+        tableView.separatorColor = ColorScheme.g3Text
+    }
+    
     func setupViews() {
-        statusView.layer.addBorder(.Bottom, color: ColorScheme.greyText, thickness: 0.5)
-        planView.layer.addBorder(.Bottom, color: ColorScheme.greyText, thickness: 0.5)
+        statusView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
+        planView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
     }
     
     func setupTableView() {

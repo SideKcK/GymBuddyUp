@@ -24,16 +24,24 @@ class PlanMainVC: UIViewController {
     var selectedDate: NSDate!
     
     let insetColor = ColorScheme.greyText
-    let tintColor = ColorScheme.buttonTint
+    let tintColor = ColorScheme.p1Tint
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupVisual()
         setCalendar()
         setTableView()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
     }
     
+    func setupVisual() {
+        menuView.backgroundColor = ColorScheme.s1Tint
+        calendarView.backgroundColor = ColorScheme.s1Tint
+        addPlanButton.backgroundColor = ColorScheme.s4Bg
+        addPlanButton.titleLabel?.textColor = ColorScheme.s1Tint
+        addPlanView.backgroundColor = ColorScheme.s3Bg
+        tableView.backgroundColor = ColorScheme.s3Bg
+    }
     
     func setTableView() {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
@@ -45,8 +53,6 @@ class PlanMainVC: UIViewController {
     }
     
     func setCalendar() {
-        calendarView.backgroundColor = ColorScheme.calBg
-        menuView.backgroundColor = ColorScheme.calBg
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
@@ -393,7 +399,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
         
-        let color = ColorScheme.calText
+        let color = ColorScheme.g4Text
         
         return [color] // return 1 dot
         
@@ -404,7 +410,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func dayOfWeekTextColor() -> UIColor {
-        return ColorScheme.calText
+        return ColorScheme.g4Text
     }
     
     
@@ -414,30 +420,30 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
 extension PlanMainVC: CVCalendarViewAppearanceDelegate {
     
     func dayLabelWeekdayInTextColor() -> UIColor {
-        return ColorScheme.calText
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdayOutTextColor() -> UIColor {
-        return ColorScheme.calTextDark
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.calBg
+        return ColorScheme.s1Tint
     }
     func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.calBg
+        return ColorScheme.s1Tint
     }
     
     func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.calText
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.calText
+        return ColorScheme.g4Text
     }
     
     func dotMarkerColor() -> UIColor {
-        return ColorScheme.calText
+        return ColorScheme.g4Text
     }
     
 }

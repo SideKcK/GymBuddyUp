@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class TrackingPopOverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -45,6 +47,10 @@ class TrackingPopOverViewController: UIViewController, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCellWithIdentifier("TrackedItemPopoverCell", forIndexPath: indexPath) as! TrackedItemPopoverCell
         let index = indexPath.row
         cell.exerciseName.text = trackedItems[index].exercise?.name
+        if let iconUrl = trackedItems[index].exercise?.gifURL {
+            cell.exerciseIconImageView.af_setImageWithURL(iconUrl)
+            cell.exerciseIconImageView.makeThumbnail(ColorScheme.g2Text)
+        }
         return cell
     }
     

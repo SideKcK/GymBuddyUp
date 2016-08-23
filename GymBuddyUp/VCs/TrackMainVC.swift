@@ -290,16 +290,17 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     func closePickerResponse(recognizer: UITapGestureRecognizer) {
         Log.info("closePickerResponse")
-        UIView.animateWithDuration(0.3, animations: {
-            self.lbsPickerContainer.hidden = true
-            self.repsPickerContainer.hidden = true
-            self.gifContainer.hidden = false
-        }) { (Bool) in
-            UIView.animateWithDuration(0.2) {
-                self.gifIcon.hidden = false
+        if self.lbsPickerContainer.hidden == false && self.lbsPickerContainer.hidden == false {
+            UIView.animateWithDuration(0.3, animations: {
+                self.lbsPickerContainer.hidden = true
+                self.repsPickerContainer.hidden = true
+                self.gifContainer.hidden = false
+            }) { (Bool) in
+                UIView.animateWithDuration(0.2) {
+                    self.gifIcon.hidden = false
+                }
             }
         }
-        
     }
     
     func paramsTapResponse(recognizer: UITapGestureRecognizer) {

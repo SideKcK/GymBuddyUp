@@ -30,13 +30,7 @@ struct ColorScheme {
     static var greyText = UIColor.flatWhiteColorDark()
     //darkText = ContrastColorOf(lightText, returnFlat: true)
     static var contrastText = ComplementaryFlatColorOf(bgGradientOut)
-    static var navTint = UIColor.flatWhiteColor()
-    static var navBg = UIColor.flatPlumColorDark()
-    
-    static var calBg = UIColor.flatPlumColorDark()
-    static var calText = UIColor.flatWhiteColor()
-    static var calTextDark = UIColor.flatWhiteColorDark()
-    static var buttonTint = UIColor.flatMintColor()
+
     static var trackingNavigationButtonBg = UIColor.flatMintColor()
     static var trackingNavigationButtonTx = UIColor.flatWhiteColor()
     

@@ -14,13 +14,13 @@ class Exercise {
     
     struct Set {
         var amount: Int?
-        var intermission: Int?
         var weight: Int?
+        var intermission: Int?
         
         init (dict: NSDictionary) {
             self.amount = dict.valueForKey("amount") as? Int
-            self.intermission = dict.valueForKey("intermission") as? Int
             self.weight = dict.valueForKey("weight") as? Int
+            self.intermission = dict.valueForKey("intermission") as? Int
         }
         
         static func setArrayFromDictArray(data:[NSDictionary]?) -> [Set?] {

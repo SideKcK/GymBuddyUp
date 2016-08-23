@@ -47,4 +47,9 @@ class ExerciseNumberedCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setupVisual() {
+        numLabel.font = FontScheme.N3
+        nameLabel.font = FontScheme.T1
+        amountLabel.font = FontScheme.T3
+    }
 }

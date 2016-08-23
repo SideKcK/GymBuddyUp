@@ -29,13 +29,17 @@ class DiscoverMainVC: UIViewController {
     }
     
     func setupButton() {
+        tableView.backgroundColor = ColorScheme.s3Bg
         findButton.layer.cornerRadius = 8
         findButton.backgroundColor = ColorScheme.p1Tint
         findButton.titleLabel?.textColor = ColorScheme.g4Text
+        
+        findButton.titleLabel?.font = FontScheme.T2
     }
+    
     func setupNavBar() {
-        let logo = UIImage(named: "dumbbell")!
-        let imageView = UIImageView(image:logo.resize(CGSize(width: 30, height: 30)))
+        let logo = UIImage(named: "Logo")!
+        let imageView = UIImageView(image:logo.resize(CGSize(width: 25, height: 25)))
         self.navigationItem.titleView = imageView
     }
     
@@ -56,9 +60,9 @@ class DiscoverMainVC: UIViewController {
     }
 
     func addSegControl (view: UIView) {
-        let segControl = HMSegmentedControl(sectionTitles: ["Buddies", "Public"])
+        let segControl = HMSegmentedControl(sectionTitles: ["BUDDIES", "PUBLIC"])
         segControl.customize()
-        segControl.backgroundColor = UIColor.whiteColor()
+        segControl.backgroundColor = ColorScheme.s4Bg
         segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
         view.addSubview(segControl)
         segControl.addTarget(self, action: #selector(DiscoverMainVC.onSegControl(_:)), forControlEvents: .ValueChanged)

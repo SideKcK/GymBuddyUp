@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exC-0d-KOU">
-                                <rect key="frame" x="0.0" y="64" width="320" height="35"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="cK2-JD-7hM"/>
+                                    <constraint firstAttribute="height" constant="33" id="cK2-JD-7hM"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QRq-3e-xpl">
-                                <rect key="frame" x="0.0" y="99" width="320" height="420"/>
+                                <rect key="frame" x="0.0" y="97" width="320" height="422"/>
                                 <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>

@@ -315,6 +315,7 @@
                         <outlet property="borderView" destination="P1e-QN-EhU" id="Vjb-d1-nYA"/>
                         <outlet property="goalLabel" destination="HZ9-IO-Rjg" id="4bA-SQ-xNa"/>
                         <outlet property="gymButton" destination="Jmj-2P-JyT" id="IHi-ru-fjW"/>
+                        <outlet property="joinButton" destination="Qlg-nE-kWD" id="Cre-sq-ke5"/>
                         <outlet property="nameLabel" destination="T8e-D9-iei" id="A4R-61-p3G"/>
                         <outlet property="planDifLabel" destination="ReV-xn-v5n" id="o2I-4t-XeP"/>
                         <outlet property="planDifView" destination="RTO-UW-yI5" id="vsC-AB-qmp"/>

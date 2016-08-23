@@ -120,6 +120,7 @@
                         <outlet property="menuView" destination="m5s-uS-fOb" id="6tJ-AX-aAp"/>
                         <outlet property="monthButton" destination="adI-Bc-KYD" id="YNL-qm-3Fi"/>
                         <outlet property="tableView" destination="774-uY-Ki1" id="JRO-Sb-fhs"/>
+                        <outlet property="todayButton" destination="PWI-nV-v3b" id="gdc-9Z-0Ze"/>
                         <segue destination="iEy-Fi-h0E" kind="presentation" identifier="toPlanLibrarySegue" id="SCd-Gh-eem"/>
                         <segue destination="OJA-WL-q0A" kind="presentation" identifier="toBuildPlanSegue" id="OzF-Ls-qyD"/>
                         <segue destination="6RH-aL-G0u" kind="show" identifier="toPlanDetailSegue" id="ZhO-h7-1nY"/>
@@ -156,7 +157,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-we-C7j">
-                                        <rect key="frame" x="0.0" y="112.5" width="320" height="342.5"/>
+                                        <rect key="frame" x="0.0" y="115" width="320" height="340"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chest Intensive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pe-6k-qTB">
@@ -167,7 +168,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZO-Xs-XS2">
                                         <rect key="frame" x="282" y="5" width="30" height="30"/>
-                                        <state key="normal" title=". . ."/>
+                                        <state key="normal" title="..."/>
                                         <connections>
                                             <action selector="onMoreButton:" destination="31H-FZ-iqh" eventType="touchUpInside" id="Sjp-oE-KNx"/>
                                             <action selector="onMoreButton:" destination="6RH-aL-G0u" eventType="touchUpInside" id="cu9-6D-hMc"/>
@@ -216,11 +217,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-eH-aLF">
-                                        <rect key="frame" x="70" y="402" width="180" height="45"/>
+                                        <rect key="frame" x="61" y="403" width="198" height="44"/>
                                         <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="gkJ-eH-aLF" secondAttribute="height" multiplier="4:1" id="1P3-2m-WsN"/>
-                                            <constraint firstAttribute="height" constant="45" id="hlo-Cx-Dzv"/>
+                                            <constraint firstAttribute="width" secondItem="gkJ-eH-aLF" secondAttribute="height" multiplier="4.5:1" id="1P3-2m-WsN"/>
+                                            <constraint firstAttribute="height" constant="44" id="hlo-Cx-Dzv"/>
                                         </constraints>
                                         <state key="normal" title="START WORKOUT">
                                             <color key="titleColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -230,19 +231,19 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wL-Yf-W9X">
-                                        <rect key="frame" x="0.0" y="74" width="320" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="74" width="320" height="39"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVD-iW-wNi">
-                                                <rect key="frame" x="40" y="3" width="240" height="30.5"/>
+                                                <rect key="frame" x="40" y="3" width="240" height="33"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching SideKcK in Public" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CK-xB-eKA">
-                                                        <rect key="frame" x="41" y="8" width="158.5" height="14.5"/>
+                                                        <rect key="frame" x="41" y="8" width="158.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okO-rm-nXe">
-                                                        <rect key="frame" x="210" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="210" y="1.5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="Ef9-qs-436"/>
                                                             <constraint firstAttribute="height" constant="30" id="mqF-VI-SDt"/>
@@ -258,6 +259,7 @@
                                                 <constraints>
                                                     <constraint firstItem="4CK-xB-eKA" firstAttribute="centerY" secondItem="jVD-iW-wNi" secondAttribute="centerY" id="6Mc-gU-v12"/>
                                                     <constraint firstItem="4CK-xB-eKA" firstAttribute="centerX" secondItem="jVD-iW-wNi" secondAttribute="centerX" id="8wd-Ho-pgU"/>
+                                                    <constraint firstAttribute="height" constant="33" id="Llj-Ri-WbJ"/>
                                                     <constraint firstItem="okO-rm-nXe" firstAttribute="centerY" secondItem="jVD-iW-wNi" secondAttribute="centerY" id="QoT-C5-pK5"/>
                                                     <constraint firstItem="4CK-xB-eKA" firstAttribute="top" secondItem="jVD-iW-wNi" secondAttribute="top" constant="8" id="SyJ-DQ-MJh"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4CK-xB-eKA" secondAttribute="trailing" constant="12" id="cSK-Ep-dKq"/>
@@ -275,7 +277,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DvW-MQ-HN8">
-                                        <rect key="frame" x="0.0" y="111.5" width="320" height="1"/>
+                                        <rect key="frame" x="0.0" y="114" width="320" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="p1u-FN-wj9"/>
@@ -330,9 +332,10 @@
                         <outlet property="moreButton" destination="hZO-Xs-XS2" id="D31-8j-RFy"/>
                         <outlet property="planLabel" destination="3pe-6k-qTB" id="tsB-qI-mJH"/>
                         <outlet property="statusLabel" destination="4CK-xB-eKA" id="3DX-57-yUE"/>
-                        <outlet property="statusView" destination="0wL-Yf-W9X" id="eQD-sP-5mT"/>
+                        <outlet property="statusView" destination="jVD-iW-wNi" id="osK-nK-n0W"/>
                         <outlet property="statusViewHeight" destination="5N6-Zn-C5D" id="Gux-6V-wZB"/>
                         <outlet property="tableView" destination="sTd-we-C7j" id="Vzq-AV-zXX"/>
+                        <outlet property="timeLabel" destination="yk1-CG-4vQ" id="SGj-sq-8ZW"/>
                         <outlet property="timeLocView" destination="obl-fZ-Ed1" id="91A-3a-Vtm"/>
                         <outlet property="workoutButton" destination="gkJ-eH-aLF" id="JmR-AH-1dp"/>
                         <segue destination="IZj-Jg-anC" kind="unwind" identifier="unwindToPlanMainVC" unwindAction="unwindToPlanMainVC:" id="7eT-O1-eRR"/>

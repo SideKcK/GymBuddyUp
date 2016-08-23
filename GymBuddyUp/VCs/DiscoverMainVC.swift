@@ -30,11 +30,7 @@ class DiscoverMainVC: UIViewController {
     
     func setupButton() {
         tableView.backgroundColor = ColorScheme.s3Bg
-        findButton.layer.cornerRadius = 8
-        findButton.backgroundColor = ColorScheme.p1Tint
-        findButton.titleLabel?.textColor = ColorScheme.g4Text
-        
-        findButton.titleLabel?.font = FontScheme.T2
+        findButton.makeActionButton()
     }
     
     func setupNavBar() {

@@ -29,9 +29,19 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 1
+        if let button = self as? UIButton {
+            button.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
+        }
         //self.clipsToBounds = true
     }
-
+    func makeBorderButton (color: UIColor) {
+        self.layer.cornerRadius = 10
+        self.backgroundColor = ColorScheme.s4Bg
+        self.tintColor = color
+        self.layer.borderColor = color.CGColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+    }
 }
 
 extension CALayer {
@@ -63,6 +73,25 @@ extension CALayer {
     }
 }
 
+extension UIButton {
+    func makeBotButton () {
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.titleLabel?.font = UIFont.systemFontOfSize(20, weight: UIFontWeightMedium)
+    }
+    
+    func makeActionButton () {
+        self.layer.cornerRadius = 8
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.tintColor = ColorScheme.g4Text
+        self.titleLabel?.font = FontScheme.T2
+    }
+    
+
+}
 extension UIImageView {
     func makeThumbnail(color: UIColor) {
         //self.backgroundColor = color

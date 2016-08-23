@@ -15,7 +15,7 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
     @IBOutlet weak var gymButton: UIButton!
-    
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -35,12 +35,24 @@ class PlanDetailVC: UIViewController {
         self.title = selectedDate.toString()
         setTableView()
         setViews(false)
+        setupVisual()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func setupVisual() {
+        workoutButton.makeActionButton()
+        findButton.makeBorderButton(ColorScheme.p1Tint)
+        moreButton.tintColor = ColorScheme.g2Text
+        gymButton.tintColor = ColorScheme.p1Tint
+        statusView.makeBorderButton(ColorScheme.g2Text)
+        
+        planLabel.font = FontScheme.H1
+        moreButton.titleLabel?.font = FontScheme.H1
+
     }
     
     func setTableView() {

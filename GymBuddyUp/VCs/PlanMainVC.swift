@@ -17,6 +17,7 @@ class PlanMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addPlanButton: UIButton!
     @IBOutlet weak var addPlanView: UIView!
+    @IBOutlet weak var todayButton: UIBarButtonItem!
     
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
@@ -32,13 +33,13 @@ class PlanMainVC: UIViewController {
         setTableView()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
+        todayButton.tintColor = ColorScheme.s1Tint
     }
     
     func setupVisual() {
         menuView.backgroundColor = ColorScheme.s1Tint
         calendarView.backgroundColor = ColorScheme.s1Tint
-        addPlanButton.backgroundColor = ColorScheme.s4Bg
-        addPlanButton.titleLabel?.textColor = ColorScheme.s1Tint
+        
         addPlanView.backgroundColor = ColorScheme.s3Bg
         tableView.backgroundColor = ColorScheme.s3Bg
     }
@@ -112,6 +113,7 @@ class PlanMainVC: UIViewController {
                                 
                             }else {
                                 print(error)
+                                KRProgressHUD.showError()
                             }
                             dispatch_group_leave(myGroup)
                         })
@@ -127,9 +129,16 @@ class PlanMainVC: UIViewController {
                 
             }else {
                 print(error)
+                KRProgressHUD.showError()
             }
             
         }
+        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+            if KRProgressHUD.isVisible {
+                KRProgressHUD.showError()
+            }
+        })
     }
     
     func getCalendarWorkouts (date: NSDate) {
@@ -365,6 +374,8 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
+        todayButton.tintColor = selectedDate != NSDate() ? ColorScheme.g4Text : ColorScheme.s1Tint
+        
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)
         }else {

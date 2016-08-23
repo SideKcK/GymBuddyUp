@@ -40,7 +40,7 @@
                             <tableViewSection id="Xm8-LV-5lP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="CW9-N5-EC0">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CW9-N5-EC0" id="Kg8-EJ-dVC">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -76,7 +76,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="CEK-dJ-uWA">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="114" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CEK-dJ-uWA" id="7H5-tU-TNb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
@@ -86,7 +86,7 @@
                                                     <rect key="frame" x="20" y="3" width="280" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="Yk7-Or-Vz1"/>
+                                                        <constraint firstAttribute="height" constant="52" id="Yk7-Or-Vz1"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="Aug 5th, 4:45 PM">
@@ -105,7 +105,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="140" id="72B-Vg-eRQ">
-                                        <rect key="frame" x="0.0" y="105" width="414" height="140"/>
+                                        <rect key="frame" x="0.0" y="169" width="414" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="72B-Vg-eRQ" id="tqR-Nz-Wut">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
@@ -130,7 +130,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="TDF-Pa-tIb">
-                                        <rect key="frame" x="0.0" y="245" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="309" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TDF-Pa-tIb" id="SrF-rp-LbM">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -160,7 +160,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="9Ck-Sa-t8W">
-                                        <rect key="frame" x="0.0" y="295" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="359" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ck-Sa-t8W" id="Lok-4i-gwa">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
@@ -170,7 +170,7 @@
                                                     <rect key="frame" x="20" y="3" width="280" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="taU-pe-yoE"/>
+                                                        <constraint firstAttribute="height" constant="52" id="taU-pe-yoE"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="Select Gym...">
@@ -189,7 +189,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="XEF-e3-7KB">
-                                        <rect key="frame" x="0.0" y="350" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="414" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XEF-e3-7KB" id="Dx2-Mq-XSb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -219,7 +219,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="3z9-rh-Yln">
-                                        <rect key="frame" x="0.0" y="400" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="464" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3z9-rh-Yln" id="IDb-vR-KEg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
@@ -250,29 +250,10 @@
             </objects>
             <point key="canvasLocation" x="2266" y="1709"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Nfp-yh-NyJ">
-            <objects>
-                <viewController id="EVa-dm-eL7" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Kyy-t7-mea"/>
-                        <viewControllerLayoutGuide type="bottom" id="qDm-bK-rQt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wPy-XE-5Gv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vMJ-Oy-8tl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2705" y="1625"/>
-        </scene>
         <!--Choose Plan-->
         <scene sceneID="Zz1-LY-7YR">
             <objects>
-                <viewController id="BEH-LG-AFU" sceneMemberID="viewController">
+                <viewController id="BEH-LG-AFU" customClass="InvitePlanVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Q4-iq-ft7"/>
                         <viewControllerLayoutGuide type="bottom" id="LOY-1W-lSx"/>
@@ -283,7 +264,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aDk-V1-qRL">
                                 <rect key="frame" x="0.0" y="310" width="320" height="258"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nio-vI-YdE">
                                 <rect key="frame" x="15" y="122" width="289" height="130"/>
@@ -331,14 +312,17 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnA-Sd-QMJ">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="zGT-e5-USH"/>
+                                    <constraint firstAttribute="height" constant="44" id="zGT-e5-USH"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="21R-Ob-rct" kind="show" id="wls-k1-sTf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -366,9 +350,16 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Choose Plan" id="6yA-JU-efV">
-                        <barButtonItem key="leftBarButtonItem" title="X" id="TOa-Wi-uzI"/>
+                        <barButtonItem key="leftBarButtonItem" title="X" id="TOa-Wi-uzI">
+                            <connections>
+                                <action selector="onCancelButton:" destination="BEH-LG-AFU" id="AiM-1A-L2l"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="nextButton" destination="RnA-Sd-QMJ" id="PsB-Rk-6ex"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRe-6U-4Ev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -391,7 +382,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GymCell" rowHeight="70" id="MGk-ge-tvQ" customClass="GymCell" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="70"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MGk-ge-tvQ" id="daV-sG-u93">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
@@ -491,7 +482,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="80" id="tHG-4p-QLg" customClass="BuddyCell" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tHG-4p-QLg" id="oLz-IK-j2t">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>

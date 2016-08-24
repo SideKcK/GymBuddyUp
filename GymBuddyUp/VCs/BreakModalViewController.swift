@@ -43,19 +43,23 @@ class BreakModalViewController: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
         
         remainingTimeLabel.text = "\(Int(totalBreakTime)) s"
-        passedBreakTime = 0
+        passedBreakTime = 1
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
         circularProgressBar.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         // Do any additional setup after loading the view.
     }
     
     func timerCallback() {
-        passedBreakTime += 1
         let progressCGFloat = CGFloat(passedBreakTime/totalBreakTime)
         let remainingTimeInt = Int(totalBreakTime - passedBreakTime)
+        if remainingTimeInt >= 0 {
+            remainingTimeLabel.text = "\(remainingTimeInt) s"
+        }
+        passedBreakTime += 1
+
         circularProgressBar.updateProgress(progressCGFloat, animated: true, initialDelay: 0.0, duration: 1.0, completion: nil)
-        remainingTimeLabel.text = "\(remainingTimeInt) s"
-        if passedBreakTime > totalBreakTime {
+
+        if passedBreakTime > totalBreakTime + 1 {
             exitThisView()
         }
     }

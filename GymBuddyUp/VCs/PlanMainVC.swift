@@ -378,8 +378,9 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     //    }
     
     func shouldSelectDayView(dayView: DayView) -> Bool {
-        
+        return true
     }
+    
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         if dayView.date.month != selectedDate.month {

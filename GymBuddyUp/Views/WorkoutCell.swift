@@ -101,7 +101,7 @@ class WorkoutCell: UITableViewCell {
     }
     
     func setupVisual() {
-        moreButton.tintColor = ColorScheme.p1Tint
+        moreButton.tintColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
         buddyButton.tintColor = ColorScheme.p1Tint
         borderView.backgroundColor = ColorScheme.s4Bg

@@ -50,7 +50,7 @@ class PlanDetailVC: UIViewController {
     func setupVisual() {
         workoutButton.makeActionButton()
         findButton.makeBorderButton(ColorScheme.p1Tint)
-        moreButton.tintColor = ColorScheme.p1Tint
+        moreButton.tintColor = ColorScheme.g2Text
         gymButton.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
         statusView.makeBorderButton(ColorScheme.g2Text)
         

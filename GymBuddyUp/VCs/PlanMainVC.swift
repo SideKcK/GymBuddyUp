@@ -26,6 +26,7 @@ class PlanMainVC: UIViewController {
     
     let insetColor = ColorScheme.greyText
     let tintColor = ColorScheme.p1Tint
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVisual()
@@ -192,8 +193,12 @@ class PlanMainVC: UIViewController {
         })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
-        calendarView.changeMode(.WeekView)
-        calendarView.toggleCurrentDayView()
+        print("on today button")
+        calendarView.changeMode(.WeekView) {
+            print("changed mode")
+            self.calendarView.toggleCurrentDayView()
+        }
+        //calendarView.changeMode(.WeekView)
         //add selection circle to todays dayview
         
     }
@@ -372,9 +377,16 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     //
     //    }
     
-    
+    func shouldSelectDayView(dayView: DayView) -> Bool {
+        
+    }
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
+        if dayView.date.month != selectedDate.month {
+            print("select day view")
+            calendarView.changeMode(.WeekView)
+        }
+
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
         todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
@@ -383,7 +395,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         }else {
             tableView.reloadData()
         }
-        calendarView.changeMode(.WeekView)
+        
         UIView.animateWithDuration(0.3, animations: {
             self.tableView.alpha = 1
             self.addPlanView.alpha = 1
@@ -391,6 +403,8 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
+        print("presented date updated \(date.commonDescription)")
+        
         if monthButton.title != date.monthDescription {
             getCalendarWorkouts(date.convertedDate()!)
             //monthButton.alpha = 0

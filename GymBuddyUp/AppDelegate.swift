@@ -12,6 +12,7 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import FBSDKCoreKit
+import SwiftDate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,17 +65,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         User.currentUser?.userBecameActive()
         
-        // test push notification : send yourself a friend request
-//        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
-//            if (error != nil){
-//                print(error)
+        /*********************/
+        // Test the fuck out //
+        /*********************/
+        
+        func getRandomLocation(origin: CLLocation , withinRadius: Int) -> CLLocation {
+            let x0 = origin.coordinate.longitude
+            let y0 = origin.coordinate.latitude
+            
+            // Convert radius from meters to degrees
+            let radiusInDegrees = Double(withinRadius) / 111000
+            
+            let u = Double(arc4random_uniform(101))/100.0
+            let v = Double(arc4random_uniform(101))/100.0
+            
+            let w = radiusInDegrees * sqrt(u)
+            let t = 2 * M_PI * v
+            let x = w * cos(t)
+            let y = w * sin(t)
+            
+            // Adjust the x-coordinate for the shrinking of the east-west distances
+            let new_x = x / cos(y0)
+            
+            let foundLongitude = new_x + x0
+            let foundLatitude = y + y0
+            
+            return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
+        }
+        
+        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        
+        // publish random workout plans within 8 days within 5 km for testing.
+//        for _ in (1...40) {
+//            let publishLocation = getRandomLocation(testLocation, withinRadius: 5000)
+//            Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gymPlaceId: "place_id", gymLocation: publishLocation, workoutTime: NSDate() + Int(arc4random_uniform(8)).days) { (error) in
 //            }
 //        }
         
-//        Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gymPlaceId: "place_id", gymLocation: CLLocation(latitude: 30.563, longitude: -96.311), workoutTime: NSDate()) { (error) in
-//            print(error)
-//        }
-
+        //test public discover
+        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 1, withinDays: 10,  offset: 0) { (publishedWorkout, error) in
+            print(publishedWorkout[0])
+        }
+        
     }
     
     func userDidLogout() {

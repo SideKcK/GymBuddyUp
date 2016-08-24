@@ -285,6 +285,13 @@
                                                     <action selector="listiconOnClick:" destination="Eaj-m7-41E" eventType="touchUpInside" id="WOK-FI-0B0"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTa-oi-HpO">
+                                                <rect key="frame" x="135" y="79" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <segue destination="U5E-1K-A4K" kind="modal" id="z91-0E-L8n"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="BVA-bT-MTR" secondAttribute="trailing" constant="13" id="8sn-GA-g7m"/>
@@ -503,6 +510,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mf8-bu-P3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="915" y="-335"/>
+        </scene>
+        <!--Break Modal View Controller-->
+        <scene sceneID="gqH-Lt-VJ4">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="U5E-1K-A4K" customClass="BreakModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Oe-It-v6O"/>
+                        <viewControllerLayoutGuide type="bottom" id="LjH-DF-2g9"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="MM2-CX-nRG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVH-Pf-wyG">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Screen to Skip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WlI-jb-Njl">
+                                        <rect key="frame" x="88" y="273" width="144" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhw-Pf-eqd" customClass="RPCircularProgress" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="100" y="129" width="120" height="120"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rI-uA-oVo">
+                                                <rect key="frame" x="44" y="72" width="33" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Break Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amP-XJ-Mgz">
+                                                <rect key="frame" x="17" y="38" width="87" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="1QO-jK-fEt"/>
+                                            <constraint firstItem="amP-XJ-Mgz" firstAttribute="top" secondItem="Zhw-Pf-eqd" secondAttribute="top" constant="38" id="9Wv-0Y-Iud"/>
+                                            <constraint firstItem="amP-XJ-Mgz" firstAttribute="centerX" secondItem="Zhw-Pf-eqd" secondAttribute="centerX" id="LAz-iN-b3Y"/>
+                                            <constraint firstItem="7rI-uA-oVo" firstAttribute="centerX" secondItem="Zhw-Pf-eqd" secondAttribute="centerX" id="O4X-Vf-tWA"/>
+                                            <constraint firstItem="7rI-uA-oVo" firstAttribute="top" secondItem="amP-XJ-Mgz" secondAttribute="bottom" constant="13" id="p1S-EQ-RwC"/>
+                                            <constraint firstAttribute="height" constant="120" id="xFs-p7-X9R"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="WlI-jb-Njl" firstAttribute="top" secondItem="Zhw-Pf-eqd" secondAttribute="bottom" constant="24" id="ccm-w7-jvF"/>
+                                    <constraint firstItem="Zhw-Pf-eqd" firstAttribute="centerX" secondItem="yVH-Pf-wyG" secondAttribute="centerX" id="gxg-98-3s7"/>
+                                    <constraint firstItem="Zhw-Pf-eqd" firstAttribute="top" secondItem="yVH-Pf-wyG" secondAttribute="top" constant="129" id="whW-7h-vR2"/>
+                                    <constraint firstItem="WlI-jb-Njl" firstAttribute="centerX" secondItem="yVH-Pf-wyG" secondAttribute="centerX" id="zOh-BM-j94"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="yVH-Pf-wyG" firstAttribute="leading" secondItem="MM2-CX-nRG" secondAttribute="leading" id="7FC-bd-Mxh"/>
+                            <constraint firstAttribute="trailing" secondItem="yVH-Pf-wyG" secondAttribute="trailing" id="C5w-MF-nU5"/>
+                            <constraint firstItem="yVH-Pf-wyG" firstAttribute="top" secondItem="9Oe-It-v6O" secondAttribute="bottom" id="LmT-Ag-f9Y"/>
+                            <constraint firstItem="LjH-DF-2g9" firstAttribute="top" secondItem="yVH-Pf-wyG" secondAttribute="bottom" id="ZvS-fp-cbS"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="K0x-Dx-RT5"/>
+                    <connections>
+                        <outlet property="breakTimeLabel" destination="amP-XJ-Mgz" id="41R-7u-yXp"/>
+                        <outlet property="circularProgressBar" destination="Zhw-Pf-eqd" id="0Zw-AI-z6V"/>
+                        <outlet property="contentView" destination="yVH-Pf-wyG" id="efb-y5-gUV"/>
+                        <outlet property="remainingTimeLabel" destination="7rI-uA-oVo" id="NbE-ps-ycx"/>
+                        <outlet property="tipTSKLabel" destination="WlI-jb-Njl" id="i9u-fc-hox"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KWG-pJ-Pxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1447" y="337"/>
         </scene>
     </scenes>
 </document>

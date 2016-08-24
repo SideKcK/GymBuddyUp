@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Alamofire
+import GooglePlaces
 
 let apiServerKey = "AIzaSyAAjJ_0Il1pS99Rz6UcczVt6yiuiuxQdqc"
 
@@ -48,5 +49,26 @@ class GoogleAPI {
                 }
         }
         
+    }
+    
+    func getGymById(placesId: String, completion: (gym: Gym?, error: NSError?) -> Void ) {
+        GMSPlacesClient.sharedClient().lookUpPlaceID(placesId, callback: { (place: GMSPlace?, error: NSError?) -> Void in
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                completion(gym: nil, error: error)
+                return
+            }
+            
+            if let place = place {
+                completion(gym: Gym(place: place), error: nil)
+                print("Place name \(place.name)")
+                print("Place address \(place.formattedAddress)")
+                print("Place placeID \(place.placeID)")
+                print("Place attributions \(place.attributions)")
+            } else {
+                print("No place details for \(placesId)")
+                completion(gym: Gym(), error: nil)
+            }
+        })
     }
 }

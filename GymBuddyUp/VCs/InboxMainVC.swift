@@ -84,7 +84,7 @@ class InboxMainVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let navVC = segue.destinationViewController as? UINavigationController, let desVC = navVC.topViewController as? DiscoverDetailVC {
-            desVC.event = Plan()
+            desVC.plan = Plan()
         }
     }
     

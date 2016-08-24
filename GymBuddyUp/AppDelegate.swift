@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import GoogleMaps
+import GooglePlaces
+
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
@@ -27,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         // Override point for customization after application launch.
-        GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
-        
+        GMSPlacesClient.provideAPIKey("AIzaSyCZogv3GKW3LMhKWHhCArp_BN4Y16gM6d0")
         // Firebase Initialization
         
         // Register for remote notifications
@@ -101,11 +101,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gymPlaceId: "place_id", gymLocation: publishLocation, workoutTime: NSDate() + Int(arc4random_uniform(8)).days) { (error) in
 //            }
 //        }
-        
+        /*
         //test public discover
         Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 1, withinDays: 10,  offset: 0) { (publishedWorkout, error) in
             print(publishedWorkout[0])
         }
+ */
         
     }
     

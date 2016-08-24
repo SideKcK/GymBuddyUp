@@ -26,7 +26,9 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var joinButton: UIButton!
 
-    var event: Plan!
+    var event: PublishedWorkout!
+    var plan: Plan!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,13 +40,17 @@ class DiscoverDetailVC: UIViewController {
         nameLabel.userInteractionEnabled = true
         
         borderView.layer.cornerRadius = 5
-        planNameLabel.text = event.name
         statusLabel.text = "Broadcast to Public"
-        planDifLabel.text = "Beginner"
         setupTableView()
         setupVisual()
+        setupData()
+    }
+    
+    func setupData() {
+        timeLabel.text = weekMonthDateString(event.workoutTime)+", "+timeString(event.workoutTime)
         
-        timeLabel.text = weekMonthDateString(NSDate())+", "+timeString(NSDate())
+        planNameLabel.text = plan.name
+        planDifLabel.text = plan.difficulty?.description
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -109,6 +115,12 @@ class DiscoverDetailVC: UIViewController {
             desVC.gym = Gym()
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
+        if let desVC = segue.destinationViewController as? PlanExerciseVC {
+            guard let exers = plan.exercises, let row = sender as? Int else {
+                return
+            }
+            desVC.exercise = exers[row]
+        }
     }
  
 
@@ -116,7 +128,7 @@ class DiscoverDetailVC: UIViewController {
 
 extension DiscoverDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let exers = event.exercises else{
+        guard let exers = plan.exercises else{
             return 0
         }
         return exers.count
@@ -125,7 +137,7 @@ extension DiscoverDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         cell.numLabel.text = String(indexPath.row+1)
-        guard let exers = event.exercises else {
+        guard let exers = plan.exercises else {
             return cell
         }
         cell.exercise = exers[indexPath.row]

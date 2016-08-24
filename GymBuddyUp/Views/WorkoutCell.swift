@@ -35,10 +35,17 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
     var imageViews = [UIImageView]()
-    var event: Plan! {
+    var event: PublishedWorkout! {
         didSet {
-            nameLabel.text = event.name
-            if let exers = event.exercises {
+            timeLabel.text = weekMonthDateString(event.workoutTime) + ", "+timeString(event.workoutTime)
+            gymButton.setTitle(event.gym?.name, forState: .Normal)
+            
+        }
+    }
+    var plan: Plan! {
+        didSet {
+            nameLabel.text = plan.name
+            if let exers = plan.exercises {
                 if exers.count == 0 {
                     exercisesStackView.removeAllSubviews()
                     exercisesHeightConstraint.priority = 999
@@ -80,9 +87,6 @@ class WorkoutCell: UITableViewCell {
             exercisesStackView.addArrangedSubview(imageView)
             imageViews.append(imageView)
         }
-        
-        //TEST
-        timeLabel.text = weekMonthDateString(NSDate()) + ", "+timeString(NSDate())
         
         borderView.addShadow()
         clearAllViews()

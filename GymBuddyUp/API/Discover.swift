@@ -16,11 +16,12 @@ private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
 private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
 private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout_location")
 
-struct PublishedWorkout {
+class PublishedWorkout {
     var id: String
     var planId: String
-    var gymLocation: CLLocation
-    var gymPlaceId: String?
+    var gymLocation: CLLocation //to be deprecated
+    var gymPlaceId: String? //to be deprecated
+    var gym: Gym?
     var publishedBy: String
     var workoutTime: NSDate
     var publishedAt: NSDate
@@ -30,6 +31,7 @@ struct PublishedWorkout {
         self.gymLocation = location
         self.planId = dict.valueForKey("plan") as! String
         self.gymPlaceId = dict.valueForKey("gym_place_id") as? String
+        self.gym = Gym() //todo
         self.publishedBy = dict.valueForKey("published_by") as! String
         
         let workoutTime = dict.valueForKey("workout_time") as! Double

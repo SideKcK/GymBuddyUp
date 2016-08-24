@@ -71,8 +71,8 @@ class PlanMainVC: UIViewController {
             self.workouts[date] = workouts
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
-                    if let dayplans = plans {
-                        self.plans[date] = dayplans
+                    if error == nil {
+                        self.plans[date] = plans
                         //reload tableview with plans
                         if date == self.selectedDate {
                             self.tableView.reloadData()
@@ -108,13 +108,13 @@ class PlanMainVC: UIViewController {
                     dispatch_group_enter(myGroup)
                     if let planIds = Plan.planIDsWithArray(dayworkouts) {
                         Library.getPlansById(planIds, completion: { (plans, error) in
-                            if let dayplans = plans {
-                                self.plans[date] = dayplans
+                            if error == nil {
+                                self.plans[date] = plans
                                 //get plan invitation status
                                 
                             }else {
                                 print(error)
-                                KRProgressHUD.showError()
+                                KRProgressHUD.showError(message: "Network Error")
                             }
                             dispatch_group_leave(myGroup)
                         })
@@ -130,14 +130,14 @@ class PlanMainVC: UIViewController {
                 
             }else {
                 print(error)
-                KRProgressHUD.showError()
+                KRProgressHUD.showError(message: "Network Error")
             }
             
         }
         let triggerTime = (Int64(NSEC_PER_SEC) * 5)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
             if KRProgressHUD.isVisible {
-                KRProgressHUD.showError()
+                KRProgressHUD.showError(message: "Network Error")
             }
         })
     }
@@ -487,7 +487,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         guard let dayPlans = plans[selectedDate] else {
             return cell
         }
-        cell.event = dayPlans[indexPath.row]
+        cell.plan = dayPlans[indexPath.row]
         cell.showMoreButton()
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)

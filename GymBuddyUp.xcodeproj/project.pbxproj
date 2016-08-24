@@ -35,6 +35,8 @@
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
 		C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */; };
+		C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */; };
+		C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
 		C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA441D57A3A100B1348B /* InviteMainVC.swift */; };
@@ -146,6 +148,8 @@
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
 		C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingPopOverBackgroundView.swift; sourceTree = "<group>"; };
+		C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreakModalViewController.swift; path = VCs/BreakModalViewController.swift; sourceTree = "<group>"; };
+		C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPCircularProgress.swift; path = Views/RPCircularProgress.swift; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
 		C607BA441D57A3A100B1348B /* InviteMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteMainVC.swift; path = VCs/InviteMainVC.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 				C66B081C1D502378003B0872 /* UnderlineField.swift */,
 				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
 				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
+				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
+				C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */,
 				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
 				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
 				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
@@ -702,6 +708,7 @@
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
 				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
+				C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
@@ -709,6 +716,7 @@
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
 				B6F00B821D66B34600B09177 /* GeoFire.m in Sources */,
+				C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */,
 				C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
 				C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */,

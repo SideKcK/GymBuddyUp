@@ -14,11 +14,13 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class TrackedPlan {
+    weak var plan: Plan?
     var trackingId: String?
     var user: User?
     var trackingItems = [TrackedItem]()
     
     init(plan: Plan) {
+        self.plan = plan
         if let exercises = plan.exercises {
             Log.info("if let exercises = plan.exercises {")
             for exercise in exercises {

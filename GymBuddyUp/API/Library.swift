@@ -117,6 +117,10 @@ class Library {
                             exercises.append(exercise)
                             dispatch_group_leave(getExercisesTaskGroup)
                         }
+                        else {
+                            print("error getting exercise by plan id", error)
+                            dispatch_group_leave(getExercisesTaskGroup)
+                        }
                     })
                 }
             }

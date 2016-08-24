@@ -10,9 +10,12 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import Alamofire
+import SwiftDate
 
 private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
 private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
+private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout_location")
+
 
 class Invite {
     
@@ -57,6 +60,7 @@ class Invite {
     }
     
     class func publishWorkoutInviteToPublic(PlanId: String, scheduledWorkoutId: String, gymPlaceId: String, gymLocation: CLLocation, workoutTime: NSDate, completion: (NSError?) -> Void ) {
+        
         let workoutRef = publishedWorkoutRef.childByAutoId()
         let workoutId = workoutRef.key
         let workoutPath = "/published_workout/\(workoutId)"
@@ -89,8 +93,10 @@ class Invite {
                 return completion(error)
             }
             
-            let geofire = GeoFire(firebaseRef: workoutRef)
-            geofire.setLocation(gymLocation, forKey: "gym_location") { (error) in
+            // figure out where to put location data
+            let date = workoutTime.toString(DateFormat.Custom("yyyy-MM-dd"))
+            let geofire = GeoFire(firebaseRef: publishedWorkoutLocationRef.child(date!))
+            geofire.setLocation(gymLocation, forKey: workoutId) { (error) in
                 completion(error)
             }
         }

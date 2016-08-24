@@ -93,6 +93,8 @@
 		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
 		C6AF1EE31D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */; };
 		C6B40A9E1D6CDAA2001DC761 /* InvitePlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */; };
+		C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */; };
+		C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
 		C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */; };
@@ -203,6 +205,8 @@
 		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
 		C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserWorkoutHistoryCell.swift; path = Views/UserWorkoutHistoryCell.swift; sourceTree = "<group>"; };
 		C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitePlanVC.swift; path = VCs/InvitePlanVC.swift; sourceTree = "<group>"; };
+		C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserWorkoutOverviewCell.swift; path = Views/UserWorkoutOverviewCell.swift; sourceTree = "<group>"; };
+		C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsVC.swift; path = VCs/SettingsVC.swift; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
 		C6CD01EC1D3AC0E300D64A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PlanAddExercise.storyboard; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
 				C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */,
 				C681650E1D665BC700FC63FD /* MeFindVC.swift */,
+				C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				C11F64E51D6785EF00FFF5DB /* TrackedItemPopoverCell.swift */,
 				C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */,
 				C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */,
+				C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */,
+				C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */,
 				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
@@ -725,6 +732,7 @@
 				C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
 				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
+				C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */,

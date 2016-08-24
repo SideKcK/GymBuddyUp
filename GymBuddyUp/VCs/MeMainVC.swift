@@ -11,7 +11,10 @@ import UIKit
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let kHeaderHeight:CGFloat = 130
+    
+    
+    let kHeaderHeight:CGFloat = 150
+    let profileRadius:CGFloat = 125
     let titleBGView: UIImageView = UIImageView()
     let profileView : UIImageView = UIImageView()
 
@@ -39,7 +42,7 @@ class MeMainVC: UIViewController {
         let headerW = CGRectGetWidth(self.view.frame)
 
         
-        profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight/2, width: headerW/3, height: headerW/3)
+        profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight - profileRadius / 2.0, width: profileRadius, height: profileRadius)
         profileView.makeThumbnail(ColorScheme.p1Tint)
         
         //title background
@@ -69,12 +72,7 @@ class MeMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLogout(sender: AnyObject) {
-        User.currentUser!.signOut(){ _ in
-        self.performSegueWithIdentifier("toSignUpLogin", sender: self)
-        }
-    }
-
+    
     /*
     // MARK: - Navigation
 
@@ -106,9 +104,9 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .None
             return cell
         }else if indexPath.row == cells.count - 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserWorkoutOverviewCell
             cell.selectionStyle = .None
-            cell.backgroundColor = ColorScheme.s3Bg
+            
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath) as! UserWorkoutHistoryCell

@@ -26,10 +26,17 @@ class UserBuddyOverviewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setupVisual()
+    }
+    
+    func setupVisual() {
         self.backgroundColor = ColorScheme.p1Tint
         buddyNumLabel.textColor = ColorScheme.g4Text
         buddyLabel.textColor = ColorScheme.g4Text
         buddyView.tintColor = ColorScheme.s4Bg
+        let text = FontScheme.T3
+        buddyNumLabel.font = text
+        buddyLabel.font = text
     }
 
 }

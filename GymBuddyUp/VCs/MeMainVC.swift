@@ -72,6 +72,13 @@ class MeMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindToMeMainVC(segue: UIStoryboardSegue) {
+        
+    }
+    
+    func onActionButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toEditProfileSegue", sender: sender)
+    }
     
     /*
     // MARK: - Navigation
@@ -96,6 +103,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
             cell.user = user
+            cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
             return cell
         }else if indexPath.row == cells.count - 3{

@@ -42,6 +42,20 @@ extension UIView {
         self.layer.borderWidth = 1.0
         self.clipsToBounds = true
     }
+    
+    func makeBorderButton (color: UIColor, radius: CGFloat) {
+        self.layer.cornerRadius = radius
+        self.backgroundColor = ColorScheme.s4Bg
+        self.tintColor = color
+        
+        self.layer.borderColor = color.CGColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+        
+        if let button = self as? UIButton {
+            button.setTitleColor(color, forState: .Normal)
+        }
+    }
 }
 
 extension CALayer {

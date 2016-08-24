@@ -368,7 +368,7 @@
         <!--Location-->
         <scene sceneID="xCr-wT-n05">
             <objects>
-                <viewController id="Cxn-Xy-Rvw" customClass="InviteGymVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteGymVC" id="Cxn-Xy-Rvw" customClass="InviteGymVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n55-4a-RbD"/>
                         <viewControllerLayoutGuide type="bottom" id="BNv-cG-xpn"/>

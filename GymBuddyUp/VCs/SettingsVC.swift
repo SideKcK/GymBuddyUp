@@ -29,6 +29,7 @@ class SettingsVC: UITableViewController {
     
     func setupVisual() {
         logOutButton.tintColor = ColorScheme.e1Tint
+        tableView.backgroundColor = ColorScheme.s3Bg
     }
     
     @IBAction func onLogOutButton(sender: AnyObject) {

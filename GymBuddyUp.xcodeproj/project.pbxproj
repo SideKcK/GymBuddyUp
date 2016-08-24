@@ -95,6 +95,7 @@
 		C6B40A9E1D6CDAA2001DC761 /* InvitePlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */; };
 		C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */; };
 		C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */; };
+		C6B40AA41D6D3714001DC761 /* MeUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
 		C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */; };
@@ -207,6 +208,7 @@
 		C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitePlanVC.swift; path = VCs/InvitePlanVC.swift; sourceTree = "<group>"; };
 		C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserWorkoutOverviewCell.swift; path = Views/UserWorkoutOverviewCell.swift; sourceTree = "<group>"; };
 		C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsVC.swift; path = VCs/SettingsVC.swift; sourceTree = "<group>"; };
+		C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeUpdateVC.swift; path = VCs/MeUpdateVC.swift; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
 		C6CD01EC1D3AC0E300D64A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PlanAddExercise.storyboard; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */,
 				C681650E1D665BC700FC63FD /* MeFindVC.swift */,
 				C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */,
+				C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,
 				C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
+				C6B40AA41D6D3714001DC761 /* MeUpdateVC.swift in Sources */,
 				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,

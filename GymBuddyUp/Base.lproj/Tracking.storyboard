@@ -98,15 +98,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lf9-tg-lzR" userLabel="ParamsContainer">
                                         <rect key="frame" x="0.0" y="200" width="320" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH0-62-uvQ" customClass="KKParamsLabel" customModule="GymBuddyUp" customModuleProvider="target">
-                                                <rect key="frame" x="110" y="8" width="25" height="48"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="haG-6H-eC6"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-N2-BvS">
                                                 <rect key="frame" x="147" y="8" width="26" height="48"/>
                                                 <constraints>
@@ -118,7 +109,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qf-DE-Zhz" customClass="KKParamsLabel" customModule="GymBuddyUp" customModuleProvider="target">
-                                                <rect key="frame" x="185" y="8" width="25" height="48"/>
+                                                <rect key="frame" x="112" y="8" width="25" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="XF3-s9-EZQ"/>
                                                 </constraints>
@@ -126,22 +117,31 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsm-zh-NOZ">
-                                                <rect key="frame" x="113" y="58" width="20" height="17"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="17" id="W9Z-DT-USh"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" red="0.68888300657272339" green="0.71366006135940552" blue="0.73448425531387329" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pa2-3J-BXe">
-                                                <rect key="frame" x="183" y="58" width="29" height="17"/>
+                                                <rect key="frame" x="110" y="58" width="29" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="2S3-z4-Y6c"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.68888300660000001" green="0.71366006140000005" blue="0.73448425530000006" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH0-62-uvQ" customClass="KKParamsLabel" customModule="GymBuddyUp" customModuleProvider="target">
+                                                <rect key="frame" x="181" y="8" width="25" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="haG-6H-eC6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsm-zh-NOZ">
+                                                <rect key="frame" x="184" y="58" width="20" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="17" id="W9Z-DT-USh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.68888300657272339" green="0.71366006135940552" blue="0.73448425531387329" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -151,12 +151,12 @@
                                             <constraint firstItem="LH0-62-uvQ" firstAttribute="top" secondItem="lf9-tg-lzR" secondAttribute="top" constant="8" id="L62-Fn-P54"/>
                                             <constraint firstItem="5Qf-DE-Zhz" firstAttribute="top" secondItem="lf9-tg-lzR" secondAttribute="top" constant="8" id="LR7-3e-Zux"/>
                                             <constraint firstAttribute="height" priority="999" constant="100" id="LZp-k7-AIo"/>
-                                            <constraint firstItem="bs0-N2-BvS" firstAttribute="leading" secondItem="LH0-62-uvQ" secondAttribute="trailing" constant="12" id="R5h-qy-V9t"/>
-                                            <constraint firstItem="pa2-3J-BXe" firstAttribute="leading" secondItem="bs0-N2-BvS" secondAttribute="trailing" constant="10" id="SAs-sT-BJt"/>
-                                            <constraint firstItem="5Qf-DE-Zhz" firstAttribute="leading" secondItem="bs0-N2-BvS" secondAttribute="trailing" constant="12" id="UGA-Ue-sIw"/>
+                                            <constraint firstItem="bs0-N2-BvS" firstAttribute="leading" secondItem="pa2-3J-BXe" secondAttribute="trailing" constant="8" id="OSk-aO-3Aa"/>
+                                            <constraint firstItem="bs0-N2-BvS" firstAttribute="leading" secondItem="5Qf-DE-Zhz" secondAttribute="trailing" constant="10" id="T9T-CC-JCc"/>
                                             <constraint firstItem="pa2-3J-BXe" firstAttribute="top" secondItem="5Qf-DE-Zhz" secondAttribute="bottom" constant="2" id="hGz-vK-zqa"/>
-                                            <constraint firstItem="bs0-N2-BvS" firstAttribute="leading" secondItem="wsm-zh-NOZ" secondAttribute="trailing" constant="14" id="idl-mm-YDa"/>
+                                            <constraint firstItem="wsm-zh-NOZ" firstAttribute="leading" secondItem="bs0-N2-BvS" secondAttribute="trailing" constant="11" id="n1I-5x-wM4"/>
                                             <constraint firstItem="wsm-zh-NOZ" firstAttribute="top" secondItem="LH0-62-uvQ" secondAttribute="bottom" constant="2" id="nDG-aY-bVc"/>
+                                            <constraint firstItem="LH0-62-uvQ" firstAttribute="leading" secondItem="bs0-N2-BvS" secondAttribute="trailing" constant="8" id="qJY-8D-xb0"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lD3-Qo-mC4" userLabel="LbsPickerContainer">
@@ -285,13 +285,6 @@
                                                     <action selector="listiconOnClick:" destination="Eaj-m7-41E" eventType="touchUpInside" id="WOK-FI-0B0"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTa-oi-HpO">
-                                                <rect key="frame" x="135" y="79" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <segue destination="U5E-1K-A4K" kind="modal" id="z91-0E-L8n"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="BVA-bT-MTR" secondAttribute="trailing" constant="13" id="8sn-GA-g7m"/>
@@ -345,7 +338,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Done" id="bYx-SR-xhp">
                             <connections>
                                 <action selector="onDoneButton:" destination="Eaj-m7-41E" id="ZNR-oC-fDS"/>
-                                <segue destination="rXB-N3-hsm" kind="modal" id="cCX-nK-rkO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -370,6 +362,7 @@
                         <outlet property="skipButton" destination="G13-FQ-UIE" id="O1j-vx-xRs"/>
                         <outlet property="timerContainer" destination="48t-wu-AwB" id="dV0-jg-QUN"/>
                         <outlet property="timerLabel" destination="vm1-Hs-awe" id="C1h-jV-brx"/>
+                        <outlet property="xLabel" destination="bs0-N2-BvS" id="8UA-dL-qIP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZK-dJ-o2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -412,7 +405,7 @@
         <!--Done Modal View Controller-->
         <scene sceneID="Br2-9J-E0p">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="rXB-N3-hsm" customClass="DoneModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DoneModalVC" modalPresentationStyle="overCurrentContext" id="rXB-N3-hsm" customClass="DoneModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nr-nF-UNO"/>
                         <viewControllerLayoutGuide type="bottom" id="xy1-ST-k9K"/>
@@ -437,8 +430,14 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6s-sJ-h8B">
                                 <rect key="frame" x="0.0" y="20" width="320" height="502"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="on finishing XXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjX-CD-ggh">
+                                        <rect key="frame" x="64" y="191" width="193" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sir-s9-AhF">
-                                        <rect key="frame" x="61" y="34" width="198" height="34"/>
+                                        <rect key="frame" x="61" y="139" width="198" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="198" id="2a0-YB-dFF"/>
                                             <constraint firstAttribute="height" constant="34" id="bOB-cK-0RD"/>
@@ -447,17 +446,11 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="on finishing XXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjX-CD-ggh">
-                                        <rect key="frame" x="63" y="76" width="193" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Sir-s9-AhF" firstAttribute="centerX" secondItem="w6s-sJ-h8B" secondAttribute="centerX" id="Ieo-iA-ddU"/>
-                                    <constraint firstItem="Sir-s9-AhF" firstAttribute="top" secondItem="w6s-sJ-h8B" secondAttribute="top" constant="34" id="SWo-iD-sff"/>
-                                    <constraint firstItem="zjX-CD-ggh" firstAttribute="top" secondItem="Sir-s9-AhF" secondAttribute="bottom" constant="8" id="a0x-29-gpU"/>
+                                    <constraint firstItem="Sir-s9-AhF" firstAttribute="top" secondItem="w6s-sJ-h8B" secondAttribute="top" constant="139" id="SWo-iD-sff"/>
+                                    <constraint firstItem="zjX-CD-ggh" firstAttribute="top" secondItem="Sir-s9-AhF" secondAttribute="bottom" constant="18" id="a0x-29-gpU"/>
                                     <constraint firstItem="zjX-CD-ggh" firstAttribute="centerX" secondItem="w6s-sJ-h8B" secondAttribute="centerX" id="zCa-we-QuH"/>
                                 </constraints>
                             </view>
@@ -475,8 +468,10 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="QGy-64-AuN"/>
                     <connections>
+                        <outlet property="congratsLabel" destination="Sir-s9-AhF" id="GnN-Rm-oCj"/>
                         <outlet property="contentView" destination="w6s-sJ-h8B" id="ckU-Ds-SDU"/>
                         <outlet property="doneButton" destination="t6u-u8-E1g" id="7EO-18-oKE"/>
+                        <outlet property="onFinishingObjectLabel" destination="zjX-CD-ggh" id="gLN-tQ-Uyt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z12-55-Xtx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -514,7 +509,7 @@
         <!--Break Modal View Controller-->
         <scene sceneID="gqH-Lt-VJ4">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="U5E-1K-A4K" customClass="BreakModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BreakTimeVC" modalPresentationStyle="overCurrentContext" id="U5E-1K-A4K" customClass="BreakModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Oe-It-v6O"/>
                         <viewControllerLayoutGuide type="bottom" id="LjH-DF-2g9"/>

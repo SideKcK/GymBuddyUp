@@ -11,7 +11,7 @@ import UIKit
 class BreakModalViewController: UIViewController {
     
     @IBOutlet weak var contentView: UIView!
-    var totalBreakTime: Float = 10.0
+    var totalBreakTime: Float = 0.0
     var passedBreakTime: Float = 0.0
     var timer = NSTimer()
     
@@ -69,6 +69,7 @@ class BreakModalViewController: UIViewController {
             timer.invalidate()
         }
         self.dismissViewControllerAnimated(true, completion: nil)
+        UIApplication.sharedApplication().statusBarHidden = false
     }
     
     func screenTouch(sender: UITapGestureRecognizer) {

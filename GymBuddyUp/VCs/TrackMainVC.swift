@@ -34,8 +34,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     @IBOutlet weak var gifIcon: UIButton!
     
     @IBOutlet weak var exerciseLabel: UILabel!
-    
     @IBOutlet weak var listViewIcon: UIButton!
+    @IBOutlet weak var xLabel: UILabel!
     
     
     var dropDownTitleNavButton: DropDownTitleNavButton!
@@ -183,7 +183,6 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         popoverVC?.dismissViewControllerAnimated(true, completion: nil)
         currentTrackedIndex = index
         loadTrackingItem()
-        
     }
     
     @IBAction func listiconOnClick(sender: AnyObject) {
@@ -211,7 +210,6 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         if let currentTrackedItem = trackedPlan?.trackingItems[currentTrackedIndex] {
             currentTrackedItem.saveOnNextExercise(finishedAmount, onFinishedSets: finishedSets)
         }
-        
     }
     
     @IBAction func previousItemOnClick(sender: AnyObject) {
@@ -232,7 +230,30 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     @IBAction func bottomButtonOnClick(sender: AnyObject) {
         guard let _currentUnitType = self.currentUnitType, currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        
+        if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount {
+            if currentTrackedIndex < itemsCount - 1 {
+                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+                currentTrackedIndex += 1
+                loadTrackingItem()
+            }
+            if currentTrackedIndex == itemsCount - 1 {
+                doneWorkoutAction()
+            }
+            return
+        }
+        
+        if let intermission = currentTrackedItem.exercise?.set[currentSetIndex]?.intermission where intermission > 0 {
+            Log.info("intermission = \(intermission)")
+            let storyboard = UIStoryboard(name: "Tracking", bundle: nil)
+            let breakTimeVC = storyboard.instantiateViewControllerWithIdentifier("BreakTimeVC") as! BreakModalViewController
+            breakTimeVC.totalBreakTime = Float(intermission)
+            self.presentViewController(breakTimeVC, animated: true, completion: nil)
+        
+        }
+        
         Log.info("bottomButtonOnClick")
+        
         if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
             // save current context
             guard let reps = repsLabel.text, weight = lbsLabel.text else {return}
@@ -380,7 +401,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     func setTimer() {
         if let _ = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.set[currentSetIndex]?.amount {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(TrackMainVC.addTime), userInfo: nil, repeats: true)
+            if timer.valid == false {
+                timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(TrackMainVC.addTime), userInfo: nil, repeats: true)
+            }
         }
 
     }
@@ -398,12 +421,23 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         }
     }
     
+    func doneWorkoutAction() {
+        // write backend sync code here
+        
+        // trackedPlanOnSave() ...
+        
+        let storyboard = UIStoryboard(name: "Tracking", bundle: nil)
+        let doneModalVC = storyboard.instantiateViewControllerWithIdentifier("DoneModalVC") as! DoneModalViewController
+        doneModalVC.planName = trackedPlan?.plan?.name
+        self.presentViewController(doneModalVC, animated: true, completion: nil)
+    }
+    
     @IBAction func onExitButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func onDoneButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        doneWorkoutAction()
     }
     
 }

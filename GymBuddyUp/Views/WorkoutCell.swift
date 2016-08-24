@@ -80,6 +80,10 @@ class WorkoutCell: UITableViewCell {
             exercisesStackView.addArrangedSubview(imageView)
             imageViews.append(imageView)
         }
+        
+        //TEST
+        timeLabel.text = weekMonthDateString(NSDate()) + ", "+timeString(NSDate())
+        
         borderView.addShadow()
         clearAllViews()
         setupVisual()

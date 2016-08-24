@@ -43,6 +43,8 @@ class DiscoverDetailVC: UIViewController {
         planDifLabel.text = "Beginner"
         setupTableView()
         setupVisual()
+        
+        timeLabel.text = weekMonthDateString(NSDate())+", "+timeString(NSDate())
     }
     
     override func viewDidAppear(animated: Bool) {

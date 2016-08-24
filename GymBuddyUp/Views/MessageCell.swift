@@ -35,6 +35,10 @@ class MessageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        //TEST
+        timeLabel.text = "at "+timeString(NSDate())+" on "+weekMonthDateString(NSDate())
+        
         borderView.addShadow()
         profileView.makeThumbnail(ColorScheme.s4Bg)
         deleteButton.layer.cornerRadius = 5

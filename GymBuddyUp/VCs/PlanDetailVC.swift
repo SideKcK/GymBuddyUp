@@ -33,10 +33,13 @@ class PlanDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = selectedDate.toString()
+        self.title = weekMonthDateString(selectedDate)
         setTableView()
         setViews(false)
         setupVisual()
+        
+        timeLabel.text = timeString(NSDate())
+        self.title = weekMonthDateString(NSDate())
         // Do any additional setup after loading the view.
     }
 

@@ -78,3 +78,22 @@ func dateTimeFormatter () -> NSDateFormatter {
     
     return dateFormatter
 }
+
+
+func weekMonthDateString (date: NSDate) -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "EEE, MMM d"
+    if date.isInToday() {
+        return "Today"
+    }else if date.isInTomorrow() {
+        return "Tomorrow"
+    }else {
+        return dateFormatter.stringFromDate(date)
+    }
+}
+
+func timeString (date: NSDate) -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    return dateFormatter.stringFromDate(date)
+}

@@ -18,6 +18,7 @@ class MeUpdateVC: UITableViewController {
     @IBOutlet weak var gym3Button: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var thumbView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class MeUpdateVC: UITableViewController {
     func setupVisual() {
         
         self.tableView.backgroundColor = ColorScheme.s3Bg
-        
+        thumbView.makeThumbnail(ColorScheme.p1Tint)
         profileView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
         let radius = CGFloat(4.0)
         let tint = ColorScheme.p1Tint

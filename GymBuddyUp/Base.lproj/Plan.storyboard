@@ -665,6 +665,7 @@
                         <outlet property="desLabel" destination="Ltx-9R-f3A" id="78C-3B-A8P"/>
                         <outlet property="gifView" destination="Eda-ZS-kmY" id="eU6-ze-00b"/>
                         <outlet property="mgView" destination="rYt-Eh-ezl" id="3oD-b1-cNg"/>
+                        <outlet property="muscleLabel" destination="adG-SN-bjr" id="Sff-Mj-dOS"/>
                         <outlet property="nameLabel" destination="kDN-2S-5fl" id="6fN-eP-V4O"/>
                     </connections>
                 </tableViewController>
@@ -1417,7 +1418,7 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bTs-V8-eL8"/>
+        <segue reference="Qhw-uT-cFT"/>
         <segue reference="rgS-nG-orv"/>
     </inferredMetricsTieBreakers>
 </document>

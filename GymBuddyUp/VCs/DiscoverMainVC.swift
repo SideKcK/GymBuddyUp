@@ -43,8 +43,10 @@ class DiscoverMainVC: UIViewController {
     }
     
     func setupNavBar() {
-        let logo = UIImage(named: "Logo")!
-        let imageView = UIImageView(image:logo.resize(CGSize(width: 25, height: 25)))
+        let logo = UIImage(named: "Logo_white")!
+        let imageView = UIImageView(frame:CGRectMake(0, 0, 30, 30))
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = logo
         self.navigationItem.titleView = imageView
     }
     

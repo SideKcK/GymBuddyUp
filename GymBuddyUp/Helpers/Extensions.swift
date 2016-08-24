@@ -195,6 +195,7 @@ extension UISegmentedControl
 
 extension HMSegmentedControl {
     func customize() {
+        self.selectionIndicatorHeight = 2.0
         self.selectionIndicatorColor = ColorScheme.p1Tint
         self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
@@ -202,6 +203,8 @@ extension HMSegmentedControl {
         self.titleTextAttributes = [
             NSForegroundColorAttributeName: ColorScheme.g3Text,
             NSFontAttributeName: FontScheme.T2 ]
+        self.selectedTitleTextAttributes = [
+        NSForegroundColorAttributeName: ColorScheme.p1Tint]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
         self.borderColor = ColorScheme.greyText

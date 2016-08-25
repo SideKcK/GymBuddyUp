@@ -14,6 +14,9 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var topContraint: NSLayoutConstraint!
     @IBOutlet weak var profileTapView: UIView!
     
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var exercisesStackView: UIStackView!
@@ -28,7 +31,7 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var statusStackView: UIStackView!
     @IBOutlet weak var borderView: UIView!
     
-    
+    @IBOutlet weak var dateHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
@@ -101,11 +104,14 @@ class WorkoutCell: UITableViewCell {
     }
     
     func setupVisual() {
+        dateView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 1.0)
+        dateLabel.textColor = ColorScheme.g2Text
         moreButton.tintColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
         buddyButton.tintColor = ColorScheme.p1Tint
         borderView.backgroundColor = ColorScheme.s4Bg
-        
+
+        dateLabel.font = FontScheme.T3
         profileView.layer.borderWidth = 0.5
         profileLabel.font = FontScheme.T3
         nameLabel.font = FontScheme.H2
@@ -124,6 +130,9 @@ class WorkoutCell: UITableViewCell {
         moreButton.hidden = true
         buddyButton.hidden = true
         gymButton.hidden = true
+        dateView.hidden = true
+        
+        dateHeightConstraint.priority = 999
         timeHeightConstraint.priority = 999
         statusHeightConstraint.priority = 999
         locHeightConstraint.priority = 999

@@ -34,7 +34,7 @@ class DiscoverMainVC: UIViewController {
         setupLocation()
         setupTableView()
         addSegControl(segView)
-        
+        self.findButtonConstraint.constant = self.view.frame.height / 3.0
     }
     
     func setupVisual() {

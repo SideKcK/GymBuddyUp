@@ -104,6 +104,9 @@
 		C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */; };
 		C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */; };
 		C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */; };
+		C6D810F71D6E9798006054AE /* InvitePlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810F61D6E9798006054AE /* InvitePlanCell.swift */; };
+		C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */; };
+		C6D810FB1D6E97C3006054AE /* InviteAddPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -219,6 +222,9 @@
 		C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddMainVC.swift; path = VCs/PlanAddMainVC.swift; sourceTree = "<group>"; };
 		C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddDetailVC.swift; path = VCs/PlanAddDetailVC.swift; sourceTree = "<group>"; };
 		C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExerciseNumberedCell.swift; path = Views/ExerciseNumberedCell.swift; sourceTree = "<group>"; };
+		C6D810F61D6E9798006054AE /* InvitePlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitePlanCell.swift; path = Views/InvitePlanCell.swift; sourceTree = "<group>"; };
+		C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteNoPlanCell.swift; path = Views/InviteNoPlanCell.swift; sourceTree = "<group>"; };
+		C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteAddPlanCell.swift; path = Views/InviteAddPlanCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -474,6 +480,9 @@
 				C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */,
 				C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */,
 				C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */,
+				C6D810F61D6E9798006054AE /* InvitePlanCell.swift */,
+				C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */,
+				C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -706,6 +715,7 @@
 				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
+				C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */,
 				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
 				C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */,
@@ -719,6 +729,7 @@
 				C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */,
 				C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
+				C6D810FB1D6E97C3006054AE /* InviteAddPlanCell.swift in Sources */,
 				C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */,
 				C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */,
 				C6AF1EE31D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift in Sources */,
@@ -754,6 +765,7 @@
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
+				C6D810F71D6E9798006054AE /* InvitePlanCell.swift in Sources */,
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
 				C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,

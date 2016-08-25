@@ -77,11 +77,23 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("addPlanCell", forIndexPath: indexPath)
             return cell
         }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            //remove shadow
+            cell.borderView.clipsToBounds = true
+            cell.showStatusView()
+            cell.showLocView()
+            cell.showTimeView()
+            cell.showDateView()
+            cell.alpha = 0.7
             return cell
         }
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0 {
+            
+        }
+    }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
     }

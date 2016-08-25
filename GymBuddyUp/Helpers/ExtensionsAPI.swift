@@ -9,7 +9,7 @@
 import UIKit
 
 extension Library {
-    class func getPlansById (planId: [String], completion: (plans: [Plan]?, error: NSError?) -> Void) {
+    class func getPlansById (planId: [String], completion: (plans: [Plan], error: NSError?) -> Void) {
         let myGroup = dispatch_group_create()
         let numPlan = planId.count
         var plans = [Plan](count: numPlan, repeatedValue: Plan())
@@ -18,7 +18,7 @@ extension Library {
             Library.getPlanById(id, completion: { (plan, error) in
                 guard let plan = plan else {
                     print(error)
-                    completion(plans: nil, error: error)
+                    completion(plans: [Plan](), error: error)
                     return
                 }
                 Library.getExercisesByPlanId(id, completion: { (exercises, error) in
@@ -28,7 +28,7 @@ extension Library {
                         dispatch_group_leave(myGroup)
                     }else {
                         print(error)
-                        completion(plans: nil, error: error)
+                        completion(plans: [Plan](), error: error)
                     }
                 })
                 

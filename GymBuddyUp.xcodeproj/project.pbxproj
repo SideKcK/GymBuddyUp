@@ -308,10 +308,36 @@
 		C1388BA41D65184000513C05 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				C649C5661CE3C68800258994 /* BorderedButton.swift */,
 				C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */,
 				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
 			);
 			name = Button;
+			sourceTree = "<group>";
+		};
+		C1E471551D6F63A800C19AAA /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
+			);
+			name = Picker;
+			sourceTree = "<group>";
+		};
+		C1E471561D6F63B500C19AAA /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
+			);
+			name = ProgressBar;
+			sourceTree = "<group>";
+		};
+		C1E471571D6F63C300C19AAA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				C66B081C1D502378003B0872 /* UnderlineField.swift */,
+				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
@@ -425,14 +451,12 @@
 		C649C5651CE3C64F00258994 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C1E471571D6F63C300C19AAA /* Misc */,
+				C1E471561D6F63B500C19AAA /* ProgressBar */,
+				C1E471551D6F63A800C19AAA /* Picker */,
 				C11F64DC1D66592300FFF5DB /* Labels */,
 				C1388BA41D65184000513C05 /* Button */,
 				C64EC21C1D289DCA000DA37A /* Cells */,
-				C649C5661CE3C68800258994 /* BorderedButton.swift */,
-				C66B081C1D502378003B0872 /* UnderlineField.swift */,
-				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
-				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
-				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

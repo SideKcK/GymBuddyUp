@@ -37,10 +37,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     @IBOutlet weak var listViewIcon: UIButton!
     @IBOutlet weak var xLabel: UILabel!
     
-    
     var dropDownTitleNavButton: DropDownTitleNavButton!
-    
-    
     var trackedPlan: TrackedPlan?
     var seconds: Float = 0.0
     var secondTotal: Float = 0.0
@@ -50,6 +47,15 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var currentSetsAmount = 0
     var popoverVC: TrackingPopOverViewController?
     var itemsCount = 0
+    var nextButtonState = NextButtonState.Normal
+    
+    enum NextButtonState {
+        case TimingNotStarted
+        case TimingStarted
+        case TimeIsUp
+        case LastSet
+        case Normal
+    }
     
     var finishedSets = 0 {
         didSet {
@@ -121,6 +127,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         
         lbsPicker.maskDisabled = false
         repsPicker.maskDisabled = false
+        
+        // TODO: Replace text with specific image from Siran
+        botButton.setTitle("Z", forState: .Normal)
         
         lbsLabel.userInteractionEnabled = true
         let lbsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.paramsTapResponse(_:)))
@@ -228,49 +237,103 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         }
     }
     
-    @IBAction func bottomButtonOnClick(sender: AnyObject) {
-        guard let _currentUnitType = self.currentUnitType, currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
-        
-        if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount {
-            if currentTrackedIndex < itemsCount - 1 {
-                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
-                currentTrackedIndex += 1
-                loadTrackingItem()
-            }
-            if currentTrackedIndex == itemsCount - 1 {
-                doneWorkoutAction()
-            }
-            return
-        }
-        
+    
+    func showBreakTime() {
+        guard let currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+
         if let intermission = currentTrackedItem.exercise?.set[currentSetIndex]?.intermission where intermission > 0 {
             Log.info("intermission = \(intermission)")
             let storyboard = UIStoryboard(name: "Tracking", bundle: nil)
             let breakTimeVC = storyboard.instantiateViewControllerWithIdentifier("BreakTimeVC") as! BreakModalViewController
             breakTimeVC.totalBreakTime = Float(intermission)
             self.presentViewController(breakTimeVC, animated: true, completion: nil)
-        
-        }
-        
-        Log.info("bottomButtonOnClick")
-        
-        if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
-            // save current context
-            guard let reps = repsLabel.text, weight = lbsLabel.text else {return}
-            guard let repsValue = Int(reps), weightValue = Int(weight) else {return}
-            
-            currentTrackedItem.saveOnNextSet(repsValue, weight: weightValue)
-            finishedSets = currentTrackedItem.finishedSets
-            if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount {
-                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
-            }
-        } else if _currentUnitType == Exercise.UnitType.DurationInSeconds {
-            setTimer()
-        } else {
             
         }
     }
     
+    @IBAction func bottomButtonOnClick(sender: AnyObject) {
+        guard let currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        
+        Log.info("bottomButtonOnClick")
+        
+        // deterministic finite automation procedure - may have bugs
+        switch nextButtonState {
+        case .Normal:
+            showBreakTime()
+            Log.info("cfs = \(currentTrackedItem.finishedSets), csa = \(currentTrackedItem.setsAmount)")
+            jumpToNextSet()
+            if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount - 1 {
+                nextButtonState = .LastSet
+            }
+            break
+        case .LastSet:
+            jumpToNextSet()
+            if currentTrackedIndex < itemsCount - 1 {
+                showBreakTime()
+                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+                currentTrackedIndex += 1
+                loadTrackingItem()
+            } else if currentTrackedIndex == itemsCount - 1 {
+                doneWorkoutAction()
+            }
+            break
+        case .TimingStarted:
+            timer.safeInvalidate()
+            nextButtonState = .TimingNotStarted
+            break
+        case .TimingNotStarted:
+            setTimer()
+            nextButtonState = .TimingStarted
+            break
+        case .TimeIsUp:
+            nextButtonState = .Normal
+            if currentTrackedIndex < itemsCount - 1 {
+                showBreakTime()
+                exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+                currentTrackedIndex += 1
+                loadTrackingItem()
+            }
+            break
+        }
+        
+        Log.info("state = \(nextButtonState)")
+        
+        nextButtonAdjust(nextButtonState)
+    }
+    
+    func nextButtonAdjust(state: NextButtonState) {
+        // 2) button adjustment according to state
+        switch nextButtonState {
+        case .Normal:
+            botButton.setTitle("N", forState: .Normal)
+            break
+        case .LastSet:
+            botButton.setTitle("N", forState: .Normal)
+            break
+        case .TimingStarted:
+            botButton.setTitle("P", forState: .Normal)
+            break
+        case .TimingNotStarted:
+            botButton.setTitle("G", forState: .Normal)
+            break
+        case .TimeIsUp:
+            botButton.setTitle("N", forState: .Normal)
+            break
+        }
+    
+    }
+    
+    func jumpToNextSet() {
+        guard let currentTrackedItem = trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+        guard let reps = repsLabel.text, weight = lbsLabel.text else {return}
+        guard let repsValue = Int(reps), weightValue = Int(weight) else {return}
+        
+        currentTrackedItem.saveOnNextSet(repsValue, weight: weightValue)
+        finishedSets = currentTrackedItem.finishedSets
+        if currentTrackedItem.finishedSets == currentTrackedItem.setsAmount {
+            exerciseContextSave(finishedAmount, onFinishedSets: finishedSets)
+        }
+    }
     
     func loadTrackingItem() {
         // reload views needed
@@ -284,7 +347,6 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         gifIcon.hidden = false
         
         guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
-        Log.info("_currentUnitType=\(_currentUnitType)")
         guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
         
         currentSetsAmount = _currentTrackedItem.setsAmount
@@ -292,7 +354,6 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         currentUnitType = _currentUnitType
         finishedSets = _currentTrackedItem.finishedSets
         finishedAmount = _currentTrackedItem.finishedAmount
-        
         
         dropDownTitleNavButton.title = "\(currentTrackedIndex + 1)/\(itemsCount)"
         
@@ -305,13 +366,22 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
                     self.gifIcon.setImage(image, forState: .Normal)
                 }
             }
-            
         }
 
-
+        xLabel.enabled = true
+        lbsLabel.enabled = true
+        lbsLabel.text = "0"
+        
         if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
             timerContainer.hidden = true
             paramsContainer.hidden = false
+            
+            if _currentUnitType == Exercise.UnitType.Repetition {
+                xLabel.enabled = false
+                lbsLabel.enabled = false
+                lbsLabel.text = "0"
+            }
+            
         } else {
             timerContainer.hidden = false
             paramsContainer.hidden = true
@@ -327,6 +397,25 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         }
         
         // reload progress
+        // "G" -> Start, "P" -> Pause, "N" -> Next
+        switch _currentUnitType {
+        case .Repetition, .RepByWeight:
+            nextButtonState = .Normal
+            botButton.setTitle("N", forState: .Normal)
+
+            if currentSetsAmount == 1 {
+                nextButtonState = .LastSet
+            }
+            break
+        case .DurationInSeconds:
+            nextButtonState = .TimingNotStarted
+            botButton.setTitle("G", forState: .Normal)
+            break
+        default:
+            Log.info("default fired in switch")
+            
+        }
+        
     }
     
     func dropDownTitleNavButton(button: DropDownTitleNavButton) {
@@ -339,8 +428,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     
     
     func closePickerResponse(recognizer: UITapGestureRecognizer) {
-        Log.info("closePickerResponse")
-        if self.lbsPickerContainer.hidden == false && self.lbsPickerContainer.hidden == false {
+
+        if self.lbsPickerContainer.hidden == false || self.repsPickerContainer.hidden == false {
+
             UIView.animateWithDuration(0.3, animations: {
                 self.lbsPickerContainer.hidden = true
                 self.repsPickerContainer.hidden = true
@@ -354,8 +444,11 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func paramsTapResponse(recognizer: UITapGestureRecognizer) {
+        guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
         UIView.animateWithDuration(0.3) {
-            self.lbsPickerContainer.hidden = false
+            if _currentUnitType != Exercise.UnitType.Repetition {
+                self.lbsPickerContainer.hidden = false
+            }
             self.repsPickerContainer.hidden = false
             self.gifContainer.hidden = true
             self.gifIcon.hidden = true
@@ -413,23 +506,28 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         guard let currentExercise = _currentTrackedItem.exercise else {return}
         finishedAmount += 1
         if(finishedAmount == currentExercise.set[currentSetIndex]?.amount)  {
-            if timer.valid {
-                timer.invalidate()
-            }
-            botButton.titleLabel?.text = ">>"
+            nextButtonState = .TimeIsUp
+            botButton.titleLabel?.text = "N"
             //go to next exercise
         }
     }
     
+    func doneTrackingCallback() {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     func doneWorkoutAction() {
+        timer.safeInvalidate()
+        
         // write backend sync code here
         
         // trackedPlanOnSave() ...
-        
         let storyboard = UIStoryboard(name: "Tracking", bundle: nil)
         let doneModalVC = storyboard.instantiateViewControllerWithIdentifier("DoneModalVC") as! DoneModalViewController
         doneModalVC.planName = trackedPlan?.plan?.name
+        doneModalVC.doneCallBack = doneTrackingCallback
         self.presentViewController(doneModalVC, animated: true, completion: nil)
+
     }
     
     @IBAction func onExitButton(sender: AnyObject) {

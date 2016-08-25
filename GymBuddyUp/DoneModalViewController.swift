@@ -9,7 +9,6 @@
 import UIKit
 
 class DoneModalViewController: UIViewController {
-
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var doneButton: UIButton!
@@ -17,9 +16,12 @@ class DoneModalViewController: UIViewController {
     @IBOutlet weak var congratsLabel: UILabel!
     @IBOutlet weak var onFinishingObjectLabel: UILabel!
     var planName: String?
+    var doneCallBack: (()->())?
     
     @IBAction func doneButtonOnClick(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {
+            self.doneCallBack?()
+        })
         UIApplication.sharedApplication().statusBarHidden = false
     }
 

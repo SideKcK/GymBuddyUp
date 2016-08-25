@@ -20,6 +20,14 @@ extension UIViewController {
     }
 }
 
+extension NSTimer {
+    func safeInvalidate() {
+        if valid {
+           invalidate()
+        }
+    }
+}
+
 extension UIView {
     func addShadow() {
         let darkColor = ColorScheme.s2Shadow

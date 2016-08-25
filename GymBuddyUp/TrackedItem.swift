@@ -51,6 +51,19 @@ class TrackedItem {
         weights = [Int](count: setsAmount, repeatedValue: 0)
     }
     
+    init (finishedAmount: Int, finishedSets: Int, exercise: Exercise, reps:[Int], weights:[Int]) {
+        self.setsAmount = 1
+        self.finishedAmount = finishedAmount
+        self.finishedSets =  finishedSets
+        self.exercise =  exercise
+        self.reps = reps
+        self.weights = weights
+        self.maxReps = 0
+        self.maxWeight = 0
+        self.isFinalized = false
+    }
+
+    
     func saveOnNextExercise(onFinishedAmount: Int, onFinishedSets: Int) {
         finishedAmount = onFinishedAmount
         finishedSets = onFinishedSets

@@ -107,6 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(publishedWorkout[0])
         }
  */
+        TrackedPlan.getTrackedPlanById("-KPHMEB3SLHgJ-v39B3Y:2016-08-24"){ (trackedPlan, error) in
+            print("====planId: "+trackedPlan!.planId!)
+        }
+
         
     }
     

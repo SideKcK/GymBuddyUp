@@ -27,5 +27,9 @@ class InviteNoPlanCell: UITableViewCell {
 
     func setupVisual() {
         borderView.makeBorderButton(ColorScheme.s4Bg, radius: 4.0)
+        descriptionLabel.textColor = ColorScheme.g2Text
+        
+        titleLabel.font = FontScheme.H2
+        descriptionLabel.font = FontScheme.T3
     }
 }

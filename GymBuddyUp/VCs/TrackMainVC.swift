@@ -129,7 +129,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         repsPicker.maskDisabled = false
         
         // TODO: Replace text with specific image from Siran
-        botButton.setTitle("Z", forState: .Normal)
+        botButton.setTitle("N", forState: .Normal)
         
         lbsLabel.userInteractionEnabled = true
         let lbsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.paramsTapResponse(_:)))
@@ -507,7 +507,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         finishedAmount += 1
         if(finishedAmount == currentExercise.set[currentSetIndex]?.amount)  {
             nextButtonState = .TimeIsUp
-            botButton.titleLabel?.text = "N"
+            botButton.setTitle("N", forState: .Normal)
             //go to next exercise
         }
     }

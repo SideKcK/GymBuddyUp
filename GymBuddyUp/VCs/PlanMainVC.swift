@@ -8,6 +8,7 @@
 
 import UIKit
 import CVCalendar
+import SwiftDate
 import KRProgressHUD
 
 class PlanMainVC: UIViewController {
@@ -92,60 +93,107 @@ class PlanMainVC: UIViewController {
     }
     
     func getPlansThisWeek(date: NSDate) {
+        
         KRProgressHUD.show()
-        let sWeek = date.startOf(.WeekOfYear)
-        let eWeek = date.endOf(.WeekOfYear)
-        print(sWeek.toString())
-        print(eWeek.toString())
-        ScheduledWorkout.getScheduledWorkoutsInRange(sWeek, endDate: eWeek) { (workouts, error) in
-            if let workouts = workouts {
-                for (workoutdate, workout) in workouts {
-                    self.workouts[workoutdate] = workout
-                    
-                }
-                let myGroup = dispatch_group_create()
-                for (date, dayworkouts) in workouts {
-                    dispatch_group_enter(myGroup)
-                    if let planIds = Plan.planIDsWithArray(dayworkouts) {
-                        Library.getPlansById(planIds, completion: { (plans, error) in
-                            if error == nil {
-                                self.plans[date] = plans
-                                //get plan invitation status
-                                
-                            }else {
-                                print(error)
-                                KRProgressHUD.showError(message: "Network Error")
-                            }
-                            dispatch_group_leave(myGroup)
-                        })
-                    }
-                }
-                
-                dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-                    
-                    //reload tableview with plans
-                    self.tableView.reloadData()
-                    KRProgressHUD.dismiss()
-                })
-                
-            }else {
-                print(error)
-                KRProgressHUD.showError(message: "Network Error")
-            }
+        
+        let firstDayOfWeek = date.startOf(.WeekOfYear)
+        let fetchPlanTaskGroup = dispatch_group_create()
+
+        
+        for i in (0..<7) {
+
+            let day = firstDayOfWeek + i.days
+            dispatch_group_enter(fetchPlanTaskGroup)
             
+            ScheduledWorkout.getScheduledWorkoutsForDate(day, complete: { (workoutsOnDay) in
+                self.workouts[day] = workoutsOnDay
+
+                if workoutsOnDay.count == 0 {
+                    self.plans[day] = []
+                    dispatch_group_leave(fetchPlanTaskGroup)
+                }
+                    
+                else {
+                    let planIds = Plan.planIDsWithArray(workoutsOnDay)
+                    Library.getPlansById(planIds!, completion: { (plans, error) in
+                        if error == nil {
+                            self.plans[day] = plans
+                        }
+                        else {
+                            print("Error getting plans for this week", error)
+                        }
+                        
+                        dispatch_group_leave(fetchPlanTaskGroup)
+                    })
+                }
+            })
         }
-        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            if KRProgressHUD.isVisible {
-                KRProgressHUD.showError(message: "Network Error")
-            }
+        
+        dispatch_group_notify(fetchPlanTaskGroup, dispatch_get_main_queue(), {
+            //reload tableview with plans
+            self.tableView.reloadData()
+            KRProgressHUD.dismiss()
         })
     }
+    
+    
+    
+//        }
+//        KRProgressHUD.show()
+//        let sWeek = date.startOf(.WeekOfYear)
+//        let eWeek = date.endOf(.WeekOfYear)
+//        print(sWeek.toString())
+//        print(eWeek.toString())
+//        ScheduledWorkout.getScheduledWorkoutsForTimespan(sWeek, endDate: eWeek) { (workouts, error) in
+//            if let workouts = workouts {
+//                for (workoutdate, workout) in workouts {
+//                    self.workouts[workoutdate] = workout
+//                    
+//                }
+//                let myGroup = dispatch_group_create()
+//                for (date, dayworkouts) in workouts {
+//                    dispatch_group_enter(myGroup)
+//                    if let planIds = Plan.planIDsWithArray(dayworkouts) {
+//                        Library.getPlansById(planIds, completion: { (plans, error) in
+//                            if error == nil {
+//                                self.plans[date] = plans
+//                                //get plan invitation status
+//                                
+//                            }else {
+//                                print("Network Error AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", error)
+//                                KRProgressHUD.showError(message: "Network Error")
+//                            }
+//                            dispatch_group_leave(myGroup)
+//                        })
+//                    }
+//                }
+//                
+//                dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+//                    
+//                    //reload tableview with plans
+//                    self.tableView.reloadData()
+//                    KRProgressHUD.dismiss()
+//                })
+//                
+//            }else {
+//                print("Network Error AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", error)
+//                KRProgressHUD.showError(message: "Network Error")
+//            }
+//            
+//        }
+//        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+//            if KRProgressHUD.isVisible {
+//                
+//                KRProgressHUD.showError(message: "Network Error")
+//            }
+//        })
+//    }
     
     func getCalendarWorkouts (date: NSDate) {
         let sMonth = (1.weeks).agoFromDate(date.startOf(.Month))
         let eMonth = (1.weeks).fromDate(date.endOf(.Month))
-        ScheduledWorkout.getScheduledWorkoutsInRange(sMonth, endDate: eMonth) { (workouts, error) in
+        ScheduledWorkout.getScheduledWorkoutsForTimespan(sMonth, endDate: eMonth) { (workouts, error) in
             if let workouts = workouts {
                 for (date, dayworkouts) in workouts {
                     if dayworkouts.count != 0 {
@@ -158,7 +206,6 @@ class PlanMainVC: UIViewController {
                 print(error)
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {

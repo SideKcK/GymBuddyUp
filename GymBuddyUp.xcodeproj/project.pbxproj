@@ -484,8 +484,6 @@
 				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
 				C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */,
 				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
-				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
-				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
 			);
 			name = Tracking;
@@ -494,6 +492,8 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
+				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
 				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,

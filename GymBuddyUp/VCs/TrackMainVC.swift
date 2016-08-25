@@ -371,6 +371,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         xLabel.enabled = true
         lbsLabel.enabled = true
         lbsLabel.text = "0"
+        repsLabel.text = "0"
         
         if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
             timerContainer.hidden = true

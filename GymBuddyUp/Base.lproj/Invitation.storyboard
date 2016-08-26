@@ -273,7 +273,7 @@
                                 </date>
                             </datePicker>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aDk-V1-qRL">
-                                <rect key="frame" x="0.0" y="331" width="414" height="405"/>
+                                <rect key="frame" x="0.0" y="331" width="414" height="361"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlanCell" rowHeight="120" id="Za7-60-SL6" customClass="InviteNoPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
@@ -286,14 +286,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-On-xcj">
                                                     <rect key="frame" x="16" y="8" width="382" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-Ve-VrQ">
-                                                            <rect key="frame" x="8" y="16" width="49" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Detailed Plan Needed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-Ve-VrQ">
+                                                            <rect key="frame" x="8" y="16" width="225" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQg-ON-TnT">
-                                                            <rect key="frame" x="8" y="48" width="42" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I just want to find someone to workout together" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQg-ON-TnT">
+                                                            <rect key="frame" x="8" y="48" width="230" height="41"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -310,12 +310,13 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="2B5-VM-iVd"/>
                                                         <constraint firstItem="aed-ch-eO9" firstAttribute="centerY" secondItem="mC6-On-xcj" secondAttribute="centerY" id="8wF-Nd-giy"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JQg-ON-TnT" secondAttribute="bottom" constant="8" id="N3y-wb-wC8"/>
                                                         <constraint firstAttribute="trailing" secondItem="aed-ch-eO9" secondAttribute="trailing" constant="8" id="XX9-K3-kYn"/>
                                                         <constraint firstItem="cR4-Ve-VrQ" firstAttribute="top" secondItem="mC6-On-xcj" secondAttribute="top" constant="16" id="a7F-K8-QBr"/>
                                                         <constraint firstItem="cR4-Ve-VrQ" firstAttribute="leading" secondItem="mC6-On-xcj" secondAttribute="leading" constant="8" id="cBf-Y8-2xo"/>
                                                         <constraint firstItem="JQg-ON-TnT" firstAttribute="leading" secondItem="cR4-Ve-VrQ" secondAttribute="leading" id="uXu-io-gp5"/>
                                                         <constraint firstItem="JQg-ON-TnT" firstAttribute="top" secondItem="cR4-Ve-VrQ" secondAttribute="bottom" constant="8" id="vXw-an-wcc"/>
-                                                        <constraint firstItem="aed-ch-eO9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JQg-ON-TnT" secondAttribute="trailing" constant="20" id="wwO-cX-me7"/>
+                                                        <constraint firstItem="aed-ch-eO9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JQg-ON-TnT" secondAttribute="trailing" constant="90" id="wwO-cX-me7"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -404,7 +405,7 @@
                             <constraint firstItem="nio-vI-YdE" firstAttribute="leading" secondItem="uXc-XY-sic" secondAttribute="leading" id="Phm-JH-Lfe"/>
                             <constraint firstItem="LOY-1W-lSx" firstAttribute="top" secondItem="RnA-Sd-QMJ" secondAttribute="bottom" id="R4C-wb-5xr"/>
                             <constraint firstItem="uSp-7A-IrO" firstAttribute="top" secondItem="nio-vI-YdE" secondAttribute="bottom" constant="35" id="Ss8-93-TEY"/>
-                            <constraint firstAttribute="bottom" secondItem="aDk-V1-qRL" secondAttribute="bottom" id="bhr-g2-Hcm"/>
+                            <constraint firstAttribute="bottom" secondItem="aDk-V1-qRL" secondAttribute="bottom" constant="44" id="bhr-g2-Hcm"/>
                             <constraint firstItem="RnA-Sd-QMJ" firstAttribute="leading" secondItem="1zT-yS-gGz" secondAttribute="leading" id="dkI-mH-8xG"/>
                             <constraint firstAttribute="trailing" secondItem="RnA-Sd-QMJ" secondAttribute="trailing" id="eXX-Bk-9AC"/>
                             <constraint firstItem="uXc-XY-sic" firstAttribute="top" secondItem="5Q4-iq-ft7" secondAttribute="bottom" constant="26" id="hEl-ig-oRi"/>

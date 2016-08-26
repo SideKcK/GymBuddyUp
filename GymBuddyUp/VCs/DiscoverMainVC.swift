@@ -163,6 +163,7 @@ class DiscoverMainVC: UIViewController {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if events.count != 0 {
         let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
         if (yDirection < 0) {
             UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
@@ -178,6 +179,7 @@ class DiscoverMainVC: UIViewController {
                 self.segView.alpha = 1
                 }, completion: nil)
             
+        }
         }
 
     }

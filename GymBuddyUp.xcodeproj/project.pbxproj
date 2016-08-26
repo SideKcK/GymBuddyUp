@@ -48,7 +48,6 @@
 		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
-		C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */; };
 		C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6304E191D6387C700EE7110 /* WorkoutCell.xib */; };
 		C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */; };
 		C64942FE1D6775B3002C9D49 /* GymMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64942FD1D6775B3002C9D49 /* GymMapVC.swift */; };
@@ -166,7 +165,6 @@
 		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
-		C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAPI.swift; path = Helpers/ExtensionsAPI.swift; sourceTree = "<group>"; };
 		C6304E191D6387C700EE7110 /* WorkoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WorkoutCell.xib; path = Views/WorkoutCell.xib; sourceTree = "<group>"; };
 		C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutCell.swift; path = Views/WorkoutCell.swift; sourceTree = "<group>"; };
 		C64942FD1D6775B3002C9D49 /* GymMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymMapVC.swift; path = VCs/GymMapVC.swift; sourceTree = "<group>"; };
@@ -315,10 +313,36 @@
 		C1388BA41D65184000513C05 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				C649C5661CE3C68800258994 /* BorderedButton.swift */,
 				C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */,
 				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
 			);
 			name = Button;
+			sourceTree = "<group>";
+		};
+		C1E471551D6F63A800C19AAA /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
+			);
+			name = Picker;
+			sourceTree = "<group>";
+		};
+		C1E471561D6F63B500C19AAA /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
+			);
+			name = ProgressBar;
+			sourceTree = "<group>";
+		};
+		C1E471571D6F63C300C19AAA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				C66B081C1D502378003B0872 /* UnderlineField.swift */,
+				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
@@ -402,7 +426,6 @@
 			isa = PBXGroup;
 			children = (
 				C6CD01E11D3890E300D64A06 /* Extensions.swift */,
-				C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */,
 				C649C5601CE3C08700258994 /* ColorScheme.swift */,
 				C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */,
 				C60986581CEEC25200A0AFE3 /* Utils.swift */,
@@ -433,14 +456,12 @@
 		C649C5651CE3C64F00258994 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C1E471571D6F63C300C19AAA /* Misc */,
+				C1E471561D6F63B500C19AAA /* ProgressBar */,
+				C1E471551D6F63A800C19AAA /* Picker */,
 				C11F64DC1D66592300FFF5DB /* Labels */,
 				C1388BA41D65184000513C05 /* Button */,
 				C64EC21C1D289DCA000DA37A /* Cells */,
-				C649C5661CE3C68800258994 /* BorderedButton.swift */,
-				C66B081C1D502378003B0872 /* UnderlineField.swift */,
-				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
-				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
-				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -711,7 +732,6 @@
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */,
 				C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */,
-				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */,

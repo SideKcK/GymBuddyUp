@@ -31,6 +31,7 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var statusStackView: UIStackView!
     @IBOutlet weak var borderView: UIView!
     
+    @IBOutlet weak var nameDateConstraint: NSLayoutConstraint!
     @IBOutlet weak var dateHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusHeightConstraint: NSLayoutConstraint!
@@ -131,11 +132,14 @@ class WorkoutCell: UITableViewCell {
         buddyButton.hidden = true
         gymButton.hidden = true
         dateView.hidden = true
+        dateLabel.hidden = true
         
         dateHeightConstraint.priority = 999
         timeHeightConstraint.priority = 999
         statusHeightConstraint.priority = 999
         locHeightConstraint.priority = 999
+        
+        nameDateConstraint.constant = 0
     }
     
     func showMoreButton() {
@@ -149,6 +153,12 @@ class WorkoutCell: UITableViewCell {
         profileView.makeThumbnail(ColorScheme.p1Tint)
     }
     
+    func showDateView() {
+        nameDateConstraint.constant = 8
+        dateHeightConstraint.priority = 250
+        dateLabel.hidden = false
+        dateView.hidden = false
+    }
     func showTimeView() {
         timeHeightConstraint.priority = 250
     }

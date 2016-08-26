@@ -107,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(publishedWorkout[0])
         }
  */
+
         
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
+		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		B6F00B821D66B34600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B791D66B34600B09177 /* GeoFire.m */; };
 		B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */; };
@@ -113,6 +114,7 @@
 		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
+				9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
+				9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
 				B6F00B821D66B34600B09177 /* GeoFire.m in Sources */,
 				C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */,

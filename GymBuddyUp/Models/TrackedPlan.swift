@@ -107,6 +107,7 @@ class TrackedPlan {
         var data = [String: AnyObject]()
         var subdata = [String: AnyObject]()
         var workoutLog = [String: AnyObject]()
+
         subdata["plan_id"] = planId
         subdata["scheduled_workout"] = scheduledWorkout
         subdata["start_time"] = dateToInt(startTime)
@@ -124,12 +125,21 @@ class TrackedPlan {
                     set_detail["amount"] =  trackedItems[index].reps[index1]
                     set_detail["weight"] =  trackedItems[index].weights[index1]
                     set_details[String(index1)] = set_detail
+                    
+                    
                 }
+                BestRecord.addBestRecord(trackedItems[index].exercise!,createDate: dateToString(startTime),bestRecord: trackedItems[index].weights.maxElement()!) { (error) in
+                    completion(error)
+                }
+
             }else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.DurationInSeconds || trackedItems[index].exercise!.unitType == Exercise.UnitType.DistanceInMiles ){
                 var set_detail = [String: AnyObject]()
                 set_detail["amount"] =  trackedItems[index].finishedAmount
                 set_detail["weight"] = 0
                 set_details["0"] = set_detail
+                BestRecord.addBestRecord(trackedItems[index].exercise!,createDate: dateToString(startTime),bestRecord: trackedItems[index].finishedAmount) { (error) in
+                    completion(error)
+                }
             }else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.Repetition){
                 for index1 in 0 ..< trackedItems[index].reps.count {
                     print("=========== Inside trackedItems[index]"+String(index1))
@@ -137,6 +147,9 @@ class TrackedPlan {
                     set_detail["amount"] =  trackedItems[index].reps[index1]
                     set_detail["weight"] = 0
                     set_details[String(index1)] = set_detail
+                }
+                BestRecord.addBestRecord(trackedItems[index].exercise!,createDate: dateToString(startTime),bestRecord: trackedItems[index].reps.maxElement()!) { (error) in
+                    completion(error)
                 }
             }
             exercise_details["set_details"] =  set_details

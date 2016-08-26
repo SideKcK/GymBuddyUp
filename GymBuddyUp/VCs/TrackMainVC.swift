@@ -37,6 +37,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     @IBOutlet weak var listViewIcon: UIButton!
     @IBOutlet weak var xLabel: UILabel!
     
+    @IBOutlet var contentView: UIView!
+    
+    
     var dropDownTitleNavButton: DropDownTitleNavButton!
     var trackedPlan: TrackedPlan?
     var seconds: Float = 0.0
@@ -48,7 +51,10 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var popoverVC: TrackingPopOverViewController?
     var itemsCount = 0
     var nextButtonState = NextButtonState.Normal
-    
+    lazy var startButtonImage = UIImage(named: "start")
+    lazy var pauseButtonImage = UIImage(named: "pause")
+    lazy var nextButtonImage = UIImage(named: "next-and-log")
+
     enum NextButtonState {
         case TimingNotStarted
         case TimingStarted
@@ -114,22 +120,28 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // picker setup
         lbsPicker.dataSource = self
         lbsPicker.delegate = self
         repsPicker.dataSource = self
         repsPicker.delegate = self
         lbsPicker.reloadData()
         repsPicker.reloadData()
+        lbsPicker.font = FontScheme.N3
+        repsPicker.font = FontScheme.N3
+        lbsPicker.highlightedFont = FontScheme.N3
+        repsPicker.highlightedFont = FontScheme.N3
         lbsPicker.pickerViewStyle = AKPickerViewStyle.Flat
         lbsPicker.interitemSpacing = 20.0
         repsPicker.pickerViewStyle = AKPickerViewStyle.Flat
         repsPicker.interitemSpacing = 20.0
-        
         lbsPicker.maskDisabled = false
         repsPicker.maskDisabled = false
         
+        contentView.backgroundColor = ColorScheme.s3Bg
+        
         // TODO: Replace text with specific image from Siran
-        botButton.setTitle("N", forState: .Normal)
+        botButton.setImage(nextButtonImage, forState: .Normal)
         
         lbsLabel.userInteractionEnabled = true
         let lbsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.paramsTapResponse(_:)))
@@ -304,20 +316,14 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     func nextButtonAdjust(state: NextButtonState) {
         // 2) button adjustment according to state
         switch nextButtonState {
-        case .Normal:
-            botButton.setTitle("N", forState: .Normal)
-            break
-        case .LastSet:
-            botButton.setTitle("N", forState: .Normal)
+        case .Normal, .LastSet, .TimeIsUp:
+            botButton.setImage(nextButtonImage, forState: .Normal)
             break
         case .TimingStarted:
-            botButton.setTitle("P", forState: .Normal)
+            botButton.setImage(pauseButtonImage, forState: .Normal)
             break
         case .TimingNotStarted:
-            botButton.setTitle("G", forState: .Normal)
-            break
-        case .TimeIsUp:
-            botButton.setTitle("N", forState: .Normal)
+            botButton.setImage(startButtonImage, forState: .Normal)
             break
         }
     
@@ -341,6 +347,11 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             timer.invalidate()
         }
         
+        xLabel.enabled = true
+        lbsLabel.enabled = true
+        lbsLabel.text = "0"
+        repsLabel.text = "0"
+        
         lbsPickerContainer.hidden = true
         repsPickerContainer.hidden = true
         gifContainer.hidden = false
@@ -355,6 +366,9 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         finishedSets = _currentTrackedItem.finishedSets
         finishedAmount = _currentTrackedItem.finishedAmount
         
+        repsLabel.text = "\(_currentTrackedItem.reps[currentSetIndex])"
+        lbsLabel.text = "\(_currentTrackedItem.weights[currentSetIndex])"
+        
         dropDownTitleNavButton.title = "\(currentTrackedIndex + 1)/\(itemsCount)"
         
         if let gifUrl = _currentTrackedItem.exercise?.gifURL {
@@ -368,10 +382,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             }
         }
 
-        xLabel.enabled = true
-        lbsLabel.enabled = true
-        lbsLabel.text = "0"
-        repsLabel.text = "0"
+
         
         if (_currentUnitType == Exercise.UnitType.Repetition) || (_currentUnitType == Exercise.UnitType.RepByWeight) {
             timerContainer.hidden = true
@@ -402,19 +413,16 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         switch _currentUnitType {
         case .Repetition, .RepByWeight:
             nextButtonState = .Normal
-            botButton.setTitle("N", forState: .Normal)
+            botButton.setImage(nextButtonImage, forState: .Normal)
 
             if currentSetsAmount == 1 {
                 nextButtonState = .LastSet
             }
             break
-        case .DurationInSeconds:
+        case .DurationInSeconds, .DistanceInMiles:
             nextButtonState = .TimingNotStarted
-            botButton.setTitle("G", forState: .Normal)
+            botButton.setImage(startButtonImage, forState: .Normal)
             break
-        default:
-            Log.info("default fired in switch")
-            
         }
         
     }
@@ -508,7 +516,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         finishedAmount += 1
         if(finishedAmount == currentExercise.set[currentSetIndex]?.amount)  {
             nextButtonState = .TimeIsUp
-            botButton.setTitle("N", forState: .Normal)
+            botButton.setImage(nextButtonImage, forState: .Normal)
             //go to next exercise
         }
     }

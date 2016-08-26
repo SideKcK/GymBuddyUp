@@ -107,16 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(publishedWorkout[0])
         }
  */
-        /*var trackedItems = [TrackedItem]()
-        trackedItems.append(TrackedItem(finishedAmount: 50, finishedSets: 3, exercise: Exercise(id: 100100101, unitType: Exercise.UnitType.RepByWeight), reps: [10,10,10], weights: [20,20,30]))
-        trackedItems.append(TrackedItem(finishedAmount: 50, finishedSets: 3, exercise: Exercise(id: 100100102, unitType: Exercise.UnitType.RepByWeight), reps: [10,20,20], weights: [20,30,40]))
-        trackedItems.append(TrackedItem(finishedAmount: 50, finishedSets: 3, exercise: Exercise(id: 100100101, unitType: Exercise.UnitType.RepByWeight), reps: [10,10,10], weights: [20,50,30]))
-        trackedItems.append(TrackedItem(finishedAmount: 50, finishedSets: 3, exercise: Exercise(id: 100103110, unitType: Exercise.UnitType.Repetition), reps: [10,10,10], weights: [0,0,0]))
-        TrackedPlan.trackedPlanOnSave("-KPHMEB3SLHgJ-v39B3Y", planId:"-KOZM75q5bh0DtN4AvzM", startTime: stringToDate("2016-08-24")!, endTime: stringToDate("2016-08-25")!, trackedItems: trackedItems){ (error) in
-            if (error != nil){
-                print(error)
-            }
-        }*/
 
         
     }

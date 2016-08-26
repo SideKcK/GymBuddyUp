@@ -198,14 +198,21 @@ class TrackedPlan {
     class func getTrackedPlanById(id: String, completion: (trackedPlan: TrackedPlan?, error: NSError?)-> Void) {
         // Query
         print("=========== Before getTrackedPlanById!")
-        
+        let getTrackedItemGroup = dispatch_group_create()
         trackedPlanRef.child(id).observeSingleEventOfType(.Value,withBlock: {
             (dataSnapshot: FIRDataSnapshot) in
             let result = TrackedPlan(trackingId: id , data:(dataSnapshot.value as! NSDictionary))
+            dispatch_group_enter(getTrackedItemGroup)
             getTrackedItems(dataSnapshot.value as! NSDictionary){(resultTrackedItems, error) in
                 result.trackingItems = resultTrackedItems!
+                dispatch_group_leave(getTrackedItemGroup)
             }
-            completion(trackedPlan: result, error: nil)
+            
+            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                print("=========== dispatch_group_notify: ")
+                completion(trackedPlan: result, error: nil)
+            }
+            
         }){
             (error) in
             completion(trackedPlan: nil, error: error)
@@ -216,7 +223,7 @@ class TrackedPlan {
         // Query
         print("=========== Before getTrackedItems!")
         var trackedItems = [TrackedItem]()
-        let getExercisesTaskGroup = dispatch_group_create()
+        let getTrackedItemGroup = dispatch_group_create()
         //let getTrackedItemGroup = dispatch_group_create()
         let workoutLog = data.valueForKey("workout_log") as? NSArray
         for items in workoutLog! {
@@ -235,7 +242,8 @@ class TrackedPlan {
             let exercise_id = (exerciseData!.valueForKey("exercise") as? Int)!
             var exercise : Exercise?
             print("=========== index2: ")
-            dispatch_group_enter(getExercisesTaskGroup)
+            
+            dispatch_group_enter(getTrackedItemGroup)
             Library.getExerciseById(exercise_id){(resultExercise, error) in
                 exercise = resultExercise
                 print("=========== getExerciseById1: "+String(exercise_id))
@@ -243,11 +251,18 @@ class TrackedPlan {
                 if(exercise == nil){
                    // exercise = Exercise(id: exercise_id,unitType: Exercise.UnitType.RepByWeight)
                 }
-                trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
-                dispatch_group_leave(getExercisesTaskGroup)
+                if(exercise!.unitType == Exercise.UnitType.RepByWeight){
+                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
+                }else if(exercise!.unitType == Exercise.UnitType.DurationInSeconds || exercise!.unitType == Exercise.UnitType.DistanceInMiles){
+                    trackedItems.append(TrackedItem(finishedAmount: amount[0],finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
+                }else if(exercise!.unitType == Exercise.UnitType.Repetition){
+                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
+                }
+                
+                dispatch_group_leave(getTrackedItemGroup)
             }
         }
-        dispatch_group_notify(getExercisesTaskGroup, dispatch_get_main_queue()) {
+        dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
             print("=========== dispatch_group_notify: ")
             completion(trackedItems: trackedItems, error: nil)
         }

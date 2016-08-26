@@ -19,8 +19,6 @@ private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.data
 class PublishedWorkout {
     var id: String
     var planId: String
-    var gymLocation: CLLocation //to be deprecated
-    var gymPlaceId: String? //to be deprecated
     var gym: Gym?
     var publishedBy: String
     var workoutTime: NSDate
@@ -28,10 +26,8 @@ class PublishedWorkout {
     
     init (id: String, location: CLLocation, dict: NSDictionary) {
         self.id = id
-        self.gymLocation = location
         self.planId = dict.valueForKey("plan") as! String
-        self.gymPlaceId = dict.valueForKey("gym_place_id") as? String
-        self.gym = Gym() //todo
+        self.gym = Gym(fromFirebase: dict.valueForKey("gym") as! NSDictionary)
         self.publishedBy = dict.valueForKey("published_by") as! String
         
         let workoutTime = dict.valueForKey("workout_time") as! Double
@@ -70,9 +66,12 @@ class Discover {
                 //print(key, location.distanceFromLocation(foundLocation))
                 dispatch_group_enter(fetchWorkoutDispatchGroup)
                 
-                publishedWorkoutRef.child(key).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                publishedWorkoutRef.child(key).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                     let data = snapshot.value as! [String:AnyObject]
-                    result.append(PublishedWorkout(id: key, location: foundLocation, dict: data))
+                    if data["available"] as? Bool != false {
+                        result.append(PublishedWorkout(id: key, location: foundLocation, dict: data))
+                    }
+                    
                     dispatch_group_leave(fetchWorkoutDispatchGroup)
                 })
             })

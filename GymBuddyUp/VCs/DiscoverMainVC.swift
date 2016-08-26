@@ -145,7 +145,7 @@ class DiscoverMainVC: UIViewController {
     }
     
     func onGymButton (sender: UIButton) {
-        guard let placeId = events[sender.tag].gymPlaceId else {
+        guard let placeId = events[sender.tag].gym?.placeid else {
             return
         }
         GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
@@ -237,7 +237,7 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         cell.event = events[indexPath.row]
-        cell.gymDisLabel.text = String(round(cell.event.gymLocation.distanceFromLocation(location) / 1609.34))+" miles"
+        cell.gymDisLabel.text = String(round(cell.event.gym!.location!.distanceFromLocation(location) / 1609.34))+" miles"
         cell.plan = plans[indexPath.row]
         
         cell.gymButton.tag = indexPath.row

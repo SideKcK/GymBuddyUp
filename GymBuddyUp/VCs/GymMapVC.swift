@@ -27,13 +27,13 @@ class GymMapVC: UIViewController {
         var lat = 0.0
         var lgn = 0.0
         if let location = userLocation {
-            lat = abs(location.coordinate.latitude - gymLocation.latitude)
-            lgn = abs(location.coordinate.longitude - gymLocation.longitude)
+            lat = abs(location.coordinate.latitude - gymLocation.coordinate.latitude)
+            lgn = abs(location.coordinate.longitude - gymLocation.coordinate.longitude)
         }
-            let region = MKCoordinateRegion(center: gymLocation, span: MKCoordinateSpan(latitudeDelta: 2 * lat + 0.01, longitudeDelta: 2 * lgn + 0.01))
+            let region = MKCoordinateRegion(center: gymLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 2 * lat + 0.01, longitudeDelta: 2 * lgn + 0.01))
             mapView.setRegion(region, animated: true)
         
-        addAnnotationAtCoordinate(gymLocation)
+        addAnnotationAtCoordinate(gymLocation.coordinate)
         
     }
 

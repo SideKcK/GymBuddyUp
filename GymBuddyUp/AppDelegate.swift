@@ -93,20 +93,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
         }
         
-        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
-        
-        // publish random workout plans within 8 days within 5 km for testing.
-//        for _ in (1...40) {
-//            let publishLocation = getRandomLocation(testLocation, withinRadius: 5000)
-//            Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gymPlaceId: "place_id", gymLocation: publishLocation, workoutTime: NSDate() + Int(arc4random_uniform(8)).days) { (error) in
+       let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+//    
+//            for i in (1..<40) {
+//                Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gym: Gym(), workoutTime: NSDate() + Int(arc4random_uniform(8)).days) {_ in
+//                    
+//                }
 //            }
-//        }
-        /*
+        
         //test public discover
-        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 1, withinDays: 10,  offset: 0) { (publishedWorkout, error) in
-            print(publishedWorkout[0])
+        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 100, withinDays: 8,  offset: 0) { (publishedWorkout, error) in
+            print(publishedWorkout)
         }
- */
+        
 
         
     }

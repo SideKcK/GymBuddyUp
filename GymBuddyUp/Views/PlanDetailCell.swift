@@ -15,6 +15,7 @@ class PlanDetailCell: UICollectionViewCell {
     @IBOutlet weak var tableView: UITableView!
 
     var plan: Plan! {
+        
         didSet {
             nameLabel.text = plan.name
             desLabel.text = plan.description

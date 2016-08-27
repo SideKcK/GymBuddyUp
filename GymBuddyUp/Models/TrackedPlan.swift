@@ -24,23 +24,23 @@ class TrackedPlan {
     var trackingItems = [TrackedItem]()
     
     init(plan: Plan) {
-     self.plan = plan
-     if let exercises = plan.exercises {
-     //Log.info("if let exercises = plan.exercises {")
-     for exercise in exercises {
-     let trackingItem =  TrackedItem(_exercise: exercise)
-     trackingItems.append(trackingItem)
-     }
-     }
-     }
+        self.plan = plan
+        if let exercises = plan.exercises {
+            for exercise in exercises {
+                let trackingItem =  TrackedItem(_exercise: exercise)
+                trackingItems.append(trackingItem)
+            }
+        }
+    }
      
-     init(planId: String) {
-     
-     }
-     
-     init(planDict: NSDictionary) {
-     
-     }
+    init(planId: String) {
+
+    }
+
+    init(planDict: NSDictionary) {
+
+    }
+    
     init(trackingId:String, data: NSDictionary)
     {
         self.trackingId = trackingId
@@ -74,10 +74,7 @@ class TrackedPlan {
                 trackingArray.append(TrackedPlan(trackingId: trackingId as! String, data: data))
             }
             return trackingArray
-        }
-            
-        else
-        {
+        } else {
             return []
         }
     }

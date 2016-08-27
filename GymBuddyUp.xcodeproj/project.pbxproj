@@ -36,6 +36,7 @@
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
+		C1F7D17D1D725A95002C6CCD /* InboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */; };
 		C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */; };
 		C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */; };
 		C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */; };
@@ -153,6 +154,7 @@
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
+		C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxMessage.swift; sourceTree = "<group>"; };
 		C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingPopOverBackgroundView.swift; sourceTree = "<group>"; };
 		C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreakModalViewController.swift; path = VCs/BreakModalViewController.swift; sourceTree = "<group>"; };
 		C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPCircularProgress.swift; path = Views/RPCircularProgress.swift; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
 				9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */,
+				C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
 				C6D810FB1D6E97C3006054AE /* InviteAddPlanCell.swift in Sources */,
 				C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */,
+				C1F7D17D1D725A95002C6CCD /* InboxMessage.swift in Sources */,
 				C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */,
 				C6AF1EE31D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,

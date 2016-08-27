@@ -172,7 +172,7 @@
                                             <constraint firstAttribute="trailing" secondItem="5tp-o6-Qxm" secondAttribute="trailing" id="Cq3-Nb-zRt"/>
                                             <constraint firstItem="5tp-o6-Qxm" firstAttribute="leading" secondItem="lD3-Qo-mC4" secondAttribute="leading" id="QU2-rl-Ian"/>
                                             <constraint firstItem="5tp-o6-Qxm" firstAttribute="top" secondItem="lD3-Qo-mC4" secondAttribute="top" id="YEB-MT-aAk"/>
-                                            <constraint firstAttribute="height" constant="70" id="qqH-cY-aur"/>
+                                            <constraint firstAttribute="height" constant="50" id="qqH-cY-aur"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAS-Am-TLN" userLabel="RepsPickerContainer">
@@ -185,7 +185,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274509803926" green="0.94509803921568625" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="5rN-Rx-MxL"/>
+                                            <constraint firstAttribute="height" constant="50" id="5rN-Rx-MxL"/>
                                             <constraint firstItem="58n-AC-YOR" firstAttribute="leading" secondItem="XAS-Am-TLN" secondAttribute="leading" id="DzT-DU-Wxd"/>
                                             <constraint firstItem="58n-AC-YOR" firstAttribute="top" secondItem="XAS-Am-TLN" secondAttribute="top" id="Fme-8G-1AC"/>
                                             <constraint firstAttribute="bottom" secondItem="58n-AC-YOR" secondAttribute="bottom" id="acL-BF-v21"/>

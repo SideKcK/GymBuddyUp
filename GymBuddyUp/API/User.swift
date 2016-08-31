@@ -16,6 +16,40 @@ import FBSDKLoginKit
 // callbacks
 typealias UserAuthCallback = (user:User?, error: NSError?) -> Void
 
+struct UserInfo {
+    
+    enum Gender:Int {
+        case Female = 0
+        case Male = 1
+        case Unspecified = 2
+    }
+    
+    enum Goal: Int {
+        case KeepFit = 1
+        case LoseWeight = 0
+        case BuildMuscle = 3
+        case HaveFun = 2
+        
+        var description: String {
+            switch self {
+            case KeepFit:
+                return "Keep Fit"
+            case LoseWeight:
+                return "Lose Weight"
+            case BuildMuscle:
+                return "Build Muscle"
+            case HaveFun:
+                return "Have Fun"
+            }
+        }
+    }
+    
+    var userId: String!
+    var photoURL: NSURL?
+    var screenName: String?
+    var gender:Gender
+}
+
 
 class User {
     

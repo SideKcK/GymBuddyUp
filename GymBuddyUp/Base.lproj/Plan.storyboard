@@ -139,7 +139,7 @@
                 <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="GymMapVC" id="6K1-uK-7kJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iza-3W-y1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.5" y="674"/>
+            <point key="canvasLocation" x="2120" y="783"/>
         </scene>
         <!--FRIDAY, AUG 8-->
         <scene sceneID="tnT-Rg-sO1">
@@ -336,7 +336,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="imq-Pj-U1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="IZj-Jg-anC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1762" y="878"/>
+            <point key="canvasLocation" x="1751" y="783"/>
         </scene>
         <!--Tracking-->
         <scene sceneID="3jd-5o-ycP">
@@ -1418,7 +1418,7 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qhw-uT-cFT"/>
         <segue reference="rgS-nG-orv"/>
+        <segue reference="bTs-V8-eL8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,7 +18,7 @@
         <!--Discover-->
         <scene sceneID="HT5-D0-xwQ">
             <objects>
-                <viewController title="Discover" id="fDu-2d-TJ4" customClass="DiscoverMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Discover" extendedLayoutIncludesOpaqueBars="YES" id="fDu-2d-TJ4" customClass="DiscoverMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7hh-b2-RR7"/>
                         <viewControllerLayoutGuide type="bottom" id="f2r-lS-BJs"/>
@@ -31,6 +31,13 @@
                                 <rect key="frame" x="0.0" y="97" width="320" height="422"/>
                                 <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvx-LL-vU8">
+                                <rect key="frame" x="137" y="269" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="testbutton:" destination="fDu-2d-TJ4" eventType="touchUpInside" id="6ck-af-Lle"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6o-7w-yyS">
                                 <rect key="frame" x="61" y="455" width="198" height="44"/>
                                 <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>

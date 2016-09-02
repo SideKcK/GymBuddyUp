@@ -36,6 +36,14 @@
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
+		C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E731D77BC3200E6CA77 /* Chat.storyboard */; };
+		C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */; };
+		C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */; };
+		C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */; };
+		C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */; };
+		C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E7D1D77C1FB00E6CA77 /* Message.swift */; };
+		C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */; };
+		C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E841D78EDA700E6CA77 /* Conversation.swift */; };
 		C1F7D17D1D725A95002C6CCD /* InboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */; };
 		C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */; };
 		C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */; };
@@ -154,6 +162,14 @@
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
+		C1F08E731D77BC3200E6CA77 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelfMessageCell.xib; path = Views/SelfMessageCell.xib; sourceTree = "<group>"; };
+		C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfMessageCell.swift; path = Views/SelfMessageCell.swift; sourceTree = "<group>"; };
+		C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemberMessageCell.xib; path = Views/MemberMessageCell.xib; sourceTree = "<group>"; };
+		C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberMessageCell.swift; path = Views/MemberMessageCell.swift; sourceTree = "<group>"; };
+		C1F08E7D1D77C1FB00E6CA77 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
+		C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = VCs/ChatViewController.swift; sourceTree = "<group>"; };
+		C1F08E841D78EDA700E6CA77 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = Models/Conversation.swift; sourceTree = "<group>"; };
 		C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxMessage.swift; sourceTree = "<group>"; };
 		C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingPopOverBackgroundView.swift; sourceTree = "<group>"; };
 		C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreakModalViewController.swift; path = VCs/BreakModalViewController.swift; sourceTree = "<group>"; };
@@ -347,6 +363,14 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		C1F08E7F1D780D9B00E6CA77 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +431,7 @@
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
 				C649C54E1CE2C31C00258994 /* Main.storyboard */,
+				C1F08E731D77BC3200E6CA77 /* Chat.storyboard */,
 				C64EC20F1D20D82B000DA37A /* Inbox.storyboard */,
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
@@ -439,6 +464,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E7F1D780D9B00E6CA77 /* Chat */,
 				C64942FF1D67B39A002C9D49 /* Inbox */,
 				C68165141D66831D00FC63FD /* Discover */,
 				C607BA4C1D58230B00B1348B /* Me */,
@@ -529,6 +555,7 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E7D1D77C1FB00E6CA77 /* Message.swift */,
 				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
 				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
@@ -537,6 +564,7 @@
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
 				9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */,
 				C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */,
+				C1F08E841D78EDA700E6CA77 /* Conversation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -544,6 +572,10 @@
 		C68165051D650D2100FC63FD /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */,
+				C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */,
+				C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */,
+				C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */,
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
 				C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */,
 				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
@@ -645,6 +677,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */,
 				C11F64E81D6785EF00FFF5DB /* TrackedItemPopoverCell.xib in Resources */,
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
 				C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */,
@@ -655,12 +688,14 @@
 				C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
+				C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
 				C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */,
 				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
+				C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,6 +757,7 @@
 			files = (
 				9FA0DF131D700601003CACEE /* Tracking.swift in Sources */,
 				C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */,
+				C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */,
 				B6F00BA61D66B3E400B09177 /* Gym.swift in Sources */,
 				B6F00BA91D66B3E400B09177 /* MidCat.swift in Sources */,
 				C64942FE1D6775B3002C9D49 /* GymMapVC.swift in Sources */,
@@ -745,6 +781,7 @@
 				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
+				C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */,
 				C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */,
 				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
@@ -752,6 +789,7 @@
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
+				C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */,
@@ -775,6 +813,7 @@
 				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
+				C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,
@@ -790,6 +829,7 @@
 				C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
+				C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */,
 				C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */,
 				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,

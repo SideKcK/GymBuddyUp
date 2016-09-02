@@ -38,6 +38,7 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         var i = 0
         for item in thisTabBar.items! {
             if i != 2 {

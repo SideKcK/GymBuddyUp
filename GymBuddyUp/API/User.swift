@@ -60,8 +60,8 @@ class User {
     var email: String?
     var screenName: String?
     
-    private let firUser: FIRUser?
-    private let userRef: FIRDatabaseReference?
+    private var firUser: FIRUser?
+    private var userRef: FIRDatabaseReference?
     
     var gender: Gender?
     var cachedPhoto:UIImage?
@@ -76,6 +76,7 @@ class User {
     var gym: String? //to WW: or change it to CLLocationCoordinates if thats better for backend
     var description: String? {
         get {
+            
             return self.userRef?.valueForKey("description") as? String
         }
     }
@@ -113,6 +114,15 @@ class User {
         userBecameActive()
     }
     
+    
+    init (snapshot: FIRDataSnapshot) {
+        self.userId = snapshot.key
+        if let _screenName = snapshot.value!["screenName"] as? String {
+            self.screenName = _screenName
+        }
+        self.userRef = ref.child(self.userId)
+    }
+    
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (firebaseUser, error) in
             if error != nil {
@@ -139,15 +149,16 @@ class User {
     }
     
     class func signUpWithEmail(email: String, password: String, completion: UserAuthCallback) {
+        print("reach here in signUpWithEmail")
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (firebaseUser, error) in
             if error != nil {
                 completion(user: nil, error: error)
-            }
-            else
-                // sign up succeeded. Create and cache current user.
-            {
-                User.currentUser = User(user: firebaseUser!)
-                completion(user: User.currentUser, error: nil)
+            } else {
+                if let user = firebaseUser {
+                    User.currentUser = User(user: user)
+                    completion(user: User.currentUser, error: nil)
+                }
+
             }
         })
     }
@@ -171,11 +182,46 @@ class User {
                         completion(user: nil, error: error)
                     }
                     else {
+
                         User.currentUser = User(user: firebaseUser!)
                         completion(user: User.currentUser, error: nil)
                     }})
             }
         }
+    }
+    
+    func getMyFriendList(successfulHandler: ([User])->()) {
+       let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_friend/\(self.userId)")
+        ref.observeSingleEventOfType(.Value) { (snapshot :FIRDataSnapshot) in
+            let postDict = snapshot.value as! [String : AnyObject]
+            var userIds = [String]()
+            for (key, _) in postDict {
+                userIds.append(key)
+            }
+            User.getUserArrayFromIdList(userIds, successHandler: { (users: [User]) in
+                successfulHandler(users)
+            })
+        }
+    }
+    
+    class func getUserArrayFromIdList (userIds: [String], successHandler: ([User])->()) {
+        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
+        let gcdGetUserGroup = dispatch_group_create()
+        var ret = [User]()
+        for userId in userIds {
+            dispatch_group_enter(gcdGetUserGroup)
+            ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                ret.append(User(snapshot: snapshot))
+                dispatch_group_leave(gcdGetUserGroup)
+            }) { (error) in
+                print(error.localizedDescription)
+                dispatch_group_leave(gcdGetUserGroup)
+            }
+        }
+        
+        dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            successHandler(ret)
+        })
     }
     
     class func hasAuthenticatedUser () -> Bool {
@@ -218,7 +264,6 @@ class User {
         let pngImageData = UIImagePNGRepresentation(self.cachedPhoto!)
         let filePath = self.userId + "/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000)).png"
         let photoRef = storageRef.child(filePath)
-        
         // Upload the file to the path "images/rivers.jpg"
         let uploadTask = photoRef.putData(pngImageData!, metadata: nil) { metadata, error in
             if (error != nil) {
@@ -259,7 +304,13 @@ class User {
     }
     
     func updateProfile(attr: AnyObject?, value: AnyObject?) {
-        
+        if let attrName = attr as? String, valueStr = value as? String {
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            Log.info("Done setting attribute")
+        }
+        Log.info("no problem til here")
     }
     
     func update() {

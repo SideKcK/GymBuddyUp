@@ -183,6 +183,31 @@ extension CVDate {
     }
 }
 
+extension NSDate {
+    // Convert UTC (or GMT) to local time
+    func toLocalTime() -> NSDate {
+        let timezone: NSTimeZone = NSTimeZone.localTimeZone()
+        let seconds: NSTimeInterval = NSTimeInterval(timezone.secondsFromGMTForDate(self))
+        return NSDate(timeInterval: seconds, sinceDate: self)
+    }
+    
+    // Convert local time to UTC (or GMT)
+    func toGlobalTime() -> NSDate {
+        let timezone: NSTimeZone = NSTimeZone.localTimeZone()
+        let seconds: NSTimeInterval = -NSTimeInterval(timezone.secondsFromGMTForDate(self))
+        return NSDate(timeInterval: seconds, sinceDate: self)
+    }
+}
+
+extension NSDate {
+    static func changeDaysBy(days : Int) -> NSDate {
+        let currentDate = NSDate()
+        let dateComponents = NSDateComponents()
+        dateComponents.day = days
+        return NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
+    }
+}
+
 extension UISegmentedControl
 {
     func removeBorders() {

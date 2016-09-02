@@ -13,7 +13,7 @@ class MeBuddiesVC: UIViewController {
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var findView: UIView!
 
-    var buddies = ["Jesiah", "You", "Aaron"]//TODO change to User
+    var buddies = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,8 +24,18 @@ class MeBuddiesVC: UIViewController {
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
         setupVisual()
+        loadData()
     }
 
+    func loadData() {
+        User.currentUser?.getMyFriendList({ (users: [User]) in
+            self.buddies = users
+            self.tableView.reloadData()
+            self.title = "Buddies ("+String(self.buddies.count)+")"
+        })
+    
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,7 +71,8 @@ extension MeBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
-        cell.buddy = buddies[indexPath.row]
+        let buddy = buddies[indexPath.row]
+        cell.buddy = buddy.screenName
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

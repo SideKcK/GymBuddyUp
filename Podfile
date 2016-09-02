@@ -25,6 +25,6 @@ target 'GymBuddyUp' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
-
-
+    pod 'ALTextInputBar'
+    pod 'JSQMessagesViewController'
 end

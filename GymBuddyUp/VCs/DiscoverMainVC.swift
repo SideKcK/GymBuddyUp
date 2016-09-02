@@ -37,6 +37,12 @@ class DiscoverMainVC: UIViewController {
         self.findButtonConstraint.constant = self.view.frame.height / 3.0
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.hidden = false
+        self.tabBarController?.tabBar.translucent = false
+    }
+    
     func setupVisual() {
         tableView.backgroundColor = ColorScheme.s3Bg
         findButton.makeActionButton()
@@ -58,6 +64,23 @@ class DiscoverMainVC: UIViewController {
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    
+    @IBAction func testbutton(sender: AnyObject) {
+//        self.hidesBottomBarWhenPushed = true
+        self.tabBarController?.tabBar.hidden = true
+        self.tabBarController?.tabBar.translucent = true
+        Log.info("asdasdasd")
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+        self.navigationController?.pushViewController(secondViewController, animated: true)
+        InboxMessage.test()
+//        self.hidesBottomBarWhenPushed = false
+
+        
+        
+    }
+    
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")

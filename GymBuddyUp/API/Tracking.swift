@@ -91,7 +91,7 @@ class Tracking {
                     completion(error)
                 }
                 
-            }else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.DurationInSeconds || trackedItems[index].exercise!.unitType == Exercise.UnitType.DistanceInMiles ){
+            } else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.DurationInSeconds || trackedItems[index].exercise!.unitType == Exercise.UnitType.DistanceInMiles ){
                 var set_detail = [String: AnyObject]()
                 set_detail["amount"] =  trackedItems[index].finishedAmount
                 set_detail["weight"] = 0
@@ -99,7 +99,7 @@ class Tracking {
                 addBestRecord(trackedItems[index].exercise!,createDate: dateToString(startTime),bestRecord: trackedItems[index].finishedAmount) { (error) in
                     completion(error)
                 }
-            }else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.Repetition){
+            } else if(trackedItems[index].exercise!.unitType == Exercise.UnitType.Repetition){
                 for index1 in 0 ..< trackedItems[index].reps.count {
                     print("=========== Inside trackedItems[index]"+String(index1))
                     var set_detail = [String: AnyObject]()

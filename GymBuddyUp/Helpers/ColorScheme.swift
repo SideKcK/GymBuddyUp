@@ -39,5 +39,11 @@ struct ColorScheme {
     static var trackingPopOverNormalItemTx = UIColor(hexString: "#000000")
     static var trackingNavigationParamsLabel = UIColor.flatBlackColor()
     static var trackingDoneModalBg = UIColor ( red: 0.08, green: 0.0, blue: 0.0, alpha: 0.68 )
+    static var chatRecipientBackgroudColor = UIColor.flatGrayColor()
+    static var chatMyBackgroudColor = UIColor.flatSkyBlueColor()
+    
+    static var chatRecipientMessageColor = ContrastColorOf(chatRecipientBackgroudColor, returnFlat: true)
+    static var chatMyMessageColor = ContrastColorOf(chatMyBackgroudColor, returnFlat: true)
+
     
 }

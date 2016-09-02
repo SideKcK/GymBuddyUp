@@ -16,15 +16,20 @@ private let friendRef:FIRDatabaseReference! = FIRDatabase.database().reference()
 
 class Friend {
     
-    class func testFunction () {
-        sendFriendRequest("0Pi8sNFijqWGQpu293sonMIuqbm2") { (error) in
-            User.currentUser?.getTokenForcingRefresh() {idToken, error in
-                print(idToken)
-        }
-    }
+    enum FriendStatus: Int {
+        case isFriend = 1
+        case requestPending = 0
+        case notFriend = -1
     }
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
+    
+    class func testFunction()
+    {
+        isCurrentUserFriendWith("Noh5cGUfhbSSTnS2IDApRmqcSs82") { (status) in
+            print(status)
+        }
+    }
     
     class func sendFriendRequest(recipientId: String, completion: (NSError?) -> Void) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
@@ -34,7 +39,7 @@ class Friend {
             
             let parameters = [
                 "token": idToken!,
-                "operation": "send",
+                "operation": "friend_request_send",
                 "recipientId": recipientId
             ]
             
@@ -60,7 +65,7 @@ class Friend {
             
             let parameters = [
                 "token": idToken!,
-                "operation": "reject",
+                "operation": "friend_request_reject",
                 "requestId": requestId
             ]
             
@@ -86,8 +91,8 @@ class Friend {
             
             let parameters = [
                 "token": idToken!,
-                "operation": "accept",
-                "recipientId": requestId
+                "operation": "friend_request_accept",
+                "requestId": requestId
             ]
             
             Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
@@ -113,6 +118,25 @@ class Friend {
                 }
             
             completion(friends)
+        })
+    }
+    
+    class func isCurrentUserFriendWith(userToCheckWith:String, completion: FriendStatus -> Void) {
+        friendRef.child((User.currentUser?.userId)!).child(userToCheckWith).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            if let val = snapshot.value as? NSDictionary {
+                let isFriend = val["is_friend"] as? Int
+                if isFriend == 1 {
+                    completion(FriendStatus.isFriend)
+                }
+                else if isFriend == 0 {
+                    completion(FriendStatus.requestPending)
+                }
+            }
+            
+            else {
+                completion(FriendStatus.notFriend)
+            }
+            
         })
     }
 }

@@ -108,7 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     
         // TEST FRIEND REQUEST;
-        //Friend.testFunction()
 
         
     }

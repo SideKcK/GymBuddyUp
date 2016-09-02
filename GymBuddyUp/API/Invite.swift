@@ -26,19 +26,134 @@ class Invite {
     }
     
     class func sendWorkoutInviteToUser(recipientId: String, completion: (NSError?) -> Void ) {
-        
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "workout_invite_send",
+                "recipientId": recipientId
+            ]
+            
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
+
     }
     
-    class func acceptWorkoutInvite(inviteId: String) {
-        
+    class func acceptWorkoutInvite(inviteId: String, completion: (NSError?) -> Void ) {
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "workout_invite_accept",
+                "workoutId": inviteId
+            ]
+            
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
     }
     
-    class func cancelWorkoutInvite(inviteId: String) {
-        
+    class func cancelWorkoutInvite(inviteId: String, completion: (NSError?) -> Void) {
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "workout_invite_cancel",
+                "workoutId": inviteId
+            ]
+            
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
     }
     
-    class func rejectWorkoutInvite(inviteId: String) {
-        
+    class func rejectWorkoutInvite(inviteId: String, completion: (NSError?) -> Void) {
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "workout_invite_reject",
+                "workoutId": inviteId
+            ]
+            
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
+    }
+    
+    class func confirmWorkoutInvite(inviteId: String, completion: (NSError?) -> Void) {
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "workout_invite_confirm",
+                "workoutId": inviteId
+            ]
+            
+            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
     }
     
     class func publishWorkoutInviteToPublic(PlanId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
@@ -68,7 +183,7 @@ class Invite {
         inviteData["invitee"] = nil
         inviteData["accepted"] = false
         inviteData["confirmed"] = false
-        inviteData["scheduled_workout"] = scheduledWorkoutId
+        inviteData["plan"] = PlanId
         
         let fanoutObject = [workoutPath: workoutData, userInvitePath: userInviteData, invitePath: inviteData]
         

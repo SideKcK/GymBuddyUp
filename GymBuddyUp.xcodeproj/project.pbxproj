@@ -10,6 +10,7 @@
 		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
 		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
 		9FA0DF131D700601003CACEE /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF121D700601003CACEE /* Tracking.swift */; };
+		B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B436691D76C2FA003EF548 /* Friend.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		B6F00B821D66B34600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B791D66B34600B09177 /* GeoFire.m */; };
 		B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */; };
@@ -125,6 +126,7 @@
 		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
 		9FA0DF121D700601003CACEE /* Tracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		B6B436691D76C2FA003EF548 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				B6F00BA31D66B3E400B09177 /* User.swift */,
 				B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */,
 				B6F00B9E1D66B3E400B09177 /* Invite.swift */,
+				B6B436691D76C2FA003EF548 /* Friend.swift */,
 				B6F00B9F1D66B3E400B09177 /* Library.swift */,
 				B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */,
 				9FA0DF121D700601003CACEE /* Tracking.swift */,
@@ -842,6 +845,7 @@
 				C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 				C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */,
+				B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */,
 				B6F00BA81D66B3E400B09177 /* Library.swift in Sources */,
 				B6F00B861D66B34600B09177 /* GFQuery.m in Sources */,
 			);

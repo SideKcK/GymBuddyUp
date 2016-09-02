@@ -102,10 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
         
         //test public discover
-        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 100, withinDays: 8,  offset: 0) { (publishedWorkout, error) in
-            print(publishedWorkout)
-        }
+//        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 100, withinDays: 8,  offset: 0) { (publishedWorkout, error) in
+//            print(publishedWorkout)
+//        }
         
+    
+        // TEST FRIEND REQUEST;
 
         
     }

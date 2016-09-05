@@ -26,14 +26,17 @@ class ChatViewController: JSQMessagesViewController {
     var conversationId: String?
     
     // change it to false when deployed
-    let inDebug = true
+    let inDebug = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("chatview viewDidLoad")
         // Do any additional setup after loading the view.
-        title = "Chat"
+        
         setupBubbles()
-        /* just for debug  --------start--------*/
+        
+        /* just for debug  --------start-------- */
         if inDebug {
             senderId = "jedihy"
             senderDisplayName = "jedihy"
@@ -43,8 +46,10 @@ class ChatViewController: JSQMessagesViewController {
                 conversationId = getConversationId(sId, strB: rId)
             }
         }
-
-        /* just for debug  ---------end---------*/
+        /* just for debug  ---------end--------- */
+        
+        self.inputToolbar.contentView.leftBarButtonItem = nil
+        
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
     }
@@ -55,8 +60,15 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     // call setup(senderId, recipientId) when preparing segue
-    func setup(senderId:String, setupWithBothIds recipientId: String) {
+    func setup(senderId:String, setupByRecipientId recipientId: String, recipientName: String?) {
+        Log.info("setup ChatVC")
+        self.title = recipientName
         self.senderId = senderId
+        self.senderDisplayName = ""
+        if let screenName = User.currentUser?.screenName {
+            self.senderDisplayName = screenName
+        }
+
         self.recipientId = recipientId
         self.conversationId = getConversationId(senderId, strB: recipientId)
     }

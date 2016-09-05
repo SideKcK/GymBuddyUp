@@ -15,6 +15,7 @@ class InboxMainVC: UIViewController {
     
     var actions = [String] (count: 3, repeatedValue: "Action")
     var messages = [String](count: 10, repeatedValue: "Test")
+    var conversatoins = [Conversation]()
     var showInvites = true
     
     override func viewDidLoad() {

@@ -18,16 +18,19 @@ class MeMainVC: UIViewController {
     let titleBGView: UIImageView = UIImageView()
     let profileView : UIImageView = UIImageView()
 
-    var user = User.currentUser
+    var user: User?
     var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if user?.userId != User.currentUser?.userId {
-            cells.removeAtIndex(1)
-            
+        if user == nil {
+            user = User.currentUser
         }
+        
+//        if user?.userId != User.currentUser?.userId {
+//            cells.removeAtIndex(1)
+//        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 230
@@ -36,6 +39,18 @@ class MeMainVC: UIViewController {
         // Do any additional setup after loading the view.
         setHeader()
     }
+    
+    @IBAction func psButton(sender: AnyObject) {
+        if let currentUserId = User.currentUser?.userId, recipientUserId = user?.userId {
+            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+            let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            chatVC.setup(currentUserId, setupByRecipientId: recipientUserId, recipientName: user?.screenName)
+            
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
+
+    }
+    
     func setHeader() {
         titleBGView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
         profileView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
@@ -103,6 +118,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
             cell.user = user
+            cell.nameLabel.text = user?.screenName
             cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
             return cell

@@ -24,6 +24,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
 
+    // FIXME: should not put model info in views
     var user: User! {
         didSet {
             if let screenName = user.screenName,

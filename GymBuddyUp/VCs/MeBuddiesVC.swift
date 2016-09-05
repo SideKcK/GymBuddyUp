@@ -55,10 +55,12 @@ class MeBuddiesVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let desVC = segue.destinationViewController as? MeMainVC {
-            //for testing
-            //desVC.user = User()
+        if segue.identifier == "ToBuddyProfileSegue" {
+            if let desVC = segue.destinationViewController as? MeMainVC {
+                desVC.user = sender as? User
+            }
         }
+
     }
  
 

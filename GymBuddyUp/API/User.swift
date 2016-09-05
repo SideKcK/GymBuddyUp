@@ -224,6 +224,18 @@ class User {
         }
     }
     
+    func syncWithLastestUserInfo() {
+        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
+        ref.child(userId).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+            if let _screenName = snapshot.value?["screenName"] as? String {
+                self.screenName = _screenName
+                print(_screenName)
+            }
+        }
+    
+    
+    }
+    
     func getMyFriendList(successfulHandler: ([User])->()) {
        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_friend/\(self.userId)")
         ref.observeSingleEventOfType(.Value) { (snapshot :FIRDataSnapshot) in

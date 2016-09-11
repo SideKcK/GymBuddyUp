@@ -89,16 +89,37 @@ class DiscoverDetailVC: UIViewController {
         tableView.dataSource = self
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
+        if plan.exercises?.count == 0 {
+            tableView.hidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func onChatButton(sender: AnyObject) {
+            //        self.hidesBottomBarWhenPushed = true
+            self.tabBarController?.tabBar.hidden = true
+            self.tabBarController?.tabBar.translucent = true
+            Log.info("asdasdasd")
+            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+            let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+            InboxMessage.test()
+            //        self.hidesBottomBarWhenPushed = false
+    }
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+        let statusView = StatusView()
+        guard let window = UIApplication.sharedApplication().keyWindow else {
+            return
+        }
+        statusView.displayView(window)
+        
     }
     @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

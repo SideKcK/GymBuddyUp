@@ -104,6 +104,8 @@
 		C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */; };
 		C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650E1D665BC700FC63FD /* MeFindVC.swift */; };
 		C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */; };
+		C6860BEB1D85E1C50081C89D /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6860BEA1D85E1C50081C89D /* StatusView.xib */; };
+		C6860BED1D85E1E00081C89D /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BEC1D85E1E00081C89D /* StatusView.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6AF1EDF1D6B98C200B69D08 /* PlanLibDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */; };
 		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
@@ -236,6 +238,8 @@
 		C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteBuddiesVC.swift; path = VCs/InviteBuddiesVC.swift; sourceTree = "<group>"; };
 		C681650E1D665BC700FC63FD /* MeFindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeFindVC.swift; path = VCs/MeFindVC.swift; sourceTree = "<group>"; };
 		C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverDetailVC.swift; path = VCs/DiscoverDetailVC.swift; sourceTree = "<group>"; };
+		C6860BEA1D85E1C50081C89D /* StatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusView.xib; path = Views/StatusView.xib; sourceTree = "<group>"; };
+		C6860BEC1D85E1E00081C89D /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusView.swift; path = Views/StatusView.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibDetailVC.swift; path = VCs/PlanLibDetailVC.swift; sourceTree = "<group>"; };
 		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 			children = (
 				C66B081C1D502378003B0872 /* UnderlineField.swift */,
 				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
+				C6860BEA1D85E1C50081C89D /* StatusView.xib */,
+				C6860BEC1D85E1E00081C89D /* StatusView.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -689,6 +695,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6860BEB1D85E1C50081C89D /* StatusView.xib in Resources */,
 				C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */,
 				C11F64E81D6785EF00FFF5DB /* TrackedItemPopoverCell.xib in Resources */,
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
@@ -854,6 +861,7 @@
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
 				C6D810F71D6E9798006054AE /* InvitePlanCell.swift in Sources */,
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
+				C6860BED1D85E1E00081C89D /* StatusView.swift in Sources */,
 				C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 				C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */,

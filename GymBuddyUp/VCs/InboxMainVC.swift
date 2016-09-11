@@ -86,7 +86,7 @@ class InboxMainVC: UIViewController {
     }
     
     func addSegControl (view: UIView) {
-        let segControl = HMSegmentedControl(sectionTitles: ["Workout Invites", "Buddy Requests", "Chat"])
+        let segControl = HMSegmentedControl(sectionTitles: ["Invitations", "Buddy Requests", "Messages"])
         segControl.customize()
         segControl.backgroundColor = ColorScheme.s4Bg
         segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
@@ -161,16 +161,18 @@ class InboxMainVC: UIViewController {
 extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 2
-//    }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tabState == .Invitaions {
-            return actions.count
-        } else if tabState == .BuddyRequests {
-            return messages.count
-        } else {
+        if tabState == .Invitaions || tabState == .BuddyRequests {
+            if section == 0 {
+                return actions.count
+            } else {
+                return messages.count
+            }
+        }  else {
             return conversations.count
         }
     }

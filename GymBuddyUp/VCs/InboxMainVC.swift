@@ -43,9 +43,7 @@ class InboxMainVC: UIViewController {
         guard let userId = User.currentUser?.userId else {return}
         userConversationRef.child(userId).observeEventType(.ChildAdded, withBlock: {(snapshot) in
             let conversationId = snapshot.key
-            print(snapshot)
-            let recipientId = snapshot.value!["recipient_id"] as! String
-            let recipientName = snapshot.value!["recipient_name"] as! String
+            guard let recipientId = snapshot.value?["recipient_id"] as? String, recipientName = snapshot.value?["recipient_name"] as? String else {return}
             Log.info("recipientName \(recipientName)")
             let lastRecord = snapshot.value!["last_record"] as! String
             let _ = snapshot.value!["createdAt"] as! String

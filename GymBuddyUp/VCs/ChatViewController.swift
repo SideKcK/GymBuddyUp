@@ -71,11 +71,15 @@ class ChatViewController: JSQMessagesViewController {
         self.senderDisplayName = senderName
         self.recipientId = recipientId
         self.conversationId = getConversationId(senderId, strB: recipientId)
+        unNewConversation()
+
+    }
+    
+    private func unNewConversation() {
         if let convsId = self.conversationId {
             let ownConversationRef = userConversationRef.child("\(self.senderId)/\(convsId)/isNew")
             ownConversationRef.setValue(0)
         }
-
     }
     
     private func getConversationId(strA: String, strB: String) -> String {
@@ -102,6 +106,7 @@ class ChatViewController: JSQMessagesViewController {
                     }
                 }
                 self.addMessage(id, text: text, date: createAt)
+                self.unNewConversation()
                 self.finishReceivingMessage()
             }) { (error) in
                 Log.info("asdasdasdasd")

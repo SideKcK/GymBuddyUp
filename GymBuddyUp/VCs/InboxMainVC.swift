@@ -152,6 +152,7 @@ class InboxMainVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let navVC = segue.destinationViewController as? UINavigationController, let desVC = navVC.topViewController as? DiscoverDetailVC {
             desVC.plan = Plan()
+            //desVC.event = PublishedWorkout
         }
     }
     
@@ -250,10 +251,10 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tabState == .Invitaions {
-
+            self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else if tabState == .BuddyRequests {
-
+            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
             let index = indexPath.row
@@ -272,19 +273,6 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             }
         
         }
-        
-        
-//        if showInvites {
-//            self.performSegueWithIdentifier("toPlanDetailSegue", sender: messages[indexPath.row])
-//        }else {
-//            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: messages[indexPath.row])
-//        }
-//        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MessageCell {
-//            cell.borderView.backgroundColor = ColorScheme.greyText
-//            UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {
-//                cell.borderView.backgroundColor = UIColor.whiteColor()
-//                }, completion: nil)
-//        }
         
     }
     

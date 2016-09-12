@@ -10,6 +10,8 @@ import UIKit
 
 class StatusView: UIView {
     var view: UIView!
+    @IBOutlet weak var borderView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
     
     /**
      Initialiser method
@@ -31,10 +33,23 @@ class StatusView: UIView {
         view = loadViewFromXibFile()
         view.frame = bounds
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.makeBorderButton(ColorScheme.p1Tint)
-        addSubview(view)
+        borderView.makeBorderButton(ColorScheme.p1Tint, radius: 3.0)
+        
+        view.userInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StatusView.tapped(_:)))
+        //view.addGestureRecognizer(tapGestureRecognizer)
+        
+        closeButton.addTarget(self, action: #selector(StatusView.closeButtonTapped(_:)), forControlEvents: .TouchDown)
         
         translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        
+        let margins = self.layoutMarginsGuide
+        view.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor, constant: 0).active = true
+        
+        view.centerXAnchor.constraintEqualToAnchor(margins.centerXAnchor).active = true
+        view.needsUpdateConstraints()
+        
     }
     
     func loadViewFromXibFile() -> UIView {
@@ -52,13 +67,19 @@ class StatusView: UIView {
         }
     }
     
-    func displayView(onView: UIView) {
+    func displayView() {
+        guard let onView = UIApplication.sharedApplication().keyWindow else {
+            return
+        }
         self.alpha = 0.0
         onView.addSubview(self)
         
-        onView.addConstraint(NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: onView, attribute: .Bottom, multiplier: 1.0, constant: 50.0)) // move it a bit upwards
-        onView.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: onView, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
-        onView.needsUpdateConstraints()
+        let margins = onView.layoutMarginsGuide
+        self.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor, constant: -40.0).active = true
+        
+        self.centerXAnchor.constraintEqualToAnchor(margins.centerXAnchor).active = true
+        
+        self.needsUpdateConstraints()
         
         // display the view
         UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -71,4 +92,15 @@ class StatusView: UIView {
             }
         }
     }
+    func closeButtonTapped(button: UIButton) {
+        print("Button pressed 👍")
+    }
+    
+    func tapped(sender: AnyObject?) {
+        print("tapped")
+        if let tabBarController = self.window?.rootViewController as? TabBarVC {
+            tabBarController.selectedIndex = 1
+        }
+    }
+    
 }

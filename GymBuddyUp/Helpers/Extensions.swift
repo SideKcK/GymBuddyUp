@@ -106,7 +106,7 @@ extension UIButton {
         self.clipsToBounds = true
     }
 
-    func makeBotButton () {
+    func makeBotButton (color: UIColor) {
         self.heightAnchor.constraintEqualToConstant(44)
         self.backgroundColor = ColorScheme.p1Tint
         self.setTitleColor(ColorScheme.g4Text, forState: .Normal)

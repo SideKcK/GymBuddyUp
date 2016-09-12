@@ -60,12 +60,32 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;siran's description&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkk-6c-JY9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;siran's description&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkk-6c-JY9">
                                                     <rect key="frame" x="42" y="237" width="131" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="An3-ew-gym">
+                                                    <rect key="frame" x="40" y="94" width="240" height="34"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qb-GX-Gs0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="34"/>
+                                                            <state key="normal" title="Accept">
+                                                                <color key="titleColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5A1-3q-NtP">
+                                                            <rect key="frame" x="130" y="0.0" width="110" height="34"/>
+                                                            <state key="normal" title="Reject">
+                                                                <color key="titleColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="zVf-f1-R1L"/>
+                                                    </constraints>
+                                                </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-C5-cZb">
                                                     <rect key="frame" x="100" y="94" width="120" height="34"/>
                                                     <constraints>
@@ -77,10 +97,21 @@
                                                         <color key="titleColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnT-pC-s8s">
+                                                    <rect key="frame" x="277" y="8" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="1SX-Eu-Uf1"/>
+                                                        <constraint firstAttribute="width" constant="35" id="M1q-jI-nbW"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Message"/>
+                                                    <connections>
+                                                        <action selector="psButton:" destination="mv2-Eg-HHb" eventType="touchUpInside" id="8oj-4L-wPb"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZoS-v2-c1D">
-                                                    <rect key="frame" x="105" y="136" width="111" height="20"/>
+                                                    <rect key="frame" x="105" y="141" width="111" height="20"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="xTR-5T-0JJ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Workout_usedInPageME" translatesAutoresizingMaskIntoConstraints="NO" id="xTR-5T-0JJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="xTR-5T-0JJ" secondAttribute="height" id="Ey5-p1-8b2"/>
@@ -111,17 +142,6 @@
                                                         </mask>
                                                     </variation>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnT-pC-s8s">
-                                                    <rect key="frame" x="277" y="8" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="1SX-Eu-Uf1"/>
-                                                        <constraint firstAttribute="width" constant="35" id="M1q-jI-nbW"/>
-                                                    </constraints>
-                                                    <state key="normal" image="Message"/>
-                                                    <connections>
-                                                        <action selector="psButton:" destination="mv2-Eg-HHb" eventType="touchUpInside" id="8oj-4L-wPb"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="tnT-pC-s8s" firstAttribute="trailing" secondItem="IxG-Yx-V54" secondAttribute="trailingMargin" id="3AK-TM-rOV"/>
@@ -129,6 +149,7 @@
                                                 <constraint firstItem="oxd-aC-5FB" firstAttribute="leading" secondItem="IxG-Yx-V54" secondAttribute="leadingMargin" constant="68" id="76B-eT-dkq"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="TmN-YZ-Bxg" secondAttribute="trailing" constant="12" id="7lx-3b-Ly3"/>
                                                 <constraint firstItem="Jgy-Sg-X8c" firstAttribute="leading" secondItem="oxd-aC-5FB" secondAttribute="leading" id="7oa-Wr-cu8"/>
+                                                <constraint firstItem="MXh-C5-cZb" firstAttribute="bottom" secondItem="An3-ew-gym" secondAttribute="bottom" id="Ajn-19-Y9G"/>
                                                 <constraint firstItem="MXh-C5-cZb" firstAttribute="top" secondItem="dPH-0v-j13" secondAttribute="bottom" constant="5" id="Do9-5L-2bV"/>
                                                 <constraint firstItem="MXh-C5-cZb" firstAttribute="centerX" secondItem="IxG-Yx-V54" secondAttribute="centerX" id="EGt-lK-Qha"/>
                                                 <constraint firstItem="Pkk-6c-JY9" firstAttribute="top" secondItem="TmN-YZ-Bxg" secondAttribute="bottom" constant="12" id="HPT-nd-CfS"/>
@@ -144,10 +165,14 @@
                                                 <constraint firstItem="oxd-aC-5FB" firstAttribute="top" secondItem="ZoS-v2-c1D" secondAttribute="bottom" constant="20" id="oX4-Xi-n2o"/>
                                                 <constraint firstItem="tnT-pC-s8s" firstAttribute="top" secondItem="IxG-Yx-V54" secondAttribute="topMargin" id="qbT-gq-tbu"/>
                                                 <constraint firstItem="ZoS-v2-c1D" firstAttribute="centerX" secondItem="IxG-Yx-V54" secondAttribute="centerX" id="s04-sO-YEe"/>
+                                                <constraint firstItem="An3-ew-gym" firstAttribute="centerX" secondItem="IxG-Yx-V54" secondAttribute="centerX" id="udw-uh-8AW"/>
+                                                <constraint firstItem="MXh-C5-cZb" firstAttribute="top" secondItem="An3-ew-gym" secondAttribute="top" id="wKx-Ci-ug3"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pkk-6c-JY9" secondAttribute="trailing" constant="12" id="yhv-dX-iSs"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Pkk-6c-JY9" secondAttribute="bottom" constant="12" id="zSd-lv-PQO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="acceptButton" destination="1qb-GX-Gs0" id="j1K-X2-3Qk"/>
                                             <outlet property="actionButton" destination="MXh-C5-cZb" id="VMR-Bv-zfa"/>
                                             <outlet property="descriptionLabel" destination="Pkk-6c-JY9" id="HOE-Oq-tED"/>
                                             <outlet property="goalLabel" destination="kKe-Vg-dLq" id="vAk-z7-MPD"/>
@@ -156,6 +181,8 @@
                                             <outlet property="gymLabel" destination="TmN-YZ-Bxg" id="NPM-85-uZD"/>
                                             <outlet property="gymNameLabel" destination="Jgy-Sg-X8c" id="OJH-vC-qv9"/>
                                             <outlet property="nameLabel" destination="dPH-0v-j13" id="EOd-3q-xAj"/>
+                                            <outlet property="rejectButton" destination="5A1-3q-NtP" id="VhG-Ez-gu8"/>
+                                            <outlet property="requestStack" destination="An3-ew-gym" id="VB0-W8-y4X"/>
                                             <outlet property="workoutNameLabel" destination="ovH-kG-jfL" id="xCF-4U-xpa"/>
                                             <outlet property="workoutNumLabel" destination="mDx-5O-Dfb" id="0ox-Q1-RKv"/>
                                         </connections>
@@ -179,7 +206,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="s8y-t1-Jh5">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="findSidekick" translatesAutoresizingMaskIntoConstraints="NO" id="s8y-t1-Jh5">
                                                     <rect key="frame" x="14" y="12" width="20" height="20"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -224,7 +251,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="dWN-3z-Sq4">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Workout_usedInPageME" translatesAutoresizingMaskIntoConstraints="NO" id="dWN-3z-Sq4">
                                                     <rect key="frame" x="14" y="12" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="k3o-M7-PRE"/>
@@ -296,7 +323,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Me" id="o9D-uG-dts">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="17N-bx-XZ1">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="17N-bx-XZ1">
                             <connections>
                                 <action selector="onLogout:" destination="mv2-Eg-HHb" id="LWL-AN-rqV"/>
                                 <segue destination="K6F-Px-taC" kind="show" id="i4V-WE-LkS"/>
@@ -923,7 +950,10 @@
     </scenes>
     <resources>
         <image name="Message" width="40" height="40"/>
+        <image name="Workout_usedInPageME" width="30" height="30"/>
         <image name="dumbbell" width="512" height="512"/>
+        <image name="findSidekick" width="30" height="30"/>
+        <image name="settings" width="17" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GB7-ju-sVw"/>

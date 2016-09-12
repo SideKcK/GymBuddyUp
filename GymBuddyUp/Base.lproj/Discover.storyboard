@@ -304,22 +304,28 @@
                                     <action selector="onJoinButton:" destination="nK6-Gi-qx7" eventType="touchUpInside" id="Shn-hB-TTw"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KjW-3O-5Sh">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="KjW-3O-5Sh">
                                 <rect key="frame" x="0.0" y="523" width="320" height="45"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDN-D7-6S2">
-                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="45"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDN-D7-6S2">
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="45"/>
                                         <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Join">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onJoinButton:" destination="nK6-Gi-qx7" eventType="touchUpInside" id="4eD-iV-Ure"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv3-ih-lAW">
-                                        <rect key="frame" x="162" y="0.0" width="157.5" height="45"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv3-ih-lAW">
+                                        <rect key="frame" x="161" y="0.0" width="159" height="45"/>
                                         <color key="backgroundColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Reject">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onRejectButton:" destination="nK6-Gi-qx7" eventType="touchUpInside" id="1bB-2X-WdF"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -335,6 +341,9 @@
                                 <state key="normal" title="Go To Plan">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onPlanButton:" destination="nK6-Gi-qx7" eventType="touchUpInside" id="a5P-vY-1DV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>

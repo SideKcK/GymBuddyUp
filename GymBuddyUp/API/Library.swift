@@ -14,7 +14,6 @@ import FirebaseStorage
 private let ref: FIRDatabaseReference! = FIRDatabase.database().reference()
 private let storageRef = FIRStorage.storage().reference()
 
-private let topCategoryRef = ref.child("gym_top_category")
 private let midCategoryRef = ref.child("gym_mid_category")
 private let exerciseRef = ref.child("exercise")
 private let systemPlanRef = ref.child("system_plan")
@@ -22,20 +21,6 @@ private let planDetailRef = ref.child("plan_detail")
 
 
 class Library {
-
-    class func getTopCategory(completion: (content:[NSDictionary]?, error:NSError?) -> Void) {
-        topCategoryRef.observeSingleEventOfType(.Value, withBlock: {
-            (snapshot) in
-            let value = snapshot.valueInExportFormat() as? NSDictionary
-            let entries = value?.allValues as? [NSDictionary]
-
-            completion(content: entries, error: nil)
-
-        }) {
-            (error) in
-            completion(content: nil, error: error)
-        }
-    }
 
     class func getMidCategory(completion: (content:[MidCat]?, error:NSError?) -> Void) {
         midCategoryRef.observeSingleEventOfType(.Value, withBlock: {
@@ -56,15 +41,22 @@ class Library {
         systemPlanRef.child(planId).observeSingleEventOfType(.Value, withBlock: {
             (snapshot) in
             if let jsonData = snapshot.value as? NSDictionary {
-                let plan = Plan(id: planId, dict: jsonData)
-                completion(plan: plan, error: nil)
+                
+                getExercisesByPlanId(planId, completion: { (exercises, error) in
+                    
+                    if (error != nil) {
+                        return completion(plan: nil, error: error)
+                    }
+                    
+                    let plan = Plan(id: planId, dict: jsonData, exercises: exercises)
+                    completion(plan: plan, error: nil)
+                })
             }
         }) {
             (error) in
             completion(plan: nil, error: error)
         }
     }
-    
     
 
     class func getPlansByMidId(catID: Int, completion: (plans:[Plan]?, error:NSError?) -> Void) {
@@ -95,7 +87,7 @@ class Library {
         }
     }
 
-    class func getExercisesByPlanId(planId: String, completion: (exercises: [Exercise]?, error: NSError?) -> Void)  {
+    private class func getExercisesByPlanId(planId: String, completion: (exercises: [Exercise]?, error: NSError?) -> Void)  {
         planDetailRef.child(planId).observeSingleEventOfType(.Value, withBlock: {
             (snapshot) in
             
@@ -116,6 +108,10 @@ class Library {
                             
                             exercise.set = Exercise.Set.setArrayFromDictArray(setData)
                             exercises.append(exercise)
+                            dispatch_group_leave(getExercisesTaskGroup)
+                        }
+                        else {
+                            print("error getting exercise by plan id", error)
                             dispatch_group_leave(getExercisesTaskGroup)
                         }
                     })
@@ -144,6 +140,34 @@ class Library {
             completion(exercise: nil, error: error)
         }
     }
+    
+    // Problemetic
+    class func getPlansById (planId: [String], completion: (plans: [Plan], error: NSError?) -> Void) {
+        
+        if planId.count == 0 {
+            return completion(plans: [], error: nil)
+        }
+        
+        let myGroup = dispatch_group_create()
+        let numPlan = planId.count
+        var plans = [Plan](count: numPlan, repeatedValue: Plan())
+        
+        for (index, id) in planId.enumerate() {
+            dispatch_group_enter(myGroup)
+            Library.getPlanById(id, completion: { (plan, error) in
+                if error != nil {
+                    print("error getting plan for \(id)")
+                }
+                else {
+                    plans[index] = plan!
+                }
+                
+                dispatch_group_leave(myGroup)
+            })
+        }
+        
+        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+            completion(plans: plans, error: nil)
+        })
+    }
 }
-
-

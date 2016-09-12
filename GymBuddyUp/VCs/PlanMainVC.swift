@@ -8,6 +8,7 @@
 
 import UIKit
 import CVCalendar
+import SwiftDate
 import KRProgressHUD
 
 class PlanMainVC: UIViewController {
@@ -17,23 +18,33 @@ class PlanMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addPlanButton: UIButton!
     @IBOutlet weak var addPlanView: UIView!
+    @IBOutlet weak var todayButton: UIBarButtonItem!
     
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
     var selectedDate: NSDate!
     
-    let insetColor = ColorScheme.sharedInstance.greyText
-    let tintColor = ColorScheme.sharedInstance.buttonTint
+    let insetColor = ColorScheme.greyText
+    let tintColor = ColorScheme.p1Tint
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupVisual()
         setCalendar()
         setTableView()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
+        todayButton.tintColor = ColorScheme.s1Tint
     }
     
+    func setupVisual() {
+        menuView.backgroundColor = ColorScheme.s1Tint
+        calendarView.backgroundColor = ColorScheme.s1Tint
+        
+        addPlanView.backgroundColor = ColorScheme.s3Bg
+        tableView.backgroundColor = ColorScheme.s3Bg
+    }
     
     func setTableView() {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
@@ -45,8 +56,6 @@ class PlanMainVC: UIViewController {
     }
     
     func setCalendar() {
-        calendarView.backgroundColor = ColorScheme.sharedInstance.calBg
-        menuView.backgroundColor = ColorScheme.sharedInstance.calBg
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
@@ -63,8 +72,8 @@ class PlanMainVC: UIViewController {
             self.workouts[date] = workouts
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
-                    if let dayplans = plans {
-                        self.plans[date] = dayplans
+                    if error == nil {
+                        self.plans[date] = plans
                         //reload tableview with plans
                         if date == self.selectedDate {
                             self.tableView.reloadData()
@@ -84,52 +93,107 @@ class PlanMainVC: UIViewController {
     }
     
     func getPlansThisWeek(date: NSDate) {
+        
         KRProgressHUD.show()
-        let sWeek = date.startOf(.WeekOfYear)
-        let eWeek = date.endOf(.WeekOfYear)
-        print(sWeek.toString())
-        print(eWeek.toString())
-        ScheduledWorkout.getScheduledWorkoutsInRange(sWeek, endDate: eWeek) { (workouts, error) in
-            if let workouts = workouts {
-                for (workoutdate, workout) in workouts {
-                    self.workouts[workoutdate] = workout
-                    
-                }
-                let myGroup = dispatch_group_create()
-                for (date, dayworkouts) in workouts {
-                    dispatch_group_enter(myGroup)
-                    if let planIds = Plan.planIDsWithArray(dayworkouts) {
-                        Library.getPlansById(planIds, completion: { (plans, error) in
-                            if let dayplans = plans {
-                                self.plans[date] = dayplans
-                                //get plan invitation status
-                                
-                            }else {
-                                print(error)
-                            }
-                            dispatch_group_leave(myGroup)
-                        })
-                    }
-                }
-                
-                dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-                    
-                    //reload tableview with plans
-                    self.tableView.reloadData()
-                    KRProgressHUD.dismiss()
-                })
-                
-            }else {
-                print(error)
-            }
+        
+        let firstDayOfWeek = date.startOf(.WeekOfYear)
+        let fetchPlanTaskGroup = dispatch_group_create()
+
+        
+        for i in (0..<7) {
+
+            let day = firstDayOfWeek + i.days
+            dispatch_group_enter(fetchPlanTaskGroup)
             
+            ScheduledWorkout.getScheduledWorkoutsForDate(day, complete: { (workoutsOnDay) in
+                self.workouts[day] = workoutsOnDay
+
+                if workoutsOnDay.count == 0 {
+                    self.plans[day] = []
+                    dispatch_group_leave(fetchPlanTaskGroup)
+                }
+                    
+                else {
+                    let planIds = Plan.planIDsWithArray(workoutsOnDay)
+                    Library.getPlansById(planIds!, completion: { (plans, error) in
+                        if error == nil {
+                            self.plans[day] = plans
+                        }
+                        else {
+                            print("Error getting plans for this week", error)
+                        }
+                        
+                        dispatch_group_leave(fetchPlanTaskGroup)
+                    })
+                }
+            })
         }
+        
+        dispatch_group_notify(fetchPlanTaskGroup, dispatch_get_main_queue(), {
+            //reload tableview with plans
+            self.tableView.reloadData()
+            KRProgressHUD.dismiss()
+        })
     }
+    
+    
+    
+//        }
+//        KRProgressHUD.show()
+//        let sWeek = date.startOf(.WeekOfYear)
+//        let eWeek = date.endOf(.WeekOfYear)
+//        print(sWeek.toString())
+//        print(eWeek.toString())
+//        ScheduledWorkout.getScheduledWorkoutsForTimespan(sWeek, endDate: eWeek) { (workouts, error) in
+//            if let workouts = workouts {
+//                for (workoutdate, workout) in workouts {
+//                    self.workouts[workoutdate] = workout
+//                    
+//                }
+//                let myGroup = dispatch_group_create()
+//                for (date, dayworkouts) in workouts {
+//                    dispatch_group_enter(myGroup)
+//                    if let planIds = Plan.planIDsWithArray(dayworkouts) {
+//                        Library.getPlansById(planIds, completion: { (plans, error) in
+//                            if error == nil {
+//                                self.plans[date] = plans
+//                                //get plan invitation status
+//                                
+//                            }else {
+//                                print("Network Error AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", error)
+//                                KRProgressHUD.showError(message: "Network Error")
+//                            }
+//                            dispatch_group_leave(myGroup)
+//                        })
+//                    }
+//                }
+//                
+//                dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+//                    
+//                    //reload tableview with plans
+//                    self.tableView.reloadData()
+//                    KRProgressHUD.dismiss()
+//                })
+//                
+//            }else {
+//                print("Network Error AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", error)
+//                KRProgressHUD.showError(message: "Network Error")
+//            }
+//            
+//        }
+//        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+//            if KRProgressHUD.isVisible {
+//                
+//                KRProgressHUD.showError(message: "Network Error")
+//            }
+//        })
+//    }
     
     func getCalendarWorkouts (date: NSDate) {
         let sMonth = (1.weeks).agoFromDate(date.startOf(.Month))
         let eMonth = (1.weeks).fromDate(date.endOf(.Month))
-        ScheduledWorkout.getScheduledWorkoutsInRange(sMonth, endDate: eMonth) { (workouts, error) in
+        ScheduledWorkout.getScheduledWorkoutsForTimespan(sMonth, endDate: eMonth) { (workouts, error) in
             if let workouts = workouts {
                 for (date, dayworkouts) in workouts {
                     if dayworkouts.count != 0 {
@@ -142,7 +206,6 @@ class PlanMainVC: UIViewController {
                 print(error)
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -177,8 +240,12 @@ class PlanMainVC: UIViewController {
         })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
-        calendarView.changeMode(.WeekView)
-        calendarView.toggleCurrentDayView()
+        print("on today button")
+        calendarView.changeMode(.WeekView) {
+            print("changed mode")
+            self.calendarView.toggleCurrentDayView()
+        }
+        //calendarView.changeMode(.WeekView)
         //add selection circle to todays dayview
         
     }
@@ -214,6 +281,7 @@ class PlanMainVC: UIViewController {
             return
         }
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -245,6 +313,7 @@ class PlanMainVC: UIViewController {
             //delete
             if repeating {
                 let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                deleteController.customize()
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                     // ...
                 }
@@ -354,17 +423,25 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     //        return UIView()
     //
     //    }
+
     
-    
+
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
+        if dayView.date.month != selectedDate.month {
+            print("select day view")
+            calendarView.changeMode(.WeekView)
+        }
+
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
+        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
+        
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)
         }else {
             tableView.reloadData()
         }
-        calendarView.changeMode(.WeekView)
+        
         UIView.animateWithDuration(0.3, animations: {
             self.tableView.alpha = 1
             self.addPlanView.alpha = 1
@@ -372,6 +449,8 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
+        print("presented date updated \(date.commonDescription)")
+        
         if monthButton.title != date.monthDescription {
             getCalendarWorkouts(date.convertedDate()!)
             //monthButton.alpha = 0
@@ -393,7 +472,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func dotMarker(colorOnDayView dayView: CVCalendarDayView) -> [UIColor] {
         
-        let color = ColorScheme.sharedInstance.calText
+        let color = ColorScheme.g4Text
         
         return [color] // return 1 dot
         
@@ -404,7 +483,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     }
     
     func dayOfWeekTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.g4Text
     }
     
     
@@ -414,30 +493,30 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
 extension PlanMainVC: CVCalendarViewAppearanceDelegate {
     
     func dayLabelWeekdayInTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdayOutTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calTextDark
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calBg
+        return ColorScheme.s1Tint
     }
     func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
-        return ColorScheme.sharedInstance.calBg
+        return ColorScheme.s1Tint
     }
     
     func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.g4Text
     }
     
     func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.g4Text
     }
     
     func dotMarkerColor() -> UIColor {
-        return ColorScheme.sharedInstance.calText
+        return ColorScheme.g4Text
     }
     
 }
@@ -456,7 +535,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         guard let dayPlans = plans[selectedDate] else {
             return cell
         }
-        cell.event = dayPlans[indexPath.row]
+        cell.plan = dayPlans[indexPath.row]
         cell.showMoreButton()
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)

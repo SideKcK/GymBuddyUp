@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,42 +17,46 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oea-VE-Bhm">
                         <rect key="frame" x="15" y="8" width="278" height="100"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me" translatesAutoresizingMaskIntoConstraints="NO" id="s4H-Mz-VDB">
-                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="s4H-Mz-VDB">
+                                <rect key="frame" x="8" y="8" width="55" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ccc-QC-WNg"/>
-                                    <constraint firstAttribute="width" constant="50" id="arz-dm-tq3"/>
+                                    <constraint firstAttribute="height" constant="55" id="Ccc-QC-WNg"/>
+                                    <constraint firstAttribute="width" constant="55" id="arz-dm-tq3"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesiah Bruce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bv-6j-wcz">
-                                <rect key="frame" x="73" y="8" width="99" height="21"/>
+                                <rect key="frame" x="78" y="8" width="99" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal: Muscle Build" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVM-WL-7qP">
-                                <rect key="frame" x="73" y="49" width="111" height="16"/>
+                                <rect key="frame" x="78" y="52" width="111" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gym: Crunch, White Plains" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-XA-ovQ">
-                                <rect key="frame" x="73" y="66" width="159" height="16"/>
+                                <rect key="frame" x="78" y="69" width="159" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXL-hE-WD7">
-                                <rect key="frame" x="240" y="8" width="30" height="30"/>
-                                <state key="normal" title="Add"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXL-hE-WD7">
+                                <rect key="frame" x="230" y="8" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="oJq-c7-eoO"/>
+                                    <constraint firstAttribute="height" constant="40" id="wDc-b3-EyR"/>
+                                </constraints>
+                                <state key="normal" image="Add Buddy"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2 mile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3s-ZK-0bD">
-                                <rect key="frame" x="73" y="30" width="46" height="16"/>
+                                <rect key="frame" x="78" y="30" width="46" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" id="qyK-eX-dwF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -64,7 +68,7 @@
                             <constraint firstItem="zXL-hE-WD7" firstAttribute="top" secondItem="2Bv-6j-wcz" secondAttribute="top" id="ODY-CU-U4N"/>
                             <constraint firstItem="QNh-XA-ovQ" firstAttribute="top" secondItem="TVM-WL-7qP" secondAttribute="bottom" constant="1" id="ONL-si-BLK"/>
                             <constraint firstItem="TVM-WL-7qP" firstAttribute="leading" secondItem="2Bv-6j-wcz" secondAttribute="leading" id="Qvx-Wz-nhj"/>
-                            <constraint firstItem="TVM-WL-7qP" firstAttribute="top" secondItem="H3s-ZK-0bD" secondAttribute="bottom" constant="3" id="TZ1-NE-iuK"/>
+                            <constraint firstItem="TVM-WL-7qP" firstAttribute="top" secondItem="H3s-ZK-0bD" secondAttribute="bottom" constant="10" id="TZ1-NE-iuK"/>
                             <constraint firstItem="zXL-hE-WD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Bv-6j-wcz" secondAttribute="trailing" constant="12" id="UMG-HU-urQ"/>
                             <constraint firstItem="H3s-ZK-0bD" firstAttribute="leading" secondItem="2Bv-6j-wcz" secondAttribute="leading" id="WXR-H6-Ic2"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QNh-XA-ovQ" secondAttribute="bottom" constant="15" id="ZGj-Pr-kyj"/>
@@ -96,6 +100,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Me" width="30" height="30"/>
+        <image name="Add Buddy" width="40" height="40"/>
+        <image name="dumbbell" width="512" height="512"/>
     </resources>
 </document>

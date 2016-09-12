@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
+		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
+		9FA0DF131D700601003CACEE /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF121D700601003CACEE /* Tracking.swift */; };
+		B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B436691D76C2FA003EF548 /* Friend.swift */; };
 		B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */; };
 		B6F00B821D66B34600B09177 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B791D66B34600B09177 /* GeoFire.m */; };
 		B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F00B7B1D66B34600B09177 /* GFBase32Utils.m */; };
@@ -34,6 +37,21 @@
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
+		C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E731D77BC3200E6CA77 /* Chat.storyboard */; };
+		C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */; };
+		C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */; };
+		C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */; };
+		C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */; };
+		C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E7D1D77C1FB00E6CA77 /* Message.swift */; };
+		C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */; };
+		C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E841D78EDA700E6CA77 /* Conversation.swift */; };
+		C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */; };
+		C1F08E891D7D130B00E6CA77 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E871D7D130B00E6CA77 /* ConversationCell.xib */; };
+		C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E8C1D7E06B500E6CA77 /* BadgeSwift.swift */; };
+		C1F7D17D1D725A95002C6CCD /* InboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */; };
+		C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */; };
+		C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */; };
+		C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */; };
 		C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA261D52CE7900B1348B /* LibraryCatCell.swift */; };
 		C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C607BA401D57A31700B1348B /* Invitation.storyboard */; };
 		C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA441D57A3A100B1348B /* InviteMainVC.swift */; };
@@ -43,7 +61,6 @@
 		C607BA561D5AE80800B1348B /* GymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C607BA551D5AE80800B1348B /* GymCell.swift */; };
 		C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60986581CEEC25200A0AFE3 /* Utils.swift */; };
 		C6304E161D618B6000EE7110 /* PlanLibNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */; };
-		C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */; };
 		C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6304E191D6387C700EE7110 /* WorkoutCell.xib */; };
 		C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */; };
 		C64942FE1D6775B3002C9D49 /* GymMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64942FD1D6775B3002C9D49 /* GymMapVC.swift */; };
@@ -87,20 +104,34 @@
 		C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */; };
 		C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681650E1D665BC700FC63FD /* MeFindVC.swift */; };
 		C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */; };
+		C6860BEB1D85E1C50081C89D /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6860BEA1D85E1C50081C89D /* StatusView.xib */; };
+		C6860BED1D85E1E00081C89D /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BEC1D85E1E00081C89D /* StatusView.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6AF1EDF1D6B98C200B69D08 /* PlanLibDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */; };
+		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
+		C6AF1EE31D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */; };
+		C6B40A9E1D6CDAA2001DC761 /* InvitePlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */; };
+		C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */; };
+		C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */; };
+		C6B40AA41D6D3714001DC761 /* MeUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */; };
 		C6CD01E21D3890E300D64A06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E11D3890E300D64A06 /* Extensions.swift */; };
 		C6CD01EA1D3AC07700D64A06 /* PlanBuildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */; };
 		C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */; };
 		C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */; };
 		C6CD01F21D3B368600D64A06 /* PlanAddDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */; };
 		C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */; };
+		C6D810F71D6E9798006054AE /* InvitePlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810F61D6E9798006054AE /* InvitePlanCell.swift */; };
+		C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */; };
+		C6D810FB1D6E97C3006054AE /* InviteAddPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
+		9FA0DF121D700601003CACEE /* Tracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		B6B436691D76C2FA003EF548 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		B6CF8D541D20EC3100BF9075 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6F00B721D66B34600B09177 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		B6F00B731D66B34600B09177 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
@@ -124,8 +155,8 @@
 		B6F00B9F1D66B3E400B09177 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		B6F00BA01D66B3E400B09177 /* MidCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MidCat.swift; path = API/MidCat.swift; sourceTree = "<group>"; };
 		B6F00BA11D66B3E400B09177 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plan.swift; path = API/Plan.swift; sourceTree = "<group>"; };
-		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduledWorkout.swift; path = API/ScheduledWorkout.swift; sourceTree = "<group>"; };
-		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = API/User.swift; sourceTree = "<group>"; };
+		B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledWorkout.swift; sourceTree = "<group>"; };
+		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
@@ -138,6 +169,21 @@
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
+		C1F08E731D77BC3200E6CA77 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelfMessageCell.xib; path = Views/SelfMessageCell.xib; sourceTree = "<group>"; };
+		C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfMessageCell.swift; path = Views/SelfMessageCell.swift; sourceTree = "<group>"; };
+		C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemberMessageCell.xib; path = Views/MemberMessageCell.xib; sourceTree = "<group>"; };
+		C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberMessageCell.swift; path = Views/MemberMessageCell.swift; sourceTree = "<group>"; };
+		C1F08E7D1D77C1FB00E6CA77 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
+		C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = VCs/ChatViewController.swift; sourceTree = "<group>"; };
+		C1F08E841D78EDA700E6CA77 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = Models/Conversation.swift; sourceTree = "<group>"; };
+		C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = Views/ConversationCell.swift; sourceTree = "<group>"; };
+		C1F08E871D7D130B00E6CA77 /* ConversationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConversationCell.xib; path = Views/ConversationCell.xib; sourceTree = "<group>"; };
+		C1F08E8C1D7E06B500E6CA77 /* BadgeSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeSwift.swift; path = Views/BadgeSwift.swift; sourceTree = "<group>"; };
+		C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxMessage.swift; sourceTree = "<group>"; };
+		C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingPopOverBackgroundView.swift; sourceTree = "<group>"; };
+		C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreakModalViewController.swift; path = VCs/BreakModalViewController.swift; sourceTree = "<group>"; };
+		C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPCircularProgress.swift; path = Views/RPCircularProgress.swift; sourceTree = "<group>"; };
 		C607BA261D52CE7900B1348B /* LibraryCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryCatCell.swift; path = Views/LibraryCatCell.swift; sourceTree = "<group>"; };
 		C607BA411D57A31700B1348B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Invitation.storyboard; sourceTree = "<group>"; };
 		C607BA441D57A3A100B1348B /* InviteMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteMainVC.swift; path = VCs/InviteMainVC.swift; sourceTree = "<group>"; };
@@ -147,7 +193,6 @@
 		C607BA551D5AE80800B1348B /* GymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymCell.swift; path = Views/GymCell.swift; sourceTree = "<group>"; };
 		C60986581CEEC25200A0AFE3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
 		C6304E151D618B6000EE7110 /* PlanLibNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibNavVC.swift; path = VCs/PlanLibNavVC.swift; sourceTree = "<group>"; };
-		C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAPI.swift; path = Helpers/ExtensionsAPI.swift; sourceTree = "<group>"; };
 		C6304E191D6387C700EE7110 /* WorkoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WorkoutCell.xib; path = Views/WorkoutCell.xib; sourceTree = "<group>"; };
 		C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkoutCell.swift; path = Views/WorkoutCell.swift; sourceTree = "<group>"; };
 		C64942FD1D6775B3002C9D49 /* GymMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GymMapVC.swift; path = VCs/GymMapVC.swift; sourceTree = "<group>"; };
@@ -193,14 +238,25 @@
 		C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteBuddiesVC.swift; path = VCs/InviteBuddiesVC.swift; sourceTree = "<group>"; };
 		C681650E1D665BC700FC63FD /* MeFindVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeFindVC.swift; path = VCs/MeFindVC.swift; sourceTree = "<group>"; };
 		C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverDetailVC.swift; path = VCs/DiscoverDetailVC.swift; sourceTree = "<group>"; };
+		C6860BEA1D85E1C50081C89D /* StatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusView.xib; path = Views/StatusView.xib; sourceTree = "<group>"; };
+		C6860BEC1D85E1E00081C89D /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusView.swift; path = Views/StatusView.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibDetailVC.swift; path = VCs/PlanLibDetailVC.swift; sourceTree = "<group>"; };
+		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
+		C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserWorkoutHistoryCell.swift; path = Views/UserWorkoutHistoryCell.swift; sourceTree = "<group>"; };
+		C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitePlanVC.swift; path = VCs/InvitePlanVC.swift; sourceTree = "<group>"; };
+		C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserWorkoutOverviewCell.swift; path = Views/UserWorkoutOverviewCell.swift; sourceTree = "<group>"; };
+		C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsVC.swift; path = VCs/SettingsVC.swift; sourceTree = "<group>"; };
+		C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeUpdateVC.swift; path = VCs/MeUpdateVC.swift; sourceTree = "<group>"; };
 		C6CD01E11D3890E300D64A06 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Helpers/Extensions.swift; sourceTree = "<group>"; };
 		C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanBuildVC.swift; path = VCs/PlanBuildVC.swift; sourceTree = "<group>"; };
 		C6CD01EC1D3AC0E300D64A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PlanAddExercise.storyboard; sourceTree = "<group>"; };
 		C6CD01EF1D3B34DA00D64A06 /* PlanAddMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddMainVC.swift; path = VCs/PlanAddMainVC.swift; sourceTree = "<group>"; };
 		C6CD01F11D3B368600D64A06 /* PlanAddDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanAddDetailVC.swift; path = VCs/PlanAddDetailVC.swift; sourceTree = "<group>"; };
 		C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExerciseNumberedCell.swift; path = Views/ExerciseNumberedCell.swift; sourceTree = "<group>"; };
+		C6D810F61D6E9798006054AE /* InvitePlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitePlanCell.swift; path = Views/InvitePlanCell.swift; sourceTree = "<group>"; };
+		C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteNoPlanCell.swift; path = Views/InviteNoPlanCell.swift; sourceTree = "<group>"; };
+		C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteAddPlanCell.swift; path = Views/InviteAddPlanCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,10 +313,14 @@
 		B6F00B9A1D66B3E400B09177 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
+				B6F00BA31D66B3E400B09177 /* User.swift */,
 				B6F00B9C1D66B3E400B09177 /* GoogleAPI.swift */,
 				B6F00B9E1D66B3E400B09177 /* Invite.swift */,
+				B6B436691D76C2FA003EF548 /* Friend.swift */,
 				B6F00B9F1D66B3E400B09177 /* Library.swift */,
 				B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */,
+				9FA0DF121D700601003CACEE /* Tracking.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -277,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */,
+				C1F08E8C1D7E06B500E6CA77 /* BadgeSwift.swift */,
 			);
 			name = Labels;
 			sourceTree = "<group>";
@@ -284,10 +345,46 @@
 		C1388BA41D65184000513C05 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				C649C5661CE3C68800258994 /* BorderedButton.swift */,
 				C11F64E91D67B2A300FFF5DB /* DropDownTitleNavButton.swift */,
 				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
 			);
 			name = Button;
+			sourceTree = "<group>";
+		};
+		C1E471551D6F63A800C19AAA /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
+			);
+			name = Picker;
+			sourceTree = "<group>";
+		};
+		C1E471561D6F63B500C19AAA /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				C1FF9ACD1D6E30B2005842F3 /* RPCircularProgress.swift */,
+			);
+			name = ProgressBar;
+			sourceTree = "<group>";
+		};
+		C1E471571D6F63C300C19AAA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				C66B081C1D502378003B0872 /* UnderlineField.swift */,
+				C1FF9AC91D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift */,
+				C6860BEA1D85E1C50081C89D /* StatusView.xib */,
+				C6860BEC1D85E1E00081C89D /* StatusView.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		C1F08E7F1D780D9B00E6CA77 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		C607BA431D57A37600B1348B /* Invitation */ = {
@@ -296,6 +393,7 @@
 				C607BA441D57A3A100B1348B /* InviteMainVC.swift */,
 				C607BA481D57E14500B1348B /* InviteGymVC.swift */,
 				C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */,
+				C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */,
 			);
 			name = Invitation;
 			sourceTree = "<group>";
@@ -306,6 +404,8 @@
 				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
 				C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */,
 				C681650E1D665BC700FC63FD /* MeFindVC.swift */,
+				C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */,
+				C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -347,6 +447,7 @@
 				C649C55F1CE3C04600258994 /* Helpers */,
 				C649C5621CE3C45400258994 /* VCs */,
 				C649C54E1CE2C31C00258994 /* Main.storyboard */,
+				C1F08E731D77BC3200E6CA77 /* Chat.storyboard */,
 				C64EC20F1D20D82B000DA37A /* Inbox.storyboard */,
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
@@ -368,8 +469,8 @@
 			isa = PBXGroup;
 			children = (
 				C6CD01E11D3890E300D64A06 /* Extensions.swift */,
-				C6304E171D62D63500EE7110 /* ExtensionsAPI.swift */,
 				C649C5601CE3C08700258994 /* ColorScheme.swift */,
+				C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */,
 				C60986581CEEC25200A0AFE3 /* Utils.swift */,
 				C65301E31D01F51E00DEF7A0 /* Validation.swift */,
 			);
@@ -379,6 +480,7 @@
 		C649C5621CE3C45400258994 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E7F1D780D9B00E6CA77 /* Chat */,
 				C64942FF1D67B39A002C9D49 /* Inbox */,
 				C68165141D66831D00FC63FD /* Discover */,
 				C607BA4C1D58230B00B1348B /* Me */,
@@ -398,12 +500,12 @@
 		C649C5651CE3C64F00258994 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C1E471571D6F63C300C19AAA /* Misc */,
+				C1E471561D6F63B500C19AAA /* ProgressBar */,
+				C1E471551D6F63A800C19AAA /* Picker */,
 				C11F64DC1D66592300FFF5DB /* Labels */,
 				C1388BA41D65184000513C05 /* Button */,
 				C64EC21C1D289DCA000DA37A /* Cells */,
-				C649C5661CE3C68800258994 /* BorderedButton.swift */,
-				C66B081C1D502378003B0872 /* UnderlineField.swift */,
-				C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -444,9 +546,13 @@
 				C64EC2251D334893000DA37A /* UserBuddyOverviewCell.swift */,
 				C607BA261D52CE7900B1348B /* LibraryCatCell.swift */,
 				C607BA551D5AE80800B1348B /* GymCell.swift */,
-				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
 				C11F64E51D6785EF00FFF5DB /* TrackedItemPopoverCell.swift */,
 				C11F64E61D6785EF00FFF5DB /* TrackedItemPopoverCell.xib */,
+				C6AF1EE21D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift */,
+				C6B40A9F1D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift */,
+				C6D810F61D6E9798006054AE /* InvitePlanCell.swift */,
+				C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */,
+				C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -455,9 +561,8 @@
 			isa = PBXGroup;
 			children = (
 				C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */,
+				C1FF9ACB1D6D7DF2005842F3 /* BreakModalViewController.swift */,
 				C11F64E31D67822F00FFF5DB /* TrackingPopOverViewController.swift */,
-				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
-				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				C66B08241D503ADF003B0872 /* TrackMainVC.swift */,
 			);
 			name = Tracking;
@@ -466,12 +571,16 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E7D1D77C1FB00E6CA77 /* Message.swift */,
+				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
+				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
 				B6F00B9D1D66B3E400B09177 /* Gym.swift */,
 				B6F00BA01D66B3E400B09177 /* MidCat.swift */,
 				B6F00BA11D66B3E400B09177 /* Plan.swift */,
-				B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */,
-				B6F00BA31D66B3E400B09177 /* User.swift */,
+				9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */,
+				C1F7D17C1D725A95002C6CCD /* InboxMessage.swift */,
+				C1F08E841D78EDA700E6CA77 /* Conversation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -479,13 +588,20 @@
 		C68165051D650D2100FC63FD /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
+				C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */,
+				C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */,
+				C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */,
+				C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */,
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
 				C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */,
+				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
 				C6304E1B1D639FD800EE7110 /* WorkoutCell.swift */,
 				C68165081D65280600FC63FD /* BuddyCardCell.xib */,
 				C681650A1D65282500FC63FD /* BuddyCardCell.swift */,
 				C64943021D67B45D002C9D49 /* MessageCell.swift */,
 				C64943031D67B45D002C9D49 /* MessageCell.xib */,
+				C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */,
+				C1F08E871D7D130B00E6CA77 /* ConversationCell.xib */,
 			);
 			name = Reuse;
 			sourceTree = "<group>";
@@ -579,6 +695,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6860BEB1D85E1C50081C89D /* StatusView.xib in Resources */,
+				C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */,
 				C11F64E81D6785EF00FFF5DB /* TrackedItemPopoverCell.xib in Resources */,
 				C649C55E1CE3BBD900258994 /* SignupLogin.storyboard in Resources */,
 				C6304E1A1D6387C700EE7110 /* WorkoutCell.xib in Resources */,
@@ -589,12 +707,15 @@
 				C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
+				C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
 				C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */,
 				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
+				C1F08E891D7D130B00E6CA77 /* ConversationCell.xib in Resources */,
+				C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,7 +775,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA0DF131D700601003CACEE /* Tracking.swift in Sources */,
 				C607BA501D582A6100B1348B /* BuddyCell.swift in Sources */,
+				C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */,
 				B6F00BA61D66B3E400B09177 /* Gym.swift in Sources */,
 				B6F00BA91D66B3E400B09177 /* MidCat.swift in Sources */,
 				C64942FE1D6775B3002C9D49 /* GymMapVC.swift in Sources */,
@@ -667,28 +790,41 @@
 				C64EC2261D334893000DA37A /* UserBuddyOverviewCell.swift in Sources */,
 				C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */,
 				C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */,
-				C6304E181D62D63500EE7110 /* ExtensionsAPI.swift in Sources */,
+				C6B40AA01D6D2A3B001DC761 /* UserWorkoutOverviewCell.swift in Sources */,
 				C66B08251D503ADF003B0872 /* TrackMainVC.swift in Sources */,
 				C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */,
 				B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */,
 				C607BA271D52CE7900B1348B /* LibraryCatCell.swift in Sources */,
 				C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */,
 				C649C5671CE3C68800258994 /* BorderedButton.swift in Sources */,
+				C6B40AA41D6D3714001DC761 /* MeUpdateVC.swift in Sources */,
 				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
+				C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */,
+				C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */,
 				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
+				C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
+				C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */,
+				C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */,
+				C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
+				9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
 				B6F00B821D66B34600B09177 /* GeoFire.m in Sources */,
+				C1FF9ACC1D6D7DF2005842F3 /* BreakModalViewController.swift in Sources */,
+				C1FF9ACA1D6D12D5005842F3 /* TrackingPopOverBackgroundView.swift in Sources */,
 				C64EC2211D2DE81E000DA37A /* MeMainVC.swift in Sources */,
+				C6D810FB1D6E97C3006054AE /* InviteAddPlanCell.swift in Sources */,
 				C11F64EA1D67B2A300FFF5DB /* DropDownTitleNavButton.swift in Sources */,
+				C1F7D17D1D725A95002C6CCD /* InboxMessage.swift in Sources */,
 				C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */,
+				C6AF1EE31D6C0BA800B69D08 /* UserWorkoutHistoryCell.swift in Sources */,
 				C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */,
 				C6CD01F51D3DD2BE00D64A06 /* ExerciseNumberedCell.swift in Sources */,
 				C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */,
@@ -698,9 +834,12 @@
 				B6F00BAC1D66B3E400B09177 /* User.swift in Sources */,
 				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
+				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
+				C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,
+				C6B40A9E1D6CDAA2001DC761 /* InvitePlanVC.swift in Sources */,
 				C649C5641CE3C48B00258994 /* LandingScreenVC.swift in Sources */,
 				B6F00B841D66B34600B09177 /* GFGeoHash.m in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
@@ -709,8 +848,10 @@
 				C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
 				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
+				C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
+				C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */,
 				C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */,
 				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,
@@ -718,10 +859,13 @@
 				C65301E41D01F51E00DEF7A0 /* Validation.swift in Sources */,
 				C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */,
 				C64EC20C1D20B317000DA37A /* PlanEditVC.swift in Sources */,
+				C6D810F71D6E9798006054AE /* InvitePlanCell.swift in Sources */,
 				C607BA491D57E14500B1348B /* InviteGymVC.swift in Sources */,
+				C6860BED1D85E1E00081C89D /* StatusView.swift in Sources */,
 				C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */,
 				C649C54B1CE2C31C00258994 /* AppDelegate.swift in Sources */,
 				C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */,
+				B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */,
 				B6F00BA81D66B3E400B09177 /* Library.swift in Sources */,
 				B6F00B861D66B34600B09177 /* GFQuery.m in Sources */,
 			);

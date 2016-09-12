@@ -9,10 +9,6 @@
 import UIKit
 import CoreLocation
 
-import Firebase
-import FirebaseDatabase
-import FirebaseStorage
-
 
 
 class Plan {
@@ -54,12 +50,13 @@ class Plan {
         enabled = true
     }
     
-    init (id: String, dict: NSDictionary) {
+    init (id: String, dict: NSDictionary, exercises: [Exercise]?) {
         self.id = id
         self.name = dict.valueForKey("name") as? String
         self.difficulty = Difficulty(rawValue: (dict.valueForKey("difficulty") as! Int))
         self.description = dict.valueForKey("description") as? String
         self.enabled = dict.valueForKey("enabled") as! Bool
+        self.exercises = exercises
     }
 
     class func planIDsWithArray(array: [ScheduledWorkout]?) -> [String]? {

@@ -61,7 +61,12 @@ func secondToMin(sec: Float) -> String {
 }
 
 func secondsToHoursMinutesSeconds (seconds : Int) -> String {
-    return "\((seconds % (3600 * 24)) / 60)min\((seconds % 3600) % 60)s"
+    let secs = (seconds % 3600) % 60
+    var secsString = String(secs)
+    if secsString.characters.count == 1 {
+        secsString = "0\(secsString)"
+    }
+    return "\((seconds % (3600 * 24)) / 60):\(secsString)"
 }
 
 func dateTimeFormatter () -> NSDateFormatter {
@@ -72,4 +77,23 @@ func dateTimeFormatter () -> NSDateFormatter {
     dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
     
     return dateFormatter
+}
+
+
+func weekMonthDateString (date: NSDate) -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "EEE, MMM d"
+    if date.isInToday() {
+        return "Today"
+    }else if date.isInTomorrow() {
+        return "Tomorrow"
+    }else {
+        return dateFormatter.stringFromDate(date)
+    }
+}
+
+func timeString (date: NSDate) -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    return dateFormatter.stringFromDate(date)
 }

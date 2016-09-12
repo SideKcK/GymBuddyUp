@@ -9,13 +9,19 @@
 import UIKit
 
 class DoneModalViewController: UIViewController {
-
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var doneButton: UIButton!
     
+    @IBOutlet weak var congratsLabel: UILabel!
+    @IBOutlet weak var onFinishingObjectLabel: UILabel!
+    var planName: String?
+    var doneCallBack: (()->())?
+    
     @IBAction func doneButtonOnClick(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {
+            self.doneCallBack?()
+        })
         UIApplication.sharedApplication().statusBarHidden = false
     }
 
@@ -23,7 +29,10 @@ class DoneModalViewController: UIViewController {
         super.viewDidLoad()
 
         UIApplication.sharedApplication().statusBarHidden = true
-        contentView.backgroundColor = ColorScheme.sharedInstance.trackingDoneModalBg
+        congratsLabel.textColor = ColorScheme.p1Tint
+        onFinishingObjectLabel.textColor = ColorScheme.p1Tint
+        onFinishingObjectLabel.text = planName
+        contentView.backgroundColor = ColorScheme.trackingDoneModalBg
         let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.frame

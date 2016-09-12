@@ -15,10 +15,11 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
     @IBOutlet weak var gymButton: UIButton!
-    
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
+    
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cancelInviteButton: UIButton!
     
@@ -32,15 +33,30 @@ class PlanDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = selectedDate.toString()
+        self.title = weekMonthDateString(selectedDate)
         setTableView()
         setViews(false)
+        setupVisual()
+        
+        timeLabel.text = timeString(NSDate())
+        self.title = weekMonthDateString(NSDate())
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func setupVisual() {
+        workoutButton.makeActionButton()
+        findButton.makeBorderButton(ColorScheme.p1Tint)
+        moreButton.tintColor = ColorScheme.g2Text
+        gymButton.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
+        statusView.makeBorderButton(ColorScheme.g2Text)
+        
+        findButton.titleLabel?.font = UIFont.systemFontOfSize(17, weight: UIFontWeightMedium)
+        planLabel.font = FontScheme.H1
+        gymButton.titleLabel?.font = FontScheme.T2
     }
     
     func setTableView() {
@@ -74,6 +90,7 @@ class PlanDetailVC: UIViewController {
 
     @IBAction func onMoreButton(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -84,6 +101,7 @@ class PlanDetailVC: UIViewController {
             //delete
             if repeating {
                 let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                deleteController.customize()
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                     // ...
                 }
@@ -151,6 +169,7 @@ class PlanDetailVC: UIViewController {
         }
         
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .ActionSheet)
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "No, Keep it", style: .Cancel) { (action) in
             // ...
         }
@@ -169,7 +188,8 @@ class PlanDetailVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "startWorkoutSegue" {
-            let desVC = segue.destinationViewController as! TrackMainVC
+            let desNC = segue.destinationViewController as! UINavigationController
+            let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(plan: plan)
         }
         

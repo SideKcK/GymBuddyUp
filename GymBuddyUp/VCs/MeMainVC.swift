@@ -11,20 +11,26 @@ import UIKit
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let kHeaderHeight:CGFloat = 130
+    
+    
+    let kHeaderHeight:CGFloat = 150
+    let profileRadius:CGFloat = 125
     let titleBGView: UIImageView = UIImageView()
     let profileView : UIImageView = UIImageView()
 
-    var user = User.currentUser
+    var user: User?
     var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if user?.userId != User.currentUser?.userId {
-            cells.removeAtIndex(1)
-            
+        if user == nil {
+            user = User.currentUser
         }
+        
+//        if user?.userId != User.currentUser?.userId {
+//            cells.removeAtIndex(1)
+//        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 230
@@ -33,18 +39,28 @@ class MeMainVC: UIViewController {
         // Do any additional setup after loading the view.
         setHeader()
     }
+    
+    @IBAction func psButton(sender: AnyObject) {
+        if let  currentUserId = User.currentUser?.userId,
+                recipientUserId = user?.userId,
+                senderName = User.currentUser?.screenName {
+            
+            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+            let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            chatVC.setup(currentUserId, senderName: senderName, setupByRecipientId: recipientUserId, recipientName: user?.screenName)
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
+
+    }
+    
     func setHeader() {
         titleBGView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
         profileView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
         let headerW = CGRectGetWidth(self.view.frame)
 
         
-        profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight/2, width: headerW/3, height: headerW/3)
-        profileView.clipsToBounds = true
-        profileView.contentMode = UIViewContentMode.ScaleAspectFill
-        profileView.layer.cornerRadius = headerW/6
-        profileView.layer.borderWidth = 2.0
-        profileView.layer.borderColor = ColorScheme.sharedInstance.navTint.CGColor
+        profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight - profileRadius / 2.0, width: profileRadius, height: profileRadius)
+        profileView.makeThumbnail(ColorScheme.p1Tint)
         
         //title background
         self.titleBGView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kHeaderHeight)
@@ -59,7 +75,7 @@ class MeMainVC: UIViewController {
         self.titleBGView.addSubview(blurEffectView)
         
         let tableHeaderView = UIView(frame: CGRectMake(0, 0, headerW, kHeaderHeight))
-        tableHeaderView.backgroundColor = UIColor.flatWhiteColor()
+        tableHeaderView.backgroundColor = ColorScheme.s3Bg
         tableHeaderView.addSubview(self.titleBGView)
         tableHeaderView.addSubview(self.profileView)
         
@@ -73,12 +89,14 @@ class MeMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLogout(sender: AnyObject) {
-        User.currentUser!.signOut(){ _ in
-        self.performSegueWithIdentifier("toSignUpLogin", sender: self)
-        }
+    @IBAction func unwindToMeMainVC(segue: UIStoryboardSegue) {
+        
     }
-
+    
+    func onActionButton (sender: UIButton) {
+        self.performSegueWithIdentifier("toEditProfileSegue", sender: sender)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -102,6 +120,8 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
             cell.user = user
+            cell.nameLabel.text = user?.screenName
+            cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
             return cell
         }else if indexPath.row == cells.count - 3{
@@ -110,11 +130,13 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .None
             return cell
         }else if indexPath.row == cells.count - 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserWorkoutOverviewCell
             cell.selectionStyle = .None
+            
             return cell
         }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath) as! UserWorkoutHistoryCell
+            
             return cell
         }
         

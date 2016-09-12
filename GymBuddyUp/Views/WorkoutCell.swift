@@ -14,6 +14,9 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var topContraint: NSLayoutConstraint!
     @IBOutlet weak var profileTapView: UIView!
     
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var exercisesStackView: UIStackView!
@@ -28,17 +31,25 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var statusStackView: UIStackView!
     @IBOutlet weak var borderView: UIView!
     
-    
+    @IBOutlet weak var nameDateConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dateHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
     var imageViews = [UIImageView]()
-    var event: Plan! {
+    var event: PublishedWorkout! {
         didSet {
-            nameLabel.text = event.name
-            if let exers = event.exercises {
+            timeLabel.text = weekMonthDateString(event.workoutTime) + ", "+timeString(event.workoutTime)
+            gymButton.setTitle(event.gym?.name, forState: .Normal)
+            
+        }
+    }
+    var plan: Plan! {
+        didSet {
+            nameLabel.text = plan.name
+            if let exers = plan.exercises {
                 if exers.count == 0 {
                     exercisesStackView.removeAllSubviews()
                     exercisesHeightConstraint.priority = 999
@@ -51,7 +62,7 @@ class WorkoutCell: UITableViewCell {
                     exercisesHeightConstraint.priority = 250
                 
                     for index in 0...(exers.count - 1) {
-                    imageViews[index].makeThumbnail()
+                    imageViews[index].makeThumbnail(ColorScheme.g3Text)
                     if exers.count > 6 && index == 5 {
                         imageViews[index].image = UIImage(named: "dumbbell")
                         //change last imageView
@@ -70,12 +81,8 @@ class WorkoutCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        borderView.addShadow()
-        clearAllViews()
-        profileTapView.userInteractionEnabled = true
-        selectionStyle = .None
         for _ in 0...5 {
-            let width = exercisesStackView.frame.height - 4.0
+            let width = CGFloat(35.0)
             let imageView = UIImageView(frame: CGRectMake(0, 0, width, width))
 
             imageView.widthAnchor.constraintEqualToConstant(width).active = true
@@ -85,6 +92,11 @@ class WorkoutCell: UITableViewCell {
             imageViews.append(imageView)
         }
         
+        borderView.addShadow()
+        clearAllViews()
+        setupVisual()
+        profileTapView.userInteractionEnabled = true
+        selectionStyle = .None
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -92,6 +104,26 @@ class WorkoutCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupVisual() {
+        dateView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 1.0)
+        dateLabel.textColor = ColorScheme.g2Text
+        moreButton.tintColor = ColorScheme.g2Text
+        gymButton.tintColor = ColorScheme.p1Tint
+        buddyButton.tintColor = ColorScheme.p1Tint
+        borderView.backgroundColor = ColorScheme.s4Bg
+
+        dateLabel.font = FontScheme.T3
+        profileView.layer.borderWidth = 0.5
+        profileLabel.font = FontScheme.T3
+        nameLabel.font = FontScheme.H2
+        timeLabel.font = FontScheme.H2
+        gymButton.titleLabel?.font = FontScheme.T2
+        gymDisLabel.font = FontScheme.T3
+        statusLabel.font = FontScheme.T3
+        buddyButton.titleLabel?.font = FontScheme.T2
+        
+    }
+
     func clearAllViews() {
         profileView.hidden = true
         profileLabel.hidden = true
@@ -99,9 +131,15 @@ class WorkoutCell: UITableViewCell {
         moreButton.hidden = true
         buddyButton.hidden = true
         gymButton.hidden = true
+        dateView.hidden = true
+        dateLabel.hidden = true
+        
+        dateHeightConstraint.priority = 999
         timeHeightConstraint.priority = 999
         statusHeightConstraint.priority = 999
         locHeightConstraint.priority = 999
+        
+        nameDateConstraint.constant = 0
     }
     
     func showMoreButton() {
@@ -112,9 +150,15 @@ class WorkoutCell: UITableViewCell {
         profileView.hidden = false
         profileLabel.hidden = false
         topContraint.constant = 40
-        profileView.makeThumbnail()
+        profileView.makeThumbnail(ColorScheme.p1Tint)
     }
     
+    func showDateView() {
+        nameDateConstraint.constant = 8
+        dateHeightConstraint.priority = 250
+        dateLabel.hidden = false
+        dateView.hidden = false
+    }
     func showTimeView() {
         timeHeightConstraint.priority = 250
     }

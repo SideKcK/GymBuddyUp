@@ -20,19 +20,50 @@ extension UIViewController {
     }
 }
 
+extension NSTimer {
+    func safeInvalidate() {
+        if valid {
+           invalidate()
+        }
+    }
+}
+
 extension UIView {
     func addShadow() {
-        let lightColor = ColorScheme.sharedInstance.lightText
-        let darkColor = ColorScheme.sharedInstance.darkText
-        self.backgroundColor = lightColor
+        let darkColor = ColorScheme.s2Shadow
+        self.backgroundColor = ColorScheme.s4Bg
         self.layer.cornerRadius = 5
         self.layer.shadowColor = darkColor.CGColor
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 1
+        if let button = self as? UIButton {
+            button.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
+        }
         //self.clipsToBounds = true
     }
-
+    func makeBorderButton (color: UIColor) {
+        self.layer.cornerRadius = self.frame.height / 2.0
+        self.backgroundColor = ColorScheme.s4Bg
+        self.tintColor = color
+        self.layer.borderColor = color.CGColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+    }
+    
+    func makeBorderButton (color: UIColor, radius: CGFloat) {
+        self.layer.cornerRadius = radius
+        self.backgroundColor = ColorScheme.s4Bg
+        self.tintColor = color
+        
+        self.layer.borderColor = color.CGColor
+        self.layer.borderWidth = 1.0
+        self.clipsToBounds = true
+        
+        if let button = self as? UIButton {
+            button.setTitleColor(color, forState: .Normal)
+        }
+    }
 }
 
 extension CALayer {
@@ -64,13 +95,44 @@ extension CALayer {
     }
 }
 
-extension UIImageView {
-    func makeThumbnail() {
-        //self.backgroundColor = UIColor.flatGrayColor()
+extension UIButton {
+    func makeThumbnail(color: UIColor) {
+        //self.backgroundColor = color
         self.layer.borderWidth = 1
         self.layer.masksToBounds = false
-        self.layer.borderColor = UIColor.flatGrayColor().CGColor
+        self.layer.borderColor = color.CGColor
         self.layer.cornerRadius = self.frame.height/2.0
+        self.contentMode = UIViewContentMode.ScaleAspectFill
+        self.clipsToBounds = true
+    }
+
+    func makeBotButton (color: UIColor) {
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.titleLabel?.font = UIFont.systemFontOfSize(20, weight: UIFontWeightMedium)
+    }
+    
+    func makeActionButton () {
+        self.layer.cornerRadius = 8
+        self.heightAnchor.constraintEqualToConstant(44)
+        self.backgroundColor = ColorScheme.p1Tint
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.tintColor = ColorScheme.g4Text
+        self.titleLabel?.font = FontScheme.T2
+    }
+    
+
+}
+
+extension UIImageView {
+    func makeThumbnail(color: UIColor) {
+        //self.backgroundColor = color
+        self.layer.borderWidth = 1
+        self.layer.masksToBounds = false
+        self.layer.borderColor = color.CGColor
+        self.layer.cornerRadius = self.frame.height/2.0
+        self.contentMode = UIViewContentMode.ScaleAspectFill
         self.clipsToBounds = true
     }
 }
@@ -101,6 +163,14 @@ extension UIImage {
     }
 }
 
+extension UIAlertController {
+    func customize() {
+        let backView = self.view.subviews.last?.subviews.last
+        //backView?.layer.cornerRadius = 10.0
+        backView?.alpha = 1.0
+        self.view.tintColor = ColorScheme.p1Tint
+    }
+}
 extension CVDate {
     public var monthDescription: String {
         get {
@@ -110,6 +180,31 @@ extension CVDate {
             }
             return month
         }
+    }
+}
+
+extension NSDate {
+    // Convert UTC (or GMT) to local time
+    func toLocalTime() -> NSDate {
+        let timezone: NSTimeZone = NSTimeZone.localTimeZone()
+        let seconds: NSTimeInterval = NSTimeInterval(timezone.secondsFromGMTForDate(self))
+        return NSDate(timeInterval: seconds, sinceDate: self)
+    }
+    
+    // Convert local time to UTC (or GMT)
+    func toGlobalTime() -> NSDate {
+        let timezone: NSTimeZone = NSTimeZone.localTimeZone()
+        let seconds: NSTimeInterval = -NSTimeInterval(timezone.secondsFromGMTForDate(self))
+        return NSDate(timeInterval: seconds, sinceDate: self)
+    }
+}
+
+extension NSDate {
+    static func changeDaysBy(days : Int) -> NSDate {
+        let currentDate = NSDate()
+        let dateComponents = NSDateComponents()
+        dateComponents.day = days
+        return NSCalendar.currentCalendar().dateByAddingComponents(dateComponents, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
     }
 }
 
@@ -133,17 +228,20 @@ extension UISegmentedControl
 
 extension HMSegmentedControl {
     func customize() {
-        self.selectionIndicatorColor = ColorScheme.sharedInstance.buttonTint
+        self.selectionIndicatorHeight = 2.0
+        self.selectionIndicatorColor = ColorScheme.p1Tint
         self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
         self.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed
         
         self.titleTextAttributes = [
-            NSForegroundColorAttributeName: ColorScheme.sharedInstance.darkText,
-            NSFontAttributeName: UIFont.systemFontOfSize(13)]
+            NSForegroundColorAttributeName: ColorScheme.g3Text,
+            NSFontAttributeName: FontScheme.T2 ]
+        self.selectedTitleTextAttributes = [
+        NSForegroundColorAttributeName: ColorScheme.p1Tint]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
-        self.borderColor = ColorScheme.sharedInstance.greyText
-        self.borderWidth = 1.5
+        self.borderColor = ColorScheme.greyText
+        self.borderWidth = 1
         self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
     }
 }
@@ -194,15 +292,6 @@ extension UIView {
         BottomBorder.backgroundColor = color.CGColor
         self.layer.addSublayer(BottomBorder)
         return BottomBorder
-    }
-    
-    func setTopBorder(color color: UIColor) {
-        let TopBorder = CALayer()
-        TopBorder.frame = CGRectMake(0.0, 0.0, self.frame.size.width, 1.5)
-        TopBorder.backgroundColor = color.CGColor
-        TopBorder.opacity = 0.3
-        
-        self.layer.addSublayer(TopBorder)
     }
     
     func applyPlainShadow() {

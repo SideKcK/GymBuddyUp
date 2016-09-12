@@ -23,9 +23,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breast Press" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hq-ze-xLt">
-                        <rect key="frame" x="56" y="16" width="96" height="21"/>
+                        <rect key="frame" x="56" y="7" width="96" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j4o-Hk-26e">
@@ -35,20 +35,35 @@
                             <constraint firstAttribute="height" constant="24" id="NSl-OY-FTI"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 of 0 sets finished" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUG-EJ-hbT">
+                        <rect key="frame" x="56" y="31" width="117" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="j4o-Hk-26e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2hq-ze-xLt" secondAttribute="trailing" constant="8" id="Fbh-XC-2vR"/>
                     <constraint firstAttribute="trailingMargin" secondItem="j4o-Hk-26e" secondAttribute="trailing" id="L08-yv-mhX"/>
+                    <constraint firstItem="pUG-EJ-hbT" firstAttribute="leading" secondItem="s4J-Li-XXt" secondAttribute="trailing" constant="8" id="Lla-Wq-RW5"/>
+                    <constraint firstItem="pUG-EJ-hbT" firstAttribute="top" secondItem="2hq-ze-xLt" secondAttribute="bottom" constant="3" id="Nfc-mz-s7o"/>
                     <constraint firstItem="2hq-ze-xLt" firstAttribute="leading" secondItem="s4J-Li-XXt" secondAttribute="trailing" constant="8" id="Nov-3s-2nS"/>
                     <constraint firstItem="2hq-ze-xLt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ODD-c2-6n4"/>
                     <constraint firstAttribute="leadingMargin" secondItem="s4J-Li-XXt" secondAttribute="leading" id="PRR-EB-VwN"/>
                     <constraint firstItem="s4J-Li-XXt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="W9w-kp-sBL"/>
+                    <constraint firstItem="2hq-ze-xLt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="iTe-aQ-a1h"/>
                     <constraint firstItem="j4o-Hk-26e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="udr-Yr-qne"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ODD-c2-6n4"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="exerciseIconImageView" destination="s4J-Li-XXt" id="cIP-9G-T4F"/>
                 <outlet property="exerciseName" destination="2hq-ze-xLt" id="44N-lx-DBi"/>
+                <outlet property="progressDescriptionLabel" destination="pUG-EJ-hbT" id="ouu-Im-htq"/>
                 <outlet property="statusIndicatorImageView" destination="j4o-Hk-26e" id="x59-Do-8y9"/>
             </connections>
             <point key="canvasLocation" x="612" y="328.5"/>

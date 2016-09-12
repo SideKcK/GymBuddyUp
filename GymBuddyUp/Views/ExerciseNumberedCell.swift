@@ -21,7 +21,7 @@ class ExerciseNumberedCell: UITableViewCell {
         didSet {
             let downloadURL = exercise.thumbnailURL
             self.thumbnailView.af_setImageWithURL(downloadURL)
-            self.thumbnailView.makeThumbnail()
+            self.thumbnailView.makeThumbnail(ColorScheme.g2Text)
             self.nameLabel.text = exercise.name
             guard let amount = exercise.set[0]?.amount else{
                 return
@@ -47,4 +47,9 @@ class ExerciseNumberedCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setupVisual() {
+        numLabel.font = FontScheme.N3
+        nameLabel.font = FontScheme.T1
+        amountLabel.font = FontScheme.T3
+    }
 }

@@ -68,7 +68,7 @@ extension GymMapVC : MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation.isKindOfClass(MKPointAnnotation) {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "custom")
-        annotationView.pinTintColor = ColorScheme.sharedInstance.buttonTint
+        annotationView.pinTintColor = ColorScheme.p1Tint
         annotationView.canShowCallout = true
         return annotationView
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import GooglePlaces
 
 class Gym {
     var placeid: String?
@@ -22,21 +23,68 @@ class Gym {
         self.location = CLLocation(latitude: 30.563, longitude: -96.311)
     }
     
-    init(dict: NSDictionary) {
-        if let address = dict["vicinity"] as? String {
-            self.address = address
-            if let name = dict["name"] as? String {
-                self.name = name
-            }
+
+    init? (fromGooglePlace: NSDictionary) {
+        self.address =  fromGooglePlace["vicinity"] as? String
+        self.name = fromGooglePlace["name"] as? String
+        self.placeid = fromGooglePlace["place_id"] as? String
+        
+        if let geo = fromGooglePlace["geometry"] as? NSDictionary,
+            let loc = geo["location"] as? NSDictionary,
+            let lat = loc["lat"] as? CLLocationDegrees,
+            let lng = loc["lng"] as? CLLocationDegrees {
+            self.location = CLLocation(latitude: lat, longitude: lng)
         }
-        //self.name =
+        else {
+            return nil
+        }
+    }
+    
+    init? (fromFirebase: NSDictionary)
+    {
+        self.name = fromFirebase.valueForKey("name") as? String
+        self.address = fromFirebase.valueForKey("address") as? String
+        self.placeid = fromFirebase.valueForKey("place_id") as? String
+        if let lat = fromFirebase.valueForKey("lat") as? CLLocationDegrees,
+        let long = fromFirebase.valueForKey("long") as? CLLocationDegrees {
+            self.location = CLLocation(latitude: lat, longitude: long)
+        }
+        else {
+            return nil
+        }
+    }
+    
+    init(place: GMSPlace) {
+        self.address = place.formattedAddress
+        self.location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        self.placeid = place.placeID
+        self.name = place.name
+    }
+    
+    //init ()
+    
+    func toDictionary() -> NSDictionary? {
+        var dict = [String: AnyObject]()
+        dict["place_id"] = self.placeid
+        dict["name"] = self.name
+        dict["address"] = self.address
+
+        guard self.location != nil
+        else {
+            return nil
+        }
+        
+        dict["lat"] = self.location!.coordinate.latitude
+        dict["long"] = self.location!.coordinate.longitude
+
+        return dict
     }
     
     class func gymsWithArray(array: [NSDictionary]) -> [Gym] {
         var gyms = [Gym]()
 
         for dictionary in array {
-            gyms.append(Gym(dict: dictionary))
+            gyms.append(Gym(fromGooglePlace: dictionary)!)
         }
         return gyms
     }

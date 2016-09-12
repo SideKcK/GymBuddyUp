@@ -298,7 +298,6 @@
                                     <constraint firstAttribute="width" constant="50" id="u3N-qu-a2a"/>
                                 </constraints>
                                 <color key="tintColor" red="0.1960784314" green="0.74901960779999999" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Plus"/>
                                 <connections>
                                     <action selector="onProfileButton:" destination="403-DD-fB4" eventType="touchUpInside" id="cn6-kA-DqZ"/>
                                 </connections>
@@ -611,7 +610,6 @@
     </scenes>
     <resources>
         <image name="Checkmark" width="30" height="30"/>
-        <image name="Plus" width="50" height="50"/>
         <image name="gym" width="960" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>

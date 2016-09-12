@@ -7,17 +7,18 @@
 //
 
 import UIKit
-import GoogleMaps
+import GooglePlaces
+
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import FBSDKCoreKit
+import SwiftDate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
@@ -26,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         // Override point for customization after application launch.
-        GMSServices.provideAPIKey("AIzaSyDThFYIwTlrRah2NGdbqh6bnWOl_leUb1s")
-        
+        GMSPlacesClient.provideAPIKey("AIzaSyCZogv3GKW3LMhKWHhCArp_BN4Y16gM6d0")
         // Firebase Initialization
         
         // Register for remote notifications
@@ -38,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         FIRApp.configure()
-        
         if User.hasAuthenticatedUser() {
             userDidLogin()
         }
@@ -63,21 +62,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser?.userBecameActive()
+        User.currentUser?.syncWithLastestUserInfo()
         
-        // test push notification : send yourself a friend request
-//        Invite.sendFriendRequest(User.currentUser!.userId) { (error) in
-//            if (error != nil){
-//                print(error)
+        /*********************/
+        // Test the fuck out //
+        /*********************/
+        
+        func getRandomLocation(origin: CLLocation , withinRadius: Int) -> CLLocation {
+            let x0 = origin.coordinate.longitude
+            let y0 = origin.coordinate.latitude
+            
+            // Convert radius from meters to degrees
+            let radiusInDegrees = Double(withinRadius) / 111000
+            
+            let u = Double(arc4random_uniform(101))/100.0
+            let v = Double(arc4random_uniform(101))/100.0
+            
+            let w = radiusInDegrees * sqrt(u)
+            let t = 2 * M_PI * v
+            let x = w * cos(t)
+            let y = w * sin(t)
+            
+            // Adjust the x-coordinate for the shrinking of the east-west distances
+            let new_x = x / cos(y0)
+            
+            let foundLongitude = new_x + x0
+            let foundLatitude = y + y0
+            
+            return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
+        }
+        
+       let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+//    
+//            for i in (1..<40) {
+//                Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gym: Gym(), workoutTime: NSDate() + Int(arc4random_uniform(8)).days) {_ in
+//                    
+//                }
 //            }
+        
+        //test public discover
+//        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 100, withinDays: 8,  offset: 0) { (publishedWorkout, error) in
+//            print(publishedWorkout)
 //        }
         
-//        Invite.sendWorkoutInviteToPublic("-KPHMEB3SLHgJ-v39B3Y", workoutTime: NSDate(), gymId: "gymId123") { (error) in
-//            print(error)
-//        }
+    
+        // TEST FRIEND REQUEST;
+
         
-//        Library.getExercisesByPlanId("-KOZM75q5bh0DtN4AvzM") { (exercises, error) in
-//            print(exercises)
-//        }
     }
     
     func userDidLogout() {
@@ -110,7 +141,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let notification = userInfo["aps"] as? NSDictionary,
             let alert = notification["alert"] as? String {
             let alertCtrl = UIAlertController(title: "Message Received", message: alert as String, preferredStyle: UIAlertControllerStyle.Alert)
+            alertCtrl.customize()
             alertCtrl.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
             // Find the presented VC...
             var presentedVC = self.window?.rootViewController
             while (presentedVC!.presentedViewController != nil)  {

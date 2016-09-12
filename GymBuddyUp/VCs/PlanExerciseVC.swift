@@ -13,11 +13,14 @@ class PlanExerciseVC: UITableViewController {
     @IBOutlet weak var desLabel: UILabel!
     @IBOutlet weak var gifView: UIImageView!
     @IBOutlet weak var mgView: UIImageView!
+    @IBOutlet weak var muscleLabel: UILabel!
 
     var exercise = Exercise()
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mgView.hidden = true
+        muscleLabel.hidden = true
         nameLabel.text = exercise.name
         desLabel.text = exercise.description
         gifView.af_setImageWithURL(exercise.gifURL)

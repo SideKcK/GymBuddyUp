@@ -58,7 +58,7 @@ class PlanLibDetailVC: UIViewController {
     
     @IBAction func onSelectPlanButton(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: "Repeat this plan?", preferredStyle: .ActionSheet)
-        
+        alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -108,16 +108,18 @@ extension PlanLibDetailVC: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let detailCell = collectionView.dequeueReusableCellWithReuseIdentifier("PlanDetailCell", forIndexPath: indexPath) as! PlanDetailCell
         let plan = plans[indexPath.row]
-        Library.getExercisesByPlanId(plans[indexPath.row].id) { (exercises, error) in
-            print("get exercises")
-            if let exer = exercises {
-                plan.exercises = exer
-                detailCell.plan = plan
-                detailCell.tableView.reloadData()
-            }else {
-                print(error)
-            }
-        }
+        detailCell.plan = plan
+        detailCell.tableView.reloadData()
+//        Library.getExercisesByPlanId(plans[indexPath.row].id) { (exercises, error) in
+//            print("get exercises")
+//            if let exer = exercises {
+//                plan.exercises = exer
+//                detailCell.plan = plan
+//                detailCell.tableView.reloadData()
+//            }else {
+//                print(error)
+//            }
+//        }
 
         return detailCell
     }

@@ -36,10 +36,12 @@ class TrackedItem {
     
     // TODO: read set from exercise
     init(_exercise: Exercise) {
-        setsAmount = 3
+        setsAmount = 1
         exercise = _exercise
-//        need to set setsAmount
-//        setsAmount = exercise.set
+        if _exercise.set.count > 0 {
+            setsAmount = _exercise.set.count
+            Log.info("setsAmount = \(setsAmount)")
+        }
         finishedAmount = 0
         finishedSets = 0
         maxReps = 0
@@ -49,14 +51,29 @@ class TrackedItem {
         weights = [Int](count: setsAmount, repeatedValue: 0)
     }
     
+    init (finishedAmount: Int, finishedSets: Int, exercise: Exercise, reps:[Int], weights:[Int]) {
+        self.setsAmount = 1
+        self.finishedAmount = finishedAmount
+        self.finishedSets =  finishedSets
+        self.exercise =  exercise
+        self.reps = reps
+        self.weights = weights
+        self.maxReps = 0
+        self.maxWeight = 0
+        self.isFinalized = false
+    }
+
+    
     func saveOnNextExercise(onFinishedAmount: Int, onFinishedSets: Int) {
         finishedAmount = onFinishedAmount
         finishedSets = onFinishedSets
     }
     
-    func saveOnNextSet(reps: Int, weight: Int) {
-        finishedSets += 1
-        maxReps = max(reps, maxReps)
+    func saveOnNextSet(rep: Int, weight: Int) {
+        reps[finishedSets] = rep
+        weights[finishedSets] = weight
+        finishedSets = min(setsAmount, finishedSets + 1)
+        maxReps = max(rep, maxReps)
         maxWeight = max(weight, maxWeight)
     }
     

@@ -14,7 +14,7 @@ class InviteMainVC: UITableViewController {
     @IBOutlet weak var gymButton: UIButton!
     var sendButton:UIButton!
     
-    var sendButtonHeight : CGFloat = 50.0
+    var sendButtonHeight : CGFloat = 44.0
     var showDatePicker = false
     var showPlan = false
     var seg: UISegmentedControl!
@@ -25,9 +25,7 @@ class InviteMainVC: UITableViewController {
     var sendTo: Int!
     var sent = false
     
-    var tintColor = ColorScheme.sharedInstance.buttonTint
-    var darkText = ColorScheme.sharedInstance.darkText
-    var greyText = ColorScheme.sharedInstance.greyText
+    var tintColor = ColorScheme.p1Tint
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,15 +41,22 @@ class InviteMainVC: UITableViewController {
         if gym != nil {
             enableSendButton()
         }
-
+        setupVisual()
     }
     override func viewWillAppear(animated: Bool) {
         self.sendButton.hidden = false
 
     }
+    override func viewDidDisappear(animated: Bool) {
+        self.sendButton.hidden = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupVisual() {
+        tableView.backgroundColor = ColorScheme.s3Bg
     }
     
     @IBAction func unwindToInviteMainVC (segue: UIStoryboardSegue) {
@@ -74,7 +79,7 @@ class InviteMainVC: UITableViewController {
         seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
         
         seg.addShadow()
-        seg.tintColor = ColorScheme.sharedInstance.greyText
+        seg.tintColor = ColorScheme.g3Text
         seg.removeBorders()
         segViews = seg.subviews
         seg.selectedSegmentIndex = sendTo
@@ -97,7 +102,7 @@ class InviteMainVC: UITableViewController {
     
     func setSendButton () {
         sendButton = UIButton(frame: CGRectMake(0, self.view.frame.height - sendButtonHeight, self.view.frame.width, sendButtonHeight))
-        sendButton.backgroundColor = greyText
+        sendButton.backgroundColor = ColorScheme.g3Text
         sendButton.setTitle("Send", forState: UIControlState.Normal)
         sendButton.addTarget(self, action:#selector(self.sendButtonClicked), forControlEvents: .TouchUpInside)
         self.navigationController!.view.addSubview(sendButton)
@@ -145,7 +150,7 @@ class InviteMainVC: UITableViewController {
         for (index, _) in segViews.enumerate() {
             if index == sender.selectedSegmentIndex {
                 //segViews[index].backgroundColor = sender.tintColor
-                segViews[index].tintColor = ColorScheme.sharedInstance.buttonTint
+                segViews[index].tintColor = ColorScheme.p1Tint
                 sender.selectedSegmentIndex = UISegmentedControlNoSegment
             }else {
                 //segViews[index].backgroundColor = sender.backgroundColor
@@ -166,14 +171,11 @@ class InviteMainVC: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 8
+        return 7
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 2 && !showDatePicker {
-            return 0
-        }
-        if indexPath.row == 3 && !showPlan {
             return 0
         }
         
@@ -184,9 +186,9 @@ class InviteMainVC: UITableViewController {
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
         
-        if indexPath.row == 7 {
+        if indexPath.row == 6 {
             //set as center
-            seg.bounds = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 50)
+            seg.frame = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 52)
             cell.addSubview(seg)
 
         }

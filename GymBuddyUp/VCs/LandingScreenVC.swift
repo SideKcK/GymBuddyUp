@@ -25,9 +25,9 @@ class LandingScreenVC: UIViewController {
         self.navigationController?.navigationBarHidden = true
         self.hideKeyboardWhenTappedAround()
 
-        overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
-        titleLabel.textColor = ColorScheme.sharedInstance.lightText
-        infoLabel.textColor = ColorScheme.sharedInstance.lightText
+        overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
+        titleLabel.textColor = ColorScheme.g4Text
+        infoLabel.textColor = ColorScheme.g4Text
         
         loginWithFacebookButton = FBSDKLoginButton()
 
@@ -35,6 +35,7 @@ class LandingScreenVC: UIViewController {
     
     func addAlertView (button: UIButton, error: NSError) -> UIAlertController {
         let errorAlert = UIAlertController(title: "Login Failed", message: error.localizedDescription, preferredStyle: .Alert)
+        errorAlert.customize()
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             button.enabled = true
             button.alpha = 1.0

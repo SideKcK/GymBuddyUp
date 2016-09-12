@@ -152,11 +152,13 @@ class ScheduledWorkout {
     /**
      Get all scheduled workouts that are active on the date. (Not necessarily scheduled for that date. A workout will be counted as active as long as it didn't stop before the date.)
      */
-    private class func getActiveWorkoutsForDate(date: NSDate, complete: ([ScheduledWorkout])-> Void) {
+    private class func getActiveWorkoutsForDate(date: NSDate, complete: ([ScheduledWorkout])-> Void, onError: (NSError) -> Void) {
         // Query
-        workoutCalendarRef.queryOrderedByChild("end_date").queryStartingAtValue(dateToString(date)).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
-                let results = initFromQueryResults(dataSnapshot.value as? NSDictionary)
-                complete(results)
+        workoutCalendarRef.queryOrderedByChild("end_date").queryStartingAtValue(dateToString(date)).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let results = initFromQueryResults(snapshot.value as? NSDictionary)
+            complete(results)
+            }) { (error) in
+                onError(error)
         }
     }
     
@@ -165,7 +167,7 @@ class ScheduledWorkout {
      */
     class func getScheduledWorkoutsForDate(date: NSDate, complete: ([ScheduledWorkout])-> Void) {
         // Query
-        getActiveWorkoutsForDate(date) {(workouts) in
+        getActiveWorkoutsForDate(date, complete: {(workouts) in
             var results = [ScheduledWorkout]()
             for workout in workouts {
                 if workout.startDate.isInSameDayAsDate(date) && workout.recur >= 0 && !isDateInArray(date, dateArray: workout.skipOn){
@@ -183,6 +185,33 @@ class ScheduledWorkout {
             }
             
             complete(results)
+        })
+        {
+            (error) in
+            print("Error getting scheduled workout for date", error)
+            complete([])
         }
     }
+    
+    class func getScheduledWorkoutsForTimespan(startDate: NSDate, endDate: NSDate, completion: (workouts:[NSDate: [ScheduledWorkout]]?, error: NSError?) -> Void) {
+                    let dateRange = DateRange(calendar: NSCalendar.currentCalendar(),
+                                              startDate: (1.days).agoFromDate(startDate),
+                                              endDate: endDate,
+                                              stepUnits: NSCalendarUnit.Day,
+                                              stepValue: 1)
+                    let myGroup = dispatch_group_create()
+                    var allworkouts = [NSDate: [ScheduledWorkout]]()
+                    for date in dateRange {
+                        dispatch_group_enter(myGroup)
+                        ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
+                            allworkouts[date] = workouts
+                            dispatch_group_leave(myGroup)
+                        }
+                    }
+                    dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+                        completion(workouts: allworkouts, error: nil)
+                    })
+            
+                }
+
 }

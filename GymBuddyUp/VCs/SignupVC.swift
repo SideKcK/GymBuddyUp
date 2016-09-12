@@ -26,12 +26,12 @@ class SignupVC: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
 
-        profileImage = UIImage(named: "Me")
+        profileImage = UIImage(named: "dumbbell")
         
-        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.sharedInstance.bgGradientCenter, ColorScheme.sharedInstance.bgGradientOut])
-        let textColor = ColorScheme.sharedInstance.lightText
+        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
+        let textColor = ColorScheme.g4Text
         loginLabel.textColor = textColor
-        loginButton.titleLabel?.textColor = ColorScheme.sharedInstance.contrastText
+        loginButton.titleLabel?.textColor = ColorScheme.contrastText
         setTextField(emailField)
         setTextField(passwordField)
         setTextField(usernameField)
@@ -40,7 +40,7 @@ class SignupVC: UIViewController {
 
         //alert controller
         alertController = UIAlertController(title: "", message: "", preferredStyle: .Alert)
-        
+        alertController.customize()
         
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
             self.nextButton.enabled = true
@@ -85,10 +85,10 @@ class SignupVC: UIViewController {
             if Validation.isPasswordSame(passwordField.text!, confirmPassword: confirmField.text!) {
                 let pwStatus = Validation.isValidPassword(passwordField.text!)
                 if  pwStatus == .succeed {
-                    
                     User.signUpWithEmail(emailField.text!, password: confirmField.text!) { (user, error) in
-                        if let user = user{
+                        if let user = user {                            
                             //upload photo
+                            
                             user.updateProfilePicture(self.profileImage){error in
                                 print("Error setting profile picture \(error?.localizedFailureReason)")
                             }

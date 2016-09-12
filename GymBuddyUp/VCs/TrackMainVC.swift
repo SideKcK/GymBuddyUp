@@ -522,7 +522,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func doneTrackingCallback() {
-        self.dismissViewControllerAnimated(false, completion: nil)
+
     }
     
     func doneWorkoutAction() {

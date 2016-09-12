@@ -66,21 +66,7 @@ class DiscoverMainVC: UIViewController {
     }
     
     
-    @IBAction func testbutton(sender: AnyObject) {
-//        self.hidesBottomBarWhenPushed = true
-        self.tabBarController?.tabBar.hidden = true
-        self.tabBarController?.tabBar.translucent = true
-        Log.info("asdasdasd")
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
-        self.navigationController?.pushViewController(secondViewController, animated: true)
-        InboxMessage.test()
-//        self.hidesBottomBarWhenPushed = false
-
         
-        
-    }
-    
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")

@@ -41,11 +41,13 @@ class MeMainVC: UIViewController {
     }
     
     @IBAction func psButton(sender: AnyObject) {
-        if let currentUserId = User.currentUser?.userId, recipientUserId = user?.userId {
+        if let  currentUserId = User.currentUser?.userId,
+                recipientUserId = user?.userId,
+                senderName = User.currentUser?.screenName {
+            
             let storyboard = UIStoryboard(name: "Chat", bundle: nil)
             let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
-            chatVC.setup(currentUserId, setupByRecipientId: recipientUserId, recipientName: user?.screenName)
-            
+            chatVC.setup(currentUserId, senderName: senderName, setupByRecipientId: recipientUserId, recipientName: user?.screenName)
             self.navigationController?.pushViewController(chatVC, animated: true)
         }
 

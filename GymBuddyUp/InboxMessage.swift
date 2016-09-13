@@ -15,45 +15,131 @@ private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
 private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
 private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout_location")
 private let inboxMessageRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("inbox_message")
+private let pushNotificatoinRef: FIRDatabaseReference! = FIRDatabase.database().reference().child("user_notification")
+
 
 enum InboxMessageType {
-    case FriendRequest
-    case Invitation
-    case Undefined
+    case FriendRequestReceived
+    case FriendRequestRejected
+    case FriendRequestAccepted
+    case WorkoutInviteReceived
+    case WorkoutInviteRejected
+    case WorkoutInviteAccepted
+    case WorkoutInviteCanceled
 }
 
+let inboxMessageMap: [String: InboxMessageType] = [
+    "friend_request_received": .FriendRequestReceived,
+    "friend_request_rejected": .FriendRequestRejected,
+    "friend_request_accepted": .FriendRequestAccepted,
+    "workout_invite_received": .WorkoutInviteReceived,
+    "workout_invite_rejected": .WorkoutInviteRejected,
+    "workout_invite_accepted": .WorkoutInviteAccepted,
+    "workout_invite_canceled": .WorkoutInviteCanceled
+]
+
+
 class InboxMessage {
+    var messageId: String
     var type: InboxMessageType
+    var isProcessed: Bool
+    var isIgnore: Bool
     var associatedId: String?
-    var content: String
     var senderId: String
-    var receiverId: String
+    var content: String?
+    var receiverId: String?
     var senderName: String?
     var senderAvatarUrl: NSURL?
     var senderAvatarImage: UIImage?
+    enum MessageAction {
+        case Accept
+        case Reject
+        case Cancel
+    }
 
-    // create a new InboxMessage
-    init(_type: InboxMessageType, _content: String, _senderId: String, _receiverId: String, _associatedId: String?, _senderName: String?, _senderAvatarUrl: NSURL?) {
-        type = _type
-        content = _content
+    init(_messageId: String, _type: String, _senderId: String, _associatedId: String?) {
+        messageId = _messageId
+        type = inboxMessageMap[_type]!
+        associatedId = _associatedId
         senderId = _senderId
-        receiverId = _receiverId
+        isIgnore = false
+        isProcessed = false
+        setType(_type)
+    }
+    
+    func process(action: MessageAction) {
+        guard let userId = User.currentUser?.userId else {return}
+        if type == .FriendRequestReceived {
+            switch action {
+            case .Accept:
+                Friend.acceptFriendRequest(messageId, completion: { (error: NSError?) in
+                    if (error == nil) {
+                        pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                        Log.info("accpeted successfully")
+                    }
+                })
+                
+                break
+            case .Reject:
+                Friend.rejectFriendRequest(messageId, completion: { (error: NSError?) in
+                    if (error == nil) {
+                        pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                        Log.info("accpeted successfully")
+                    }
+                })
+                break
+            case .Cancel:
+                Log.info("friend request type should not have cancel action")
+                break
+            }
+            
+        } else if type == .WorkoutInviteReceived {
+            switch action {
+            case .Accept:
+                
+                
+                break
+            case .Reject:
+                
+                
+                break
+            case .Cancel:
+                
+                
+                break
+            }
         
-        if type == .Invitation {
-            associatedId = _associatedId
+        
         }
-        
-        senderName = _senderName
-        senderAvatarUrl = _senderAvatarUrl
+
     }
     
-    /* TODO: create inbox message from FIRDataSnapshot
-    init(snapshot: FIRDataSnapshot) {
-        
-    
-    
+    func setType(_type: String) {
+        type = inboxMessageMap[_type]!
+        switch type {
+        case .FriendRequestReceived:
+            content = "sent you a friend request"
+            break
+        case .FriendRequestAccepted:
+            content = "is now your friend"
+            break
+        case .FriendRequestRejected:
+            content = "rejected your friend request"
+            break
+        case .WorkoutInviteAccepted:
+            content = "accepted your workout invitation"
+            break
+        case .WorkoutInviteCanceled:
+            content = "rejected your workout invitation"
+            break
+        case .WorkoutInviteReceived:
+            content = "sent you a workout invitation"
+            break
+        case .WorkoutInviteRejected:
+            content = "rejected your workout invitation"
+            break
+        }
     }
-    */
     
     class func test() {
         
@@ -65,30 +151,18 @@ class InboxMessage {
             print(error.localizedDescription)
         }
         
-        
-        
-        
-//        guard let uid = User.currentUser?.userId else {return}
-//        let key = inboxMessageRef.childByAutoId().key
-//
-//        let post = ["senderId": "aasdasd",
-//                    "receiverId": "asdasd",
-//                    "senderName": "title",
-//                    "body": "body",
-//                    "timestamp": FIRServerValue.timestamp()]
-//        inboxMessageRef.child("\(uid)/\(key)").setValue(post)
     }
     
-    func saveToBackend() {
-        switch type {
-        case .FriendRequest:
-            // friend request save procedure
-            break
-        case .Invitation:
-            // invitation save procedure
-            break
-        default:
-            Log.info("undefied inbox message type")
-        }
-    }
+//    func saveToBackend() {
+//        switch type {
+//        case .FriendRequest:
+//            // friend request save procedure
+//            break
+//        case .Invitation:
+//            // invitation save procedure
+//            break
+//        default:
+//            Log.info("undefied inbox message type")
+//        }
+//    }
 }

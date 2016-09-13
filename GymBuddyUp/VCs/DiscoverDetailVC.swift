@@ -79,7 +79,7 @@ class DiscoverDetailVC: UIViewController {
         profileView.makeThumbnail(ColorScheme.p1Tint)
         statusLabel.textColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
-        joinButton.makeBotButton()
+//        joinButton.makeBotButton()
         tableView.separatorColor = ColorScheme.g3Text
         
         let heading = FontScheme.H2

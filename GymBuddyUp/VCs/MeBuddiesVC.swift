@@ -17,7 +17,7 @@ class MeBuddiesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Buddies ("+String(buddies.count)+")"
+        self.title = "Buddies"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")

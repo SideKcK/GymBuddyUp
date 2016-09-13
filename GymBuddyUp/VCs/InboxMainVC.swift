@@ -20,13 +20,16 @@ class InboxMainVC: UIViewController {
     
     @IBOutlet weak var segView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    lazy private var ref:FIRDatabaseReference! = FIRDatabase.database().reference()
-    lazy private var userConversationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_conversation")
+    lazy private var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
+    lazy private var userConversationRef: FIRDatabaseReference! = FIRDatabase.database().reference().child("user_conversation")
+    lazy private var pushNotificatoinRef: FIRDatabaseReference! = FIRDatabase.database().reference().child("user_notification")
     var actions = [String] (count: 3, repeatedValue: "Action")
     var messages = [String](count: 10, repeatedValue: "Test")
     var conversations = [Conversation]()
+    var inboxMessages = [String]()
     var showInvites = true
     var tabState: TabStates = .Invitaions
+    var inboxMessageDict = [String: InboxMessage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,17 @@ class InboxMainVC: UIViewController {
         setupVisual()
         setupDataListener()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    
+    @IBAction func testBarButtonClick(sender: AnyObject) {
+        Friend.sendFriendRequest("VYkFlp8LyMeIF2abQCbPAh6nuMD3") { (error: NSError?) in
+            if (error != nil) {
+            
+            
+            }
+        }
     }
     
     func setupDataListener() {
@@ -77,6 +91,47 @@ class InboxMainVC: UIViewController {
             Log.info("\(error.localizedDescription)")
         }
     
+        pushNotificatoinRef.child(userId).observeEventType(.ChildAdded, withBlock: {(snapshot) in
+            print("inboxmessage got!")
+            if (!snapshot.exists()) {
+                return
+            }
+            guard let type = snapshot.value?["type"] as? String,
+                isProcessed = snapshot.value?["processed"] as? Bool,
+                isIgnored = snapshot.value?["ignored"] as? Bool,
+                senderId = snapshot.value?["sender"] as? String,
+                _ = snapshot.value?["timestamp"] as? Int
+            else {return}
+            let messageId = snapshot.key
+            let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: nil)
+            message.isProcessed = isProcessed
+            message.isIgnore = isIgnored
+            self.inboxMessageDict[messageId] = message
+            self.inboxMessages.append(messageId)
+        
+        })
+        
+        pushNotificatoinRef.child(userId).observeEventType(.ChildChanged, withBlock: {(snapshot) in
+            print("inboxmessage change detected")
+            if (!snapshot.exists()) {
+                return
+            }
+            
+            guard let type = snapshot.value?["type"] as? String,
+                isProcessed = snapshot.value?["processed"] as? Bool,
+                isIgnored = snapshot.value?["ignored"] as? Bool,
+                _ = snapshot.value?["sender"] as? String,
+                _ = snapshot.value?["timestamp"] as? Int
+                else {return}
+            
+            let messageId = snapshot.key
+            let message = self.inboxMessageDict[messageId]
+            message?.setType(type)
+            message?.isProcessed = isProcessed
+            message?.isIgnore = isIgnored
+            self.tableView.reloadData()
+        
+        })
     
     }
 
@@ -130,15 +185,17 @@ class InboxMainVC: UIViewController {
     }
     
     func onAcceptButton (sender: UIButton) {
-        let row = sender.tag
-        messages.removeAtIndex(row)
-        tableView.reloadData()
+        let index = sender.tag
+        let inboxMessageId = inboxMessages[index]
+        let inboxMessage = inboxMessageDict[inboxMessageId]
+        inboxMessage?.process(.Accept)
     }
     
     func onCancelButton (sender: UIButton) {
-        let row = sender.tag
-        messages.removeAtIndex(row)
-        tableView.reloadData()
+        let index = sender.tag
+        let inboxMessageId = inboxMessages[index]
+        let inboxMessage = inboxMessageDict[inboxMessageId]
+        inboxMessage?.process(.Reject)
     }
     
     @IBAction func onClearButton(sender: AnyObject) {
@@ -163,15 +220,20 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
+        //        if tabState == .Invitaions || tabState == .BuddyRequests {
+//            return 2
+//        } else {
+//            return 1
+//        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tabState == .Invitaions || tabState == .BuddyRequests {
             if section == 0 {
-                return actions.count
+                return inboxMessages.count
             } else {
-                return messages.count
+                return inboxMessages.count
             }
         }  else {
             return conversations.count
@@ -208,15 +270,20 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
             cell.reset()
             if indexPath.section == 0 {
-                cell.message = actions[indexPath.row]
-                cell.showButtons()
+                let inboxMessageId = inboxMessages[indexPath.row]
+                let inboxMessage = inboxMessageDict[inboxMessageId]
+                cell.message = inboxMessage?.senderId
+                cell.statusLabel.text = inboxMessage?.content
+                if let isProcessed = inboxMessage?.isProcessed where isProcessed == true {
+                    cell.showButtons()
+                }
                 //get cancel/accept button from cell.message
-                //cell.acceptButton.tag = indexPath.row
+                cell.acceptButton.tag = indexPath.row
                 cell.acceptButton.addTarget(self, action: #selector(InboxMainVC.onAcceptButton), forControlEvents: .TouchUpInside)
-                //cell.cancelButton.tag = indexPath.row
+                cell.cancelButton.tag = indexPath.row
                 cell.cancelButton.addTarget(self, action: #selector(InboxMainVC.onCancelButton), forControlEvents: .TouchUpInside)
             } else {
-                cell.message = messages[indexPath.row]
+//                cell.message = messages[indexPath.row]
             }
             
             if showInvites {
@@ -254,7 +321,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else if tabState == .BuddyRequests {
-            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
+//            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
             let index = indexPath.row

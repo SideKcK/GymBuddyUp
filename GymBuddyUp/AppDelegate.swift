@@ -106,9 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(publishedWorkout)
 //        }
         
-    
-        // TEST FRIEND REQUEST;
-
+        Invite.testfunction()
         
     }
     

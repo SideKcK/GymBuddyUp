@@ -19,6 +19,25 @@ private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.data
 
 class Invite {
     
+    enum InviteStatus:Int {
+        case pending = 1
+        case accepted = 2
+        case canceled = 0
+    }
+    
+    var accepted: Bool
+    var confirmed: Bool
+    var canceled: Bool
+    var gym: Gym
+    var inviterId: String
+    var inviteeId: String?
+    var planId: String
+    var workoutTime: NSDate
+    
+    var status: InviteStatus
+
+    
+    
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
     
     class func getWorkoutInviteByScheduledWorkoutIdAndDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void ) {
@@ -130,31 +149,6 @@ class Invite {
         }
     }
     
-    class func confirmWorkoutInvite(inviteId: String, completion: (NSError?) -> Void) {
-        User.currentUser?.getTokenForcingRefresh() {idToken, error in
-            if error != nil {
-                return completion(error)
-            }
-            
-            let parameters = [
-                "token": idToken!,
-                "operation": "workout_invite_confirm",
-                "workoutId": inviteId
-            ]
-            
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
-                .responseJSON { response in
-                    // Handle ERROR response from lambda server
-                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
-                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
-                        completion(error)
-                    }
-                    else {
-                        completion(nil)
-                    }
-            }
-        }
-    }
     
     class func publishWorkoutInviteToPublic(PlanId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
         
@@ -181,9 +175,12 @@ class Invite {
         let invitePath = "/workout_invite/\(workoutId)"
         inviteData["inviter"] = User.currentUser?.userId
         inviteData["invitee"] = nil
-        inviteData["accepted"] = false
-        inviteData["confirmed"] = false
+        inviteData["canceled_by_inviter"] = false
+        inviteData["canceled_by_invitee"] = false
         inviteData["plan"] = PlanId
+        inviteData["gym"] = gym.toDictionary()
+        inviteData["workout_time"] = workoutTime.timeIntervalSince1970
+
         
         let fanoutObject = [workoutPath: workoutData, userInvitePath: userInviteData, invitePath: inviteData]
         
@@ -206,6 +203,17 @@ class Invite {
     
     class func publishWorkoutInviteToFriends(completion: (NSError?) -> Void ) {
         
+    }
+    
+    class func testfunction()
+    {
+        User.currentUser?.getTokenForcingRefresh({ (token, error) in
+            print(token)
+        })
+        
+        Invite.publishWorkoutInviteToPublic("KOZM75uwOUmdflVo2wH", scheduledWorkoutId: "-KQsDEMmVnYNDo_j9yMy", gym: Gym(), workoutTime: NSDate()) { (err) in
+            print(err)
+        }
     }
 }
 

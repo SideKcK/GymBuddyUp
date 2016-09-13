@@ -10,7 +10,7 @@ import UIKit
 
 class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     @IBOutlet weak var thisTabBar: UITabBar!
-    let images = ["discover", "plan", "","inbox", "me"]
+    let images = ["discover", "plan", "","inbox", "Me"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

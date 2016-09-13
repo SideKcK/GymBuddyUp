@@ -48,6 +48,7 @@ class Exercise {
         case DurationInSeconds = 1
         case DistanceInMiles = 2
         case RepByWeight = 3
+        case Custom = 999
     }
     
     init () {

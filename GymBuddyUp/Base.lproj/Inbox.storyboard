@@ -41,6 +41,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Inbox" id="N58-2o-4Pj">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="fuZ-ac-8r0">
+                            <connections>
+                                <action selector="testBarButtonClick:" destination="YXP-ut-qJb" id="uFY-y9-dtm"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Clear All" id="u0f-zh-NYj">
                             <connections>
                                 <action selector="onClearButton:" destination="YXP-ut-qJb" id="exY-4Z-I5x"/>

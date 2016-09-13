@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         //for DEBUG
@@ -39,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         FIRApp.configure()
-        
         if User.hasAuthenticatedUser() {
             userDidLogin()
         }
@@ -64,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser?.userBecameActive()
+        User.currentUser?.syncWithLastestUserInfo()
         
         /*********************/
         // Test the fuck out //

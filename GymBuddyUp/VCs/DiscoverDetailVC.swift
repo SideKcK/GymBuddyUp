@@ -24,7 +24,12 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet weak var planButton: UIButton!
+    @IBOutlet weak var joinStack: UIStackView!
+    @IBOutlet weak var stackJoinButton: UIButton!
+    @IBOutlet weak var stackRejectButton: UIButton!
 
     var event: PublishedWorkout!
     var plan: Plan!
@@ -43,26 +48,42 @@ class DiscoverDetailVC: UIViewController {
         statusLabel.text = "Broadcast to Public"
         setupTableView()
         setupVisual()
-        setupData()
+        if event != nil && plan != nil {
+            setupData()
+        }
     }
     
     func setupData() {
         timeLabel.text = weekMonthDateString(event.workoutTime)+", "+timeString(event.workoutTime)
         
         planNameLabel.text = plan.name
-        planDifLabel.text = plan.difficulty?.description
+        guard let dif = plan.difficulty?.description else {
+            return
+        }
+        planDifLabel.text = dif
+        planDifView.image = UIImage(named: dif)
     }
     
     override func viewDidAppear(animated: Bool) {
         setupViews()
     }
     
+    func resetActionButton () {
+        joinButton.hidden = true
+        joinStack.hidden = true
+        planButton.hidden = true
+    }
+    
     func setupVisual() {
+        
         self.view.backgroundColor = ColorScheme.s3Bg
         profileView.makeThumbnail(ColorScheme.p1Tint)
         statusLabel.textColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
         joinButton.makeBotButton()
+        stackJoinButton.makeBotButton()
+        stackRejectButton.makeBotButton(ColorScheme.e1Tint)
+        planButton.makeBotButton()
         tableView.separatorColor = ColorScheme.g3Text
         
         let heading = FontScheme.H2
@@ -79,6 +100,9 @@ class DiscoverDetailVC: UIViewController {
     func setupViews() {
         statusView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
         planView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
+        
+        resetActionButton()
+        joinStack.hidden = false
     }
     
     func setupTableView() {
@@ -89,19 +113,48 @@ class DiscoverDetailVC: UIViewController {
         tableView.dataSource = self
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
+        if plan.exercises?.count == 0 {
+            print("plan exercise nil")
+            tableView.hidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func onChatButton(sender: AnyObject) {
+            //        self.hidesBottomBarWhenPushed = true
+            self.tabBarController?.tabBar.hidden = true
+            self.tabBarController?.tabBar.translucent = true
+            Log.info("asdasdasd")
+            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+            let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+            InboxMessage.test()
+            //        self.hidesBottomBarWhenPushed = false
+    }
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        let statusView = StatusView()
+        statusView.displayView()
+        
+    }
+    
+    @IBAction func onRejectButton(sender: AnyObject) {
+        //reject invite
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func onPlanButton(sender: AnyObject) {
+        
     }
 
     func profileTapped (sender: AnyObject?) {

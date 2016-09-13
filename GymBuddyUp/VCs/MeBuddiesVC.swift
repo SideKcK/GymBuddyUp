@@ -17,7 +17,7 @@ class MeBuddiesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Buddies ("+String(buddies.count)+")"
+        self.title = "Buddies"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
@@ -55,10 +55,12 @@ class MeBuddiesVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let desVC = segue.destinationViewController as? MeMainVC {
-            //for testing
-            //desVC.user = User()
+        if segue.identifier == "ToBuddyProfileSegue" {
+            if let desVC = segue.destinationViewController as? MeMainVC {
+                desVC.user = sender as? User
+            }
         }
+
     }
  
 

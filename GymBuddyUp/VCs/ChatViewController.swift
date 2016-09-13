@@ -20,20 +20,26 @@ class ChatViewController: JSQMessagesViewController {
     var incomingBubbleImageView: JSQMessagesBubbleImage!
     private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
     private let chatRoomRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("chat_room")
+    private let userConversationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_conversation")
+
     let dateFormatter = NSDateFormatter()
 
     var recipientId: String?
+    var recipientScreenName: String?
     var conversationId: String?
     
     // change it to false when deployed
-    let inDebug = true
+    let inDebug = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("chatview viewDidLoad")
         // Do any additional setup after loading the view.
-        title = "Chat"
+        
         setupBubbles()
-        /* just for debug  --------start--------*/
+        
+        /* just for debug  --------start-------- */
         if inDebug {
             senderId = "jedihy"
             senderDisplayName = "jedihy"
@@ -43,8 +49,10 @@ class ChatViewController: JSQMessagesViewController {
                 conversationId = getConversationId(sId, strB: rId)
             }
         }
-
-        /* just for debug  ---------end---------*/
+        /* just for debug  ---------end--------- */
+        
+        self.inputToolbar.contentView.leftBarButtonItem = nil
+        
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
     }
@@ -55,10 +63,23 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     // call setup(senderId, recipientId) when preparing segue
-    func setup(senderId:String, setupWithBothIds recipientId: String) {
+    func setup(senderId:String, senderName: String, setupByRecipientId recipientId: String, recipientName: String?) {
+        Log.info("setup ChatVC")
+        self.title = recipientName
+        self.recipientScreenName = recipientName
         self.senderId = senderId
+        self.senderDisplayName = senderName
         self.recipientId = recipientId
         self.conversationId = getConversationId(senderId, strB: recipientId)
+        unNewConversation()
+
+    }
+    
+    private func unNewConversation() {
+        if let convsId = self.conversationId {
+            let ownConversationRef = userConversationRef.child("\(self.senderId)/\(convsId)/isNew")
+            ownConversationRef.setValue(0)
+        }
     }
     
     private func getConversationId(strA: String, strB: String) -> String {
@@ -85,6 +106,7 @@ class ChatViewController: JSQMessagesViewController {
                     }
                 }
                 self.addMessage(id, text: text, date: createAt)
+                self.unNewConversation()
                 self.finishReceivingMessage()
             }) { (error) in
                 Log.info("asdasdasdasd")
@@ -102,19 +124,49 @@ class ChatViewController: JSQMessagesViewController {
                                      senderId: String!,
                                      senderDisplayName: String!, date: NSDate!) {
         
-        if let convsID = conversationId {
+        if let  convsID = conversationId,
+                rcScreenName = recipientScreenName,
+                reId = recipientId,
+                sndId = senderId,
+                sndScreenName = senderDisplayName
+        {
             
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let timeStamp = dateFormatter.stringFromDate(date!.toGlobalTime())
             
             let messageRef = chatRoomRef.child("\(convsID)")
-            let itemRef = messageRef.childByAutoId() // 1
+            let ownConversationRef = userConversationRef.child("\(senderId)/\(convsID)")
+            let peerConversationRef = userConversationRef.child("\(reId)/\(convsID)")
+            let ownConversationItem = [
+                "recipient_id": reId,
+                "recipient_name": rcScreenName,
+                "last_record": text,
+                "createdAt": timeStamp,
+                "isNew": 1
+            ]
+            let peerConversationItem = [
+                "recipient_id": sndId,
+                "recipient_name": sndScreenName,
+                "last_record": text,
+                "createdAt": timeStamp,
+                "isNew": 1
+            ]
+            
+            print(ownConversationItem)
+            print(peerConversationItem)
+            ownConversationRef.setValue(ownConversationItem)
+            peerConversationRef.setValue(peerConversationItem)
+            
+            
+            let itemRef = messageRef.childByAutoId()
             let messageItem = [ // 2
                 "text": text,
                 "senderId": senderId,
                 "createAt": timeStamp
             ]
             itemRef.setValue(messageItem) // 3
+            
+            
             finishSendingMessage()
         } else {
             return

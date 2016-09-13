@@ -9,9 +9,14 @@
 import UIKit
 
 class InviteMainVC: UITableViewController {
+    
+    @IBOutlet weak var planTableView: UITableView!
+    
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var gymButton: UIButton!
+    
+    
     var sendButton:UIButton!
     
     var sendButtonHeight : CGFloat = 44.0
@@ -26,6 +31,8 @@ class InviteMainVC: UITableViewController {
     var sent = false
     
     var tintColor = ColorScheme.p1Tint
+    
+    var plan: Plan!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +65,7 @@ class InviteMainVC: UITableViewController {
     func setupVisual() {
         tableView.backgroundColor = ColorScheme.s3Bg
     }
+    
     
     @IBAction func unwindToInviteMainVC (segue: UIStoryboardSegue) {
         if gym != nil {
@@ -122,6 +130,9 @@ class InviteMainVC: UITableViewController {
 //        )
         sent = true
         self.dismissViewControllerAnimated(true, completion: nil)
+        let statusView = StatusView()
+        statusView.setMessage("Invitation at Today, 7:30 PM Sent!")
+        statusView.displayView()
     }
     
     func dismissPicker () {

@@ -23,21 +23,22 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var gymLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var requestStack: UIStackView!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var rejectButton: UIButton!
 
+    
+    // FIXME: should not put model info in views
     var user: User! {
         didSet {
             if let screenName = user.screenName,
                 let workoutNum = user.workoutNum,
-                let likeNum = user.likeNum,
-                let starNum = user.starNum,
                 let goal = user.goal,
                 let gym = user.gym,
                 let description = user.description
             {
                 self.nameLabel.text = screenName
                 self.workoutNumLabel.text = String(workoutNum)
-                self.likeNumLabel.text = String(likeNum)
-                self.starNumLabel.text = String(starNum)
                 self.goalLabel.text = goal.description
                 self.gymLabel.text = gym
                 self.descriptionLabel.text = description
@@ -52,14 +53,19 @@ class UserProfileCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         setupVisual()
+        
+        //if user = currentuser
+        requestStack.hidden = true
     }
     
     func setupVisual() {
         goalLeading.constant = self.frame.width / 4.0
         let grey = ColorScheme.g2Text
-        actionButton.makeBorderButton(grey)
+        actionButton.makeBorderButton(grey, radius: 8.0)
         actionButton.setTitleColor(grey, forState: .Normal)
-        actionButton.layer.cornerRadius = 8
+        acceptButton.makeBorderButton(ColorScheme.p1Tint, radius: 8.0)
+        rejectButton.makeBorderButton(ColorScheme.e1Tint, radius: 8.0)
+        
         goalNameLabel.textColor = grey
         gymNameLabel.textColor = grey
         

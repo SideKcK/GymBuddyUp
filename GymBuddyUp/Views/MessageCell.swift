@@ -29,7 +29,7 @@ class MessageCell: UITableViewCell {
     
     var message : String! {
         didSet {
-            nameLabel.text = "test message name"
+            nameLabel.text = message
         }
     }
     override func awakeFromNib() {

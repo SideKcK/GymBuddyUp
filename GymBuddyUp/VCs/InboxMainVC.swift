@@ -230,13 +230,12 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tabState == .Invitaions || tabState == .BuddyRequests {
-            if section == 0 {
-                return inboxMessages.count
-            } else {
-                return inboxMessages.count
-            }
-        }  else {
+        switch tabState {
+        case .Invitaions:
+            return 0
+        case .BuddyRequests:
+            return inboxMessages.count
+        case .Chat:
             return conversations.count
         }
     }
@@ -271,7 +270,8 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
             cell.reset()
             if indexPath.section == 0 {
-                let inboxMessageId = inboxMessages[indexPath.row]
+                let index = inboxMessages.count - indexPath.row - 1
+                let inboxMessageId = inboxMessages[index]
                 guard let inboxMessage = inboxMessageDict[inboxMessageId] else {return cell}
                 cell.message = inboxMessage.senderId
                 cell.statusLabel.text = inboxMessage.content

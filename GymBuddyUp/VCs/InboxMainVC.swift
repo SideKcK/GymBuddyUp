@@ -91,7 +91,8 @@ class InboxMainVC: UIViewController {
             Log.info("\(error.localizedDescription)")
         }
     
-        pushNotificatoinRef.child(userId).observeEventType(.ChildAdded, withBlock: {(snapshot) in
+        let pushNotificationQuery = pushNotificatoinRef.child(userId).queryOrderedByChild("timestamp")
+        pushNotificationQuery.observeEventType(.ChildAdded, withBlock: {(snapshot) in
             print("inboxmessage got!")
             if (!snapshot.exists()) {
                 return
@@ -271,10 +272,10 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.reset()
             if indexPath.section == 0 {
                 let inboxMessageId = inboxMessages[indexPath.row]
-                let inboxMessage = inboxMessageDict[inboxMessageId]
-                cell.message = inboxMessage?.senderId
-                cell.statusLabel.text = inboxMessage?.content
-                if let isProcessed = inboxMessage?.isProcessed where isProcessed == true {
+                guard let inboxMessage = inboxMessageDict[inboxMessageId] else {return cell}
+                cell.message = inboxMessage.senderId
+                cell.statusLabel.text = inboxMessage.content
+                if inboxMessage.isProcessed == false && inboxMessage.type == .FriendRequestReceived {
                     cell.showButtons()
                 }
                 //get cancel/accept button from cell.message

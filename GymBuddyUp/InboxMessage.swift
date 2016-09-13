@@ -18,25 +18,7 @@ private let inboxMessageRef:FIRDatabaseReference! = FIRDatabase.database().refer
 private let pushNotificatoinRef: FIRDatabaseReference! = FIRDatabase.database().reference().child("user_notification")
 
 
-enum InboxMessageType {
-    case FriendRequestReceived
-    case FriendRequestRejected
-    case FriendRequestAccepted
-    case WorkoutInviteReceived
-    case WorkoutInviteRejected
-    case WorkoutInviteAccepted
-    case WorkoutInviteCanceled
-}
 
-let inboxMessageMap: [String: InboxMessageType] = [
-    "friend_request_received": .FriendRequestReceived,
-    "friend_request_rejected": .FriendRequestRejected,
-    "friend_request_accepted": .FriendRequestAccepted,
-    "workout_invite_received": .WorkoutInviteReceived,
-    "workout_invite_rejected": .WorkoutInviteRejected,
-    "workout_invite_accepted": .WorkoutInviteAccepted,
-    "workout_invite_canceled": .WorkoutInviteCanceled
-]
 
 
 class InboxMessage {
@@ -56,10 +38,30 @@ class InboxMessage {
         case Reject
         case Cancel
     }
+    
+    enum InboxMessageType {
+        case FriendRequestReceived
+        case FriendRequestRejected
+        case FriendRequestAccepted
+        case WorkoutInviteReceived
+        case WorkoutInviteRejected
+        case WorkoutInviteAccepted
+        case WorkoutInviteCanceled
+    }
+    
+    static let inboxMessageMap: [String: InboxMessageType] = [
+        "friend_request_received": .FriendRequestReceived,
+        "friend_request_rejected": .FriendRequestRejected,
+        "friend_request_accepted": .FriendRequestAccepted,
+        "workout_invite_received": .WorkoutInviteReceived,
+        "workout_invite_rejected": .WorkoutInviteRejected,
+        "workout_invite_accepted": .WorkoutInviteAccepted,
+        "workout_invite_canceled": .WorkoutInviteCanceled
+    ]
 
     init(_messageId: String, _type: String, _senderId: String, _associatedId: String?) {
         messageId = _messageId
-        type = inboxMessageMap[_type]!
+        type = InboxMessage.inboxMessageMap[_type]!
         associatedId = _associatedId
         senderId = _senderId
         isIgnore = false
@@ -84,7 +86,7 @@ class InboxMessage {
                 Friend.rejectFriendRequest(messageId, completion: { (error: NSError?) in
                     if (error == nil) {
                         pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
-                        Log.info("accpeted successfully")
+                        Log.info("rejected successfully")
                     }
                 })
                 break
@@ -115,7 +117,7 @@ class InboxMessage {
     }
     
     func setType(_type: String) {
-        type = inboxMessageMap[_type]!
+        type = InboxMessage.inboxMessageMap[_type]!
         switch type {
         case .FriendRequestReceived:
             content = "sent you a friend request"

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
+		9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */; };
+		9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA91D878FC2000FC787 /* Plan.storyboard */; };
 		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
 		9FA0DF131D700601003CACEE /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF121D700601003CACEE /* Tracking.swift */; };
 		B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B436691D76C2FA003EF548 /* Friend.swift */; };
@@ -80,7 +82,6 @@
 		C649C56D1CE3F55E00258994 /* SetGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C649C56C1CE3F55E00258994 /* SetGoalVC.swift */; };
 		C64EC1FA1D124FC3000DA37A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC1F91D124FC3000DA37A /* TestViewController.swift */; };
 		C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC1FB1D1B6B5A000DA37A /* GenderVC.swift */; };
-		C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC1FD1D20412B000DA37A /* Plan.storyboard */; };
 		C64EC2021D207373000DA37A /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64EC2001D207373000DA37A /* Discover.storyboard */; };
 		C64EC2041D207CDA000DA37A /* PlanMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2031D207CDA000DA37A /* PlanMainVC.swift */; };
 		C64EC2081D207D2B000DA37A /* DiscoverMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */; };
@@ -106,6 +107,8 @@
 		C68165161D66836F00FC63FD /* DiscoverDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */; };
 		C6860BEB1D85E1C50081C89D /* StatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6860BEA1D85E1C50081C89D /* StatusView.xib */; };
 		C6860BED1D85E1E00081C89D /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BEC1D85E1E00081C89D /* StatusView.swift */; };
+		C6860BEF1D8692840081C89D /* NoPlanCatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BEE1D8692840081C89D /* NoPlanCatVC.swift */; };
+		C6860BF11D8692FA0081C89D /* InviteNoPlanCatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF01D8692FA0081C89D /* InviteNoPlanCatCell.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6AF1EDF1D6B98C200B69D08 /* PlanLibDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */; };
 		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
@@ -129,6 +132,8 @@
 		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinVC.swift; sourceTree = "<group>"; };
+		9F4D9DAA1D878FC2000FC787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
 		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
 		9FA0DF121D700601003CACEE /* Tracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		B6B436691D76C2FA003EF548 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -214,7 +219,6 @@
 		C649C56C1CE3F55E00258994 /* SetGoalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetGoalVC.swift; path = VCs/SetGoalVC.swift; sourceTree = "<group>"; };
 		C64EC1F91D124FC3000DA37A /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestViewController.swift; path = VCs/TestViewController.swift; sourceTree = "<group>"; };
 		C64EC1FB1D1B6B5A000DA37A /* GenderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenderVC.swift; path = VCs/GenderVC.swift; sourceTree = "<group>"; };
-		C64EC1FE1D20412B000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
 		C64EC2011D207373000DA37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
 		C64EC2031D207CDA000DA37A /* PlanMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanMainVC.swift; path = VCs/PlanMainVC.swift; sourceTree = "<group>"; };
 		C64EC2071D207D2B000DA37A /* DiscoverMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverMainVC.swift; path = VCs/DiscoverMainVC.swift; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 		C68165151D66836F00FC63FD /* DiscoverDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverDetailVC.swift; path = VCs/DiscoverDetailVC.swift; sourceTree = "<group>"; };
 		C6860BEA1D85E1C50081C89D /* StatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusView.xib; path = Views/StatusView.xib; sourceTree = "<group>"; };
 		C6860BEC1D85E1E00081C89D /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusView.swift; path = Views/StatusView.swift; sourceTree = "<group>"; };
+		C6860BEE1D8692840081C89D /* NoPlanCatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoPlanCatVC.swift; path = VCs/NoPlanCatVC.swift; sourceTree = "<group>"; };
+		C6860BF01D8692FA0081C89D /* InviteNoPlanCatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteNoPlanCatCell.swift; path = Views/InviteNoPlanCatCell.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibDetailVC.swift; path = VCs/PlanLibDetailVC.swift; sourceTree = "<group>"; };
 		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
@@ -394,6 +400,7 @@
 				C607BA481D57E14500B1348B /* InviteGymVC.swift */,
 				C681650C1D66559A00FC63FD /* InviteBuddiesVC.swift */,
 				C6B40A9D1D6CDAA2001DC761 /* InvitePlanVC.swift */,
+				C6860BEE1D8692840081C89D /* NoPlanCatVC.swift */,
 			);
 			name = Invitation;
 			sourceTree = "<group>";
@@ -450,8 +457,8 @@
 				C1F08E731D77BC3200E6CA77 /* Chat.storyboard */,
 				C64EC20F1D20D82B000DA37A /* Inbox.storyboard */,
 				C64EC2121D20D83D000DA37A /* Me.storyboard */,
+				9F4D9DA91D878FC2000FC787 /* Plan.storyboard */,
 				C64EC2001D207373000DA37A /* Discover.storyboard */,
-				C64EC1FD1D20412B000DA37A /* Plan.storyboard */,
 				C607BA401D57A31700B1348B /* Invitation.storyboard */,
 				C66B08201D50346F003B0872 /* Tracking.storyboard */,
 				C6CD01EB1D3AC0E300D64A06 /* PlanAddExercise.storyboard */,
@@ -513,6 +520,7 @@
 		C64EC2051D207CE6000DA37A /* Plan */ = {
 			isa = PBXGroup;
 			children = (
+				9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */,
 				C6CD01E91D3AC07700D64A06 /* PlanBuildVC.swift */,
 				C64EC2031D207CDA000DA37A /* PlanMainVC.swift */,
 				C64EC2091D207D69000DA37A /* PlanLibVC.swift */,
@@ -553,6 +561,7 @@
 				C6D810F61D6E9798006054AE /* InvitePlanCell.swift */,
 				C6D810F81D6E97AB006054AE /* InviteNoPlanCell.swift */,
 				C6D810FA1D6E97C3006054AE /* InviteAddPlanCell.swift */,
+				C6860BF01D8692FA0081C89D /* InviteNoPlanCatCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -709,12 +718,12 @@
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
 				C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
-				C64EC1FF1D20412B000DA37A /* Plan.storyboard in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
 				C66B08221D50346F003B0872 /* Tracking.storyboard in Resources */,
 				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
 				C1F08E891D7D130B00E6CA77 /* ConversationCell.xib in Resources */,
+				9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */,
 				C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
@@ -806,6 +815,7 @@
 				B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */,
 				C681650B1D65282500FC63FD /* BuddyCardCell.swift in Sources */,
 				C1FF9ACE1D6E30B2005842F3 /* RPCircularProgress.swift in Sources */,
+				C6860BF11D8692FA0081C89D /* InviteNoPlanCatCell.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
@@ -867,13 +877,23 @@
 				C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */,
 				B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */,
 				B6F00BA81D66B3E400B09177 /* Library.swift in Sources */,
+				9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */,
 				B6F00B861D66B34600B09177 /* GFQuery.m in Sources */,
+				C6860BEF1D8692840081C89D /* NoPlanCatVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9F4D9DA91D878FC2000FC787 /* Plan.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F4D9DAA1D878FC2000FC787 /* Base */,
+			);
+			name = Plan.storyboard;
+			sourceTree = "<group>";
+		};
 		C607BA401D57A31700B1348B /* Invitation.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -904,14 +924,6 @@
 				C649C55D1CE3BBD900258994 /* Base */,
 			);
 			name = SignupLogin.storyboard;
-			sourceTree = "<group>";
-		};
-		C64EC1FD1D20412B000DA37A /* Plan.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C64EC1FE1D20412B000DA37A /* Base */,
-			);
-			name = Plan.storyboard;
 			sourceTree = "<group>";
 		};
 		C64EC2001D207373000DA37A /* Discover.storyboard */ = {

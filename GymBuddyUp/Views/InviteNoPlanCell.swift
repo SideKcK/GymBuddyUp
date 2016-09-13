@@ -12,6 +12,9 @@ class InviteNoPlanCell: UITableViewCell {
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var orView: UIView!
+    @IBOutlet weak var orLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,9 +30,16 @@ class InviteNoPlanCell: UITableViewCell {
 
     func setupVisual() {
         borderView.makeBorderButton(ColorScheme.s4Bg, radius: 4.0)
+        borderView.layer.borderColor = ColorScheme.p1Tint.CGColor
+
         descriptionLabel.textColor = ColorScheme.g2Text
         
         titleLabel.font = FontScheme.H2
         descriptionLabel.font = FontScheme.T3
+        
+        orView.backgroundColor = ColorScheme.g2Text
+        orLabel.textColor = ColorScheme.g2Text
+        orLabel.backgroundColor = ColorScheme.s3Bg
+        orLabel.font = FontScheme.T3
     }
 }

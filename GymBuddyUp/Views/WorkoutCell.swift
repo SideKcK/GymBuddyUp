@@ -111,6 +111,7 @@ class WorkoutCell: UITableViewCell {
         gymButton.tintColor = ColorScheme.p1Tint
         buddyButton.tintColor = ColorScheme.p1Tint
         borderView.backgroundColor = ColorScheme.s4Bg
+        borderView.layer.borderColor = ColorScheme.p1Tint.CGColor
 
         dateLabel.font = FontScheme.T3
         profileView.layer.borderWidth = 0.5

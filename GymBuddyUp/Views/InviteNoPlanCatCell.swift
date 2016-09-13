@@ -1,30 +1,25 @@
 //
-//  InviteAddPlanCell.swift
+//  InviteNoPlanCatCell.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 8/24/16.
+//  Created by you wu on 9/12/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class InviteAddPlanCell: UITableViewCell {
-    @IBOutlet weak var addButton: UIButton!
+class InviteNoPlanCatCell: UITableViewCell {
+    @IBOutlet weak var catLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setupVisual()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-
-    func setupVisual() {
-        addButton.addShadow()
     }
 
 }

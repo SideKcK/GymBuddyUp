@@ -144,8 +144,8 @@ extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        profileImage = editedImage.resize(CGSize(width: 400, height: 400))
-        profileButton.setImage(profileImage.resize( CGSize(width: 30, height: 30)), forState: .Normal)
+        profileImage = editedImage.imageScaledToSize(CGSizeMake(500, 500))
+        profileButton.setImage(profileImage.imageScaledToSize(CGSizeMake(50, 50)), forState: .Normal)
         // Dismiss UIImagePickerController to go back to your original view controller
         dismissViewControllerAnimated(true, completion: nil)
     }

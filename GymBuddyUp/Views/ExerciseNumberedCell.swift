@@ -33,6 +33,8 @@ class ExerciseNumberedCell: UITableViewCell {
                 self.amountLabel.text = String(amount) + " seconds"
             case Exercise.UnitType.DistanceInMiles:
                 self.amountLabel.text = String(amount) + " miles"
+            case Exercise.UnitType.Custom:
+                self.amountLabel.text = ""
             }
         }
     }

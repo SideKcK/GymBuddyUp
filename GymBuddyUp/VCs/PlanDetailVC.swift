@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol showCheckInButtonDelegate {
+    optional func showCheckInButton()
+}
+
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
@@ -26,10 +30,16 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var workoutButton: UIButton!
     
+    @IBOutlet weak var checkinButton: UIButton!
+
+    @IBOutlet weak var checkinLabel: UILabel!
+    @IBOutlet weak var checkinImage: UIImageView!
+    
     var selectedDate: NSDate!
     var workout: ScheduledWorkout!
     var plan: Plan!
     var sendTo = 2
+    var startTime: NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +59,7 @@ class PlanDetailVC: UIViewController {
     }
     func setupVisual() {
         workoutButton.makeActionButton()
+        checkinButton.makeActionButton()
         findButton.makeBorderButton(ColorScheme.p1Tint)
         moreButton.tintColor = ColorScheme.g2Text
         gymButton.setTitleColor(ColorScheme.p1Tint, forState: .Normal)
@@ -74,6 +85,12 @@ class PlanDetailVC: UIViewController {
         statusView.hidden = !invited
         statusViewHeight.priority = invited ? 250:999
         findButton.hidden = invited
+        let isEmpty = checkIsEmptyExercise()
+        tableView.hidden = isEmpty
+        workoutButton.hidden = isEmpty
+        checkinButton.hidden = !isEmpty
+        checkinImage.hidden = true
+        checkinLabel.hidden = true
         setStatusBar()
         
     }
@@ -86,6 +103,17 @@ class PlanDetailVC: UIViewController {
         } else {
             statusLabel.text = " invited"
         }
+    }
+    
+    func checkIsEmptyExercise()-> Bool{
+        var isEmpty = false
+        if let exercises = plan.exercises {
+            if "999" == String( String(exercises[0].id ).characters.suffix(3)){
+                isEmpty = true
+            }
+        }
+        //isEmpty = true
+        return isEmpty
     }
 
     @IBAction func onMoreButton(sender: AnyObject) {
@@ -212,7 +240,12 @@ class PlanDetailVC: UIViewController {
             desVC.gym = Gym()
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
-
+        
+        if let checkInVC = segue.destinationViewController as? CheckinVC {
+            print("checkInVC")
+            checkInVC.delegate = self
+            self.startTime = NSDate()
+        }
     }
  
 
@@ -239,4 +272,26 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("toExerciseDetailSegue", sender: indexPath.row)
     }
+}
+
+extension PlanDetailVC: showCheckInButtonDelegate {
+    
+    func showCheckInButton(){
+        checkinImage.hidden = false
+        checkinLabel.hidden = false
+        checkinButton.hidden = true
+        saveCheckin()
+    }
+    
+    func saveCheckin(){
+        let currentDate = NSDate()
+        var trackedItems = [TrackedItem]()
+        trackedItems.append(TrackedItem( _exercise: self.plan.exercises![0]))
+        Tracking.trackedPlanOnSave(self.workout.id, planId: self.plan.id, startTime: self.startTime, endTime: currentDate, trackedItems: trackedItems){ (error) in
+            if (error != nil){
+                print(error)
+            }
+        }
+    }
+    
 }

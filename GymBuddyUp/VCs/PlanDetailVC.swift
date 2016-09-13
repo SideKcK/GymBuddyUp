@@ -53,6 +53,11 @@ class PlanDetailVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        if let row = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(row, animated: true)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -261,6 +266,15 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
+        //template for set this cell as tracked: testing
+        if indexPath.row == 0 {
+            cell.setTracked(true)
+        }
+        //template for set this cell as skipped: testing
+        if indexPath.row == 1 {
+            cell.setTracked(false)
+        }
+        
         cell.numLabel.text = String(indexPath.row+1)
         if let exercises = plan.exercises {
             cell.exercise = exercises[indexPath.row]

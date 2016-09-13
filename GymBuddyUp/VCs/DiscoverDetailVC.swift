@@ -24,6 +24,7 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var planButton: UIButton!
     @IBOutlet weak var joinStack: UIStackView!
@@ -80,6 +81,10 @@ class DiscoverDetailVC: UIViewController {
         statusLabel.textColor = ColorScheme.g2Text
         gymButton.tintColor = ColorScheme.p1Tint
         joinButton.makeBotButton()
+        stackJoinButton.makeBotButton()
+        stackRejectButton.makeBotButton(ColorScheme.e1Tint)
+        planButton.makeBotButton()
+        
         tableView.separatorColor = ColorScheme.g3Text
         
         let heading = FontScheme.H2
@@ -139,8 +144,18 @@ class DiscoverDetailVC: UIViewController {
         statusView.displayView()
         
     }
+    
+    @IBAction func onRejectButton(sender: AnyObject) {
+        //reject invite
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func onPlanButton(sender: AnyObject) {
+        
     }
 
     func profileTapped (sender: AnyObject?) {

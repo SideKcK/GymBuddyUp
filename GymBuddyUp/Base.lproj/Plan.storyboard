@@ -548,9 +548,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="SideKcK Library" id="DXc-tF-Ivk">
                         <barButtonItem key="backBarButtonItem" title="Back" id="sxs-if-dHt"/>
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="XKl-0U-cWn">
+                        <barButtonItem key="leftBarButtonItem" image="Close" id="XKl-0U-cWn">
                             <connections>
-                                <segue destination="x74-CG-R7a" kind="unwind" unwindAction="unwindToPlanMainVC:" id="xd3-wh-eBy"/>
+                                <action selector="onCancelButton:" destination="Pfd-Zn-eNt" id="QxG-Tf-yji"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -561,7 +561,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXo-nF-G3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="x74-CG-R7a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2936" y="882"/>
         </scene>
@@ -1142,7 +1141,7 @@
         <!--Plan Lib NavVC-->
         <scene sceneID="Y2a-ba-pxk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iEy-Fi-h0E" customClass="PlanLibNavVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PlanLibNavVC" automaticallyAdjustsScrollViewInsets="NO" id="iEy-Fi-h0E" customClass="PlanLibNavVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tgE-WK-U7S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1558,6 +1557,7 @@
     </scenes>
     <resources>
         <image name="checkin" width="162" height="162"/>
+        <image name="Close" width="12" height="12"/>
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>

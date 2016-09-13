@@ -107,7 +107,7 @@ class User {
     var buddyNum: Int?
     
     var goal: Goal?
-    var gym: String? //to WW: or change it to CLLocationCoordinates if thats better for backend
+    var gym: String?
     var description: String? {
         get {
             

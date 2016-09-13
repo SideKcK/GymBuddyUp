@@ -14,6 +14,7 @@ class InvitePlanVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var plans = [Plan()]
+    var selected = -1
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +22,16 @@ class InvitePlanVC: UIViewController {
         setupVisual()
         setupDatepicker()
         setupTableView()
+        nextButton.enabled = false
+        nextButton.backgroundColor = ColorScheme.g3Text
+
     }
 
+    override func viewWillAppear(animated: Bool) {
+        if let row = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(row, animated: true)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,19 +57,37 @@ class InvitePlanVC: UIViewController {
         nextButton.titleLabel?.textColor = ColorScheme.g4Text
     }
     
+    @IBAction func onDatePicker(sender: UIDatePicker) {
+        let date = sender.date
+        //refresh plans
+    }
+    
     @IBAction func onCancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
+    func addPlan (sender: UIButton) {
+        self.performSegueWithIdentifier("toPlanLibSegue", sender: self)
+    }
+    @IBAction func onNextButton(sender: AnyObject) {
+        if selected == 0 {
+            self.performSegueWithIdentifier("toNoPlanCatSegue", sender: self)
+        }else {
+            self.performSegueWithIdentifier("toInviteDetailSegue", sender: self)
+        }
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let desVC = segue.destinationViewController as? InviteMainVC {
+            desVC.plan = plans[selected - 1]
+        }
+        
     }
-    */
+    
 
 }
 
@@ -70,14 +97,19 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("noPlanCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("noPlanCell", forIndexPath: indexPath) as! InviteNoPlanCell
+            
             return cell
         }else if indexPath.row == plans.count + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("addPlanCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("addPlanCell", forIndexPath: indexPath) as! InviteAddPlanCell
+            cell.addButton.addTarget(self, action: #selector(InvitePlanVC.addPlan(_:)), forControlEvents: .TouchUpInside)
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            cell.userInteractionEnabled = true
+
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.showStatusView()
@@ -90,11 +122,42 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 {
+        nextButton.enabled = true
+        nextButton.backgroundColor = ColorScheme.p1Tint
+        selected = indexPath.row
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? InviteNoPlanCell {
+            cell.borderView.layer.borderWidth = 2.0
+            
+        }
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? WorkoutCell {
+            cell.borderView.layer.borderWidth = 2.0
+            
+        }
+
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? InviteNoPlanCell {
+            cell.borderView.layer.borderWidth = 0.0
+            
+        }
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? WorkoutCell {
+            cell.borderView.layer.borderWidth = 0.0
             
         }
     }
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+            if let cell = cell as? InviteNoPlanCell {
+                cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
+                
+            }
+            if let cell = cell as? WorkoutCell {
+                cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
+                
+            }
+        
         cell.backgroundColor = UIColor.clearColor()
+        cell.selectionStyle = .None
     }
 }

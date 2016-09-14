@@ -97,6 +97,9 @@ class MeMainVC: UIViewController {
         self.performSegueWithIdentifier("toEditProfileSegue", sender: sender)
     }
     
+    func onBuddyButton (sender: UIButton) {
+        self.performSegueWithIdentifier("ToBuddyProfileSegue", sender: sender)
+    }
     /*
     // MARK: - Navigation
 
@@ -136,7 +139,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[3], forIndexPath: indexPath) as! UserWorkoutHistoryCell
-            
+            cell.buddyButton.addTarget(self, action: #selector(MeMainVC.onBuddyButton(_:)), forControlEvents: .TouchUpInside)
             return cell
         }
         
@@ -144,7 +147,10 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UserWorkoutHistoryCell {
+            self.performSegueWithIdentifier("toWorkoutDetailSegue", sender: self)
+        }
+        
         if let _ = tableView.cellForRowAtIndexPath(indexPath) as? UserBuddyOverviewCell {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
         }

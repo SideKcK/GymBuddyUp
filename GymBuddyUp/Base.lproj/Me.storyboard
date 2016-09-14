@@ -69,15 +69,17 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="An3-ew-gym">
                                                     <rect key="frame" x="40" y="94" width="240" height="34"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qb-GX-Gs0">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qb-GX-Gs0">
                                                             <rect key="frame" x="0.0" y="0.0" width="110" height="34"/>
-                                                            <state key="normal" title="Accept">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <state key="normal" title="Accept" image="green_check">
                                                                 <color key="titleColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5A1-3q-NtP">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5A1-3q-NtP">
                                                             <rect key="frame" x="130" y="0.0" width="110" height="34"/>
-                                                            <state key="normal" title="Reject">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <state key="normal" title="Reject" image="red_cross">
                                                                 <color key="titleColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                         </button>
@@ -335,11 +337,21 @@
                         <outlet property="tableView" destination="9Jz-Wu-TxM" id="NPJ-oI-0P0"/>
                         <segue destination="q8B-y2-eXI" kind="show" identifier="toBuddySegue" id="tQi-fW-Sf0"/>
                         <segue destination="VBR-Qk-MO3" kind="show" identifier="toEditProfileSegue" id="dYb-c7-Hx3"/>
+                        <segue destination="9FS-Ni-ID4" kind="show" identifier="ToBuddyProfileSegue" id="awI-hR-Ire"/>
+                        <segue destination="AqZ-iS-GHs" kind="show" identifier="toWorkoutDetailSegue" id="iHT-Di-Umm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D43-UH-G6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="999" y="107"/>
+        </scene>
+        <!--DiscoverDetailVC-->
+        <scene sceneID="X5d-sS-Rfn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="DiscoverDetailVC" id="AqZ-iS-GHs" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="So9-hW-QuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1130" y="603"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="pZu-sy-OdX">
@@ -754,7 +766,7 @@
                 <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeMainVC" id="9FS-Ni-ID4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUT-MH-vVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1619" y="509"/>
+            <point key="canvasLocation" x="1409" y="576"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Vuw-aq-wmD">
@@ -1013,7 +1025,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgG-4c-mrd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WVj-vX-Bn1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1086" y="988"/>
+            <point key="canvasLocation" x="1020" y="1061"/>
         </scene>
         <!--InviteGymVC-->
         <scene sceneID="v95-mT-cFe">
@@ -1103,11 +1115,13 @@
         <image name="Workout_usedInPageME" width="30" height="30"/>
         <image name="dumbbell" width="512" height="512"/>
         <image name="findSidekick" width="30" height="30"/>
+        <image name="green_check" width="18" height="18"/>
+        <image name="red_cross" width="18" height="18"/>
         <image name="settings" width="17" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BfD-cc-A40"/>
-        <segue reference="GB7-ju-sVw"/>
+        <segue reference="awI-hR-Ire"/>
+        <segue reference="dYb-c7-Hx3"/>
         <segue reference="Yzq-VB-49f"/>
     </inferredMetricsTieBreakers>
 </document>

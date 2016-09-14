@@ -56,7 +56,6 @@ class InviteGymVC: UIViewController {
                 return
             }
             desVC.gym = selectedGym
-            desVC.gymButton.setTitle(selectedGym.name, forState: .Normal)
         }
      }
     

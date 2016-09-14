@@ -8,31 +8,19 @@
 
 import UIKit
 
-class InviteMainVC: UITableViewController {
-    
-    @IBOutlet weak var planTableView: UITableView!
-    
-    @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var gymButton: UIButton!
-    
-    
-    var sendButton:UIButton!
-    
-    var sendButtonHeight : CGFloat = 44.0
-    var showDatePicker = false
-    var showPlan = false
-    var seg: UISegmentedControl!
-    var segViews: [UIView]!
-    
+class InviteMainVC: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sendButton: UIButton!
+
     var time: NSDate!
     var gym: Gym!
-    var sendTo: Int!
-    var sent = false
-    
-    var tintColor = ColorScheme.p1Tint
-    
+    var sendTo = "Direct Invite"
     var plan: Plan!
+    
+    var segViews : [UIView]!
+    var gymButton : UIButton!
+    var showDatePicker = false
+    var datePickerHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,119 +28,60 @@ class InviteMainVC: UITableViewController {
         
         //default time
         time = NSDate()
-        sendTo = 2
-        setSendButton()
-        setDate()
-        setButtons()
+        setupTableView()
         
         if gym != nil {
             enableSendButton()
         }
         setupVisual()
     }
-    override func viewWillAppear(animated: Bool) {
-        self.sendButton.hidden = false
-
-    }
-    override func viewDidDisappear(animated: Bool) {
-        self.sendButton.hidden = true
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func setupTableView () {
+        tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+    
     func setupVisual() {
         tableView.backgroundColor = ColorScheme.s3Bg
+        sendButton.backgroundColor = ColorScheme.g3Text
     }
     
     
     @IBAction func unwindToInviteMainVC (segue: UIStoryboardSegue) {
         if gym != nil {
+            tableView.reloadData()
             enableSendButton()
         }
     }
     
-    @IBAction func onCancelButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func setButtons() {
-        dateButton.addShadow()
-        gymButton.addShadow()
-        dateButton.tintColor = tintColor
-        gymButton.tintColor = tintColor
-        
-        UILabel.appearanceWhenContainedInInstancesOfClasses([UISegmentedControl.self]).numberOfLines = 0
-        seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
-        
-        seg.addShadow()
-        seg.tintColor = ColorScheme.g3Text
-        seg.removeBorders()
-        segViews = seg.subviews
-        seg.selectedSegmentIndex = sendTo
-        seg.momentary = true
-        segViews[sendTo].tintColor = tintColor
-        seg.selectedSegmentIndex = UISegmentedControlNoSegment
-        seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
-    }
-    
-    func setDate() {
-        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
-        datePicker.addTarget(self, action: #selector(InviteMainVC.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
-        datePicker.minimumDate = NSDate()
-        dateButton.setTitle(dateTimeFormatter().stringFromDate(NSDate()), forState: UIControlState.Normal)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(InviteMainVC.dismissPicker))
-        view.addGestureRecognizer(tap)
-    
-    }
-    
-    func setSendButton () {
-        sendButton = UIButton(frame: CGRectMake(0, self.view.frame.height - sendButtonHeight, self.view.frame.width, sendButtonHeight))
-        sendButton.backgroundColor = ColorScheme.g3Text
-        sendButton.setTitle("Send", forState: UIControlState.Normal)
-        sendButton.addTarget(self, action:#selector(self.sendButtonClicked), forControlEvents: .TouchUpInside)
-        self.navigationController!.view.addSubview(sendButton)
-        sendButton.enabled = false
-    }
-    
     func enableSendButton() {
-        sendButton.backgroundColor = tintColor
+        sendButton.backgroundColor = ColorScheme.p1Tint
         sendButton.enabled = true
     }
     
-    func sendButtonClicked() {
+    @IBAction func onSendButton(sender: AnyObject) {
         //send out invitation
-//        sendInvitation(time: time, loc: gym, audience: sendTo, completion: ({
-//            
-//        })
-//        )
-        sent = true
+        //        sendInvitation(time: time, loc: gym, audience: sendTo, completion: ({
+        //
+        //        })
+        //        )
         self.dismissViewControllerAnimated(true, completion: nil)
         let statusView = StatusView()
         statusView.setMessage("Invitation at Today, 7:30 PM Sent!")
         statusView.displayView()
+
     }
     
-    func dismissPicker () {
-        tableView.beginUpdates()
-        showDatePicker = false
-        tableView.endUpdates()
-    }
-    
-    @IBAction func onDateButton(sender: AnyObject) {
-        tableView.beginUpdates()
-        showDatePicker = true
-        tableView.endUpdates()
-    }
-    
-    
-    func datePickerValueChanged(sender: UIDatePicker) {
-        print("date picker changed")
-        dateButton.setTitle(dateTimeFormatter().stringFromDate(sender.date), forState: UIControlState.Normal)
-    }
-    
+
     func segmentedControlValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
@@ -169,89 +98,80 @@ class InviteMainVC: UITableViewController {
             }
         }
         
-        
-
     }
     
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 7
-    }
-
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 2 && !showDatePicker {
-            return 0
-        }
-        
-        return  super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    func onDateButton(sender: AnyObject) {
+        print("toggle picker")
+        showDatePicker = !showDatePicker
+        tableView.beginUpdates()
+        datePickerHeight.priority = showDatePicker ? 250 : 999
+        tableView.endUpdates()
         
     }
-
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.clearColor()
-        
-        if indexPath.row == 6 {
-            //set as center
-            seg.frame = CGRectMake((self.tableView.frame.width - gymButton.frame.width)/2.0, (super.tableView(tableView, heightForRowAtIndexPath: indexPath) - 50)/2.0, gymButton.frame.width, 52)
-            cell.addSubview(seg)
-
-        }
-    }
-    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//    
-//    }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.sendButton.hidden = true
+        //self.sendButton.hidden = true
         
     }
  
 
 }
 
+extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
+    // MARK: - Table view data source
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            cell.plan = plan
+            //remove shadow
+            cell.borderView.clipsToBounds = true
+            cell.borderView.layer.borderWidth = 2.0
+            cell.borderView.layer.borderColor = ColorScheme.p1Tint.CGColor
+            cell.showDateView()
+            return cell
+        }
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("InviteDateCell", forIndexPath: indexPath) as! InviteDateCell
+            cell.dateButton.addTarget(self, action: #selector(InviteMainVC.onDateButton(_:)), forControlEvents: .TouchUpInside)
+            datePickerHeight = cell.datePickerHeight
+            return cell
+        }
+        if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("InviteGymCell", forIndexPath: indexPath) as! InviteGymCell
+            if gym != nil {
+                cell.gymButton.setTitle(gym.name, forState: .Normal)
+            }
+            return cell
+        }
+        if indexPath.row == 3 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("InviteToCell", forIndexPath: indexPath) as! InviteToCell
+            segViews = cell.segViews
+            cell.seg.setTitle(sendTo, forSegmentAtIndex: 0)
+            cell.seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.selectionStyle = .None
+        if indexPath.row != 0 {
+            cell.backgroundColor = UIColor.clearColor()
+        }
+        if indexPath.row == 3 {
+            let cell = cell as! InviteToCell
+            cell.seg.frame = cell.toView.bounds
+            cell.toView.addSubview(cell.seg)
+
+        }
+    }
+    
+}
 

@@ -109,14 +109,20 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
             cell.userInteractionEnabled = true
-
+            cell.plan = plans[indexPath.row - 1]
             //remove shadow
             cell.borderView.clipsToBounds = true
-            cell.showStatusView()
-            cell.showLocView()
-            cell.showTimeView()
             cell.showDateView()
-            cell.alpha = 0.7
+
+            //disable the cell
+//            cell.userInteractionEnabled = false
+//            cell.borderView.alpha = 0.5
+            
+            //show these views if the invitation is sent and not selectable
+//            cell.showLocView()
+//            cell.showTimeView()
+//            cell.showStatusView()
+
             return cell
         }
     }

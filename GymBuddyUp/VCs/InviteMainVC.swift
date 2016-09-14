@@ -101,7 +101,6 @@ class InviteMainVC: UIViewController {
     }
     
     func onDateButton(sender: AnyObject) {
-        print("toggle picker")
         showDatePicker = !showDatePicker
         tableView.beginUpdates()
         datePickerHeight.priority = showDatePicker ? 250 : 999

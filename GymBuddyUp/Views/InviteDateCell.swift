@@ -35,15 +35,16 @@ class InviteDateCell: UITableViewCell {
     }
     
     func setDate() {
-        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
+        datePicker.datePickerMode = UIDatePickerMode.Time
         datePicker.addTarget(self, action: #selector(InviteDateCell.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         datePicker.minimumDate = NSDate()
+        
+        //change the date to actual date selected
         dateButton.setTitle(dateTimeFormatter().stringFromDate(NSDate()), forState: UIControlState.Normal)
         
     }
 
     func datePickerValueChanged(sender: UIDatePicker) {
-        print("date picker changed")
         dateButton.setTitle(dateTimeFormatter().stringFromDate(sender.date), forState: UIControlState.Normal)
     }
 }

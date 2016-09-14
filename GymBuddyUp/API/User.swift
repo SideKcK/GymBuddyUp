@@ -107,7 +107,7 @@ class User {
     var buddyNum: Int?
     
     var goal: Goal?
-    var gym: String? //to WW: or change it to CLLocationCoordinates if thats better for backend
+    var gym: String?
     var description: String? {
         get {
             
@@ -239,10 +239,18 @@ class User {
     func getMyFriendList(successfulHandler: ([User])->()) {
        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_friend/\(self.userId)")
         ref.observeSingleEventOfType(.Value) { (snapshot :FIRDataSnapshot) in
+            if !snapshot.exists() {
+                return
+            }
+
             let postDict = snapshot.value as! [String : AnyObject]
             var userIds = [String]()
-            for (key, _) in postDict {
-                userIds.append(key)
+            for (key, value) in postDict {
+                if let dict = value as? [String : AnyObject] {
+                    if let isFriend = dict["is_friend"] as? Int where isFriend == 1 {
+                        userIds.append(key)
+                    }
+                }
             }
             User.getUserArrayFromIdList(userIds, successHandler: { (users: [User]) in
                 successfulHandler(users)

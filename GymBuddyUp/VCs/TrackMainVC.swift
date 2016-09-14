@@ -423,6 +423,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
             nextButtonState = .TimingNotStarted
             botButton.setImage(startButtonImage, forState: .Normal)
             break
+        case .Custom:
+            break
         }
         
     }
@@ -522,6 +524,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func doneTrackingCallback() {
+        
 
     }
     

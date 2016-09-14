@@ -15,7 +15,8 @@ class ExerciseNumberedCell: UITableViewCell {
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-
+    @IBOutlet weak var trackedView: UIImageView!
+    
     var exercise: Exercise! {
         
         didSet {
@@ -33,23 +34,49 @@ class ExerciseNumberedCell: UITableViewCell {
                 self.amountLabel.text = String(amount) + " seconds"
             case Exercise.UnitType.DistanceInMiles:
                 self.amountLabel.text = String(amount) + " miles"
+            case Exercise.UnitType.Custom:
+                self.amountLabel.text = ""
             }
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setupVisual()
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
-
+    
     func setupVisual() {
+        trackedView.hidden = true
+        
         numLabel.font = FontScheme.N3
         nameLabel.font = FontScheme.T1
         amountLabel.font = FontScheme.T3
+        
     }
+    
+    func setTracked(skipped: Bool) {
+        trackedView.hidden = false
+        
+        //change it to tracked item amount
+        self.amountLabel.text = String(10) + "lbs Max Weight"
+        if skipped {
+            trackedView.hidden = true
+
+            self.backgroundColor = ColorScheme.g3Text.colorWithAlphaComponent(0.15)
+
+            amountLabel.textColor = ColorScheme.g2Text
+            nameLabel.textColor = ColorScheme.g2Text
+            
+            self.amountLabel.text = "Skipped"
+
+        }
+    }
+    
+    
 }

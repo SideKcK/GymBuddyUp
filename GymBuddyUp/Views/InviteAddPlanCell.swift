@@ -9,16 +9,22 @@
 import UIKit
 
 class InviteAddPlanCell: UITableViewCell {
+    @IBOutlet weak var addButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setupVisual()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func setupVisual() {
+        addButton.addShadow()
     }
 
 }

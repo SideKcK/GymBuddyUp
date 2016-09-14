@@ -10,6 +10,9 @@ import UIKit
 
 class StatusView: UIView {
     var view: UIView!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     
@@ -57,6 +60,10 @@ class StatusView: UIView {
         let nib = UINib(nibName: "StatusView", bundle: bundle)
         let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         return view
+    }
+    
+    func setMessage(mes: String) {
+        messageLabel.text = mes
     }
     
     private func hideView() {

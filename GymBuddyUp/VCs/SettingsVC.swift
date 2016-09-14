@@ -33,12 +33,23 @@ class SettingsVC: UITableViewController {
     }
     
     @IBAction func onLogOutButton(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Are you sure to log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let okAction = UIAlertAction(title: "Log Out", style: UIAlertActionStyle.Destructive ) { (action) in
             User.currentUser!.signOut(){ _ in
                 self.performSegueWithIdentifier("toSignUpLogin", sender: self)
             }
+            }
+
+        alertController.addAction(okAction)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alertController.addAction(cancel)
+        self.presentViewController(alertController, animated: true, completion: nil)
 
     }
-
+    @IBAction func unwindToSettingsVC(segue: UIStoryboardSegue) {
+        
+    }
+    
     // MARK: - Table view data source
 
     /*

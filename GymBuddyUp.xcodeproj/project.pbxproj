@@ -112,6 +112,8 @@
 		C6860BF31D8899D40081C89D /* InviteDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF21D8899D40081C89D /* InviteDateCell.swift */; };
 		C6860BF51D8899F40081C89D /* InviteGymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF41D8899F40081C89D /* InviteGymCell.swift */; };
 		C6860BF71D88A1B60081C89D /* InviteToCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF61D88A1B60081C89D /* InviteToCell.swift */; };
+		C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF81D8913FC0081C89D /* MePasswordVC.swift */; };
+		C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6AF1EDF1D6B98C200B69D08 /* PlanLibDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */; };
 		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
@@ -252,6 +254,8 @@
 		C6860BF21D8899D40081C89D /* InviteDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteDateCell.swift; path = Views/InviteDateCell.swift; sourceTree = "<group>"; };
 		C6860BF41D8899F40081C89D /* InviteGymCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteGymCell.swift; path = Views/InviteGymCell.swift; sourceTree = "<group>"; };
 		C6860BF61D88A1B60081C89D /* InviteToCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteToCell.swift; path = Views/InviteToCell.swift; sourceTree = "<group>"; };
+		C6860BF81D8913FC0081C89D /* MePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MePasswordVC.swift; path = VCs/MePasswordVC.swift; sourceTree = "<group>"; };
+		C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeCreditTermVC.swift; path = VCs/MeCreditTermVC.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibDetailVC.swift; path = VCs/PlanLibDetailVC.swift; sourceTree = "<group>"; };
 		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
@@ -419,6 +423,8 @@
 				C681650E1D665BC700FC63FD /* MeFindVC.swift */,
 				C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */,
 				C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */,
+				C6860BF81D8913FC0081C89D /* MePasswordVC.swift */,
+				C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -832,6 +838,7 @@
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C6860BF51D8899F40081C89D /* InviteGymCell.swift in Sources */,
 				C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */,
+				C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */,
 				C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */,
 				C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
@@ -856,6 +863,7 @@
 				B6F00BAC1D66B3E400B09177 /* User.swift in Sources */,
 				C607BA561D5AE80800B1348B /* GymCell.swift in Sources */,
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
+				C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */,
 				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
 				C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,

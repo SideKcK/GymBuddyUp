@@ -37,6 +37,11 @@ class InvitePlanVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindToInvitePlanVC (segue: UIStoryboardSegue) {
+
+    }
+
+    
     func setupTableView() {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
         tableView.estimatedRowHeight = 120
@@ -85,7 +90,9 @@ class InvitePlanVC: UIViewController {
         if let desVC = segue.destinationViewController as? InviteMainVC {
             desVC.plan = plans[selected - 1]
         }
-        
+        if let navVC = segue.destinationViewController as? PlanLibNavVC, let desVC = navVC.topViewController as? PlanLibVC{
+            desVC.from = self
+        }
     }
     
 

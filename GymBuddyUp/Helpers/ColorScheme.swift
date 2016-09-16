@@ -17,6 +17,7 @@ struct ColorScheme {
     static var s2Shadow = UIColor(hexString: "DCDADD")
     static var s3Bg = UIColor(hexString: "F5F3F7")
     static var s4Bg = UIColor.whiteColor()
+    static var s5Bg = UIColor(hexString: "189AB8")
     static var e1Tint = UIColor(hexString: "EB4B40")
     static var g1Text = UIColor(hexString: "000000")
     static var g2Text = UIColor(hexString: "6F6F6F")

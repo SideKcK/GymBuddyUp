@@ -9,53 +9,64 @@
 import UIKit
 import ChameleonFramework
 class SetGoalVC: UIViewController {
+    @IBOutlet weak var infoLabel: UILabel!
+
     @IBOutlet weak var loseWeightButton: UIButton!
-    @IBOutlet weak var loseWeightView: UIImageView!
 
     @IBOutlet weak var keepFitButton: UIButton!
-    @IBOutlet weak var keepFitView: UIImageView!
     @IBOutlet weak var haveFunButton: UIButton!
-    @IBOutlet weak var haveFunView: UIImageView!
     @IBOutlet weak var muscleButton: UIButton!
-    @IBOutlet weak var muscleView: UIImageView!
     
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
-    var buttonViewMap = [Int: UIImageView]()
-    var selected = [Int]()
+    var selected = Set<Int>()
+    
+    var tintColor = ColorScheme.p1Tint
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = GradientColor(.Radial, frame: self.view.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
+        self.view.backgroundColor = ColorScheme.s3Bg
         
         loseWeightButton.tag = 0
         keepFitButton.tag = 1
         haveFunButton.tag = 2
         muscleButton.tag = 3
-        setButton(loseWeightButton, image: loseWeightView)
-        setButton(keepFitButton, image: keepFitView)
-        setButton(haveFunButton, image: haveFunView)
-        setButton(muscleButton, image: muscleView)
+        setButton(loseWeightButton)
+        setButton(keepFitButton)
+        setButton(haveFunButton)
+        setButton(muscleButton)
+        setupVisual()
         // Do any additional setup after loading the view.
     }
 
-    func setButton (button: UIButton, image: UIImageView) {
-        buttonViewMap[button.tag] = image
-        button.addShadow()
-        image.makeThumbnail(ColorScheme.s4Bg)
+    func setButton (button: UIButton) {
+        button.makeBorderButton(tintColor, radius: 2.0)
         
         button.addTarget(self, action: #selector(SetGoalVC.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-
-
     }
     
-    func buttonClicked(sender:UIButton)
-    {
+    func setupVisual() {
+        loginLabel.textColor = ColorScheme.g3Text
+        infoLabel.textColor = ColorScheme.g3Text
+        nextButton.makeRoundButton()
+        loginButton.setTitleColor(tintColor, forState: .Normal)
+        nextButton.enabled = false
+    }
+    
+    func buttonClicked(sender:UIButton) {
+        nextButton.enabled = true
+        nextButton.backgroundColor = tintColor
         sender.selected = !sender.selected
         if (sender.selected) {
-            selected.append(sender.tag)
-            buttonViewMap[sender.tag]?.tintColor = ColorScheme.p1Tint
+            selected.insert(sender.tag)
+            sender.backgroundColor = tintColor
+            sender.setTitleColor(ColorScheme.s4Bg, forState: .Normal)
         }else {
-            buttonViewMap[sender.tag]?.tintColor = ColorScheme.s4Bg
+            selected.remove(sender.tag)
+            sender.setTitleColor(tintColor, forState: .Normal)
+            sender.backgroundColor = ColorScheme.s4Bg
         }
     }
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import KRProgressHUD
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +18,7 @@ class MeMainVC: UIViewController {
     let titleBGView: UIImageView = UIImageView()
     let profileView : UIImageView = UIImageView()
 
-    var user: User?
+    var user: User!
     var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     
     override func viewDidLoad() {
@@ -54,14 +54,16 @@ class MeMainVC: UIViewController {
     }
     
     func setHeader() {
-        titleBGView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
-        profileView.image = User.currentUser?.cachedPhoto ?? UIImage(named: "selfie")
+        titleBGView.image = user.cachedPhoto ?? UIImage(named: "selfie")
+        profileView.image = user.cachedPhoto ?? UIImage(named: "selfie")
         let headerW = CGRectGetWidth(self.view.frame)
 
         
         profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight - profileRadius / 2.0, width: profileRadius, height: profileRadius)
         profileView.makeThumbnail(ColorScheme.p1Tint)
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MeMainVC.tapProfile(_:)))
+        profileView.addGestureRecognizer(tap)
+        profileView.userInteractionEnabled = true
         //title background
         self.titleBGView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kHeaderHeight)
         self.titleBGView.contentMode = .ScaleAspectFill
@@ -91,6 +93,16 @@ class MeMainVC: UIViewController {
     
     @IBAction func unwindToMeMainVC(segue: UIStoryboardSegue) {
         
+    }
+    
+    func tapProfile (sender: AnyObject) {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func onActionButton (sender: UIButton) {
@@ -168,4 +180,33 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             self.titleBGView.frame = imgRect
         }
     }
+}
+
+extension MeMainVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        //let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+        let image = editedImage.imageScaledToSize(CGSizeMake(500, 500))
+        profileView.image = image
+        titleBGView.image = image
+        
+        //TODO: dont know why it's failing
+        //KRProgressHUD.show()
+        user.updateProfilePicture(image){error in
+            if error != nil {
+            print("Error setting profile picture \(error?.localizedFailureReason)")
+            //KRProgressHUD.showError()
+            } else {
+                //KRProgressHUD.dismiss()
+                self.tableView.reloadData()
+            }
+        }
+                // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

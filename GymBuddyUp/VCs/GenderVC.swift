@@ -11,15 +11,23 @@ import UIKit
 class GenderVC: UIViewController {
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
-    @IBOutlet weak var unspecifiedButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var maleLabel: UILabel!
+    @IBOutlet weak var femaleLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginLaebl: UILabel!
     
     var selected: User.Gender?
-    var checked = [false, false, false]
 
-
+    var tintColor = ColorScheme.p1Tint
+    var oriColor = ColorScheme.g3Text
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        selected = .Male
+        selected = .Unspecified
+        setupVisual()
+        
+
         // Do any additional setup after loading the view.
     }
 
@@ -28,19 +36,31 @@ class GenderVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupVisual() {
+        self.view.backgroundColor = ColorScheme.s3Bg
+        nextButton.makeRoundButton(ColorScheme.p1Tint)
+        loginButton.setTitleColor(tintColor, forState: .Normal)
+        loginLaebl.textColor = ColorScheme.g3Text
+        maleButton.tintColor = ColorScheme.g3Text
+        femaleButton.tintColor = ColorScheme.g3Text
+        maleLabel.textColor = ColorScheme.g3Text
+        femaleLabel.textColor = ColorScheme.g3Text
+    }
+    
     @IBAction func onMaleButton(sender: UIButton) {
         selected = .Male
-        sender.backgroundColor = UIColor.flatGrayColor()
-        
+        sender.tintColor = tintColor
+        maleLabel.textColor = tintColor
+        femaleButton.tintColor = oriColor
+        femaleLabel.textColor = oriColor
     }
 
     @IBAction func onFemaleButton(sender: UIButton) {
         selected = .Female
-        sender.backgroundColor = UIColor.flatGrayColor()
-
-    }
-    @IBAction func onUnspecifiedButton(sender: AnyObject) {
-        selected = .Unspecified
+        sender.tintColor = tintColor
+        femaleLabel.textColor = tintColor
+        maleButton.tintColor = oriColor
+        maleLabel.textColor = oriColor
     }
     
     @IBAction func onNextButton(sender: AnyObject) {

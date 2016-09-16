@@ -13,8 +13,10 @@ class PlanLibVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var cats: [MidCat]?
     var selectedCat: MidCat?
+    var from: UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor(gradientStyle: .TopToBottom, withFrame: self.view.frame, andColors: [ColorScheme.p1Tint, ColorScheme.s5Bg])
         tableView.dataSource = self
         tableView.delegate = self
         tableView.layoutMargins = UIEdgeInsetsZero
@@ -43,6 +45,7 @@ class PlanLibVC: UIViewController {
                 
                 detailVC.title = selectedCat?.name
                 detailVC.plans = plans
+                detailVC.from = from
             }
         }
     }

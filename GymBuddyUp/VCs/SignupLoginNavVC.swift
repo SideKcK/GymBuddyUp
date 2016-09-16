@@ -13,11 +13,20 @@ class SignupLoginNavVC: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.translucent = true
-        self.navigationBar.tintColor = ColorScheme.g4Text
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.g4Text]
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        
+        navigationBarAppearace.translucent = false
+        navigationBarAppearace.tintColor = ColorScheme.g4Text  // Back buttons and such
+        navigationBarAppearace.barTintColor = ColorScheme.s1Tint  // Bar's background color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:ColorScheme.g4Text]  // Title's text color
+
+        
+//        self.navigationBar.backgroundColor = ColorScheme.s1Tint
+//        self.navigationBar.shadowImage = UIImage()
+//        self.navigationBar.tintColor = ColorScheme.g4Text
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.g4Text]
         
     }
 

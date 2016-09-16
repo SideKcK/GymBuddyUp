@@ -182,7 +182,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EEm-ZF-hGn"/>
                                 </constraints>
-                                <state key="normal" title="Send">
+                                <state key="normal" title="Broadcast">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -269,8 +269,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-On-xcj">
                                                     <rect key="frame" x="16" y="8" width="382" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unplanned Wrokout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-Ve-VrQ">
-                                                            <rect key="frame" x="8" y="16" width="179" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unplanned Workout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-Ve-VrQ">
+                                                            <rect key="frame" x="8" y="16" width="178" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -382,8 +382,8 @@
                                     <action selector="onNextButton:" destination="BEH-LG-AFU" eventType="touchUpInside" id="Y9a-hG-EuE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSp-7A-IrO">
-                                <rect key="frame" x="15" y="307" width="69" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSp-7A-IrO">
+                                <rect key="frame" x="15" y="307" width="61" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -600,6 +600,7 @@
                     <connections>
                         <outlet property="tableView" destination="HMV-jE-t5L" id="coQ-fw-yNU"/>
                         <segue destination="VxV-5P-03C" kind="unwind" identifier="unwindToInviteMainVC" unwindAction="unwindToInviteMainVC:" id="vHD-WD-qcD"/>
+                        <segue destination="VxV-5P-03C" kind="unwind" identifier="unwindToMeUpdateVC" unwindAction="unwindToMeUpdateVC:" id="0Zd-4n-oMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjT-YE-1rR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -690,6 +691,6 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0kw-OF-hBD"/>
+        <segue reference="xl0-lW-JAf"/>
     </inferredMetricsTieBreakers>
 </document>

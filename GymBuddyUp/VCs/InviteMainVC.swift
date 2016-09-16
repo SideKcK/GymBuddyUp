@@ -85,6 +85,9 @@ class InviteMainVC: UIViewController {
     func segmentedControlValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
+            sendButton.setTitle("Send", forState: .Normal)
+        }else {
+            sendButton.setTitle("Broadcast", forState: .Normal)
         }
         
         for (index, _) in segViews.enumerate() {

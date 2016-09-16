@@ -12,25 +12,31 @@ import FBSDKLoginKit
 
 class LandingScreenVC: UIViewController {
     @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var loginWithFacebookButton: FBSDKLoginButton!
-    @IBOutlet weak var signUpButton: BorderedButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var loginButton: BorderedButton!
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
         self.hideKeyboardWhenTappedAround()
 
-        overlayView.backgroundColor = GradientColor(.Radial, frame: overlayView.bounds, colors: [ColorScheme.bgGradientCenter, ColorScheme.bgGradientOut])
+        logoView.tintColor = ColorScheme.p1Tint
+        overlayView.backgroundColor = ColorScheme.s1Tint
         titleLabel.textColor = ColorScheme.g4Text
         infoLabel.textColor = ColorScheme.g4Text
         
+        loginWithFacebookButton.makeRoundButton(ColorScheme.facebook)
         loginWithFacebookButton = FBSDKLoginButton()
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
     }
     
     func addAlertView (button: UIButton, error: NSError) -> UIAlertController {
@@ -56,21 +62,10 @@ class LandingScreenVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLoginButton(sender: AnyObject) {
-        loginButton.enabled = false
-        loginButton.alpha = 0.3
-        User.signInWithEmail(usernameField.text!, password: passwordField.text!) { (user, error) in
-            if (error != nil){
-                // handle error here
-                let alert = self.addAlertView(self.loginButton, error: error!)
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-            else {
-                self.performSegueWithIdentifier("toMainSegue", sender: sender)
-            }
-        }
+    @IBAction func onSkipButton(sender: AnyObject) {
+        self.performSegueWithIdentifier("toMainSegue", sender: sender)
     }
-
+    
     @IBAction func onLoginWithFacebookButton(sender: AnyObject) {
 
         User.signInWithFacebook(self){ (user, error) in

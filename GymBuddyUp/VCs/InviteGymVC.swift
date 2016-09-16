@@ -17,6 +17,8 @@ class InviteGymVC: UIViewController {
     var defaultGyms = [Gym(), Gym()]
     var nearbyGyms = [Gym]()
     
+    var from: UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,6 +58,13 @@ class InviteGymVC: UIViewController {
                 return
             }
             desVC.gym = selectedGym
+        }
+        if let desVC = segue.destinationViewController as? MeUpdateVC {
+            guard let selectedGym = sender as? Gym else {
+                return
+            }
+            desVC.gym = selectedGym
+            desVC.gym1Button.setTitle(selectedGym.name, forState: .Normal)
         }
      }
     
@@ -116,6 +125,10 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let _ = from as? MeUpdateVC {
+            self.performSegueWithIdentifier("unwindToMeUpdateVC", sender: nearbyGyms[indexPath.row])
+        }
+        
         if indexPath.section == 1 {
             self.performSegueWithIdentifier("unwindToInviteMainVC", sender: nearbyGyms[indexPath.row])
         }

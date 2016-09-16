@@ -119,9 +119,16 @@ extension UIButton {
         self.backgroundColor = ColorScheme.p1Tint
         self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
         self.tintColor = ColorScheme.g4Text
-        self.titleLabel?.font = FontScheme.T2
+        self.titleLabel?.font = FontScheme.T1
     }
     
+    func makeRoundButton (bgColor: UIColor? = ColorScheme.g3Text) {
+        self.layer.cornerRadius = self.frame.height / 2.0
+        self.clipsToBounds = true
+        self.backgroundColor = bgColor
+        self.setTitleColor(ColorScheme.g4Text, forState: .Normal)
+        self.titleLabel?.font = FontScheme.T1
+    }
 
 }
 
@@ -240,7 +247,7 @@ extension HMSegmentedControl {
         NSForegroundColorAttributeName: ColorScheme.p1Tint]
         self.backgroundColor = UIColor.clearColor()
         self.borderType = HMSegmentedControlBorderType.Bottom
-        self.borderColor = ColorScheme.greyText
+        self.borderColor = ColorScheme.g3Text
         self.borderWidth = 1
         self.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
     }
@@ -307,5 +314,12 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 1.3, height: 1.3)
         layer.shadowOpacity = 0.5
         layer.shadowRadius = 0.2
+    }
+}
+
+extension UITextField {
+    func signuploginFieldStyle() {
+        font = FontScheme.T1
+        
     }
 }

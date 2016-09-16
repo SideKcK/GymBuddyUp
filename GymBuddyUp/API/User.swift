@@ -133,12 +133,12 @@ class User {
         self.userRef = ref.child(user.uid)
         
         // custom properties
-        self.workoutNum = 50
+        self.workoutNum = 0
         self.starNum = 21
         self.dislikeNum = 10
         self.buddyNum = 20
         self.goal = .KeepFit
-        self.gym = "Life Fitness"
+        self.gym = "Not Specified"
         
         // TODO: figure out bast logic for photo caching.
         if (self.photoURL != nil) {

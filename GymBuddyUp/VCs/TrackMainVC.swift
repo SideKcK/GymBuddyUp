@@ -455,6 +455,11 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func paramsTapResponse(recognizer: UITapGestureRecognizer) {
+        if self.repsPickerContainer.hidden == false ||
+            self.lbsPickerContainer.hidden == false {
+            return
+        }
+
         guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
         UIView.animateWithDuration(0.3) {
             if _currentUnitType != Exercise.UnitType.Repetition {

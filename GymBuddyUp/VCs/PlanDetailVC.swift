@@ -223,7 +223,7 @@ class PlanDetailVC: UIViewController {
         if segue.identifier == "startWorkoutSegue" {
             let desNC = segue.destinationViewController as! UINavigationController
             let desVC = desNC.topViewController as! TrackMainVC
-            desVC.trackedPlan = TrackedPlan(plan: plan)
+            desVC.trackedPlan = TrackedPlan(scheduledWorkout: self.workout.id, plan: plan)
         }
         
         

@@ -23,14 +23,15 @@ struct ColorScheme {
     static var g3Text = UIColor(hexString: "BBBBBB")
     static var g4Text = ContrastColorOf(s1Tint, returnFlat: false)
     
-    // to be deprecated --- start ---
-    static var bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
-    static var bgGradientOut = UIColor(red: 63/255.0, green: 203/255.0, blue: 213/255.0, alpha: 1.0)
-    static var greyText = UIColor.flatWhiteColorDark()
-    //darkText = ContrastColorOf(lightText, returnFlat: true)
-    static var contrastText = ComplementaryFlatColorOf(bgGradientOut)
-
-    //
+    static var facebook = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+//    // to be deprecated --- start ---
+//    static var bgGradientCenter = UIColor(red: 115/255.0, green: 220/255.0, blue: 227/255.0, alpha: 1.0)
+//    static var bgGradientOut = UIColor(red: 63/255.0, green: 203/255.0, blue: 213/255.0, alpha: 1.0)
+//    static var greyText = UIColor.flatWhiteColorDark()
+//    //darkText = ContrastColorOf(lightText, returnFlat: true)
+//    static var contrastText = ComplementaryFlatColorOf(bgGradientOut)
+//
+//    //
     static var trackingNavigationButtonBg = UIColor.flatMintColor()
     static var trackingNavigationButtonTx = UIColor.flatWhiteColor()
     

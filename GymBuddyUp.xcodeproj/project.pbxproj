@@ -114,6 +114,8 @@
 		C6860BF71D88A1B60081C89D /* InviteToCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF61D88A1B60081C89D /* InviteToCell.swift */; };
 		C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BF81D8913FC0081C89D /* MePasswordVC.swift */; };
 		C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */; };
+		C6860BFD1D8A69E10081C89D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BFC1D8A69E10081C89D /* LoginVC.swift */; };
+		C6860BFF1D8B90950081C89D /* ResetPwVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6860BFE1D8B90950081C89D /* ResetPwVC.swift */; };
 		C68BD2BE1D6413660060F944 /* ExerciseNumberedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */; };
 		C6AF1EDF1D6B98C200B69D08 /* PlanLibDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */; };
 		C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */; };
@@ -256,6 +258,8 @@
 		C6860BF61D88A1B60081C89D /* InviteToCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteToCell.swift; path = Views/InviteToCell.swift; sourceTree = "<group>"; };
 		C6860BF81D8913FC0081C89D /* MePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MePasswordVC.swift; path = VCs/MePasswordVC.swift; sourceTree = "<group>"; };
 		C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeCreditTermVC.swift; path = VCs/MeCreditTermVC.swift; sourceTree = "<group>"; };
+		C6860BFC1D8A69E10081C89D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = VCs/LoginVC.swift; sourceTree = "<group>"; };
+		C6860BFE1D8B90950081C89D /* ResetPwVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPwVC.swift; path = VCs/ResetPwVC.swift; sourceTree = "<group>"; };
 		C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseNumberedCell.xib; path = Views/ExerciseNumberedCell.xib; sourceTree = "<group>"; };
 		C6AF1EDE1D6B98C200B69D08 /* PlanLibDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanLibDetailVC.swift; path = VCs/PlanLibDetailVC.swift; sourceTree = "<group>"; };
 		C6AF1EE01D6BFFB300B69D08 /* FontScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontScheme.swift; path = Helpers/FontScheme.swift; sourceTree = "<group>"; };
@@ -552,6 +556,8 @@
 				C649C56A1CE3EE0800258994 /* SignupVC.swift */,
 				C649C56C1CE3F55E00258994 /* SetGoalVC.swift */,
 				C64EC1FB1D1B6B5A000DA37A /* GenderVC.swift */,
+				C6860BFC1D8A69E10081C89D /* LoginVC.swift */,
+				C6860BFE1D8B90950081C89D /* ResetPwVC.swift */,
 			);
 			name = SignupLogin;
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				C6B40AA41D6D3714001DC761 /* MeUpdateVC.swift in Sources */,
 				C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */,
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
+				C6860BFF1D8B90950081C89D /* ResetPwVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
 				C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */,
 				C6860BF71D88A1B60081C89D /* InviteToCell.swift in Sources */,
@@ -837,6 +844,7 @@
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C6860BF51D8899F40081C89D /* InviteGymCell.swift in Sources */,
+				C6860BFD1D8A69E10081C89D /* LoginVC.swift in Sources */,
 				C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */,
 				C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */,
 				C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */,

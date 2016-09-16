@@ -275,7 +275,7 @@
                                                     <constraint firstAttribute="height" constant="80" id="qNo-61-EGS"/>
                                                     <constraint firstAttribute="width" constant="80" id="yqn-xO-4m8"/>
                                                 </constraints>
-                                                <state key="normal" image="next-and-log">
+                                                <state key="normal" image="next&amp;Log">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -586,7 +586,7 @@
     <resources>
         <image name="list" width="19" height="15"/>
         <image name="next" width="40" height="40"/>
-        <image name="next-and-log" width="80" height="80"/>
+        <image name="next&amp;Log" width="80" height="80"/>
         <image name="previous" width="40" height="40"/>
     </resources>
 </document>

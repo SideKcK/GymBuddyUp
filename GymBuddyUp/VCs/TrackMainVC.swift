@@ -53,7 +53,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var nextButtonState = NextButtonState.Normal
     lazy var startButtonImage = UIImage(named: "start")
     lazy var pauseButtonImage = UIImage(named: "pause")
-    lazy var nextButtonImage = UIImage(named: "next-and-log")
+    lazy var nextButtonImage = UIImage(named: "next&Log")
 
     enum NextButtonState {
         case TimingNotStarted

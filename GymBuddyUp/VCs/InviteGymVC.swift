@@ -125,7 +125,7 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if from.isKindOfClass(MeUpdateVC) {
+        if let _ = from as? MeUpdateVC {
             self.performSegueWithIdentifier("unwindToMeUpdateVC", sender: nearbyGyms[indexPath.row])
         }
         

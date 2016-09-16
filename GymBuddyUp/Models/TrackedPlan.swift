@@ -32,6 +32,17 @@ class TrackedPlan {
             }
         }
     }
+    
+    init(scheduledWorkout: String, plan: Plan) {
+        self.scheduledWorkout = scheduledWorkout
+        self.plan = plan
+        if let exercises = plan.exercises {
+            for exercise in exercises {
+                let trackingItem =  TrackedItem(_exercise: exercise)
+                trackingItems.append(trackingItem)
+            }
+        }
+    }
      
     init(planId: String) {
 

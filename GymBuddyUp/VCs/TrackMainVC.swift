@@ -51,6 +51,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var popoverVC: TrackingPopOverViewController?
     var itemsCount = 0
     var nextButtonState = NextButtonState.Normal
+    var startTime = NSDate()
     lazy var startButtonImage = UIImage(named: "start")
     lazy var pauseButtonImage = UIImage(named: "pause")
     lazy var nextButtonImage = UIImage(named: "next-and-log")
@@ -532,6 +533,13 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         timer.safeInvalidate()
         
         // write backend sync code here
+        let endTime = NSDate()
+        
+        Tracking.trackedPlanOnSave((trackedPlan?.scheduledWorkout)!,planId: (trackedPlan?.plan?.id)!, startTime: startTime, endTime: endTime, trackedItems: (trackedPlan?.trackingItems)!){ (error) in
+            if (error != nil){
+                print(error)
+            }
+        }
         
         // trackedPlanOnSave() ...
         let storyboard = UIStoryboard(name: "Tracking", bundle: nil)

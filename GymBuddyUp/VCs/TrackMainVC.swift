@@ -51,9 +51,10 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var popoverVC: TrackingPopOverViewController?
     var itemsCount = 0
     var nextButtonState = NextButtonState.Normal
+    var startTime = NSDate()
     lazy var startButtonImage = UIImage(named: "start")
     lazy var pauseButtonImage = UIImage(named: "pause")
-    lazy var nextButtonImage = UIImage(named: "next-and-log")
+    lazy var nextButtonImage = UIImage(named: "next&Log")
 
     enum NextButtonState {
         case TimingNotStarted
@@ -455,6 +456,11 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func paramsTapResponse(recognizer: UITapGestureRecognizer) {
+        if self.repsPickerContainer.hidden == false ||
+            self.lbsPickerContainer.hidden == false {
+            return
+        }
+
         guard let _currentUnitType = trackedPlan?.trackingItems[currentTrackedIndex].exercise?.unitType else {return}
         UIView.animateWithDuration(0.3) {
             if _currentUnitType != Exercise.UnitType.Repetition {
@@ -532,6 +538,13 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         timer.safeInvalidate()
         
         // write backend sync code here
+        let endTime = NSDate()
+        
+        Tracking.trackedPlanOnSave((trackedPlan?.scheduledWorkout)!,planId: (trackedPlan?.plan?.id)!, startTime: startTime, endTime: endTime, trackedItems: (trackedPlan?.trackingItems)!){ (error) in
+            if (error != nil){
+                print(error)
+            }
+        }
         
         // trackedPlanOnSave() ...
         let storyboard = UIStoryboard(name: "Tracking", bundle: nil)

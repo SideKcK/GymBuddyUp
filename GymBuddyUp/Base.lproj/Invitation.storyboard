@@ -259,11 +259,11 @@
                                 <rect key="frame" x="0.0" y="331" width="414" height="361"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlanCell" rowHeight="134" id="Za7-60-SL6" customClass="InviteNoPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="134"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlanCell" rowHeight="144" id="Za7-60-SL6" customClass="InviteNoPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Za7-60-SL6" id="ul3-ax-yCf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="134"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mC6-On-xcj">
@@ -294,14 +294,14 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjS-81-7U8">
-                                                    <rect key="frame" x="16" y="120" width="382" height="1"/>
+                                                    <rect key="frame" x="16" y="133" width="382" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="K4l-2C-4xh"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmq-ED-jau">
-                                                    <rect key="frame" x="50" y="110" width="40" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmq-ED-jau">
+                                                    <rect key="frame" x="50" y="114" width="40" height="21"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="R6U-AO-6pd"/>
@@ -314,12 +314,12 @@
                                             <constraints>
                                                 <constraint firstItem="yjS-81-7U8" firstAttribute="trailing" secondItem="mC6-On-xcj" secondAttribute="trailing" id="26K-Gd-kFY"/>
                                                 <constraint firstItem="mC6-On-xcj" firstAttribute="top" secondItem="ul3-ax-yCf" secondAttribute="top" constant="8" id="2aH-R2-bXV"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mC6-On-xcj" secondAttribute="bottom" constant="8" id="54s-Qj-X04"/>
                                                 <constraint firstItem="Tmq-ED-jau" firstAttribute="leading" secondItem="ul3-ax-yCf" secondAttribute="leading" constant="50" id="WJ6-Bg-AZX"/>
                                                 <constraint firstItem="yjS-81-7U8" firstAttribute="centerY" secondItem="Tmq-ED-jau" secondAttribute="centerY" id="cb7-Nj-9oG"/>
-                                                <constraint firstItem="yjS-81-7U8" firstAttribute="top" secondItem="mC6-On-xcj" secondAttribute="bottom" constant="12" id="dii-5d-2sr"/>
+                                                <constraint firstItem="yjS-81-7U8" firstAttribute="top" secondItem="mC6-On-xcj" secondAttribute="bottom" constant="25" id="dii-5d-2sr"/>
                                                 <constraint firstItem="mC6-On-xcj" firstAttribute="leading" secondItem="ul3-ax-yCf" secondAttribute="leading" constant="16" id="jRj-1L-exq"/>
                                                 <constraint firstAttribute="trailing" secondItem="mC6-On-xcj" secondAttribute="trailing" constant="16" id="r4s-KJ-UcH"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Tmq-ED-jau" secondAttribute="bottom" id="vpE-CF-ASB"/>
                                                 <constraint firstItem="yjS-81-7U8" firstAttribute="leading" secondItem="mC6-On-xcj" secondAttribute="leading" id="yWX-Zn-QWE"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -331,14 +331,14 @@
                                             <outlet property="titleLabel" destination="cR4-Ve-VrQ" id="EBu-2U-UQf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addPlanCell" rowHeight="82" id="BPK-69-HIX" customClass="InviteAddPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="162" width="414" height="82"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addPlanCell" rowHeight="72" id="BPK-69-HIX" customClass="InviteAddPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="172" width="414" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BPK-69-HIX" id="zJN-nN-ViG">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="BPK-69-HIX" id="zJN-nN-ViG">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-TA-Nng">
+                                                <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-TA-Nng">
                                                     <rect key="frame" x="16" y="19" width="179" height="22"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>

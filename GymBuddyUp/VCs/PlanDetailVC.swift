@@ -282,6 +282,12 @@ class PlanDetailVC: UIViewController {
                 }
             }
         }
+        
+        if let desNC = segue.destinationViewController as? UINavigationController,
+        let desVC = desNC.topViewController as? InviteMainVC {
+            desVC.plan = plan
+            desVC.setNavBarItem()
+        }
         if let desVC = segue.destinationViewController as? PlanMainVC {
             if let send = sender as? String {
                 if send == "delete" || send == "repeat"{

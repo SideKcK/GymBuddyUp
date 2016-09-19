@@ -27,10 +27,27 @@
             </objects>
             <point key="canvasLocation" x="1286" y="1625"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sZk-a3-Kns">
+            <objects>
+                <navigationController storyboardIdentifier="InviteMainNavVC" id="Kwi-a6-7Ux" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yah-by-IhY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n2l-yh-60L" kind="relationship" relationship="rootViewController" id="mHO-FL-Emv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chp-hy-3pO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2814" y="821"/>
+        </scene>
         <!--Create Invite-->
         <scene sceneID="975-FI-y4L">
             <objects>
-                <viewController id="n2l-yh-60L" customClass="InviteMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteMainVC" id="n2l-yh-60L" customClass="InviteMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IUe-89-6Zu"/>
                         <viewControllerLayoutGuide type="bottom" id="ejI-G5-ilf"/>
@@ -691,6 +708,6 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xl0-lW-JAf"/>
+        <segue reference="mHO-FL-Emv"/>
     </inferredMetricsTieBreakers>
 </document>

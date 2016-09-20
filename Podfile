@@ -11,8 +11,10 @@ target 'GymBuddyUp' do
     pod 'CVCalendar', :git => 'https://github.com/Mozharovsky/CVCalendar.git'
     pod 'HMSegmentedControl'
     pod 'GooglePlaces', '~> 2.0.1'
+    pod 'ObjectMapper'
     
     pod 'SwiftDate'
+    pod 'SwiftyJSON'
     pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
     
     pod 'Firebase'

@@ -11,37 +11,74 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 import SwiftDate
+import SwiftyJSON
+import ObjectMapper
 
 private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
-private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
-private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout_location")
+private let userInviteRef:FIRDatabaseReference! = ref.child("user_workout_invite")
+private let publishedWorkoutRef:FIRDatabaseReference! = ref.child("published_workout")
+private let publishedWorkoutLocationRef:FIRDatabaseReference! = ref.child("published_workout_location")
 
 
-class Invite {
+class Invite : Mappable {
+    var id: String!
+    var canceledByInviter: Bool!
+    var canceledByInvitee: Bool!
+    var gym: Gym?
+    var inviterId: String!
+    var inviteeId: String?
+    var planId: String!
+    var workoutTime: NSDate?
     
-    enum InviteStatus:Int {
-        case pending = 1
-        case accepted = 2
-        case canceled = 0
+    required init?(_ map: Map)
+    {
+        
     }
     
-    var accepted: Bool
-    var confirmed: Bool
-    var canceled: Bool
-    var gym: Gym
-    var inviterId: String
-    var inviteeId: String?
-    var planId: String
-    var workoutTime: NSDate
-    
-    var status: InviteStatus
-
+    // Mappable
+    func mapping(map: Map) {
+        id <- map["id"]
+        canceledByInviter <- map["canceled_by_inviter"]
+        canceledByInvitee <- map["canceled_by_invitee"]
+        gym <- map["gym"]
+        inviterId <- map["inviter"]
+        inviteeId <- map["invitee"]
+        planId <- map["plan"]
+        workoutTime <- (map["workout_time"], DateTransform())
+    }
     
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
     
-    class func getWorkoutInviteByScheduledWorkoutIdAndDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void ) {
-        
+    class func getWorkoutInviteByScheduledWorkoutIdAndDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?, Invite?) -> Void )
+    {
+        let userInviteId = scheduledWorkoutId + ":" + dateToString(date)
+        if let userId = User.currentUser?.userId! {
+            userInviteRef.child(userId).child(userInviteId).child("invite").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if snapshot.value == nil {
+                    return completion(nil, nil)
+                }
+                
+                let inviteId:String = snapshot.value as! String
+                
+                ref.child("workout_invite").child(inviteId).observeSingleEventOfType(.Value, withBlock: {
+                    (inviteSnapshot)  in
+                    guard let data = inviteSnapshot.value as? [String: AnyObject] else
+                    {
+                        return completion (nil, nil)
+                    }
+                    
+                    var mapData = data
+                    mapData["id"] = inviteId
+                    
+                    completion(nil, Invite(JSON:mapData))
+                    
+                })
+            })
+        }
+        else {
+            completion(authenticationError, nil)
+        }
     }
     
     class func sendWorkoutInviteToUser(recipientId: String, completion: (NSError?) -> Void ) {
@@ -207,13 +244,18 @@ class Invite {
     
     class func testfunction()
     {
-        User.currentUser?.getTokenForcingRefresh({ (token, error) in
-            print(token)
-        })
+//        User.currentUser?.getTokenForcingRefresh({ (token, error) in
+//            print(token)
+//        })
+//        
+//        Invite.publishWorkoutInviteToPublic("KOZM75uwOUmdflVo2wH", scheduledWorkoutId: "-KQsDEMmVnYNDo_j9yMy", gym: Gym(), workoutTime: NSDate()) { (err) in
+//            print(err)
+//        }
         
-        Invite.publishWorkoutInviteToPublic("KOZM75uwOUmdflVo2wH", scheduledWorkoutId: "-KQsDEMmVnYNDo_j9yMy", gym: Gym(), workoutTime: NSDate()) { (err) in
-            print(err)
-        }
+//        getWorkoutInviteByScheduledWorkoutIdAndDate("-KQsDEMmVnYNDo_j9yMy", date: stringToDate("2016-09-13")!) { (error, invite) in
+//            
+//            print (error, invite)
+//        }
     }
 }
 

@@ -14,16 +14,23 @@ class MeUpdateVC: UITableViewController {
     @IBOutlet weak var fitButton: UIButton!
     @IBOutlet weak var funButton: UIButton!
     @IBOutlet weak var gym1Button: UIButton!
-    @IBOutlet weak var gym2Button: UIButton!
-    @IBOutlet weak var gym3Button: UIButton!
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var thumbView: UIImageView!
 
+    var gym: Gym!
+    var selected = Set<Int>()
+    var tintColor = ColorScheme.p1Tint
     override func viewDidLoad() {
         super.viewDidLoad()
+        //for testing
+        selected.insert(2)
+        
         setupVisual()
         setupButtons()
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,6 +43,10 @@ class MeUpdateVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func unwindToMeUpdateVC(segue: UIStoryboardSegue) {
+        
+    }
+    
     func setupVisual() {
         
         self.tableView.backgroundColor = ColorScheme.s3Bg
@@ -49,15 +60,43 @@ class MeUpdateVC: UITableViewController {
         funButton.makeBorderButton(tint, radius: radius)
         let grey = ColorScheme.g2Text
         gym1Button.makeBorderButton(grey, radius: radius)
-        gym2Button.makeBorderButton(grey, radius: radius)
-        gym3Button.makeBorderButton(grey, radius: radius)
+        
         textView.makeBorderButton(grey, radius: radius)
     }
     
     func setupButtons() {
+        weightButton.tag = 0
+        fitButton.tag = 1
+        funButton.tag = 2
+        muscleButton.tag = 3
+        setButton(weightButton)
+        setButton(fitButton)
+        setButton(funButton)
+        setButton(muscleButton)
+        
         gym1Button.addTarget(self, action: #selector(MeUpdateVC.onGymButton(_:)), forControlEvents: .TouchUpInside)
-        gym2Button.addTarget(self, action: #selector(MeUpdateVC.onGymButton(_:)), forControlEvents: .TouchUpInside)
-        gym3Button.addTarget(self, action: #selector(MeUpdateVC.onGymButton(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    func setButton (button: UIButton) {
+        button.makeBorderButton(tintColor, radius: 2.0)
+        if selected.contains(button.tag) {
+            button.backgroundColor = tintColor
+            button.setTitleColor(ColorScheme.s4Bg, forState: .Normal)
+        }
+        button.addTarget(self, action: #selector(SetGoalVC.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+
+    func buttonClicked(sender:UIButton) {
+        sender.selected = !sender.selected
+        if (sender.selected) {
+            selected.insert(sender.tag)
+            sender.backgroundColor = tintColor
+            sender.setTitleColor(ColorScheme.s4Bg, forState: .Normal)
+        }else {
+            selected.remove(sender.tag)
+            sender.setTitleColor(tintColor, forState: .Normal)
+            sender.backgroundColor = ColorScheme.s4Bg
+        }
     }
     
     func onGymButton (sender: UIButton) {
@@ -134,14 +173,15 @@ class MeUpdateVC: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let desVC = segue.destinationViewController as? InviteGymVC {
+            desVC.from = self
+        }
     }
-    */
+    
 
 }

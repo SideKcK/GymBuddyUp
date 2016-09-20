@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xzf-MA-lgc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xzf-MA-lgc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -133,6 +133,14 @@
             </objects>
             <point key="canvasLocation" x="1261" y="878"/>
         </scene>
+        <!--InviteMainNavVC-->
+        <scene sceneID="hIS-Z6-CcU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Invitation" referencedIdentifier="InviteMainNavVC" id="9k4-MG-6g0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JhG-08-Ca2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2087" y="608"/>
+        </scene>
         <!--GymMapVC-->
         <scene sceneID="N6d-cq-Zn2">
             <objects>
@@ -160,8 +168,8 @@
                                         <rect key="frame" x="0.0" y="117.5" width="320" height="337.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-6w-pnL">
-                                        <rect key="frame" x="10" y="128" width="198" height="44"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-6w-pnL">
+                                        <rect key="frame" x="61" y="205.5" width="198" height="44"/>
                                         <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="gTn-4A-jaQ"/>
@@ -231,7 +239,7 @@
                                         </constraints>
                                         <state key="normal" title="Find your SideKcK"/>
                                         <connections>
-                                            <segue destination="AZZ-Zq-cl7" kind="presentation" identifier="toInvitationSegue" id="bTs-V8-eL8"/>
+                                            <segue destination="9k4-MG-6g0" kind="presentation" id="hM7-gy-tIQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-eH-aLF">
@@ -289,14 +297,14 @@
                                             <constraint firstAttribute="trailing" secondItem="okO-rm-nXe" secondAttribute="trailing" id="tQ1-xD-SQ8"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Every workout counts!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0D6-nr-gWS">
-                                        <rect key="frame" x="18" y="163" width="170" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Every workout counts!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0D6-nr-gWS">
+                                        <rect key="frame" x="75" y="308.5" width="170" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="checkin" translatesAutoresizingMaskIntoConstraints="NO" id="PJb-4U-Wns">
-                                        <rect key="frame" x="40" y="134" width="240" height="128"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkin" translatesAutoresizingMaskIntoConstraints="NO" id="PJb-4U-Wns">
+                                        <rect key="frame" x="79" y="137.5" width="162" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="162" id="7Js-OH-iKC"/>
                                             <constraint firstAttribute="height" constant="162" id="WQA-kv-H3a"/>
@@ -835,6 +843,7 @@
                         <outlet property="selectPlanButton" destination="s5r-wj-yR1" id="z3J-DG-orX"/>
                         <segue destination="8gL-VT-xxv" kind="unwind" identifier="unwindToPlanMainSegue" unwindAction="unwindToPlanMainVC:" id="xXM-q9-Kg9"/>
                         <segue destination="cEc-hT-IZq" kind="show" identifier="toExerciseDetailSegue" id="gmL-tt-qef"/>
+                        <segue destination="8gL-VT-xxv" kind="unwind" identifier="unwindToInvitePlanVC" unwindAction="unwindToInvitePlanVC:" id="tU0-Eo-Z1Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M8v-qY-ZrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1449,7 +1458,7 @@
                 <viewControllerPlaceholder storyboardName="Invitation" id="AZZ-Zq-cl7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="loe-1C-J1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1496.5" y="1328"/>
+            <point key="canvasLocation" x="1350.5" y="1328"/>
         </scene>
         <!--CheckinVC-->
         <scene sceneID="7am-JM-110">
@@ -1556,12 +1565,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkin" width="162" height="162"/>
         <image name="Close" width="12" height="12"/>
+        <image name="checkin" width="162" height="162"/>
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bTs-V8-eL8"/>
         <segue reference="rgS-nG-orv"/>
     </inferredMetricsTieBreakers>
 </document>

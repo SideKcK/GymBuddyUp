@@ -32,7 +32,7 @@ class InviteBuddiesVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
-            desVC.seg.setTitle(sender as? String, forSegmentAtIndex: 0)
+            desVC.sendTo = sender as! String
         }
     }
 

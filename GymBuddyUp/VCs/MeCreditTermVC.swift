@@ -1,56 +1,35 @@
 //
-//  SettingsVC.swift
+//  MeCreditTermVC.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 8/23/16.
+//  Created by you wu on 9/14/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class SettingsVC: UITableViewController {
-    @IBOutlet weak var logOutButton: UIButton!
+class MeCreditTermVC: UITableViewController {
 
+    @IBOutlet weak var logoView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        setupVisual()
+        logoView.backgroundColor = ColorScheme.s3Bg
+        tableView.backgroundColor = ColorScheme.s3Bg
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func setupVisual() {
-        logOutButton.tintColor = ColorScheme.e1Tint
-        tableView.backgroundColor = ColorScheme.s3Bg
-    }
-    
-    @IBAction func onLogOutButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Are you sure to log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let okAction = UIAlertAction(title: "Log Out", style: UIAlertActionStyle.Destructive ) { (action) in
-            User.currentUser!.signOut(){ _ in
-                self.performSegueWithIdentifier("toSignUpLogin", sender: self)
-            }
-            }
 
-        alertController.addAction(okAction)
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        alertController.addAction(cancel)
-        self.presentViewController(alertController, animated: true, completion: nil)
-
-    }
-    @IBAction func unwindToSettingsVC(segue: UIStoryboardSegue) {
-        
-    }
-    
     // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.selectionStyle = .None
+    }
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

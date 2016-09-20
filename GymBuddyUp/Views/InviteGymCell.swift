@@ -1,16 +1,18 @@
 //
-//  InviteNoPlanCatCell.swift
+//  InviteGymCell.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 9/12/16.
+//  Created by you wu on 9/13/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class InviteNoPlanCatCell: UITableViewCell {
-    @IBOutlet weak var catLabel: UILabel!
+class InviteGymCell: UITableViewCell {
 
+    @IBOutlet weak var gymLabel: UILabel!
+    @IBOutlet weak var gymButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,7 +25,10 @@ class InviteNoPlanCatCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setupVisual () {
-        catLabel.font = FontScheme.H2
+    func setupVisual() {
+        gymButton.addShadow()
+        gymButton.tintColor = ColorScheme.p1Tint
+        gymLabel.font = FontScheme.T1
+
     }
 }

@@ -32,7 +32,7 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var stackRejectButton: UIButton!
 
     var event: PublishedWorkout!
-    var plan: Plan!
+    var plan = Plan()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class DiscoverDetailVC: UIViewController {
         statusLabel.text = "Broadcast to Public"
         setupTableView()
         setupVisual()
-        if event != nil && plan != nil {
+        if event != nil {
             setupData()
         }
     }

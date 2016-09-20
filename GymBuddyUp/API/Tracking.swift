@@ -27,6 +27,24 @@ func dateToInt(date: NSDate)->Int {
     return myInt
 }
 
+func secondToString(second: Int)->String {
+    let minute = second/60
+    let hour = minute/60
+    var minuteStr = String("")
+    var hourStr = String("")
+    if(minute > 1){
+        minuteStr = String(minute) + " minutes"
+    }else if(minute > 1){
+        minuteStr = String(minute) + " minute"
+    }
+    if(hour > 1){
+        hourStr = String(hour) + " hours"
+    }else if(hour > 0){
+        hourStr = String(hour) + " hour"
+    }
+    return hourStr + minuteStr + String(second) + " seconds"
+}
+
 class Tracking {
     
     
@@ -34,7 +52,7 @@ class Tracking {
         
     }
     
-       
+    
     class func initFromQueryResults(queryResults: NSDictionary?) -> [TrackedPlan]
     {
         if queryResults != nil {
@@ -156,21 +174,27 @@ class Tracking {
      */
     class func getTrackedPlanById(id: String, completion: (trackedPlan: TrackedPlan?, error: NSError?)-> Void) {
         // Query
-        print("=========== Before getTrackedPlanById!")
+        print("=========== Before getTrackedPlanById!"+id)
         let getTrackedItemGroup = dispatch_group_create()
         trackedPlanRef.child(id).observeSingleEventOfType(.Value,withBlock: {
             (dataSnapshot: FIRDataSnapshot) in
-            let result = TrackedPlan(trackingId: id , data:(dataSnapshot.value as! NSDictionary))
-            dispatch_group_enter(getTrackedItemGroup)
-            getTrackedItems(dataSnapshot.value as! NSDictionary){(resultTrackedItems, error) in
-                result.trackingItems = resultTrackedItems!
-                dispatch_group_leave(getTrackedItemGroup)
+            if let values = dataSnapshot.value as? NSDictionary {
+                let result = TrackedPlan(trackingId: id , data: values)
+                dispatch_group_enter(getTrackedItemGroup)
+                getTrackedItems(dataSnapshot.value as! NSDictionary){(resultTrackedItems, error) in
+                    result.trackingItems = resultTrackedItems!
+                    dispatch_group_leave(getTrackedItemGroup)
+                }
+                
+                dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                    print("=========== dispatch_group_notify: ")
+                    completion(trackedPlan: result, error: nil)
+                }
+                
+            }else{
+                completion(trackedPlan: nil, error: nil)
             }
             
-            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
-                print("=========== dispatch_group_notify: ")
-                completion(trackedPlan: result, error: nil)
-            }
             
         }){
             (error) in
@@ -189,14 +213,23 @@ class Tracking {
             
             var amount = [Int]()
             var weight = [Int]()
+            var maxReps = Int()
+            var maxWeight = Int()
+            var isSkiped = false
             let exerciseData = items as? NSDictionary
-            let set_detail = exerciseData!.valueForKey("set_details") as? NSArray
-            print("=========== index: ")
-            for item1 in set_detail! {
-                print("=========== index1: ")
-                
-                amount.append((item1.valueForKey("amount") as? Int)!)
-                weight.append((item1.valueForKey("weight") as? Int)!)
+            if let set_detail = exerciseData!.valueForKey("set_details") as? NSArray {
+                print("=========== index: ")
+                for item1 in set_detail {
+                    print("=========== index1: ")
+                    if(maxReps < (item1.valueForKey("amount") as? Int)!){
+                        maxReps = (item1.valueForKey("amount") as? Int)!
+                    }
+                    if(maxWeight < (item1.valueForKey("weight") as? Int)!){
+                        maxWeight = (item1.valueForKey("weight") as? Int)!
+                    }
+                    amount.append((item1.valueForKey("amount") as? Int)!)
+                    weight.append((item1.valueForKey("weight") as? Int)!)
+                }
             }
             let exercise_id = (exerciseData!.valueForKey("exercise") as? Int)!
             var exercise : Exercise?
@@ -211,11 +244,25 @@ class Tracking {
                     // exercise = Exercise(id: exercise_id,unitType: Exercise.UnitType.RepByWeight)
                 }
                 if(exercise!.unitType == Exercise.UnitType.RepByWeight){
-                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
-                }else if(exercise!.unitType == Exercise.UnitType.DurationInSeconds || exercise!.unitType == Exercise.UnitType.DistanceInMiles){
-                    trackedItems.append(TrackedItem(finishedAmount: amount[0],finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
+                    if(maxWeight == 0){
+                        isSkiped = true
+                    }
+                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight,  maxReps: maxReps, maxWeight: maxWeight, bestRecordStr: String(maxWeight)+" lbs Max Weight", isSkiped: isSkiped))
+                }else if(exercise!.unitType == Exercise.UnitType.DurationInSeconds){
+                    if(maxReps == 0){
+                        isSkiped = true
+                    }
+                    trackedItems.append(TrackedItem(finishedAmount: amount[0],finishedSets: 0,exercise: exercise!, reps: amount, weights: weight, maxReps: maxReps, maxWeight: maxWeight, bestRecordStr: secondToString(maxReps), isSkiped: isSkiped))
+                }else if(exercise!.unitType == Exercise.UnitType.DistanceInMiles){
+                    if(maxReps == 0){
+                        isSkiped = true
+                    }
+                    trackedItems.append(TrackedItem(finishedAmount: amount[0],finishedSets: 0,exercise: exercise!, reps: amount, weights: weight, maxReps: maxReps, maxWeight: maxWeight, bestRecordStr: String(maxReps)+" miles", isSkiped: isSkiped))
                 }else if(exercise!.unitType == Exercise.UnitType.Repetition){
-                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight))
+                    if(maxReps == 0){
+                        isSkiped = true
+                    }
+                    trackedItems.append(TrackedItem(finishedAmount: 0,finishedSets: 0,exercise: exercise!, reps: amount, weights: weight, maxReps: maxReps, maxWeight: maxWeight, bestRecordStr: String(maxReps) + " Max Reps", isSkiped: isSkiped))
                 }
                 
                 dispatch_group_leave(getTrackedItemGroup)
@@ -272,4 +319,6 @@ class Tracking {
     }
     
 }
+
+
 

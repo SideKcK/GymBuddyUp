@@ -14,6 +14,7 @@ class PlanLibDetailVC: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
 
     var plans = [Plan]()
+    var from: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,8 @@ class PlanLibDetailVC: UIViewController {
         pageControl?.numberOfPages = plans.count
         pageControl?.currentPage = 0
         pageControl?.userInteractionEnabled = false
+        
+        selectPlanButton.backgroundColor = ColorScheme.p1Tint
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +51,11 @@ class PlanLibDetailVC: UIViewController {
         ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (error) in
             if error == nil {
                 //unwind to plan main
-                self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: navVC.selectedDate)
+                if let _ = self.from as? InvitePlanVC {
+                    self.performSegueWithIdentifier("unwindToInvitePlanVC", sender: self)
+                }else {
+                    self.performSegueWithIdentifier("unwindToPlanMainSegue", sender: navVC.selectedDate)
+                }
             }else {
                 print(error)
             }
@@ -126,6 +133,7 @@ extension PlanLibDetailVC: UICollectionViewDataSource, UICollectionViewDelegate 
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let detailCell = cell as? PlanDetailCell else { return }
+        detailCell.backgroundColor = UIColor(gradientStyle: .LeftToRight, withFrame: self.view.frame, andColors: [ColorScheme.p1Tint, ColorScheme.s5Bg])
         detailCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
     }
     //Use for size

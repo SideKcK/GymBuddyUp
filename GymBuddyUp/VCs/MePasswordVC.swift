@@ -1,15 +1,17 @@
 //
-//  SettingsVC.swift
+//  MePasswordVC.swift
 //  GymBuddyUp
 //
-//  Created by you wu on 8/23/16.
+//  Created by you wu on 9/14/16.
 //  Copyright © 2016 You Wu. All rights reserved.
 //
 
 import UIKit
 
-class SettingsVC: UITableViewController {
-    @IBOutlet weak var logOutButton: UIButton!
+class MePasswordVC: UITableViewController {
+    @IBOutlet weak var curPwField: UITextField!
+    @IBOutlet weak var newPwField: UITextField!
+    @IBOutlet weak var newPwField2: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,37 +21,36 @@ class SettingsVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        setupVisual()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func setupVisual() {
-        logOutButton.tintColor = ColorScheme.e1Tint
-        tableView.backgroundColor = ColorScheme.s3Bg
-    }
-    
-    @IBAction func onLogOutButton(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Are you sure to log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let okAction = UIAlertAction(title: "Log Out", style: UIAlertActionStyle.Destructive ) { (action) in
-            User.currentUser!.signOut(){ _ in
-                self.performSegueWithIdentifier("toSignUpLogin", sender: self)
-            }
-            }
 
-        alertController.addAction(okAction)
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        alertController.addAction(cancel)
-        self.presentViewController(alertController, animated: true, completion: nil)
-
-    }
-    @IBAction func unwindToSettingsVC(segue: UIStoryboardSegue) {
+    @IBAction func onSaveButton(sender: AnyObject) {
+        //check old password
+        
+        guard let newPw = newPwField.text else {
+            let alertController = UIAlertController(title: "Enter new Password", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        if newPw == newPwField2.text
+            && Validation.isValidPassword(newPw) == Validation.pwStatus.succeed {
+            //upload new password
+            self.performSegueWithIdentifier("unwindToSettingsVC", sender: self)
+        }else {
+            let alertController = UIAlertController(title: "New Password not Strong Enough", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
         
     }
-    
     // MARK: - Table view data source
 
     /*

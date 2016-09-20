@@ -37,6 +37,11 @@ class InvitePlanVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindToInvitePlanVC (segue: UIStoryboardSegue) {
+
+    }
+
+    
     func setupTableView() {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
         tableView.estimatedRowHeight = 120
@@ -85,7 +90,9 @@ class InvitePlanVC: UIViewController {
         if let desVC = segue.destinationViewController as? InviteMainVC {
             desVC.plan = plans[selected - 1]
         }
-        
+        if let navVC = segue.destinationViewController as? PlanLibNavVC, let desVC = navVC.topViewController as? PlanLibVC{
+            desVC.from = self
+        }
     }
     
 
@@ -109,14 +116,20 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
             cell.userInteractionEnabled = true
-
+            cell.plan = plans[indexPath.row - 1]
             //remove shadow
             cell.borderView.clipsToBounds = true
-            cell.showStatusView()
-            cell.showLocView()
-            cell.showTimeView()
             cell.showDateView()
-            cell.alpha = 0.7
+
+            //disable the cell
+//            cell.userInteractionEnabled = false
+//            cell.borderView.alpha = 0.5
+            
+            //show these views if the invitation is sent and not selectable
+//            cell.showLocView()
+//            cell.showTimeView()
+//            cell.showStatusView()
+
             return cell
         }
     }

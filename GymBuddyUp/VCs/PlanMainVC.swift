@@ -25,7 +25,7 @@ class PlanMainVC: UIViewController {
     var plans = [NSDate: [Plan]]()
     var selectedDate: NSDate!
     
-    let insetColor = ColorScheme.greyText
+    let insetColor = ColorScheme.g3Text
     let tintColor = ColorScheme.p1Tint
     
     override func viewDidLoad() {
@@ -233,11 +233,11 @@ class PlanMainVC: UIViewController {
     }
     
     @IBAction func onMonthButton(sender: AnyObject) {
-        calendarView.changeMode(.MonthView)
-        UIView.animateWithDuration(0.3, animations: {
-            self.tableView.alpha = 0
-            self.addPlanView.alpha = 0
-        })
+//        calendarView.changeMode(.MonthView)
+//        UIView.animateWithDuration(0.3, animations: {
+//            self.tableView.alpha = 0
+//            self.addPlanView.alpha = 0
+//        })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
         print("on today button")

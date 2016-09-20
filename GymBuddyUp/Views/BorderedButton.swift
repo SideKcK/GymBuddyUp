@@ -14,9 +14,10 @@ class BorderedButton: UIButton {
         super.init(coder: aDecoder)
         titleLabel?.textColor = textColor
         backgroundColor = UIColor.clearColor()
-        layer.cornerRadius = 15
+        layer.cornerRadius = frame.height / 2.0
         layer.borderWidth = 1
         layer.borderColor = titleLabel?.textColor.CGColor
+        titleLabel?.font = FontScheme.T1
         
     }
     

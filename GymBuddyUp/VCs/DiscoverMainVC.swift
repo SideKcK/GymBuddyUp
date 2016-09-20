@@ -272,7 +272,7 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
         
         self.performSegueWithIdentifier("ToInviteDetailSegue", sender: indexPath.row)
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? WorkoutCell {
-            cell.borderView.backgroundColor = ColorScheme.greyText
+            cell.borderView.backgroundColor = ColorScheme.g3Text
             UIView.animateWithDuration(0.1, delay: 0.3, options: .CurveEaseIn, animations: {
                     cell.borderView.backgroundColor = UIColor.whiteColor()
                 }, completion: nil)

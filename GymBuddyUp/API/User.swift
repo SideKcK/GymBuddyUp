@@ -232,8 +232,6 @@ class User {
                 print(_screenName)
             }
         }
-    
-    
     }
     
     func getMyFriendList(successfulHandler: ([User])->()) {
@@ -370,6 +368,29 @@ class User {
     func update() {
         
     }
+    
+//    class func resetPassword(email:String, completion: ()->Void ) -> Void {
+//        let auth = email
+//    }
+//    
+//    func updatePassword(oldPassword: String, newPassword: String, errorHandler: (NSError?) -> Void) -> Void {
+//        let email = firUser?.email
+//        if email == nil {
+//            return errorHandler()
+//        }
+//        
+//        let oldCredential = FIREmailPasswordAuthProvider.credentialWithEmail(email!, password: oldPassword)
+//        firUser?.reauthenticateWithCredential(oldCredential, completion: { (error) in
+//            if error != nil {
+//                errorHandler(error)
+//            }
+//            else {
+//                self.firUser?.updatePassword(newPassword, completion: { (error) in
+//                    errorHandler(error)
+//                })
+//            }
+//        })
+//    }
     
     func getTokenForcingRefresh(completion: (token:String?, error:NSError?) -> Void) {
         firUser?.getTokenForcingRefresh(true) {idToken, error in

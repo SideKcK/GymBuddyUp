@@ -139,5 +139,10 @@ class Friend {
             
         })
     }
+    
+    class func discoverNearbyUsers(location: CLLocation, withinMiles: Int = 20)
+    {
+        
+    }
 }
 

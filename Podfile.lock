@@ -1,12 +1,7 @@
 PODS:
   - Alamofire (3.5.0)
-<<<<<<< HEAD
   - AlamofireImage (2.5.0):
     - Alamofire (~> 3.5)
-=======
-  - AlamofireImage (2.4.1):
-    - Alamofire (~> 3.3)
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
   - ALTextInputBar (1.1.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -80,14 +75,9 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-<<<<<<< HEAD
   - KRProgressHUD (1.7.0)
-=======
-  - KRProgressHUD (1.6.2)
   - ObjectMapper (1.4.0)
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
   - SwiftDate (3.0.8)
-  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -106,38 +96,13 @@ DEPENDENCIES:
   - GooglePlaces (~> 2.0.1)
   - HMSegmentedControl (= 1.5.2)
   - JSQMessagesViewController
-<<<<<<< HEAD
   - KRProgressHUD (= 1.7.0)
-=======
-  - KRProgressHUD (from `https://github.com/krimpedance/KRProgressHUD.git`)
-  - ObjectMapper
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
+  - ObjectMapper (< 1.5.0)
   - SwiftDate
-  - SwiftyJSON
 
-<<<<<<< HEAD
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   AlamofireImage: 2d34936e5201270bb17a316a786e90e83b4a249d
-=======
-EXTERNAL SOURCES:
-  CVCalendar:
-    :git: https://github.com/Mozharovsky/CVCalendar.git
-  KRProgressHUD:
-    :git: https://github.com/krimpedance/KRProgressHUD.git
-
-CHECKOUT OPTIONS:
-  CVCalendar:
-    :commit: 48f7fdea992f7d1bbcc40befe75c76ebd1467de1
-    :git: https://github.com/Mozharovsky/CVCalendar.git
-  KRProgressHUD:
-    :commit: c2a1267492846f13be268e0634850ad6d42c11cf
-    :git: https://github.com/krimpedance/KRProgressHUD.git
-
-SPEC CHECKSUMS:
-  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
-  AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
   ALTextInputBar: b1ee2db624abc30ce3bb9c38562d283d6f6e9033
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -162,19 +127,10 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-<<<<<<< HEAD
   KRProgressHUD: eb23a52e98069190660e33167e870cf2d80a435f
-=======
-  KRProgressHUD: d6de2aa1120e3bbdc6fadf89a3157371648bc156
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 4f42df2536956fd14e0206bffdd0e8d4b089ecec
-=======
-PODFILE CHECKSUM: 842cdc6fc83c2e26ff766018b8e27ae9da604145
->>>>>>> c6249edcf81b8ca39a6b7a088959eb02d746ec38
+PODFILE CHECKSUM: 88cf974e384d92d28db3804b08cf824672a8e1da
 
 COCOAPODS: 1.0.1

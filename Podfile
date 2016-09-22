@@ -11,11 +11,10 @@ target 'GymBuddyUp' do
     pod 'CVCalendar', '1.3.1'
     pod 'HMSegmentedControl', '1.5.2'
     pod 'GooglePlaces', '~> 2.0.1'
-    pod 'ObjectMapper'
+    pod 'ObjectMapper', '<1.5.0'
     
     pod 'SwiftDate'
     pod 'KRProgressHUD', '1.7.0'
-    pod 'SwiftyJSON'
     
     pod 'Firebase'
     pod 'Firebase/Auth'

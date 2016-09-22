@@ -16,6 +16,7 @@ class InviteMainVC: UIViewController {
     var gym: Gym!
     var sendTo = "Direct Invite"
     var plan: Plan!
+    var workoutId: String?
     
     var segViews : [UIView]!
     var gymButton : UIButton!

@@ -11,7 +11,6 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 import SwiftDate
-import SwiftyJSON
 import ObjectMapper
 
 private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()

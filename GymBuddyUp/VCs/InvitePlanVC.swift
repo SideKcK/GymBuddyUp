@@ -15,6 +15,7 @@ class InvitePlanVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var plans = [Plan]()
+    var workouts = [ScheduledWorkout]()
     var selectedDate = NSDate()
     var selected = -1
     let dateFormatter = NSDateFormatter()
@@ -75,6 +76,7 @@ class InvitePlanVC: UIViewController {
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {
+                        self.workouts = workouts
                         self.plans = plans
                         self.tableView.reloadData()
                         self.selected = -1
@@ -122,6 +124,8 @@ class InvitePlanVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
             desVC.plan = plans[selected - 1]
+            desVC.workoutId = workouts[selected - 1].id
+            Log.info("workout Id = \(workouts[selected - 1].id)")
         }
         if let navVC = segue.destinationViewController as? PlanLibNavVC, let desVC = navVC.topViewController as? PlanLibVC{
             desVC.from = self

@@ -11,13 +11,23 @@ import UIKit
 class InviteBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var buddies = ["Jesiah", "You", "Aaron"]//TODO change to User
+    var buddies = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        loadData()
         // Do any additional setup after loading the view.
+    }
+    
+    func loadData() {
+        User.currentUser?.getMyFriendList({ (users: [User]) in
+            self.buddies = users
+            self.tableView.reloadData()
+            self.title = "Buddies ("+String(self.buddies.count)+")"
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +42,7 @@ class InviteBuddiesVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
-            desVC.sendTo = sender as! String
+            desVC.sendToUser = sender as? User
         }
     }
 
@@ -45,7 +55,11 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCell", forIndexPath: indexPath) as! BuddyCell
-        cell.buddy = buddies[indexPath.row]
+        let index = indexPath.row
+        let buddy = buddies[index]
+        cell.nameLabel.text = buddy.screenName
+        cell.goalLabel.hidden = true
+        cell.gymLabel.hidden = true
         return cell
     }
     

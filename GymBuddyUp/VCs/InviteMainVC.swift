@@ -14,7 +14,7 @@ class InviteMainVC: UIViewController {
 
     var time: NSDate!
     var gym: Gym!
-    var sendTo = "Direct Invite"
+    var sendToUser: User?
     var plan: Plan!
     var workoutId: String?
     
@@ -22,6 +22,14 @@ class InviteMainVC: UIViewController {
     var gymButton : UIButton!
     var showDatePicker = false
     var datePickerHeight: NSLayoutConstraint!
+    
+    enum SendType {
+        case DirectInvitation
+        case BroadcastBuddies
+        case BroadcastPublic
+    }
+    
+    var sendInvitationType: SendType = .BroadcastPublic
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +86,35 @@ class InviteMainVC: UIViewController {
     }
     
     @IBAction func onSendButton(sender: AnyObject) {
-        //send out invitation
-        //        sendInvitation(time: time, loc: gym, audience: sendTo, completion: ({
-        //
-        //        })
-        //        )
+        guard let scheduledWorkoutId = workoutId else {return}
+        switch sendInvitationType {
+        case .DirectInvitation:
+            if let sendTo = sendToUser {
+                Invite.publishWorkoutInviteToUser(sendTo.userId, PlanId: plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                    Log.info("send to \(sendTo.screenName) successfully")
+                })
+            }
+            break
+        case .BroadcastBuddies:
+            Invite.publishWorkoutInviteToFriends(plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                if error == nil {
+                    Log.info("broadcast to friends successfully")
+                }
+            })
+            break
+        case .BroadcastPublic:
+            Invite.publishWorkoutInviteToPublic(plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                if error == nil {
+                    Log.info("broadcast to public successfully")
+                }
+            })
+            break
+        }
+        
+
         self.dismissViewControllerAnimated(true, completion: nil)
         let statusView = StatusView()
-        statusView.setMessage("Invitation at Today, 7:30 PM Sent!")
+        statusView.setMessage("Invitation sent")
         statusView.displayView()
 
     }
@@ -93,9 +122,15 @@ class InviteMainVC: UIViewController {
 
     func segmentedControlValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            sendInvitationType = .DirectInvitation
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
             sendButton.setTitle("Send", forState: .Normal)
         }else {
+            if sender.selectedSegmentIndex == 1 {
+                sendInvitationType = .BroadcastBuddies
+            } else {
+                sendInvitationType = .BroadcastPublic
+            }
             sendButton.setTitle("Broadcast", forState: .Normal)
         }
         
@@ -164,7 +199,11 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCellWithIdentifier("InviteToCell", forIndexPath: indexPath) as! InviteToCell
             segViews = cell.segViews
-            cell.seg.setTitle(sendTo, forSegmentAtIndex: 0)
+            if let sendTo = sendToUser {
+                cell.seg.setTitle(sendTo.screenName, forSegmentAtIndex: 0)
+            } else {
+                cell.seg.setTitle("Direct Invite", forSegmentAtIndex: 0)
+            }
             cell.seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
             return cell
         }

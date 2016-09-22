@@ -116,6 +116,9 @@
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="International Chest Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvT-mw-OoB">
                                 <rect key="frame" x="10" y="45" width="178.5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="a3d-uH-Eip"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -168,6 +171,7 @@
                                 <rect key="frame" x="10" y="15" width="36" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" id="0Vo-KX-vHd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="990" constant="17" id="9sk-yU-QpE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

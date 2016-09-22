@@ -356,14 +356,27 @@ class User {
     }
     
     func updateProfile(attr: AnyObject?, value: AnyObject?) {
+        print(self.userId)
         if let attrName = attr as? String, valueStr = value as? String {
             let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
             let attrRef = ref.child("\(attrName)")
             attrRef.setValue(valueStr)
             Log.info("Done setting attribute")
+        }else if let attrName = attr as? String, valueStr = value as? Int{
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            Log.info("Done setting attribute")
+        }else if let attrName = attr as? String, valueStr = value as? Set<Int>{
+            let valueArray = Array(valueStr)
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueArray)
+            Log.info("Done setting attribute")
         }
         Log.info("no problem til here")
     }
+
     
     func update() {
         

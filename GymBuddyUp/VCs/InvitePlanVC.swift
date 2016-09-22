@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 class InvitePlanVC: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var tableView: UITableView!
 
-    var plans = [Plan()]
+    var plans = [Plan]()
+    var selectedDate = NSDate()
     var selected = -1
+    let dateFormatter = NSDateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,7 @@ class InvitePlanVC: UIViewController {
         setupTableView()
         nextButton.enabled = false
         nextButton.backgroundColor = ColorScheme.g3Text
+        reloadPlans(NSDate())
 
     }
 
@@ -62,9 +67,33 @@ class InvitePlanVC: UIViewController {
         nextButton.titleLabel?.textColor = ColorScheme.g4Text
     }
     
+    
+    func reloadPlans(date: NSDate) {
+        KRProgressHUD.show()
+        
+        ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
+            if let planIds = Plan.planIDsWithArray(workouts) {
+                Library.getPlansById(planIds, completion: { (plans, error) in
+                    if error == nil {
+                        self.plans = plans
+                        self.tableView.reloadData()
+                        self.selected = -1
+                    } else {
+                        print(error)
+                        KRProgressHUD.showError()
+                    }
+                    
+                    KRProgressHUD.dismiss()
+                    
+                })
+            }
+        }
+    }
+    
+    
     @IBAction func onDatePicker(sender: UIDatePicker) {
         let date = sender.date
-        //refresh plans
+        reloadPlans(date)
     }
     
     @IBAction func onCancelButton(sender: AnyObject) {
@@ -74,6 +103,7 @@ class InvitePlanVC: UIViewController {
     func addPlan (sender: UIButton) {
         self.performSegueWithIdentifier("toPlanLibSegue", sender: self)
     }
+    
     @IBAction func onNextButton(sender: AnyObject) {
         if selected == 0 {
             self.performSegueWithIdentifier("toNoPlanCatSegue", sender: self)
@@ -81,6 +111,9 @@ class InvitePlanVC: UIViewController {
             self.performSegueWithIdentifier("toInviteDetailSegue", sender: self)
         }
     }
+    
+    
+    
     
     
     // MARK: - Navigation
@@ -94,8 +127,6 @@ class InvitePlanVC: UIViewController {
             desVC.from = self
         }
     }
-    
-
 }
 
 extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
@@ -115,11 +146,15 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            let index = indexPath.row - 1
             cell.userInteractionEnabled = true
-            cell.plan = plans[indexPath.row - 1]
+            cell.plan = plans[index]
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.showDateView()
+            
+            dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            cell.dateLabel.text = dateFormatter.stringFromDate(selectedDate)
 
             //disable the cell
 //            cell.userInteractionEnabled = false
@@ -137,7 +172,24 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         nextButton.enabled = true
         nextButton.backgroundColor = ColorScheme.p1Tint
+
+        // deselect previous selected items
+        if selected != -1 && selected < plans.count {
+            let selectedIndexPath = NSIndexPath(forRow: selected, inSection: 0)
+            let cellToDeselect = tableView.cellForRowAtIndexPath(selectedIndexPath)
+            if let _cellToDeselect = cellToDeselect as? InviteNoPlanCell {
+                _cellToDeselect.borderView.layer.borderWidth = 0.0
+                
+            }
+            if let _cellToDeselect = cellToDeselect as? WorkoutCell {
+                _cellToDeselect.borderView.layer.borderWidth = 0.0
+                
+            }
+        }
+
+        
         selected = indexPath.row
+        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? InviteNoPlanCell {
             cell.borderView.layer.borderWidth = 2.0
             

@@ -23,6 +23,7 @@ class PlanMainVC: UIViewController {
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
+    var dayPlans = [Plan]()
     var selectedDate: NSDate!
     
     let insetColor = ColorScheme.g3Text
@@ -59,7 +60,7 @@ class PlanMainVC: UIViewController {
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
-        monthButton.title = "< "+CVDate(date: NSDate()).monthDescription
+        monthButton.title = "< " + CVDate(date: NSDate()).monthDescription
         selectedDate = NSDate().startOf(.Day)
         getCalendarWorkouts(selectedDate)
         
@@ -74,7 +75,7 @@ class PlanMainVC: UIViewController {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {
                         self.plans[date] = plans
-                        //reload tableview with plans
+                        // reload tableview with plans
                         if date == self.selectedDate {
                             self.tableView.reloadData()
                         }

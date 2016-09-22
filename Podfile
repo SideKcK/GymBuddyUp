@@ -8,12 +8,12 @@ target 'GymBuddyUp' do
     pod 'ChameleonFramework/Swift', '~> 2.1.0'
     pod 'Alamofire', '~> 3.4'
     pod 'AlamofireImage', '~> 2.4'
-    pod 'CVCalendar', :git => 'https://github.com/Mozharovsky/CVCalendar.git'
-    pod 'HMSegmentedControl'
+    pod 'CVCalendar', '1.3.1'
+    pod 'HMSegmentedControl', '1.5.2'
     pod 'GooglePlaces', '~> 2.0.1'
     
     pod 'SwiftDate'
-    pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
+    pod 'KRProgressHUD', '1.7.0'
     
     pod 'Firebase'
     pod 'Firebase/Auth'

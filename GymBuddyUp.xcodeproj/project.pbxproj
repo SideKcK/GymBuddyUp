@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
+		9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */; };
 		9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */; };
 		9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA91D878FC2000FC787 /* Plan.storyboard */; };
 		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
@@ -136,9 +136,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
-		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
+		5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinVC.swift; sourceTree = "<group>"; };
 		9F4D9DAA1D878FC2000FC787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
 		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
@@ -284,13 +284,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */,
+				9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		885C5EAA3B1098E70E447E3C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */,
+				5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B6F00B701D66B34600B09177 /* GeoFire */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,14 +352,6 @@
 				9FA0DF121D700601003CACEE /* Tracking.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		B72B06C72A1DDA93FB72C229 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C11F64DC1D66592300FFF5DB /* Labels */ = {
@@ -447,8 +448,8 @@
 				B6F00B701D66B34600B09177 /* GeoFire */,
 				C649C5491CE2C31C00258994 /* GymBuddyUp */,
 				C649C5481CE2C31C00258994 /* Products */,
-				E64D904A4C5393EDF14BB71C /* Pods */,
-				B72B06C72A1DDA93FB72C229 /* Frameworks */,
+				885C5EAA3B1098E70E447E3C /* Pods */,
+				CF834469C9C63C7A32775520 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -654,13 +655,12 @@
 			name = PlanAdd;
 			sourceTree = "<group>";
 		};
-		E64D904A4C5393EDF14BB71C /* Pods */ = {
+		CF834469C9C63C7A32775520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */,
-				4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */,
+				8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,12 +670,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "GymBuddyUp" */;
 			buildPhases = (
-				46D9065C99984273F89B1ECF /* [CP] Check Pods Manifest.lock */,
+				EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */,
 				C649C5431CE2C31C00258994 /* Sources */,
 				C649C5441CE2C31C00258994 /* Frameworks */,
 				C649C5451CE2C31C00258994 /* Resources */,
-				0845A1D7E8F85D4E9DCC1E5D /* [CP] Embed Pods Frameworks */,
-				6E6A1D13611E68A73F14883D /* [CP] Copy Pods Resources */,
+				995C4A9C8BD12A9EA1D79FDB /* [CP] Embed Pods Frameworks */,
+				B18F7A12CA9DC1BF136E170C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -753,7 +753,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0845A1D7E8F85D4E9DCC1E5D /* [CP] Embed Pods Frameworks */ = {
+		995C4A9C8BD12A9EA1D79FDB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -768,22 +768,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		46D9065C99984273F89B1ECF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6E6A1D13611E68A73F14883D /* [CP] Copy Pods Resources */ = {
+		B18F7A12CA9DC1BF136E170C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -796,6 +781,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1082,7 +1082,7 @@
 		};
 		C649C55A1CE2C31C00258994 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */;
+			baseConfigurationReference = 5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1112,12 +1112,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		C649C55B1CE2C31C00258994 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */;
+			baseConfigurationReference = 5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1147,6 +1148,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

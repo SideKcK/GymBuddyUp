@@ -34,8 +34,8 @@ class InviteNoPlanCell: UITableViewCell {
 
         descriptionLabel.textColor = ColorScheme.g2Text
         
-        titleLabel.font = FontScheme.H2
-        descriptionLabel.font = FontScheme.T3
+//        titleLabel.font = FontScheme.H2
+//        descriptionLabel.font = FontScheme.T3
         
         orView.backgroundColor = ColorScheme.g2Text
         orLabel.textColor = ColorScheme.g2Text

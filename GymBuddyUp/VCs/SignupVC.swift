@@ -169,6 +169,11 @@ class SignupVC: UIViewController {
                         }else {
                             print(error)
                             KRProgressHUD.showError()
+                            if(String(error).rangeOfString("ERROR_EMAIL_ALREADY_IN_USE") != nil){
+                                self.errorView.hidden = false
+                                self.errorLabel.hidden = false
+                            }
+
                         }
                     }
                 

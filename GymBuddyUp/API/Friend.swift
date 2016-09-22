@@ -24,12 +24,6 @@ class Friend {
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
     
-    class func testFunction()
-    {
-        isCurrentUserFriendWith("Noh5cGUfhbSSTnS2IDApRmqcSs82") { (status) in
-            print(status)
-        }
-    }
     
     class func sendFriendRequest(recipientId: String, completion: (NSError?) -> Void) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
@@ -138,6 +132,11 @@ class Friend {
             }
             
         })
+    }
+    
+    class func discoverNearbyUsers(location: CLLocation, withinMiles: Int = 20)
+    {
+        
     }
 }
 

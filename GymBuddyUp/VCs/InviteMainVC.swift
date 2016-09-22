@@ -41,6 +41,14 @@ class InviteMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setNavBarItem () {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(InviteMainVC.cancelInvite))
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    func cancelInvite() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
         tableView.estimatedRowHeight = 120

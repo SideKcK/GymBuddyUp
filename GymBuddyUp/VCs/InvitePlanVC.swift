@@ -163,8 +163,9 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
                         cell.userInteractionEnabled = false
                         cell.borderView.alpha = 0.5
                         cell.invite = _invite
-                        cell.showLocView()
-                        cell.showTimeView()
+                        //cell.showTimeView()
+                        //cell.showDateView()
+
                         User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
                             guard let screenName = user[0].screenName else {return}
                             cell.statusLabel.text = "Invitation sent to \(screenName)"
@@ -179,6 +180,9 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.showDateView()
+            cell.showLocView()
+            cell.showStatusView()
+
             
             dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
             cell.dateLabel.text = dateFormatter.stringFromDate(selectedDate)

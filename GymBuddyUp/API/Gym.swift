@@ -9,12 +9,33 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
+import ObjectMapper
 
-class Gym {
+class Gym: Mappable {
     var placeid: String?
     var name: String?
     var location: CLLocation?
     var address: String?
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    
+    // Mappable
+    func mapping(map: Map) {
+        name <- map["name"]
+        address <- map["address"]
+        placeid <- map["place_id"]
+        var lat: Double?
+        var long: Double?
+        lat <- map["lat"]
+        long <- map["long"]
+        if let _lat = lat,
+            let _long = long {
+            location = CLLocation(latitude: _lat, longitude: _long)
+        }
+    }
     
     init () {
         self.name = "test gym"

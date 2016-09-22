@@ -16,6 +16,7 @@ class InvitePlanVC: UIViewController {
 
     var plans = [Plan]()
     var workouts = [ScheduledWorkout]()
+    var invites = [Invite]()
     var selectedDate = NSDate()
     var selected = -1
     let dateFormatter = NSDateFormatter()
@@ -114,10 +115,7 @@ class InvitePlanVC: UIViewController {
         }
     }
     
-    
-    
-    
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -150,9 +148,34 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            cell.clearAllViews()
             let index = indexPath.row - 1
-            cell.userInteractionEnabled = true
             cell.plan = plans[index]
+            let workoutId = workouts[index].id
+            cell.asyncIdentifer = workoutId
+            
+            // async fetch userInfo
+            Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: NSDate(), completion: { (error: NSError?, invite: Invite?) in
+                if let _invite = invite where error == nil {
+                    let asyncId = workoutId
+                    let curCell = cell
+                    if curCell.asyncIdentifer == asyncId {
+                        cell.userInteractionEnabled = false
+                        cell.borderView.alpha = 0.5
+                        cell.invite = _invite
+                        cell.showLocView()
+                        cell.showTimeView()
+                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                            guard let screenName = user[0].screenName else {return}
+                            cell.statusLabel.text = "Invitation sent to \(screenName)"
+                            cell.showStatusView()
+                        })
+                        
+                    }
+                }
+
+            })
+            
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.showDateView()
@@ -161,13 +184,10 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = dateFormatter.stringFromDate(selectedDate)
 
             //disable the cell
-//            cell.userInteractionEnabled = false
-//            cell.borderView.alpha = 0.5
+
             
             //show these views if the invitation is sent and not selectable
-//            cell.showLocView()
-//            cell.showTimeView()
-//            cell.showStatusView()
+
 
             return cell
         }

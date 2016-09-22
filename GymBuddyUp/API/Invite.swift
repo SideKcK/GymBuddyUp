@@ -34,8 +34,7 @@ class Invite : Mappable {
     var accessLevel: Int!
     var publishedTime: NSDate!
     
-    required init?(_ map: Map)
-    {
+    required init?(_ map: Map) {
         
     }
     
@@ -67,21 +66,23 @@ class Invite : Mappable {
                     return completion(nil, nil)
                 }
                 
-                let inviteId:String = snapshot.value as! String
+                if let inviteId:String = snapshot.value as? String {
+                    ref.child("workout_invite").child(inviteId).observeSingleEventOfType(.Value, withBlock: {
+                        (inviteSnapshot)  in
+                        guard let data = inviteSnapshot.value as? [String: AnyObject] else
+                        {
+                            return completion (nil, nil)
+                        }
+                        
+                        var mapData = data
+                        mapData["id"] = inviteId
+                        
+                        completion(nil, Invite(JSON:mapData))
+                        
+                    })
+                }
                 
-                ref.child("workout_invite").child(inviteId).observeSingleEventOfType(.Value, withBlock: {
-                    (inviteSnapshot)  in
-                    guard let data = inviteSnapshot.value as? [String: AnyObject] else
-                    {
-                        return completion (nil, nil)
-                    }
-                    
-                    var mapData = data
-                    mapData["id"] = inviteId
-                    
-                    completion(nil, Invite(JSON:mapData))
-                    
-                })
+
             })
         }
         else {

@@ -70,7 +70,7 @@ class DiscoverMainVC: UIViewController {
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
-        tableView.estimatedRowHeight = 120
+        tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self

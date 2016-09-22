@@ -38,14 +38,33 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
+    var asyncIdentifer = ""
+    
     var imageViews = [UIImageView]()
     var event: PublishedWorkout! {
         didSet {
-            timeLabel.text = weekMonthDateString(event.workoutTime) + ", "+timeString(event.workoutTime)
+            timeLabel.text = weekMonthDateString(event.workoutTime) + ", " + timeString(event.workoutTime)
             gymButton.setTitle(event.gym?.name, forState: .Normal)
             
         }
     }
+    
+    var invite: Invite? {
+        didSet {
+            if let _invite = invite {
+                if let workoutTime = _invite.workoutTime {
+                    timeLabel.text = weekMonthDateString(workoutTime)
+                }
+                
+                if let gymName = _invite.gym?.name {
+                    gymButton.setTitle(gymName, forState: .Normal)
+                }
+                
+            }
+        
+        }
+    }
+    
     var plan: Plan! {
         didSet {
             nameLabel.text = plan.name
@@ -126,6 +145,7 @@ class WorkoutCell: UITableViewCell {
     }
 
     func clearAllViews() {
+        userInteractionEnabled = true
         profileView.hidden = true
         profileLabel.hidden = true
         topContraint.constant = 8

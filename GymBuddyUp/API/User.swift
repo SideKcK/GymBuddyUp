@@ -410,5 +410,4 @@ class User {
         
         User.currentUser = nil
     }
-    
 }

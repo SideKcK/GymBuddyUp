@@ -16,7 +16,7 @@ import ObjectMapper
 
 private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
 private let userInviteRef:FIRDatabaseReference! = ref.child("user_workout_invite")
-private let publishedWorkoutRef:FIRDatabaseReference! = ref.child("published_workout")
+private let workoutInviteRef:FIRDatabaseReference! = ref.child("workout_invite")
 private let publishedWorkoutLocationRef:FIRDatabaseReference! = ref.child("published_workout_location")
 
 
@@ -24,11 +24,16 @@ class Invite : Mappable {
     var id: String!
     var canceledByInviter: Bool!
     var canceledByInvitee: Bool!
+    var isAvailable: Bool!
+
     var gym: Gym?
     var inviterId: String!
     var inviteeId: String?
     var planId: String!
     var workoutTime: NSDate?
+    var sentTo: String!
+    var accessLevel: Int!
+    var publishedTime: NSDate!
     
     required init?(_ map: Map)
     {
@@ -45,6 +50,10 @@ class Invite : Mappable {
         inviteeId <- map["invitee"]
         planId <- map["plan"]
         workoutTime <- (map["workout_time"], DateTransform())
+        sentTo <- map["sent_to"]
+        accessLevel <- map["access"]
+        isAvailable <- map["available"]
+        publishedTime <- (map["published_at"], DateTransform())
     }
     
     
@@ -81,7 +90,7 @@ class Invite : Mappable {
         }
     }
     
-    class func sendWorkoutInviteToUser(recipientId: String, completion: (NSError?) -> Void ) {
+    internal class func sendWorkoutInviteToUser(recipientId: String, inviteId: String, completion: (NSError?) -> Void ) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
             if error != nil {
                 return completion(error)
@@ -90,7 +99,8 @@ class Invite : Mappable {
             let parameters = [
                 "token": idToken!,
                 "operation": "workout_invite_send",
-                "recipientId": recipientId
+                "recipientId": recipientId,
+                "workoutId": inviteId
             ]
             
             Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
@@ -186,60 +196,92 @@ class Invite : Mappable {
         }
     }
     
-    
-    class func publishWorkoutInviteToPublic(PlanId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
+    internal class func publishWorkoutInvite(sendTo: String, planId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void )
+    {
+        var accessLevel = 0
         
-        let workoutRef = publishedWorkoutRef.childByAutoId()
-        let workoutId = workoutRef.key
-        let workoutPath = "/published_workout/\(workoutId)"
-        var workoutData = [String:AnyObject]();
+        switch sendTo {
+        case "public":
+            accessLevel = 2
+            
+        case "friends":
+            accessLevel = 1
         
-        workoutData["workout_time"] = workoutTime.timeIntervalSince1970
-        workoutData["plan"] = PlanId
-        workoutData["scheduled_workout"] = scheduledWorkoutId
-        workoutData["published_at"] = FIRServerValue.timestamp()
-        workoutData["published_by"] = User.currentUser?.userId
-        workoutData["available"] = true
-        workoutData["gym"] = gym.toDictionary()
+        default:
+            accessLevel = 0
+        }
         
-        var userInviteData = [String:AnyObject]();
-        let userInvitePath = "/user_workout_invite/\(User.currentUser!.userId)/\(scheduledWorkoutId):\(dateToString(workoutTime))"
-        userInviteData["access"] = "public"
-        userInviteData["scheduled_workout"] = scheduledWorkoutId
-        userInviteData["invite"] = workoutId
+        // Create a unique ID for this invite.
+        let inviteRef = workoutInviteRef.childByAutoId()
+        let inviteId = inviteRef.key
         
         var inviteData = [String:AnyObject]();
-        let invitePath = "/workout_invite/\(workoutId)"
+        let invitePath = "/workout_invite/\(inviteId)"
         inviteData["inviter"] = User.currentUser?.userId
         inviteData["invitee"] = nil
+        inviteData["sent_to"] = sendTo
+        inviteData["access"] = accessLevel
         inviteData["canceled_by_inviter"] = false
         inviteData["canceled_by_invitee"] = false
-        inviteData["plan"] = PlanId
+        inviteData["plan"] = planId
         inviteData["gym"] = gym.toDictionary()
         inviteData["workout_time"] = workoutTime.timeIntervalSince1970
-
+        inviteData["published_at"] = FIRServerValue.timestamp()
+        inviteData["available"] = true
         
-        let fanoutObject = [workoutPath: workoutData, userInvitePath: userInviteData, invitePath: inviteData]
+        // Create a user_workout_invite node for this user.
+        var userInviteData = [String:AnyObject]();
+        let userInvitePath = "/user_workout_invite/\(User.currentUser!.userId)/\(scheduledWorkoutId):\(dateToString(workoutTime))"
+        userInviteData["sent_to"] = sendTo
+        userInviteData["scheduled_workout"] = scheduledWorkoutId
+        userInviteData["invite"] = inviteId
         
+        // Fanout data to update
+        let fanoutObject = [userInvitePath: userInviteData, invitePath: inviteData]
+        
+        // Update fantout object
         ref.updateChildValues(fanoutObject) { (error, ref) in
             if (error != nil) {
                 return completion(error)
             }
             
-            // figure out where to put location data
-            let date = workoutTime.toString(DateFormat.Custom("yyyy-MM-dd"))
-            let geofire = GeoFire(firebaseRef: publishedWorkoutLocationRef.child(date!))
-            geofire.setLocation(gym.location, forKey: workoutId) { (error) in
-                if error != nil {
-                    print(error)
-                }
+            switch sendTo {
+                
+            case "public" : // if send to public, log additional geolocation data.
+                // figure out where to put location data
+                let date = workoutTime.toString(DateFormat.Custom("yyyy-MM-dd"))
+                let geofire = GeoFire(firebaseRef: publishedWorkoutLocationRef.child(date!))
+                geofire.setLocation(gym.location, forKey: inviteId) { (error) in
+                    if error != nil {
+                        print(error)
+                    }
+                    completion(error)
+                    }
+                
+            case "friends" :
                 completion(error)
+                
+            default: // send to public or a specific user
+                sendWorkoutInviteToUser(sendTo, inviteId: inviteId, completion: { (error) in
+                    print(error)
+                    completion(error)
+                })
             }
         }
     }
     
-    class func publishWorkoutInviteToFriends(completion: (NSError?) -> Void ) {
-        
+    
+    class func publishWorkoutInviteToPublic(planId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
+        publishWorkoutInvite("public", planId: planId, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: workoutTime, completion: completion)
+    }
+    
+    class func publishWorkoutInviteToFriends(planId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
+        publishWorkoutInvite("friends", planId: planId, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: workoutTime, completion: completion)
+    }
+    
+    class func publishWorkoutInviteToUser(sendTo: String, PlanId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void )
+    {
+        publishWorkoutInvite(sendTo, planId: PlanId, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: workoutTime, completion: completion)
     }
     
     class func testfunction()

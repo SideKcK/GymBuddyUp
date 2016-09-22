@@ -670,7 +670,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8d-YY-uco">
-                                                    <rect key="frame" x="133" y="7" width="55" height="30"/>
+                                                    <rect key="frame" x="12" y="7" width="297" height="30"/>
                                                     <state key="normal" title="Log Out"/>
                                                     <connections>
                                                         <action selector="onLogOutButton:" destination="K6F-Px-taC" eventType="touchUpInside" id="6R4-qa-IWm"/>
@@ -679,6 +679,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="p8d-YY-uco" firstAttribute="centerY" secondItem="7Ee-66-Es9" secondAttribute="centerY" id="3em-pz-xZp"/>
+                                                <constraint firstItem="p8d-YY-uco" firstAttribute="leading" secondItem="7Ee-66-Es9" secondAttribute="leading" constant="12" id="Qxw-36-I9W"/>
                                                 <constraint firstItem="p8d-YY-uco" firstAttribute="centerX" secondItem="7Ee-66-Es9" secondAttribute="centerX" id="srL-4t-lEb"/>
                                             </constraints>
                                         </tableViewCellContentView>

@@ -132,6 +132,9 @@ class SignupVC: UIViewController {
         UIView.animateWithDuration(1.0) {
             self.centerLine.constant += 40
         }
+    }
+    
+    @IBAction func onEditChanged(sender: AnyObject) {
 
         if !emailField.text!.isEmpty &&
             !passwordField.text!.isEmpty &&

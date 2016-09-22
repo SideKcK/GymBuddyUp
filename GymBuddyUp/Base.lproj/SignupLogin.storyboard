@@ -218,8 +218,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                 <connections>
+                                    <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="3ad-ds-m6i"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="4fL-iF-iIE"/>
-                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="Z0Z-hj-spH"/>
+                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="csV-r0-o3o"/>
                                     <action selector="onEmailDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="1G3-v0-LxG"/>
                                 </connections>
                             </textField>
@@ -231,8 +232,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="FFQ-be-IVw"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="gR6-U2-dUd"/>
-                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="Bdp-qV-19I"/>
+                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="YiD-lY-Ip8"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kvs-30-Vrt">
@@ -243,8 +245,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
+                                    <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="SCz-b8-JgH"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="VWX-Kh-lAf"/>
-                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="fEb-sg-ceu"/>
+                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="59Z-Rj-CJh"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xTp-6q-LSu" userLabel="Confirm Field">
@@ -255,8 +258,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
+                                    <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="fxb-Iw-gMq"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="I0C-ce-U8k"/>
-                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="Yi9-01-Wic"/>
+                                    <action selector="onEditDidEnd:" destination="403-DD-fB4" eventType="editingDidEnd" id="snu-u3-gqI"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This email has been registered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCf-2y-xcx">
@@ -386,7 +390,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="onEditDidEnd:" destination="Tlx-dY-81w" eventType="editingDidEnd" id="ZaO-AG-wGV"/>
+                                    <action selector="onEditDidEnd:" destination="Tlx-dY-81w" eventType="editingChanged" id="Fye-4d-ouA"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tib-f9-oOz">
@@ -398,7 +402,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="onEditDidEnd:" destination="Tlx-dY-81w" eventType="editingDidEnd" id="yJM-TR-Gz9"/>
+                                    <action selector="onEditDidEnd:" destination="Tlx-dY-81w" eventType="editingChanged" id="neb-Do-ABr"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hna-4K-mZf">
@@ -906,7 +910,7 @@
         <image name="male_icon" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="50U-d8-CRs"/>
-        <segue reference="Bna-CU-LTl"/>
+        <segue reference="ujo-k8-446"/>
+        <segue reference="oZ1-zv-yLD"/>
     </inferredMetricsTieBreakers>
 </document>

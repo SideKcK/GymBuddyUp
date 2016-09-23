@@ -41,7 +41,7 @@ class WorkoutCell: UITableViewCell {
     var asyncIdentifer = ""
     
     var imageViews = [UIImageView]()
-    var event: PublishedWorkout! {
+    var event: Invite! {
         didSet {
             timeLabel.text = weekMonthDateString(event.workoutTime) + ", " + timeString(event.workoutTime)
             gymButton.setTitle(event.gym?.name, forState: .Normal)

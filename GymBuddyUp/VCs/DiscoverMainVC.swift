@@ -23,7 +23,7 @@ class DiscoverMainVC: UIViewController {
     
     var locationManager: CLLocationManager!
     var currentLocation = CLLocation()
-    var events = [PublishedWorkout]()
+    var events = [Invite]()
     var plans = [Plan]()
     var showPublic = false
     

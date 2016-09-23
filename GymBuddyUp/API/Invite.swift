@@ -29,7 +29,7 @@ class Invite : Mappable {
     var inviterId: String!
     var inviteeId: String?
     var planId: String!
-    var workoutTime: NSDate?
+    var workoutTime: NSDate!
     var sentTo: String!
     var accessLevel: Int!
     var publishedTime: NSDate!
@@ -81,8 +81,6 @@ class Invite : Mappable {
                         
                     })
                 }
-                
-
             })
         }
         else {
@@ -232,8 +230,10 @@ class Invite : Mappable {
         // Create a user_workout_invite node for this user.
         var userInviteData = [String:AnyObject]();
         let userInvitePath = "/user_workout_invite/\(User.currentUser!.userId)/\(scheduledWorkoutId):\(dateToString(workoutTime))"
+        userInviteData["access"] = accessLevel
         userInviteData["sent_to"] = sendTo
         userInviteData["scheduled_workout"] = scheduledWorkoutId
+        userInviteData["workout_time"] = workoutTime.timeIntervalSince1970
         userInviteData["invite"] = inviteId
         
         // Fanout data to update

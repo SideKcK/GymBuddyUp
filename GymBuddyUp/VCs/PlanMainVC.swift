@@ -553,7 +553,8 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     tableView.beginUpdates()
                     cell.invite = _invite
                     cell.borderView.clipsToBounds = true
-                    cell.showDateView()
+//                    cell.showDateView()
+                    cell.showTimeView()
                     cell.showLocView()
                     cell.showStatusView()
                     cell.setNeedsLayout()

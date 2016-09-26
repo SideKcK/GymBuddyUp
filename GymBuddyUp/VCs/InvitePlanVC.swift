@@ -167,6 +167,7 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
                         //remove shadow
                         tableView.beginUpdates()
                         cell.borderView.clipsToBounds = true
+                        cell.showTimeView()
                         cell.showDateView()
                         cell.showLocView()
                         cell.showStatusView()

@@ -53,8 +53,7 @@ class WorkoutCell: UITableViewCell {
         didSet {
             if let _invite = invite {
                 if let workoutTime = _invite.workoutTime {
-                    timeLabel.text = weekMonthDateString(workoutTime)
-                    Log.info("\(timeLabel.text)")
+                    timeLabel.text = weekMonthDateString(workoutTime) + ", " + timeString(workoutTime)
                 }
                 
                 if let gymName = _invite.gym?.name {

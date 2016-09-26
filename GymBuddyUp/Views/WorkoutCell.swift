@@ -54,6 +54,7 @@ class WorkoutCell: UITableViewCell {
             if let _invite = invite {
                 if let workoutTime = _invite.workoutTime {
                     timeLabel.text = weekMonthDateString(workoutTime)
+                    Log.info("\(timeLabel.text)")
                 }
                 
                 if let gymName = _invite.gym?.name {
@@ -145,6 +146,7 @@ class WorkoutCell: UITableViewCell {
     }
 
     func clearAllViews() {
+        Log.info("clearAllViews")
         userInteractionEnabled = true
         profileView.hidden = true
         profileLabel.hidden = true

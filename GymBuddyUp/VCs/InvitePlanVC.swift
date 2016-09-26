@@ -45,7 +45,7 @@ class InvitePlanVC: UIViewController {
     }
     
     @IBAction func unwindToInvitePlanVC (segue: UIStoryboardSegue) {
-
+        reloadPlans(NSDate())
     }
 
     
@@ -58,8 +58,8 @@ class InvitePlanVC: UIViewController {
     }
     
     func setupDatepicker() {
-        datePicker.minimumDate = NSDate()
-        datePicker.maximumDate = (1.months).fromNow()
+//        datePicker.minimumDate = NSDate()
+//        datePicker.maximumDate = (1.months).fromNow()
     }
     
     func setupVisual() {
@@ -153,35 +153,41 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
             cell.plan = plans[index]
             let workoutId = workouts[index].id
             cell.asyncIdentifer = workoutId
-            
+
             // async fetch userInfo
             Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: NSDate(), completion: { (error: NSError?, invite: Invite?) in
                 if let _invite = invite where error == nil {
+                    Log.info("async 1")
                     let asyncId = workoutId
                     let curCell = cell
                     if curCell.asyncIdentifer == asyncId {
                         cell.userInteractionEnabled = false
                         cell.borderView.alpha = 0.5
                         cell.invite = _invite
-                        //cell.showTimeView()
-                        //cell.showDateView()
+                        //remove shadow
+                        tableView.beginUpdates()
+                        cell.borderView.clipsToBounds = true
+                        cell.showDateView()
+                        cell.showLocView()
+                        cell.showStatusView()
+                        cell.layoutIfNeeded()
+                        cell.layoutSubviews()
+                        tableView.endUpdates()
+                        Log.info("senTo = \(_invite.sentTo)")
+                        if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                            User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                guard let screenName = user[0].screenName else {return}
+                                cell.statusLabel.text = "Invitation sent to \(screenName)"
+                            })
+                        } else {
+                            cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                        }
 
-                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
-                            guard let screenName = user[0].screenName else {return}
-                            cell.statusLabel.text = "Invitation sent to \(screenName)"
-                            cell.showStatusView()
-                        })
                         
                     }
                 }
 
             })
-            
-            //remove shadow
-            cell.borderView.clipsToBounds = true
-            cell.showDateView()
-            cell.showLocView()
-            cell.showStatusView()
 
             
             dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle

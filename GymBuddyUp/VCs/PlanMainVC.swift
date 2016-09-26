@@ -222,7 +222,7 @@ class PlanMainVC: UIViewController {
     
     
     @IBAction func unwindToPlanMainVC(segue: UIStoryboardSegue) {
-        
+        self.reloadPlans(self.selectedDate)
     }
     
     func onGymButton (sender: UIButton) {
@@ -533,10 +533,50 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
-        guard let dayPlans = plans[selectedDate] else {
+        guard let dayPlans = plans[selectedDate], dayWorkouts = workouts[selectedDate] else {
             return cell
         }
-        cell.plan = dayPlans[indexPath.row]
+        let index = indexPath.row
+        cell.clearAllViews()
+        cell.plan = dayPlans[index]
+        let workoutId = dayWorkouts[index].id
+        
+        cell.asyncIdentifer = workoutId
+        
+        // async fetch userInfo
+        Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: selectedDate, completion: { (error: NSError?, invite: Invite?) in
+            if let _invite = invite where error == nil {
+                let asyncId = workoutId
+                let curCell = cell
+                if curCell.asyncIdentifer == asyncId {
+                    //remove shadow
+                    tableView.beginUpdates()
+                    cell.invite = _invite
+                    cell.borderView.clipsToBounds = true
+                    cell.showDateView()
+                    cell.showLocView()
+                    cell.showStatusView()
+                    cell.setNeedsLayout()
+                    cell.layoutIfNeeded()
+                    cell.layoutSubviews()
+                    tableView.endUpdates()
+                    Log.info("senTo = \(_invite.sentTo)")
+                    if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                            guard let screenName = user[0].screenName else {return}
+                            cell.statusLabel.text = "Invitation sent to \(screenName)"
+                        })
+                    } else {
+                        cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                    }
+                    
+                    
+                }
+            }
+            
+        })
+
+        
         cell.showMoreButton()
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)

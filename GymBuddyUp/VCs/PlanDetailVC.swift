@@ -125,8 +125,8 @@ class PlanDetailVC: UIViewController {
         }else{
             tableView.hidden = isEmpty
             let currentDate = NSDate()
-            if(selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)){
-                workoutButton.hidden = true
+            if(dateToString(selectedDate) == dateToString(currentDate)){
+                workoutButton.hidden = false
             }else{
                 workoutButton.hidden = isTracked
             }

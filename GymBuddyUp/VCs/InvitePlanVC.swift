@@ -18,7 +18,7 @@ class InvitePlanVC: UIViewController {
     var workouts = [ScheduledWorkout]()
     var invites = [Invite]()
     var selectedDate = NSDate()
-    var selected = -1
+    var selected = 0
     let dateFormatter = NSDateFormatter()
     
     override func viewDidLoad() {
@@ -28,8 +28,8 @@ class InvitePlanVC: UIViewController {
         setupVisual()
         setupDatepicker()
         setupTableView()
-        nextButton.enabled = false
-        nextButton.backgroundColor = ColorScheme.g3Text
+        nextButton.enabled = true
+        nextButton.backgroundColor = ColorScheme.p1Tint
         reloadPlans(NSDate())
 
     }
@@ -58,7 +58,7 @@ class InvitePlanVC: UIViewController {
     }
     
     func setupDatepicker() {
-//        datePicker.minimumDate = NSDate()
+        datePicker.minimumDate = NSDate()
 //        datePicker.maximumDate = (1.months).fromNow()
     }
     
@@ -67,6 +67,7 @@ class InvitePlanVC: UIViewController {
         datePicker.backgroundColor = ColorScheme.s4Bg
         nextButton.backgroundColor = ColorScheme.p1Tint
         nextButton.titleLabel?.textColor = ColorScheme.g4Text
+
     }
     
     
@@ -80,7 +81,7 @@ class InvitePlanVC: UIViewController {
                         self.workouts = workouts
                         self.plans = plans
                         self.tableView.reloadData()
-                        self.selected = -1
+                        self.selected = 0
                     } else {
                         print(error)
                         KRProgressHUD.showError()
@@ -140,7 +141,7 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("noPlanCell", forIndexPath: indexPath) as! InviteNoPlanCell
-            
+            cell.borderView.layer.borderWidth = 2.0
             return cell
         }else if indexPath.row == plans.count + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("addPlanCell", forIndexPath: indexPath) as! InviteAddPlanCell
@@ -205,11 +206,10 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        nextButton.enabled = true
-        nextButton.backgroundColor = ColorScheme.p1Tint
+
 
         // deselect previous selected items
-        if selected != -1 && selected < plans.count {
+        if selected < plans.count {
             let selectedIndexPath = NSIndexPath(forRow: selected, inSection: 0)
             let cellToDeselect = tableView.cellForRowAtIndexPath(selectedIndexPath)
             if let _cellToDeselect = cellToDeselect as? InviteNoPlanCell {

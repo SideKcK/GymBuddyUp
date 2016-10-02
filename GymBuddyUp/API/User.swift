@@ -336,8 +336,9 @@ class User {
     
     func cacheUserPhoto(url: NSURL)
     {
-        let data = NSData(contentsOfURL: url)
-        self.cachedPhoto = UIImage(data: data!)?.imageScaledToSize(CGSizeMake(500, 500))
+        if let data = NSData(contentsOfURL: url) {
+        self.cachedPhoto = UIImage(data: data)?.imageScaledToSize(CGSizeMake(500, 500))
+        }
     }
     
     func updateProfilePicture(photoURL: NSURL?, errorHandler: (NSError?)->Void) {

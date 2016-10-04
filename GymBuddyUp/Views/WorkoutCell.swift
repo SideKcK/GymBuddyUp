@@ -145,6 +145,7 @@ class WorkoutCell: UITableViewCell {
     }
 
     func clearAllViews() {
+        borderView.alpha = 1
         Log.info("clearAllViews")
         userInteractionEnabled = true
         profileView.hidden = true

@@ -15,6 +15,8 @@ class NoPlanCatVC: UIViewController {
     //the selected plan
     var plan = Plan()
     var cats = ["Shoulder", "Arms", "Chest", "Abs", "Back", "Leg", "Cardio"]
+    var date: NSDate?
+    var workoutId: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +47,10 @@ class NoPlanCatVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
             desVC.plan = sender as! Plan
+            if let selectedDate = date, workoutId = workoutId {
+                desVC.time = selectedDate
+                desVC.workoutId = workoutId
+            }
         }
         
     }

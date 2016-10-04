@@ -60,7 +60,8 @@ class PlanMainVC: UIViewController {
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
-        monthButton.title = "< " + CVDate(date: NSDate()).monthDescription
+        title = CVDate(date: NSDate()).monthDescription
+        //monthButton.title = "< " + CVDate(date: NSDate()).monthDescription
         selectedDate = NSDate().startOf(.Day)
         getCalendarWorkouts(selectedDate)
         
@@ -433,7 +434,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
             print("select day view")
             calendarView.changeMode(.WeekView)
         }
-
+        title = dayView.date.monthDescription
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
         todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
@@ -552,7 +553,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     //remove shadow
                     tableView.beginUpdates()
                     cell.invite = _invite
-                    cell.borderView.clipsToBounds = true
+                    //cell.borderView.clipsToBounds = true
 //                    cell.showDateView()
                     cell.showTimeView()
                     cell.showLocView()

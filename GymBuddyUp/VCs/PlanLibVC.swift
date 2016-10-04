@@ -13,6 +13,7 @@ class PlanLibVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var cats: [MidCat]?
     var selectedCat: MidCat?
+    var date = NSDate()
     var from: UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()

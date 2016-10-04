@@ -34,11 +34,20 @@ class InviteDateCell: UITableViewCell {
         datePicker.backgroundColor = ColorScheme.s4Bg
     }
     
+    func setDate(date: NSDate) {
+        datePicker.datePickerMode = UIDatePickerMode.Time
+        datePicker.addTarget(self, action: #selector(InviteDateCell.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.minimumDate = date
+        
+        //change the date to actual date selected
+        dateButton.setTitle(dateTimeFormatter().stringFromDate(date), forState: UIControlState.Normal)
+        
+    }
+    
     func setDate() {
         datePicker.datePickerMode = UIDatePickerMode.Time
         datePicker.addTarget(self, action: #selector(InviteDateCell.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         datePicker.minimumDate = NSDate()
-        
         //change the date to actual date selected
         dateButton.setTitle(dateTimeFormatter().stringFromDate(NSDate()), forState: UIControlState.Normal)
         

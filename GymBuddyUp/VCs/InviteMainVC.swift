@@ -36,8 +36,9 @@ class InviteMainVC: UIViewController {
         //load default gym, show on gym label
         
         //default time
-        time = NSDate()
         setupTableView()
+        
+        Log.info("InviteMainVC fired")
         
         if gym != nil {
             enableSendButton()
@@ -186,6 +187,7 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("InviteDateCell", forIndexPath: indexPath) as! InviteDateCell
             cell.dateButton.addTarget(self, action: #selector(InviteMainVC.onDateButton(_:)), forControlEvents: .TouchUpInside)
+            cell.setDate(time)
             datePickerHeight = cell.datePickerHeight
             return cell
         }

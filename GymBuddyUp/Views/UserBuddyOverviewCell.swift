@@ -16,7 +16,7 @@ class UserBuddyOverviewCell: UITableViewCell {
     var user: User! {
         didSet {
             if let buddyNum = user.buddyNum {
-                self.buddyNumLabel.text = String(buddyNum)
+                //self.buddyNumLabel.text = String(buddyNum)
             }else {
                 print("error cannot get user buddy num")
                 return

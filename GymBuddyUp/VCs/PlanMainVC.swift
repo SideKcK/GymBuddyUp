@@ -562,6 +562,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     cell.layoutSubviews()
                     tableView.endUpdates()
                     Log.info("senTo = \(_invite.sentTo)")
+                    if _invite.sentTo != nil{
                     if _invite.sentTo != "public" && _invite.sentTo != "friends" {
                         User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
                             guard let screenName = user[0].screenName else {return}
@@ -570,7 +571,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     } else {
                         cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
                     }
-                    
+                    }
                     
                 }
             }

@@ -44,6 +44,9 @@ class PlanDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkinButton.hidden = true
+        checkinImage.hidden = true
+        checkinLabel.hidden = true
         self.title = weekMonthDateString(selectedDate)
         let currentDate = NSDate()
         let getTrackedItemGroup = dispatch_group_create()
@@ -116,25 +119,34 @@ class PlanDetailVC: UIViewController {
         findButton.hidden = invited
         let isEmpty = checkIsEmptyExercise()
         let isTracked = checkIsTracked()
+        var allowStart = true
+        let currentDate = NSDate()
+        if(dateToString(selectedDate) != dateToString(currentDate)){
+            allowStart = false
+        }
         if(isEmpty){
             tableView.hidden = isEmpty
             workoutButton.hidden = isEmpty
-            checkinButton.hidden = isTracked
+            if(allowStart){
+                checkinButton.hidden = isTracked
+            }else{
+                checkinButton.hidden = true
+            }
             checkinImage.hidden = !isTracked
             checkinLabel.hidden = !isTracked
         }else{
             tableView.hidden = isEmpty
-            let currentDate = NSDate()
-            if(selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)){
-                workoutButton.hidden = true
-            }else{
+            if(allowStart){
                 workoutButton.hidden = isTracked
+            }else{
+                workoutButton.hidden = true
             }
             checkinButton.hidden = !isEmpty
             checkinImage.hidden = !isEmpty
             checkinLabel.hidden = !isEmpty
             
         }
+        
         setStatusBar()
         
     }

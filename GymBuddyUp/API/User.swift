@@ -48,6 +48,7 @@ struct UserInfo {
     var photoURL: NSURL?
     var screenName: String?
     var gender:Gender
+    var goals: [Goal]?
 }
 
 
@@ -87,7 +88,7 @@ class User {
     
     
     private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("users")
-    private let storageRef = FIRStorage.storage().reference()
+    private let storageRef = FIRStorage.storage().reference().child("user")
     
     var userId: String!
     var photoURL: NSURL?
@@ -107,13 +108,15 @@ class User {
     var buddyNum: Int?
     
     var goal: Goal?
+    var goals: [Goal]?
     var gym: String?
-    var description: String? {
+    var description: String? 
+    /*var description: String? {
         get {
             
             return self.userRef?.valueForKey("description") as? String
         }
-    }
+    }*/
     
     var distance: Double?
     var sameInterestNum: Int?
@@ -133,13 +136,13 @@ class User {
         self.userRef = ref.child(user.uid)
         
         // custom properties
-        self.workoutNum = 0
+        self.workoutNum = 10
         self.starNum = 21
         self.dislikeNum = 10
         self.buddyNum = 20
         self.goal = .KeepFit
         self.gym = "Not Specified"
-        
+        self.goals = []
         // TODO: figure out bast logic for photo caching.
         if (self.photoURL != nil) {
             updateProfilePicture(self.photoURL) { error in }
@@ -151,8 +154,15 @@ class User {
     
     init (snapshot: FIRDataSnapshot) {
         self.userId = snapshot.key
-        if let _screenName = snapshot.value!["screenName"] as? String {
+        if let _screenName = snapshot.value!["screen_name"] as? String {
             self.screenName = _screenName
+        }
+        
+        if let _goals = snapshot.value!["goal"] as? [Int] {
+            for key in _goals{
+                self.goals?.append(Goal(rawValue: key)!)
+                print(String(key))
+            }
         }
         self.userRef = ref.child(self.userId)
     }
@@ -227,9 +237,27 @@ class User {
     func syncWithLastestUserInfo() {
         let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
         ref.child(userId).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
-            if let _screenName = snapshot.value?["screenName"] as? String {
+            if let _screenName = snapshot.value?["screen_name"] as? String {
                 self.screenName = _screenName
                 print(_screenName)
+            }
+            if let _goals = snapshot.value?["goal"] as? [Int] {
+                for key in _goals{
+                    self.goals?.append(Goal(rawValue: key)!)
+                    //print(String(key))
+                }
+            }
+            if let _gym = snapshot.value?["gym"] as? String {
+                GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
+                    if error == nil {
+                        if(gym != nil){
+                            self.gym = gym!.name
+                            print(gym!.name)
+                        }
+                    }else {
+                        print(error)
+                    }
+                }
             }
         }
     }
@@ -355,7 +383,7 @@ class User {
         }
     }
     
-    func updateProfile(attr: AnyObject?, value: AnyObject?) {
+    /*func updateProfile(attr: AnyObject?, value: AnyObject?) {
         print(self.userId)
         if let attrName = attr as? String, valueStr = value as? String {
             let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
@@ -375,8 +403,58 @@ class User {
             Log.info("Done setting attribute")
         }
         Log.info("no problem til here")
-    }
+    }*/
 
+    
+    func updateProfile(attr: AnyObject?, value: AnyObject?) {
+        
+        let attrName = attr as! String
+        switch attrName {
+            
+        case "screen_name":
+            let valueStr = value as? String
+            self.screenName = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            
+        case "goal":
+            if let valueStr = value as? Set<Int>{
+                let valueArray = Array(valueStr)
+                self.goals = []
+                for key in valueArray{
+                    self.goals?.append(Goal(rawValue: key)!)
+                }
+                
+                let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+                let attrRef = ref.child("\(attrName)")
+                attrRef.setValue(valueArray)
+                Log.info("Done setting attribute")
+            }
+        case "gender":
+            let valueStr = value as? Int
+            self.gender = Gender(rawValue: valueStr!)
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+        case "description":
+            let valueStr = value as? String
+            self.description = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+        case "gym":
+            let valueStr = value as? String
+            self.gym = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+        default:
+            Log.info("no attr matches")
+        }
+        
+        Log.info("no problem til here")
+    }
     
     func update() {
         

@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol updateMeDelegate {
+    optional func syncAfterUpdateMe()
+}
+
 class MeUpdateVC: UITableViewController {
     @IBOutlet weak var weightButton: UIButton!
     @IBOutlet weak var muscleButton: UIButton!
@@ -19,17 +23,21 @@ class MeUpdateVC: UITableViewController {
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var thumbView: UIImageView!
 
+    @IBOutlet weak var screenNameField: UITextField!
+    
+    var user: User!
     var gym: Gym!
     var selected = Set<Int>()
     var tintColor = ColorScheme.p1Tint
+    var delegate: updateMeDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //for testing
-        selected.insert(2)
         
         setupVisual()
         setupButtons()
-        
+        setupInfo()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,7 +52,37 @@ class MeUpdateVC: UITableViewController {
     }
 
     @IBAction func unwindToMeUpdateVC(segue: UIStoryboardSegue) {
-        
+        print(gym.name)
+    }
+    
+    func setupInfo(){
+        screenNameField.text = user.screenName
+        if let _goals = user.goals {
+            for goal in _goals {
+                
+                if(goal.rawValue == 0){
+                    //weightButton.selected = true
+                    print("0")
+                    buttonClicked(weightButton)
+                }else if(goal.rawValue == 1){
+                   // fitButton.selected = true
+                    print("1")
+                    buttonClicked(fitButton)
+                }else if(goal.rawValue == 2){
+                    print("2")
+                    //funButton.selected = true
+                    buttonClicked(funButton)
+                }else if(goal.rawValue == 3){
+                    print("3")
+                    //muscleButton.selected = true
+                    buttonClicked(muscleButton)
+                }
+            }
+        }
+        gym1Button.setTitle(user.gym, forState: UIControlState.Normal)
+        if let _description = user.description {
+            textView.text = _description
+        }
     }
     
     func setupVisual() {
@@ -119,6 +157,13 @@ class MeUpdateVC: UITableViewController {
     
     @IBAction func onSaveButton(sender: AnyObject) {
         //save changes
+        User.currentUser!.updateProfile("screen_name", value: screenNameField.text)
+        User.currentUser!.updateProfile("goal", value: self.selected)
+        User.currentUser!.updateProfile("description", value: textView.text)
+        if gym != nil{
+            User.currentUser!.updateProfile("gym", value: gym!.placeid)
+        }
+        delegate?.syncAfterUpdateMe!()
         self.performSegueWithIdentifier("unwindToMeMainVC", sender: self)
     }
     

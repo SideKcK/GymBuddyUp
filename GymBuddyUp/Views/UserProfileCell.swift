@@ -31,22 +31,36 @@ class UserProfileCell: UITableViewCell {
     // FIXME: should not put model info in views
     var user: User! {
         didSet {
-            if let screenName = user.screenName,
-                let workoutNum = user.workoutNum,
-                let goal = user.goal,
-                let gym = user.gym,
-                let description = user.description
-            {
-                self.nameLabel.text = screenName
-                self.workoutNumLabel.text = String(workoutNum)
-                self.goalLabel.text = goal.description
-                self.gymLabel.text = gym
-                self.descriptionLabel.text = description
+            if let screenName = user.screenName {
                 
-            } else {
+                self.nameLabel.text = screenName
+            }
+            if let workoutNum = user.workoutNum {
+                self.workoutNumLabel.text = String(workoutNum)
+            }
+            if let goals = user.goals {
+                var goalDes = String()
+                print("enter profile cell")
+                for goal in goals{
+                    if goalDes != ""{
+                        goalDes += ", " + goal.description
+                    }else{
+                        goalDes += goal.description
+                    }
+                }
+                self.goalLabel.text = goalDes
+            }
+            if let gym = user.gym {
+                 self.gymLabel.text = gym
+            }
+            if let description = user.description {
+                self.descriptionLabel.text = description
+            }
+            
+            /*else {
                     print("error cannot get user profile") //TBD error class
                     return
-            }
+            }*/
         }
     }
     override func awakeFromNib() {

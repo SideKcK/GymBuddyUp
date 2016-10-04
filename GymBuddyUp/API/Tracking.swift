@@ -209,6 +209,7 @@ class Tracking {
         let getTrackedItemGroup = dispatch_group_create()
         //let getTrackedItemGroup = dispatch_group_create()
         let workoutLog = data.valueForKey("workout_log") as? NSArray
+        if workoutLog != nil {
         for items in workoutLog! {
             
             var amount = [Int]()
@@ -272,6 +273,9 @@ class Tracking {
             print("=========== dispatch_group_notify: ")
             completion(trackedItems: trackedItems, error: nil)
         }
+        }else{
+            completion(trackedItems: trackedItems, error: nil)
+        }
     }
     
     class func addBestRecord(exercise: Exercise, createDate: String, bestRecord: Int, completion: (NSError?) -> Void) {
@@ -318,6 +322,55 @@ class Tracking {
         }
     }
     
+    class func getTrackedPlanTimeSpan(startDate: NSDate, endDate: NSDate, completion: (trackedPlan: [TrackedPlan]?, error: NSError?)-> Void) {
+        // Query
+        print("=========== Before getTrackedPlanTimeSpan!")
+
+        trackedPlanRef.queryOrderedByChild("start_time").queryStartingAtValue(dateToInt(startDate))
+            .queryEndingAtValue(dateToInt(endDate)).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+                var results:[TrackedPlan] = []
+                
+                let trackedPlans = (dataSnapshot.value as? NSDictionary)
+                if(trackedPlans != nil){
+                    let myGroup = dispatch_group_create()
+                    for(key,value) in trackedPlans!{
+                        let result = TrackedPlan(trackingId: key as! String , data:(value as! NSDictionary))
+                        /*getTrackedItems(dataSnapshot.value as! NSDictionary){(resultTrackedItems, error) in
+                            result.trackingItems = resultTrackedItems!
+                        }*/
+                         //print("=========== inside getTrackedPlanTimeSpan!" +  result.planId!)
+                        
+                        dispatch_group_enter(myGroup)
+                        Library.getPlanById(result.planId!, completion: { (plan, error) in
+                            
+                            if error != nil {
+                                //print("error getting plan for \(result.planId!)")
+                            }
+                            else {
+                                if plan != nil{
+                                    //print("=========== inside getPlanById!" + (plan?.name)!)
+                                    result.plan = plan!
+                                    results.append(result)
+                                }
+                            }
+                            
+                            dispatch_group_leave(myGroup)
+                        })
+                        
+                        
+                    }
+                    dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+                         //print("=========== end of getTrackedPlanTimeSpan")
+                        completion(trackedPlan: results, error: nil)
+                    })
+                    
+                }else{
+                    results = [TrackedPlan]()
+                    completion(trackedPlan: results, error: nil)
+                }
+                
+        }
+    }
 }
 
 

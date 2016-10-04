@@ -166,7 +166,7 @@ class SignupVC: UIViewController {
                                 KRProgressHUD.showError()
                             }
                             //update screen name
-                            user.updateProfile("screenName", value: self.usernameField.text)
+                            user.updateProfile("screen_name", value: self.usernameField.text)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
                             KRProgressHUD.dismiss()
                         }else {
@@ -184,7 +184,7 @@ class SignupVC: UIViewController {
                     
                     alertController.title = "Sign Up Failed"
                     if pwStatus == .countError {
-                        alertController.message = "Your password must be 5-20 charaters."
+                        alertController.message = "Your password must be 6-20 charaters."
                     }else {
                         alertController.message = "Your password must contain both digits and letters."
                     }

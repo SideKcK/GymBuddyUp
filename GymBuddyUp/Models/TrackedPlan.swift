@@ -14,7 +14,7 @@ import SwiftDate
 
 
 class TrackedPlan {
-    weak var plan: Plan?
+    var plan: Plan?
     var planId: String?
     var trackingId: String? //format  is  “eventId:date”
     var startDate : NSDate?

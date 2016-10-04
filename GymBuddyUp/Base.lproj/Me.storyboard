@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3QE-q7-zSr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3QE-q7-zSr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -992,6 +992,7 @@
                         <outlet property="gym1Button" destination="aga-N6-o6E" id="sgc-Hu-jCL"/>
                         <outlet property="muscleButton" destination="dbA-UE-fXk" id="Blx-fM-2Uu"/>
                         <outlet property="profileView" destination="6Yu-FR-bjv" id="XT9-xL-DbR"/>
+                        <outlet property="screenNameField" destination="399-rY-kvq" id="b8v-9Y-p3v"/>
                         <outlet property="textView" destination="tJ3-iW-yRt" id="QUV-1N-dXN"/>
                         <outlet property="thumbView" destination="e0g-4G-sEg" id="j20-9w-dxX"/>
                         <outlet property="weightButton" destination="Zll-Ah-0Vb" id="WKZ-rw-cRO"/>

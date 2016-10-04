@@ -31,7 +31,6 @@ class InvitePlanVC: UIViewController {
         nextButton.enabled = true
         nextButton.backgroundColor = ColorScheme.p1Tint
         reloadPlans(selectedDate)
-
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -58,7 +57,7 @@ class InvitePlanVC: UIViewController {
     }
     
     func setupDatepicker() {
-//        datePicker.minimumDate = NSDate()
+        datePicker.minimumDate = NSDate()
 //        datePicker.maximumDate = (1.months).fromNow()
     }
     
@@ -67,6 +66,7 @@ class InvitePlanVC: UIViewController {
         datePicker.backgroundColor = ColorScheme.s4Bg
         nextButton.backgroundColor = ColorScheme.p1Tint
         nextButton.titleLabel?.textColor = ColorScheme.g4Text
+
     }
     
     
@@ -148,7 +148,7 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("noPlanCell", forIndexPath: indexPath) as! InviteNoPlanCell
-            
+            cell.borderView.layer.borderWidth = 2.0
             return cell
         }else if indexPath.row == plans.count + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("addPlanCell", forIndexPath: indexPath) as! InviteAddPlanCell

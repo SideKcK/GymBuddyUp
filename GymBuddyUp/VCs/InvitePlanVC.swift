@@ -18,7 +18,7 @@ class InvitePlanVC: UIViewController {
     var workouts = [ScheduledWorkout]()
     var invites = [Invite]()
     var selectedDate = NSDate()
-    var selected = -1
+    var selected = 0
     let dateFormatter = NSDateFormatter()
     
     override func viewDidLoad() {
@@ -28,9 +28,9 @@ class InvitePlanVC: UIViewController {
         setupVisual()
         setupDatepicker()
         setupTableView()
-        nextButton.enabled = false
-        nextButton.backgroundColor = ColorScheme.g3Text
-        reloadPlans(NSDate())
+        nextButton.enabled = true
+        nextButton.backgroundColor = ColorScheme.p1Tint
+        reloadPlans(selectedDate)
 
     }
 
@@ -80,7 +80,7 @@ class InvitePlanVC: UIViewController {
                         self.workouts = workouts
                         self.plans = plans
                         self.tableView.reloadData()
-                        self.selected = -1
+                        self.selected = 0
                     } else {
                         print(error)
                         KRProgressHUD.showError()
@@ -96,6 +96,7 @@ class InvitePlanVC: UIViewController {
     
     @IBAction func onDatePicker(sender: UIDatePicker) {
         let date = sender.date
+        selectedDate = date
         reloadPlans(date)
     }
     
@@ -120,13 +121,20 @@ class InvitePlanVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let desVC = segue.destinationViewController as? NoPlanCatVC {
+            desVC.date = selectedDate
+            desVC.workoutId = workouts[selected - 1].id
+        }
+        
         if let desVC = segue.destinationViewController as? InviteMainVC {
             desVC.plan = plans[selected - 1]
             desVC.workoutId = workouts[selected - 1].id
+            desVC.time = selectedDate
             Log.info("workout Id = \(workouts[selected - 1].id)")
         }
         if let navVC = segue.destinationViewController as? PlanLibNavVC, let desVC = navVC.topViewController as? PlanLibVC{
             desVC.from = self
+            desVC.date = selectedDate
         }
     }
 }
@@ -207,11 +215,12 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         nextButton.enabled = true
         nextButton.backgroundColor = ColorScheme.p1Tint
-
+        Log.info("didSelectRowAtIndexPath prev selected = \(selected) plans count = \(plans.count)")
         // deselect previous selected items
-        if selected != -1 && selected < plans.count {
+        if selected != -1 && selected <= plans.count {
             let selectedIndexPath = NSIndexPath(forRow: selected, inSection: 0)
             let cellToDeselect = tableView.cellForRowAtIndexPath(selectedIndexPath)
+            print(cellToDeselect)
             if let _cellToDeselect = cellToDeselect as? InviteNoPlanCell {
                 _cellToDeselect.borderView.layer.borderWidth = 0.0
                 
@@ -248,14 +257,15 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-            if let cell = cell as? InviteNoPlanCell {
-                cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
-                
-            }
-            if let cell = cell as? WorkoutCell {
-                cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
-                
-            }
+        Log.info("willDisplayCell fired")
+        if let cell = cell as? InviteNoPlanCell {
+            cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
+            
+        }
+        if let cell = cell as? WorkoutCell {
+            cell.borderView.layer.borderWidth = indexPath.row == selected ? 2.0 : 0.0
+            
+        }
         
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None

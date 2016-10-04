@@ -43,14 +43,15 @@ class PlanDetailVC: UIViewController {
     var startTime: NSDate!
     
     override func viewDidLoad() {
+        Log.info("PlanDetailVC fired")
         super.viewDidLoad()
         self.title = weekMonthDateString(selectedDate)
         let currentDate = NSDate()
         let getTrackedItemGroup = dispatch_group_create()
-        if(selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)){
+        if (selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
             dispatch_group_enter(getTrackedItemGroup)
-            Tracking.getTrackedPlanById(String(workout.id)+":"+dateToString(selectedDate)){(result, error) in
-                if( result != nil){
+            Tracking.getTrackedPlanById(String(workout.id) + ":" + dateToString(selectedDate)){(result, error) in
+                if(result != nil){
                     self.trackedPlan = result
                 }
                 dispatch_group_leave(getTrackedItemGroup)
@@ -59,19 +60,16 @@ class PlanDetailVC: UIViewController {
                 self.setTableView()
                 self.setViews(false)
                 self.setupVisual()
-                
                 self.timeLabel.text = timeString(NSDate())
-                self.title = weekMonthDateString(NSDate())
+                self.title = weekMonthDateString(self.selectedDate)
             }
             
-        }else{
+        } else {
             setTableView()
             setViews(false)
             setupVisual()
-            
             timeLabel.text = timeString(NSDate())
-            self.title = weekMonthDateString(NSDate())
-            
+            self.title = weekMonthDateString(self.selectedDate)
         }
         
         // Do any additional setup after loading the view.
@@ -116,6 +114,7 @@ class PlanDetailVC: UIViewController {
         findButton.hidden = invited
         let isEmpty = checkIsEmptyExercise()
         let isTracked = checkIsTracked()
+        
         if(isEmpty){
             tableView.hidden = isEmpty
             workoutButton.hidden = isEmpty
@@ -136,7 +135,6 @@ class PlanDetailVC: UIViewController {
             
         }
         setStatusBar()
-        
     }
     
     func setStatusBar() {
@@ -149,10 +147,10 @@ class PlanDetailVC: UIViewController {
         }
     }
     
-    func checkIsEmptyExercise()-> Bool{
+    func checkIsEmptyExercise() -> Bool{
         var isEmpty = false
         if let exercises = plan.exercises {
-            if "999" == String( String(exercises[0].id ).characters.suffix(3)){
+            if "999" == String(String(exercises[0].id).characters.suffix(3)){
                 isEmpty = true
             }
         }
@@ -160,7 +158,7 @@ class PlanDetailVC: UIViewController {
         return isEmpty
     }
     
-    func checkIsTracked()-> Bool{
+    func checkIsTracked() -> Bool{
         var isTracked = false
         if(self.trackedPlan != nil){
             isTracked = true

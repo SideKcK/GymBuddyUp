@@ -245,7 +245,7 @@
                 <viewControllerPlaceholder storyboardName="Plan" referencedIdentifier="PlanLibNavVC" id="3c0-E3-Cuv" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wvn-Ez-eFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748.5" y="2084"/>
+            <point key="canvasLocation" x="1377.5" y="2118"/>
         </scene>
         <!--Choose Plan-->
         <scene sceneID="Zz1-LY-7YR">
@@ -317,7 +317,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="K4l-2C-4xh"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmq-ED-jau">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmq-ED-jau">
                                                     <rect key="frame" x="50" y="114" width="40" height="21"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -708,6 +708,6 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xl0-lW-JAf"/>
+        <segue reference="0kw-OF-hBD"/>
     </inferredMetricsTieBreakers>
 </document>

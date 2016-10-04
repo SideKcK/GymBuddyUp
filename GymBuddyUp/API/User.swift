@@ -143,7 +143,7 @@ class User {
         self.goal = .KeepFit
         self.gym = "Not Specified"
         self.goals = []
-        // TODO: figure out bast logic for photo caching.
+        // TODO: figure out best logic for photo caching.
         if (self.photoURL != nil) {
             updateProfilePicture(self.photoURL) { error in }
         }
@@ -187,6 +187,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
+                User.currentUser?.syncWithLastestUserInfo()
                 completion(user: User.currentUser, error: nil)
             }
         })

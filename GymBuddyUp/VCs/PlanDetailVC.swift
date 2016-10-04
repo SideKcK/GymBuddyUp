@@ -279,12 +279,21 @@ class PlanDetailVC: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toInviteMainSegue" {
+            if let desNC = segue.destinationViewController as? UINavigationController,
+                let desVC = desNC.topViewController as? InviteMainVC {
+                desVC.workoutId = workout.id
+                desVC.plan = plan
+                desVC.time = selectedDate
+                desVC.setNavBarItem()
+            }
+        }
+        
         if segue.identifier == "startWorkoutSegue" {
             let desNC = segue.destinationViewController as! UINavigationController
             let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(scheduledWorkout: self.workout.id, plan: plan)
         }
-        
         
         if segue.identifier ==  "toExerciseDetailSegue" {
             if let desVC = segue.destinationViewController as? PlanExerciseVC {
@@ -293,12 +302,7 @@ class PlanDetailVC: UIViewController {
                 }
             }
         }
-        
-        if let desNC = segue.destinationViewController as? UINavigationController,
-        let desVC = desNC.topViewController as? InviteMainVC {
-            desVC.plan = plan
-            desVC.setNavBarItem()
-        }
+
         if let desVC = segue.destinationViewController as? PlanMainVC {
             if let send = sender as? String {
                 if send == "delete" || send == "repeat"{
@@ -306,6 +310,7 @@ class PlanDetailVC: UIViewController {
                 }
             }
         }
+        
         if let desVC = segue.destinationViewController as? GymMapVC {
             desVC.gym = Gym()
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
@@ -317,8 +322,6 @@ class PlanDetailVC: UIViewController {
             self.startTime = NSDate()
         }
     }
-    
-    
 }
 
 extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {

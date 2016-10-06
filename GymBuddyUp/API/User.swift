@@ -243,6 +243,7 @@ class User {
                 print(_screenName)
             }
             if let _goals = snapshot.value?["goal"] as? [Int] {
+                self.goals = []
                 for key in _goals{
                     self.goals?.append(Goal(rawValue: key)!)
                     //print(String(key))
@@ -427,7 +428,9 @@ class User {
                 for key in valueArray{
                     self.goals?.append(Goal(rawValue: key)!)
                 }
-                
+                for element in self.goals! {
+                    print(String(element))
+                }
                 let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
                 let attrRef = ref.child("\(attrName)")
                 attrRef.setValue(valueArray)

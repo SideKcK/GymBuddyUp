@@ -79,8 +79,17 @@ class Exercise {
         self.name = dict.valueForKey("name") as? String
         self.sort_order = dict.valueForKey("sort_order") as? Int
         self.description = dict.valueForKey("description") as? String
-        self.thumbnailURL = testURL
-        self.gifURL = testURL
+        if let thumbnailURL = dict.valueForKey("thumb_url") as? String{
+            self.thumbnailURL = NSURL(string: thumbnailURL)
+        }else{
+            self.thumbnailURL = testURL
+        }
+        if let gifURL = dict.valueForKey("gif_url") as? String{
+            self.gifURL = NSURL(string: gifURL)
+        }else{
+            self.gifURL = testURL
+        }
+        
         let typeVal = dict.valueForKey("type") as? Int
         self.unitType = UnitType(rawValue: (typeVal != nil ? typeVal!:0))
         self.set = Set.setArrayFromDictArray((dict.valueForKey("set") as? [NSDictionary]))

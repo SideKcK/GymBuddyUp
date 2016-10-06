@@ -23,27 +23,13 @@ class MeMainVC: UIViewController {
     var workOuts: [ScheduledWorkout] = []
     var trackings: [TrackedPlan] = []
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         if user == nil {
             print()
             user = User.currentUser
         }
-        let eMonth = NSDate()
-        let sMonth = (1.years).agoFromDate(eMonth.startOf(.Month))
-        let getScheduledWorkoutGroup = dispatch_group_create()
-        dispatch_group_enter(getScheduledWorkoutGroup)
-        Tracking.getTrackedPlanTimeSpan(sMonth, endDate: eMonth){ (trackedPlans, error) in
-            print("getTrackedPlanTimeSpan " +  String(trackedPlans?.count))
-            if let trackedPlans = trackedPlans {
-                self.trackings = trackedPlans
-                 //print("getTrackedPlanTimeSpan " + (trackedPlans[0].plan?.name)!)
-                self.user.workoutNum = trackedPlans.count
-                self.tableView.reloadData()
-            }else {
-                print(error)
-            }
-            dispatch_group_leave(getScheduledWorkoutGroup)
-        }
+        setHistory()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +39,10 @@ class MeMainVC: UIViewController {
         // Do any additional setup after loading the view.
         setHeader()
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        print("Enter MeMainVC")
+        setHistory()
+    }
     @IBAction func psButton(sender: AnyObject) {
         if let  currentUserId = User.currentUser?.userId,
                 recipientUserId = user?.userId,
@@ -100,6 +89,24 @@ class MeMainVC: UIViewController {
 
     }
 
+    func setHistory(){
+        let eMonth = NSDate()
+        let sMonth = (1.years).agoFromDate(eMonth.startOf(.Month))
+        let getScheduledWorkoutGroup = dispatch_group_create()
+        dispatch_group_enter(getScheduledWorkoutGroup)
+        Tracking.getTrackedPlanTimeSpan(sMonth, endDate: eMonth){ (trackedPlans, error) in
+            print("getTrackedPlanTimeSpan " +  String(trackedPlans?.count))
+            if let trackedPlans = trackedPlans {
+                self.trackings = trackedPlans
+                //print("getTrackedPlanTimeSpan " + (trackedPlans[0].plan?.name)!)
+                self.user.workoutNum = trackedPlans.count
+                self.tableView.reloadData()
+            }else {
+                print(error)
+            }
+            dispatch_group_leave(getScheduledWorkoutGroup)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

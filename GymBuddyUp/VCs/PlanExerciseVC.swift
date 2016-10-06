@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftGifOrigin
 
 class PlanExerciseVC: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
@@ -23,7 +24,10 @@ class PlanExerciseVC: UITableViewController {
         muscleLabel.hidden = true
         nameLabel.text = exercise.name
         desLabel.text = exercise.description
-        gifView.af_setImageWithURL(exercise.gifURL)
+        
+        gifView.image = UIImage.gifWithURL(String(exercise.gifURL))
+        //
+        //gifView.hidden = true
         // Do any additional setup after loading the view.
     }
 

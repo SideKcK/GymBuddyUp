@@ -82,6 +82,8 @@ class MeUpdateVC: UITableViewController {
         gym1Button.setTitle(user.gym, forState: UIControlState.Normal)
         if let _description = user.description {
             textView.text = _description
+        }else{
+            textView.text = ""
         }
     }
     

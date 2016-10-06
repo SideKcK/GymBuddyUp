@@ -95,9 +95,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
 //    
 //            for i in (1..<40) {
-//                Invite.publishWorkoutInviteToPublic("-KOZM75q5bh0DtN4AvzM", scheduledWorkoutId: "-KPHMEB3SLHgJ-v39B3Y", gym: Gym(), workoutTime: NSDate() + Int(arc4random_uniform(8)).days) {_ in
-//                    
-//                }
+               // Invite.publishWorkoutInvite("public", planId: "-KQIqnf5N7BfQmtt0FHM", scheduledWorkoutId: "-KTHk01US7HniC_Bqy0C", gym: Gym(), workoutTime: NSDate()) {_ in
+               //
+              // }
 //            }
         
         //test public discover
@@ -106,7 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         
         //Invite.testfunction()
-        
+        //Invite.acceptWorkoutInvite("-KTHpHYlhHB_aTtX30yS" ){_ in
+        //}
     }
     
     func userDidLogout() {

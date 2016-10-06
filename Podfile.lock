@@ -78,6 +78,7 @@ PODS:
   - KRProgressHUD (1.7.0)
   - ObjectMapper (1.4.0)
   - SwiftDate (3.0.8)
+  - SwiftGifOrigin (1.5.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -99,6 +100,7 @@ DEPENDENCIES:
   - KRProgressHUD (= 1.7.0)
   - ObjectMapper (< 1.5.0)
   - SwiftDate
+  - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
@@ -130,7 +132,8 @@ SPEC CHECKSUMS:
   KRProgressHUD: eb23a52e98069190660e33167e870cf2d80a435f
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
+  SwiftGifOrigin: 893ebcceabe215a00b607328b5322b4e228347e5
 
-PODFILE CHECKSUM: 88cf974e384d92d28db3804b08cf824672a8e1da
+PODFILE CHECKSUM: ebc69cea0205db438658803619732ff4415a7fa9
 
 COCOAPODS: 1.0.1

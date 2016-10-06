@@ -28,4 +28,6 @@ target 'GymBuddyUp' do
     pod 'FBSDKShareKit'
     pod 'ALTextInputBar'
     pod 'JSQMessagesViewController'
+    
+    pod 'SwiftGifOrigin'
 end

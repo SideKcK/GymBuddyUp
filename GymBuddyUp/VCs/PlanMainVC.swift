@@ -564,14 +564,14 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     tableView.endUpdates()
                     Log.info("senTo = \(_invite.sentTo)")
                     if _invite.sentTo != nil{
-                    if _invite.sentTo != "public" && _invite.sentTo != "friends" {
-                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
-                            guard let screenName = user[0].screenName else {return}
-                            cell.statusLabel.text = "Invitation sent to \(screenName)"
-                        })
-                    } else {
-                        cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
-                    }
+                        if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                            User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                guard let screenName = user[0].screenName else {return}
+                                cell.statusLabel.text = "Invitation sent to \(screenName)"
+                            })
+                        } else {
+                            cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                        }
                     }
                     
                 }

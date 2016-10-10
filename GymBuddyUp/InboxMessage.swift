@@ -98,16 +98,21 @@ class InboxMessage {
         } else if type == .WorkoutInviteReceived {
             switch action {
             case .Accept:
-                
+                Invite.acceptWorkoutInvite(messageId, completion: { (error: NSError?) in
+                    pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                    Log.info("accepted successfully")
+
+                })
                 
                 break
             case .Reject:
-                
+                Invite.rejectWorkoutInvite(messageId, completion: { (error: NSError?) in
+                    pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                    Log.info("rejected successfully")
+                })
                 
                 break
             case .Cancel:
-                
-                
                 break
             }
         

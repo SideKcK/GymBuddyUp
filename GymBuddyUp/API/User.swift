@@ -174,6 +174,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
+                User.currentUser?.syncWithLastestUserInfo()
                 completion(user: User.currentUser, error: nil)
             }
         })

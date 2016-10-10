@@ -48,6 +48,7 @@ class InboxMainVC: UIViewController {
     
     
     @IBAction func testBarButtonClick(sender: AnyObject) {
+        Log.info("test button clicked")
         Friend.sendFriendRequest("VYkFlp8LyMeIF2abQCbPAh6nuMD3") { (error: NSError?) in
             if (error != nil) {
             

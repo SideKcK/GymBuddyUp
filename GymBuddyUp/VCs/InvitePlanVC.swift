@@ -123,7 +123,7 @@ class InvitePlanVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? NoPlanCatVC {
             desVC.date = selectedDate
-            desVC.workoutId = workouts[selected - 1].id
+//            desVC.workoutId = workouts[selected - 1].id
         }
         
         if let desVC = segue.destinationViewController as? InviteMainVC {

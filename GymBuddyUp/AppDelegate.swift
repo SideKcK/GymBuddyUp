@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         User.currentUser?.userBecameActive()
         User.currentUser?.syncWithLastestUserInfo()
+        LocationCache.sharedInstance.setup()
         
         /*********************/
         // Test the fuck out //

@@ -30,6 +30,19 @@ class InviteGymVC: UIViewController {
         GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(CLLocationCoordinate2D(latitude: 30.562, longitude: -96.313), radius: 5000, name: "gym") { (gyms, error) in
             if gyms != nil {
                 self.nearbyGyms = gyms
+                self.nearbyGyms.sortInPlace({ (a: Gym, b: Gym) -> Bool in
+                    var distanceToA = 9999999999999.0
+                    var distanceToB = 9999999999999.0
+                    if let aLocation = a.location {
+                        distanceToA = LocationCache.sharedInstance.currentLocation.distanceFromLocation(aLocation)
+                    }
+                    if let bLocation = b.location {
+                        distanceToB = LocationCache.sharedInstance.currentLocation.distanceFromLocation(bLocation)
+                    }
+                    
+                    return distanceToA < distanceToB
+                })
+                
                 self.tableView.reloadData()
                 KRProgressHUD.dismiss()
             }else {

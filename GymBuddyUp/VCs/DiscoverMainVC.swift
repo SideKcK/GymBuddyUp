@@ -21,8 +21,6 @@ class DiscoverMainVC: UIViewController {
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var findButtonConstraint: NSLayoutConstraint!
     
-    var locationManager: CLLocationManager!
-    var currentLocation = CLLocation()
     var events = [Invite]()
     var plans = [Plan]()
     var showPublic = false
@@ -31,7 +29,6 @@ class DiscoverMainVC: UIViewController {
         super.viewDidLoad()
         setupNavBar()
         setupVisual()
-        setupLocation()
         setupTableView()
         addSegControl(segView)
         self.findButtonConstraint.constant = self.view.frame.height / 3.0
@@ -57,16 +54,6 @@ class DiscoverMainVC: UIViewController {
         self.navigationItem.titleView = imageView
     }
     
-    func setupLocation () {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter = 200
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-    
-        
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
@@ -95,7 +82,6 @@ class DiscoverMainVC: UIViewController {
         findButtonConstraint.constant = 20
         findButton.hidden = showPublic
         reloadData()
-
     }
     
     func reloadData() {
@@ -117,6 +103,7 @@ class DiscoverMainVC: UIViewController {
     
     func reloadPublicDiscover() {
         KRProgressHUD.show()
+        let currentLocation = LocationCache.sharedInstance.currentLocation
         Discover.discoverPublicWorkout(currentLocation, radiusInkilometers: 100.0, withinDays: 3, offset: 0, completion: { (workouts, error) in
             if error != nil{
                 Log.error(error.debugDescription)
@@ -205,8 +192,9 @@ class DiscoverMainVC: UIViewController {
                 desVC.plan = plans[row]
             }
         if let desVC = segue.destinationViewController as? GymMapVC,
-            let gym = sender as? Gym{
-            desVC.userLocation = locationManager.location
+            let gym = sender as? Gym {
+            let currentLocation = LocationCache.sharedInstance.currentLocation
+            desVC.userLocation = currentLocation
             desVC.gym = gym
         }
     }
@@ -214,24 +202,6 @@ class DiscoverMainVC: UIViewController {
 
 }
 
-extension DiscoverMainVC: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-            if let location = manager.location {
-                currentLocation = location
-                reloadData()
-            }
-            //print(manager.location)
-        }
-    }
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let location = locations.first {
-//            //upload user location
-//        }
-//        
-//    }
-}
 
 extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDataSource
@@ -242,11 +212,9 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
-        guard let location = locationManager.location else{
-            return cell
-        }
+        let currentLocation = LocationCache.sharedInstance.currentLocation
         cell.event = events[indexPath.row]
-        cell.gymDisLabel.text = String(round(cell.event.gym!.location!.distanceFromLocation(location) / 1609.34))+" miles"
+        cell.gymDisLabel.text = String(round(cell.event.gym!.location!.distanceFromLocation(currentLocation) / 1609.34))+" miles"
         cell.plan = plans[indexPath.row]
         
         cell.gymButton.tag = indexPath.row

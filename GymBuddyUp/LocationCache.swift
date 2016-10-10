@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocationCache {
+class LocationCache : NSObject, CLLocationManagerDelegate {
     
     //MARK: Shared Instance
     
@@ -18,11 +18,33 @@ class LocationCache {
     }()
     
     //MARK: Local Variable
-    
+    lazy var locationManager = CLLocationManager()
+    lazy var currentLocation = CLLocation()
     
     //MARK: Init
-    
-    init() {
-        
+    override init() {
+        super.init()
     }
+    
+    func setup() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 200
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = manager.location {
+            currentLocation = location
+        }
+    }
+    
+    
 }

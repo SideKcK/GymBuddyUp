@@ -19,6 +19,11 @@ class GymCell: UITableViewCell {
         didSet {
             nameLabel.text = gym.name
             desLabel.text = gym.address
+            if let location = gym.location {
+                let distance = LocationCache.sharedInstance.currentLocation.distanceFromLocation(location)
+                let distanceString = String(format: "%.1f", distance / 1609.3)
+                distanceLabel.text = "\(distanceString) miles"
+            }
         }
     }
 }

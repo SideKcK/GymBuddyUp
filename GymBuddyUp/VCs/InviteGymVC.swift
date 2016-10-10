@@ -16,7 +16,7 @@ class InviteGymVC: UIViewController {
     var lastGym = Gym()
     var defaultGyms = [Gym(), Gym()]
     var nearbyGyms = [Gym]()
-    
+    var totalSections = 1
     var from: UIViewController!
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class InviteGymVC: UIViewController {
                 KRProgressHUD.showError()
                 print(error)
             }
-            }
+        }
 
 
         
@@ -73,55 +73,79 @@ class InviteGymVC: UIViewController {
 
 extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if defaultGyms.indexOf({$0.name == lastGym.name}) == nil {
-                return defaultGyms.count
-            }else {
-                return defaultGyms.count + 1
+        if totalSections == 2 {
+            if section == 0 {
+                return 1
+            } else {
+                return nearbyGyms.count
             }
-        }else {
+        } else {
             return nearbyGyms.count
         }
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GymCell", forIndexPath: indexPath) as! GymCell
-        if indexPath.section == 1 {
+        if totalSections == 2 {
+            if indexPath.section == 0 {
+                cell.gym = User.currentUser?.googleGymObj
+            } else if indexPath.section == 1 {
+                cell.gym = nearbyGyms[indexPath.row]
+            }
+        } else {
             cell.gym = nearbyGyms[indexPath.row]
         }
+        
         return cell
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if let _ = User.currentUser?.googleGymObj {
+            totalSections = 2
+            return totalSections
+        }
+        return totalSections
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-            headerView.backgroundColor = UIColor.flatWhiteColor()
-            
-            let profileView = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 30))
-            profileView.image = UIImage(named: "dumbbell")
-            headerView.addSubview(profileView)
-            
-            let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 300, height: 30))
-            nameLabel.clipsToBounds = true
-            nameLabel.text = "Gym Nearby"
-            
-            nameLabel.font = UIFont.systemFontOfSize(12)
-            headerView.addSubview(nameLabel)
-            return headerView
+        if totalSections == 2 {
+            if section == 0 {
+                let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+                headerView.backgroundColor = UIColor.flatWhiteColor()
+                
+                let profileView = UIImageView(frame: CGRect(x: 20, y: 10, width: 20, height: 20))
+                profileView.image = UIImage(named: "dumbbell")
+                headerView.addSubview(profileView)
+                
+                let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 150, height: 20))
+                nameLabel.clipsToBounds = true
+                nameLabel.text = "Current Gym"
+                
+                nameLabel.font = UIFont.systemFontOfSize(12)
+                headerView.addSubview(nameLabel)
+                return headerView
+            }
         }
-        return nil
         
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        headerView.backgroundColor = UIColor.flatWhiteColor()
+        
+        let profileView = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 20))
+        profileView.image = UIImage(named: "dumbbell")
+        headerView.addSubview(profileView)
+        
+        let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 150, height: 20))
+        nameLabel.clipsToBounds = true
+        nameLabel.text = "Gym Nearby"
+        
+        nameLabel.font = UIFont.systemFontOfSize(12)
+        headerView.addSubview(nameLabel)
+        return headerView
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return 40
-        }
-        return 0
+        return 40
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

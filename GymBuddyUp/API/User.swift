@@ -254,11 +254,11 @@ class User {
             if let _gym = snapshot.value?["gym"] as? String {
                 GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
                     if error == nil {
-                        if(gym != nil){
-                            self.gym = gym!.name
-                            print(gym!.name)
+                        if let fetchedGym = gym {
+                            self.gym = fetchedGym.name
+                            self.googleGymObj = fetchedGym
                         }
-                    }else {
+                    } else {
                         print(error)
                     }
                 }
@@ -424,7 +424,7 @@ class User {
             attrRef.setValue(valueStr)
             
         case "goal":
-            if let valueStr = value as? Set<Int>{
+            if let valueStr = value as? Set<Int> {
                 let valueArray = Array(valueStr)
                 self.goals = []
                 for key in valueArray {

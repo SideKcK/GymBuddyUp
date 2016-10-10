@@ -11,7 +11,7 @@ import CoreLocation
 import GooglePlaces
 import ObjectMapper
 
-class Gym: Mappable {
+class Gym: NSObject, Mappable {
     var placeid: String?
     var name: String?
     var location: CLLocation?
@@ -37,7 +37,7 @@ class Gym: Mappable {
         }
     }
     
-    init () {
+    override init () {
         self.name = "test gym"
         self.placeid = "-1"
         self.address = "XXX University Dr, College Station"
@@ -49,7 +49,7 @@ class Gym: Mappable {
         self.address =  fromGooglePlace["vicinity"] as? String
         self.name = fromGooglePlace["name"] as? String
         self.placeid = fromGooglePlace["place_id"] as? String
-        
+        Log.info("placeId=\(self.placeid)")
         if let geo = fromGooglePlace["geometry"] as? NSDictionary,
             let loc = geo["location"] as? NSDictionary,
             let lat = loc["lat"] as? CLLocationDegrees,
@@ -79,6 +79,7 @@ class Gym: Mappable {
         self.address = place.formattedAddress
         self.location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         self.placeid = place.placeID
+        Log.info("placeId=\(self.placeid)")
         self.name = place.name
     }
     

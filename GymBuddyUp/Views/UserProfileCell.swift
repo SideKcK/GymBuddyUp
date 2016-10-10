@@ -19,6 +19,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var gymNameLabel: UILabel!
     @IBOutlet weak var goalLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var gymLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -27,7 +28,8 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
 
-    
+    var asyncIdentifer = ""
+
     // FIXME: should not put model info in views
     var user: User! {
         didSet {
@@ -50,9 +52,7 @@ class UserProfileCell: UITableViewCell {
                 }
                 self.goalLabel.text = goalDes
             }
-            if let gym = user.gym {
-                 self.gymLabel.text = gym
-            }
+
             if let description = user.description {
                 self.descriptionLabel.text = description
             }

@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol updateMeDelegate {
-    optional func syncAfterUpdateMe()
+    optional func syncAfterUpdateMe(updatedGymPlaceId: String, updatedGymObj: Gym?,updatedGoals: Set<Int>)
 }
 
 class MeUpdateVC: UITableViewController {
@@ -165,7 +165,7 @@ class MeUpdateVC: UITableViewController {
         if gym != nil{
             User.currentUser!.updateProfile("gym", value: gym!.placeid)
         }
-        delegate?.syncAfterUpdateMe!()
+        delegate?.syncAfterUpdateMe?(gym.placeid!, updatedGymObj: gym, updatedGoals: self.selected)
         self.performSegueWithIdentifier("unwindToMeMainVC", sender: self)
     }
     

@@ -110,6 +110,7 @@ class User {
     var goal: Goal?
     var goals: [Goal]?
     var gym: String?
+    var googleGymObj: Gym?
     var description: String? 
     /*var description: String? {
         get {
@@ -136,10 +137,10 @@ class User {
         self.userRef = ref.child(user.uid)
         
         // custom properties
-        self.workoutNum = 10
-        self.starNum = 21
-        self.dislikeNum = 10
-        self.buddyNum = 20
+        self.workoutNum = 0
+        self.starNum = 0
+        self.dislikeNum = 0
+        self.buddyNum = 0
         self.goal = .KeepFit
         self.gym = "Not Specified"
         self.goals = []
@@ -426,7 +427,7 @@ class User {
             if let valueStr = value as? Set<Int>{
                 let valueArray = Array(valueStr)
                 self.goals = []
-                for key in valueArray{
+                for key in valueArray {
                     self.goals?.append(Goal(rawValue: key)!)
                 }
                 for element in self.goals! {

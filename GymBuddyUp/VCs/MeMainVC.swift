@@ -11,8 +11,7 @@ import KRProgressHUD
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    
+        
     let kHeaderHeight:CGFloat = 150
     let profileRadius:CGFloat = 125
     let titleBGView: UIImageView = UIImageView()
@@ -145,9 +144,6 @@ class MeMainVC: UIViewController {
             updateVC.delegate = self
         }
     }
-    
-
-
 }
 
 extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
@@ -157,14 +153,29 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
+            let asyncId = user.userId
+            cell.asyncIdentifer = asyncId
             cell.user = user
             cell.nameLabel.text = user?.screenName
+            cell.gymLabel.text = "Not Specific"
+            cell.chatButton.hidden = true
+            if asyncId != User.currentUser?.userId {
+                cell.chatButton.hidden = false
+            }
+            if let googleGymObj = user?.googleGymObj {
+                cell.gymLabel.text = googleGymObj.name
+            } else if let gymName = user?.gym {
+                cell.gymLabel.text = gymName
+            }
+            
+            
+
             cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
             return cell
-        }else if indexPath.row == cells.count - 3{
+        }else if indexPath.row == cells.count - 3 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserBuddyOverviewCell
             cell.user = user
             cell.selectionStyle = .None
@@ -245,9 +256,15 @@ extension MeMainVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     
 }
 extension MeMainVC: updateMeDelegate {
-    func syncAfterUpdateMe() {
-        print("updateMeDelegate")
-       self.tableView.reloadData()
-    }
+    func syncAfterUpdateMe(updatedGymObj: Gym?, updatedGymPlaceId: String, updatedGoals: Set<Int>) {
+        User.currentUser?.googleGymObj = updatedGymObj
+        User.currentUser?.gym = updatedGymPlaceId
+        for goal in updatedGoals {
+            User.currentUser?.goals?.append(User.Goal(rawValue: goal)!)
+        }
+        User.currentUser?.syncWithLastestUserInfo()
+        self.tableView.reloadData()
     
+    }
+
 }

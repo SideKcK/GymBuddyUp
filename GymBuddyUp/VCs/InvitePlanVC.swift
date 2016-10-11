@@ -127,6 +127,7 @@ class InvitePlanVC: UIViewController {
         }
         
         if let desVC = segue.destinationViewController as? InviteMainVC {
+            
             desVC.plan = plans[selected - 1]
             desVC.workoutId = workouts[selected - 1].id
             desVC.time = selectedDate

@@ -52,6 +52,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var itemsCount = 0
     var nextButtonState = NextButtonState.Normal
     var startTime = NSDate()
+    var delegate: showTrackingInfoDelegate?
+    
     lazy var startButtonImage = UIImage(named: "start")
     lazy var pauseButtonImage = UIImage(named: "pause")
     lazy var nextButtonImage = UIImage(named: "next&Log")
@@ -530,8 +532,10 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func doneTrackingCallback() {
-        
-
+        self.dismissViewControllerAnimated(true, completion: nil)
+        if self.trackedPlan != nil {
+            self.delegate?.showTrackingTable!(self.trackedPlan!)
+        }
     }
     
     func doneWorkoutAction() {

@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 @objc protocol showCheckInButtonDelegate {
     optional func showCheckInButton()
 }
 
+@objc protocol showTrackingInfoDelegate {
+    optional func showTrackingTable(trackedPlan: AnyObject)
+}
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -119,11 +123,14 @@ class PlanDetailVC: UIViewController {
         let isTracked = checkIsTracked()
 
         var allowStart = true
+        var allowFind = false
         let currentDate = NSDate()
         if(dateToString(selectedDate) != dateToString(currentDate)){
             allowStart = false
         }
-
+        if(dateToString(selectedDate) == dateToString(currentDate) || selectedDate > currentDate){
+            allowFind = true
+        }
         if(isEmpty){
             tableView.hidden = isEmpty
             workoutButton.hidden = isEmpty
@@ -138,15 +145,25 @@ class PlanDetailVC: UIViewController {
             tableView.hidden = isEmpty
             if(allowStart){
                 workoutButton.hidden = isTracked
+                checkinButton.hidden = !isEmpty
+                checkinImage.hidden = !isEmpty
+                checkinLabel.hidden = !isEmpty
             }else{
                 workoutButton.hidden = true
+                if(allowFind){
+                    findButton.hidden = false
+                }else{
+                    findButton.hidden = true
+                }
+                checkinButton.hidden = true
+                checkinImage.hidden = true
+                checkinLabel.hidden = true
             }
-            checkinButton.hidden = !isEmpty
-            checkinImage.hidden = !isEmpty
-            checkinLabel.hidden = !isEmpty
-            
         }
-        
+        if(isTracked){
+            timeLocView.hidden = false
+            findButton.hidden = true
+        }
         setStatusBar()
     }
     
@@ -293,6 +310,7 @@ class PlanDetailVC: UIViewController {
             let desNC = segue.destinationViewController as! UINavigationController
             let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(scheduledWorkout: self.workout.id, plan: plan)
+            desVC.delegate = self
         }
         
         if segue.identifier ==  "toExerciseDetailSegue" {
@@ -322,6 +340,32 @@ class PlanDetailVC: UIViewController {
             self.startTime = NSDate()
         }
     }
+    
+    func reloadPlan() {
+        KRProgressHUD.show()
+        
+        let currentDate = NSDate()
+        let getTrackedItemGroup = dispatch_group_create()
+        if (selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
+            dispatch_group_enter(getTrackedItemGroup)
+            Tracking.getTrackedPlanById(String(workout.id) + ":" + dateToString(selectedDate)){(result, error) in
+                if(result != nil){
+                    self.trackedPlan = result
+                }
+                dispatch_group_leave(getTrackedItemGroup)
+            }
+            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                self.setTableView()
+                self.setViews(false)
+                self.setupVisual()
+                self.timeLabel.text = timeString(NSDate())
+                self.title = weekMonthDateString(self.selectedDate)
+                self.tableView.reloadData()
+                KRProgressHUD.dismiss()
+            }
+            
+        }
+    }
 }
 
 extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
@@ -347,6 +391,8 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
             
             if trackedPlan?.trackingItems[indexPath.row] != nil{
                 cell.setTracked((trackedPlan?.trackingItems[indexPath.row].isSkiped)!)
+            }else{
+                cell.setTracked(true)
             }
             
         }
@@ -367,12 +413,14 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension PlanDetailVC: showCheckInButtonDelegate {
+extension PlanDetailVC: showCheckInButtonDelegate, showTrackingInfoDelegate {
     
     func showCheckInButton(){
         checkinImage.hidden = false
         checkinLabel.hidden = false
         checkinButton.hidden = true
+        timeLocView.hidden = false
+        findButton.hidden = true
         saveCheckin()
     }
     
@@ -387,4 +435,7 @@ extension PlanDetailVC: showCheckInButtonDelegate {
         }
     }
     
+    func showTrackingTable(trackedPlan: AnyObject){
+        self.reloadPlan()
+    }
 }

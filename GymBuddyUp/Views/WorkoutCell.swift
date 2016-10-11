@@ -89,12 +89,15 @@ class WorkoutCell: UITableViewCell {
                     for index in 0...(exers.count - 1) {
                     imageViews[index].makeThumbnail(ColorScheme.g3Text)
                     if exers.count > 6 && index == 5 {
-                        imageViews[index].image = UIImage(named: "dumbbell")
+                        imageViews[index].image = UIImage(named: "more_exercise")
                         //change last imageView
                         break
                     }else {
-                        let downloadURL = exers[index].thumbnailURL
-                        imageViews[index].af_setImageWithURL(downloadURL)
+                        if let downloadURL = exers[index].thumbnailURL{
+                            imageViews[index].af_setImageWithURL(downloadURL)
+                        }else{
+                            imageViews[index].hidden = true
+                        }
                     }
 
                 }
@@ -173,6 +176,10 @@ class WorkoutCell: UITableViewCell {
     
     func showMoreButton() {
         moreButton.hidden = false
+    }
+    
+    func hideMoreButton() {
+        moreButton.hidden = true
     }
     
     func showProfileView() {

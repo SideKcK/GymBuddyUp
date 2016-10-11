@@ -23,6 +23,7 @@ class PlanMainVC: UIViewController {
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
+    var trackedPlan = [NSDate: [Bool]]()
     var dayPlans = [Plan]()
     var selectedDate: NSDate!
     
@@ -100,7 +101,7 @@ class PlanMainVC: UIViewController {
         
         let firstDayOfWeek = date.startOf(.WeekOfYear)
         let fetchPlanTaskGroup = dispatch_group_create()
-
+        let getTrackedItemGroup = dispatch_group_create()
         
         for i in (0..<7) {
 
@@ -112,6 +113,7 @@ class PlanMainVC: UIViewController {
 
                 if workoutsOnDay.count == 0 {
                     self.plans[day] = []
+                    self.trackedPlan[day] = []
                     dispatch_group_leave(fetchPlanTaskGroup)
                 }
                     
@@ -127,14 +129,43 @@ class PlanMainVC: UIViewController {
                         
                         dispatch_group_leave(fetchPlanTaskGroup)
                     })
+                    let currentDate = NSDate()
+                    let numWorkout = workoutsOnDay.count
+                    var workoutids = [String](count: numWorkout, repeatedValue: "")
+                    let defaultTrack = [Bool](count: numWorkout, repeatedValue: false)
+                    for (index,workout) in workoutsOnDay.enumerate(){
+                       workoutids[index] = String(workout.id) + ":" + dateToString(day)
+                    }
+                    
+                    if (day < currentDate || dateToString(day) == dateToString(currentDate)) {
+                        print("Getting isTracked")
+                        dispatch_group_enter(getTrackedItemGroup)
+                        Tracking.getIsTrackedById(workoutids){(result, error) in
+                            print("Inside isTracked")
+                            if(result != nil){
+                                    
+                                self.trackedPlan[day] = result!
+                            }else{
+                                self.trackedPlan[day] = defaultTrack
+                            }
+                                dispatch_group_leave(getTrackedItemGroup)
+                        }
+                            
+                        }else{
+                            self.trackedPlan[day] = defaultTrack
+                        }
                 }
             })
         }
         
         dispatch_group_notify(fetchPlanTaskGroup, dispatch_get_main_queue(), {
+            
+            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+                KRProgressHUD.dismiss()
+            }
             //reload tableview with plans
-            self.tableView.reloadData()
-            KRProgressHUD.dismiss()
+           
         })
     }
     
@@ -282,17 +313,30 @@ class PlanMainVC: UIViewController {
             print("on more button error")
             return
         }
+        
+        var isTracked = false
+        if trackedPlan[selectedDate] != nil  && trackedPlan[selectedDate]! != [] {
+            if( trackedPlan[selectedDate]!.indices.contains(sender.tag)){
+                isTracked = trackedPlan[selectedDate]![sender.tag]
+            }
+        }
+        print("Inside More Button " + String(trackedPlan[selectedDate]))
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         alertController.customize()
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
         alertController.addAction(cancelAction)
-        
-        let inviteAction = UIAlertAction(title: "Find Your SideKcK", style: .Default) { (action) in
-            self.performSegueWithIdentifier("toInvitationSegue", sender: workout)
+        let currentDate = NSDate()
+        if (selectedDate > currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
+            if(isTracked){
+            }else{
+                let inviteAction = UIAlertAction(title: "Find Your SideKcK", style: .Default) { (action) in
+                    self.performSegueWithIdentifier("toInvitationSegue", sender: workout)
+                }
+                alertController.addAction(inviteAction)
+            }
         }
-        alertController.addAction(inviteAction)
         let repeating = workout.recur == 7
         let RepeatAction = UIAlertAction(title: "Repeat Weekly", style: .Default) { (action) in
             //set plan as repeat
@@ -306,22 +350,32 @@ class PlanMainVC: UIViewController {
                 
             })
         }
+        
         if !repeating {
             alertController.addAction(RepeatAction)
         }
         
-        
-        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
-            //delete
-            if repeating {
-                let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
-                deleteController.customize()
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        if (selectedDate > currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
+            if(!isTracked){
+                let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+                    //delete
+                    if repeating {
+                        let deleteController = UIAlertController(title: nil, message: "This is a repeating plan.", preferredStyle: .ActionSheet)
+                        deleteController.customize()
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                     // ...
-                }
-                deleteController.addAction(cancelAction)
+                        }
+                        deleteController.addAction(cancelAction)
                 let DeleteAllAction = UIAlertAction(title: "Delete All Future Plans", style: .Destructive) { (action) in
-                    ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                    /*ScheduledWorkout.deleteScheduledWorkout(workout.id, completion: { (error) in
+                        if error == nil {
+                            print("deleted all future plans")
+                            self.reloadPlans(self.selectedDate)
+                        }else {
+                            print(error)
+                        }
+                    })*/
+                    ScheduledWorkout.stopRecurringWorkoutOnDate(workout.id, stopOnDate: self.selectedDate, completion: { (error) in
                         if error == nil {
                             print("deleted all future plans")
                             self.reloadPlans(self.selectedDate)
@@ -329,6 +383,7 @@ class PlanMainVC: UIViewController {
                             print(error)
                         }
                     })
+
                 }
                 deleteController.addAction(DeleteAllAction)
                 let DeleteThisAction = UIAlertAction(title: "Delete This Plan Only", style: .Destructive) { (action) in
@@ -353,9 +408,10 @@ class PlanMainVC: UIViewController {
                     }
                 })
             }
+            }
+            alertController.addAction(DeleteAction)
+            }
         }
-        alertController.addAction(DeleteAction)
-        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     // MARK: - Navigation
@@ -578,9 +634,35 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
             }
             
         })
-
         
-        cell.showMoreButton()
+        
+        var isTracked = false
+        if trackedPlan[selectedDate] != nil  && trackedPlan[selectedDate]! != [] {
+            if( trackedPlan[selectedDate]!.indices.contains(index)){
+                isTracked = trackedPlan[selectedDate]![index]
+                
+            }
+        }
+        let repeating = dayWorkouts[index].recur == 7
+        
+        let currentDate = NSDate()
+        
+        if(dateToString(selectedDate) == dateToString(currentDate)){
+            print("isTracked : " + String(isTracked))
+            if(isTracked && repeating){
+                cell.hideMoreButton()
+            }else{
+                cell.showMoreButton()
+            }
+        }else if (selectedDate < currentDate) {
+            if(repeating){
+                cell.hideMoreButton()
+            }else{
+                cell.showMoreButton()
+            }
+        }else{
+            cell.showMoreButton()
+        }
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)
         //add gym segue

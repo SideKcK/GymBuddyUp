@@ -371,6 +371,41 @@ class Tracking {
                 
         }
     }
+    
+    class func getIsTrackedById(workoutids: [String], completion: (isTracked: [Bool]?, error: NSError?)-> Void) {
+        // Query
+        
+        
+        if workoutids.count == 0 {
+            return completion(isTracked: [], error: nil)
+        }
+        
+        let myGroup = dispatch_group_create()
+        let numPlan = workoutids.count
+        var isTrackeds = [Bool](count: numPlan, repeatedValue: Bool(false))
+        
+        for (index, id) in workoutids.enumerate() {
+            dispatch_group_enter(myGroup)
+            trackedPlanRef.child(id).observeSingleEventOfType(.Value,withBlock: {
+                (dataSnapshot: FIRDataSnapshot) in
+                if let values = dataSnapshot.value as? NSDictionary {
+                    isTrackeds[index] = true
+                }else{
+                    isTrackeds[index] = false
+                }
+                 dispatch_group_leave(myGroup)
+                
+            }){
+                (error) in
+                completion(isTracked: [], error: error)
+            }
+        }
+        
+        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+            completion(isTracked: isTrackeds, error: nil)
+        })
+        
+    }
 }
 
 

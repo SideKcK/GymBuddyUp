@@ -162,12 +162,22 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let _ = from as? MeUpdateVC {
-            self.performSegueWithIdentifier("unwindToMeUpdateVC", sender: nearbyGyms[indexPath.row])
+        var gymSelected: Gym?
+        if totalSections == 2 {
+            if indexPath.section == 0 {
+                gymSelected = User.currentUser?.googleGymObj
+            } else {
+                gymSelected = nearbyGyms[indexPath.row]
+            }
+        } else if totalSections == 1 {
+            gymSelected = nearbyGyms[indexPath.row]
         }
         
-        if indexPath.section == 1 {
-            self.performSegueWithIdentifier("unwindToInviteMainVC", sender: nearbyGyms[indexPath.row])
+        if let _ = from as? MeUpdateVC {
+            self.performSegueWithIdentifier("unwindToMeUpdateVC", sender: gymSelected)
+        } else {
+            self.performSegueWithIdentifier("unwindToInviteMainVC", sender: gymSelected)
         }
+
     }
 }

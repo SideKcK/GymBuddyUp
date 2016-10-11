@@ -34,12 +34,13 @@ class UserProfileCell: UITableViewCell {
     var user: User! {
         didSet {
             if let screenName = user.screenName {
-                
                 self.nameLabel.text = screenName
             }
+            
             if let workoutNum = user.workoutNum {
                 self.workoutNumLabel.text = String(workoutNum)
             }
+            
             if let goals = user.goals {
                 var goalDes = String()
                 print("enter profile cell")

@@ -8,6 +8,9 @@
 
 import UIKit
 import KRProgressHUD
+import Alamofire
+import AlamofireImage
+
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -56,11 +59,18 @@ class MeMainVC: UIViewController {
     }
     
     func setHeader() {
-        titleBGView.image = user.cachedPhoto ?? UIImage(named: "selfie")
-        profileView.image = user.cachedPhoto ?? UIImage(named: "selfie")
-        let headerW = CGRectGetWidth(self.view.frame)
+        if let photoURL = user.photoURL {
+            let request = NSMutableURLRequest(URL: photoURL)
+            titleBGView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                self.titleBGView.image = response.result.value
+            }
+            
+            profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                self.profileView.image = response.result.value
+            }
+        }
 
-        
+        let headerW = CGRectGetWidth(self.view.frame)
         profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight - profileRadius / 2.0, width: profileRadius, height: profileRadius)
         profileView.makeThumbnail(ColorScheme.p1Tint)
         let tap = UITapGestureRecognizer(target: self, action: #selector(MeMainVC.tapProfile(_:)))
@@ -161,16 +171,16 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = user?.screenName
             cell.gymLabel.text = "Not Specific"
             cell.chatButton.hidden = true
+            
             if asyncId != User.currentUser?.userId {
                 cell.chatButton.hidden = false
             }
+            
             if let googleGymObj = user?.googleGymObj {
                 cell.gymLabel.text = googleGymObj.name
             } else if let gymName = user?.gym {
                 cell.gymLabel.text = gymName
             }
-            
-            
 
             cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
@@ -241,12 +251,13 @@ extension MeMainVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         
         //TODO: dont know why it's failing
         //KRProgressHUD.show()
-        user.updateProfilePicture(image){error in
+        user.updateProfilePicture(image){ error in
             if error != nil {
             print("Error setting profile picture \(error?.localizedFailureReason)")
             //KRProgressHUD.showError()
             } else {
                 //KRProgressHUD.dismiss()
+                Log.info("Setting successfully!")
                 self.tableView.reloadData()
             }
         }

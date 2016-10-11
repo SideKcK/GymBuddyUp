@@ -10,6 +10,8 @@ import UIKit
 import CoreLocation
 import HMSegmentedControl
 import KRProgressHUD
+import Alamofire
+import AlamofireImage
 
 class DiscoverMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +25,7 @@ class DiscoverMainVC: UIViewController {
     
     var events = [Invite]()
     var plans = [Plan]()
+    var userCache = UserCache.sharedInstance.cache
     var showPublic = false
     
     override func viewDidLoad() {
@@ -31,6 +34,7 @@ class DiscoverMainVC: UIViewController {
         setupVisual()
         setupTableView()
         addSegControl(segView)
+        reloadData()
         self.findButtonConstraint.constant = self.view.frame.height / 3.0
     }
     
@@ -108,7 +112,7 @@ class DiscoverMainVC: UIViewController {
             if error != nil{
                 Log.error(error.debugDescription)
                 KRProgressHUD.showError(message: "Network error")
-            }else {
+            } else {
                 self.events = workouts
                 var planids = [String]()
                 for workout in workouts {
@@ -212,13 +216,34 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
-        let currentLocation = LocationCache.sharedInstance.currentLocation
-        cell.event = events[indexPath.row]
-        cell.gymDisLabel.text = String(round(cell.event.gym!.location!.distanceFromLocation(currentLocation) / 1609.34))+" miles"
+        let event = events[indexPath.row]
+        cell.invite = events[indexPath.row]
         cell.plan = plans[indexPath.row]
+        let asyncId = event.id
+        cell.asyncIdentifer = asyncId
+        if let user = userCache[event.inviterId] {
+            cell.profileLabel.text = user.screenName
+        } else {
+            User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
+                if asyncId == cell.asyncIdentifer {
+                    let user = users[0]
+                    cell.profileLabel.text = user.screenName
+                    if let photoURL = user.photoURL {
+                        let request = NSMutableURLRequest(URL: photoURL)
+                        cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                            cell.profileView.image = response.result.value
+                        }
+
+                    }
+                }
+            }
+        }
+        
+        
         
         cell.gymButton.tag = indexPath.row
-        cell.gymButton.addTarget(self, action: #selector(DiscoverMainVC.onGymButton), forControlEvents: .TouchUpInside)
+        cell.gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
+        
         cell.profileTapView.tag = indexPath.row
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DiscoverMainVC.profileTapped(_:)))
         cell.profileTapView.addGestureRecognizer(tapGestureRecognizer)
@@ -226,6 +251,7 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
         cell.showProfileView()
         cell.showTimeView()
         cell.showLocView()
+        
         cell.setNeedsUpdateConstraints()
         cell.updateConstraintsIfNeeded()
         

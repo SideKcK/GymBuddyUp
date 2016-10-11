@@ -60,6 +60,12 @@ class WorkoutCell: UITableViewCell {
                     gymButton.setTitle(gymName, forState: .Normal)
                 }
                 
+                if let location = invite?.gym?.location {
+                    let distance = LocationCache.sharedInstance.currentLocation.distanceFromLocation(location)
+                    let distanceString = String(format: "%.1f", distance / 1609.3)
+                    gymDisLabel.text = "\(distanceString) miles"
+                }
+                
             }
         
         }

@@ -165,6 +165,11 @@ class User {
                 print(String(key))
             }
         }
+        
+        if let _photoURL = snapshot.value!["profile_image_url"] as? String {
+            self.photoURL = NSURL(string: _photoURL)
+        }
+        
         self.userRef = ref.child(self.userId)
     }
     
@@ -251,6 +256,7 @@ class User {
                     //print(String(key))
                 }
             }
+            
             if let _gym = snapshot.value?["gym"] as? String {
                 GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
                     if error == nil {
@@ -263,6 +269,11 @@ class User {
                     }
                 }
             }
+            
+            if let _photoURL = snapshot.value?["profile_image_url"] as? String {
+                self.photoURL = NSURL(string: _photoURL)
+            }
+            
         }
     }
     
@@ -342,37 +353,29 @@ class User {
         // to be implemented
     }
     
-    func updateProfilePicture(photo: UIImage!, errorHandler: (NSError?)->Void) {
+    func updateProfilePicture(photo: UIImage, errorHandler: (NSError?)->Void) {
         self.cachedPhoto = photo.imageScaledToSize(CGSizeMake(500, 500))
         // Create a reference to the file you want to upload
         let pngImageData = UIImagePNGRepresentation(self.cachedPhoto!)
         let filePath = self.userId + "/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000)).png"
         let photoRef = storageRef.child(filePath)
         // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = photoRef.putData(pngImageData!, metadata: nil) { metadata, error in
+        photoRef.putData(pngImageData!, metadata: nil) { metaData, error in
             if (error != nil) {
                 // Uh-oh, an error occurred!
+                Log.info("updateProfilePhotoError: \(error!.localizedDescription)")
             } else {
                 // Metadata contains file metadata such as size, content-type, and download URL.
-                self.photoURL = metadata!.downloadURL()
-                let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
-                changeRequest?.photoURL = self.photoURL!
-                changeRequest?.commitChangesWithCompletion({ (error) in
-                    if error != nil {
-                        errorHandler(error)
-                    }
-                })
+                if let fetchedMetaData = metaData {
+                    self.photoURL = fetchedMetaData.downloadURL()
+                    let urlString = self.photoURL?.URLString
+                    self.updateProfile("profile_image_url", value: urlString)
+                }
+                
             }
         }
     }
-    
-    func cacheUserPhoto(url: NSURL)
-    {
-        if let data = NSData(contentsOfURL: url) {
-        self.cachedPhoto = UIImage(data: data)?.imageScaledToSize(CGSizeMake(500, 500))
-        }
-    }
-    
+
     func updateProfilePicture(photoURL: NSURL?, errorHandler: (NSError?)->Void) {
         if photoURL != nil {
             let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
@@ -382,7 +385,7 @@ class User {
                     errorHandler(error)
                 }
                 else {
-                    self.cacheUserPhoto(photoURL!)
+                    self.updateProfile("profile_image_url", value: photoURL)
                 }
             })
         }
@@ -415,7 +418,16 @@ class User {
         
         let attrName = attr as! String
         switch attrName {
-            
+        case "profile_image_url":
+            Log.info("profile_image_url update Attribute")
+            if let valueStr = value as? String {
+                self.photoURL = NSURL(string: valueStr)
+                let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+                let attrRef = ref.child("\(attrName)")
+                attrRef.setValue(valueStr)
+                Log.info("profile_image_url updated Attribute Successfully")
+            }
+            break
         case "screen_name":
             let valueStr = value as? String
             self.screenName = valueStr

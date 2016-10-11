@@ -11,7 +11,6 @@ import Foundation
 class LocationCache : NSObject, CLLocationManagerDelegate {
     
     //MARK: Shared Instance
-    
     static let sharedInstance : LocationCache = {
         let instance = LocationCache()
         return instance

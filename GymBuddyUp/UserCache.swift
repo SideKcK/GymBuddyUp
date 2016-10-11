@@ -18,7 +18,7 @@ class UserCache {
     }()
     
     //MARK: Local Variable
-    var cache = [String : [String: String]]()
+    var cache = [String : User]()
     
     //MARK: Init
     

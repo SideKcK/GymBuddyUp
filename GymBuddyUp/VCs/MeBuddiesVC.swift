@@ -12,7 +12,7 @@ class MeBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var findView: UIView!
-
+    
     var buddies = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()

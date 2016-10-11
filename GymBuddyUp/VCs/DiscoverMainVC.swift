@@ -184,7 +184,7 @@ class DiscoverMainVC: UIViewController {
 
     }
     
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -221,17 +221,32 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
         cell.plan = plans[indexPath.row]
         let asyncId = event.id
         cell.asyncIdentifer = asyncId
-        if let user = userCache[event.inviterId] {
+        if let user = UserCache.sharedInstance.cache[event.inviterId] {
             cell.profileLabel.text = user.screenName
+            
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncId == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                cell.profileView.image = user.cachedPhoto            }
         } else {
             User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
                 if asyncId == cell.asyncIdentifer {
                     let user = users[0]
+                    UserCache.sharedInstance.cache[event.inviterId] = user
                     cell.profileLabel.text = user.screenName
                     if let photoURL = user.photoURL {
                         let request = NSMutableURLRequest(URL: photoURL)
                         cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
-                            cell.profileView.image = response.result.value
+                            if asyncId == cell.asyncIdentifer {
+                                cell.profileView.image = response.result.value
+                                user.cachedPhoto = response.result.value
+                            }
                         }
 
                     }

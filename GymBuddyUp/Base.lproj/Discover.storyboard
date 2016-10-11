@@ -239,7 +239,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aD6-cO-5gS">
-                                <rect key="frame" x="20" y="329" width="280" height="239"/>
+                                <rect key="frame" x="20" y="329" width="280" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="GWd-NO-Yjo"/>
@@ -358,7 +358,7 @@
                             <constraint firstItem="P1e-QN-EhU" firstAttribute="top" secondItem="RIo-nV-Nx1" secondAttribute="bottom" id="8NR-BW-cx6"/>
                             <constraint firstItem="djX-TW-rdj" firstAttribute="top" secondItem="HaF-Mm-G8X" secondAttribute="bottom" constant="20" id="9tE-LM-TwY"/>
                             <constraint firstItem="P1e-QN-EhU" firstAttribute="leading" secondItem="djX-TW-rdj" secondAttribute="leading" id="Di8-eb-sxh"/>
-                            <constraint firstItem="piG-NB-j4Y" firstAttribute="top" secondItem="aD6-cO-5gS" secondAttribute="bottom" id="Ekx-7T-8Go"/>
+                            <constraint firstItem="piG-NB-j4Y" firstAttribute="top" secondItem="aD6-cO-5gS" secondAttribute="bottom" constant="53" id="Ekx-7T-8Go"/>
                             <constraint firstAttribute="trailing" secondItem="wU1-23-WiS" secondAttribute="trailing" id="Lx2-Pj-aiD"/>
                             <constraint firstItem="aD6-cO-5gS" firstAttribute="top" secondItem="P1e-QN-EhU" secondAttribute="bottom" constant="2" id="QHU-lL-0aN"/>
                             <constraint firstItem="P1e-QN-EhU" firstAttribute="centerX" secondItem="0rf-R7-y5G" secondAttribute="centerX" id="ZyF-Hs-t1M"/>
@@ -510,7 +510,7 @@
         <image name="time" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kla-ff-Gr2"/>
-        <segue reference="eJB-Nl-MSy"/>
+        <segue reference="vwh-6C-eR7"/>
+        <segue reference="8si-lg-1Ru"/>
     </inferredMetricsTieBreakers>
 </document>

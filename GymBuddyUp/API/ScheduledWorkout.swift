@@ -15,7 +15,7 @@ import FirebaseStorage
 import SwiftDate
 
 private let ref: FIRDatabaseReference! = FIRDatabase.database().reference()
-private let workoutCalendarRef = ref.child("user_workout_calendar").child(User.currentUser!.userId)
+private let workoutCalendarRef = ref.child("user_workout_calendar")
 
 
 
@@ -103,7 +103,7 @@ class ScheduledWorkout {
     
     class func addWorkoutToCalendar(planId: String, startDate: NSDate, endDate: NSDate? = stringToDate("9999-12-31"), recur: Int = 0, completion: (NSError?) -> Void) {
         let planId = planId
-        let newWorkoutRef = workoutCalendarRef.childByAutoId()
+        let newWorkoutRef = workoutCalendarRef.child(User.currentUser!.userId).childByAutoId()
         
         var data = [String: AnyObject]()
         data["plan"] = planId
@@ -120,7 +120,7 @@ class ScheduledWorkout {
     }
     
     class func skipScheduledWorkoutForDate(scheduledWorkoutId: String, date: NSDate, completion: (NSError?) -> Void) {
-        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("skip_on").child(dateToString(date))
+        let workoutRef = workoutCalendarRef.child(User.currentUser!.userId).child(scheduledWorkoutId).child("skip_on").child(dateToString(date))
         workoutRef.setValue(true) { (error, ref) in
             completion(error)
         }
@@ -128,21 +128,21 @@ class ScheduledWorkout {
     
     
     class func deleteScheduledWorkout(scheduledWorkoutId: String, completion: (NSError?) -> Void) {
-        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("repeat")
+        let workoutRef = workoutCalendarRef.child(User.currentUser!.userId).child(scheduledWorkoutId).child("repeat")
         workoutRef.setValue(-1) { (error, ref) in
             completion(error)
         }
     }
 
     class func stopRecurringWorkoutOnDate(scheduledWorkoutId: String, stopOnDate: NSDate, completion: (NSError?) -> Void) {
-        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId).child("end_date")
+        let workoutRef = workoutCalendarRef.child(User.currentUser!.userId).child(scheduledWorkoutId).child("end_date")
         workoutRef.setValue(dateToString(stopOnDate)) { (error, ref) in
             completion(error)
         }
     }
     
     class func repeatScheduledWorkout(scheduledWorkoutId: String, recur: Int, endDate: NSDate? = stringToDate("9999-12-31"), completion: (NSError?) -> Void) {
-        let workoutRef = workoutCalendarRef.child(scheduledWorkoutId)
+        let workoutRef = workoutCalendarRef.child(User.currentUser!.userId).child(scheduledWorkoutId)
         let data = ["end_date": dateToString(endDate!), "repeat": recur]
         workoutRef.updateChildValues(data as [NSObject : AnyObject]) { (error, ref) in
             completion(error)
@@ -154,7 +154,7 @@ class ScheduledWorkout {
      */
     private class func getActiveWorkoutsForDate(date: NSDate, complete: ([ScheduledWorkout])-> Void, onError: (NSError) -> Void) {
         // Query
-        workoutCalendarRef.queryOrderedByChild("end_date").queryStartingAtValue(dateToString(date)).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        workoutCalendarRef.child(User.currentUser!.userId).queryOrderedByChild("end_date").queryStartingAtValue(dateToString(date)).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             let results = initFromQueryResults(snapshot.value as? NSDictionary)
             complete(results)
             }) { (error) in
@@ -167,6 +167,7 @@ class ScheduledWorkout {
      */
     class func getScheduledWorkoutsForDate(date: NSDate, complete: ([ScheduledWorkout])-> Void) {
         // Query
+    
         getActiveWorkoutsForDate(date, complete: {(workouts) in
             var results = [ScheduledWorkout]()
             for workout in workouts {

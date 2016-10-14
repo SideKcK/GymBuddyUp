@@ -76,6 +76,8 @@ class ExerciseNumberedCell: UITableViewCell {
             
             self.amountLabel.text = "Skipped"
 
+        }else{
+            self.backgroundColor = UIColor(red: 256/256, green: 256/256, blue: 256/256, alpha: 1)
         }
     }
     

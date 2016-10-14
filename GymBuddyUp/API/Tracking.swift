@@ -15,8 +15,8 @@ import FirebaseStorage
 import SwiftDate
 
 private let ref: FIRDatabaseReference! = FIRDatabase.database().reference()
-private let trackedPlanRef = ref.child("user_workout_tracking").child(User.currentUser!.userId)
-private let bestRecordRef = ref.child("user_workout_tracking").child(User.currentUser!.userId).child("best_record")
+private let trackedPlanRef = ref.child("user_workout_tracking")
+private let bestRecordRef = ref.child("user_workout_tracking")
 
 func dateToInt(date: NSDate)->Int {
     
@@ -135,7 +135,7 @@ class Tracking {
         subdata["workout_log"] = workoutLog
         data[scheduledWorkout+":"+dateToString(startTime)] = subdata
         
-        trackedPlanRef.updateChildValues(data) { (error, ref) in
+        trackedPlanRef.child(User.currentUser!.userId).updateChildValues(data) { (error, ref) in
             completion(error)
         }
     }
@@ -149,7 +149,7 @@ class Tracking {
         print("=========== Before getTrackedPlanByDate!")
         let interval = NSTimeInterval(60 * 60 * 24 * 1)
         let newDate = date.dateByAddingTimeInterval(interval)
-        trackedPlanRef.queryOrderedByChild("start_date").queryStartingAtValue(dateToString(date))
+        trackedPlanRef.child(User.currentUser!.userId).queryOrderedByChild("start_date").queryStartingAtValue(dateToString(date))
             .queryEndingAtValue(dateToString(newDate)).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
                 var results:[TrackedPlan]?
                 
@@ -176,7 +176,7 @@ class Tracking {
         // Query
         print("=========== Before getTrackedPlanById!"+id)
         let getTrackedItemGroup = dispatch_group_create()
-        trackedPlanRef.child(id).observeSingleEventOfType(.Value,withBlock: {
+        trackedPlanRef.child(User.currentUser!.userId).child(id).observeSingleEventOfType(.Value,withBlock: {
             (dataSnapshot: FIRDataSnapshot) in
             if let values = dataSnapshot.value as? NSDictionary {
                 let result = TrackedPlan(trackingId: id , data: values)
@@ -282,7 +282,7 @@ class Tracking {
         
         var data = [String: AnyObject]()
         
-        bestRecordRef.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
+        bestRecordRef.child(User.currentUser!.userId).child("best_record").observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
             var bestRecordObj = [String: AnyObject]()
             bestRecordObj["best_record"] = bestRecord
             
@@ -290,7 +290,7 @@ class Tracking {
                 
                 data[createDate] = bestRecordObj
                 
-                let exerciseBestRecordRef = bestRecordRef.child(String(exercise.id))
+                let exerciseBestRecordRef = bestRecordRef.child(User.currentUser!.userId).child("best_record").child(String(exercise.id))
                 exerciseBestRecordRef.updateChildValues(data) { (error, ref) in
                     completion(error)
                 }
@@ -299,7 +299,7 @@ class Tracking {
                 var subData = [String: AnyObject]()
                 subData[createDate] = bestRecordObj
                 data[String(exercise.id)] = subData
-                bestRecordRef.updateChildValues(data) { (error, ref) in
+                bestRecordRef.child(User.currentUser!.userId).child("best_record").updateChildValues(data) { (error, ref) in
                     completion(error)
                 }
             }
@@ -311,7 +311,7 @@ class Tracking {
         // Query
         print("=========== Before getBestRecordByExercise!"+String(exercise.id))
         if(exercise.unitType == Exercise.UnitType.Repetition || exercise.unitType == Exercise.UnitType.DurationInSeconds  || exercise.unitType == Exercise.UnitType.DistanceInMiles  || exercise.unitType == Exercise.UnitType.RepByWeight){
-            bestRecordRef.child(String(exercise.id)).queryOrderedByChild("best_record").queryLimitedToLast(1).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+            bestRecordRef.child(User.currentUser!.userId).child("best_record").child(String(exercise.id)).queryOrderedByChild("best_record").queryLimitedToLast(1).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
                 let dataDict = (dataSnapshot.value as? NSDictionary)
                 for(key, value) in dataDict!{
                     print("=========== Before getBestRecordByExercise!"+(key as! String))
@@ -326,7 +326,7 @@ class Tracking {
         // Query
         print("=========== Before getTrackedPlanTimeSpan!")
 
-        trackedPlanRef.queryOrderedByChild("start_time").queryStartingAtValue(dateToInt(startDate))
+        trackedPlanRef.child(User.currentUser!.userId).queryOrderedByChild("start_time").queryStartingAtValue(dateToInt(startDate))
             .queryEndingAtValue(dateToInt(endDate)).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
                 var results:[TrackedPlan] = []
                 
@@ -386,7 +386,7 @@ class Tracking {
         
         for (index, id) in workoutids.enumerate() {
             dispatch_group_enter(myGroup)
-            trackedPlanRef.child(id).observeSingleEventOfType(.Value,withBlock: {
+            trackedPlanRef.child(User.currentUser!.userId).child(id).observeSingleEventOfType(.Value,withBlock: {
                 (dataSnapshot: FIRDataSnapshot) in
                 if let values = dataSnapshot.value as? NSDictionary {
                     isTrackeds[index] = true

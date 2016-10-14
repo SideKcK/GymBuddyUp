@@ -233,7 +233,8 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } else {
-                cell.profileView.image = user.cachedPhoto            }
+                cell.profileView.image = user.cachedPhoto
+            }
         } else {
             User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
                 if asyncId == cell.asyncIdentifer {

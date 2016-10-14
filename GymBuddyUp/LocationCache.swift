@@ -19,6 +19,7 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
     //MARK: Local Variable
     lazy var locationManager = CLLocationManager()
     lazy var currentLocation = CLLocation()
+    var isGotLocation = false
     
     //MARK: Init
     override init() {
@@ -42,8 +43,11 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = manager.location {
             currentLocation = location
+            if isGotLocation == false {
+                isGotLocation = true
+                // update to user_info
+                
+            }
         }
     }
-    
-    
 }

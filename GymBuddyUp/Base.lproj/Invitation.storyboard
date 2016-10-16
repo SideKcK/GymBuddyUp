@@ -93,6 +93,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="492278628.96372002">
                                                         <!--2016-08-07 16:03:48 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="onDatePicked:" destination="tlk-in-OKu" eventType="valueChanged" id="zMA-ZO-uxo"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -708,6 +711,6 @@
         <image name="dumbbell" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0kw-OF-hBD"/>
+        <segue reference="xl0-lW-JAf"/>
     </inferredMetricsTieBreakers>
 </document>

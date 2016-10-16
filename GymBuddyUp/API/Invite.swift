@@ -109,6 +109,7 @@ class Invite : Mappable {
                         completion(error)
                     }
                     else {
+                        Log.info("direct invitation sent successfully!")
                         completion(nil)
                     }
             }

@@ -18,6 +18,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var badgeLabel: UILabel!
 
     @IBOutlet weak var borderView: UIView!
+    var asyncId: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -215,6 +215,7 @@ class DiscoverMainVC: UIViewController {
                 desVC.event = events[row]
                 desVC.plan = plans[row]
             }
+        
         if let desVC = segue.destinationViewController as? GymMapVC,
             let gym = sender as? Gym {
             let currentLocation = LocationCache.sharedInstance.currentLocation
@@ -272,8 +273,6 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
-        
         
         cell.gymButton.tag = indexPath.row
         cell.gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)

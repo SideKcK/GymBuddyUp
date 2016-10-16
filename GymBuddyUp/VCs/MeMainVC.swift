@@ -28,7 +28,7 @@ class MeMainVC: UIViewController {
         
         super.viewDidLoad()
         if user == nil {
-            print()
+            Log.info("show currentUser's info")
             user = User.currentUser
         }
         setHistory()

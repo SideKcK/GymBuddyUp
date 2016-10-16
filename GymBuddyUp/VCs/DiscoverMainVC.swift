@@ -158,8 +158,22 @@ class DiscoverMainVC: UIViewController {
         
     }
     
-    func profileTapped (sender: AnyObject? ) {
-        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    func profileTapped (sender: AnyObject?) {
+        guard let tapLocation = sender?.locationInView(self.tableView) else {return}
+        //using the tapLocation, we retrieve the corresponding indexPath
+        guard let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation) else {return}
+        
+        let event = events[indexPath.row]
+        
+        if let user = UserCache.sharedInstance.cache[event.inviterId] {
+            self.performSegueWithIdentifier("toProfileSegue", sender: user)
+        } else {
+            User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
+                let user = users[0]
+                UserCache.sharedInstance.cache[event.inviterId] = user
+                self.performSegueWithIdentifier("toProfileSegue", sender: user)
+            }
+        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -177,7 +191,7 @@ class DiscoverMainVC: UIViewController {
                 self.findButton.alpha = 1
                 self.segHeightConstraint.priority = 250
                 self.segView.alpha = 1
-                }, completion: nil)
+            }, completion: nil)
             
         }
         }
@@ -189,6 +203,15 @@ class DiscoverMainVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
+        if segue.identifier == "toProfileSegue" {
+            if let desVC = segue.destinationViewController as? MeMainVC {
+                desVC.user = sender as? User
+                return
+            }
+        }
+        
         if let navVC = segue.destinationViewController as? UINavigationController,
             let desVC = navVC.topViewController as? DiscoverDetailVC,
             let row = sender as? Int {
@@ -259,9 +282,8 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.gymButton.tag = indexPath.row
         cell.gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
-        
-        cell.profileTapView.tag = indexPath.row
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DiscoverMainVC.profileTapped(_:)))
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(profileTapped(_:)))
         cell.profileTapView.addGestureRecognizer(tapGestureRecognizer)
         
         cell.showProfileView()

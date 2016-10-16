@@ -32,6 +32,7 @@ class ConversationCell: UITableViewCell {
         avatarImage.makeThumbnail(UIColor.clearColor())
         borderView.backgroundColor = ColorScheme.s4Bg
         borderView.addShadow()
+        badgeLabel.makeCircle(UIColor.clearColor())
         screenNameLabel.font = FontScheme.H2
         lastRecordLabel.font = FontScheme.T2
         lastRecordLabel.textColor = ColorScheme.g3Text

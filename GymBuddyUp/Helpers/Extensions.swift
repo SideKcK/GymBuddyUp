@@ -132,6 +132,18 @@ extension UIButton {
 
 }
 
+extension UIView {
+    func makeCircle(color: UIColor) {
+        //self.backgroundColor = color
+        self.layer.borderWidth = 1
+        self.layer.masksToBounds = false
+        self.layer.borderColor = color.CGColor
+        self.layer.cornerRadius = self.frame.height/2.0
+        self.contentMode = UIViewContentMode.ScaleAspectFill
+        self.clipsToBounds = true
+    }
+}
+
 extension UIImageView {
     func makeThumbnail(color: UIColor) {
         //self.backgroundColor = color

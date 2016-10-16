@@ -346,6 +346,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("ConversationCell", forIndexPath: indexPath) as! ConversationCell
+            cell.selectionStyle = .Gray
             let index = indexPath.row
             let conversation = conversations[index]
             let asyncId = conversation.conversationId
@@ -402,6 +403,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = UIColor.clearColor()
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tabState == .Invitaions {
             self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
@@ -410,6 +412,8 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
 //            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.selected = false
             Log.info("did select chat session")
             let index = indexPath.row
             let conversation = conversations[index]

@@ -148,10 +148,11 @@ class DiscoverMainVC: UIViewController {
         guard let placeId = events[sender.tag].gym?.placeid else {
             return
         }
+        
         GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
             if error == nil {
-            self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
-            }else {
+                self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
+            } else {
                 print(error)
             }
         }
@@ -178,22 +179,20 @@ class DiscoverMainVC: UIViewController {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if events.count != 0 {
-        let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
-        if (yDirection < 0) {
-            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
-                self.findButton.alpha = 0
-                self.segHeightConstraint.priority = 999
-                self.segView.alpha = 0
+            let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
+            if (yDirection < 0) {
+                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
+                    self.findButton.alpha = 0
+                    self.segHeightConstraint.priority = 999
+                    self.segView.alpha = 0
                 }, completion: nil)
-        }
-        else if (yDirection > 0) {
-            UIView.animateWithDuration(0.1, delay: 0.2, options: .CurveEaseIn, animations: {
-                self.findButton.alpha = 1
-                self.segHeightConstraint.priority = 250
-                self.segView.alpha = 1
-            }, completion: nil)
-            
-        }
+            } else if (yDirection > 0) {
+                UIView.animateWithDuration(0.1, delay: 0.2, options: .CurveEaseIn, animations: {
+                    self.findButton.alpha = 1
+                    self.segHeightConstraint.priority = 250
+                    self.segView.alpha = 1
+                }, completion: nil)
+            }
         }
 
     }
@@ -203,8 +202,6 @@ class DiscoverMainVC: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        
         if segue.identifier == "toProfileSegue" {
             if let desVC = segue.destinationViewController as? MeMainVC {
                 desVC.user = sender as? User
@@ -225,8 +222,6 @@ class DiscoverMainVC: UIViewController {
             desVC.gym = gym
         }
     }
-
-
 }
 
 

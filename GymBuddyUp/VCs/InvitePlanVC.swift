@@ -44,7 +44,7 @@ class InvitePlanVC: UIViewController {
     }
     
     @IBAction func unwindToInvitePlanVC (segue: UIStoryboardSegue) {
-        reloadPlans(NSDate())
+        reloadPlans(selectedDate)
     }
 
     
@@ -134,8 +134,9 @@ class InvitePlanVC: UIViewController {
             Log.info("workout Id = \(workouts[selected - 1].id)")
         }
         if let navVC = segue.destinationViewController as? PlanLibNavVC, let desVC = navVC.topViewController as? PlanLibVC{
+            navVC.selectedDate = selectedDate
             desVC.from = self
-            desVC.date = selectedDate
+            desVC.selectedDate = selectedDate
         }
     }
 }

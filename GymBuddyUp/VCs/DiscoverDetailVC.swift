@@ -152,16 +152,18 @@ class DiscoverDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func onChatButton(sender: AnyObject) {
-            //        self.hidesBottomBarWhenPushed = true
-            self.tabBarController?.tabBar.hidden = true
-            self.tabBarController?.tabBar.translucent = true
-            Log.info("asdasdasd")
+        if let  currentUserId = User.currentUser?.userId,
+            recipientUserId = event.inviterId,
+            recipientName = UserCache.sharedInstance.cache[event.inviterId]?.screenName,
+            senderName = User.currentUser?.screenName {
+            
             let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-            let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-            InboxMessage.test()
-            //        self.hidesBottomBarWhenPushed = false
+            let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            chatVC.setup(currentUserId, senderName: senderName, setupByRecipientId: recipientUserId, recipientName: recipientName)
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
     }
     
     @IBAction func onJoinButton(sender: AnyObject) {

@@ -45,6 +45,7 @@ class MeMainVC: UIViewController {
         print("Enter MeMainVC")
         setHistory()
     }
+    
     @IBAction func psButton(sender: AnyObject) {
         if let  currentUserId = User.currentUser?.userId,
                 recipientUserId = user?.userId,

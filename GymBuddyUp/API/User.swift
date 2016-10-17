@@ -111,7 +111,13 @@ class User {
     var goals: [Goal]?
     var gym: String?
     var googleGymObj: Gym?
-    var description: String? 
+    var description: String?
+    
+    
+    // some info for cell cache
+    var canBeFriend = true
+    
+    
     /*var description: String? {
         get {
             

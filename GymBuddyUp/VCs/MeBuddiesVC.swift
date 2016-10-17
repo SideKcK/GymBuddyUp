@@ -28,6 +28,14 @@ class MeBuddiesVC: UIViewController {
         setupVisual()
         loadData()
     }
+    @IBAction func addFriendOnClick(sender: AnyObject) {
+        let navVC = UINavigationController()
+        let searchUserVC = SearchUserViewController()
+        navVC.pushViewController(searchUserVC, animated: false)
+        self.presentViewController(navVC, animated: true) { 
+            Log.info("instantiate a new NavVC")
+        }
+    }
 
     func loadData() {
         User.currentUser?.getMyFriendList({ (users: [User]) in

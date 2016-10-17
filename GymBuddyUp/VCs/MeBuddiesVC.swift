@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class MeBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -47,7 +49,6 @@ class MeBuddiesVC: UIViewController {
         findButton.layer.cornerRadius = 8
         findButton.backgroundColor = ColorScheme.p1Tint
         findButton.titleLabel?.textColor = ColorScheme.g4Text
-        
         findButton.titleLabel?.font = FontScheme.T2
     }
     
@@ -75,6 +76,21 @@ extension MeBuddiesVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let buddy = buddies[indexPath.row]
         cell.buddy = buddy.screenName
+        let asyncIdentifer = buddy.userId
+        cell.asyncIdentifer = asyncIdentifer
+        if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncIdentifer == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                cell.profileView.image = user.cachedPhoto
+            }
+        }
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

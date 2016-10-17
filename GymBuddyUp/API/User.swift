@@ -306,7 +306,9 @@ class User {
         for userId in userIds {
             dispatch_group_enter(gcdGetUserGroup)
             ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                ret.append(User(snapshot: snapshot))
+                let user = User(snapshot: snapshot)
+                UserCache.sharedInstance.cache[user.userId] = user
+                ret.append(user)
                 dispatch_group_leave(gcdGetUserGroup)
             }) { (error) in
                 print(error.localizedDescription)

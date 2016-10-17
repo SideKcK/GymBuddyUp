@@ -17,7 +17,7 @@ class BuddyCardCell: UITableViewCell {
     @IBOutlet weak var gymLabel: UILabel!
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var disHeightConstraint: NSLayoutConstraint!
-
+    var asyncIdentifer = ""
     var buddy: String! {
         didSet {
             nameLabel.text = buddy
@@ -28,6 +28,7 @@ class BuddyCardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profileView.makeThumbnail(UIColor.clearColor())
         disHeightConstraint.priority = 999
         addButton.hidden = true
         borderView.addShadow()

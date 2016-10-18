@@ -74,7 +74,7 @@ extension MeBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let buddy = buddies[indexPath.row]
-        cell.buddy = buddy.screenName
+        cell.buddy = buddy
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

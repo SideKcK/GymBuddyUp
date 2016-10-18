@@ -13,6 +13,7 @@ import Alamofire
 import SwiftDate
 
 private let friendRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_friend")
+private let userLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_location")
 
 class Friend {
     
@@ -138,5 +139,46 @@ class Friend {
     {
         
     }
+    
+    class func discoverNewBuddies(location: CLLocation, radiusInkilometers: Double, completion: ([User], NSError?) -> Void) {
+        // Query locations at input location with a radius of radius meters
+        
+        let geoQueryDispatchGroup = dispatch_group_create()
+        var userList = [User]()
+        
+        print("inside discoverNewBuddies ")
+        dispatch_group_enter(geoQueryDispatchGroup)
+        
+        
+        let geofire = GeoFire(firebaseRef: userLocationRef)
+        let query = geofire.queryAtLocation(location, withRadius: radiusInkilometers)
+        
+        let fetchWorkoutDispatchGroup = dispatch_group_create()
+        
+        let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
+            //print(key, location.distanceFromLocation(ßfoundLocation))
+            dispatch_group_enter(fetchWorkoutDispatchGroup)
+            
+            //if(key != User.currentUser?.userId){
+                User.getUserById(key, successHandler: { (user: User) in
+                    user.userlocation = foundLocation
+                    userList.append(user)
+                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+                })
+            //}
+        })
+    
+            query.observeReadyWithBlock({
+                query.removeObserverWithFirebaseHandle(observerHandle)
+                dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+                    dispatch_group_leave(geoQueryDispatchGroup)
+                }
+            })
+            
+            dispatch_group_notify(geoQueryDispatchGroup, dispatch_get_main_queue()) {
+                completion(userList, nil)
+            }
+        }
+
 }
 

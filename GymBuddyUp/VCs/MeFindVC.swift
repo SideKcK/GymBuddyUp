@@ -13,11 +13,11 @@ class MeFindVC: UIViewController {
     @IBOutlet weak var segView: UIView!
     @IBOutlet weak var tableView: UITableView!
 
-    var buddies = ["Jesiah", "You", "Aaron"]//TODO change to User
+    var buddies = [User]() //TODO change to User
     var fbNum = 3
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("inside MeFindVC")
         addSegControl(segView)
         setupVisual()
         tableView.delegate = self
@@ -25,6 +25,35 @@ class MeFindVC: UIViewController {
         tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
         tableView.estimatedRowHeight = 120
         tableView.rowHeight = UITableViewAutomaticDimension
+        //Friend.discoverNewBuddies(location: CLLocation, radiusInkilometers: Double)([User], NSError?) -> Void)
+        
+        var resultUserList = [User]()
+        let fetchNewBuddiesGroup = dispatch_group_create()
+        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        dispatch_group_enter(fetchNewBuddiesGroup)
+        Friend.discoverNewBuddies(testLocation, radiusInkilometers: 100.0,  completion: { (users, error) in
+            if error != nil{
+                Log.error(error.debugDescription)
+            } else {
+                for user in users{
+                    if(User.currentUser?.userId != user.userId){
+                        if(User.currentUser?.userlocation != nil && user.userlocation != nil){
+                            user.distance = User.currentUser?.userlocation!.distanceFromLocation(user.userlocation!)
+                        }
+                        
+                        resultUserList.append(user)
+                            
+                    }
+                
+                }
+                
+                self.buddies = resultUserList
+            }
+            dispatch_group_leave(fetchNewBuddiesGroup)
+        })
+        dispatch_group_notify(fetchNewBuddiesGroup, dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
     }
 
     func setupVisual() {
@@ -50,6 +79,13 @@ class MeFindVC: UIViewController {
         let row = sender.tag
         sender.setTitle("Request Sent", forState: .Normal)
         sender.enabled = false
+        print("row : " + String(row))
+        Friend.sendFriendRequest(self.buddies[row].userId) { (error: NSError?) in
+            if (error != nil) {
+                
+                
+            }
+        }
         //send friend request
     }
     

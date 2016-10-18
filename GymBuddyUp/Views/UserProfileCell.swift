@@ -41,18 +41,18 @@ class UserProfileCell: UITableViewCell {
                 self.workoutNumLabel.text = String(workoutNum)
             }
             
-            if let goals = user.goals {
-                var goalDes = String()
-                print("enter profile cell")
-                for goal in goals{
-                    if goalDes != ""{
-                        goalDes += ", " + goal.description
-                    }else{
-                        goalDes += goal.description
-                    }
+        
+            var goalDes = String()
+            print("enter profile cell")
+            for goal in user.goals{
+                if goalDes != ""{
+                    goalDes += ", " + goal.description
+                }else{
+                    goalDes += goal.description
                 }
-                self.goalLabel.text = goalDes
             }
+            self.goalLabel.text = goalDes
+            
 
             if let description = user.description {
                 self.descriptionLabel.text = description

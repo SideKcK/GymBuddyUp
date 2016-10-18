@@ -18,9 +18,35 @@ class BuddyCardCell: UITableViewCell {
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var disHeightConstraint: NSLayoutConstraint!
 
-    var buddy: String! {
+    var buddy: User! {
         didSet {
-            nameLabel.text = buddy
+            nameLabel.text = buddy.screenName
+            let distance = buddy.distance!/1000/1.60934
+            let distanceStr = NSString(format: "%.2f", distance)
+            disLabel.text = (distanceStr as String) + " miles"
+            
+            var goalDes = String()
+            if buddy.goals.isEmpty == false{
+                print("Goal is not nil " )
+                for goal in buddy.goals{
+                    if goalDes != ""{
+                        goalDes += ", " + goal.description
+                    }else{
+                        goalDes += goal.description
+                    }
+                }
+                
+            }
+            
+            if let googleGymObj = buddy?.googleGymObj {
+                self.gymLabel.text = "Gym: " + googleGymObj.name!
+            } else if let gymName = buddy?.gym {
+                self.gymLabel.text = "Gym: " + gymName
+            }else{
+                self.gymLabel.text = "Gym: Not Specific"
+            }
+            
+             self.goalLabel.text = "Goals: " + goalDes
             
         }
     }

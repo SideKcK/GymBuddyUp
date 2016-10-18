@@ -15,6 +15,7 @@ class PlanLibDetailVC: UIViewController {
 
     var plans = [Plan]()
     var from: UIViewController!
+    var selectedDate = NSDate()
     
     override func viewDidLoad() {
         super.viewDidLoad()

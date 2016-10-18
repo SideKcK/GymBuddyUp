@@ -57,8 +57,8 @@ class MeUpdateVC: UITableViewController {
     
     func setupInfo(){
         screenNameField.text = user.screenName
-        if let _goals = user.goals {
-            for goal in _goals {
+        
+            for goal in user.goals {
                 
                 if(goal.rawValue == 0){
                     //weightButton.selected = true
@@ -78,7 +78,7 @@ class MeUpdateVC: UITableViewController {
                     buttonClicked(muscleButton)
                 }
             }
-        }
+        
         gym1Button.setTitle(user.gym, forState: UIControlState.Normal)
         if let _description = user.description {
             textView.text = _description

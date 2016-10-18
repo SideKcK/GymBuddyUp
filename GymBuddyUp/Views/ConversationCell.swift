@@ -18,6 +18,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var badgeLabel: UILabel!
 
     @IBOutlet weak var borderView: UIView!
+    var asyncId: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +32,7 @@ class ConversationCell: UITableViewCell {
         avatarImage.makeThumbnail(UIColor.clearColor())
         borderView.backgroundColor = ColorScheme.s4Bg
         borderView.addShadow()
+        badgeLabel.makeCircle(UIColor.clearColor())
         screenNameLabel.font = FontScheme.H2
         lastRecordLabel.font = FontScheme.T2
         lastRecordLabel.textColor = ColorScheme.g3Text

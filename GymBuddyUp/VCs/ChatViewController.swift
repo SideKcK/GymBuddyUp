@@ -77,7 +77,7 @@ class ChatViewController: JSQMessagesViewController {
     
     private func unNewConversation() {
         if let convsId = self.conversationId {
-            let ownConversationRef = userConversationRef.child("\(self.senderId)/\(convsId)/isNew")
+            let ownConversationRef = userConversationRef.child("\(self.recipientId)/\(convsId)/isNew")
             ownConversationRef.setValue(0)
         }
     }
@@ -142,7 +142,7 @@ class ChatViewController: JSQMessagesViewController {
                 "recipient_name": rcScreenName,
                 "last_record": text,
                 "createdAt": timeStamp,
-                "isNew": 1
+                "isNew": 0
             ]
             let peerConversationItem = [
                 "recipient_id": sndId,

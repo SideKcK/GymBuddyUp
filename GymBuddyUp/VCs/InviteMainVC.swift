@@ -166,6 +166,14 @@ class InviteMainVC: UIViewController {
 
 }
 
+extension InviteMainVC: InviteDatePickerOnPicked {
+    func datePicker(datePicker: UIDatePicker) {
+        self.time = datePicker.date
+        Log.info("time = \(self.time)")
+    }
+}
+
+
 extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
     // MARK: - Table view data source
     
@@ -186,6 +194,9 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         }
         if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("InviteDateCell", forIndexPath: indexPath) as! InviteDateCell
+            if cell.delegate == nil {
+                cell.delegate = self
+            }
             cell.dateButton.addTarget(self, action: #selector(InviteMainVC.onDateButton(_:)), forControlEvents: .TouchUpInside)
             cell.setDate(time)
             datePickerHeight = cell.datePickerHeight

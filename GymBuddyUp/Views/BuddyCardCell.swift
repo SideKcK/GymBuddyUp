@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol BuddyCardCellAddFriend {
+    func buddyCardCell(buddyCardCell: BuddyCardCell, selectedUserId: String)
+}
+
 class BuddyCardCell: UITableViewCell {
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,6 +22,9 @@ class BuddyCardCell: UITableViewCell {
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var disHeightConstraint: NSLayoutConstraint!
 
+    var asyncIdentifer = ""
+    weak var delegate: BuddyCardCellAddFriend?
+    
     var buddy: User! {
         didSet {
             nameLabel.text = buddy.screenName
@@ -54,6 +61,7 @@ class BuddyCardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profileView.makeThumbnail(UIColor.clearColor())
         disHeightConstraint.priority = 999
         addButton.hidden = true
         borderView.addShadow()
@@ -80,7 +88,13 @@ class BuddyCardCell: UITableViewCell {
         disHeightConstraint.priority = 250
     }
     
+    func addButtonOnClick() {
+        delegate?.buddyCardCell(self, selectedUserId: asyncIdentifer)
+    }
+    
     func showAddButton() {
         addButton.hidden = false
+        addButton.userInteractionEnabled = true
+        addButton.addTarget(self, action: #selector(addButtonOnClick), forControlEvents: .TouchUpInside)
     }
 }

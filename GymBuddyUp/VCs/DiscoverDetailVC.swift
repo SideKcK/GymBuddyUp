@@ -152,34 +152,78 @@ class DiscoverDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func onChatButton(sender: AnyObject) {
-            //        self.hidesBottomBarWhenPushed = true
-            self.tabBarController?.tabBar.hidden = true
-            self.tabBarController?.tabBar.translucent = true
-            Log.info("asdasdasd")
+        if let  currentUserId = User.currentUser?.userId,
+            recipientUserId = event.inviterId,
+            recipientName = UserCache.sharedInstance.cache[event.inviterId]?.screenName,
+            senderName = User.currentUser?.screenName {
+            
             let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-            let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-            InboxMessage.test()
-            //        self.hidesBottomBarWhenPushed = false
+            let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            chatVC.setup(currentUserId, senderName: senderName, setupByRecipientId: recipientUserId, recipientName: recipientName)
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
     }
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        let statusView = StatusView()
-        statusView.displayView()
+        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
+            Log.info("unwrap failed check nil values")
+            return
+        }
+        Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let statusView = StatusView()
+                statusView.setMessage("Done! Enjoy working out with \(user.screenName!)")
+                statusView.displayView()
+            } else {
+                Log.info("join failed")
+            }
+
+        }
+
         
     }
     
     @IBAction func onRejectButton(sender: AnyObject) {
         //reject invite
+        guard let inviteId = event?.id else {
+            Log.info("unwrap failed check nil values")
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        Invite.rejectWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                Log.info("rejected successfully")
+            } else {
+                Log.info("reject failed")
+            }
+        }
+
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     @IBAction func onCancelButton(sender: AnyObject) {
+        guard let inviteId = event?.id else {
+            Log.info("unwrap failed check nil values")
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        Invite.cancelWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                Log.info("canceled successfully")
+            } else {
+                Log.info("cancel failed")
+            }
+        }
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+
     }
     
     @IBAction func onPlanButton(sender: AnyObject) {

@@ -10,6 +10,8 @@ import UIKit
 import HMSegmentedControl
 import Firebase
 import FirebaseDatabase
+import Alamofire
+import AlamofireImage
 
 class InboxMainVC: UIViewController {
     enum TabStates {
@@ -49,9 +51,9 @@ class InboxMainVC: UIViewController {
     
     @IBAction func testBarButtonClick(sender: AnyObject) {
         Log.info("test button clicked")
-        Friend.sendFriendRequest("VYkFlp8LyMeIF2abQCbPAh6nuMD3") { (error: NSError?) in
+        Friend.sendFriendRequest("wz5xp2adjfM5MEUC5BtGNIxATIf2") { (error: NSError?) in
             if (error != nil) {
-            
+                
             
             }
         }
@@ -344,9 +346,46 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("ConversationCell", forIndexPath: indexPath) as! ConversationCell
+            cell.selectionStyle = .Gray
             let index = indexPath.row
             let conversation = conversations[index]
+            let asyncId = conversation.conversationId
+            cell.asyncId = conversation.conversationId
             cell.screenNameLabel.text = conversation.recipientScreenName
+            
+            if let user = UserCache.sharedInstance.cache[conversation.recipientId] {                
+                if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                    let request = NSMutableURLRequest(URL: photoURL)
+                    cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                        if asyncId == cell.asyncId {
+                            cell.avatarImage.image = response.result.value
+                            user.cachedPhoto = response.result.value
+                        }
+                    }
+                } else {
+                    cell.avatarImage.image = user.cachedPhoto
+                }
+            } else {
+                User.getUserArrayFromIdList([conversation.recipientId]) { (users: [User]) in
+                    if asyncId == cell.asyncId {
+                        let user = users[0]
+                        UserCache.sharedInstance.cache[conversation.recipientId] = user
+                        if let photoURL = user.photoURL {
+                            let request = NSMutableURLRequest(URL: photoURL)
+                            cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                                if asyncId == cell.asyncId {
+                                    cell.avatarImage.image = response.result.value
+                                    user.cachedPhoto = response.result.value
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            
+            
             if conversation.isNew == true {
                 cell.badgeLabel.backgroundColor = UIColor.redColor()
             } else {
@@ -364,6 +403,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = UIColor.clearColor()
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tabState == .Invitaions {
             self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
@@ -372,6 +412,8 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
 //            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.selected = false
             Log.info("did select chat session")
             let index = indexPath.row
             let conversation = conversations[index]

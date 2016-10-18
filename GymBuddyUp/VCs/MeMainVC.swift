@@ -28,7 +28,7 @@ class MeMainVC: UIViewController {
         
         super.viewDidLoad()
         if user == nil {
-            print()
+            Log.info("show currentUser's info")
             user = User.currentUser
         }
         setHistory()
@@ -45,6 +45,7 @@ class MeMainVC: UIViewController {
         print("Enter MeMainVC")
         setHistory()
     }
+    
     @IBAction func psButton(sender: AnyObject) {
         if let  currentUserId = User.currentUser?.userId,
                 recipientUserId = user?.userId,
@@ -271,7 +272,7 @@ extension MeMainVC: updateMeDelegate {
         User.currentUser?.googleGymObj = updatedGymObj
         User.currentUser?.gym = updatedGymPlaceId
         for goal in updatedGoals {
-            User.currentUser?.goals?.append(User.Goal(rawValue: goal)!)
+            User.currentUser?.goals.append(User.Goal(rawValue: goal)!)
         }
         User.currentUser?.syncWithLastestUserInfo()
         self.tableView.reloadData()

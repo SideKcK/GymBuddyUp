@@ -34,6 +34,7 @@ class InboxMainVC: UIViewController {
     var tabState: TabStates = .Invitaions
     var inboxBuddyDict = [String: InboxMessage]()
     var inboxInvitationDict = [String: InboxMessage]()
+    var segControl: HMSegmentedControl!
 
     
     override func viewDidLoad() {
@@ -168,7 +169,7 @@ class InboxMainVC: UIViewController {
     }
     
     func addSegControl (view: UIView) {
-        let segControl = HMSegmentedControl(sectionTitles: ["Invitations", "Buddy Requests", "Messages"])
+        segControl = HMSegmentedControl(sectionTitles: ["Invitations", "Buddy Requests", "Messages"])
         segControl.customize()
         segControl.backgroundColor = ColorScheme.s4Bg
         segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
@@ -412,6 +413,16 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
 //            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
+            let titleFormatterBlock: HMTitleFormatterBlock = {(control: AnyObject!, title: String!, index: UInt, selected: Bool) -> NSAttributedString in
+                if title == "Messages" {
+                    let attString = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.blueColor()
+                        ])
+                    return attString;
+                }
+                return NSAttributedString()
+                
+            }
+            segControl.titleFormatter = titleFormatterBlock
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             cell?.selected = false
             Log.info("did select chat session")

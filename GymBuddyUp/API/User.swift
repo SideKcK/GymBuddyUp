@@ -89,6 +89,7 @@ class User {
     
     private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("users")
     private let storageRef = FIRStorage.storage().reference().child("user")
+    private let userLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_location")
     
     var userId: String!
     var photoURL: NSURL?
@@ -108,10 +109,16 @@ class User {
     var buddyNum: Int?
     
     var goal: Goal?
-    var goals: [Goal]?
+    var goals = [Goal]()
     var gym: String?
     var googleGymObj: Gym?
-    var description: String? 
+    var description: String?
+    var userlocation: CLLocation?
+    
+    // some info for cell cache
+    var canBeFriend = true
+    
+    
     /*var description: String? {
         get {
             
@@ -125,6 +132,9 @@ class User {
     
     
     static var currentUser: User?
+    
+    init(){
+    }
     
     init (user: FIRUser) {
         // FIRUser properties
@@ -161,15 +171,28 @@ class User {
         
         if let _goals = snapshot.value!["goal"] as? [Int] {
             for key in _goals{
-                self.goals?.append(Goal(rawValue: key)!)
+                self.goals.append(Goal(rawValue: key)!)
                 print(String(key))
             }
+            
         }
         
         if let _photoURL = snapshot.value!["profile_image_url"] as? String {
             self.photoURL = NSURL(string: _photoURL)
         }
         
+        if let _gym = snapshot.value?["gym"] as? String {
+            GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
+                if error == nil {
+                    if let fetchedGym = gym {
+                        self.gym = fetchedGym.name
+                        self.googleGymObj = fetchedGym
+                    }
+                } else {
+                    print(error)
+                }
+            }
+        }
         self.userRef = ref.child(self.userId)
     }
     
@@ -217,7 +240,7 @@ class User {
     
     class func signInWithFacebook (fromViewController: UIViewController!, completion: UserAuthCallback) {
         let loginManager = FBSDKLoginManager()
-        let facebookReadPermissions = ["public_profile", "email"]
+        let facebookReadPermissions = ["public_profile", "email", "user_friends"]
         loginManager.logInWithReadPermissions(facebookReadPermissions, fromViewController: fromViewController) { (result, error) in
             if error != nil {
                 completion(user: nil, error: error)
@@ -252,7 +275,7 @@ class User {
             if let _goals = snapshot.value?["goal"] as? [Int] {
                 self.goals = []
                 for key in _goals{
-                    self.goals?.append(Goal(rawValue: key)!)
+                    self.goals.append(Goal(rawValue: key)!)
                     //print(String(key))
                 }
             }
@@ -306,13 +329,35 @@ class User {
         for userId in userIds {
             dispatch_group_enter(gcdGetUserGroup)
             ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                ret.append(User(snapshot: snapshot))
+                let user = User(snapshot: snapshot)
+                UserCache.sharedInstance.cache[user.userId] = user
+                ret.append(user)
                 dispatch_group_leave(gcdGetUserGroup)
             }) { (error) in
                 print(error.localizedDescription)
                 dispatch_group_leave(gcdGetUserGroup)
             }
         }
+        
+        dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            successHandler(ret)
+        })
+    }
+    
+    class func getUserById (userId: String, successHandler: (User)->()) {
+        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
+        let gcdGetUserGroup = dispatch_group_create()
+        var ret = User()
+        
+        dispatch_group_enter(gcdGetUserGroup)
+        ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            ret = User(snapshot: snapshot)
+            dispatch_group_leave(gcdGetUserGroup)
+        }) { (error) in
+            print(error.localizedDescription)
+            dispatch_group_leave(gcdGetUserGroup)
+        }
+        
         
         dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
             successHandler(ret)
@@ -345,12 +390,29 @@ class User {
                 print (error)
             }
         }
+        //let currentLocation = LocationCache.sharedInstance.currentLocation
+        
+        let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        
+        updateLastSeenLocation(currentLocation){ (err) in
+            //            print(err)
+        }
+
     }
     
 
     // TODO
-    func updateLastSeenLocation(location: CLLocation) {
+    func updateLastSeenLocation(location: CLLocation, completion: (NSError?) -> Void) {
         // to be implemented
+        
+        let geofire = GeoFire(firebaseRef: userLocationRef)
+        geofire.setLocation(location, forKey: self.userId) { (error) in
+            if error != nil {
+                print(error)
+            }
+            User.currentUser?.userlocation = location
+            completion(error)
+        }
     }
     
     func updateProfilePicture(photo: UIImage, errorHandler: (NSError?)->Void) {
@@ -440,9 +502,9 @@ class User {
                 let valueArray = Array(valueStr)
                 self.goals = []
                 for key in valueArray {
-                    self.goals?.append(Goal(rawValue: key)!)
+                    self.goals.append(Goal(rawValue: key)!)
                 }
-                for element in self.goals! {
+                for element in self.goals {
                     print(String(element))
                 }
                 let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")

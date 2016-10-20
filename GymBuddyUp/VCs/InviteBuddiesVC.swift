@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
 
 class InviteBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -15,10 +18,19 @@ class InviteBuddiesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        setupVisual()
         loadData()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupVisual() {
+        tableView.backgroundColor = ColorScheme.s3Bg
+        tableView.separatorColor = UIColor.clearColor()
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
     }
     
     func loadData() {
@@ -54,12 +66,29 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCell", forIndexPath: indexPath) as! BuddyCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let index = indexPath.row
         let buddy = buddies[index]
+        let asyncIdentifer = buddy.userId
+        cell.asyncIdentifer = asyncIdentifer
+        if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncIdentifer == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                cell.profileView.image = user.cachedPhoto
+            }
+        }
+        
         cell.nameLabel.text = buddy.screenName
         cell.goalLabel.hidden = true
         cell.gymLabel.hidden = true
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     

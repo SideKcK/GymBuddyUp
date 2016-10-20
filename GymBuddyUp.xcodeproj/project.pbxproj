@@ -41,6 +41,7 @@
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
 		C1C28C0F1DABF5F700972202 /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C0E1DABF5F700972202 /* UserCache.swift */; };
 		C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C101DABF66D00972202 /* LocationCache.swift */; };
+		C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */; };
 		C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E731D77BC3200E6CA77 /* Chat.storyboard */; };
 		C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */; };
 		C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */; };
@@ -185,6 +186,7 @@
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
 		C1C28C0E1DABF5F700972202 /* UserCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
 		C1C28C101DABF66D00972202 /* LocationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCache.swift; sourceTree = "<group>"; };
+		C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUserViewController.swift; path = VCs/SearchUserViewController.swift; sourceTree = "<group>"; };
 		C1F08E731D77BC3200E6CA77 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelfMessageCell.xib; path = Views/SelfMessageCell.xib; sourceTree = "<group>"; };
 		C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfMessageCell.swift; path = Views/SelfMessageCell.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */,
 				C6860BF81D8913FC0081C89D /* MePasswordVC.swift */,
 				C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */,
+				C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				C6860BF11D8692FA0081C89D /* InviteNoPlanCatCell.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
+				C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C6860BF51D8899F40081C89D /* InviteGymCell.swift in Sources */,
 				C6860BFD1D8A69E10081C89D /* LoginVC.swift in Sources */,

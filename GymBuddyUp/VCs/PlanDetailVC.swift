@@ -69,6 +69,7 @@ class PlanDetailVC: UIViewController {
                 self.setupVisual()
                 self.timeLabel.text = timeString(NSDate())
                 self.title = weekMonthDateString(self.selectedDate)
+                self.planLabel.text = self.plan.name
             }
             
         } else {
@@ -115,6 +116,7 @@ class PlanDetailVC: UIViewController {
     }
     
     func setViews(invited: Bool) {
+        self.planLabel.text = self.plan.name
         timeLocView.hidden = !invited
         statusView.hidden = !invited
         statusViewHeight.priority = invited ? 250:999

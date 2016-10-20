@@ -272,7 +272,7 @@ extension MeMainVC: updateMeDelegate {
         User.currentUser?.googleGymObj = updatedGymObj
         User.currentUser?.gym = updatedGymPlaceId
         for goal in updatedGoals {
-            User.currentUser?.goals?.append(User.Goal(rawValue: goal)!)
+            User.currentUser?.goals.append(User.Goal(rawValue: goal)!)
         }
         User.currentUser?.syncWithLastestUserInfo()
         self.tableView.reloadData()

@@ -107,10 +107,12 @@ class InboxMainVC: UIViewController {
                 isProcessed = snapshot.value?["processed"] as? Bool,
                 isIgnored = snapshot.value?["ignored"] as? Bool,
                 senderId = snapshot.value?["sender"] as? String,
+                senderName = snapshot.value?["sender_name"] as? String,
                 _ = snapshot.value?["timestamp"] as? Int
             else {return}
             let messageId = snapshot.key
-            let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: nil)
+            let associatedId = snapshot.value?["workout_invite_id"] as? String
+            let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: associatedId, _senderName: senderName)
             message.isProcessed = isProcessed
             message.isIgnore = isIgnored
             switch message.type {
@@ -123,8 +125,7 @@ class InboxMainVC: UIViewController {
                 self.inboxInvitations.append(messageId)
                 break
             }
-
-        
+            self.tableView.reloadData()
         })
         
         pushNotificatoinRef.child(userId).observeEventType(.ChildChanged, withBlock: {(snapshot) in
@@ -257,8 +258,9 @@ class InboxMainVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let navVC = segue.destinationViewController as? UINavigationController, let desVC = navVC.topViewController as? DiscoverDetailVC {
-            desVC.plan = Plan()
-            //desVC.event = PublishedWorkout
+            guard let senderDict = sender as? [String : AnyObject] else {return}
+            desVC.event = senderDict["invite"] as! Invite
+            desVC.plan = senderDict["plan"] as! Plan
         }
     }
     
@@ -293,8 +295,9 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
                 let index = inboxInvitations.count - indexPath.row - 1
                 let inboxMessageId = inboxInvitations[index]
                 guard let inboxMessage = inboxInvitationDict[inboxMessageId] else {return cell}
-                cell.message = inboxMessage.senderId
+                cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
+                Log.info("invitation type = \(inboxMessage.type) isProcessed = \(inboxMessage.isProcessed)")
                 if inboxMessage.isProcessed == false && inboxMessage.type == .WorkoutInviteReceived {
                     cell.showButtons()
                 }
@@ -322,7 +325,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
                 let index = inboxBuddies.count - indexPath.row - 1
                 let inboxMessageId = inboxBuddies[index]
                 guard let inboxMessage = inboxBuddyDict[inboxMessageId] else {return cell}
-                cell.message = inboxMessage.senderId
+                cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
                 if inboxMessage.isProcessed == false && inboxMessage.type == .FriendRequestReceived {
                     cell.showButtons()
@@ -406,8 +409,25 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tabState == .Invitaions {
-            self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
-        
+            let inboxMessageId = inboxInvitations[indexPath.row]
+            let inboxMessage = inboxInvitationDict[inboxMessageId]
+            guard let workoutId = inboxMessage?.associatedId else {return}
+            Invite.getWorkoutInviteById(workoutId, completion: { (error: NSError?, invite: Invite?) in
+                if error == nil {
+                    guard let _invite = invite else {return}
+                    Library.getPlanById(_invite.planId, completion: { (plan, error) in
+                        if error != nil {
+                            Log.error(error.debugDescription)
+                        }else {
+                            guard let _plan = plan else {return}
+                            Log.info("Got both invitation and plan")
+                            self.performSegueWithIdentifier("toPlanDetailSegue", sender: ["invite" : _invite, "plan": _plan])
+                        }
+                    })
+                } else {
+                    Log.info("Can't access this invitation: \(error?.localizedDescription)")
+                }
+            })
         } else if tabState == .BuddyRequests {
 //            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         

@@ -316,6 +316,7 @@ class User {
                     }
                 }
             }
+            
             User.getUserArrayFromIdList(userIds, successHandler: { (users: [User]) in
                 successfulHandler(users)
             })

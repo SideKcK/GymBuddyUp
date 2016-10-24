@@ -45,9 +45,7 @@ class Discover {
             let fetchWorkoutDispatchGroup = dispatch_group_create()
             
             let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
-                //print(key, location.distanceFromLocation(ßfoundLocation))
                 dispatch_group_enter(fetchWorkoutDispatchGroup)
-                
                 workoutInviteRef.child(key).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                     var data = snapshot.value as! [String:AnyObject]
                     if data["available"] as? Bool != false && data["access"] as? Int > 1{

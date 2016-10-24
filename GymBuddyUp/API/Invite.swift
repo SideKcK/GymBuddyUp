@@ -76,9 +76,7 @@ class Invite : Mappable {
                         
                         var mapData = data
                         mapData["id"] = inviteId
-                        
                         completion(nil, Invite(JSON:mapData))
-                        
                     })
                 }
             })
@@ -271,6 +269,12 @@ class Invite : Mappable {
         }
     }
     
+    class func getWorkoutInviteById(workoutId: String, completion: (NSError?, Invite?) -> Void) {
+        workoutInviteRef.child(workoutId).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let data = snapshot.value as! [String:AnyObject]
+            completion(nil, Invite(JSON: data))
+        })
+    }
     
     class func publishWorkoutInviteToPublic(planId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
         publishWorkoutInvite("public", planId: planId, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: workoutTime, completion: completion)

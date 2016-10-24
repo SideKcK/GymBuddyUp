@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 import SwiftDate
+import FBSDKLoginKit
 
 private let friendRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_friend")
 private let userLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_location")
@@ -178,7 +179,75 @@ class Friend {
             dispatch_group_notify(geoQueryDispatchGroup, dispatch_get_main_queue()) {
                 completion(userList, nil)
             }
+    }
+    
+    class func discoverFBFriends(completion: ([User], NSError?) -> Void){
+        let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
+        var userList = [User]()
+        if let tokenString = User.currentUser?.facebookAccesstoken{
+        let fetchWorkoutDispatchGroup = dispatch_group_create()
+        let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params, tokenString: tokenString, version: nil, HTTPMethod: "GET")
+        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            print("inside discoverFBFriends 11 " + tokenString)
+           
+            if error != nil {
+                 print("inside discoverFBFriends error")
+                let errorMessage = error.localizedDescription /* Handle error */
+                print(error.userInfo[FBSDKErrorDeveloperMessageKey] )
+                print(errorMessage)
+            } else if result.isKindOfClass(NSDictionary){ /* handle response */
+                
+                /*if let userNameArray : NSArray = result.valueForKey("data") as! NSArray
+                {
+                    for(index, friend) in userNameArray.enumerate()
+                    {
+                        print(friend.valueForKey("id"))
+                        print(friend.valueForKey("first_name"))
+                    }
+                }*/
+                
+                for (key, value) in result as! NSDictionary {
+                    let _key  = key as! String
+                    switch(_key){
+                        case "data":
+                             let stringMirror = Mirror(reflecting: value)
+                            print(stringMirror.subjectType)
+                            let data : NSArray = (value as? NSArray)!
+                            dispatch_group_enter(fetchWorkoutDispatchGroup)
+                            for friend in data{
+                                print("inside discoverFBFriends no error NSArray")
+                                let _friend = friend as! NSDictionary
+                                User.getUserByFacebookId(_friend["id"] as! String,successHandler: { (user: User) in
+                                    print(user.screenName)
+                                    userList.append(user)
+                                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+                                })
+                                print("Facebook id :" + String(friend["id"]))
+                            }
+                             dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+                                print("completion(userList, nil) :")
+                                completion(userList, nil)
+                             }
+                        break
+                        case "summary":
+                            print("summary" + String(value["total_count"] as! Int) )
+                        break
+                        default:
+                            Log.info("no key matches")
+                    }
+                    print("Property: \"\(key as! String)\"")
+                    //print("Value: \"\(value as! String)\"")
+                    
+                }
+                print(" dispatch_group_leave(fetchWorkoutDispatchGroup) :")
+            }
+            
+            }
         }
+    
+    
+    }
+    
 
 }
 

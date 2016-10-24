@@ -92,7 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
         }
+        /*Friend.discoverFBFriends(){(users, error) in
         
+        
+        }*/
        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
 //    
 //            for i in (1..<40) {

@@ -46,7 +46,10 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
             if isGotLocation == false {
                 isGotLocation = true
                 // update to user_info
-                
+                User.currentUser!.updateLastSeenLocation(currentLocation){ error in
+                    
+                    
+                }
             }
         }
     }

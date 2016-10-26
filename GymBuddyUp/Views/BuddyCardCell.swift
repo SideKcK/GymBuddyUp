@@ -56,8 +56,10 @@ class BuddyCardCell: UITableViewCell {
                 self.gymLabel.text = "Gym: Not Specific"
             }
             
-             self.goalLabel.text = "Goals: " + goalDes
-            
+            self.goalLabel.text = "Goals: " + goalDes
+            if buddy.photoURL != nil {
+                self.profileView.af_setImageWithURL(buddy.photoURL!)
+            }
         }
     }
 

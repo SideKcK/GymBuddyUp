@@ -65,7 +65,12 @@ class MeFindVC: UIViewController {
     
     func onSegControl (sender: HMSegmentedControl) {
         print("seg control" )
-        getFBBuddy()
+        if(sender.selectedSegmentIndex == 0){
+            getNearByBuddy()
+        }else if(sender.selectedSegmentIndex == 1){
+            getFBBuddy()
+        }
+        
         //tableView.reloadData()
     }
     
@@ -73,6 +78,7 @@ class MeFindVC: UIViewController {
         
         var resultUserList = [User]()
         let fetchNewBuddiesGroup = dispatch_group_create()
+        //let testLocation = LocationCache.sharedInstance.currentLocation
         let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
         dispatch_group_enter(fetchNewBuddiesGroup)
         Friend.discoverNewBuddies(testLocation, radiusInkilometers: 100.0,  completion: { (users, error) in
@@ -135,6 +141,13 @@ class MeFindVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? MeMainVC {
 
+<<<<<<< Updated upstream
+=======
+            //for testing
+            let targetUser = sender as? User
+            desVC.user = targetUser
+
+>>>>>>> Stashed changes
         }
     }
  

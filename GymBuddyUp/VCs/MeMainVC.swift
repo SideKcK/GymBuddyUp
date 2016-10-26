@@ -14,7 +14,7 @@ import AlamofireImage
 class MeMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-        
+    
     let kHeaderHeight:CGFloat = 150
     let profileRadius:CGFloat = 125
     let titleBGView: UIImageView = UIImageView()
@@ -24,6 +24,7 @@ class MeMainVC: UIViewController {
     var cells = ["ProfileCell", "UserBuddyOverviewCell", "WorkoutCell", "WorkoutHistoryCell"]
     var workOuts: [ScheduledWorkout] = []
     var trackings: [TrackedPlan] = []
+    var isCurrent = true
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -31,8 +32,15 @@ class MeMainVC: UIViewController {
             Log.info("show currentUser's info")
             user = User.currentUser
         }
-        setHistory()
         
+    
+        if(user.userId != User.currentUser?.userId){
+            isCurrent = false
+        }
+        //editProfileButton.hidden = !isCurrent
+
+        setHistory()
+    
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 230
@@ -43,6 +51,7 @@ class MeMainVC: UIViewController {
     }
     override func viewDidAppear(animated: Bool) {
         print("Enter MeMainVC")
+        
         setHistory()
     }
     
@@ -172,7 +181,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = user?.screenName
             cell.gymLabel.text = "Not Specific"
             cell.chatButton.hidden = true
-            
+            cell.actionButton.hidden = !isCurrent
             if asyncId != User.currentUser?.userId {
                 cell.chatButton.hidden = false
             }

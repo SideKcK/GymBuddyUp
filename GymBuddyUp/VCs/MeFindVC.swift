@@ -141,13 +141,10 @@ class MeFindVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? MeMainVC {
 
-<<<<<<< Updated upstream
-=======
             //for testing
             let targetUser = sender as? User
             desVC.user = targetUser
 
->>>>>>> Stashed changes
         }
     }
  

@@ -34,7 +34,7 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var stackRejectButton: UIButton!
 
     var event: Invite!
-    var plan = Plan()
+    var plan: Plan!
 
     override func viewDidLoad() {
         super.viewDidLoad()

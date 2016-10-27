@@ -59,11 +59,12 @@ class InboxMessage {
         "workout_invite_canceled": .WorkoutInviteCanceled
     ]
 
-    init(_messageId: String, _type: String, _senderId: String, _associatedId: String?) {
+    init(_messageId: String, _type: String, _senderId: String, _associatedId: String?, _senderName: String) {
         messageId = _messageId
         type = InboxMessage.inboxMessageMap[_type]!
         associatedId = _associatedId
         senderId = _senderId
+        senderName = _senderName
         isIgnore = false
         isProcessed = false
         setType(_type)

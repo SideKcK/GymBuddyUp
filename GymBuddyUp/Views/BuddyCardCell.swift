@@ -28,10 +28,13 @@ class BuddyCardCell: UITableViewCell {
     var buddy: User! {
         didSet {
             nameLabel.text = buddy.screenName
+            if buddy.distance != nil {
             let distance = buddy.distance!/1000/1.60934
             let distanceStr = NSString(format: "%.2f", distance)
             disLabel.text = (distanceStr as String) + " miles"
-            
+            }else{
+                disLabel.text = ""
+            }
             var goalDes = String()
             if buddy.goals.isEmpty == false{
                 print("Goal is not nil " )
@@ -53,8 +56,10 @@ class BuddyCardCell: UITableViewCell {
                 self.gymLabel.text = "Gym: Not Specific"
             }
             
-             self.goalLabel.text = "Goals: " + goalDes
-            
+            self.goalLabel.text = "Goals: " + goalDes
+            if buddy.photoURL != nil {
+                self.profileView.af_setImageWithURL(buddy.photoURL!)
+            }
         }
     }
 

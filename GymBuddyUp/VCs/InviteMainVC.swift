@@ -184,7 +184,9 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            cell.workouttime = time
             cell.plan = plan
+            
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.borderView.layer.borderWidth = 2.0

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import Alamofire
 
 class Conversation {
     var conversationId: String
@@ -39,6 +40,32 @@ class Conversation {
         }
     
     
+    }
+    
+    class func sendMessageToUser(recipientId: String, completion: (NSError?) -> Void) {
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            if error != nil {
+                return completion(error)
+            }
+            
+            let parameters = [
+                "token": idToken!,
+                "operation": "chat_message",
+                "recipientId": recipientId
+            ]
+            
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
+                .responseJSON { response in
+                    // Handle ERROR response from lambda server
+                    if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
+                        completion(error)
+                    }
+                    else {
+                        completion(nil)
+                    }
+            }
+        }
     }
 
 

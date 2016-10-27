@@ -27,11 +27,6 @@ class MessageCell: UITableViewCell {
     var deleteOnDragRelease = false
     var cancelOnDragRelease = false
     
-    var message : String! {
-        didSet {
-            nameLabel.text = message
-        }
-    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

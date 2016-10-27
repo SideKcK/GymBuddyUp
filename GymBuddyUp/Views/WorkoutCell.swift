@@ -39,10 +39,11 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
     var asyncIdentifer = ""
-    
+    var workouttime : NSDate?
     var imageViews = [UIImageView]()
     var event: Invite! {
         didSet {
+            print("event: Invite")
             timeLabel.text = weekMonthDateString(event.workoutTime) + ", " + timeString(event.workoutTime)
             gymButton.setTitle(event.gym?.name, forState: .Normal)
             
@@ -51,9 +52,11 @@ class WorkoutCell: UITableViewCell {
     
     var invite: Invite? {
         didSet {
+            print("invite: Invite")
             if let _invite = invite {
                 if let workoutTime = _invite.workoutTime {
                     timeLabel.text = weekMonthDateString(workoutTime) + ", " + timeString(workoutTime)
+                    
                 }
                 
                 if let gymName = _invite.gym?.name {
@@ -73,6 +76,18 @@ class WorkoutCell: UITableViewCell {
     
     var plan: Plan! {
         didSet {
+            let currentDate = NSDate()
+            let interval = NSTimeInterval(60 * 60 * 24 * 1)
+            if let workoutTime = self.workouttime {
+                if weekMonthDateString(workoutTime) == weekMonthDateString(currentDate){
+                    dateLabel.text = "Today"
+                }else if weekMonthDateString(workoutTime) == weekMonthDateString(currentDate.dateByAddingTimeInterval(interval)) {
+                    dateLabel.text = "Tomorrow"
+                }else{
+                    dateLabel.text =  weekMonthDateString(workoutTime) + ", " + timeString(workoutTime)
+                }
+            }
+            //dateLabel.text = "Today"
             nameLabel.text = plan.name
             if let exers = plan.exercises {
                 if exers.count == 0 {

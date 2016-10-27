@@ -76,9 +76,7 @@ class Invite : Mappable {
                         
                         var mapData = data
                         mapData["id"] = inviteId
-                        
                         completion(nil, Invite(JSON:mapData))
-                        
                     })
                 }
             })
@@ -101,7 +99,7 @@ class Invite : Mappable {
                 "workoutId": inviteId
             ]
             
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -129,7 +127,7 @@ class Invite : Mappable {
                 "workoutId": inviteId
             ]
             
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -155,7 +153,7 @@ class Invite : Mappable {
                 "workoutId": inviteId
             ]
             
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -181,7 +179,7 @@ class Invite : Mappable {
                 "workoutId": inviteId
             ]
             
-            Alamofire.request(.POST, "https://q08av7imrj.execute-api.us-east-1.amazonaws.com/dev/friend-request", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -271,6 +269,12 @@ class Invite : Mappable {
         }
     }
     
+    class func getWorkoutInviteById(workoutId: String, completion: (NSError?, Invite?) -> Void) {
+        workoutInviteRef.child(workoutId).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let data = snapshot.value as! [String:AnyObject]
+            completion(nil, Invite(JSON: data))
+        })
+    }
     
     class func publishWorkoutInviteToPublic(planId: String, scheduledWorkoutId: String, gym:Gym, workoutTime: NSDate, completion: (NSError?) -> Void ) {
         publishWorkoutInvite("public", planId: planId, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: workoutTime, completion: completion)

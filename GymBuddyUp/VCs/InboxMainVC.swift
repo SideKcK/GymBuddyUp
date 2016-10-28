@@ -81,18 +81,27 @@ class InboxMainVC: UIViewController {
         
         userConversationRef.child(userId).observeEventType(.ChildChanged, withBlock: {(snapshot) in
             let conversationId = snapshot.key
+            guard let recipientId = snapshot.value?["recipient_id"] as? String, recipientName = snapshot.value?["recipient_name"] as? String else {return}
             let lastRecord = snapshot.value!["last_record"] as! String
+            let _ = snapshot.value!["createdAt"] as! String
             var isNew = false
             if let _isNew = snapshot.value?["isNew"] as? Int where _isNew == 1 {
                 isNew = true
             }
-            let _ = self.conversations.indexOf({ (conversation: Conversation) -> Bool in
+
+            let isInCurrentList = self.conversations.indexOf({ (conversation: Conversation) -> Bool in
                 if conversation.conversationId == conversationId {
                     conversation.update(lastRecord, isNew: isNew)
                     return true
                 }
                 return false
             })
+            
+            if isInCurrentList == nil {
+                let conversation = Conversation(conversationId: conversationId, lastRecord: lastRecord, initWithRecipientIdandName: recipientId, recipientScreenName: recipientName, isNew: isNew)
+                self.conversations.append(conversation)
+            }
+            
             self.tableView.reloadData()
         }) { (error) in
             Log.info("\(error.localizedDescription)")

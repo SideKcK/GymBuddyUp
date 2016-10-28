@@ -162,6 +162,13 @@ class ScheduledWorkout {
         }
     }
     
+    class func addChangesListener(complete: () -> Void) {
+        guard let currentUserId = User.currentUser?.userId else {return}
+        workoutCalendarRef.child(currentUserId).observeEventType(FIRDataEventType.ChildChanged) { (_:FIRDataSnapshot) in
+            complete()
+        }
+    }
+    
     /**
      Get all workouts that are scheduled on the date. (for now there will only be 1 workout for a day. but still returns a list. )
      */

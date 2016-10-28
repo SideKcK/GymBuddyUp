@@ -39,6 +39,7 @@
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
+		C15238341DC2EE70006CC091 /* InvitationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15238331DC2EE70006CC091 /* InvitationCache.swift */; };
 		C1C28C0F1DABF5F700972202 /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C0E1DABF5F700972202 /* UserCache.swift */; };
 		C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C101DABF66D00972202 /* LocationCache.swift */; };
 		C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */; };
@@ -184,6 +185,7 @@
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
+		C15238331DC2EE70006CC091 /* InvitationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationCache.swift; sourceTree = "<group>"; };
 		C1C28C0E1DABF5F700972202 /* UserCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
 		C1C28C101DABF66D00972202 /* LocationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCache.swift; sourceTree = "<group>"; };
 		C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUserViewController.swift; path = VCs/SearchUserViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				C1C28C0E1DABF5F700972202 /* UserCache.swift */,
 				C1C28C101DABF66D00972202 /* LocationCache.swift */,
+				C15238331DC2EE70006CC091 /* InvitationCache.swift */,
 			);
 			name = Cache;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
 				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
+				C15238341DC2EE70006CC091 /* InvitationCache.swift in Sources */,
 				C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,

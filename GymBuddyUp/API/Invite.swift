@@ -40,12 +40,12 @@ class Invite : Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        id <- map["id"]
+        id <- map["id"] // there is not field named id
         canceledByInviter <- map["canceled_by_inviter"]
         canceledByInvitee <- map["canceled_by_invitee"]
         gym <- map["gym"]
         inviterId <- map["inviter"]
-        inviteeId <- map["invitee"]
+        inviteeId <- map["invitee"] // there is not field named id
         planId <- map["plan"]
         workoutTime <- (map["workout_time"], DateTransform())
         sentTo <- map["sent_to"]

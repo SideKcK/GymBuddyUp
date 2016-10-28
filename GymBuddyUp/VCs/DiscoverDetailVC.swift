@@ -169,7 +169,8 @@ class DiscoverDetailVC: UIViewController {
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
         guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
-            Log.info("unwrap failed check nil values")
+            Log.info("onJoinButton unwrap failed check nil values")
+            Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
             return
         }
         Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in

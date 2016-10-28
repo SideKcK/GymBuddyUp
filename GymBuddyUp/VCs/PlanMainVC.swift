@@ -40,6 +40,12 @@ class PlanMainVC: UIViewController {
         todayButton.tintColor = ColorScheme.s1Tint
     }
     
+    func setupChangesListener() {
+//        ScheduledWorkout.addChangesListener { 
+//            self.getPlansThisWeek(self.selectedDate)
+//        }
+    }
+    
     func setupVisual() {
         menuView.backgroundColor = ColorScheme.s1Tint
         calendarView.backgroundColor = ColorScheme.s1Tint

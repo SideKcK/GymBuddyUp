@@ -116,6 +116,7 @@ class InboxMainVC: UIViewController {
             let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: associatedId, _senderName: senderName)
             message.isProcessed = isProcessed
             message.isIgnore = isIgnored
+            
             switch message.type {
             case .FriendRequestAccepted, .FriendRequestReceived, .FriendRequestRejected:
                 self.inboxBuddyDict[messageId] = message
@@ -126,6 +127,7 @@ class InboxMainVC: UIViewController {
                 self.inboxInvitations.append(messageId)
                 break
             }
+            
             self.tableView.reloadData()
         })
         
@@ -230,9 +232,10 @@ class InboxMainVC: UIViewController {
     
     func onInvitationAcceptButton (sender: UIButton) {
         let index = sender.tag
+        Log.info("onInvitationAcceptButton index = \(index)")
         let inboxMessageId = inboxInvitations[index]
         let inboxMessage = inboxInvitationDict[inboxMessageId]
-        inboxMessage?.process(.Cancel)
+        inboxMessage?.process(.Accept)
     }
     
     func onInvitationRejectButton (sender: UIButton) {
@@ -416,6 +419,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             Invite.getWorkoutInviteById(workoutId, completion: { (error: NSError?, invite: Invite?) in
                 if error == nil {
                     guard let _invite = invite else {return}
+                    _invite.id = workoutId
                     Library.getPlanById(_invite.planId, completion: { (plan, error) in
                         if error != nil {
                             Log.error(error.debugDescription)
@@ -433,16 +437,6 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
 //            self.performSegueWithIdentifier("toBuddyProfileSegue", sender: indexPath.section == 0 ? actions[indexPath.row] : messages[indexPath.row])
         
         } else {
-            let titleFormatterBlock: HMTitleFormatterBlock = {(control: AnyObject!, title: String!, index: UInt, selected: Bool) -> NSAttributedString in
-                if title == "Messages" {
-                    let attString = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.blueColor()
-                        ])
-                    return attString;
-                }
-                return NSAttributedString()
-                
-            }
-            segControl.titleFormatter = titleFormatterBlock
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             cell?.selected = false
             Log.info("did select chat session")

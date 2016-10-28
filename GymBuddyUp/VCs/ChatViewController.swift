@@ -158,20 +158,22 @@ class ChatViewController: JSQMessagesViewController {
                 "isNew": 1
             ]
             
-            print(ownConversationItem)
-            print(peerConversationItem)
             ownConversationRef.setValue(ownConversationItem)
             peerConversationRef.setValue(peerConversationItem)
             
             
             let itemRef = messageRef.childByAutoId()
-            let messageItem = [ // 2
+            let messageItem = [
                 "text": text,
                 "senderId": senderId,
                 "createAt": timeStamp
             ]
-            itemRef.setValue(messageItem) // 3
-            
+            itemRef.setValue(messageItem)
+            Conversation.sendMessageToUser(reId, completion: { (error: NSError?) in
+                if error != nil {
+                    Log.error("chatVC notification error = \(error?.localizedDescription)")
+                }
+            })
             
             finishSendingMessage()
         } else {

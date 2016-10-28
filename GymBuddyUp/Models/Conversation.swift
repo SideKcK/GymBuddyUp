@@ -32,16 +32,6 @@ class Conversation {
         self.isNew = isNew
     }
     
-    class func getMyActiveConversationList() {
-        if let user = User.currentUser {
-            let userId = user.userId
-            
-        
-        }
-    
-    
-    }
-    
     class func sendMessageToUser(recipientId: String, completion: (NSError?) -> Void) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
             if error != nil {

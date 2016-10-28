@@ -62,18 +62,14 @@ class MeUpdateVC: UITableViewController {
                 
                 if(goal.rawValue == 0){
                     //weightButton.selected = true
-                    print("0")
                     buttonClicked(weightButton)
                 }else if(goal.rawValue == 1){
                    // fitButton.selected = true
-                    print("1")
                     buttonClicked(fitButton)
                 }else if(goal.rawValue == 2){
-                    print("2")
                     //funButton.selected = true
                     buttonClicked(funButton)
                 }else if(goal.rawValue == 3){
-                    print("3")
                     //muscleButton.selected = true
                     buttonClicked(muscleButton)
                 }
@@ -159,9 +155,11 @@ class MeUpdateVC: UITableViewController {
     
     @IBAction func onSaveButton(sender: AnyObject) {
         //save changes
-        User.currentUser!.updateProfile("screen_name", value: screenNameField.text)
-        User.currentUser!.updateProfile("goal", value: self.selected)
-        User.currentUser!.updateProfile("description", value: textView.text)
+        User.currentUser?.updateScreenNameInAuth(screenNameField.text, errorHandler: { (error: NSError?) in
+            Log.error("update screenName error = \(error?.localizedDescription)")
+        })
+        User.currentUser?.updateProfile("goal", value: self.selected)
+        User.currentUser?.updateProfile("description", value: textView.text)
         if gym != nil{
             User.currentUser!.updateProfile("gym", value: gym!.placeid)
         }

@@ -541,6 +541,22 @@ class User {
             }
         }
     }
+    
+    func updateScreenNameInAuth(newName: String?, errorHandler: (NSError?)->Void) {
+        if let screenName = newName {
+            let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+            changeRequest?.displayName = newName
+            changeRequest?.commitChangesWithCompletion({ (error: NSError?) in
+                if error != nil {
+                    errorHandler(error)
+                } else {
+                    self.updateProfile("screen_name", value: screenName)
+                }
+            })
+        } else {
+            errorHandler(NSError(domain: "Profile update failure (empty name)", code: 1, userInfo: nil))
+        }
+    }
 
     func updateProfilePicture(photoURL: NSURL?, errorHandler: (NSError?)->Void) {
         if photoURL != nil {

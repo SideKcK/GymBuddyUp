@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 import Alamofire
 import AlamofireImage
+import SwiftDate
 
 class InboxMainVC: UIViewController {
     enum TabStates {
@@ -35,6 +36,7 @@ class InboxMainVC: UIViewController {
     var inboxBuddyDict = [String: InboxMessage]()
     var inboxInvitationDict = [String: InboxMessage]()
     var segControl: HMSegmentedControl!
+    let dateFormatter = NSDateFormatter()
 
     
     override func viewDidLoad() {
@@ -118,11 +120,11 @@ class InboxMainVC: UIViewController {
                 isIgnored = snapshot.value?["ignored"] as? Bool,
                 senderId = snapshot.value?["sender"] as? String,
                 senderName = snapshot.value?["sender_name"] as? String,
-                _ = snapshot.value?["timestamp"] as? Int
+                timeStamp = snapshot.value?["timestamp"] as? Double
             else {return}
             let messageId = snapshot.key
             let associatedId = snapshot.value?["workout_invite_id"] as? String
-            let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: associatedId, _senderName: senderName)
+            let message = InboxMessage(_messageId: snapshot.key, _type: type, _senderId: senderId, _associatedId: associatedId, _senderName: senderName, _timeStamp: timeStamp)
             message.isProcessed = isProcessed
             message.isIgnore = isIgnored
             
@@ -244,20 +246,25 @@ class InboxMainVC: UIViewController {
         Log.info("onInvitationAcceptButton index = \(index)")
         let inboxMessageId = inboxInvitations[index]
         let inboxMessage = inboxInvitationDict[inboxMessageId]
+        Log.info("accepted message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Accept)
     }
     
     func onInvitationRejectButton (sender: UIButton) {
         let index = sender.tag
+        Log.info("onInvitationRejectButton index = \(index)")
         let inboxMessageId = inboxInvitations[index]
         let inboxMessage = inboxInvitationDict[inboxMessageId]
+        Log.info("rejected message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Reject)
     }
     
     func onInvitationCancelButton (sender: UIButton) {
         let index = sender.tag
+        Log.info("onInvitationCancelButton index = \(index)")
         let inboxMessageId = inboxInvitations[index]
         let inboxMessage = inboxInvitationDict[inboxMessageId]
+        Log.info("cancelled message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Cancel)
     }
     
@@ -305,11 +312,23 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
             cell.reset()
             if indexPath.section == 0 {
-                let index = inboxInvitations.count - indexPath.row - 1
+                let index = indexPath.row
                 let inboxMessageId = inboxInvitations[index]
                 guard let inboxMessage = inboxInvitationDict[inboxMessageId] else {return cell}
+                cell.bindedUserId = inboxMessage.senderId
                 cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
+                
+                if let timestamp = inboxMessage.timeStamp {
+                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let timeLabelString = dateFormatter.stringFromDate(timestamp)
+                    let offsetedTime = dateFormatter.dateFromString(timeLabelString)
+                    if let elapsedTimeString = offsetedTime?.toNaturalString(NSDate()) {
+                        cell.timeLabel.text = elapsedTimeString + " ago"
+                    }
+                }
+                
                 Log.info("invitation type = \(inboxMessage.type) isProcessed = \(inboxMessage.isProcessed)")
                 if inboxMessage.isProcessed == false && inboxMessage.type == .WorkoutInviteReceived {
                     cell.showButtons()
@@ -335,11 +354,21 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
             cell.reset()
             if indexPath.section == 0 {
-                let index = inboxBuddies.count - indexPath.row - 1
+                let index = indexPath.row
                 let inboxMessageId = inboxBuddies[index]
                 guard let inboxMessage = inboxBuddyDict[inboxMessageId] else {return cell}
+                cell.bindedUserId = inboxMessage.senderId
                 cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
+                if let timestamp = inboxMessage.timeStamp {
+                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let timeLabelString = dateFormatter.stringFromDate(timestamp)
+                    let offsetedTime = dateFormatter.dateFromString(timeLabelString)
+                    if let elapsedTimeString = offsetedTime?.toNaturalString(NSDate()) {
+                        cell.timeLabel.text = elapsedTimeString + " ago"
+                    }
+                }
                 if inboxMessage.isProcessed == false && inboxMessage.type == .FriendRequestReceived {
                     cell.showButtons()
                 }

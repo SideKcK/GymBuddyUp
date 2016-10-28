@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class MessageCell: UITableViewCell {
     @IBOutlet weak var profileView: UIImageView!
@@ -27,12 +29,56 @@ class MessageCell: UITableViewCell {
     var deleteOnDragRelease = false
     var cancelOnDragRelease = false
     
+    var asyncId = ""
+    var bindedUserId: String? {
+        didSet {
+            let currentAsyncId = asyncId
+            if let userId = bindedUserId {
+                if let user = UserCache.sharedInstance.cache[userId] {
+                    self.nameLabel.text = user.screenName
+                    if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                        let request = NSMutableURLRequest(URL: photoURL)
+                        self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                            if currentAsyncId == self.asyncId {
+                                self.profileView.image = response.result.value
+                                user.cachedPhoto = response.result.value
+                            }
+                        }
+                    } else {
+                        self.profileView.image = user.cachedPhoto
+                    }
+                } else {
+                    User.getUserArrayFromIdList([userId]) { (users: [User]) in
+                        if currentAsyncId == self.asyncId {
+                            let user = users[0]
+                            self.nameLabel.text = user.screenName
+                            UserCache.sharedInstance.cache[userId] = user
+                            if let photoURL = user.photoURL {
+                                let request = NSMutableURLRequest(URL: photoURL)
+                                self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                                    if currentAsyncId == self.asyncId {
+                                        self.profileView.image = response.result.value
+                                        user.cachedPhoto = response.result.value
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            
+            
+            }
+        }
+    
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         //TEST
-        timeLabel.text = "at "+timeString(NSDate())+" on "+weekMonthDateString(NSDate())
+        timeLabel.text = "at " + timeString(NSDate()) + " on " + weekMonthDateString(NSDate())
         
         borderView.addShadow()
         profileView.makeThumbnail(ColorScheme.s4Bg)

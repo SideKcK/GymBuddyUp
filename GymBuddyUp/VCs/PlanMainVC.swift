@@ -52,6 +52,12 @@ class PlanMainVC: UIViewController {
         
         addPlanView.backgroundColor = ColorScheme.s3Bg
         tableView.backgroundColor = ColorScheme.s3Bg
+        
+        let navLabel = UILabel()
+        navLabel.text = "Plan"
+        navLabel.textColor = ColorScheme.s4Bg
+        navLabel.sizeToFit()
+        self.navigationItem.titleView = navLabel
     }
     
     func setTableView() {
@@ -67,8 +73,10 @@ class PlanMainVC: UIViewController {
         calendarView.calendarAppearanceDelegate = self
         menuView.delegate = self
         calendarView.delegate = self
-        title = CVDate(date: NSDate()).monthDescription
-        //monthButton.title = "< " + CVDate(date: NSDate()).monthDescription
+        if let titleView = navigationItem.titleView as? UILabel {
+            titleView.text = CVDate(date: NSDate()).monthDescription
+        }
+        
         selectedDate = NSDate().startOf(.Day)
         getCalendarWorkouts(selectedDate)
         
@@ -76,7 +84,6 @@ class PlanMainVC: UIViewController {
     
     func reloadPlans(date: NSDate) {
         KRProgressHUD.show()
-        
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
             self.workouts[date] = workouts
             if let planIds = Plan.planIDsWithArray(workouts) {
@@ -88,7 +95,7 @@ class PlanMainVC: UIViewController {
                             self.tableView.reloadData()
                         }
                         
-                    }else {
+                    } else {
                         print(error)
                         KRProgressHUD.showError()
                     }
@@ -130,7 +137,7 @@ class PlanMainVC: UIViewController {
                             self.plans[day] = plans
                         }
                         else {
-                            print("Error getting plans for this week", error)
+                            Log.error("Error getting plans for this week error = \(error?.localizedDescription)")
                         }
                         
                         dispatch_group_leave(fetchPlanTaskGroup)
@@ -496,7 +503,11 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
             print("select day view")
             calendarView.changeMode(.WeekView)
         }
-        title = dayView.date.monthDescription
+        
+        if let titleView = navigationItem.titleView as? UILabel {
+            titleView.text = dayView.date.monthDescription
+        }
+        
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
         todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
@@ -615,8 +626,6 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     //remove shadow
                     tableView.beginUpdates()
                     cell.invite = _invite
-                    //cell.borderView.clipsToBounds = true
-//                    cell.showDateView()
                     cell.showTimeView()
                     cell.showLocView()
                     cell.showStatusView()

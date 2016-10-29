@@ -230,12 +230,6 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row != 0 {
             cell.backgroundColor = UIColor.clearColor()
         }
-        if indexPath.row == 3 {
-            let cell = cell as! InviteToCell
-            cell.seg.frame = cell.toView.bounds
-            cell.toView.addSubview(cell.seg)
-
-        }
     }
     
 }

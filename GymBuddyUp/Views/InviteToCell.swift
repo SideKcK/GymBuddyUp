@@ -22,6 +22,12 @@ class InviteToCell: UITableViewCell {
         setupVisual()
         setSegControl()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // because storyboard has intrinsic width (4s for inferred size), when this view shows on bigger screen, we need to update bounds as well (Maybe it's a bug??)
+        seg.frame = toView.bounds
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -38,6 +44,7 @@ class InviteToCell: UITableViewCell {
         UILabel.appearanceWhenContainedInInstancesOfClasses([UISegmentedControl.self]).numberOfLines = 0
         seg = UISegmentedControl(items: ["Direct Invite", "Broadcast\nBuddies", "Broadcast\nPublic"])
         
+        
         seg.addShadow()
         seg.tintColor = ColorScheme.g3Text
         seg.removeBorders()
@@ -46,8 +53,9 @@ class InviteToCell: UITableViewCell {
         seg.momentary = true
         segViews[sendTo].tintColor = ColorScheme.p1Tint
         seg.selectedSegmentIndex = UISegmentedControlNoSegment
+        seg.frame = toView.bounds
+        toView.addSubview(seg)
         
-
     }
     
 }

@@ -442,7 +442,6 @@
 			isa = PBXGroup;
 			children = (
 				C64EC2201D2DE81E000DA37A /* MeMainVC.swift */,
-				C6860BF61D88A1B60081C89D /* InviteToCell.swift */,
 				C607BA4D1D58232B00B1348B /* MeBuddiesVC.swift */,
 				C681650E1D665BC700FC63FD /* MeFindVC.swift */,
 				C6B40AA11D6D2F2E001DC761 /* SettingsVC.swift */,
@@ -604,6 +603,7 @@
 				C6860BF01D8692FA0081C89D /* InviteNoPlanCatCell.swift */,
 				C6860BF21D8899D40081C89D /* InviteDateCell.swift */,
 				C6860BF41D8899F40081C89D /* InviteGymCell.swift */,
+				C6860BF61D88A1B60081C89D /* InviteToCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";

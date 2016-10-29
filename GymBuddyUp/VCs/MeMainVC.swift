@@ -26,7 +26,7 @@ class MeMainVC: UIViewController {
     var trackings: [TrackedPlan] = []
     var isCurrent = true
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
         if user == nil {
             Log.info("show currentUser's info")
@@ -36,6 +36,8 @@ class MeMainVC: UIViewController {
     
         if(user.userId != User.currentUser?.userId){
             isCurrent = false
+            self.title = " "
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem()
         }
         //editProfileButton.hidden = !isCurrent
 

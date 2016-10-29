@@ -78,8 +78,8 @@ class MeFindVC: UIViewController {
         
         var resultUserList = [User]()
         let fetchNewBuddiesGroup = dispatch_group_create()
-        //let testLocation = LocationCache.sharedInstance.currentLocation
-        let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        let testLocation = LocationCache.sharedInstance.currentLocation
+        //let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
         dispatch_group_enter(fetchNewBuddiesGroup)
         Friend.discoverNewBuddies(testLocation, radiusInkilometers: 100.0,  completion: { (users, error) in
             if error != nil{

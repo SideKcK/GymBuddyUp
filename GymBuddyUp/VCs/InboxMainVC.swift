@@ -36,7 +36,7 @@ class InboxMainVC: UIViewController {
     var inboxBuddyDict = [String: InboxMessage]()
     var inboxInvitationDict = [String: InboxMessage]()
     var segControl: HMSegmentedControl!
-    let dateFormatter = NSDateFormatter()
+    let timeStampFormatter = NSDateFormatter()
 
     
     override func viewDidLoad() {
@@ -47,7 +47,13 @@ class InboxMainVC: UIViewController {
         addSegControl(segView)
         setupVisual()
         setupDataListener()
+        setupMisc()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupMisc() {
+        timeStampFormatter.timeZone = NSTimeZone.localTimeZone()
+        timeStampFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     }
     
     
@@ -229,14 +235,14 @@ class InboxMainVC: UIViewController {
     
     func onBuddyAcceptButton (sender: UIButton) {
         let index = sender.tag
-        let inboxMessageId = inboxBuddies[index]
+        let inboxMessageId = inboxBuddies.reverseGet(index)
         let inboxMessage = inboxBuddyDict[inboxMessageId]
         inboxMessage?.process(.Accept)
     }
     
     func onBuddyRejectButton (sender: UIButton) {
         let index = sender.tag
-        let inboxMessageId = inboxBuddies[index]
+        let inboxMessageId = inboxBuddies.reverseGet(index)
         let inboxMessage = inboxBuddyDict[inboxMessageId]
         inboxMessage?.process(.Reject)
     }
@@ -244,7 +250,7 @@ class InboxMainVC: UIViewController {
     func onInvitationAcceptButton (sender: UIButton) {
         let index = sender.tag
         Log.info("onInvitationAcceptButton index = \(index)")
-        let inboxMessageId = inboxInvitations[index]
+        let inboxMessageId = inboxInvitations.reverseGet(index)
         let inboxMessage = inboxInvitationDict[inboxMessageId]
         Log.info("accepted message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Accept)
@@ -253,7 +259,7 @@ class InboxMainVC: UIViewController {
     func onInvitationRejectButton (sender: UIButton) {
         let index = sender.tag
         Log.info("onInvitationRejectButton index = \(index)")
-        let inboxMessageId = inboxInvitations[index]
+        let inboxMessageId = inboxInvitations.reverseGet(index)
         let inboxMessage = inboxInvitationDict[inboxMessageId]
         Log.info("rejected message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Reject)
@@ -262,7 +268,7 @@ class InboxMainVC: UIViewController {
     func onInvitationCancelButton (sender: UIButton) {
         let index = sender.tag
         Log.info("onInvitationCancelButton index = \(index)")
-        let inboxMessageId = inboxInvitations[index]
+        let inboxMessageId = inboxInvitations.reverseGet(index)
         let inboxMessage = inboxInvitationDict[inboxMessageId]
         Log.info("cancelled message id = \(inboxMessage?.messageId)")
         inboxMessage?.process(.Cancel)
@@ -313,19 +319,16 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.reset()
             if indexPath.section == 0 {
                 let index = indexPath.row
-                let inboxMessageId = inboxInvitations[index]
+                let inboxMessageId = inboxInvitations.reverseGet(index)
                 guard let inboxMessage = inboxInvitationDict[inboxMessageId] else {return cell}
                 cell.bindedUserId = inboxMessage.senderId
                 cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
                 
                 if let timestamp = inboxMessage.timeStamp {
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                    let timeLabelString = dateFormatter.stringFromDate(timestamp)
-                    let offsetedTime = dateFormatter.dateFromString(timeLabelString)
-                    if let elapsedTimeString = offsetedTime?.toNaturalString(NSDate()) {
-                        cell.timeLabel.text = elapsedTimeString + " ago"
+                    let timeLabelString = timeStampFormatter.stringFromDate(timestamp)
+                    if let offsetedTime = timeStampFormatter.dateFromString(timeLabelString) {
+                        cell.timeLabel.text = NSDate.timeAgoSinceDate(offsetedTime, numericDates: false)
                     }
                 }
                 
@@ -355,16 +358,14 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.reset()
             if indexPath.section == 0 {
                 let index = indexPath.row
-                let inboxMessageId = inboxBuddies[index]
+                let inboxMessageId = inboxBuddies.reverseGet(index)
                 guard let inboxMessage = inboxBuddyDict[inboxMessageId] else {return cell}
                 cell.bindedUserId = inboxMessage.senderId
                 cell.nameLabel.text = inboxMessage.senderName
                 cell.statusLabel.text = inboxMessage.content
                 if let timestamp = inboxMessage.timeStamp {
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                    let timeLabelString = dateFormatter.stringFromDate(timestamp)
-                    let offsetedTime = dateFormatter.dateFromString(timeLabelString)
+                    let timeLabelString = timeStampFormatter.stringFromDate(timestamp)
+                    let offsetedTime = timeStampFormatter.dateFromString(timeLabelString)
                     if let elapsedTimeString = offsetedTime?.toNaturalString(NSDate()) {
                         cell.timeLabel.text = elapsedTimeString + " ago"
                     }

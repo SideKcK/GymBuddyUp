@@ -37,7 +37,6 @@ class PlanMainVC: UIViewController {
         setTableView()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
-        todayButton.tintColor = ColorScheme.s1Tint
     }
     
     func setupChangesListener() {
@@ -509,7 +508,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         }
         
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
-        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
+//        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)

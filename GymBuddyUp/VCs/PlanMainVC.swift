@@ -670,10 +670,26 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                             Log.info("senTo = \(_invite.sentTo)")
                             if _invite.sentTo != nil{
                                 if _invite.sentTo != "public" && _invite.sentTo != "friends" {
-                                    User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
-                                        guard let screenName = user[0].screenName else {return}
-                                        cell.statusLabel.text = "Invitation sent to \(screenName)"
-                                    })
+                                    if _invite.sentTo != User.currentUser?.userId {
+                                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                            guard let screenName = user[0].screenName else {return}
+                                            cell.statusLabel.text = "Invitation sent to \(screenName)"
+                                        })
+                                    } else {
+                                        if let user = UserCache.sharedInstance.cache[_invite.inviterId] {
+                                            cell.statusLabel.text = "Workout with \(user.screenName)"
+                                        } else {
+                                            User.getUserArrayFromIdList([_invite.inviterId], successHandler: { (users: [User]) in
+                                                if users.count > 0 {
+                                                    UserCache.sharedInstance.cache[_invite.inviterId] = users[0]
+                                                    guard let screenName = users[0].screenName else {return}
+                                                    cell.statusLabel.text = "Workout with \(screenName)"
+                                                }
+                                            })
+                                        }
+
+                                    }
+
                                 } else {
                                     cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
                                 }

@@ -52,10 +52,10 @@ class PlanMainVC: UIViewController {
         addPlanView.backgroundColor = ColorScheme.s3Bg
         tableView.backgroundColor = ColorScheme.s3Bg
         
-        let navLabel = UILabel()
+        let navLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 18))
         navLabel.text = "Plan"
+        navLabel.textAlignment = .Center
         navLabel.textColor = ColorScheme.s4Bg
-        navLabel.sizeToFit()
         self.navigationItem.titleView = navLabel
     }
     
@@ -443,10 +443,12 @@ class PlanMainVC: UIViewController {
                 desVC.selectedDate = selectedDate
             }
         }
+        
         if let desVC = segue.destinationViewController as? GymMapVC {
             desVC.gym = Gym()
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
+        
         if let desVC = segue.destinationViewController as? MeMainVC {
             //for testing
             //desVC.user = User()

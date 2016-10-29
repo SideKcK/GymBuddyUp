@@ -455,7 +455,7 @@
                 <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="MeFindVC" id="fpL-A3-ZUW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jl0-hx-3Tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="673" y="782"/>
+            <point key="canvasLocation" x="674" y="816"/>
         </scene>
         <!--Gym MapVC-->
         <scene sceneID="hlB-n0-gv0">
@@ -537,7 +537,7 @@
         <image name="time" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vwh-6C-eR7"/>
-        <segue reference="8si-lg-1Ru"/>
+        <segue reference="eJB-Nl-MSy"/>
+        <segue reference="Kla-ff-Gr2"/>
     </inferredMetricsTieBreakers>
 </document>

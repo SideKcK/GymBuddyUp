@@ -69,12 +69,14 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let index = indexPath.row
         let buddy = buddies[index]
+        cell.buddy = buddy
         let asyncIdentifer = buddy.userId
         cell.asyncIdentifer = asyncIdentifer
+        cell.profileView.image = UIImage(named: "dumbbell")
         if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
             if let photoURL = user.photoURL where user.cachedPhoto == nil {
                 let request = NSMutableURLRequest(URL: photoURL)
-                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                     if asyncIdentifer == cell.asyncIdentifer {
                         cell.profileView.image = response.result.value
                         user.cachedPhoto = response.result.value
@@ -86,8 +88,6 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.nameLabel.text = buddy.screenName
-        cell.goalLabel.hidden = true
-        cell.gymLabel.hidden = true
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

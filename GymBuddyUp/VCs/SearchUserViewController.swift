@@ -179,6 +179,7 @@ extension SearchUserViewController : UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let index = indexPath.row
         let buddy = usersFound[index]
+        cell.buddy = buddy
         let asyncIdentifer = buddy.userId
         cell.addButton.enabled = buddy.canBeFriend
         cell.asyncIdentifer = asyncIdentifer
@@ -197,8 +198,6 @@ extension SearchUserViewController : UITableViewDelegate, UITableViewDataSource 
         }
         cell.delegate = self
         cell.nameLabel.text = buddy.screenName
-        cell.goalLabel.hidden = true
-        cell.gymLabel.hidden = true
         cell.showAddButton()
         cell.backgroundColor = UIColor.clearColor()
         return cell

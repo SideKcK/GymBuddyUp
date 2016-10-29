@@ -20,6 +20,8 @@ class PlanMainVC: UIViewController {
     @IBOutlet weak var addPlanView: UIView!
     @IBOutlet weak var todayButton: UIBarButtonItem!
     
+    @IBOutlet weak var addPlanToTopConstraint: NSLayoutConstraint!
+    
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
@@ -510,6 +512,15 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         }
         
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
+        if selectedDate < NSDate() {
+            if addPlanToTopConstraint.constant != -66 {
+                addPlanToTopConstraint.constant = -66
+            }
+        } else {
+            if addPlanToTopConstraint.constant != 0 {
+                addPlanToTopConstraint.constant = 0
+            }
+        }
 //        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
         
         if plans[selectedDate] == nil {
@@ -618,38 +629,66 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         
         cell.asyncIdentifer = workoutId
         
-        // async fetch userInfo
-        Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: selectedDate, completion: { (error: NSError?, invite: Invite?) in
-            if let _invite = invite where error == nil {
-                let asyncId = workoutId
-                let curCell = cell
-                if curCell.asyncIdentifer == asyncId {
-                    //remove shadow
-                    tableView.beginUpdates()
-                    cell.invite = _invite
-                    cell.showTimeView()
-                    cell.showLocView()
-                    cell.showStatusView()
-                    cell.setNeedsLayout()
-                    cell.layoutIfNeeded()
-                    cell.layoutSubviews()
-                    tableView.endUpdates()
-                    Log.info("senTo = \(_invite.sentTo)")
-                    if _invite.sentTo != nil{
-                        if _invite.sentTo != "public" && _invite.sentTo != "friends" {
-                            User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
-                                guard let screenName = user[0].screenName else {return}
-                                cell.statusLabel.text = "Invitation sent to \(screenName)"
-                            })
-                        } else {
-                            cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+        if let dateString = selectedDate?.toString() {
+            let cacheId = workoutId + dateString
+            if let _invite = InvitationCache.sharedInstance.cache[cacheId] {
+                cell.invite = _invite
+                cell.showTimeView()
+                cell.showLocView()
+                cell.showStatusView()
+                cell.setNeedsLayout()
+                cell.layoutIfNeeded()
+                cell.layoutSubviews()
+                Log.info("senTo = \(_invite.sentTo)")
+                if _invite.sentTo != nil{
+                    if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                            guard let screenName = user[0].screenName else {return}
+                            cell.statusLabel.text = "Invitation sent to \(screenName)"
+                        })
+                    } else {
+                        cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                    }
+                }
+            } else {
+                Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: selectedDate, completion: { (error: NSError?, invite: Invite?) in
+                    if let _invite = invite where error == nil {
+                        let asyncId = workoutId
+                        let curCell = cell
+                        if curCell.asyncIdentifer == asyncId {
+                            //remove shadow
+                            InvitationCache.sharedInstance.cache[cacheId] = _invite
+                            tableView.beginUpdates()
+                            cell.invite = _invite
+                            cell.showTimeView()
+                            cell.showLocView()
+                            cell.showStatusView()
+                            cell.setNeedsLayout()
+                            cell.layoutIfNeeded()
+                            cell.layoutSubviews()
+                            tableView.endUpdates()
+                            Log.info("senTo = \(_invite.sentTo)")
+                            if _invite.sentTo != nil{
+                                if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                                    User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                        guard let screenName = user[0].screenName else {return}
+                                        cell.statusLabel.text = "Invitation sent to \(screenName)"
+                                    })
+                                } else {
+                                    cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                                }
+                            }
+                            
                         }
                     }
                     
-                }
+                })
             }
-            
-        })
+        
+        
+        }
+        
+
         
         
         var isTracked = false

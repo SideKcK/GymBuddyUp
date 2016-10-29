@@ -163,11 +163,14 @@
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="top" secondItem="ZoS-v2-c1D" secondAttribute="bottom" constant="20" id="KN9-fl-cuk"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="baseline" secondItem="Jgy-Sg-X8c" secondAttribute="baseline" id="LLc-tg-uY2"/>
                                                 <constraint firstItem="Pkk-6c-JY9" firstAttribute="leading" secondItem="IxG-Yx-V54" secondAttribute="leadingMargin" constant="34" id="LbY-fQ-upp"/>
+                                                <constraint firstItem="TmN-YZ-Bxg" firstAttribute="top" secondItem="Jgy-Sg-X8c" secondAttribute="top" id="PTg-MZ-yfp"/>
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="leading" secondItem="oxd-aC-5FB" secondAttribute="trailing" constant="8" id="R3Y-5U-CPk"/>
+                                                <constraint firstItem="Jgy-Sg-X8c" firstAttribute="top" secondItem="oxd-aC-5FB" secondAttribute="bottom" constant="6.5" id="R8a-55-IIW"/>
                                                 <constraint firstItem="ZoS-v2-c1D" firstAttribute="top" secondItem="MXh-C5-cZb" secondAttribute="bottom" constant="9" id="UQE-SY-Ooh"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="leading" secondItem="Jgy-Sg-X8c" secondAttribute="trailing" constant="9" id="b8m-D7-OEd"/>
                                                 <constraint firstItem="ZoS-v2-c1D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IxG-Yx-V54" secondAttribute="leadingMargin" constant="12" id="gS6-mD-5R5"/>
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="baseline" secondItem="oxd-aC-5FB" secondAttribute="baseline" id="iyg-A3-N3i"/>
+                                                <constraint firstItem="Jgy-Sg-X8c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kKe-Vg-dLq" secondAttribute="bottom" constant="6" id="jjm-QF-taC"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="top" secondItem="kKe-Vg-dLq" secondAttribute="bottom" constant="7" id="mUB-vZ-lxC"/>
                                                 <constraint firstItem="oxd-aC-5FB" firstAttribute="top" secondItem="ZoS-v2-c1D" secondAttribute="bottom" constant="20" id="oX4-Xi-n2o"/>
                                                 <constraint firstItem="tnT-pC-s8s" firstAttribute="top" secondItem="IxG-Yx-V54" secondAttribute="topMargin" id="qbT-gq-tbu"/>
@@ -181,6 +184,7 @@
                                                 <mask key="constraints">
                                                     <exclude reference="Bxh-9B-M6U"/>
                                                     <exclude reference="iyg-A3-N3i"/>
+                                                    <exclude reference="mUB-vZ-lxC"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1117,7 +1121,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dYb-c7-Hx3"/>
-        <segue reference="awI-hR-Ire"/>
         <segue reference="Yzq-VB-49f"/>
+        <segue reference="GB7-ju-sVw"/>
     </inferredMetricsTieBreakers>
 </document>

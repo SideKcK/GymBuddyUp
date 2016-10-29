@@ -18,7 +18,7 @@ class InvitationCache {
     }()
     
     //MARK: Local Variable
-    var cache = [String : InvitationCache]()
+    var cache = [String : Invite]()
     
     //MARK: Init
     

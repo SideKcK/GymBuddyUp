@@ -21,13 +21,13 @@ class InviteGymVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
         KRProgressHUD.show()
-        GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(CLLocationCoordinate2D(latitude: 30.562, longitude: -96.313), radius: 5000, name: "gym") { (gyms, error) in
+        let myLocationCoord2D = LocationCache.sharedInstance.currentLocation.coordinate
+        GoogleAPI.sharedInstance.fetchPlacesNearCoordinate(myLocationCoord2D, radius: 5000, name: "gym") { (gyms, error) in
             if gyms != nil {
                 self.nearbyGyms = gyms
                 self.nearbyGyms.sortInPlace({ (a: Gym, b: Gym) -> Bool in

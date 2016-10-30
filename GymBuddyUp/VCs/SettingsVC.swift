@@ -9,8 +9,10 @@
 import UIKit
 
 class SettingsVC: UITableViewController {
-    @IBOutlet weak var logOutButton: UIButton!
 
+    @IBOutlet weak var logoutLabel: UILabel!
+    private let logoutSection = 2
+    private let logoutRow = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +22,11 @@ class SettingsVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         setupVisual()
+        setupTable()
+    }
+    
+    func setupTable() {
+        tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,24 +35,31 @@ class SettingsVC: UITableViewController {
     }
     
     func setupVisual() {
-        logOutButton.tintColor = ColorScheme.e1Tint
+        logoutLabel.textColor = ColorScheme.e1Tint
         tableView.backgroundColor = ColorScheme.s3Bg
     }
     
-    @IBAction func onLogOutButton(sender: AnyObject) {
+    private func logoutAction() {
         let alertController = UIAlertController(title: "Are you sure to log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         let okAction = UIAlertAction(title: "Log Out", style: UIAlertActionStyle.Destructive ) { (action) in
             User.currentUser!.signOut(){ _ in
                 self.performSegueWithIdentifier("toSignUpLogin", sender: self)
             }
-            }
-
+        }
+        
         alertController.addAction(okAction)
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
         alertController.addAction(cancel)
         self.presentViewController(alertController, animated: true, completion: nil)
-
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == logoutRow && indexPath.section == logoutSection {
+            logoutAction()
+        }
+    }
+    
+    
     @IBAction func unwindToSettingsVC(segue: UIStoryboardSegue) {
         
     }

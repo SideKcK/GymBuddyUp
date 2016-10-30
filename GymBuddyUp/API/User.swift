@@ -144,7 +144,6 @@ class User {
         self.userId = user.uid
         self.email = user.email
         self.screenName = user.displayName
-        self.photoURL = user.photoURL
         
         self.userRef = ref.child(user.uid)
         
@@ -219,7 +218,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
-                User.currentUser?.syncWithLastestUserInfo()
+                User.currentUser?.syncWithLastestUserInfo(nil)
                 completion(user: User.currentUser, error: nil)
             }
         })
@@ -233,7 +232,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
-                User.currentUser?.syncWithLastestUserInfo()
+                User.currentUser?.syncWithLastestUserInfo(nil)
                 completion(user: User.currentUser, error: nil)
             }
         })
@@ -302,7 +301,7 @@ class User {
         }
     }
     
-    func syncWithLastestUserInfo() {
+    func syncWithLastestUserInfo(completion: (() -> ())?) {
         let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
         ref.child(userId).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
             if let _screenName = snapshot.value?["screen_name"] as? String {
@@ -337,6 +336,8 @@ class User {
             if let _facebookAccesstoken = snapshot.value!["facebook_accesstoken"] as? String {
                 self.facebookAccesstoken = _facebookAccesstoken
             }
+            
+            completion?()
         }
     }
     

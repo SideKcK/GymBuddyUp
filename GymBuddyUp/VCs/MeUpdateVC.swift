@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 @objc protocol updateMeDelegate {
     optional func syncAfterUpdateMe(updatedGymPlaceId: String, updatedGymObj: Gym?,updatedGoals: Set<Int>)
@@ -46,6 +48,18 @@ class MeUpdateVC: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    private func fetchAvatar(url: NSURL) {
+        let request = NSMutableURLRequest(URL: url)
+        thumbView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+            self.thumbView.image = response.result.value
+        }
+        
+        thumbView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+            self.thumbView.image = response.result.value
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,23 +71,32 @@ class MeUpdateVC: UITableViewController {
     
     func setupInfo(){
         screenNameField.text = user.screenName
-        
-            for goal in user.goals {
-                
-                if(goal.rawValue == 0){
-                    //weightButton.selected = true
-                    buttonClicked(weightButton)
-                }else if(goal.rawValue == 1){
-                   // fitButton.selected = true
-                    buttonClicked(fitButton)
-                }else if(goal.rawValue == 2){
-                    //funButton.selected = true
-                    buttonClicked(funButton)
-                }else if(goal.rawValue == 3){
-                    //muscleButton.selected = true
-                    buttonClicked(muscleButton)
+        if let photoURL = user.photoURL {
+            fetchAvatar(photoURL)
+        } else {
+            User.currentUser?.syncWithLastestUserInfo({
+                if let photoURL = self.user.photoURL {
+                    self.fetchAvatar(photoURL)
                 }
+            })
+        }
+        
+        for goal in user.goals {
+            
+            if(goal.rawValue == 0){
+                //weightButton.selected = true
+                buttonClicked(weightButton)
+            }else if(goal.rawValue == 1){
+               // fitButton.selected = true
+                buttonClicked(fitButton)
+            }else if(goal.rawValue == 2){
+                //funButton.selected = true
+                buttonClicked(funButton)
+            }else if(goal.rawValue == 3){
+                //muscleButton.selected = true
+                buttonClicked(muscleButton)
             }
+        }
         
         gym1Button.setTitle(user.gym, forState: UIControlState.Normal)
         if let _description = user.description {

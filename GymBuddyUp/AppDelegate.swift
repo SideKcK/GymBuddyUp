@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
         User.currentUser?.userBecameActive()
-        User.currentUser?.syncWithLastestUserInfo()
+        User.currentUser?.syncWithLastestUserInfo(nil)
         LocationCache.sharedInstance.setup()
         
         /*********************/

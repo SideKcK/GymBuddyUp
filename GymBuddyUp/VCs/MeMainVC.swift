@@ -70,16 +70,26 @@ class MeMainVC: UIViewController {
 
     }
     
+    private func fetchAvatar(url: NSURL) {
+        let request = NSMutableURLRequest(URL: url)
+        titleBGView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+        self.titleBGView.image = response.result.value
+        }
+        
+        profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+        self.profileView.image = response.result.value
+        }
+    }
+    
     func setHeader() {
         if let photoURL = user.photoURL {
-            let request = NSMutableURLRequest(URL: photoURL)
-            titleBGView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
-                self.titleBGView.image = response.result.value
-            }
-            
-            profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
-                self.profileView.image = response.result.value
-            }
+            fetchAvatar(photoURL)
+        } else {
+            User.currentUser?.syncWithLastestUserInfo({
+                if let photoURL = self.user.photoURL {
+                    self.fetchAvatar(photoURL)
+                }
+            })
         }
 
         let headerW = CGRectGetWidth(self.view.frame)
@@ -285,7 +295,7 @@ extension MeMainVC: updateMeDelegate {
         for goal in updatedGoals {
             User.currentUser?.goals.append(User.Goal(rawValue: goal)!)
         }
-        User.currentUser?.syncWithLastestUserInfo()
+        User.currentUser?.syncWithLastestUserInfo(nil)
         self.tableView.reloadData()
     
     }

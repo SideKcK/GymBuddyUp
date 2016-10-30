@@ -402,7 +402,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             if let user = UserCache.sharedInstance.cache[conversation.recipientId] {                
                 if let photoURL = user.photoURL where user.cachedPhoto == nil {
                     let request = NSMutableURLRequest(URL: photoURL)
-                    cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                         if asyncId == cell.asyncId {
                             cell.avatarImage.image = response.result.value
                             user.cachedPhoto = response.result.value
@@ -418,7 +418,7 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
                         UserCache.sharedInstance.cache[conversation.recipientId] = user
                         if let photoURL = user.photoURL {
                             let request = NSMutableURLRequest(URL: photoURL)
-                            cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                            cell.avatarImage.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                                 if asyncId == cell.asyncId {
                                     cell.avatarImage.image = response.result.value
                                     user.cachedPhoto = response.result.value

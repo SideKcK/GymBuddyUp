@@ -87,6 +87,8 @@ class BuddyCardCell: UITableViewCell {
         disLabel.font = FontScheme.T2
         goalLabel.font = FontScheme.T3
         gymLabel.font = FontScheme.T3
+        
+        profileView.image = UIImage(named: "dumbbell")
     }
     
     func showDistance() {

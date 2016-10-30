@@ -376,7 +376,7 @@ class User {
                 ret.append(user)
                 dispatch_group_leave(gcdGetUserGroup)
             }) { (error) in
-                print(error.localizedDescription)
+                Log.error(error.localizedDescription)
                 dispatch_group_leave(gcdGetUserGroup)
             }
         }

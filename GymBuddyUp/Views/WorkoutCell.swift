@@ -165,6 +165,7 @@ class WorkoutCell: UITableViewCell {
         gymDisLabel.font = FontScheme.T3
         statusLabel.font = FontScheme.T3
         buddyButton.titleLabel?.font = FontScheme.T2
+        profileView.image = UIImage(named: "dumbbell")
         
     }
 

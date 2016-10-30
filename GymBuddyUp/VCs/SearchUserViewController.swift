@@ -186,7 +186,7 @@ extension SearchUserViewController : UITableViewDelegate, UITableViewDataSource 
         if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
             if let photoURL = user.photoURL where user.cachedPhoto == nil {
                 let request = NSMutableURLRequest(URL: photoURL)
-                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                     if asyncIdentifer == cell.asyncIdentifer {
                         cell.profileView.image = response.result.value
                         user.cachedPhoto = response.result.value

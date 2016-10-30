@@ -88,16 +88,18 @@ extension MeBuddiesVC : UITableViewDelegate, UITableViewDataSource {
         let asyncIdentifer = buddy.userId
         cell.asyncIdentifer = asyncIdentifer
         if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
-            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+            if let photoURL = user.photoURL {
+                Log.info("UserProfile test: go fetch profile photo username=\(user.screenName!)")
                 let request = NSMutableURLRequest(URL: photoURL)
-                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                     if asyncIdentifer == cell.asyncIdentifer {
                         cell.profileView.image = response.result.value
                         user.cachedPhoto = response.result.value
                     }
                 }
             } else {
-                cell.profileView.image = user.cachedPhoto
+                Log.info("UserProfile test: use cachedPhoto username=\(user.screenName!)")
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
             }
         }
 

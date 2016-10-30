@@ -39,11 +39,12 @@ class PlanMainVC: UIViewController {
         setTableView()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
+        setupChangesListener()
     }
     
     func setupChangesListener() {
         ScheduledWorkout.addChangesListener {
-            Log.info("found a new invitatoin")
+            Log.info("found a new invitation")
             self.getPlansThisWeek(self.selectedDate)
         }
     }
@@ -627,7 +628,6 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         cell.clearAllViews()
         cell.plan = dayPlans[index]
         let workoutId = dayWorkouts[index].id
-        
         cell.asyncIdentifer = workoutId
         
         if let dateString = selectedDate?.toString() {

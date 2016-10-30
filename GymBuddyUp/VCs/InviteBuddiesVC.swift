@@ -83,7 +83,7 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } else {
-                cell.profileView.image = user.cachedPhoto
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
             }
         }
         

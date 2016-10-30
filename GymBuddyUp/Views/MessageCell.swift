@@ -38,7 +38,7 @@ class MessageCell: UITableViewCell {
                     self.nameLabel.text = user.screenName
                     if let photoURL = user.photoURL where user.cachedPhoto == nil {
                         let request = NSMutableURLRequest(URL: photoURL)
-                        self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                        self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                             if currentAsyncId == self.asyncId {
                                 self.profileView.image = response.result.value
                                 user.cachedPhoto = response.result.value
@@ -55,7 +55,7 @@ class MessageCell: UITableViewCell {
                             UserCache.sharedInstance.cache[userId] = user
                             if let photoURL = user.photoURL {
                                 let request = NSMutableURLRequest(URL: photoURL)
-                                self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "selfie"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                                self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
                                     if currentAsyncId == self.asyncId {
                                         self.profileView.image = response.result.value
                                         user.cachedPhoto = response.result.value

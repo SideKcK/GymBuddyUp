@@ -164,7 +164,7 @@ class ScheduledWorkout {
     
     class func addChangesListener(complete: () -> Void) {
         guard let currentUserId = User.currentUser?.userId else {return}
-        workoutCalendarRef.child(currentUserId).observeEventType(FIRDataEventType.ChildChanged) { (_:FIRDataSnapshot) in
+        workoutCalendarRef.child(currentUserId).observeEventType(.Value) { (_:FIRDataSnapshot) in
             complete()
         }
     }

@@ -42,9 +42,10 @@ class PlanMainVC: UIViewController {
     }
     
     func setupChangesListener() {
-//        ScheduledWorkout.addChangesListener { 
-//            self.getPlansThisWeek(self.selectedDate)
-//        }
+        ScheduledWorkout.addChangesListener {
+            Log.info("found a new invitatoin")
+            self.getPlansThisWeek(self.selectedDate)
+        }
     }
     
     func setupVisual() {
@@ -656,7 +657,6 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                         let asyncId = workoutId
                         let curCell = cell
                         if curCell.asyncIdentifer == asyncId {
-                            //remove shadow
                             InvitationCache.sharedInstance.cache[cacheId] = _invite
                             tableView.beginUpdates()
                             cell.invite = _invite
@@ -667,45 +667,51 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                             cell.layoutIfNeeded()
                             cell.layoutSubviews()
                             tableView.endUpdates()
-                            Log.info("senTo = \(_invite.sentTo)")
-                            if _invite.sentTo != nil{
-                                if _invite.sentTo != "public" && _invite.sentTo != "friends" {
-                                    if _invite.sentTo != User.currentUser?.userId {
-                                        User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
-                                            guard let screenName = user[0].screenName else {return}
-                                            cell.statusLabel.text = "Invitation sent to \(screenName)"
-                                        })
-                                    } else {
-                                        if let user = UserCache.sharedInstance.cache[_invite.inviterId] {
-                                            cell.statusLabel.text = "Workout with \(user.screenName)"
+                            if _invite.sentTo != nil {
+                                if _invite.inviterId != User.currentUser?.userId {
+                                    if let user = UserCache.sharedInstance.cache[_invite.inviterId] {
+                                        if let screenName = user.screenName {
+                                            cell.statusLabel.text = "Workout with \(screenName)"
                                         } else {
-                                            User.getUserArrayFromIdList([_invite.inviterId], successHandler: { (users: [User]) in
-                                                if users.count > 0 {
-                                                    UserCache.sharedInstance.cache[_invite.inviterId] = users[0]
-                                                    guard let screenName = users[0].screenName else {return}
-                                                    cell.statusLabel.text = "Workout with \(screenName)"
-                                                }
-                                            })
+                                            cell.statusLabel.text = "Workout with unnamed user"
                                         }
-
+                                        
+                                    } else {
+                                        User.getUserArrayFromIdList([_invite.inviterId], successHandler: { (users: [User]) in
+                                            if users.count > 0 {
+                                                UserCache.sharedInstance.cache[_invite.inviterId] = users[0]
+                                                guard let screenName = users[0].screenName else {return}
+                                                cell.statusLabel.text = "Workout with \(screenName)"
+                                            }
+                                        })
                                     }
-
                                 } else {
-                                    cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
+                                        if let recipientId = _invite.sentTo {
+                                            if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                                                if let user = UserCache.sharedInstance.cache[recipientId] where user.screenName != nil {
+                                                    cell.statusLabel.text = "Invitation sent to \(user.screenName!)"
+                                                } else {
+                                                    User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                                        guard let screenName = user[0].screenName else {return}
+                                                        cell.statusLabel.text = "Invitation sent to \(screenName)"
+                                                    })
+                                                }
+                                            } else {
+                                                cell.statusLabel.text = "Invitation sent to \(recipientId)"
+                                            }
+                                            
+                                        } else {
+                                            cell.statusLabel.text = "Invitation sent to unknown user"
+                                    }
                                 }
                             }
-                            
                         }
                     }
-                    
                 })
             }
         
         
         }
-        
-
-        
         
         var isTracked = false
         if trackedPlan[selectedDate] != nil  && trackedPlan[selectedDate]! != [] {

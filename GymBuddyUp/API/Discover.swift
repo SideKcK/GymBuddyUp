@@ -24,6 +24,7 @@ class Discover {
     
     class func discoverPublicWorkout(location: CLLocation, radiusInkilometers: Double, withinDays: Int, offset: Int?, completion: ([Invite], NSError?) -> Void) {
         // Query locations at input location with a radius of radius meters
+        guard let currentUserId = User.currentUser?.userId else {return}
     
         var result = [Invite]()
         
@@ -51,7 +52,10 @@ class Discover {
                     if data["available"] as? Bool != false && data["access"] as? Int > 1{
                         // add id to data dictionary
                         data["id"] = key
-                        result.append(Invite(JSON:data)!)
+                        let invite = Invite(JSON:data)!
+                        if invite.inviterId != currentUserId && invite.isAvailable == true {
+                            result.append(invite)
+                        }
                     }
                     
                     dispatch_group_leave(fetchWorkoutDispatchGroup)

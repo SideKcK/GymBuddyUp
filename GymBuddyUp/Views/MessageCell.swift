@@ -102,7 +102,7 @@ class MessageCell: UITableViewCell {
         nameLabel.font = FontScheme.H2
         timeLabel.font = FontScheme.T2
         statusLabel.font = FontScheme.T3
-        
+        timeLabel.textColor = ColorScheme.g2Text
     }
     
     func reset() {

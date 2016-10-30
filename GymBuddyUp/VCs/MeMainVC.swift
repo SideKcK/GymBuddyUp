@@ -85,11 +85,16 @@ class MeMainVC: UIViewController {
         if let photoURL = user.photoURL {
             fetchAvatar(photoURL)
         } else {
-            User.currentUser?.syncWithLastestUserInfo({
-                if let photoURL = self.user.photoURL {
-                    self.fetchAvatar(photoURL)
+            if let currentUser = User.currentUser
+            {
+                if currentUser.userId == user.userId {
+                    User.currentUser?.syncWithLastestUserInfo({
+                        if let photoURL = self.user.photoURL {
+                            self.fetchAvatar(photoURL)
+                        }
+                    })
                 }
-            })
+            }
         }
 
         let headerW = CGRectGetWidth(self.view.frame)
@@ -286,18 +291,19 @@ extension MeMainVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
                 // Dismiss UIImagePickerController to go back to your original view controller
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
 }
+
 extension MeMainVC: updateMeDelegate {
-    func syncAfterUpdateMe(updatedGymObj: Gym?, updatedGymPlaceId: String, updatedGoals: Set<Int>) {
+    func syncAfterUpdateMe(updatedGymPlaceId: String?, updatedGymObj: Gym?, updatedGoals: Set<Int>, updatedProfile: UIImage?) {
+        Log.info("update delegate callback")
         User.currentUser?.googleGymObj = updatedGymObj
         User.currentUser?.gym = updatedGymPlaceId
         for goal in updatedGoals {
             User.currentUser?.goals.append(User.Goal(rawValue: goal)!)
         }
         User.currentUser?.syncWithLastestUserInfo(nil)
+        self.titleBGView.image = updatedProfile
+        self.profileView.image = updatedProfile
         self.tableView.reloadData()
-    
     }
-
 }

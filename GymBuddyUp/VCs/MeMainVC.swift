@@ -243,10 +243,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UserWorkoutHistoryCell {
-            //self.performSegueWithIdentifier("toWorkoutDetailSegue", sender: self)
-        }
-        
+
         if let _ = tableView.cellForRowAtIndexPath(indexPath) as? UserBuddyOverviewCell {
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
         }

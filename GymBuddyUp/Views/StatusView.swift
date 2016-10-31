@@ -39,9 +39,6 @@ class StatusView: UIView {
         borderView.makeBorderButton(ColorScheme.p1Tint, radius: 3.0)
         
         view.userInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StatusView.tapped(_:)))
-        //view.addGestureRecognizer(tapGestureRecognizer)
-        
         closeButton.addTarget(self, action: #selector(StatusView.closeButtonTapped(_:)), forControlEvents: .TouchDown)
         
         translatesAutoresizingMaskIntoConstraints = false

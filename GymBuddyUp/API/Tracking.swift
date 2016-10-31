@@ -388,7 +388,7 @@ class Tracking {
             dispatch_group_enter(myGroup)
             trackedPlanRef.child(User.currentUser!.userId).child(id).observeSingleEventOfType(.Value,withBlock: {
                 (dataSnapshot: FIRDataSnapshot) in
-                if let values = dataSnapshot.value as? NSDictionary {
+                if let _ = dataSnapshot.value as? NSDictionary {
                     isTrackeds[index] = true
                 }else{
                     isTrackeds[index] = false

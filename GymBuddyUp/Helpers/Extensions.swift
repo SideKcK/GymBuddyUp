@@ -296,15 +296,6 @@ extension UISegmentedControl
         setDividerImage(UIImage(color: tintColor), forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)
 
     }
-    
-    func makeMultiline(numberOfLines: Int)
-    {
-        for segment in self.subviews
-        {
-            let labels = segment.subviews.filter { $0 is UILabel }	// [AnyObject]
-            labels.map { ($0 as! UILabel).numberOfLines = numberOfLines }
-        }
-    }
 }
 
 extension HMSegmentedControl {

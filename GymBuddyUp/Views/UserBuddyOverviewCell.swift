@@ -13,16 +13,7 @@ class UserBuddyOverviewCell: UITableViewCell {
     @IBOutlet weak var buddyLabel: UILabel!
     @IBOutlet weak var buddyView: UIImageView!
 
-    var user: User! {
-        didSet {
-            if let buddyNum = user.buddyNum {
-                //self.buddyNumLabel.text = String(buddyNum)
-            }else {
-                print("error cannot get user buddy num")
-                return
-            }
-        }
-    }
+    var user: User!
     
     override func awakeFromNib() {
         super.awakeFromNib()

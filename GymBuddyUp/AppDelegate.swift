@@ -92,26 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
         }
-        /*Friend.discoverFBFriends(){(users, error) in
-        
-        
-        }*/
-       let testLocation = CLLocation(latitude: 30.563, longitude: -96.311)
-//    
-//            for i in (1..<40) {
-               // Invite.publishWorkoutInvite("public", planId: "-KQIqnf5N7BfQmtt0FHM", scheduledWorkoutId: "-KTHk01US7HniC_Bqy0C", gym: Gym(), workoutTime: NSDate()) {_ in
-               //
-              // }
-//            }
-        
-        //test public discover
-//        Discover.discoverPublicWorkout(testLocation, radiusInkilometers: 100, withinDays: 8,  offset: 0) { (publishedWorkout, error) in
-//            print(publishedWorkout)
-//        }
-        
-        //Invite.testfunction()
-        //Invite.acceptWorkoutInvite("-KTHpHYlhHB_aTtX30yS" ){_ in
-        //}
+
     }
     
     func userDidLogout() {

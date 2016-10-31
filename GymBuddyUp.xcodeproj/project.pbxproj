@@ -44,7 +44,6 @@
 		C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C101DABF66D00972202 /* LocationCache.swift */; };
 		C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */; };
 		C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E731D77BC3200E6CA77 /* Chat.storyboard */; };
-		C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E7D1D77C1FB00E6CA77 /* Message.swift */; };
 		C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */; };
 		C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E841D78EDA700E6CA77 /* Conversation.swift */; };
 		C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */; };
@@ -186,7 +185,6 @@
 		C1C28C101DABF66D00972202 /* LocationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCache.swift; sourceTree = "<group>"; };
 		C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUserViewController.swift; path = VCs/SearchUserViewController.swift; sourceTree = "<group>"; };
 		C1F08E731D77BC3200E6CA77 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
-		C1F08E7D1D77C1FB00E6CA77 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = VCs/ChatViewController.swift; sourceTree = "<group>"; };
 		C1F08E841D78EDA700E6CA77 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = Models/Conversation.swift; sourceTree = "<group>"; };
 		C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = Views/ConversationCell.swift; sourceTree = "<group>"; };
@@ -614,7 +612,6 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C1F08E7D1D77C1FB00E6CA77 /* Message.swift */,
 				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
 				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
@@ -854,7 +851,6 @@
 				C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */,
 				C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */,
 				C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */,
-				C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
 				C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,

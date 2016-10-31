@@ -460,10 +460,6 @@ class PlanMainVC: UIViewController {
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
         
-        if let desVC = segue.destinationViewController as? MeMainVC {
-            //for testing
-            //desVC.user = User()
-        }
     }
     
     

@@ -23,7 +23,18 @@ class DiscoverMainVC: UIViewController {
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var findButtonConstraint: NSLayoutConstraint!
     
-    var events = [Invite]()
+    var events = [Invite]() {
+        didSet {
+            if events.count > 0 {
+                findButton.hidden = true
+                findLabel.hidden = true
+            } else {
+                findButton.hidden = true
+                findLabel.hidden = true
+            }
+        }
+    
+    }
     var plans = [Plan]()
     var userCache = UserCache.sharedInstance.cache
     var showPublic = false
@@ -35,7 +46,6 @@ class DiscoverMainVC: UIViewController {
         setupTableView()
         addSegControl(segView)
         reloadData()
-        self.findButtonConstraint.constant = self.view.frame.height / 3.0
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,8 +66,18 @@ class DiscoverMainVC: UIViewController {
         imageView.contentMode = .ScaleAspectFit
         imageView.image = logo
         self.navigationItem.titleView = imageView
+        let findNewButton = UIButton()
+        findNewButton.setImage(UIImage(named: "find_new_buddy"), forState: .Normal)
+        findNewButton.frame = CGRectMake(0, 0, 30, 30)
+        findNewButton.addTarget(self, action: #selector(findNewButtonOnClick), forControlEvents: .TouchUpInside)
+        let rightBarButton = UIBarButtonItem(customView: findNewButton)
+        navigationItem.rightBarButtonItem = rightBarButton
+        
     }
     
+    func findNewButtonOnClick() {
+        performSegueWithIdentifier("toFindBuddiesSegue", sender: nil)
+    }
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
@@ -83,8 +103,10 @@ class DiscoverMainVC: UIViewController {
     
     func onSegControl (sender: HMSegmentedControl) {
         showPublic = !showPublic
-        findButtonConstraint.constant = 20
-        findButton.hidden = showPublic
+        if showPublic {
+            findButton.hidden = true
+            findLabel.hidden = true
+        }
         reloadData()
     }
     
@@ -126,19 +148,7 @@ class DiscoverMainVC: UIViewController {
                 
             }
         })
-        
-        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            if KRProgressHUD.isVisible {
-                KRProgressHUD.showError(message: "Network Error")
-            }
-            self.events.removeAll()
-            self.plans.removeAll()
-            if self.events.count == 0 {
-                self.findButtonConstraint.constant = self.view.frame.height / 3.0
-            }
-            self.tableView.reloadData()
-        })  
+
     }
     
     func reloadPublicDiscover() {
@@ -163,18 +173,10 @@ class DiscoverMainVC: UIViewController {
                     }else {
                         self.plans = plans
                         self.tableView.reloadData()
-                        
                         KRProgressHUD.dismiss()
                     }
                 })
                 
-            }
-        })
-        
-        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            if KRProgressHUD.isVisible {
-                KRProgressHUD.showError(message: "Network Error")
             }
         })
 
@@ -213,30 +215,6 @@ class DiscoverMainVC: UIViewController {
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if events.count != 0 {
-            let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
-            if (yDirection < 0) {
-                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
-                    self.findButton.alpha = 0
-                    self.segHeightConstraint.priority = 999
-                    self.segView.alpha = 0
-                }, completion: nil)
-            } else if (yDirection > 0) {
-                UIView.animateWithDuration(0.1, delay: 0.2, options: .CurveEaseIn, animations: {
-                    self.findButton.alpha = 1
-                    self.segHeightConstraint.priority = 250
-                    self.segView.alpha = 1
-                }, completion: nil)
-            }
-        }
-
-    }
-    
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toProfileSegue" {
             if let desVC = segue.destinationViewController as? MeMainVC {
@@ -291,7 +269,7 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } else {
-                cell.profileView.image = user.cachedPhoto
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
             }
         } else {
             User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in

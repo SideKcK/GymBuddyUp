@@ -21,7 +21,8 @@ class DiscoverMainVC: UIViewController {
     
     
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var findButtonConstraint: NSLayoutConstraint!
+    var refreshControl: UIRefreshControl!
+
     
     var events = [Invite]() {
         didSet {
@@ -33,14 +34,15 @@ class DiscoverMainVC: UIViewController {
                 findLabel.hidden = false
             }
         }
-    
     }
+    
     var plans = [Plan]()
     var userCache = UserCache.sharedInstance.cache
     var showPublic = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         setupNavBar()
         setupVisual()
         setupTableView()
@@ -48,10 +50,22 @@ class DiscoverMainVC: UIViewController {
         reloadData()
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.hidden = false
         self.tabBarController?.tabBar.translucent = false
+    }
+    
+    func setupViews() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        reloadData()
+        refreshControl.endRefreshing()
     }
     
     func setupVisual() {

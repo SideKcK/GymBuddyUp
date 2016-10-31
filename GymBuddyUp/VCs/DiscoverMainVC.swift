@@ -29,8 +29,8 @@ class DiscoverMainVC: UIViewController {
                 findButton.hidden = true
                 findLabel.hidden = true
             } else {
-                findButton.hidden = true
-                findLabel.hidden = true
+                findButton.hidden = false
+                findLabel.hidden = false
             }
         }
     

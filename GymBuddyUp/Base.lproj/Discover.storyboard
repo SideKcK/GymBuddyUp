@@ -37,17 +37,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6ZV-Fc-6jE"/>
                                     <constraint firstAttribute="width" constant="198" id="7hy-mz-VYJ"/>
-                                    <constraint firstAttribute="width" secondItem="n6o-7w-yyS" secondAttribute="height" multiplier="4.5:1" id="J17-le-tyD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Find New Buddies">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="J17-le-tyD"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <segue destination="fpL-A3-ZUW" kind="show" identifier="toFindBuddiesSegue" id="Eke-50-sS3"/>
                                 </connections>
@@ -72,30 +66,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3z0-xg-8RU" firstAttribute="centerX" secondItem="n6o-7w-yyS" secondAttribute="centerX" id="1hq-u3-FjM"/>
-                            <constraint firstItem="3z0-xg-8RU" firstAttribute="top" secondItem="n6o-7w-yyS" secondAttribute="bottom" constant="20" id="4As-as-cFt"/>
                             <constraint firstItem="wFk-iV-I3j" firstAttribute="top" secondItem="Tzd-hT-WiO" secondAttribute="bottom" id="4vO-Du-LiV"/>
                             <constraint firstItem="n6o-7w-yyS" firstAttribute="centerY" secondItem="nfk-Zc-ne0" secondAttribute="centerY" id="FFo-bF-fLE"/>
                             <constraint firstItem="Tzd-hT-WiO" firstAttribute="leading" secondItem="nfk-Zc-ne0" secondAttribute="leading" id="GNw-R5-o8S"/>
                             <constraint firstAttribute="trailing" secondItem="wFk-iV-I3j" secondAttribute="trailing" id="RPb-nk-iPb"/>
                             <constraint firstItem="f2r-lS-BJs" firstAttribute="top" secondItem="wFk-iV-I3j" secondAttribute="bottom" id="SaP-0O-fZN"/>
-                            <constraint firstItem="3z0-xg-8RU" firstAttribute="centerY" secondItem="n6o-7w-yyS" secondAttribute="centerY" id="XjN-tJ-Blt"/>
                             <constraint firstItem="Tzd-hT-WiO" firstAttribute="top" secondItem="7hh-b2-RR7" secondAttribute="bottom" id="bwJ-WH-PWX"/>
                             <constraint firstItem="3z0-xg-8RU" firstAttribute="top" secondItem="n6o-7w-yyS" secondAttribute="bottom" constant="20" id="faG-bC-a5g"/>
                             <constraint firstAttribute="trailing" secondItem="Tzd-hT-WiO" secondAttribute="trailing" id="kug-K0-UL0"/>
-                            <constraint firstItem="f2r-lS-BJs" firstAttribute="top" secondItem="n6o-7w-yyS" secondAttribute="bottom" constant="20" id="qgx-Bx-Fsh"/>
                             <constraint firstItem="wFk-iV-I3j" firstAttribute="leading" secondItem="nfk-Zc-ne0" secondAttribute="leading" id="xSU-Gd-JfS"/>
                             <constraint firstItem="n6o-7w-yyS" firstAttribute="centerX" secondItem="nfk-Zc-ne0" secondAttribute="centerX" id="ykd-rE-FYF"/>
                             <constraint firstItem="3z0-xg-8RU" firstAttribute="centerX" secondItem="n6o-7w-yyS" secondAttribute="centerX" id="zJ1-PW-AZ6"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1hq-u3-FjM"/>
-                                <exclude reference="4As-as-cFt"/>
-                                <exclude reference="XjN-tJ-Blt"/>
-                                <exclude reference="qgx-Bx-Fsh"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="ybz-vT-00S">
                         <nil key="title"/>
@@ -104,7 +86,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="findButton" destination="n6o-7w-yyS" id="kZN-PX-SaZ"/>
-                        <outlet property="findButtonConstraint" destination="qgx-Bx-Fsh" id="IXJ-ro-QLg"/>
                         <outlet property="findLabel" destination="3z0-xg-8RU" id="lNR-PU-5sA"/>
                         <outlet property="segHeightConstraint" destination="u8D-cd-y3u" id="R7c-SD-OtJ"/>
                         <outlet property="segView" destination="Tzd-hT-WiO" id="5k5-2I-ZrJ"/>

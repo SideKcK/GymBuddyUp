@@ -86,7 +86,54 @@ class Library {
             completion(plans: nil, error: error)
         }
     }
-
+    
+    class func getSinglePlanByMidId(catID: Int, completion: (plans: Plan?, error:NSError?) -> Void) {
+        print("getSinglePlanByMidId " + String(catID))
+        
+        var plan = Plan()
+        midCategoryRef.child("\(catID)/system_plans").observeSingleEventOfType(.Value, withBlock: {
+            (snapshot) in
+            
+            let getPlanTaskGrp1 = dispatch_group_create()
+            
+            for planSnapshot in snapshot.children {
+                let planId = (planSnapshot as! FIRDataSnapshot).key
+                print("inside getSinglePlanByMidId " + planId)
+                dispatch_group_enter(getPlanTaskGrp1)
+                
+                if let isMultiple = (planSnapshot as! FIRDataSnapshot).value as? Bool {
+                    if(!isMultiple){
+                    getPlanById(planId, completion: { (_plan, error) in
+                        if _plan != nil {
+                            print("getting plan", planId)
+                            plan = _plan!
+                            dispatch_group_leave(getPlanTaskGrp1)
+                        }else{
+                            dispatch_group_leave(getPlanTaskGrp1)
+                        }
+                    })
+                        
+                    }else{
+                        dispatch_group_leave(getPlanTaskGrp1)
+                    }
+                }else{
+                     dispatch_group_leave(getPlanTaskGrp1)
+                }
+               
+            }
+            
+            dispatch_group_notify(getPlanTaskGrp1, dispatch_get_main_queue()) {
+                print("leave getPlanTaskGrp1")
+                completion(plans: plan, error: nil)
+            }
+            
+        }) {
+            (error) in
+            completion(plans: nil, error: error)
+        }
+        
+    }
+    
     private class func getExercisesByPlanId(planId: String, completion: (exercises: [Exercise]?, error: NSError?) -> Void)  {
         planDetailRef.child(planId).observeSingleEventOfType(.Value, withBlock: {
             (snapshot) in

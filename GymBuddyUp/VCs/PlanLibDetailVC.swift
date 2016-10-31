@@ -49,7 +49,7 @@ class PlanLibDetailVC: UIViewController {
         let recur = repeating ? 7:0
         //set plan in Firebase
         let cell = collectionView.visibleCells()[0] as! PlanDetailCell
-        ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (error) in
+        ScheduledWorkout.addWorkoutToCalendar(cell.plan.id, startDate: navVC.selectedDate, recur: recur) { (workoutId, error) in
             if error == nil {
                 //unwind to plan main
                 if let _ = self.from as? InvitePlanVC {

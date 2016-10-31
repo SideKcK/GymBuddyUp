@@ -25,6 +25,7 @@ class PlanMainVC: UIViewController {
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
+    var gyms = [NSDate: [Gym]]()
     var trackedPlan = [NSDate: [Bool]]()
     var dayPlans = [Plan]()
     var selectedDate: NSDate!
@@ -89,6 +90,7 @@ class PlanMainVC: UIViewController {
         KRProgressHUD.show()
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
             self.workouts[date] = workouts
+            self.gyms[date] = []
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {
@@ -129,6 +131,7 @@ class PlanMainVC: UIViewController {
 
                 if workoutsOnDay.count == 0 {
                     self.plans[day] = []
+                    self.gyms[day] = []
                     self.trackedPlan[day] = []
                     dispatch_group_leave(fetchPlanTaskGroup)
                 }
@@ -138,6 +141,7 @@ class PlanMainVC: UIViewController {
                     Library.getPlansById(planIds!, completion: { (plans, error) in
                         if error == nil {
                             self.plans[day] = plans
+                            self.gyms[day] = [Gym](count: plans.count, repeatedValue: Gym())
                         }
                         else {
                             Log.error("Error getting plans for this week error = \(error?.localizedDescription)")
@@ -440,7 +444,10 @@ class PlanMainVC: UIViewController {
             if let row = sender as? Int {
                 desVC.plan =  plans[selectedDate]![row]
                 desVC.workout = workouts[selectedDate]![row]
+                desVC.gym = gyms[selectedDate]![row]
+               
             }
+           
         }
         if segue.identifier == "toPlanLibrarySegue" {
             if let desVC = segue.destinationViewController as? PlanLibNavVC {
@@ -651,6 +658,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                         cell.statusLabel.text = "Invitation sent to \(_invite.sentTo)"
                     }
                 }
+                gyms[selectedDate]![index] = _invite.gym!
             } else {
                 Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: selectedDate, completion: { (error: NSError?, invite: Invite?) in
                     if let _invite = invite where error == nil {
@@ -706,11 +714,20 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                                 }
                             }
                         }
+                        if(_invite.gym != nil){
+                            self.gyms[self.selectedDate]![index] = _invite.gym!
+                        }else{
+                            self.gyms[self.selectedDate]![index] = Gym()
+                        }
+                    }else{
+                        self.gyms[self.selectedDate]![index] = Gym()
                     }
                 })
             }
         
         
+        }else{
+            self.gyms[self.selectedDate]![index] = Gym()
         }
         
         var isTracked = false

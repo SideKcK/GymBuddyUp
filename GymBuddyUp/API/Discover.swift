@@ -83,33 +83,68 @@ class Discover {
         // 4. for each workout 
         var invites = [Invite]()
         let getInvitesTaskGrp = dispatch_group_create()
-        
+       
+        //let getInvitesTaskGrp2 = dispatch_group_create()
         userFriendsRef.child((User.currentUser?.userId)!).queryOrderedByChild("is_friend").queryEqualToValue(1).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            
             for friend in snapshot.children {
+                dispatch_group_enter(getInvitesTaskGrp)
                 // get this friend's active workout
                 let friendUid = (friend as! FIRDataSnapshot).key
-          
-                dispatch_group_enter(getInvitesTaskGrp)
-                
-                userWorkoutInviteRef.child(friendUid).queryOrderedByChild("workout_time").queryStartingAtValue(NSDate().timeIntervalSince1970).observeSingleEventOfType(.Value, withBlock: { (userWorkoutInviteRef) in
-                    let invite = userWorkoutInviteRef.valueForKey("invite") as! String
+                print("friendUid :::::" + friendUid)
+                let getInvitesTaskGrp1 = dispatch_group_create()
+                userWorkoutInviteRef.child(friendUid).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (userWorkoutInviteRef) in
                     
+                    let obj = userWorkoutInviteRef.value as! NSDictionary
+                    
+                    for (key, value) in obj {
+                        dispatch_group_enter(getInvitesTaskGrp1)
+                        let inviteid = (value as! NSDictionary)["invite"] as! String
+                        print("invite :::::" + inviteid)
                     // now get this invite object
-                    workoutInviteRef.child(invite).queryOrderedByChild("access").queryStartingAtValue(1).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
-                        let inviteData = inviteSnapshot.value as! [String: AnyObject]
-                        if let invite = Invite(JSON: inviteData){
-                            if invite.isAvailable != false {
-                                invites.append(invite)
+                        workoutInviteRef.child(inviteid).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
+                            if(inviteSnapshot.value is NSNull){
+                                print("invite is null")
+                            }else{
+                                    var inviteData = inviteSnapshot.value as! [String: AnyObject]
+                                    inviteData["id"] = key
+                                    if let invite = Invite(JSON: inviteData){
+                                        if invite.isAvailable != false && invite.accessLevel != 2 {
+                                            print("invite is not null " + invite.id)
+                                            invites.append(invite)
+                                        }
+                                    }
+                                
                             }
-                        }
                         
+                            dispatch_group_leave(getInvitesTaskGrp1)
+                        })
+                        /*workoutInviteRef.child(inviteidArray[0]).queryOrderedByChild("access").queryEqualToValue(1).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
+                            if(inviteSnapshot.value is NSNull){
+                                
+                            }else{
+                                let inviteData = inviteSnapshot.value as! [String: AnyObject]
+                                
+                                if let invite = Invite(JSON: inviteData){
+                                    if invite.isAvailable != false {
+                                        invites.append(invite)
+                                    }
+                                }
+                            }
+                            
+                            dispatch_group_leave(getInvitesTaskGrp2)
+                            
+                        })*/
+                    }
+                    dispatch_group_notify(getInvitesTaskGrp1, dispatch_get_main_queue()) {
                         dispatch_group_leave(getInvitesTaskGrp)
-                    })
+                    }
+                   
                 })
             }
             
             dispatch_group_notify(getInvitesTaskGrp, dispatch_get_main_queue()) {
-                completion(invites, nil)
+                 completion(invites, nil)
             }
         })
     }

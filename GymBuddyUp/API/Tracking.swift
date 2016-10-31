@@ -77,7 +77,7 @@ class Tracking {
         
     }
     
-    class func trackedPlanOnSave(scheduledWorkout: String, planId: String, startTime: NSDate, endTime: NSDate, trackedItems: [TrackedItem],
+    class func trackedPlanOnSave(scheduledWorkout: String, planId: String, startTime: NSDate, endTime: NSDate, trackedItems: [TrackedItem], gym: Gym,
                                  completion: (NSError?) -> Void) {
         
         print("=========== Inside trackedPlanOnSave"+User.currentUser!.userId)
@@ -89,7 +89,7 @@ class Tracking {
         subdata["scheduled_workout"] = scheduledWorkout
         subdata["start_time"] = dateToInt(startTime)
         subdata["end_time"] = dateToInt(endTime)
-        
+        subdata["gym"] = gym.toDictionary()
         for index in 0 ..< trackedItems.count {
             print("=========== Inside trackedItems"+String(index))
             var exercise_details = [String: AnyObject]()

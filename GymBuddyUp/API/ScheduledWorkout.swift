@@ -101,7 +101,7 @@ class ScheduledWorkout {
     //assign this plan as user's today plan
     //replace if plan exists
     
-    class func addWorkoutToCalendar(planId: String, startDate: NSDate, endDate: NSDate? = stringToDate("9999-12-31"), recur: Int = 0, completion: (NSError?) -> Void) {
+    class func addWorkoutToCalendar(planId: String, startDate: NSDate, endDate: NSDate? = stringToDate("9999-12-31"), recur: Int = 0, completion: (workoutId: String, NSError?) -> Void) {
         let planId = planId
         let newWorkoutRef = workoutCalendarRef.child(User.currentUser!.userId).childByAutoId()
         
@@ -115,7 +115,7 @@ class ScheduledWorkout {
         // If workout is not recurring, set end_date same as start_date, else use specified end_date. if specified enddate is nil, use 9999-12-31.
         
         newWorkoutRef.setValue(data) { (error, ref) in
-            completion(error)
+            completion(workoutId: newWorkoutRef.key, error)
         }
     }
     

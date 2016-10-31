@@ -97,12 +97,48 @@ class DiscoverMainVC: UIViewController {
     }
     
     func reloadBuddiesDiscover() {
-        self.events.removeAll()
-        self.plans.removeAll()
-        if self.events.count == 0 {
-            self.findButtonConstraint.constant = self.view.frame.height / 3.0
-        }
-        self.tableView.reloadData()
+        KRProgressHUD.show()
+        
+        Discover.discoverFriendsWorkout(5, completion: { (workouts, error) in
+            if error != nil{
+                Log.error(error.debugDescription)
+                KRProgressHUD.showError(message: "Network error")
+            } else {
+                self.events = workouts
+                
+                var planids = [String]()
+                for workout in workouts {
+                    planids.append(workout.planId)
+                }
+                
+                //get plans
+                Library.getPlansById(planids, completion: { (plans, error) in
+                    if error != nil {
+                        Log.error(error.debugDescription)
+                        KRProgressHUD.showError(message: "Network error")
+                    }else {
+                        self.plans = plans
+                        self.tableView.reloadData()
+                        
+                        KRProgressHUD.dismiss()
+                    }
+                })
+                
+            }
+        })
+        
+        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+            if KRProgressHUD.isVisible {
+                KRProgressHUD.showError(message: "Network Error")
+            }
+            self.events.removeAll()
+            self.plans.removeAll()
+            if self.events.count == 0 {
+                self.findButtonConstraint.constant = self.view.frame.height / 3.0
+            }
+            self.tableView.reloadData()
+        })  
     }
     
     func reloadPublicDiscover() {
@@ -235,6 +271,9 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+        
+        print("indexPath.row : " + String(indexPath.row))
+        print("workouts.count:" + String(events.count))
         let event = events[indexPath.row]
         cell.invite = events[indexPath.row]
         cell.plan = plans[indexPath.row]

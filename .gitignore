@@ -67,3 +67,5 @@ fastlane/report.xml
 fastlane/screenshots
 
 demos/
+
+GymBuddyUp/Base.lproj/Invitation.storyboard

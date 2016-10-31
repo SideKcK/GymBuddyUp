@@ -147,7 +147,7 @@ extension InvitePlanVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        print("enter inviteplan vc")
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("noPlanCell", forIndexPath: indexPath) as! InviteNoPlanCell
             cell.borderView.layer.borderWidth = 2.0

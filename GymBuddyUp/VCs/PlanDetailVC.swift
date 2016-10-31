@@ -45,7 +45,7 @@ class PlanDetailVC: UIViewController {
     var trackedPlan: TrackedPlan?
     var sendTo = 2
     var startTime: NSDate!
-    
+    var gym: Gym?
     override func viewDidLoad() {
         Log.info("PlanDetailVC fired")
         super.viewDidLoad()
@@ -60,6 +60,15 @@ class PlanDetailVC: UIViewController {
             Tracking.getTrackedPlanById(String(workout.id) + ":" + dateToString(selectedDate)){(result, error) in
                 if(result != nil){
                     self.trackedPlan = result
+                    
+                    self.timeLabel.text = timeString((self.trackedPlan?.startDate)!)
+                    
+                    if(self.trackedPlan?.gym != nil){
+                        
+                        self.gymButton.titleLabel?.text = self.trackedPlan?.gym?.name
+                        self.gymButton.setTitle(self.trackedPlan?.gym?.name, forState: UIControlState.Normal)
+                        self.gymButton.enabled = false
+                    }
                 }
                 dispatch_group_leave(getTrackedItemGroup)
             }
@@ -67,9 +76,10 @@ class PlanDetailVC: UIViewController {
                 self.setTableView()
                 self.setViews(false)
                 self.setupVisual()
-                self.timeLabel.text = timeString(NSDate())
+                
                 self.title = weekMonthDateString(self.selectedDate)
                 self.planLabel.text = self.plan.name
+                
             }
             
         } else {
@@ -312,6 +322,7 @@ class PlanDetailVC: UIViewController {
             let desNC = segue.destinationViewController as! UINavigationController
             let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(scheduledWorkout: self.workout.id, plan: plan)
+            desVC.gym = self.gym
             desVC.delegate = self
         }
         
@@ -430,7 +441,7 @@ extension PlanDetailVC: showCheckInButtonDelegate, showTrackingInfoDelegate {
         let currentDate = NSDate()
         var trackedItems = [TrackedItem]()
         trackedItems.append(TrackedItem( _exercise: self.plan.exercises![0]))
-        Tracking.trackedPlanOnSave(self.workout.id, planId: self.plan.id, startTime: self.startTime, endTime: currentDate, trackedItems: trackedItems){ (error) in
+        Tracking.trackedPlanOnSave(self.workout.id, planId: self.plan.id, startTime: self.startTime, endTime: currentDate, trackedItems: trackedItems, gym: gym!){ (error) in
             if (error != nil){
                 print(error)
             }

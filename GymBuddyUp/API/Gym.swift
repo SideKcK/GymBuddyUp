@@ -38,9 +38,9 @@ class Gym: NSObject, Mappable {
     }
     
     override init () {
-        self.name = "test gym"
+        self.name = ""
         self.placeid = "-1"
-        self.address = "XXX University Dr, College Station"
+        self.address = ""
         self.location = CLLocation(latitude: 30.563, longitude: -96.311)
     }
     

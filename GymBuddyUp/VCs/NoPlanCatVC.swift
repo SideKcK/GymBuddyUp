@@ -14,7 +14,8 @@ class NoPlanCatVC: UIViewController {
     
     //the selected plan
     var plan = Plan()
-    var cats = ["Shoulder", "Arms", "Chest", "Abs", "Back", "Leg", "Cardio"]
+    var cats = ["Shoulder", "Biceps", "Triceps", "Chest", "Abs", "Back", "Leg", "Cardio"]
+    var cusCats = [100100, 100101, 100102, 100103, 200100, 200101,300100, 400100]
     var date: NSDate?
     var workoutId: String?
     override func viewDidLoad() {
@@ -46,11 +47,19 @@ class NoPlanCatVC: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
-            desVC.plan = sender as! Plan
-            if let selectedDate = date, workoutId = workoutId {
+            let index = sender as! Int
+            print("index : " + String(cusCats[index]))
+            desVC.plan = self.plan
+            desVC.workoutId = self.workoutId
+            
+            
+            if let selectedDate = date {
                 desVC.time = selectedDate
+            }
+            if let workoutId = workoutId {
                 desVC.workoutId = workoutId
             }
+
         }
         
     }
@@ -72,6 +81,25 @@ extension NoPlanCatVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //should be plans[indexpath.row] when pulling actual data
-        self.performSegueWithIdentifier("toInviteDetailSegue", sender: plan)
+        
+        Library.getSinglePlanByMidId(cusCats[indexPath.row], completion: { (plan, error) in
+            if error == nil && plan != nil {
+                print("plan : " + (plan?.id)!)
+                self.plan = plan!
+                ScheduledWorkout.addWorkoutToCalendar(plan!.id, startDate: self.date!, recur: 0) { (workoutId, error) in
+                    if error == nil {
+                        //unwind to plan main
+                        print("before performSegueWithIdentifier")
+                        self.workoutId = workoutId
+                        self.performSegueWithIdentifier("toInviteDetailSegue", sender: indexPath.row)
+                    }else {
+                        print(error)
+                    }
+                }
+            }else {
+                print(error)
+            }
+        })
+       
     }
 }

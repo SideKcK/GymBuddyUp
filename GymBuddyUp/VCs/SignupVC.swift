@@ -166,6 +166,11 @@ class SignupVC: UIViewController {
                                 KRProgressHUD.showError()
                             }
                             //update screen name
+                            user.updateScreenNameInAuth(self.usernameField.text, errorHandler: { (error: NSError?) in
+                                if error != nil {
+                                    Log.error("error on setting screen name")
+                                }
+                            })
                             user.updateProfile("screen_name", value: self.usernameField.text)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
                             KRProgressHUD.dismiss()

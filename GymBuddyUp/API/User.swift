@@ -336,7 +336,9 @@ class User {
             if let _facebookAccesstoken = snapshot.value!["facebook_accesstoken"] as? String {
                 self.facebookAccesstoken = _facebookAccesstoken
             }
-            
+            if let _facebookId = snapshot.value?["facebook_id"] as? String {
+                self.facebookId = _facebookId
+            }
             completion?()
         }
     }

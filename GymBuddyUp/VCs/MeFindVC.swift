@@ -17,8 +17,9 @@ class MeFindVC: UIViewController {
     var fbNum = 3
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("inside MeFindVC")
-        addSegControl(segView)
+        if User.currentUser?.facebookId != nil{
+            addSegControl(segView)
+        }
         setupVisual()
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,7 +37,7 @@ class MeFindVC: UIViewController {
     
     func addSegControl (view: UIView) {
         print("addsegcontrol")
-        let segControl = HMSegmentedControl(sectionTitles: ["Nearby", "Facebook("+String(fbNum)+")"])
+        let segControl = HMSegmentedControl(sectionTitles: ["Nearby", "Facebook"])
         segControl.customize()
         segControl.frame = CGRectMake(0, 0, self.view.frame.width, view.frame.height)
         view.addSubview(segControl)

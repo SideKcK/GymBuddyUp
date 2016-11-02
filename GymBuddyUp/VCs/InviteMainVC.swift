@@ -88,6 +88,12 @@ class InviteMainVC: UIViewController {
     
     @IBAction func onSendButton(sender: AnyObject) {
         guard let scheduledWorkoutId = workoutId else {return}
+        if(gym == nil){
+            let alert = UIAlertController(title: "", message: "Please select a gym.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
         switch sendInvitationType {
         case .DirectInvitation:
             if let sendTo = sendToUser {

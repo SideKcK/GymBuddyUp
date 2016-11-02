@@ -34,11 +34,7 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-        }
-    }
+    
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = manager.location {
@@ -54,4 +50,12 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
             }
         }
     }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+
 }

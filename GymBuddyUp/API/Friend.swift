@@ -147,7 +147,7 @@ class Friend {
         let geoQueryDispatchGroup = dispatch_group_create()
         var userList = [User]()
         
-        print("inside discoverNewBuddies ")
+        print("inside discoverNewBuddies " + String(location.coordinate.longitude))
         dispatch_group_enter(geoQueryDispatchGroup)
         
         

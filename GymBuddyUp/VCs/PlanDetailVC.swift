@@ -83,6 +83,13 @@ class PlanDetailVC: UIViewController {
             }
             
         } else {
+            if gym != nil {
+                self.gymButton.titleLabel?.text = self.gym?.name
+                self.gymButton.setTitle(self.gym?.name, forState: UIControlState.Normal)
+                self.gymButton.enabled = false
+            }else{
+                self.gymButton.hidden = true
+            }
             setTableView()
             setViews(false)
             setupVisual()

@@ -192,10 +192,10 @@
                                             <action selector="onMoreButton:" destination="6RH-aL-G0u" eventType="touchUpInside" id="cu9-6D-hMc"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="obl-fZ-Ed1">
-                                        <rect key="frame" x="50" y="52" width="220" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="obl-fZ-Ed1">
+                                        <rect key="frame" x="50" y="52" width="140" height="30"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dumbbell" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-xi-Zau">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-xi-Zau">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="D7F-KC-nbz"/>
@@ -215,11 +215,11 @@
                                                     <constraint firstAttribute="height" constant="30" id="jgP-hV-I21"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYc-1X-e5B">
-                                                <rect key="frame" x="110" y="0.0" width="110" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYc-1X-e5B">
+                                                <rect key="frame" x="110" y="0.0" width="30" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="NYSC, White Plains"/>
+                                                <state key="normal" title=""/>
                                                 <connections>
                                                     <action selector="onGymButton:" destination="6RH-aL-G0u" eventType="touchUpInside" id="ZFl-3q-euq"/>
                                                     <segue destination="6K1-uK-7kJ" kind="show" id="YeF-Dd-egC"/>
@@ -1575,6 +1575,7 @@
         <image name="Close" width="12" height="12"/>
         <image name="checkin" width="162" height="162"/>
         <image name="dumbbell" width="512" height="512"/>
+        <image name="time" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rgS-nG-orv"/>

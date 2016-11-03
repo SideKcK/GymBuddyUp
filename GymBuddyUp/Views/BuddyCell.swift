@@ -13,11 +13,4 @@ class BuddyCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var gymLabel: UILabel!
-    
-    var buddy: String! {
-        didSet {
-            nameLabel.text = buddy
-            
-        }
-    }
 }

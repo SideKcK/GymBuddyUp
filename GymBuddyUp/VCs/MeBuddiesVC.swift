@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class MeBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var findView: UIView!
-
+    
     var buddies = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,14 @@ class MeBuddiesVC: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         setupVisual()
         loadData()
+    }
+    @IBAction func addFriendOnClick(sender: AnyObject) {
+        let navVC = UINavigationController()
+        let searchUserVC = SearchUserViewController()
+        navVC.pushViewController(searchUserVC, animated: false)
+        self.presentViewController(navVC, animated: true) { 
+            Log.info("instantiate a new NavVC")
+        }
     }
 
     func loadData() {
@@ -47,7 +57,6 @@ class MeBuddiesVC: UIViewController {
         findButton.layer.cornerRadius = 8
         findButton.backgroundColor = ColorScheme.p1Tint
         findButton.titleLabel?.textColor = ColorScheme.g4Text
-        
         findButton.titleLabel?.font = FontScheme.T2
     }
     
@@ -74,7 +83,26 @@ extension MeBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
         let buddy = buddies[indexPath.row]
-        cell.buddy = buddy.screenName
+
+        cell.buddy = buddy
+        let asyncIdentifer = buddy.userId
+        cell.asyncIdentifer = asyncIdentifer
+        if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
+            if let photoURL = user.photoURL {
+                Log.info("UserProfile test: go fetch profile photo username=\(user.screenName!)")
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncIdentifer == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                Log.info("UserProfile test: use cachedPhoto username=\(user.screenName!)")
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
+            }
+        }
+
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

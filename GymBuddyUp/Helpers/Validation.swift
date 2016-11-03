@@ -16,7 +16,7 @@ class Validation: NSObject {
     }
     //password must be 5-20 characters, contains both num and character
     class func isValidPassword(password: String) -> pwStatus {
-        if password.characters.count > 20 || password.characters.count < 5 {
+        if password.characters.count > 20 || password.characters.count < 6 {
             return .countError
         }
         var hasNum = false

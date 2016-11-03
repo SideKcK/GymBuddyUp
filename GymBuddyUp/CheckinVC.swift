@@ -18,7 +18,7 @@ class CheckinVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         UIApplication.sharedApplication().statusBarHidden = true
         congratsLabel.textColor = ColorScheme.p1Tint
         contentView.backgroundColor = ColorScheme.trackingDoneModalBg

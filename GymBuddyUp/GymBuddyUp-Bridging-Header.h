@@ -11,4 +11,5 @@
 
 #import "GeoFire.h"
 
+
 #endif /* GymBuddyUp_Bridging_Header_h */

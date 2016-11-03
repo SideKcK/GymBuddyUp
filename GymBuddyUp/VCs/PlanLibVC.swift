@@ -13,6 +13,7 @@ class PlanLibVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var cats: [MidCat]?
     var selectedCat: MidCat?
+    var selectedDate = NSDate()
     var from: UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ class PlanLibVC: UIViewController {
         if segue.identifier == "toPlanLibDetailSegue" {
             if let detailVC = segue.destinationViewController as? PlanLibDetailVC,
                 plans = (sender as? [Plan]) {
-                
+                detailVC.selectedDate = selectedDate
                 detailVC.title = selectedCat?.name
                 detailVC.plans = plans
                 detailVC.from = from

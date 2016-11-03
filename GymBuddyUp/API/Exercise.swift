@@ -8,7 +8,7 @@
 
 import UIKit
 
-let testURL = NSURL(string: "http://www.building-muscle101.com/images/bench_press.jpg")
+let testURL = NSURL(string: "https://firebasestorage.googleapis.com/v0/b/sidekck-9ac02.appspot.com/o/images%2Fexercise%2F100100102%2F100100102_anim.gif?alt=media&token=859c16ab-36b3-48b1-9595-a59fa681f373")
 
 class Exercise {
     
@@ -59,6 +59,7 @@ class Exercise {
         description = "this is a test exercise: The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps."
         let tmpSet = Set(dict: ["amount": "10", "intermission": "10", "weight":"30"])
         set = [tmpSet]
+        print("Enter No Init")
     }
     
     init (id: Int, unitType: UnitType) {
@@ -70,6 +71,7 @@ class Exercise {
         description = "this is a test exercise: The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps."
         let tmpSet = Set(dict: ["amount": "10", "intermission": "10", "weight":"30"])
         set = [tmpSet]
+        print("Enter unitType Init")
     }
         
     init (id: Int, dict: NSDictionary) {
@@ -77,10 +79,32 @@ class Exercise {
         self.name = dict.valueForKey("name") as? String
         self.sort_order = dict.valueForKey("sort_order") as? Int
         self.description = dict.valueForKey("description") as? String
-        self.thumbnailURL = testURL
-        self.gifURL = testURL
+        
+        if "999" == String(String(self.id).characters.suffix(3)){
+            
+        }else{
+            if let thumbnailURL = dict.valueForKey("thumb_url") as? String{
+                self.thumbnailURL = NSURL(string: thumbnailURL)
+            }else{
+                self.thumbnailURL = testURL
+            }
+            if let gifURL = dict.valueForKey("gif_url") as? String{
+                self.gifURL = NSURL(string: gifURL)
+            }else{
+                self.gifURL = testURL
+            }
+        }
         let typeVal = dict.valueForKey("type") as? Int
         self.unitType = UnitType(rawValue: (typeVal != nil ? typeVal!:0))
         self.set = Set.setArrayFromDictArray((dict.valueForKey("set") as? [NSDictionary]))
+        print("Enter Dic Init")
+    }
+    
+    func checkIsEmptyExercise() -> Bool{
+        var isEmpty = false
+        if "999" == String(String(self.id).characters.suffix(3)){
+            isEmpty = true
+        }
+        return isEmpty
     }
 }

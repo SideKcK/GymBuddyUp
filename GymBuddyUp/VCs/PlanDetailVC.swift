@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 @objc protocol showCheckInButtonDelegate {
     optional func showCheckInButton()
 }
 
+@objc protocol showTrackingInfoDelegate {
+    optional func showTrackingTable(trackedPlan: AnyObject)
+}
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-
+    
     @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var timeLocView: UIStackView!
@@ -31,28 +35,71 @@ class PlanDetailVC: UIViewController {
     @IBOutlet weak var workoutButton: UIButton!
     
     @IBOutlet weak var checkinButton: UIButton!
-
+    
     @IBOutlet weak var checkinLabel: UILabel!
     @IBOutlet weak var checkinImage: UIImageView!
     
     var selectedDate: NSDate!
     var workout: ScheduledWorkout!
     var plan: Plan!
+    var trackedPlan: TrackedPlan?
     var sendTo = 2
     var startTime: NSDate!
-    
+    var gym: Gym?
     override func viewDidLoad() {
+        Log.info("PlanDetailVC fired")
         super.viewDidLoad()
+        checkinButton.hidden = true
+        checkinImage.hidden = true
+        checkinLabel.hidden = true
         self.title = weekMonthDateString(selectedDate)
-        setTableView()
-        setViews(false)
-        setupVisual()
+        let currentDate = NSDate()
+        let getTrackedItemGroup = dispatch_group_create()
+        if (selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
+            dispatch_group_enter(getTrackedItemGroup)
+            Tracking.getTrackedPlanById(String(workout.id) + ":" + dateToString(selectedDate)){(result, error) in
+                if(result != nil){
+                    self.trackedPlan = result
+                    
+                    self.timeLabel.text = timeString((self.trackedPlan?.startDate)!)
+                    
+                    if(self.trackedPlan?.gym != nil){
+                        
+                        self.gymButton.titleLabel?.text = self.trackedPlan?.gym?.name
+                        self.gymButton.setTitle(self.trackedPlan?.gym?.name, forState: UIControlState.Normal)
+                        self.gymButton.enabled = false
+                    }
+                }
+                dispatch_group_leave(getTrackedItemGroup)
+            }
+            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                self.setTableView()
+                self.setViews(false)
+                self.setupVisual()
+                
+                self.title = weekMonthDateString(self.selectedDate)
+                self.planLabel.text = self.plan.name
+                
+            }
+            
+        } else {
+            if gym != nil {
+                self.gymButton.titleLabel?.text = self.gym?.name
+                self.gymButton.setTitle(self.gym?.name, forState: UIControlState.Normal)
+                self.gymButton.enabled = false
+            }else{
+                self.gymButton.hidden = true
+            }
+            setTableView()
+            setViews(false)
+            setupVisual()
+            timeLabel.text = timeString(NSDate())
+            self.title = weekMonthDateString(self.selectedDate)
+        }
         
-        timeLabel.text = timeString(NSDate())
-        self.title = weekMonthDateString(NSDate())
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         if let row = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(row, animated: true)
@@ -84,22 +131,61 @@ class PlanDetailVC: UIViewController {
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
     }
-
+    
     func setViews(invited: Bool) {
+        self.planLabel.text = self.plan.name
         timeLocView.hidden = !invited
         statusView.hidden = !invited
         statusViewHeight.priority = invited ? 250:999
         findButton.hidden = invited
         let isEmpty = checkIsEmptyExercise()
-        tableView.hidden = isEmpty
-        workoutButton.hidden = isEmpty
-        checkinButton.hidden = !isEmpty
-        checkinImage.hidden = true
-        checkinLabel.hidden = true
-        setStatusBar()
-        
-    }
+        let isTracked = checkIsTracked()
 
+        var allowStart = true
+        var allowFind = false
+        let currentDate = NSDate()
+        if(dateToString(selectedDate) != dateToString(currentDate)){
+            allowStart = false
+        }
+        if(dateToString(selectedDate) == dateToString(currentDate) || selectedDate > currentDate){
+            allowFind = true
+        }
+        if(isEmpty){
+            tableView.hidden = isEmpty
+            workoutButton.hidden = isEmpty
+            if(allowStart){
+                checkinButton.hidden = isTracked
+            }else{
+                checkinButton.hidden = true
+            }
+            checkinImage.hidden = !isTracked
+            checkinLabel.hidden = !isTracked
+        }else{
+            tableView.hidden = isEmpty
+            if(allowStart){
+                workoutButton.hidden = isTracked
+                checkinButton.hidden = !isEmpty
+                checkinImage.hidden = !isEmpty
+                checkinLabel.hidden = !isEmpty
+            }else{
+                workoutButton.hidden = true
+                if(allowFind){
+                    findButton.hidden = false
+                }else{
+                    findButton.hidden = true
+                }
+                checkinButton.hidden = true
+                checkinImage.hidden = true
+                checkinLabel.hidden = true
+            }
+        }
+        if(isTracked){
+            timeLocView.hidden = false
+            findButton.hidden = true
+        }
+        setStatusBar()
+    }
+    
     func setStatusBar() {
         if sendTo == 1 {
             statusLabel.text = "Searching SideKcK in Buddy List"
@@ -110,17 +196,26 @@ class PlanDetailVC: UIViewController {
         }
     }
     
-    func checkIsEmptyExercise()-> Bool{
+    func checkIsEmptyExercise() -> Bool{
         var isEmpty = false
         if let exercises = plan.exercises {
-            if "999" == String( String(exercises[0].id ).characters.suffix(3)){
+            if "999" == String(String(exercises[0].id).characters.suffix(3)){
                 isEmpty = true
             }
         }
         //isEmpty = true
         return isEmpty
     }
-
+    
+    func checkIsTracked() -> Bool{
+        var isTracked = false
+        if(self.trackedPlan != nil){
+            isTracked = true
+        }
+        //isEmpty = true
+        return isTracked
+    }
+    
     @IBAction func onMoreButton(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         alertController.customize()
@@ -215,17 +310,28 @@ class PlanDetailVC: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toInviteMainSegue" {
+            if let desNC = segue.destinationViewController as? UINavigationController,
+                let desVC = desNC.topViewController as? InviteMainVC {
+                desVC.workoutId = workout.id
+                desVC.plan = plan
+                desVC.time = selectedDate
+                desVC.setNavBarItem()
+            }
+        }
+        
         if segue.identifier == "startWorkoutSegue" {
             let desNC = segue.destinationViewController as! UINavigationController
             let desVC = desNC.topViewController as! TrackMainVC
             desVC.trackedPlan = TrackedPlan(scheduledWorkout: self.workout.id, plan: plan)
+            desVC.gym = self.gym
+            desVC.delegate = self
         }
-        
         
         if segue.identifier ==  "toExerciseDetailSegue" {
             if let desVC = segue.destinationViewController as? PlanExerciseVC {
@@ -234,6 +340,7 @@ class PlanDetailVC: UIViewController {
                 }
             }
         }
+
         if let desVC = segue.destinationViewController as? PlanMainVC {
             if let send = sender as? String {
                 if send == "delete" || send == "repeat"{
@@ -241,6 +348,7 @@ class PlanDetailVC: UIViewController {
                 }
             }
         }
+        
         if let desVC = segue.destinationViewController as? GymMapVC {
             desVC.gym = Gym()
             desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
@@ -252,8 +360,32 @@ class PlanDetailVC: UIViewController {
             self.startTime = NSDate()
         }
     }
- 
-
+    
+    func reloadPlan() {
+        KRProgressHUD.show()
+        
+        let currentDate = NSDate()
+        let getTrackedItemGroup = dispatch_group_create()
+        if (selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
+            dispatch_group_enter(getTrackedItemGroup)
+            Tracking.getTrackedPlanById(String(workout.id) + ":" + dateToString(selectedDate)){(result, error) in
+                if(result != nil){
+                    self.trackedPlan = result
+                }
+                dispatch_group_leave(getTrackedItemGroup)
+            }
+            dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
+                self.setTableView()
+                self.setViews(false)
+                self.setupVisual()
+                self.timeLabel.text = timeString(NSDate())
+                self.title = weekMonthDateString(self.selectedDate)
+                self.tableView.reloadData()
+                KRProgressHUD.dismiss()
+            }
+            
+        }
+    }
 }
 
 extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
@@ -267,19 +399,32 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseNumberedCell", forIndexPath: indexPath) as! ExerciseNumberedCell
         //template for set this cell as tracked: testing
-        if indexPath.row == 0 {
-            cell.setTracked(true)
+        if(!checkIsEmptyExercise()){
+        if(checkIsTracked()){
+            /*if indexPath.row == 0 {
+             cell.setTracked(true)
+             }
+             //template for set this cell as skipped: testing
+             if indexPath.row == 1 {
+             cell.setTracked(false)
+             }*/
+            
+            if trackedPlan?.trackingItems[indexPath.row] != nil{
+                cell.setTracked((trackedPlan?.trackingItems[indexPath.row].isSkiped)!)
+            }else{
+                cell.setTracked(true)
+            }
+            
         }
-        //template for set this cell as skipped: testing
-        if indexPath.row == 1 {
-            cell.setTracked(false)
-        }
+        
         
         cell.numLabel.text = String(indexPath.row+1)
         if let exercises = plan.exercises {
             cell.exercise = exercises[indexPath.row]
+            cell.amountLabel.text = trackedPlan?.trackingItems[indexPath.row].bestRecordStr
         }
-        cell.layoutMargins = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
         return cell
     }
     
@@ -288,12 +433,14 @@ extension PlanDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension PlanDetailVC: showCheckInButtonDelegate {
+extension PlanDetailVC: showCheckInButtonDelegate, showTrackingInfoDelegate {
     
     func showCheckInButton(){
         checkinImage.hidden = false
         checkinLabel.hidden = false
         checkinButton.hidden = true
+        timeLocView.hidden = false
+        findButton.hidden = true
         saveCheckin()
     }
     
@@ -301,11 +448,14 @@ extension PlanDetailVC: showCheckInButtonDelegate {
         let currentDate = NSDate()
         var trackedItems = [TrackedItem]()
         trackedItems.append(TrackedItem( _exercise: self.plan.exercises![0]))
-        Tracking.trackedPlanOnSave(self.workout.id, planId: self.plan.id, startTime: self.startTime, endTime: currentDate, trackedItems: trackedItems){ (error) in
+        Tracking.trackedPlanOnSave(self.workout.id, planId: self.plan.id, startTime: self.startTime, endTime: currentDate, trackedItems: trackedItems, gym: gym!){ (error) in
             if (error != nil){
                 print(error)
             }
         }
     }
     
+    func showTrackingTable(trackedPlan: AnyObject){
+        self.reloadPlan()
+    }
 }

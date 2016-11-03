@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '8.0'
 # Uncomment this line if you're using Swift
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
@@ -8,12 +8,13 @@ target 'GymBuddyUp' do
     pod 'ChameleonFramework/Swift', '~> 2.1.0'
     pod 'Alamofire', '~> 3.4'
     pod 'AlamofireImage', '~> 2.4'
-    pod 'CVCalendar', :git => 'https://github.com/Mozharovsky/CVCalendar.git'
-    pod 'HMSegmentedControl'
+    pod 'CVCalendar', '<=1.3.1'
+    pod 'HMSegmentedControl', '1.5.2'
     pod 'GooglePlaces', '~> 2.0.1'
+    pod 'ObjectMapper', '<1.5.0'
     
-    pod 'SwiftDate'
-    pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git'
+    pod 'SwiftDate', '<4.0.0'
+    pod 'KRProgressHUD', '<=1.7.0'
     
     pod 'Firebase'
     pod 'Firebase/Auth'
@@ -25,6 +26,8 @@ target 'GymBuddyUp' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
-    pod 'ALTextInputBar'
+    pod 'ALTextInputBar', '1.1.0'
     pod 'JSQMessagesViewController'
+    
+    pod 'SwiftGifOrigin', '<1.6'
 end

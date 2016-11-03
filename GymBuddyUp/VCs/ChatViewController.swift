@@ -39,17 +39,6 @@ class ChatViewController: JSQMessagesViewController {
         
         setupBubbles()
         
-        /* just for debug  --------start-------- */
-        if inDebug {
-            senderId = "jedihy"
-            senderDisplayName = "jedihy"
-            recipientId = "asdasdasd"
-            
-            if let rId = recipientId, sId = senderId {
-                conversationId = getConversationId(sId, strB: rId)
-            }
-        }
-        /* just for debug  ---------end--------- */
         
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
@@ -59,7 +48,23 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        unNewConversation()
         observeMessages()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unlistenAllEvents()
+        
+    }
+    
+    private func unlistenAllEvents() {
+        Log.info("unlisten all events")
+        if let convsID = conversationId {
+            let messageRef = chatRoomRef.child("\(convsID)")
+            messageRef.removeAllObservers()
+        }
+    
     }
     
     // call setup(senderId, recipientId) when preparing segue
@@ -71,14 +76,13 @@ class ChatViewController: JSQMessagesViewController {
         self.senderDisplayName = senderName
         self.recipientId = recipientId
         self.conversationId = getConversationId(senderId, strB: recipientId)
-        unNewConversation()
 
     }
     
     private func unNewConversation() {
-        if let convsId = self.conversationId {
-            let ownConversationRef = userConversationRef.child("\(self.senderId)/\(convsId)/isNew")
-            ownConversationRef.setValue(0)
+        if let convsId = self.conversationId, currentUserId = User.currentUser?.userId {
+                let ownConversationRef = userConversationRef.child("\(currentUserId)/\(convsId)/isNew")
+                ownConversationRef.setValue(0)
         }
     }
     
@@ -92,7 +96,7 @@ class ChatViewController: JSQMessagesViewController {
     
     private func observeMessages() {
         
-        if let convsID = conversationId {
+        if let currentUserId = User.currentUser?.userId ,convsID = conversationId {
             let messageRef = chatRoomRef.child("\(convsID)")
             let messagesQuery = messageRef.queryLimitedToLast(25)
             messagesQuery.observeEventType(.ChildAdded, withBlock: {(snapshot) in
@@ -106,7 +110,9 @@ class ChatViewController: JSQMessagesViewController {
                     }
                 }
                 self.addMessage(id, text: text, date: createAt)
-                self.unNewConversation()
+                if currentUserId != id {
+                    self.unNewConversation()
+                }
                 self.finishReceivingMessage()
             }) { (error) in
                 Log.info("asdasdasdasd")
@@ -142,7 +148,7 @@ class ChatViewController: JSQMessagesViewController {
                 "recipient_name": rcScreenName,
                 "last_record": text,
                 "createdAt": timeStamp,
-                "isNew": 1
+                "isNew": 0
             ]
             let peerConversationItem = [
                 "recipient_id": sndId,
@@ -152,20 +158,22 @@ class ChatViewController: JSQMessagesViewController {
                 "isNew": 1
             ]
             
-            print(ownConversationItem)
-            print(peerConversationItem)
             ownConversationRef.setValue(ownConversationItem)
             peerConversationRef.setValue(peerConversationItem)
             
             
             let itemRef = messageRef.childByAutoId()
-            let messageItem = [ // 2
+            let messageItem = [
                 "text": text,
                 "senderId": senderId,
                 "createAt": timeStamp
             ]
-            itemRef.setValue(messageItem) // 3
-            
+            itemRef.setValue(messageItem)
+            Conversation.sendMessageToUser(reId, completion: { (error: NSError?) in
+                if error != nil {
+                    Log.error("chatVC notification error = \(error?.localizedDescription)")
+                }
+            })
             
             finishSendingMessage()
         } else {

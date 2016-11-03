@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -27,7 +27,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to Plan to View Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOk-8O-i64">
-                            <rect key="frame" x="62.5" y="37" width="197" height="21"/>
+                            <rect key="frame" x="63" y="37" width="197" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -35,8 +35,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QOk-8O-i64" secondAttribute="trailing" constant="12" id="73O-k8-jsO"/>
                         <constraint firstItem="Ga4-Wr-k0J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="epv-gE-E9Y" secondAttribute="leading" constant="22" id="JlZ-nw-PH9"/>
                         <constraint firstItem="QOk-8O-i64" firstAttribute="centerX" secondItem="epv-gE-E9Y" secondAttribute="centerX" id="WT2-be-zjT"/>
+                        <constraint firstItem="QOk-8O-i64" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="epv-gE-E9Y" secondAttribute="leading" constant="12" id="Wqo-rb-GH3"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QOk-8O-i64" secondAttribute="bottom" constant="8" id="akq-wV-P5J"/>
                         <constraint firstItem="QOk-8O-i64" firstAttribute="top" secondItem="Ga4-Wr-k0J" secondAttribute="bottom" constant="8" id="bfZ-sT-EYn"/>
                         <constraint firstItem="Ga4-Wr-k0J" firstAttribute="centerX" secondItem="epv-gE-E9Y" secondAttribute="centerX" id="pLs-Aq-bTz"/>

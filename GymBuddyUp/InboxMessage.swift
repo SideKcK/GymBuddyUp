@@ -33,6 +33,8 @@ class InboxMessage {
     var senderName: String?
     var senderAvatarUrl: NSURL?
     var senderAvatarImage: UIImage?
+    var timeStamp: NSDate?
+    
     enum MessageAction {
         case Accept
         case Reject
@@ -59,13 +61,15 @@ class InboxMessage {
         "workout_invite_canceled": .WorkoutInviteCanceled
     ]
 
-    init(_messageId: String, _type: String, _senderId: String, _associatedId: String?) {
+    init(_messageId: String, _type: String, _senderId: String, _associatedId: String?, _senderName: String, _timeStamp: Double) {
         messageId = _messageId
         type = InboxMessage.inboxMessageMap[_type]!
         associatedId = _associatedId
         senderId = _senderId
+        senderName = _senderName
         isIgnore = false
         isProcessed = false
+        timeStamp = NSDate(timeIntervalSince1970: _timeStamp / 1000)
         setType(_type)
     }
     
@@ -98,16 +102,21 @@ class InboxMessage {
         } else if type == .WorkoutInviteReceived {
             switch action {
             case .Accept:
-                
+                Invite.acceptWorkoutInvite(messageId, completion: { (error: NSError?) in
+                    pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                    Log.info("accepted successfully")
+
+                })
                 
                 break
             case .Reject:
-                
+                Invite.rejectWorkoutInvite(messageId, completion: { (error: NSError?) in
+                    pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
+                    Log.info("rejected successfully")
+                })
                 
                 break
             case .Cancel:
-                
-                
                 break
             }
         

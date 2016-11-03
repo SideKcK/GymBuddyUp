@@ -38,16 +38,56 @@ class WorkoutCell: UITableViewCell {
     @IBOutlet weak var locHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exercisesHeightConstraint: NSLayoutConstraint!
     
+    var asyncIdentifer = ""
+    var workouttime : NSDate?
     var imageViews = [UIImageView]()
-    var event: PublishedWorkout! {
+    var event: Invite! {
         didSet {
-            timeLabel.text = weekMonthDateString(event.workoutTime) + ", "+timeString(event.workoutTime)
+            print("event: Invite")
+            timeLabel.text = weekMonthDateString(event.workoutTime) + ", " + timeString(event.workoutTime)
             gymButton.setTitle(event.gym?.name, forState: .Normal)
             
         }
     }
+    
+    var invite: Invite? {
+        didSet {
+            print("invite: Invite")
+            if let _invite = invite {
+                if let workoutTime = _invite.workoutTime {
+                    timeLabel.text = weekMonthDateString(workoutTime) + ", " + timeString(workoutTime)
+                    
+                }
+                
+                if let gymName = _invite.gym?.name {
+                    gymButton.setTitle(gymName, forState: .Normal)
+                }
+                
+                if let location = invite?.gym?.location {
+                    let distance = LocationCache.sharedInstance.currentLocation.distanceFromLocation(location)
+                    let distanceString = String(format: "%.1f", distance / 1609.3)
+                    gymDisLabel.text = "\(distanceString) miles"
+                }
+                
+            }
+        
+        }
+    }
+    
     var plan: Plan! {
         didSet {
+            let currentDate = NSDate()
+            let interval = NSTimeInterval(60 * 60 * 24 * 1)
+            if let workoutTime = self.workouttime {
+                if weekMonthDateString(workoutTime) == weekMonthDateString(currentDate){
+                    dateLabel.text = "Today"
+                }else if weekMonthDateString(workoutTime) == weekMonthDateString(currentDate.dateByAddingTimeInterval(interval)) {
+                    dateLabel.text = "Tomorrow"
+                }else{
+                    dateLabel.text =  weekMonthDateString(workoutTime) + ", " + timeString(workoutTime)
+                }
+            }
+            //dateLabel.text = "Today"
             nameLabel.text = plan.name
             if let exers = plan.exercises {
                 if exers.count == 0 {
@@ -64,12 +104,15 @@ class WorkoutCell: UITableViewCell {
                     for index in 0...(exers.count - 1) {
                     imageViews[index].makeThumbnail(ColorScheme.g3Text)
                     if exers.count > 6 && index == 5 {
-                        imageViews[index].image = UIImage(named: "dumbbell")
+                        imageViews[index].image = UIImage(named: "more_exercise")
                         //change last imageView
                         break
                     }else {
-                        let downloadURL = exers[index].thumbnailURL
-                        imageViews[index].af_setImageWithURL(downloadURL)
+                        if let downloadURL = exers[index].thumbnailURL{
+                            imageViews[index].af_setImageWithURL(downloadURL)
+                        }else{
+                            imageViews[index].hidden = true
+                        }
                     }
 
                 }
@@ -122,10 +165,14 @@ class WorkoutCell: UITableViewCell {
         gymDisLabel.font = FontScheme.T3
         statusLabel.font = FontScheme.T3
         buddyButton.titleLabel?.font = FontScheme.T2
+        profileView.image = UIImage(named: "dumbbell")
         
     }
 
     func clearAllViews() {
+        borderView.alpha = 1
+        Log.info("clearAllViews")
+        userInteractionEnabled = true
         profileView.hidden = true
         profileLabel.hidden = true
         topContraint.constant = 8
@@ -145,6 +192,10 @@ class WorkoutCell: UITableViewCell {
     
     func showMoreButton() {
         moreButton.hidden = false
+    }
+    
+    func hideMoreButton() {
+        moreButton.hidden = true
     }
     
     func showProfileView() {

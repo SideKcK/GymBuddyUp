@@ -10,6 +10,8 @@ import UIKit
 import CoreLocation
 import HMSegmentedControl
 import KRProgressHUD
+import Alamofire
+import AlamofireImage
 
 class DiscoverMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -19,28 +21,51 @@ class DiscoverMainVC: UIViewController {
     
     
     @IBOutlet weak var segHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var findButtonConstraint: NSLayoutConstraint!
+    var refreshControl: UIRefreshControl!
+
     
-    var locationManager: CLLocationManager!
-    var currentLocation = CLLocation()
-    var events = [PublishedWorkout]()
+    var events = [Invite]() {
+        didSet {
+            if events.count > 0 {
+                findButton.hidden = true
+                findLabel.hidden = true
+            } else {
+                findButton.hidden = false
+                findLabel.hidden = false
+            }
+        }
+    }
+    
     var plans = [Plan]()
+    var userCache = UserCache.sharedInstance.cache
     var showPublic = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         setupNavBar()
         setupVisual()
-        setupLocation()
         setupTableView()
         addSegControl(segView)
-        self.findButtonConstraint.constant = self.view.frame.height / 3.0
+        reloadData()
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.hidden = false
         self.tabBarController?.tabBar.translucent = false
+    }
+    
+    func setupViews() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        reloadData()
+        refreshControl.endRefreshing()
     }
     
     func setupVisual() {
@@ -55,22 +80,22 @@ class DiscoverMainVC: UIViewController {
         imageView.contentMode = .ScaleAspectFit
         imageView.image = logo
         self.navigationItem.titleView = imageView
-    }
-    
-    func setupLocation () {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.distanceFilter = 200
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-    
+        let findNewButton = UIButton()
+        findNewButton.setImage(UIImage(named: "find_new_buddy"), forState: .Normal)
+        findNewButton.frame = CGRectMake(0, 0, 30, 30)
+        findNewButton.addTarget(self, action: #selector(findNewButtonOnClick), forControlEvents: .TouchUpInside)
+        let rightBarButton = UIBarButtonItem(customView: findNewButton)
+        navigationItem.rightBarButtonItem = rightBarButton
         
+    }
+    
+    func findNewButtonOnClick() {
+        performSegueWithIdentifier("toFindBuddiesSegue", sender: nil)
+    }
     
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
-        tableView.estimatedRowHeight = 120
+        tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
@@ -92,10 +117,11 @@ class DiscoverMainVC: UIViewController {
     
     func onSegControl (sender: HMSegmentedControl) {
         showPublic = !showPublic
-        findButtonConstraint.constant = 20
-        findButton.hidden = showPublic
+        if showPublic {
+            findButton.hidden = true
+            findLabel.hidden = true
+        }
         reloadData()
-
     }
     
     func reloadData() {
@@ -107,22 +133,15 @@ class DiscoverMainVC: UIViewController {
     }
     
     func reloadBuddiesDiscover() {
-        self.events.removeAll()
-        self.plans.removeAll()
-        if self.events.count == 0 {
-            self.findButtonConstraint.constant = self.view.frame.height / 3.0
-        }
-        self.tableView.reloadData()
-    }
-    
-    func reloadPublicDiscover() {
         KRProgressHUD.show()
-        Discover.discoverPublicWorkout(currentLocation, radiusInkilometers: 100.0, withinDays: 3, offset: 0, completion: { (workouts, error) in
+        
+        Discover.discoverFriendsWorkout(5, completion: { (workouts, error) in
             if error != nil{
                 Log.error(error.debugDescription)
                 KRProgressHUD.showError(message: "Network error")
-            }else {
+            } else {
                 self.events = workouts
+                
                 var planids = [String]()
                 for workout in workouts {
                     planids.append(workout.planId)
@@ -143,11 +162,35 @@ class DiscoverMainVC: UIViewController {
                 
             }
         })
-        
-        let triggerTime = (Int64(NSEC_PER_SEC) * 5)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
-            if KRProgressHUD.isVisible {
-                KRProgressHUD.showError(message: "Network Error")
+
+    }
+    
+    func reloadPublicDiscover() {
+        KRProgressHUD.show()
+        let currentLocation = LocationCache.sharedInstance.currentLocation
+        Discover.discoverPublicWorkout(currentLocation, radiusInkilometers: 100.0, withinDays: 3, offset: 0, completion: { (workouts, error) in
+            if error != nil{
+                Log.error(error.debugDescription)
+                KRProgressHUD.showError(message: "Network error")
+            } else {
+                self.events = workouts
+                var planids = [String]()
+                for workout in workouts {
+                    planids.append(workout.planId)
+                }
+                
+                //get plans
+                Library.getPlansById(planids, completion: { (plans, error) in
+                    if error != nil {
+                        Log.error(error.debugDescription)
+                        KRProgressHUD.showError(message: "Network error")
+                    }else {
+                        self.plans = plans
+                        self.tableView.reloadData()
+                        KRProgressHUD.dismiss()
+                    }
+                })
+                
             }
         })
 
@@ -157,81 +200,59 @@ class DiscoverMainVC: UIViewController {
         guard let placeId = events[sender.tag].gym?.placeid else {
             return
         }
+        
         GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
             if error == nil {
-            self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
-            }else {
+                self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
+            } else {
                 print(error)
             }
         }
         
     }
     
-    func profileTapped (sender: AnyObject? ) {
-        self.performSegueWithIdentifier("toProfileSegue", sender: self)
+    func profileTapped (sender: AnyObject?) {
+        guard let tapLocation = sender?.locationInView(self.tableView) else {return}
+        //using the tapLocation, we retrieve the corresponding indexPath
+        guard let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation) else {return}
+        
+        let event = events[indexPath.row]
+        
+        if let user = UserCache.sharedInstance.cache[event.inviterId] {
+            self.performSegueWithIdentifier("toProfileSegue", sender: user)
+        } else {
+            User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
+                let user = users[0]
+                UserCache.sharedInstance.cache[event.inviterId] = user
+                self.performSegueWithIdentifier("toProfileSegue", sender: user)
+            }
+        }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if events.count != 0 {
-        let yDirection = scrollView.panGestureRecognizer.velocityInView(scrollView).y
-        if (yDirection < 0) {
-            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseIn, animations: {
-                self.findButton.alpha = 0
-                self.segHeightConstraint.priority = 999
-                self.segView.alpha = 0
-                }, completion: nil)
-        }
-        else if (yDirection > 0) {
-            UIView.animateWithDuration(0.1, delay: 0.2, options: .CurveEaseIn, animations: {
-                self.findButton.alpha = 1
-                self.segHeightConstraint.priority = 250
-                self.segView.alpha = 1
-                }, completion: nil)
-            
-        }
-        }
-
-    }
-    
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toProfileSegue" {
+            if let desVC = segue.destinationViewController as? MeMainVC {
+                desVC.user = sender as? User
+                return
+            }
+        }
+        
         if let navVC = segue.destinationViewController as? UINavigationController,
             let desVC = navVC.topViewController as? DiscoverDetailVC,
             let row = sender as? Int {
                 desVC.event = events[row]
                 desVC.plan = plans[row]
             }
+        
         if let desVC = segue.destinationViewController as? GymMapVC,
-            let gym = sender as? Gym{
-            desVC.userLocation = locationManager.location
+            let gym = sender as? Gym {
+            let currentLocation = LocationCache.sharedInstance.currentLocation
+            desVC.userLocation = currentLocation
             desVC.gym = gym
         }
     }
-
-
 }
 
-extension DiscoverMainVC: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-            if let location = manager.location {
-                currentLocation = location
-                reloadData()
-            }
-            //print(manager.location)
-        }
-    }
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let location = locations.first {
-//            //upload user location
-//        }
-//        
-//    }
-}
 
 extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDataSource
@@ -242,22 +263,58 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
-        guard let location = locationManager.location else{
-            return cell
-        }
-        cell.event = events[indexPath.row]
-        cell.gymDisLabel.text = String(round(cell.event.gym!.location!.distanceFromLocation(location) / 1609.34))+" miles"
+        
+        print("indexPath.row : " + String(indexPath.row))
+        print("workouts.count:" + String(events.count))
+        let event = events[indexPath.row]
+        cell.invite = events[indexPath.row]
         cell.plan = plans[indexPath.row]
+        let asyncId = event.id
+        cell.asyncIdentifer = asyncId
+        if let user = UserCache.sharedInstance.cache[event.inviterId] {
+            cell.profileLabel.text = user.screenName
+            
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncId == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
+            }
+        } else {
+            User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
+                if asyncId == cell.asyncIdentifer {
+                    let user = users[0]
+                    UserCache.sharedInstance.cache[event.inviterId] = user
+                    cell.profileLabel.text = user.screenName
+                    if let photoURL = user.photoURL {
+                        let request = NSMutableURLRequest(URL: photoURL)
+                        cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                            if asyncId == cell.asyncIdentifer {
+                                cell.profileView.image = response.result.value
+                                user.cachedPhoto = response.result.value
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
         
         cell.gymButton.tag = indexPath.row
-        cell.gymButton.addTarget(self, action: #selector(DiscoverMainVC.onGymButton), forControlEvents: .TouchUpInside)
-        cell.profileTapView.tag = indexPath.row
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DiscoverMainVC.profileTapped(_:)))
+        cell.gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(profileTapped(_:)))
         cell.profileTapView.addGestureRecognizer(tapGestureRecognizer)
         
         cell.showProfileView()
         cell.showTimeView()
         cell.showLocView()
+        
         cell.setNeedsUpdateConstraints()
         cell.updateConstraintsIfNeeded()
         

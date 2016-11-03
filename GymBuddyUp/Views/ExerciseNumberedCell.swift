@@ -20,9 +20,10 @@ class ExerciseNumberedCell: UITableViewCell {
     var exercise: Exercise! {
         
         didSet {
-            let downloadURL = exercise.thumbnailURL
-            self.thumbnailView.af_setImageWithURL(downloadURL)
-            self.thumbnailView.makeThumbnail(ColorScheme.g2Text)
+            if let downloadURL = exercise.thumbnailURL{
+                self.thumbnailView.af_setImageWithURL(downloadURL)
+                self.thumbnailView.makeThumbnail(ColorScheme.g2Text)
+            }
             self.nameLabel.text = exercise.name
             guard let amount = exercise.set[0]?.amount else{
                 return
@@ -75,6 +76,8 @@ class ExerciseNumberedCell: UITableViewCell {
             
             self.amountLabel.text = "Skipped"
 
+        }else{
+            self.backgroundColor = UIColor(red: 256/256, green: 256/256, blue: 256/256, alpha: 1)
         }
     }
     

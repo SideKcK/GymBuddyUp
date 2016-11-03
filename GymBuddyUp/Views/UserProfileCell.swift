@@ -19,6 +19,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var gymNameLabel: UILabel!
     @IBOutlet weak var goalLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var gymLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -27,26 +28,40 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
 
-    
+    var asyncIdentifer = ""
+
     // FIXME: should not put model info in views
     var user: User! {
         didSet {
-            if let screenName = user.screenName,
-                let workoutNum = user.workoutNum,
-                let goal = user.goal,
-                let gym = user.gym,
-                let description = user.description
-            {
+            if let screenName = user.screenName {
                 self.nameLabel.text = screenName
+            }
+            
+            if let workoutNum = user.workoutNum {
                 self.workoutNumLabel.text = String(workoutNum)
-                self.goalLabel.text = goal.description
-                self.gymLabel.text = gym
+            }
+            
+        
+            var goalDes = String()
+            print("enter profile cell")
+            for goal in user.goals{
+                if goalDes != ""{
+                    goalDes += ", " + goal.description
+                }else{
+                    goalDes += goal.description
+                }
+            }
+            self.goalLabel.text = goalDes
+            
+
+            if let description = user.description {
                 self.descriptionLabel.text = description
-                
-            } else {
+            }
+            
+            /*else {
                     print("error cannot get user profile") //TBD error class
                     return
-            }
+            }*/
         }
     }
     override func awakeFromNib() {

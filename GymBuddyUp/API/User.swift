@@ -48,6 +48,7 @@ struct UserInfo {
     var photoURL: NSURL?
     var screenName: String?
     var gender:Gender
+    var goals: [Goal]?
 }
 
 
@@ -87,7 +88,8 @@ class User {
     
     
     private let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("users")
-    private let storageRef = FIRStorage.storage().reference()
+    private let storageRef = FIRStorage.storage().reference().child("user")
+    private let userLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_location")
     
     var userId: String!
     var photoURL: NSURL?
@@ -107,13 +109,24 @@ class User {
     var buddyNum: Int?
     
     var goal: Goal?
+    var goals = [Goal]()
     var gym: String?
-    var description: String? {
+    var googleGymObj: Gym?
+    var description: String?
+    var userlocation: CLLocation?
+    var providerId: String?
+    var facebookAccesstoken : String?
+    var facebookId: String?
+    // some info for cell cache
+    var canBeFriend = true
+    
+    
+    /*var description: String? {
         get {
             
             return self.userRef?.valueForKey("description") as? String
         }
-    }
+    }*/
     
     var distance: Double?
     var sameInterestNum: Int?
@@ -122,27 +135,35 @@ class User {
     
     static var currentUser: User?
     
+    init(){
+    }
+    
     init (user: FIRUser) {
         // FIRUser properties
         self.firUser = user;
         self.userId = user.uid
         self.email = user.email
         self.screenName = user.displayName
-        self.photoURL = user.photoURL
         
         self.userRef = ref.child(user.uid)
         
         // custom properties
         self.workoutNum = 0
-        self.starNum = 21
-        self.dislikeNum = 10
-        self.buddyNum = 20
+        self.starNum = 0
+        self.dislikeNum = 0
+        self.buddyNum = 0
         self.goal = .KeepFit
         self.gym = "Not Specified"
-        
-        // TODO: figure out bast logic for photo caching.
+        self.goals = []
+        // TODO: figure out best logic for photo caching.
         if (self.photoURL != nil) {
             updateProfilePicture(self.photoURL) { error in }
+        }
+        
+        let providerData = user.providerData
+        for userInfo in providerData {
+            self.providerId = userInfo.providerID
+            print("self.providerId: " + self.providerId!)
         }
         
         userBecameActive()
@@ -151,11 +172,44 @@ class User {
     
     init (snapshot: FIRDataSnapshot) {
         self.userId = snapshot.key
-        if let _screenName = snapshot.value!["screenName"] as? String {
+        print("queryEqualToValue : " + self.userId!)
+        if let _screenName = snapshot.value!["screen_name"] as? String {
             self.screenName = _screenName
         }
+        
+        if let _goals = snapshot.value!["goal"] as? [Int] {
+            for key in _goals{
+                self.goals.append(Goal(rawValue: key)!)
+                print(String(key))
+            }
+            
+        }
+        
+        if let _photoURL = snapshot.value!["profile_image_url"] as? String {
+            self.photoURL = NSURL(string: _photoURL)
+        }
+        
+        if let _gym = snapshot.value?["gym"] as? String {
+            GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
+                if error == nil {
+                    if let fetchedGym = gym {
+                        self.gym = fetchedGym.name
+                        self.googleGymObj = fetchedGym
+                    }
+                } else {
+                    print(error)
+                }
+            }
+        }
+        
+        if let _facebookAccesstoken = snapshot.value!["facebook_accesstoken"] as? String {
+            self.facebookAccesstoken = _facebookAccesstoken
+        }
+        
         self.userRef = ref.child(self.userId)
     }
+    
+    
     
     class func signInWithEmail(email: String, password: String, completion: UserAuthCallback) {
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (firebaseUser, error) in
@@ -164,6 +218,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
+                User.currentUser?.syncWithLastestUserInfo(nil)
                 completion(user: User.currentUser, error: nil)
             }
         })
@@ -177,6 +232,7 @@ class User {
             }
             else {
                 User.currentUser = User(user: firebaseUser!)
+                User.currentUser?.syncWithLastestUserInfo(nil)
                 completion(user: User.currentUser, error: nil)
             }
         })
@@ -199,7 +255,7 @@ class User {
     
     class func signInWithFacebook (fromViewController: UIViewController!, completion: UserAuthCallback) {
         let loginManager = FBSDKLoginManager()
-        let facebookReadPermissions = ["public_profile", "email"]
+        let facebookReadPermissions = ["public_profile", "email", "user_friends", "read_custom_friendlists"]
         loginManager.logInWithReadPermissions(facebookReadPermissions, fromViewController: fromViewController) { (result, error) in
             if error != nil {
                 completion(user: nil, error: error)
@@ -208,32 +264,83 @@ class User {
                 print("FBLogin cancelled")
             } else {
                 // [START headless_facebook_auth]
+                
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                
                 // [END headless_facebook_auth]
                 FIRAuth.auth()?.signInWithCredential(credential, completion: { (firebaseUser, error) in
+                   
+                    print("FBSDKAccessToken.currentAccessToken().tokenString " + FBSDKAccessToken.currentAccessToken().tokenString)
                     
                     if error != nil {
                         completion(user: nil, error: error)
                     }
                     else {
-
+                       
                         User.currentUser = User(user: firebaseUser!)
+                        User.currentUser!.updateProfile("screen_name", value: User.currentUser!.screenName)
+                        User.currentUser!.updateProfile("facebook_accesstoken", value: FBSDKAccessToken.currentAccessToken().tokenString)
+                        
+                        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"])
+                        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                            
+                            if ((error) != nil) {
+                                // Process error
+                                print("Error: \(error)")
+                            } else {
+                                print("fetched user: \(result)")
+                                // Facebook users ID:
+                                let userID:NSString = result.valueForKey("id") as! NSString
+                                User.currentUser!.updateProfile("facebook_id", value: userID)
+                            }
+                       
+                        })
                         completion(user: User.currentUser, error: nil)
                     }})
             }
         }
     }
     
-    func syncWithLastestUserInfo() {
+    func syncWithLastestUserInfo(completion: (() -> ())?) {
         let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
         ref.child(userId).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
-            if let _screenName = snapshot.value?["screenName"] as? String {
+            if let _screenName = snapshot.value?["screen_name"] as? String {
                 self.screenName = _screenName
                 print(_screenName)
             }
+            if let _goals = snapshot.value?["goal"] as? [Int] {
+                self.goals = []
+                for key in _goals{
+                    self.goals.append(Goal(rawValue: key)!)
+                    //print(String(key))
+                }
+            }
+            
+            if let _gym = snapshot.value?["gym"] as? String {
+                GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
+                    if error == nil {
+                        if let fetchedGym = gym {
+                            self.gym = fetchedGym.name
+                            self.googleGymObj = fetchedGym
+                        }
+                    } else {
+                        print(error)
+                    }
+                }
+            }
+            
+            if let _photoURL = snapshot.value?["profile_image_url"] as? String {
+                self.photoURL = NSURL(string: _photoURL)
+            }
+            
+            if let _facebookAccesstoken = snapshot.value!["facebook_accesstoken"] as? String {
+                self.facebookAccesstoken = _facebookAccesstoken
+            }
+            if let _facebookId = snapshot.value?["facebook_id"] as? String {
+                self.facebookId = _facebookId
+            }
+            completion?()
         }
-    
-    
     }
     
     func getMyFriendList(successfulHandler: ([User])->()) {
@@ -252,6 +359,7 @@ class User {
                     }
                 }
             }
+            
             User.getUserArrayFromIdList(userIds, successHandler: { (users: [User]) in
                 successfulHandler(users)
             })
@@ -265,10 +373,12 @@ class User {
         for userId in userIds {
             dispatch_group_enter(gcdGetUserGroup)
             ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                ret.append(User(snapshot: snapshot))
+                let user = User(snapshot: snapshot)
+                UserCache.sharedInstance.cache[user.userId] = user
+                ret.append(user)
                 dispatch_group_leave(gcdGetUserGroup)
             }) { (error) in
-                print(error.localizedDescription)
+                Log.error(error.localizedDescription)
                 dispatch_group_leave(gcdGetUserGroup)
             }
         }
@@ -278,6 +388,89 @@ class User {
         })
     }
     
+    class func getUserById (userId: String, successHandler: (User)->()) {
+        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
+        let gcdGetUserGroup = dispatch_group_create()
+        var ret = User()
+        
+        dispatch_group_enter(gcdGetUserGroup)
+        ref.child(userId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            ret = User(snapshot: snapshot)
+            dispatch_group_leave(gcdGetUserGroup)
+        }) { (error) in
+            print(error.localizedDescription)
+            dispatch_group_leave(gcdGetUserGroup)
+        }
+        
+        
+        dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            successHandler(ret)
+        })
+    }
+    
+    class func getUserByFacebookId (facebookId: String, successHandler: (User)->()) {
+        let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
+        let gcdGetUserGroup = dispatch_group_create()
+        var ret = User()
+        
+        dispatch_group_enter(gcdGetUserGroup)
+        print("facebook_id : " + facebookId)
+        ref.queryOrderedByChild("facebook_id").queryEqualToValue(facebookId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            print("queryEqualToValue : " + facebookId)
+            ret = User()
+            let queryResults = snapshot.value as! NSDictionary
+            for userId in queryResults.allKeys {
+                ret.userId = userId as! String
+                let data = queryResults[userId as! String] as! NSDictionary
+                if let _screenName = data["screen_name"] as? String {
+                    ret.screenName = _screenName
+                }
+                 print("ret.screenName" + ret.screenName!)
+                if let _goals = data["goal"] as? [Int] {
+                    for key in _goals{
+                        ret.goals.append(Goal(rawValue: key)!)
+                        print(String(key))
+                    }
+                    
+                }
+                
+                if let _photoURL = data["profile_image_url"] as? String {
+                    ret.photoURL = NSURL(string: _photoURL)
+                }
+                
+                if let _gym = data["gym"] as? String {
+                    GoogleAPI.sharedInstance.getGymById(_gym) { (gym, error) in
+                        if error == nil {
+                            if let fetchedGym = gym {
+                                ret.gym = fetchedGym.name
+                                ret.googleGymObj = fetchedGym
+                            }
+                        } else {
+                            print(error)
+                        }
+                    }
+                }
+                
+                if let _facebookAccesstoken = data["facebook_accesstoken"] as? String {
+                    ret.facebookAccesstoken = _facebookAccesstoken
+                }
+                
+                ret.userRef = ref.child(ret.userId)
+            }
+
+            
+            dispatch_group_leave(gcdGetUserGroup)
+        }) { (error) in
+            print(error.localizedDescription)
+            dispatch_group_leave(gcdGetUserGroup)
+        }
+        
+        
+        dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            successHandler(ret)
+        })
+    }
+
     class func hasAuthenticatedUser () -> Bool {
         if (FIRAuth.auth()?.currentUser != nil) {
             if (User.currentUser == nil){
@@ -304,44 +497,70 @@ class User {
                 print (error)
             }
         }
+        //let currentLocation = LocationCache.sharedInstance.currentLocation
+        
+        let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        
+        updateLastSeenLocation(currentLocation){ (err) in
+            //            print(err)
+        }
+
     }
     
 
     // TODO
-    func updateLastSeenLocation(location: CLLocation) {
+    func updateLastSeenLocation(location: CLLocation, completion: (NSError?) -> Void) {
         // to be implemented
+        
+        let geofire = GeoFire(firebaseRef: userLocationRef)
+        geofire.setLocation(location, forKey: self.userId) { (error) in
+            if error != nil {
+                print(error)
+            }
+            User.currentUser?.userlocation = location
+            completion(error)
+        }
     }
     
-    func updateProfilePicture(photo: UIImage!, errorHandler: (NSError?)->Void) {
+    func updateProfilePicture(photo: UIImage, errorHandler: (NSError?)->Void) {
         self.cachedPhoto = photo.imageScaledToSize(CGSizeMake(500, 500))
         // Create a reference to the file you want to upload
         let pngImageData = UIImagePNGRepresentation(self.cachedPhoto!)
         let filePath = self.userId + "/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000)).png"
         let photoRef = storageRef.child(filePath)
         // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = photoRef.putData(pngImageData!, metadata: nil) { metadata, error in
+        photoRef.putData(pngImageData!, metadata: nil) { metaData, error in
             if (error != nil) {
                 // Uh-oh, an error occurred!
+                Log.info("updateProfilePhotoError: \(error!.localizedDescription)")
             } else {
                 // Metadata contains file metadata such as size, content-type, and download URL.
-                self.photoURL = metadata!.downloadURL()
-                let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
-                changeRequest?.photoURL = self.photoURL!
-                changeRequest?.commitChangesWithCompletion({ (error) in
-                    if error != nil {
-                        errorHandler(error)
-                    }
-                })
+                if let fetchedMetaData = metaData {
+                    self.photoURL = fetchedMetaData.downloadURL()
+                    let urlString = self.photoURL?.URLString
+                    self.updateProfile("profile_image_url", value: urlString)
+                }
+                
             }
         }
     }
     
-    func cacheUserPhoto(url: NSURL)
-    {
-        let data = NSData(contentsOfURL: url)
-        self.cachedPhoto = UIImage(data: data!)?.imageScaledToSize(CGSizeMake(500, 500))
+    func updateScreenNameInAuth(newName: String?, errorHandler: (NSError?)->Void) {
+        if let screenName = newName {
+            let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+            changeRequest?.displayName = newName
+            changeRequest?.commitChangesWithCompletion({ (error: NSError?) in
+                if error != nil {
+                    errorHandler(error)
+                } else {
+                    self.updateProfile("screen_name", value: screenName)
+                }
+            })
+        } else {
+            errorHandler(NSError(domain: "Profile update failure (empty name)", code: 1, userInfo: nil))
+        }
     }
-    
+
     func updateProfilePicture(photoURL: NSURL?, errorHandler: (NSError?)->Void) {
         if photoURL != nil {
             let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
@@ -351,25 +570,140 @@ class User {
                     errorHandler(error)
                 }
                 else {
-                    self.cacheUserPhoto(photoURL!)
+                    self.updateProfile("profile_image_url", value: photoURL)
                 }
             })
         }
     }
     
-    func updateProfile(attr: AnyObject?, value: AnyObject?) {
+    /*func updateProfile(attr: AnyObject?, value: AnyObject?) {
+        print(self.userId)
         if let attrName = attr as? String, valueStr = value as? String {
             let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
             let attrRef = ref.child("\(attrName)")
             attrRef.setValue(valueStr)
             Log.info("Done setting attribute")
+        }else if let attrName = attr as? String, valueStr = value as? Int{
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            Log.info("Done setting attribute")
+        }else if let attrName = attr as? String, valueStr = value as? Set<Int>{
+            let valueArray = Array(valueStr)
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueArray)
+            Log.info("Done setting attribute")
         }
+        Log.info("no problem til here")
+    }*/
+
+    
+    func updateProfile(attr: AnyObject?, value: AnyObject?) {
+        
+        let attrName = attr as! String
+        switch attrName {
+        case "profile_image_url":
+            Log.info("profile_image_url update Attribute")
+            if let valueStr = value as? String {
+                self.photoURL = NSURL(string: valueStr)
+                let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+                let attrRef = ref.child("\(attrName)")
+                attrRef.setValue(valueStr)
+                Log.info("profile_image_url updated Attribute Successfully")
+            }
+            break
+        case "screen_name":
+            let valueStr = value as? String
+            self.screenName = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        case "goal":
+            if let valueStr = value as? Set<Int> {
+                let valueArray = Array(valueStr)
+                self.goals = []
+                for key in valueArray {
+                    self.goals.append(Goal(rawValue: key)!)
+                }
+                for element in self.goals {
+                    print(String(element))
+                }
+                let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+                let attrRef = ref.child("\(attrName)")
+                attrRef.setValue(valueArray)
+                Log.info("Done setting attribute")
+            }
+            break
+        case "gender":
+            let valueStr = value as? Int
+            self.gender = Gender(rawValue: valueStr!)
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        case "description":
+            let valueStr = value as? String
+            self.description = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        case "gym":
+            let valueStr = value as? String
+            self.gym = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        case "facebook_accesstoken":
+            let valueStr = value as? String
+            self.facebookAccesstoken = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        case "facebook_id":
+            let valueStr = value as? String
+            self.facebookId = valueStr
+            let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info").child("\(self.userId)")
+            let attrRef = ref.child("\(attrName)")
+            attrRef.setValue(valueStr)
+            break
+        default:
+            Log.info("no attr matches")
+        }
+        
         Log.info("no problem til here")
     }
     
     func update() {
         
     }
+    
+//    class func resetPassword(email:String, completion: ()->Void ) -> Void {
+//        let auth = email
+//    }
+//    
+//    func updatePassword(oldPassword: String, newPassword: String, errorHandler: (NSError?) -> Void) -> Void {
+//        let email = firUser?.email
+//        if email == nil {
+//            return errorHandler()
+//        }
+//        
+//        let oldCredential = FIREmailPasswordAuthProvider.credentialWithEmail(email!, password: oldPassword)
+//        firUser?.reauthenticateWithCredential(oldCredential, completion: { (error) in
+//            if error != nil {
+//                errorHandler(error)
+//            }
+//            else {
+//                self.firUser?.updatePassword(newPassword, completion: { (error) in
+//                    errorHandler(error)
+//                })
+//            }
+//        })
+//    }
     
     func getTokenForcingRefresh(completion: (token:String?, error:NSError?) -> Void) {
         firUser?.getTokenForcingRefresh(true) {idToken, error in
@@ -389,5 +723,4 @@ class User {
         
         User.currentUser = nil
     }
-    
 }

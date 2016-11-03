@@ -7,17 +7,39 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
 
 class InviteBuddiesVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var buddies = ["Jesiah", "You", "Aaron"]//TODO change to User
+    var buddies = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupVisual()
+        loadData()
+        // Do any additional setup after loading the view.
+    }
+    
+    func setupVisual() {
+        tableView.backgroundColor = ColorScheme.s3Bg
+        tableView.separatorColor = UIColor.clearColor()
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        tableView.registerNib(UINib(nibName: "BuddyCardCell", bundle: nil), forCellReuseIdentifier: "BuddyCardCell")
+    }
+    
+    func loadData() {
+        User.currentUser?.getMyFriendList({ (users: [User]) in
+            self.buddies = users
+            self.tableView.reloadData()
+            self.title = "Buddies ("+String(self.buddies.count)+")"
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +54,7 @@ class InviteBuddiesVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteMainVC {
-            desVC.sendTo = sender as! String
+            desVC.sendToUser = sender as? User
         }
     }
 
@@ -44,8 +66,29 @@ extension InviteBuddiesVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCell", forIndexPath: indexPath) as! BuddyCell
-        cell.buddy = buddies[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("BuddyCardCell", forIndexPath: indexPath) as! BuddyCardCell
+        let index = indexPath.row
+        let buddy = buddies[index]
+        cell.buddy = buddy
+        let asyncIdentifer = buddy.userId
+        cell.asyncIdentifer = asyncIdentifer
+        cell.profileView.image = UIImage(named: "dumbbell")
+        if let user = UserCache.sharedInstance.cache[asyncIdentifer] {
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                let request = NSMutableURLRequest(URL: photoURL)
+                cell.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    if asyncIdentifer == cell.asyncIdentifer {
+                        cell.profileView.image = response.result.value
+                        user.cachedPhoto = response.result.value
+                    }
+                }
+            } else {
+                cell.profileView.image = user.cachedPhoto ?? UIImage(named: "dumbbell")
+            }
+        }
+        
+        cell.nameLabel.text = buddy.screenName
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     

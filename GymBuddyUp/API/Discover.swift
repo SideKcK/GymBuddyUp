@@ -13,37 +13,20 @@ import SwiftDate
 import Alamofire
 
 private let ref:FIRDatabaseReference! = FIRDatabase.database().reference()
-private let publishedWorkoutRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout")
-private let publishedWorkoutLocationRef:FIRDatabaseReference! = FIRDatabase.database().reference().child("published_workout_location")
+private let userFriendsRef:FIRDatabaseReference! = ref.child("user_friend")
+private let userWorkoutInviteRef:FIRDatabaseReference! = ref.child("user_workout_invite")
 
-class PublishedWorkout {
-    var id: String
-    var planId: String
-    var gym: Gym?
-    var publishedBy: String
-    var workoutTime: NSDate
-    var publishedAt: NSDate
-    
-    init (id: String, location: CLLocation, dict: NSDictionary) {
-        self.id = id
-        self.planId = dict.valueForKey("plan") as! String
-        self.gym = Gym(fromFirebase: dict.valueForKey("gym") as! NSDictionary)
-        self.publishedBy = dict.valueForKey("published_by") as! String
-        
-        let workoutTime = dict.valueForKey("workout_time") as! Double
-        self.workoutTime = NSDate(timeIntervalSince1970: workoutTime)
-        
-        let publishedAt = dict.valueForKey("published_at") as! Double
-        self.publishedAt = NSDate(timeIntervalSince1970: publishedAt)
-    }
-}
+private let workoutInviteRef:FIRDatabaseReference! = ref.child("workout_invite")
+private let publishedWorkoutLocationRef:FIRDatabaseReference! = ref.child("published_workout_location")
+
 
 class Discover {
     
-    class func discoverPublicWorkout(location: CLLocation, radiusInkilometers: Double, withinDays: Int, offset: Int?, completion: ([PublishedWorkout], NSError?) -> Void) {
+    class func discoverPublicWorkout(location: CLLocation, radiusInkilometers: Double, withinDays: Int, offset: Int?, completion: ([Invite], NSError?) -> Void) {
         // Query locations at input location with a radius of radius meters
-        
-        var result = [PublishedWorkout]()
+        guard let currentUserId = User.currentUser?.userId else {return}
+    
+        var result = [Invite]()
         
         let geoQueryDispatchGroup = dispatch_group_create()
         
@@ -63,13 +46,16 @@ class Discover {
             let fetchWorkoutDispatchGroup = dispatch_group_create()
             
             let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
-                //print(key, location.distanceFromLocation(foundLocation))
                 dispatch_group_enter(fetchWorkoutDispatchGroup)
-                
-                publishedWorkoutRef.child(key).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                    let data = snapshot.value as! [String:AnyObject]
-                    if data["available"] as? Bool != false {
-                        result.append(PublishedWorkout(id: key, location: foundLocation, dict: data))
+                workoutInviteRef.child(key).queryOrderedByChild("workout_time").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                    var data = snapshot.value as! [String:AnyObject]
+                    if data["available"] as? Bool != false && data["access"] as? Int > 1{
+                        // add id to data dictionary
+                        data["id"] = key
+                        let invite = Invite(JSON:data)!
+                        if invite.inviterId != currentUserId && invite.isAvailable == true {
+                            result.append(invite)
+                        }
                     }
                     
                     dispatch_group_leave(fetchWorkoutDispatchGroup)
@@ -85,8 +71,74 @@ class Discover {
         }
         
         dispatch_group_notify(geoQueryDispatchGroup, dispatch_get_main_queue()) {
-            print(result.count, "results found")
             completion(result, nil)
         }
     }
+    
+    class func discoverFriendsWorkout (withinDays: Int, completion: ([Invite], NSError?) -> Void) {
+        
+        // 1. get friends list
+        // 2. for each friend, get active published workout. (workoutTime >= today && type > private (access > 0, 0 is private, 1 is friends, 2 is public) )
+        // 3. for each workout id, filter by available = true
+        // 4. for each workout 
+        var invites = [Invite]()
+        let getInvitesTaskGrp = dispatch_group_create()
+       
+        //let getInvitesTaskGrp2 = dispatch_group_create()
+        userFriendsRef.child((User.currentUser?.userId)!).queryOrderedByChild("is_friend").queryEqualToValue(1).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            
+            for friend in snapshot.children {
+                dispatch_group_enter(getInvitesTaskGrp)
+                // get this friend's active workout
+                let friendUid = (friend as! FIRDataSnapshot).key
+                print("friendUid :::::" + friendUid)
+                let getInvitesTaskGrp1 = dispatch_group_create()
+                let today = stringToDate(dateToString(NSDate()))
+                //let today = stringToDate("2016-10-01")
+                let interval = NSTimeInterval(60 * 60 * 24 * 3)
+                let newDate = today!.dateByAddingTimeInterval(interval)
+                userWorkoutInviteRef.child(friendUid).queryOrderedByChild("workout_time").queryStartingAtValue(dateToInt(today!))
+                    .queryEndingAtValue(dateToInt(newDate)).observeSingleEventOfType(.Value, withBlock: { (userWorkoutInviteRef) in
+                    
+                        if let obj = userWorkoutInviteRef.value as? NSDictionary {
+                    
+                            for (key, value) in obj {
+                                dispatch_group_enter(getInvitesTaskGrp1)
+                                let inviteid = (value as! NSDictionary)["invite"] as! String
+                                print("invite :::::" + inviteid)
+                                // now get this invite object
+                                workoutInviteRef.child(inviteid).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
+                                    if(inviteSnapshot.value is NSNull){
+                                        print("invite is null")
+                                    }else{
+                                        var inviteData = inviteSnapshot.value as! [String: AnyObject]
+                                        inviteData["id"] = key
+                                        if let invite = Invite(JSON: inviteData){
+                                            if invite.isAvailable != false && invite.accessLevel != 2 {
+                                                print("invite is not null " + invite.id)
+                                                invites.append(invite)
+                                            }
+                                        }
+                                
+                                    }
+                        
+                                    dispatch_group_leave(getInvitesTaskGrp1)
+                                })
+                            }
+                        }
+                        dispatch_group_notify(getInvitesTaskGrp1, dispatch_get_main_queue()) {
+                            dispatch_group_leave(getInvitesTaskGrp)
+                        }
+                   
+                    })
+                }
+            
+                dispatch_group_notify(getInvitesTaskGrp, dispatch_get_main_queue()) {
+                    completion(invites, nil)
+                }
+            })
+        }
+    
+    
+
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */; };
+		9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */; };
 		9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */; };
 		9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA91D878FC2000FC787 /* Plan.storyboard */; };
 		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
@@ -39,12 +39,11 @@
 		C1388BA11D64F7A500513C05 /* TrackedPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA01D64F7A500513C05 /* TrackedPlan.swift */; };
 		C1388BA31D64FC5B00513C05 /* TrackedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA21D64FC5B00513C05 /* TrackedItem.swift */; };
 		C1388BA61D65189700513C05 /* TrackingNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */; };
+		C15238341DC2EE70006CC091 /* InvitationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15238331DC2EE70006CC091 /* InvitationCache.swift */; };
+		C1C28C0F1DABF5F700972202 /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C0E1DABF5F700972202 /* UserCache.swift */; };
+		C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C28C101DABF66D00972202 /* LocationCache.swift */; };
+		C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */; };
 		C1F08E741D77BC3200E6CA77 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E731D77BC3200E6CA77 /* Chat.storyboard */; };
-		C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */; };
-		C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */; };
-		C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */; };
-		C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */; };
-		C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E7D1D77C1FB00E6CA77 /* Message.swift */; };
 		C1F08E811D780DBE00E6CA77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */; };
 		C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E841D78EDA700E6CA77 /* Conversation.swift */; };
 		C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */; };
@@ -136,9 +135,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
-		6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
+		5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
+		8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinVC.swift; sourceTree = "<group>"; };
 		9F4D9DAA1D878FC2000FC787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
 		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
@@ -181,12 +180,11 @@
 		C1388BA01D64F7A500513C05 /* TrackedPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackedPlan.swift; path = Models/TrackedPlan.swift; sourceTree = "<group>"; };
 		C1388BA21D64FC5B00513C05 /* TrackedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackedItem.swift; sourceTree = "<group>"; };
 		C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackingNavigationButton.swift; path = Views/TrackingNavigationButton.swift; sourceTree = "<group>"; };
+		C15238331DC2EE70006CC091 /* InvitationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationCache.swift; sourceTree = "<group>"; };
+		C1C28C0E1DABF5F700972202 /* UserCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
+		C1C28C101DABF66D00972202 /* LocationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCache.swift; sourceTree = "<group>"; };
+		C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUserViewController.swift; path = VCs/SearchUserViewController.swift; sourceTree = "<group>"; };
 		C1F08E731D77BC3200E6CA77 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
-		C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelfMessageCell.xib; path = Views/SelfMessageCell.xib; sourceTree = "<group>"; };
-		C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfMessageCell.swift; path = Views/SelfMessageCell.swift; sourceTree = "<group>"; };
-		C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemberMessageCell.xib; path = Views/MemberMessageCell.xib; sourceTree = "<group>"; };
-		C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemberMessageCell.swift; path = Views/MemberMessageCell.swift; sourceTree = "<group>"; };
-		C1F08E7D1D77C1FB00E6CA77 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		C1F08E801D780DBE00E6CA77 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = VCs/ChatViewController.swift; sourceTree = "<group>"; };
 		C1F08E841D78EDA700E6CA77 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = Models/Conversation.swift; sourceTree = "<group>"; };
 		C1F08E861D7D130B00E6CA77 /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = Views/ConversationCell.swift; sourceTree = "<group>"; };
@@ -284,13 +282,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20F1F3A3454249691CCE81D3 /* Pods_GymBuddyUp.framework in Frameworks */,
+				9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		885C5EAA3B1098E70E447E3C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */,
+				5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B6F00B701D66B34600B09177 /* GeoFire */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,14 +352,6 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		B72B06C72A1DDA93FB72C229 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6082EB3D70A76875842C61E9 /* Pods_GymBuddyUp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C11F64DC1D66592300FFF5DB /* Labels */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +369,16 @@
 				C1388BA51D65189700513C05 /* TrackingNavigationButton.swift */,
 			);
 			name = Button;
+			sourceTree = "<group>";
+		};
+		C1C28C0D1DABF5E800972202 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				C1C28C0E1DABF5F700972202 /* UserCache.swift */,
+				C1C28C101DABF66D00972202 /* LocationCache.swift */,
+				C15238331DC2EE70006CC091 /* InvitationCache.swift */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		C1E471551D6F63A800C19AAA /* Picker */ = {
@@ -429,6 +438,7 @@
 				C6B40AA31D6D3714001DC761 /* MeUpdateVC.swift */,
 				C6860BF81D8913FC0081C89D /* MePasswordVC.swift */,
 				C6860BFA1D8918FA0081C89D /* MeCreditTermVC.swift */,
+				C1ECE5501DB4AFF50060B94E /* SearchUserViewController.swift */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -447,8 +457,8 @@
 				B6F00B701D66B34600B09177 /* GeoFire */,
 				C649C5491CE2C31C00258994 /* GymBuddyUp */,
 				C649C5481CE2C31C00258994 /* Products */,
-				E64D904A4C5393EDF14BB71C /* Pods */,
-				B72B06C72A1DDA93FB72C229 /* Frameworks */,
+				885C5EAA3B1098E70E447E3C /* Pods */,
+				CF834469C9C63C7A32775520 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -463,6 +473,7 @@
 		C649C5491CE2C31C00258994 /* GymBuddyUp */ = {
 			isa = PBXGroup;
 			children = (
+				C1C28C0D1DABF5E800972202 /* Cache */,
 				C68007651D6AE38D00A26E12 /* Models */,
 				C649C54A1CE2C31C00258994 /* AppDelegate.swift */,
 				B6F00B9A1D66B3E400B09177 /* API */,
@@ -601,7 +612,6 @@
 		C68007651D6AE38D00A26E12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C1F08E7D1D77C1FB00E6CA77 /* Message.swift */,
 				C1388BA01D64F7A500513C05 /* TrackedPlan.swift */,
 				C1388BA21D64FC5B00513C05 /* TrackedItem.swift */,
 				B6F00B9B1D66B3E400B09177 /* Exercise.swift */,
@@ -618,10 +628,6 @@
 		C68165051D650D2100FC63FD /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
-				C1F08E751D77BFA600E6CA77 /* SelfMessageCell.xib */,
-				C1F08E761D77BFA600E6CA77 /* SelfMessageCell.swift */,
-				C1F08E771D77BFA600E6CA77 /* MemberMessageCell.xib */,
-				C1F08E781D77BFA600E6CA77 /* MemberMessageCell.swift */,
 				C6CD01F41D3DD2BE00D64A06 /* ExerciseNumberedCell.swift */,
 				C68BD2BD1D6413660060F944 /* ExerciseNumberedCell.xib */,
 				C6304E191D6387C700EE7110 /* WorkoutCell.xib */,
@@ -654,13 +660,12 @@
 			name = PlanAdd;
 			sourceTree = "<group>";
 		};
-		E64D904A4C5393EDF14BB71C /* Pods */ = {
+		CF834469C9C63C7A32775520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */,
-				4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */,
+				8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,12 +675,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "GymBuddyUp" */;
 			buildPhases = (
-				46D9065C99984273F89B1ECF /* [CP] Check Pods Manifest.lock */,
+				EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */,
 				C649C5431CE2C31C00258994 /* Sources */,
 				C649C5441CE2C31C00258994 /* Frameworks */,
 				C649C5451CE2C31C00258994 /* Resources */,
-				0845A1D7E8F85D4E9DCC1E5D /* [CP] Embed Pods Frameworks */,
-				6E6A1D13611E68A73F14883D /* [CP] Copy Pods Resources */,
+				995C4A9C8BD12A9EA1D79FDB /* [CP] Embed Pods Frameworks */,
+				B18F7A12CA9DC1BF136E170C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -693,12 +698,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "You Wu";
 				TargetAttributes = {
 					C649C5461CE2C31C00258994 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = F697GBXU4H;
+						DevelopmentTeam = MT7235KFGL;
 					};
 				};
 			};
@@ -737,7 +742,6 @@
 				C607BA421D57A31700B1348B /* Invitation.storyboard in Resources */,
 				B6CF8D551D20EC3100BF9075 /* GoogleService-Info.plist in Resources */,
 				C6CD01ED1D3AC0E300D64A06 /* PlanAddExercise.storyboard in Resources */,
-				C1F08E7B1D77BFA600E6CA77 /* MemberMessageCell.xib in Resources */,
 				C649C5521CE2C31C00258994 /* Assets.xcassets in Resources */,
 				C64EC2111D20D82B000DA37A /* Inbox.storyboard in Resources */,
 				C649C5501CE2C31C00258994 /* Main.storyboard in Resources */,
@@ -745,7 +749,6 @@
 				C64EC2141D20D83D000DA37A /* Me.storyboard in Resources */,
 				C1F08E891D7D130B00E6CA77 /* ConversationCell.xib in Resources */,
 				9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */,
-				C1F08E791D77BFA600E6CA77 /* SelfMessageCell.xib in Resources */,
 				C64EC2021D207373000DA37A /* Discover.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,7 +756,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0845A1D7E8F85D4E9DCC1E5D /* [CP] Embed Pods Frameworks */ = {
+		995C4A9C8BD12A9EA1D79FDB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -768,22 +771,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		46D9065C99984273F89B1ECF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6E6A1D13611E68A73F14883D /* [CP] Copy Pods Resources */ = {
+		B18F7A12CA9DC1BF136E170C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -796,6 +784,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -832,7 +835,6 @@
 				C681650D1D66559A00FC63FD /* InviteBuddiesVC.swift in Sources */,
 				C6860BFF1D8B90950081C89D /* ResetPwVC.swift in Sources */,
 				C68165041D64C94400FC63FD /* PlanDetailVC.swift in Sources */,
-				C1F08E7C1D77BFA600E6CA77 /* MemberMessageCell.swift in Sources */,
 				C6860BF71D88A1B60081C89D /* InviteToCell.swift in Sources */,
 				C6D810F91D6E97AB006054AE /* InviteNoPlanCell.swift in Sources */,
 				C6860BF31D8899D40081C89D /* InviteDateCell.swift in Sources */,
@@ -842,14 +844,15 @@
 				C6860BF11D8692FA0081C89D /* InviteNoPlanCatCell.swift in Sources */,
 				B6F00BA71D66B3E400B09177 /* Invite.swift in Sources */,
 				C64EC1FC1D1B6B5A000DA37A /* GenderVC.swift in Sources */,
+				C1ECE5511DB4AFF50060B94E /* SearchUserViewController.swift in Sources */,
 				B6F00BA41D66B3E400B09177 /* Exercise.swift in Sources */,
 				C6860BF51D8899F40081C89D /* InviteGymCell.swift in Sources */,
 				C6860BFD1D8A69E10081C89D /* LoginVC.swift in Sources */,
 				C1F08E881D7D130B00E6CA77 /* ConversationCell.swift in Sources */,
 				C6860BF91D8913FC0081C89D /* MePasswordVC.swift in Sources */,
 				C1F08E8D1D7E06B500E6CA77 /* BadgeSwift.swift in Sources */,
-				C1F08E7E1D77C1FB00E6CA77 /* Message.swift in Sources */,
 				C649C56B1CE3EE0800258994 /* SignupVC.swift in Sources */,
+				C1C28C111DABF66D00972202 /* LocationCache.swift in Sources */,
 				C64EC20A1D207D69000DA37A /* PlanLibVC.swift in Sources */,
 				9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */,
 				C66B081D1D502378003B0872 /* UnderlineField.swift in Sources */,
@@ -873,7 +876,6 @@
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */,
 				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
-				C1F08E7A1D77BFA600E6CA77 /* SelfMessageCell.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,
@@ -882,10 +884,12 @@
 				B6F00B841D66B34600B09177 /* GFGeoHash.m in Sources */,
 				C64EC2231D332F2C000DA37A /* UserProfileCell.swift in Sources */,
 				C60986591CEEC25200A0AFE3 /* Utils.swift in Sources */,
+				C1C28C0F1DABF5F700972202 /* UserCache.swift in Sources */,
 				C607BA4E1D58232B00B1348B /* MeBuddiesVC.swift in Sources */,
 				C11F64E41D67822F00FFF5DB /* TrackingPopOverViewController.swift in Sources */,
 				C681650F1D665BC700FC63FD /* MeFindVC.swift in Sources */,
 				B6F00B831D66B34600B09177 /* GFBase32Utils.m in Sources */,
+				C15238341DC2EE70006CC091 /* InvitationCache.swift in Sources */,
 				C6B40AA21D6D2F2E001DC761 /* SettingsVC.swift in Sources */,
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
@@ -1011,8 +1015,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1039,6 +1045,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1056,8 +1063,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1076,14 +1085,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		C649C55A1CE2C31C00258994 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AFEDBB1872AE8DFAFF9CE0D /* Pods-GymBuddyUp.debug.xcconfig */;
+			baseConfigurationReference = 5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1108,17 +1120,19 @@
 				);
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sidekckapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		C649C55B1CE2C31C00258994 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EB97AC0A020753E416AAE2F /* Pods-GymBuddyUp.release.xcconfig */;
+			baseConfigurationReference = 5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1143,10 +1157,11 @@
 				);
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.torreon.sidekick.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sidekckapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

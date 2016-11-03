@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
+@objc protocol updateMeDelegate {
+    optional func syncAfterUpdateMe(updatedGymPlaceId: String?, updatedGymObj: Gym?,updatedGoals: Set<Int>, updatedProfile: UIImage?)
+}
 
 class MeUpdateVC: UITableViewController {
     @IBOutlet weak var weightButton: UIButton!
@@ -19,17 +25,21 @@ class MeUpdateVC: UITableViewController {
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var thumbView: UIImageView!
 
+    @IBOutlet weak var screenNameField: UITextField!
+    
+    var user: User!
     var gym: Gym!
     var selected = Set<Int>()
     var tintColor = ColorScheme.p1Tint
+    var delegate: updateMeDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //for testing
-        selected.insert(2)
         
         setupVisual()
         setupButtons()
-        
+        setupInfo()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -38,13 +48,62 @@ class MeUpdateVC: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    private func fetchAvatar(url: NSURL) {
+        let request = NSMutableURLRequest(URL: url)
+        thumbView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+            self.thumbView.image = response.result.value
+        }
+        
+        thumbView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+            self.thumbView.image = response.result.value
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     @IBAction func unwindToMeUpdateVC(segue: UIStoryboardSegue) {
+        print(gym.name)
+    }
+    
+    func setupInfo(){
+        screenNameField.text = user.screenName
+        if let photoURL = user.photoURL {
+            fetchAvatar(photoURL)
+        } else {
+            User.currentUser?.syncWithLastestUserInfo({
+                if let photoURL = self.user.photoURL {
+                    self.fetchAvatar(photoURL)
+                }
+            })
+        }
         
+        for goal in user.goals {
+            
+            if(goal.rawValue == 0){
+                //weightButton.selected = true
+                buttonClicked(weightButton)
+            }else if(goal.rawValue == 1){
+               // fitButton.selected = true
+                buttonClicked(fitButton)
+            }else if(goal.rawValue == 2){
+                //funButton.selected = true
+                buttonClicked(funButton)
+            }else if(goal.rawValue == 3){
+                //muscleButton.selected = true
+                buttonClicked(muscleButton)
+            }
+        }
+        
+        gym1Button.setTitle(user.gym, forState: UIControlState.Normal)
+        if let _description = user.description {
+            textView.text = _description
+        }else{
+            textView.text = ""
+        }
     }
     
     func setupVisual() {
@@ -73,8 +132,21 @@ class MeUpdateVC: UITableViewController {
         setButton(fitButton)
         setButton(funButton)
         setButton(muscleButton)
-        
+        thumbView.userInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileTap))
+        thumbView.addGestureRecognizer(tapRecognizer)
         gym1Button.addTarget(self, action: #selector(MeUpdateVC.onGymButton(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    func profileTap() {
+        Log.info("taped on thumbView")
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func setButton (button: UIButton) {
@@ -119,69 +191,56 @@ class MeUpdateVC: UITableViewController {
     
     @IBAction func onSaveButton(sender: AnyObject) {
         //save changes
+        User.currentUser?.updateScreenNameInAuth(screenNameField.text, errorHandler: { (error: NSError?) in
+            Log.error("update screenName error = \(error?.localizedDescription)")
+        })
+        User.currentUser?.updateProfile("goal", value: self.selected)
+        User.currentUser?.updateProfile("description", value: textView.text)
+        if gym != nil{
+            User.currentUser!.updateProfile("gym", value: gym!.placeid)
+        }
+        delegate?.syncAfterUpdateMe?(gym?.placeid, updatedGymObj: gym, updatedGoals: self.selected, updatedProfile: thumbView.image)
         self.performSegueWithIdentifier("unwindToMeMainVC", sender: self)
     }
     
-    // MARK: - Table view data source
-
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         // Change the color of all cells
         cell.backgroundColor = UIColor.clearColor()
     }
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let desVC = segue.destinationViewController as? InviteGymVC {
             desVC.from = self
         }
     }
-    
+}
 
+
+extension MeUpdateVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        //let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+        let image = editedImage.imageScaledToSize(CGSizeMake(500, 500))
+        thumbView.image = image
+        thumbView.image = image
+        
+        //TODO: dont know why it's failing
+        //KRProgressHUD.show()
+        user.updateProfilePicture(image){ error in
+            if error != nil {
+                print("Error setting profile picture \(error?.localizedFailureReason)")
+                //KRProgressHUD.showError()
+            } else {
+                //KRProgressHUD.dismiss()
+                Log.info("Setting successfully!")
+                self.tableView.reloadData()
+            }
+        }
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

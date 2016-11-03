@@ -14,7 +14,7 @@ import SwiftDate
 
 
 class TrackedPlan {
-    weak var plan: Plan?
+    var plan: Plan?
     var planId: String?
     var trackingId: String? //format  is  “eventId:date”
     var startDate : NSDate?
@@ -22,6 +22,7 @@ class TrackedPlan {
     var user: User?
     var scheduledWorkout: String?
     var trackingItems = [TrackedItem]()
+    var gym: Gym?
     
     init(plan: Plan) {
         self.plan = plan
@@ -60,6 +61,10 @@ class TrackedPlan {
         self.endDate = NSDate(timeIntervalSince1970: Double(data.valueForKey("end_time") as! Int))
         self.planId = data.valueForKey("plan_id") as? String
         self.trackingItems = [TrackedItem]()
+        if let _gym = data.valueForKey("gym") as? NSDictionary {
+            print("_gym is not nil")
+            self.gym = Gym(fromFirebase: _gym)
+        }
         //self.workoutLog = [String: AnyObject]()
         
     }

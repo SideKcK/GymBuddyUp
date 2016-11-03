@@ -15,12 +15,12 @@ import FirebaseStorage
 
 /*
  exercise type:
-    case Repetition = 0
-    case DurationInSeconds = 1
-    case DistanceInMiles = 2
-    case RepByWeight = 3
+ case Repetition = 0
+ case DurationInSeconds = 1
+ case DistanceInMiles = 2
+ case RepByWeight = 3
  
-*/
+ */
 
 
 class TrackedItem {
@@ -33,7 +33,8 @@ class TrackedItem {
     var isFinalized: Bool
     var reps: [Int]
     var weights: [Int]
-    
+    var bestRecordStr: String
+    var isSkiped: Bool
     // TODO: read set from exercise
     init(_exercise: Exercise) {
         setsAmount = 1
@@ -49,6 +50,8 @@ class TrackedItem {
         isFinalized = false
         reps = [Int](count: setsAmount, repeatedValue: 0)
         weights = [Int](count: setsAmount, repeatedValue: 0)
+        bestRecordStr = ""
+        isSkiped = false
     }
     
     init (finishedAmount: Int, finishedSets: Int, exercise: Exercise, reps:[Int], weights:[Int]) {
@@ -61,8 +64,23 @@ class TrackedItem {
         self.maxReps = 0
         self.maxWeight = 0
         self.isFinalized = false
+        self.bestRecordStr = ""
+        self.isSkiped = false
     }
-
+    
+    init (finishedAmount: Int, finishedSets: Int, exercise: Exercise, reps:[Int], weights:[Int], maxReps: Int, maxWeight: Int, bestRecordStr: String, isSkiped: Bool) {
+        self.setsAmount = 1
+        self.finishedAmount = finishedAmount
+        self.finishedSets =  finishedSets
+        self.exercise =  exercise
+        self.reps = reps
+        self.weights = weights
+        self.maxReps = maxReps
+        self.maxWeight = maxWeight
+        self.isFinalized = false
+        self.bestRecordStr = bestRecordStr
+        self.isSkiped = isSkiped
+    }
     
     func saveOnNextExercise(onFinishedAmount: Int, onFinishedSets: Int) {
         finishedAmount = onFinishedAmount

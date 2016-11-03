@@ -14,21 +14,31 @@ class InviteMainVC: UIViewController {
 
     var time: NSDate!
     var gym: Gym!
-    var sendTo = "Direct Invite"
+    var sendToUser: User?
     var plan: Plan!
+    var workoutId: String?
     
     var segViews : [UIView]!
     var gymButton : UIButton!
     var showDatePicker = false
     var datePickerHeight: NSLayoutConstraint!
     
+    enum SendType {
+        case DirectInvitation
+        case BroadcastBuddies
+        case BroadcastPublic
+    }
+    
+    var sendInvitationType: SendType = .BroadcastPublic
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //load default gym, show on gym label
         
         //default time
-        time = NSDate()
         setupTableView()
+        
+        Log.info("InviteMainVC fired")
         
         if gym != nil {
             enableSendButton()
@@ -41,6 +51,14 @@ class InviteMainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setNavBarItem () {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(InviteMainVC.cancelInvite))
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    func cancelInvite() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     func setupTableView () {
         tableView.registerNib(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutCell")
         tableView.estimatedRowHeight = 120
@@ -69,14 +87,41 @@ class InviteMainVC: UIViewController {
     }
     
     @IBAction func onSendButton(sender: AnyObject) {
-        //send out invitation
-        //        sendInvitation(time: time, loc: gym, audience: sendTo, completion: ({
-        //
-        //        })
-        //        )
+        guard let scheduledWorkoutId = workoutId else {return}
+        if(gym == nil){
+            let alert = UIAlertController(title: "", message: "Please select a gym.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        switch sendInvitationType {
+        case .DirectInvitation:
+            if let sendTo = sendToUser {
+                Invite.publishWorkoutInviteToUser(sendTo.userId, PlanId: plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                    Log.info("send to \(sendTo.screenName) successfully")
+                })
+            }
+            break
+        case .BroadcastBuddies:
+            Invite.publishWorkoutInviteToFriends(plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                if error == nil {
+                    Log.info("broadcast to friends successfully")
+                }
+            })
+            break
+        case .BroadcastPublic:
+            Invite.publishWorkoutInviteToPublic(plan.id, scheduledWorkoutId: scheduledWorkoutId, gym: gym, workoutTime: time, completion: { (error: NSError?) in
+                if error == nil {
+                    Log.info("broadcast to public successfully")
+                }
+            })
+            break
+        }
+        
+
         self.dismissViewControllerAnimated(true, completion: nil)
         let statusView = StatusView()
-        statusView.setMessage("Invitation at Today, 7:30 PM Sent!")
+        statusView.setMessage("Invitation sent")
         statusView.displayView()
 
     }
@@ -84,9 +129,15 @@ class InviteMainVC: UIViewController {
 
     func segmentedControlValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            sendInvitationType = .DirectInvitation
             self.performSegueWithIdentifier("toBuddySegue", sender: self)
             sendButton.setTitle("Send", forState: .Normal)
         }else {
+            if sender.selectedSegmentIndex == 1 {
+                sendInvitationType = .BroadcastBuddies
+            } else {
+                sendInvitationType = .BroadcastPublic
+            }
             sendButton.setTitle("Broadcast", forState: .Normal)
         }
         
@@ -121,6 +172,14 @@ class InviteMainVC: UIViewController {
 
 }
 
+extension InviteMainVC: InviteDatePickerOnPicked {
+    func datePicker(datePicker: UIDatePicker) {
+        self.time = datePicker.date
+        Log.info("time = \(self.time)")
+    }
+}
+
+
 extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
     // MARK: - Table view data source
     
@@ -131,7 +190,9 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("WorkoutCell", forIndexPath: indexPath) as! WorkoutCell
+            cell.workouttime = time
             cell.plan = plan
+            
             //remove shadow
             cell.borderView.clipsToBounds = true
             cell.borderView.layer.borderWidth = 2.0
@@ -141,7 +202,11 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         }
         if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("InviteDateCell", forIndexPath: indexPath) as! InviteDateCell
+            if cell.delegate == nil {
+                cell.delegate = self
+            }
             cell.dateButton.addTarget(self, action: #selector(InviteMainVC.onDateButton(_:)), forControlEvents: .TouchUpInside)
+            cell.setDate(time)
             datePickerHeight = cell.datePickerHeight
             return cell
         }
@@ -155,7 +220,11 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCellWithIdentifier("InviteToCell", forIndexPath: indexPath) as! InviteToCell
             segViews = cell.segViews
-            cell.seg.setTitle(sendTo, forSegmentAtIndex: 0)
+            if let sendTo = sendToUser {
+                cell.seg.setTitle(sendTo.screenName, forSegmentAtIndex: 0)
+            } else {
+                cell.seg.setTitle("Direct Invite", forSegmentAtIndex: 0)
+            }
             cell.seg.addTarget(self, action: #selector(InviteMainVC.segmentedControlValueChanged), forControlEvents:.ValueChanged)
             return cell
         }
@@ -166,12 +235,6 @@ extension InviteMainVC: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .None
         if indexPath.row != 0 {
             cell.backgroundColor = UIColor.clearColor()
-        }
-        if indexPath.row == 3 {
-            let cell = cell as! InviteToCell
-            cell.seg.frame = cell.toView.bounds
-            cell.toView.addSubview(cell.seg)
-
         }
     }
     

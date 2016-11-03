@@ -132,6 +132,9 @@ class SignupVC: UIViewController {
         UIView.animateWithDuration(1.0) {
             self.centerLine.constant += 40
         }
+    }
+    
+    @IBAction func onEditChanged(sender: AnyObject) {
 
         if !emailField.text!.isEmpty &&
             !passwordField.text!.isEmpty &&
@@ -163,12 +166,22 @@ class SignupVC: UIViewController {
                                 KRProgressHUD.showError()
                             }
                             //update screen name
-                            user.updateProfile("screenName", value: self.usernameField.text)
+                            user.updateScreenNameInAuth(self.usernameField.text, errorHandler: { (error: NSError?) in
+                                if error != nil {
+                                    Log.error("error on setting screen name")
+                                }
+                            })
+                            user.updateProfile("screen_name", value: self.usernameField.text)
                             self.performSegueWithIdentifier("toGenderSegue", sender: self)
                             KRProgressHUD.dismiss()
                         }else {
                             print(error)
                             KRProgressHUD.showError()
+                            if(String(error).rangeOfString("ERROR_EMAIL_ALREADY_IN_USE") != nil){
+                                self.errorView.hidden = false
+                                self.errorLabel.hidden = false
+                            }
+
                         }
                     }
                 
@@ -176,7 +189,7 @@ class SignupVC: UIViewController {
                     
                     alertController.title = "Sign Up Failed"
                     if pwStatus == .countError {
-                        alertController.message = "Your password must be 5-20 charaters."
+                        alertController.message = "Your password must be 6-20 charaters."
                     }else {
                         alertController.message = "Your password must contain both digits and letters."
                     }

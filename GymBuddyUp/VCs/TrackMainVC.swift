@@ -52,6 +52,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     var itemsCount = 0
     var nextButtonState = NextButtonState.Normal
     var startTime = NSDate()
+    var delegate: showTrackingInfoDelegate?
+    var gym: Gym?
     lazy var startButtonImage = UIImage(named: "start")
     lazy var pauseButtonImage = UIImage(named: "pause")
     lazy var nextButtonImage = UIImage(named: "next&Log")
@@ -530,8 +532,10 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     
     func doneTrackingCallback() {
-        
-
+        self.dismissViewControllerAnimated(true, completion: nil)
+        if self.trackedPlan != nil {
+            self.delegate?.showTrackingTable!(self.trackedPlan!)
+        }
     }
     
     func doneWorkoutAction() {
@@ -540,7 +544,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         // write backend sync code here
         let endTime = NSDate()
         
-        Tracking.trackedPlanOnSave((trackedPlan?.scheduledWorkout)!,planId: (trackedPlan?.plan?.id)!, startTime: startTime, endTime: endTime, trackedItems: (trackedPlan?.trackingItems)!){ (error) in
+        Tracking.trackedPlanOnSave((trackedPlan?.scheduledWorkout)!,planId: (trackedPlan?.plan?.id)!, startTime: startTime, endTime: endTime, trackedItems: (trackedPlan?.trackingItems)!, gym: gym!){ (error) in
             if (error != nil){
                 print(error)
             }

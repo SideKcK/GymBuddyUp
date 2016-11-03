@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var profileView: UIImageView!
@@ -31,9 +33,9 @@ class DiscoverDetailVC: UIViewController {
     @IBOutlet weak var stackJoinButton: UIButton!
     @IBOutlet weak var stackRejectButton: UIButton!
 
-    var event: PublishedWorkout!
-    var plan = Plan()
-    
+    var event: Invite!
+    var plan: Plan!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,6 +105,36 @@ class DiscoverDetailVC: UIViewController {
         
         resetActionButton()
         joinStack.hidden = false
+        profileView.image = UIImage(named: "dumbbell")
+        if let user = UserCache.sharedInstance.cache[event.inviterId] {
+            nameLabel.text = user.screenName
+            if let photoURL = user.photoURL where user.cachedPhoto == nil {
+                Log.info("UserProfile test: go fetch profile photo")
+                let request = NSMutableURLRequest(URL: photoURL)
+                profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                    self.profileView.image = response.result.value
+                    user.cachedPhoto = response.result.value
+                }
+            } else {
+                Log.info("UserProfile test: use cachedPhoto")
+                profileView.image = user.cachedPhoto
+                print(user.cachedPhoto)
+            }
+        } else {
+            User.getUserArrayFromIdList([event.inviterId]) { (users: [User]) in
+                    let user = users[0]
+                    UserCache.sharedInstance.cache[self.event.inviterId] = user
+                    self.nameLabel.text = user.screenName
+                    if let photoURL = user.photoURL {
+                        let request = NSMutableURLRequest(URL: photoURL)
+                        self.profileView.af_setImageWithURLRequest(request, placeholderImage: UIImage(named: "dumbbell"), filter: nil, progress: nil, imageTransition: UIImageView.ImageTransition.None, runImageTransitionIfCached: false) { (response: Response<UIImage, NSError>) in
+                            self.profileView.image = response.result.value
+                            user.cachedPhoto = response.result.value
+                        }
+                        
+                    }
+            }
+        }
     }
     
     func setupTableView() {
@@ -123,34 +155,79 @@ class DiscoverDetailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func onChatButton(sender: AnyObject) {
-            //        self.hidesBottomBarWhenPushed = true
-            self.tabBarController?.tabBar.hidden = true
-            self.tabBarController?.tabBar.translucent = true
-            Log.info("asdasdasd")
+        if let  currentUserId = User.currentUser?.userId,
+            recipientUserId = event.inviterId,
+            recipientName = UserCache.sharedInstance.cache[event.inviterId]?.screenName,
+            senderName = User.currentUser?.screenName {
+            
             let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-            let secondViewController = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-            InboxMessage.test()
-            //        self.hidesBottomBarWhenPushed = false
+            let chatVC = storyboard.instantiateViewControllerWithIdentifier("chatVC") as! ChatViewController
+            chatVC.setup(currentUserId, senderName: senderName, setupByRecipientId: recipientUserId, recipientName: recipientName)
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
     }
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        let statusView = StatusView()
-        statusView.displayView()
+        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
+            Log.info("onJoinButton unwrap failed check nil values")
+            Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
+            return
+        }
+        Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let statusView = StatusView()
+                statusView.setMessage("Done! Enjoy working out with \(user.screenName!)")
+                statusView.displayView()
+            } else {
+                Log.info("join failed")
+            }
+
+        }
+
         
     }
     
     @IBAction func onRejectButton(sender: AnyObject) {
         //reject invite
+        guard let inviteId = event?.id else {
+            Log.info("unwrap failed check nil values")
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        Invite.rejectWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                Log.info("rejected successfully")
+            } else {
+                Log.info("reject failed")
+            }
+        }
+
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     @IBAction func onCancelButton(sender: AnyObject) {
+        guard let inviteId = event?.id else {
+            Log.info("unwrap failed check nil values")
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        Invite.cancelWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                Log.info("canceled successfully")
+            } else {
+                Log.info("cancel failed")
+            }
+        }
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+
     }
     
     @IBAction func onPlanButton(sender: AnyObject) {

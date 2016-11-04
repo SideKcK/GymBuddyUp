@@ -112,11 +112,11 @@ class MeUpdateVC: UITableViewController {
         thumbView.makeThumbnail(ColorScheme.p1Tint)
         profileView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
         let radius = CGFloat(4.0)
-        let tint = ColorScheme.p1Tint
-        weightButton.makeBorderButton(tint, radius: radius)
-        muscleButton.makeBorderButton(tint, radius: radius)
-        fitButton.makeBorderButton(tint, radius: radius)
-        funButton.makeBorderButton(tint, radius: radius)
+//        let tint = ColorScheme.p1Tint
+//        weightButton.makeBorderButton(tint, radius: radius)
+//        muscleButton.makeBorderButton(tint, radius: radius)
+//        fitButton.makeBorderButton(tint, radius: radius)
+//        funButton.makeBorderButton(tint, radius: radius)
         let grey = ColorScheme.g2Text
         gym1Button.makeBorderButton(grey, radius: radius)
         
@@ -175,6 +175,10 @@ class MeUpdateVC: UITableViewController {
         self.performSegueWithIdentifier("toGymSegue", sender: sender)
     }
     @IBAction func onCancelButton(sender: AnyObject) {
+        fitButton.selected = false
+        funButton.selected = false
+        muscleButton.selected = false
+        weightButton.selected = false
         let alertController = UIAlertController(title: nil, message: "Leave Without Saving?", preferredStyle: .ActionSheet)
         alertController.customize()
         let leaveAction = UIAlertAction(title: "Leave", style: .Destructive) { (action) in
@@ -183,7 +187,10 @@ class MeUpdateVC: UITableViewController {
         alertController.addAction(leaveAction)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
+            self.fitButton.selected = self.fitButton.backgroundColor == ColorScheme.p1Tint
+            self.funButton.selected = self.funButton.backgroundColor == ColorScheme.p1Tint
+            self.muscleButton.selected = self.muscleButton.backgroundColor == ColorScheme.p1Tint
+            self.weightButton.selected = self.weightButton.backgroundColor == ColorScheme.p1Tint
         }
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)

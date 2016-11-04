@@ -51,6 +51,7 @@ class PlanMainVC: UIViewController {
     }
     
     func setupVisual() {
+        todayButton.enabled = false
         menuView.backgroundColor = ColorScheme.s1Tint
         calendarView.backgroundColor = ColorScheme.s1Tint
         
@@ -293,11 +294,8 @@ class PlanMainVC: UIViewController {
 //        })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
-        print("on today button")
-        calendarView.changeMode(.WeekView) {
-            print("changed mode")
-            self.calendarView.toggleCurrentDayView()
-        }
+        self.calendarView.toggleCurrentDayView()
+
         //calendarView.changeMode(.WeekView)
         //add selection circle to todays dayview
         
@@ -526,7 +524,7 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
                 addPlanToTopConstraint.constant = 0
             }
         }
-//        todayButton.tintColor = selectedDate != NSDate().startOf(.Day) ? ColorScheme.g4Text : ColorScheme.s1Tint
+        todayButton.enabled = selectedDate != NSDate().startOf(.Day)
         
         if plans[selectedDate] == nil {
             getPlansThisWeek(selectedDate)

@@ -38,11 +38,13 @@ class Friend {
                 "operation": "friend_request_send",
                 "recipientId": recipientId
             ]
-            
-            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
+            print("inside sendFriendRequest")
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/prod/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
+                   
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
+                        print("reponse sendFriendRequest " + response.debugDescription)
                         let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])
                         completion(error)
                     }
@@ -65,7 +67,7 @@ class Friend {
                 "requestId": requestId
             ]
             
-            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/prod/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -91,7 +93,7 @@ class Friend {
                 "requestId": requestId
             ]
             
-            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/dev/sidekck-notifications", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/prod/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
@@ -144,41 +146,51 @@ class Friend {
     class func discoverNewBuddies(location: CLLocation, radiusInkilometers: Double, completion: ([User], NSError?) -> Void) {
         // Query locations at input location with a radius of radius meters
         
-        let geoQueryDispatchGroup = dispatch_group_create()
+        //let geoQueryDispatchGroup = dispatch_group_create()
         var userList = [User]()
         
         print("inside discoverNewBuddies " + String(location.coordinate.longitude))
-        dispatch_group_enter(geoQueryDispatchGroup)
+        //dispatch_group_enter(geoQueryDispatchGroup)
         
         
         let geofire = GeoFire(firebaseRef: userLocationRef)
         let query = geofire.queryAtLocation(location, withRadius: radiusInkilometers)
         
         let fetchWorkoutDispatchGroup = dispatch_group_create()
-        
+        print("before query")
         let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
-            //print(key, location.distanceFromLocation(ßfoundLocation))
+            print(key)
+        
             dispatch_group_enter(fetchWorkoutDispatchGroup)
-            
-            //if(key != User.currentUser?.userId){
-                User.getUserById(key, successHandler: { (user: User) in
-                    user.userlocation = foundLocation
-                    userList.append(user)
-                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+            if(key != User.currentUser?.userId){
+                isCurrentUserFriendWith(key , completion: { (friendStatus) in
+                    if friendStatus == FriendStatus.notFriend {
+                        User.getUserById(key, successHandler: { (user: User) in
+                            user.userlocation = foundLocation
+                            
+                            userList.append(user)
+                            dispatch_group_leave(fetchWorkoutDispatchGroup)
+                        })
+                    }else{
+                         dispatch_group_leave(fetchWorkoutDispatchGroup)
+                    }
                 })
-            //}
+                
+            }else{
+                dispatch_group_leave(fetchWorkoutDispatchGroup)
+            }
         })
     
-            query.observeReadyWithBlock({
-                query.removeObserverWithFirebaseHandle(observerHandle)
-                dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
-                    dispatch_group_leave(geoQueryDispatchGroup)
-                }
-            })
+        query.observeReadyWithBlock({
+            print("observeReadyWithBlock")
             
-            dispatch_group_notify(geoQueryDispatchGroup, dispatch_get_main_queue()) {
+            dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+                
+                print("dispatch_group_leave(fetchWorkoutDispatchGroup)")
+                query.removeObserverWithFirebaseHandle(observerHandle)
                 completion(userList, nil)
             }
+        })
     }
     
     class func discoverFBFriends(completion: ([User], NSError?) -> Void){

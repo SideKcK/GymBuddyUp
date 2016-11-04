@@ -404,6 +404,7 @@ class User {
         
         
         dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            print("leave getUserById")
             successHandler(ret)
         })
     }

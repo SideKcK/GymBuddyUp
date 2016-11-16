@@ -216,7 +216,7 @@
                                     <constraint firstAttribute="height" constant="40" id="ITm-Ov-uJS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="3ad-ds-m6i"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="4fL-iF-iIE"/>
@@ -230,7 +230,7 @@
                                     <constraint firstAttribute="height" constant="40" id="k9n-iS-Yqb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
                                     <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="FFQ-be-IVw"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="gR6-U2-dUd"/>
@@ -243,7 +243,7 @@
                                     <constraint firstAttribute="height" constant="40" id="jha-yN-GAi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="SCz-b8-JgH"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="VWX-Kh-lAf"/>
@@ -256,7 +256,7 @@
                                     <constraint firstAttribute="height" constant="40" id="DAf-Tp-3ud"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="onEditChanged:" destination="403-DD-fB4" eventType="editingChanged" id="fxb-Iw-gMq"/>
                                     <action selector="onEditDidBegin:" destination="403-DD-fB4" eventType="editingDidBegin" id="I0C-ce-U8k"/>
@@ -402,14 +402,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e4s-PS-xsp">
-                                <rect key="frame" x="70" y="244" width="180.5" height="40"/>
+                                <rect key="frame" x="38" y="244" width="244.5" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="146" id="MTj-P0-QSW"/>
                                     <constraint firstAttribute="height" constant="40" id="vBi-Wn-dcA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="MTj-P0-QSW"/>
@@ -420,13 +420,13 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tib-f9-oOz">
-                                <rect key="frame" x="70" y="178" width="180.5" height="40"/>
+                                <rect key="frame" x="38" y="178" width="244.5" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dHa-ej-etH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="onEditDidEnd:" destination="Tlx-dY-81w" eventType="editingChanged" id="neb-Do-ABr"/>
                                 </connections>
@@ -483,7 +483,7 @@
                             <constraint firstItem="gKv-Yd-5Ea" firstAttribute="centerY" secondItem="WbF-eU-WZt" secondAttribute="centerY" constant="35" id="bqT-QW-cF7"/>
                             <constraint firstItem="e4s-PS-xsp" firstAttribute="centerX" secondItem="WbF-eU-WZt" secondAttribute="centerX" id="hC2-rg-xDR"/>
                             <constraint firstItem="gKv-Yd-5Ea" firstAttribute="centerX" secondItem="WbF-eU-WZt" secondAttribute="centerX" id="hQw-cT-DFu"/>
-                            <constraint firstItem="tib-f9-oOz" firstAttribute="leading" secondItem="WbF-eU-WZt" secondAttribute="leading" constant="70" id="jN8-wy-bwF"/>
+                            <constraint firstItem="tib-f9-oOz" firstAttribute="leading" secondItem="WbF-eU-WZt" secondAttribute="leading" constant="38" id="jN8-wy-bwF"/>
                             <constraint firstItem="e4s-PS-xsp" firstAttribute="centerY" secondItem="WbF-eU-WZt" secondAttribute="centerY" constant="-20" id="mo1-6Z-hFk"/>
                             <constraint firstItem="e4s-PS-xsp" firstAttribute="leading" secondItem="tib-f9-oOz" secondAttribute="leading" id="ntg-V8-45V"/>
                             <constraint firstItem="SQF-z0-ROQ" firstAttribute="centerX" secondItem="WbF-eU-WZt" secondAttribute="centerX" id="sne-9r-5Uw"/>
@@ -936,7 +936,7 @@
         <image name="male_icon" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wWJ-7J-eXk"/>
         <segue reference="ujo-k8-446"/>
+        <segue reference="oZ1-zv-yLD"/>
     </inferredMetricsTieBreakers>
 </document>

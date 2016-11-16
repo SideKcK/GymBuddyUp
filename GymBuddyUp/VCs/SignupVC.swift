@@ -105,7 +105,7 @@ class SignupVC: UIViewController, UITextViewDelegate {
         let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
         let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
         if show == true {
-            let changeInHeight = (CGRectGetHeight(keyboardFrame) / 2 + 40) * (show ? -1 : 1)
+            let changeInHeight = (CGRectGetHeight(keyboardFrame) / 2) * (show ? -1 : 1)
             UIView.animateWithDuration(animationDurarion, animations: { () -> Void in
                 self.centerLine.constant += changeInHeight
             })

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class LocationCache : NSObject, CLLocationManagerDelegate {
     
@@ -27,11 +28,13 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
     }
     
     func setup() {
+        print("LocationCache setup")
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     
@@ -44,7 +47,7 @@ class LocationCache : NSObject, CLLocationManagerDelegate {
                 // update to user_info
                 print("locationManager")
                 User.currentUser!.updateLastSeenLocation(currentLocation){ error in
-                    
+                    User.currentUser!.userlocation = self.currentLocation
                     
                 }
             }

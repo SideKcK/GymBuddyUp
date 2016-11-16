@@ -132,6 +132,7 @@ class User {
     var sameInterestNum: Int?
     var interestList: NSDictionary?
     
+    var blockedUserList = NSDictionary()
     
     static var currentUser: User?
     
@@ -219,6 +220,7 @@ class User {
             else {
                 User.currentUser = User(user: firebaseUser!)
                 User.currentUser?.syncWithLastestUserInfo(nil)
+                LocationCache.sharedInstance.setup()
                 completion(user: User.currentUser, error: nil)
             }
         })
@@ -247,6 +249,7 @@ class User {
                 if let user = firebaseUser {
                     User.currentUser = User(user: user)
                     completion(user: User.currentUser, error: nil)
+                    LocationCache.sharedInstance.setup()
                 }
 
             }
@@ -280,7 +283,7 @@ class User {
                         User.currentUser = User(user: firebaseUser!)
                         User.currentUser!.updateProfile("screen_name", value: User.currentUser!.screenName)
                         User.currentUser!.updateProfile("facebook_accesstoken", value: FBSDKAccessToken.currentAccessToken().tokenString)
-                        
+                        LocationCache.sharedInstance.setup()
                         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"])
                         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                             
@@ -339,6 +342,12 @@ class User {
             if let _facebookId = snapshot.value?["facebook_id"] as? String {
                 self.facebookId = _facebookId
             }
+            
+            Report.getBlockUsers({ (content, error) in
+                if content != nil {
+                    self.blockedUserList = content!
+                }
+            })
             completion?()
         }
     }
@@ -500,11 +509,11 @@ class User {
         }
         //let currentLocation = LocationCache.sharedInstance.currentLocation
         
-        let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        /*let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
         
         updateLastSeenLocation(currentLocation){ (err) in
             //            print(err)
-        }
+        }*/
 
     }
     
@@ -716,6 +725,7 @@ class User {
     func signOut(completion: (NSError?)->()) {
         do {
             try FIRAuth.auth()?.signOut()
+            LocationCache.sharedInstance.isGotLocation = false
             completion(nil)
         }
         catch let error as NSError {

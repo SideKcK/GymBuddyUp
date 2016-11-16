@@ -34,10 +34,11 @@ class MeMainVC: UIViewController {
         }
         
     
-        if(user.userId != User.currentUser?.userId){
+        if(user.userId == User.currentUser?.userId){
             isCurrent = false
             self.title = " "
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem()
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(reportUser))
+            
         }
         //editProfileButton.hidden = !isCurrent
 
@@ -55,6 +56,63 @@ class MeMainVC: UIViewController {
         print("Enter MeMainVC")
         
         setHistory()
+    }
+    
+    func reportUser() {
+        if true || user.userId != User.currentUser?.userId {
+            let alertController = UIAlertController(title: "Report", message: "Are you sure to report or block this user?", preferredStyle: .ActionSheet)
+            alertController.customize()
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                // ...
+            }
+            
+            alertController.addAction(cancelAction)
+            let reportAction = UIAlertAction(title: "Report", style: .Destructive) { (action) in
+                let subAlertController = UIAlertController(title: "Report", message: "Are you sure to report for posting abusive or illegal content?", preferredStyle: .ActionSheet)
+                
+                let reportAction = UIAlertAction(title: "Yes", style: .Destructive) {
+                    (action) in
+                    // ... @Lingchao: Logic for reporting user
+                    
+                }
+                let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                subAlertController.addAction(subCancelAction)
+                subAlertController.addAction(reportAction)
+                
+                self.presentViewController(subAlertController, animated: true, completion: { 
+                    
+                })
+                
+
+            }
+            
+            alertController.addAction(reportAction)
+            let blockAction = UIAlertAction(title: "Block", style: .Destructive) { (action) in
+                // logic for reporting user
+                // ...
+                let subAlertController = UIAlertController(title: "Block", message: "Are you sure to block this user?", preferredStyle: .ActionSheet)
+                
+                let blockAction = UIAlertAction(title: "Yes", style: .Destructive) {
+                    (action) in
+                    // ... @Lingchao: Logic for blocking user
+                    
+                }
+                let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                subAlertController.addAction(subCancelAction)
+                subAlertController.addAction(blockAction)
+                self.presentViewController(subAlertController, animated: true, completion: {
+                    
+                })
+            }
+            alertController.addAction(blockAction)
+            self.presentViewController(alertController, animated: true, completion: {
+                // ...
+            })
+        }
     }
     
     @IBAction func psButton(sender: AnyObject) {
@@ -191,6 +249,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         return 3 + trackings.count
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
@@ -200,8 +259,12 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = user?.screenName
             cell.gymLabel.text = "Not Specific"
             cell.chatButton.hidden = true
+            cell.reportButton.hidden = true
+            cell.blockButton.hidden = true
             cell.actionButton.hidden = !isCurrent
             if asyncId != User.currentUser?.userId {
+                cell.chatButton.hidden = false
+                cell.chatButton.hidden = false
                 cell.chatButton.hidden = false
             }
             

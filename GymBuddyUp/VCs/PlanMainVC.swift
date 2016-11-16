@@ -298,9 +298,7 @@ class PlanMainVC: UIViewController {
             print("changed mode")
             self.calendarView.toggleCurrentDayView()
         }
-        //calendarView.changeMode(.WeekView)
-        //add selection circle to todays dayview
-        
+   
     }
     
     

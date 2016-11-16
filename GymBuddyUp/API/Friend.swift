@@ -158,39 +158,44 @@ class Friend {
         
         let fetchWorkoutDispatchGroup = dispatch_group_create()
         print("before query")
-        let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
-            print(key)
         
-            dispatch_group_enter(fetchWorkoutDispatchGroup)
-            if(key != User.currentUser?.userId){
-                isCurrentUserFriendWith(key , completion: { (friendStatus) in
-                    if friendStatus == FriendStatus.notFriend {
-                        User.getUserById(key, successHandler: { (user: User) in
-                            user.userlocation = foundLocation
-                            
-                            userList.append(user)
-                            dispatch_group_leave(fetchWorkoutDispatchGroup)
-                        })
+        var blockedUserList = User.currentUser!.blockedUserList
+
+            let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
+
+                dispatch_group_enter(fetchWorkoutDispatchGroup)
+                if(key != User.currentUser?.userId){
+                    if let isBlocked = blockedUserList[key]{
+                        dispatch_group_leave(fetchWorkoutDispatchGroup)
                     }else{
-                         dispatch_group_leave(fetchWorkoutDispatchGroup)
+                        isCurrentUserFriendWith(key , completion: { (friendStatus) in
+                            if friendStatus == FriendStatus.notFriend {
+                                User.getUserById(key, successHandler: { (user: User) in
+                                    user.userlocation = foundLocation
+                                    
+                                    userList.append(user)
+                                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+                                })
+                            }else{
+                                dispatch_group_leave(fetchWorkoutDispatchGroup)
+                            }
+                        })
                     }
-                })
-                
-            }else{
-                dispatch_group_leave(fetchWorkoutDispatchGroup)
-            }
-        })
-    
-        query.observeReadyWithBlock({
-            print("observeReadyWithBlock")
+                }else{
+                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+                }
+            })
             
-            dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+            query.observeReadyWithBlock({
+                print("observeReadyWithBlock")
                 
-                print("dispatch_group_leave(fetchWorkoutDispatchGroup)")
-                query.removeObserverWithFirebaseHandle(observerHandle)
-                completion(userList, nil)
-            }
-        })
+                dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+                    
+                    print("dispatch_group_leave(fetchWorkoutDispatchGroup)")
+                    query.removeObserverWithFirebaseHandle(observerHandle)
+                    completion(userList, nil)
+                }
+            })
     }
     
     class func discoverFBFriends(completion: ([User], NSError?) -> Void){
@@ -198,29 +203,23 @@ class Friend {
         var userList = [User]()
         if let tokenString = User.currentUser?.facebookAccesstoken{
         let fetchWorkoutDispatchGroup = dispatch_group_create()
-        let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params, tokenString: tokenString, version: nil, HTTPMethod: "GET")
-        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-            print("inside discoverFBFriends 11 " + tokenString)
+            
+        var blockedUserList = NSDictionary()
+        Report.getBlockUsers({ (content, error) in
+            blockedUserList = content!
+            let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params, tokenString: tokenString, version: nil, HTTPMethod: "GET")
+            request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+                print("inside discoverFBFriends 11 " + tokenString)
            
-            if error != nil {
-                 print("inside discoverFBFriends error")
-                let errorMessage = error.localizedDescription /* Handle error */
-                print(error.userInfo[FBSDKErrorDeveloperMessageKey] )
-                print(errorMessage)
-            } else if result.isKindOfClass(NSDictionary){ /* handle response */
-                
-                /*if let userNameArray : NSArray = result.valueForKey("data") as! NSArray
-                {
-                    for(index, friend) in userNameArray.enumerate()
-                    {
-                        print(friend.valueForKey("id"))
-                        print(friend.valueForKey("first_name"))
-                    }
-                }*/
-                
-                for (key, value) in result as! NSDictionary {
-                    let _key  = key as! String
-                    switch(_key){
+                if error != nil {
+                    print("inside discoverFBFriends error")
+                    let errorMessage = error.localizedDescription /* Handle error */
+                    print(error.userInfo[FBSDKErrorDeveloperMessageKey] )
+                    print(errorMessage)
+                } else if result.isKindOfClass(NSDictionary){ /* handle response */
+                    for (key, value) in result as! NSDictionary {
+                        let _key  = key as! String
+                        switch(_key){
                         case "data":
                              let stringMirror = Mirror(reflecting: value)
                             print(stringMirror.subjectType)
@@ -231,7 +230,10 @@ class Friend {
                                 let _friend = friend as! NSDictionary
                                 User.getUserByFacebookId(_friend["id"] as! String,successHandler: { (user: User) in
                                     print(user.screenName)
-                                    userList.append(user)
+                                    if let isBlocked = blockedUserList[user.userId!]{
+                                    }else{
+                                        userList.append(user)
+                                    }
                                     dispatch_group_leave(fetchWorkoutDispatchGroup)
                                 })
                                 print("Facebook id :" + String(friend["id"]))
@@ -246,20 +248,18 @@ class Friend {
                         break
                         default:
                             Log.info("no key matches")
-                    }
-                    print("Property: \"\(key as! String)\"")
-                    //print("Value: \"\(value as! String)\"")
+                        }
                     
+                    }
+                    print(" dispatch_group_leave(fetchWorkoutDispatchGroup) :")
                 }
-                print(" dispatch_group_leave(fetchWorkoutDispatchGroup) :")
-            }
             
             }
+        })
+        }else{
+             completion(userList, nil)
         }
-    
-    
     }
-    
 
 }
 

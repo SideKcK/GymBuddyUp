@@ -53,8 +53,12 @@ class Discover {
                         // add id to data dictionary
                         data["id"] = key
                         let invite = Invite(JSON:data)!
-                        if invite.inviterId != currentUserId && invite.isAvailable == true {
-                            result.append(invite)
+                        if let isBlocked = User.currentUser?.blockedUserList[invite.inviterId]{
+                        
+                        }else{
+                            if invite.inviterId != currentUserId && invite.isAvailable == true {
+                                result.append(invite)
+                            }
                         }
                     }
                     

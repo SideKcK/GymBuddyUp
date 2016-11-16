@@ -9,13 +9,14 @@
 import UIKit
 import ChameleonFramework
 import KRProgressHUD
-class SignupVC: UIViewController {
+class SignupVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var profileButton: UIButton!
     
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorView: UIStackView!
     @IBOutlet weak var tryLabel: UILabel!
     
+    @IBOutlet weak var eulaTextView: UITextView!
     
     @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var emailField: UITextField!
@@ -37,7 +38,7 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVisual()
-
+        setupView()
         self.hideKeyboardWhenTappedAround()
 
         profileImage = UIImage(named: "dumbbell")
@@ -60,9 +61,25 @@ class SignupVC: UIViewController {
         setupButton()
     }
     
+    func setupView() {
+        eulaTextView.delegate = self
+        eulaTextView.userInteractionEnabled = true
+        let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our End User Licence Agreement.")
+        attributedString.addAttribute(NSLinkAttributeName, value: "", range: NSRange(location: 32, length: 16))
+        eulaTextView.attributedText = attributedString
+    }
+    
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+        Log.info("clicked")
+        let navVC = self.navigationController
+        let termsWebViewVC = TermsVC()
+        navVC?.pushViewController(termsWebViewVC, animated: false)
+        return true
+    }
+    
     func setupVisual() {
         self.view.backgroundColor = ColorScheme.s3Bg
-  
+        
         errorLabel.hidden = true
         errorView.hidden = true
         statusView.hidden = true

@@ -29,6 +29,7 @@
 		B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */; };
 		B6F00BAC1D66B3E400B09177 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA31D66B3E400B09177 /* User.swift */; };
 		B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */; };
+		C112B9FF1DDBD88B00066D9F /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112B9FE1DDBD88B00066D9F /* TermsVC.swift */; };
 		C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */; };
 		C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */; };
 		C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */; };
@@ -170,6 +171,7 @@
 		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
+		C112B9FE1DDBD88B00066D9F /* TermsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsVC.swift; path = VCs/TermsVC.swift; sourceTree = "<group>"; };
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KKParamsLabel.swift; sourceTree = "<group>"; };
 		C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneModalViewController.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				C64EC1FB1D1B6B5A000DA37A /* GenderVC.swift */,
 				C6860BFC1D8A69E10081C89D /* LoginVC.swift */,
 				C6860BFE1D8B90950081C89D /* ResetPwVC.swift */,
+				C112B9FE1DDBD88B00066D9F /* TermsVC.swift */,
 			);
 			name = SignupLogin;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */,
 				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
+				C112B9FF1DDBD88B00066D9F /* TermsVC.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,

@@ -31,7 +31,7 @@ class SignupVC: UIViewController, UITextViewDelegate {
     
     var alertController: UIAlertController!
     var profileImage: UIImage!
-    
+    var keyboardStatus = false
     let textColor = ColorScheme.g2Text
     let tintColor = ColorScheme.p1Tint
     
@@ -39,7 +39,7 @@ class SignupVC: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         setupVisual()
         setupView()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
 
         profileImage = UIImage(named: "dumbbell")
         
@@ -61,12 +61,61 @@ class SignupVC: UIViewController, UITextViewDelegate {
         setupButton()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func setupView() {
+        
         eulaTextView.delegate = self
         eulaTextView.userInteractionEnabled = true
         let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our End User Licence Agreement.")
         attributedString.addAttribute(NSLinkAttributeName, value: "", range: NSRange(location: 32, length: 16))
         eulaTextView.attributedText = attributedString
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        if keyboardStatus == false {
+            Log.info("keyboardWillShow")
+            keyboardStatus = true
+            adjustingHeight(true, notification: notification)
+        }
+
+    }
+    
+    func keyboardWillHide(notification:NSNotification) {
+        if keyboardStatus == true {
+            Log.info("keyboardWillHide")
+            keyboardStatus = false
+            adjustingHeight(false, notification: notification)
+        }
+    }
+    
+    func adjustingHeight(show:Bool, notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        if show == true {
+            let changeInHeight = (CGRectGetHeight(keyboardFrame) / 2 + 40) * (show ? -1 : 1)
+            UIView.animateWithDuration(animationDurarion, animations: { () -> Void in
+                self.centerLine.constant += changeInHeight
+            })
+        } else {
+            UIView.animateWithDuration(animationDurarion, animations: { () -> Void in
+                self.centerLine.constant = 20
+            })
+        }
+
+        
     }
     
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
@@ -140,15 +189,11 @@ class SignupVC: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func onEditDidBegin(sender: AnyObject) {
-        UIView.animateWithDuration(1.0) {
-            self.centerLine.constant -= 40
-        }
+
     }
     
     @IBAction func onEditDidEnd(sender: AnyObject) {
-        UIView.animateWithDuration(1.0) {
-            self.centerLine.constant += 40
-        }
+
     }
     
     @IBAction func onEditChanged(sender: AnyObject) {

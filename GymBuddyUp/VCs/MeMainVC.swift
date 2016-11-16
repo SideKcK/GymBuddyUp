@@ -34,7 +34,7 @@ class MeMainVC: UIViewController {
         }
         
     
-        if(user.userId == User.currentUser?.userId){
+        if(user.userId != User.currentUser?.userId){
             isCurrent = false
             self.title = " "
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menuSmDots_white"), style: .Plain, target: self, action: #selector(reportUser))

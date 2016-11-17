@@ -73,6 +73,17 @@ class MeMainVC: UIViewController {
                 let reportAction = UIAlertAction(title: "Yes", style: .Destructive) {
                     (action) in
                     // ... @Lingchao: Logic for reporting user
+                        Report.addReport("abusive_user", reportItemId: self.user.userId, completion: { error in
+                            let alertController = UIAlertController(title: "Thanks for reporting", message: "Your feedback is important in helping us keep the SideKck community safe.", preferredStyle: .Alert)
+                            alertController.customize()
+                            
+                            let OKAction = UIAlertAction(title: "Dismiss", style: .Default) { (action) in
+                                // ...
+                            }
+                        
+                            alertController.addAction(OKAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                    })
                     
                 }
                 let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
@@ -96,7 +107,22 @@ class MeMainVC: UIViewController {
                 
                 let blockAction = UIAlertAction(title: "Yes", style: .Destructive) {
                     (action) in
-                    // ... @Lingchao: Logic for blocking user
+                    Report.blockUser(self.user.userId,completion: { error in
+                        Report.getBlockUsers({ (content, error) in
+                            if content != nil {
+                                User.currentUser!.blockedUserList = content!
+                            }
+                            let alertController = UIAlertController(title: "Blocked this user successfully!", message: "", preferredStyle: .Alert)
+                            alertController.customize()
+                            
+                            let OKAction = UIAlertAction(title: "Dismiss", style: .Default) { (action) in
+                                //self.performSegueWithIdentifier( "unwindToMeMainVC", sender: self)
+                            }
+                            
+                            alertController.addAction(OKAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        })
+                    })
                     
                 }
                 let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in

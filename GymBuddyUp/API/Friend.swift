@@ -169,10 +169,10 @@ class Friend {
                         dispatch_group_leave(fetchWorkoutDispatchGroup)
                     }else{
                         isCurrentUserFriendWith(key , completion: { (friendStatus) in
-                            if friendStatus == FriendStatus.notFriend {
+                            if friendStatus != FriendStatus.isFriend {
                                 User.getUserById(key, successHandler: { (user: User) in
                                     user.userlocation = foundLocation
-                                    
+                                    user.distance = User.currentUser?.userlocation!.distanceFromLocation(user.userlocation!)
                                     userList.append(user)
                                     dispatch_group_leave(fetchWorkoutDispatchGroup)
                                 })
@@ -193,6 +193,7 @@ class Friend {
                     
                     print("dispatch_group_leave(fetchWorkoutDispatchGroup)")
                     query.removeObserverWithFirebaseHandle(observerHandle)
+                    userList.sortInPlace({ $0.distance < $1.distance })
                     completion(userList, nil)
                 }
             })

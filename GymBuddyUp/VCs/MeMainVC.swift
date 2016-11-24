@@ -239,13 +239,13 @@ class MeMainVC: UIViewController {
     }
     
     func tapProfile (sender: AnyObject) {
-        let vc = UIImagePickerController()
-        vc.delegate = self
-        
-        vc.allowsEditing = true
-        vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
-        self.presentViewController(vc, animated: true, completion: nil)
+        if(self.user.userId == User.currentUser?.userId){
+            let vc = UIImagePickerController()
+            vc.delegate = self
+            vc.allowsEditing = self.user.userId == User.currentUser?.userId
+            vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
     }
     
     func onActionButton (sender: UIButton) {

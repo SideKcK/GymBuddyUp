@@ -513,9 +513,9 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         if let titleView = navigationItem.titleView as? UILabel {
             titleView.text = dayView.date.monthDescription
         }
-        
+        let currentDate = NSDate()
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
-        if selectedDate < NSDate() {
+        if selectedDate < NSDate() && dateToString(selectedDate) != dateToString(currentDate){
             if addPlanToTopConstraint.constant != -66 {
                 addPlanToTopConstraint.constant = -66
             }

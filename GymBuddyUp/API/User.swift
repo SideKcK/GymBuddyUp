@@ -295,6 +295,7 @@ class User {
                                 // Facebook users ID:
                                 let userID:NSString = result.valueForKey("id") as! NSString
                                 User.currentUser!.updateProfile("facebook_id", value: userID)
+                                User.currentUser!.updateProfile("profile_image_url", value: "http://graph.facebook.com/" + (userID as String) + "/picture?type=large")
                             }
                        
                         })

@@ -159,7 +159,7 @@ class Friend {
         let fetchWorkoutDispatchGroup = dispatch_group_create()
         print("before query")
         
-        var blockedUserList = User.currentUser!.blockedUserList
+        let blockedUserList = User.currentUser!.blockedUserList
 
             let observerHandle = query.observeEventType(.KeyEntered, withBlock: { (key: String!, foundLocation: CLLocation!) in
 
@@ -203,11 +203,8 @@ class Friend {
         let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
         var userList = [User]()
         if let tokenString = User.currentUser?.facebookAccesstoken{
-        let fetchWorkoutDispatchGroup = dispatch_group_create()
-            
-        var blockedUserList = NSDictionary()
-        Report.getBlockUsers({ (content, error) in
-            blockedUserList = content!
+            let fetchWorkoutDispatchGroup = dispatch_group_create()
+            let blockedUserList = User.currentUser!.blockedUserList
             let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params, tokenString: tokenString, version: nil, HTTPMethod: "GET")
             request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
                 print("inside discoverFBFriends 11 " + tokenString)
@@ -256,7 +253,6 @@ class Friend {
                 }
             
             }
-        })
         }else{
              completion(userList, nil)
         }

@@ -88,10 +88,7 @@ class MeFindVC: UIViewController {
             } else {
                 for user in users{
                     if(User.currentUser?.userId != user.userId){
-                        if(User.currentUser?.userlocation != nil && user.userlocation != nil){
-                            user.distance = User.currentUser?.userlocation!.distanceFromLocation(user.userlocation!)
-                        }
-                        
+                       
                         resultUserList.append(user)
                         
                     }

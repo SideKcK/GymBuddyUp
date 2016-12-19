@@ -19,6 +19,9 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var gymNameLabel: UILabel!
     @IBOutlet weak var goalLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var blockButton: UIButton!
+    
     @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var gymLabel: UILabel!

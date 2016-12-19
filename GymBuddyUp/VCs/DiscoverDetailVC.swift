@@ -184,6 +184,7 @@ class DiscoverDetailVC: UIViewController {
                 statusView.displayView()
             } else {
                 Log.info("join failed")
+                Log.info(error?.localizedDescription)
             }
 
         }

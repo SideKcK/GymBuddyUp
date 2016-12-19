@@ -37,7 +37,8 @@ class MeMainVC: UIViewController {
         if(user.userId != User.currentUser?.userId){
             isCurrent = false
             self.title = " "
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem()
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menuSmDots_white"), style: .Plain, target: self, action: #selector(reportUser))
+            
         }
         //editProfileButton.hidden = !isCurrent
 
@@ -55,6 +56,89 @@ class MeMainVC: UIViewController {
         print("Enter MeMainVC")
         
         setHistory()
+    }
+    
+    func reportUser() {
+        if true || user.userId != User.currentUser?.userId {
+            let alertController = UIAlertController(title: "Report", message: "Are you sure to report or block this user?", preferredStyle: .ActionSheet)
+            alertController.customize()
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                // ...
+            }
+            
+            alertController.addAction(cancelAction)
+            let reportAction = UIAlertAction(title: "Report", style: .Destructive) { (action) in
+                let subAlertController = UIAlertController(title: "Report", message: "Are you sure to report for posting abusive or illegal content?", preferredStyle: .ActionSheet)
+                
+                let reportAction = UIAlertAction(title: "Yes", style: .Destructive) {
+                    (action) in
+                    // ... @Lingchao: Logic for reporting user
+                        Report.addReport("abusive_user", reportItemId: self.user.userId, completion: { error in
+                            let alertController = UIAlertController(title: "Thanks for reporting", message: "Your feedback is important in helping us keep the SideKck community safe.", preferredStyle: .Alert)
+                            alertController.customize()
+                            
+                            let OKAction = UIAlertAction(title: "Dismiss", style: .Default) { (action) in
+                                // ...
+                            }
+                        
+                            alertController.addAction(OKAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                    })
+                    
+                }
+                let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                subAlertController.addAction(subCancelAction)
+                subAlertController.addAction(reportAction)
+                
+                self.presentViewController(subAlertController, animated: true, completion: { 
+                    
+                })
+                
+
+            }
+            
+            alertController.addAction(reportAction)
+            let blockAction = UIAlertAction(title: "Block", style: .Destructive) { (action) in
+                // logic for reporting user
+                // ...
+                let subAlertController = UIAlertController(title: "Block", message: "Are you sure to block this user?", preferredStyle: .ActionSheet)
+                
+                let blockAction = UIAlertAction(title: "Yes", style: .Destructive) {
+                    (action) in
+                    Report.blockUser(self.user.userId,completion: { error in
+                        Report.getBlockUsers({ (content, error) in
+                            if content != nil {
+                                User.currentUser!.blockedUserList = content!
+                            }
+                            let alertController = UIAlertController(title: "Blocked this user successfully!", message: "", preferredStyle: .Alert)
+                            alertController.customize()
+                            
+                            let OKAction = UIAlertAction(title: "Dismiss", style: .Default) { (action) in
+                                //self.performSegueWithIdentifier( "unwindToMeMainVC", sender: self)
+                            }
+                            
+                            alertController.addAction(OKAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        })
+                    })
+                    
+                }
+                let subCancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                    // ...
+                }
+                subAlertController.addAction(subCancelAction)
+                subAlertController.addAction(blockAction)
+                self.presentViewController(subAlertController, animated: true, completion: {
+                    
+                })
+            }
+            alertController.addAction(blockAction)
+            self.presentViewController(alertController, animated: true, completion: {
+                // ...
+            })
+        }
     }
     
     @IBAction func psButton(sender: AnyObject) {
@@ -155,13 +239,13 @@ class MeMainVC: UIViewController {
     }
     
     func tapProfile (sender: AnyObject) {
-        let vc = UIImagePickerController()
-        vc.delegate = self
-        
-        vc.allowsEditing = true
-        vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
-        self.presentViewController(vc, animated: true, completion: nil)
+        if(self.user.userId == User.currentUser?.userId){
+            let vc = UIImagePickerController()
+            vc.delegate = self
+            vc.allowsEditing = self.user.userId == User.currentUser?.userId
+            vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
     }
     
     func onActionButton (sender: UIButton) {
@@ -191,6 +275,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
         return 3 + trackings.count
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cells[indexPath.row], forIndexPath: indexPath) as! UserProfileCell
@@ -200,8 +285,12 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = user?.screenName
             cell.gymLabel.text = "Not Specific"
             cell.chatButton.hidden = true
+            cell.reportButton.hidden = true
+            cell.blockButton.hidden = true
             cell.actionButton.hidden = !isCurrent
             if asyncId != User.currentUser?.userId {
+                cell.chatButton.hidden = false
+                cell.chatButton.hidden = false
                 cell.chatButton.hidden = false
             }
             

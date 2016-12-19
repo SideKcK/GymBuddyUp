@@ -23,9 +23,9 @@ target 'GymBuddyUp' do
     pod 'Firebase/Messaging'
     
     # These are pods used for the auth providers.
-    pod 'FBSDKCoreKit'
-    pod 'FBSDKLoginKit'
-    pod 'FBSDKShareKit'
+    pod 'FBSDKCoreKit', '4.17.0'
+    pod 'FBSDKLoginKit','4.17.0'
+    pod 'FBSDKShareKit','4.17.0'
     pod 'ALTextInputBar', '1.1.0'
     pod 'JSQMessagesViewController'
     

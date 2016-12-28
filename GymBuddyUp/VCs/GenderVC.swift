@@ -64,6 +64,7 @@ class GenderVC: UIViewController {
     }
     
     @IBAction func onNextButton(sender: AnyObject) {
+        
         if selected == User.Gender.Unspecified {
             //pop up alert
             let alertController = UIAlertController(title: "We recommend gym buddies based on your information", message: "Specify your gender so we can provide you with better match. ", preferredStyle: .Alert)
@@ -85,6 +86,15 @@ class GenderVC: UIViewController {
 
         }else {
             User.currentUser?.updateProfile("gender", value: self.selected?.hashValue)
+            if self.selected == .Female{
+                User.currentUser?.updateProfilePicture(UIImage(named: "woman")!){error in
+                    print("Error setting profile picture \(error?.localizedFailureReason)")
+                }
+            }else if self.selected == .Male{
+                User.currentUser?.updateProfilePicture(UIImage(named: "man")!){error in
+                    print("Error setting profile picture \(error?.localizedFailureReason)")
+                }
+            }
             self.performSegueWithIdentifier("toSetGoalSegue", sender: sender)
         }
     }

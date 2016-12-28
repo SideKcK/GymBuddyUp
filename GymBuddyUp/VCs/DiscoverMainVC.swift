@@ -168,7 +168,7 @@ class DiscoverMainVC: UIViewController {
     func reloadPublicDiscover() {
         KRProgressHUD.show()
         let currentLocation = LocationCache.sharedInstance.currentLocation
-        Discover.discoverPublicWorkout(currentLocation, radiusInkilometers: 100.0, withinDays: 3, offset: 0, completion: { (workouts, error) in
+        Discover.discoverPublicWorkout(currentLocation, radiusInkilometers: 1000.0, withinDays: 5, offset: 0, completion: { (workouts, error) in
             if error != nil{
                 Log.error(error.debugDescription)
                 KRProgressHUD.showError(message: "Network error")

@@ -117,8 +117,8 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     }
     var currentUnitType: Exercise.UnitType?
     
-    var repsRange = [1, 2, 3, 4, 5, 6, 7, 8]
-    var lbsRange = [10, 15, 20, 25, 30, 35, 40]
+    var repsRange = [Int]()
+    var lbsRange = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,7 +140,13 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
         repsPicker.interitemSpacing = 20.0
         lbsPicker.maskDisabled = false
         repsPicker.maskDisabled = false
+        for i in 0...50 {
+            repsRange.append(i)
+        }
         
+        for i in 2...60 {
+            lbsRange.append(i*5)
+        }
         contentView.backgroundColor = ColorScheme.s3Bg
         
         // TODO: Replace text with specific image from Siran
@@ -559,6 +565,14 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
 
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let desVC = segue.destinationViewController as? PlanExerciseVC {
+            guard let _currentTrackedItem =  trackedPlan?.trackingItems[currentTrackedIndex] else {return}
+            guard let currentExercise = _currentTrackedItem.exercise else {return}
+            desVC.exercise = currentExercise
+        }
+        
+    }
     @IBAction func onExitButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -128,7 +128,7 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
                 headerView.backgroundColor = UIColor.flatWhiteColor()
                 
                 let profileView = UIImageView(frame: CGRect(x: 20, y: 10, width: 20, height: 20))
-                profileView.image = UIImage(named: "dumbbell")
+                profileView.image = UIImage(named: "gym")
                 headerView.addSubview(profileView)
                 
                 let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 150, height: 20))
@@ -145,7 +145,7 @@ extension InviteGymVC: UITableViewDelegate, UITableViewDataSource {
         headerView.backgroundColor = UIColor.flatWhiteColor()
         
         let profileView = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 20))
-        profileView.image = UIImage(named: "dumbbell")
+        profileView.image = UIImage(named: "gym")
         headerView.addSubview(profileView)
         
         let nameLabel = UILabel(frame: CGRect(x: 60, y: 10, width: 150, height: 20))

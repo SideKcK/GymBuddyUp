@@ -46,6 +46,8 @@ class PlanDetailVC: UIViewController {
     var sendTo = 2
     var startTime: NSDate!
     var gym: Gym?
+    var isInvite = false
+    
     override func viewDidLoad() {
         Log.info("PlanDetailVC fired")
         super.viewDidLoad()
@@ -53,6 +55,14 @@ class PlanDetailVC: UIViewController {
         checkinImage.hidden = true
         checkinLabel.hidden = true
         self.title = weekMonthDateString(selectedDate)
+        if let _invite = workout.invite{
+            isInvite = true
+            if let _gym = _invite.gym{
+                print("Gym is not nil")
+                self.gym = _gym
+            }
+            self.timeLabel.text = timeString(_invite.workoutTime)
+        }
         let currentDate = NSDate()
         let getTrackedItemGroup = dispatch_group_create()
         if (selectedDate < currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
@@ -69,12 +79,23 @@ class PlanDetailVC: UIViewController {
                         self.gymButton.setTitle(self.trackedPlan?.gym?.name, forState: UIControlState.Normal)
                         self.gymButton.enabled = false
                     }
+                }else{
+                    if self.gym != nil {
+                        self.gymButton.titleLabel?.text = self.gym?.name
+                        self.gymButton.setTitle(self.gym?.name, forState: UIControlState.Normal)
+                        self.gymButton.enabled = false
+                        //self.gymButton.addTarget(self, action: #selector(self.onGymButton), forControlEvents: .TouchUpInside)
+                    }else{
+                        self.gymButton.hidden = true
+                    }
+                    print("start date" + String(dateToInt(self.workout.startDate)))
+                    
                 }
                 dispatch_group_leave(getTrackedItemGroup)
             }
             dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
                 self.setTableView()
-                self.setViews(false)
+                self.setViews(self.isInvite)
                 self.setupVisual()
                 
                 self.title = weekMonthDateString(self.selectedDate)
@@ -87,13 +108,13 @@ class PlanDetailVC: UIViewController {
                 self.gymButton.titleLabel?.text = self.gym?.name
                 self.gymButton.setTitle(self.gym?.name, forState: UIControlState.Normal)
                 self.gymButton.enabled = false
+                //gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
             }else{
                 self.gymButton.hidden = true
             }
             setTableView()
-            setViews(false)
+            setViews(isInvite)
             setupVisual()
-            timeLabel.text = timeString(NSDate())
             self.title = weekMonthDateString(self.selectedDate)
         }
         
@@ -172,7 +193,7 @@ class PlanDetailVC: UIViewController {
                 if(allowFind){
                     findButton.hidden = false
                 }else{
-                    findButton.hidden = true
+                    findButton.hidden = invited
                 }
                 checkinButton.hidden = true
                 checkinImage.hidden = true
@@ -183,14 +204,17 @@ class PlanDetailVC: UIViewController {
             timeLocView.hidden = false
             findButton.hidden = true
         }
+        print("allowFind" + String(allowFind) )
+        print("allowStart" + String(allowStart) )
+        print("allowFind" + String(allowFind) )
         setStatusBar()
     }
     
     func setStatusBar() {
         if sendTo == 1 {
-            statusLabel.text = "Searching SideKcK in Buddy List"
+            statusLabel.text = "Searching a gymbuddy in Buddy List"
         } else if sendTo == 2 {
-            statusLabel.text = "Searching SideKcK in Public"
+            statusLabel.text = "Searching a gymbuddy in Public"
         } else {
             statusLabel.text = " invited"
         }
@@ -214,6 +238,23 @@ class PlanDetailVC: UIViewController {
         }
         //isEmpty = true
         return isTracked
+    }
+    
+    func onGymButton (sender: UIButton) {
+        print("Placeid :")
+        print(self.gym!.placeid)
+        guard let placeId = self.gym!.placeid else {
+            return
+        }
+        
+        GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
+            if error == nil {
+                self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
+            } else {
+                print(error)
+            }
+        }
+        
     }
     
     @IBAction func onMoreButton(sender: AnyObject) {
@@ -351,7 +392,7 @@ class PlanDetailVC: UIViewController {
         
         if let desVC = segue.destinationViewController as? GymMapVC {
             desVC.gym = Gym()
-            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+            //desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
         
         if let checkInVC = segue.destinationViewController as? CheckinVC {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xzf-MA-lgc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xzf-MA-lgc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -26,7 +26,7 @@
         <!--Plan-->
         <scene sceneID="uQf-Cg-qoz">
             <objects>
-                <viewController title="Plan" id="31H-FZ-iqh" customClass="PlanMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Plan" id="31H-FZ-iqh" customClass="PlanMainVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hSZ-Zk-hIe"/>
                         <viewControllerLayoutGuide type="bottom" id="0aJ-FB-Buv"/>
@@ -153,7 +153,7 @@
         <!--FRIDAY, AUG 8-->
         <scene sceneID="tnT-Rg-sO1">
             <objects>
-                <viewController id="6RH-aL-G0u" customClass="PlanDetailVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6RH-aL-G0u" customClass="PlanDetailVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uOc-sU-Yyj"/>
                         <viewControllerLayoutGuide type="bottom" id="6ME-CB-0h1"/>
@@ -238,7 +238,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="QpO-v7-fwG"/>
                                         </constraints>
-                                        <state key="normal" title="Find your SideKcK"/>
+                                        <state key="normal" title="Find a gymbuddy"/>
                                         <connections>
                                             <segue destination="9k4-MG-6g0" kind="presentation" identifier="toInviteMainSegue" id="hM7-gy-tIQ"/>
                                         </connections>
@@ -397,7 +397,7 @@
         <!--Build-->
         <scene sceneID="Hp6-2m-aHi">
             <objects>
-                <viewController id="7ET-gH-rDP" customClass="PlanBuildVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7ET-gH-rDP" customClass="PlanBuildVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hTi-SH-Zoz"/>
                         <viewControllerLayoutGuide type="bottom" id="qqd-de-aPn"/>
@@ -508,7 +508,7 @@
         <!--SideKcK Library-->
         <scene sceneID="QYZ-dR-pYV">
             <objects>
-                <viewController id="Pfd-Zn-eNt" customClass="PlanLibVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Pfd-Zn-eNt" customClass="PlanLibVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xfc-Mq-sRl"/>
                         <viewControllerLayoutGuide type="bottom" id="QSh-Vu-rSd"/>
@@ -521,7 +521,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="center" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="70" id="Gaj-jB-bXp" customClass="LibraryCatCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="center" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="70" id="Gaj-jB-bXp" customClass="LibraryCatCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gaj-jB-bXp" id="5NV-SO-uUU">
@@ -576,7 +576,7 @@
         <!--Plan ExerciseVC-->
         <scene sceneID="58H-vK-2hk">
             <objects>
-                <tableViewController storyboardIdentifier="ExerciseVC" id="cEc-hT-IZq" customClass="PlanExerciseVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExerciseVC" id="cEc-hT-IZq" customClass="PlanExerciseVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bST-aC-kg3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -734,7 +734,7 @@
         <!--Chest-->
         <scene sceneID="niG-gM-Xau">
             <objects>
-                <viewController id="ubu-Fg-6j6" customClass="PlanLibDetailVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ubu-Fg-6j6" customClass="PlanLibDetailVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ewb-wP-AnD"/>
                         <viewControllerLayoutGuide type="bottom" id="MmK-Ax-KLn"/>
@@ -766,7 +766,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanDetailCell" id="hmn-Dl-SBs" customClass="PlanDetailCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlanDetailCell" id="hmn-Dl-SBs" customClass="PlanDetailCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="14" width="320" height="431"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -866,7 +866,7 @@
         <!--Edit Plan-->
         <scene sceneID="rXZ-b2-azn">
             <objects>
-                <viewController id="eMN-d5-ggT" customClass="PlanEditVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eMN-d5-ggT" customClass="PlanEditVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UmT-R3-2Ok"/>
                         <viewControllerLayoutGuide type="bottom" id="nsw-TO-ZB9"/>
@@ -1162,7 +1162,7 @@
         <!--Plan Lib NavVC-->
         <scene sceneID="Y2a-ba-pxk">
             <objects>
-                <navigationController storyboardIdentifier="PlanLibNavVC" automaticallyAdjustsScrollViewInsets="NO" id="iEy-Fi-h0E" customClass="PlanLibNavVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PlanLibNavVC" automaticallyAdjustsScrollViewInsets="NO" id="iEy-Fi-h0E" customClass="PlanLibNavVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tgE-WK-U7S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1475,7 +1475,7 @@
         <!--CheckinVC-->
         <scene sceneID="7am-JM-110">
             <objects>
-                <viewController storyboardIdentifier="CheckinVC" modalPresentationStyle="overCurrentContext" id="mbY-W1-37C" customClass="CheckinVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckinVC" modalPresentationStyle="overCurrentContext" id="mbY-W1-37C" customClass="CheckinVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xGN-Ax-Daj"/>
                         <viewControllerLayoutGuide type="bottom" id="8wy-GB-1Ff"/>

@@ -209,7 +209,7 @@
 		C64943001D67B3BB002C9D49 /* InboxMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InboxMainVC.swift; path = VCs/InboxMainVC.swift; sourceTree = "<group>"; };
 		C64943021D67B45D002C9D49 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		C64943031D67B45D002C9D49 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = Views/MessageCell.xib; sourceTree = "<group>"; };
-		C649C5471CE2C31C00258994 /* GymBuddyUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddyUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C649C5471CE2C31C00258994 /* SideKcK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideKcK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C649C54A1CE2C31C00258994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C649C54F1CE2C31C00258994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C649C5511CE2C31C00258994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -465,7 +465,7 @@
 		C649C5481CE2C31C00258994 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C649C5471CE2C31C00258994 /* GymBuddyUp.app */,
+				C649C5471CE2C31C00258994 /* SideKcK.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -671,9 +671,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C649C5461CE2C31C00258994 /* GymBuddyUp */ = {
+		C649C5461CE2C31C00258994 /* SideKcK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "GymBuddyUp" */;
+			buildConfigurationList = C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "SideKcK" */;
 			buildPhases = (
 				EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */,
 				C649C5431CE2C31C00258994 /* Sources */,
@@ -686,9 +686,9 @@
 			);
 			dependencies = (
 			);
-			name = GymBuddyUp;
+			name = SideKcK;
 			productName = GymBuddyUp;
-			productReference = C649C5471CE2C31C00258994 /* GymBuddyUp.app */;
+			productReference = C649C5471CE2C31C00258994 /* SideKcK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -707,7 +707,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C649C5421CE2C31C00258994 /* Build configuration list for PBXProject "GymBuddyUp" */;
+			buildConfigurationList = C649C5421CE2C31C00258994 /* Build configuration list for PBXProject "SideKcK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -720,7 +720,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C649C5461CE2C31C00258994 /* GymBuddyUp */,
+				C649C5461CE2C31C00258994 /* SideKcK */,
 			);
 		};
 /* End PBXProject section */
@@ -1099,6 +1099,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Headers",
@@ -1121,7 +1122,7 @@
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sidekckapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SideKcK;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
@@ -1136,6 +1137,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PODS_ROOT}/Firebase/Headers",
@@ -1158,7 +1160,7 @@
 				INFOPLIST_FILE = GymBuddyUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sidekckapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SideKcK;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GymBuddyUp/GymBuddyUp-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
@@ -1168,7 +1170,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C649C5421CE2C31C00258994 /* Build configuration list for PBXProject "GymBuddyUp" */ = {
+		C649C5421CE2C31C00258994 /* Build configuration list for PBXProject "SideKcK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C649C5571CE2C31C00258994 /* Debug */,
@@ -1177,7 +1179,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "GymBuddyUp" */ = {
+		C649C5591CE2C31C00258994 /* Build configuration list for PBXNativeTarget "SideKcK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C649C55A1CE2C31C00258994 /* Debug */,

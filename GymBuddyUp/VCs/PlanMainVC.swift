@@ -279,7 +279,18 @@ class PlanMainVC: UIViewController {
     }
     
     func onGymButton (sender: UIButton) {
-        self.performSegueWithIdentifier("toGymMapSegue", sender: self)
+        guard let placeId = self.gyms[self.selectedDate]![sender.tag].placeid else {
+            return
+        }
+        
+        GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
+            if error == nil {
+                self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
+            } else {
+                print(error)
+            }
+        }
+        
     }
     
     func onProfileButton (sender: UIButton) {
@@ -349,7 +360,7 @@ class PlanMainVC: UIViewController {
         if (selectedDate > currentDate || dateToString(selectedDate) == dateToString(currentDate)) {
             if(isTracked){
             }else{
-                let inviteAction = UIAlertAction(title: "Find Your SideKcK", style: .Default) { (action) in
+                let inviteAction = UIAlertAction(title: "Find a gymbuddy", style: .Default) { (action) in
                     self.performSegueWithIdentifier("toInvitationSegue", sender: workout)
                 }
                 alertController.addAction(inviteAction)
@@ -455,7 +466,7 @@ class PlanMainVC: UIViewController {
         
         if let desVC = segue.destinationViewController as? GymMapVC {
             desVC.gym = Gym()
-            desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
+            //desVC.userLocation = CLLocation(latitude: 30.562, longitude: -96.313)
         }
         
     }
@@ -635,6 +646,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
             let cacheId = workoutId + dateString
             if let _invite = InvitationCache.sharedInstance.cache[cacheId] {
                 cell.invite = _invite
+                workouts[selectedDate]![index].invite = _invite
                 cell.showTimeView()
                 cell.showLocView()
                 cell.showStatusView()
@@ -662,6 +674,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                             InvitationCache.sharedInstance.cache[cacheId] = _invite
                             tableView.beginUpdates()
                             cell.invite = _invite
+                            self.workouts[self.selectedDate]![index].invite = _invite
                             cell.showTimeView()
                             cell.showLocView()
                             cell.showStatusView()
@@ -753,7 +766,8 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         }
         cell.moreButton.tag = indexPath.row
         cell.moreButton.addTarget(self, action: #selector(PlanMainVC.onMoreButton(_:)), forControlEvents: .TouchUpInside)
-        //add gym segue
+        cell.gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
+        
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

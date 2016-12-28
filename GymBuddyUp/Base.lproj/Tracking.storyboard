@@ -21,7 +21,7 @@
         <!--Track MainVC-->
         <scene sceneID="gfn-j3-Baf">
             <objects>
-                <viewController id="Eaj-m7-41E" customClass="TrackMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Eaj-m7-41E" customClass="TrackMainVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uFY-LS-SYp"/>
                         <viewControllerLayoutGuide type="bottom" id="D8a-iD-J70"/>
@@ -106,7 +106,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qf-DE-Zhz" customClass="KKParamsLabel" customModule="GymBuddyUp" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qf-DE-Zhz" customClass="KKParamsLabel" customModule="SideKcK" customModuleProvider="target">
                                                 <rect key="frame" x="84" y="8" width="39" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="XF3-s9-EZQ"/>
@@ -124,7 +124,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH0-62-uvQ" customClass="KKParamsLabel" customModule="GymBuddyUp" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH0-62-uvQ" customClass="KKParamsLabel" customModule="SideKcK" customModuleProvider="target">
                                                 <rect key="frame" x="198" y="8" width="39" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="haG-6H-eC6"/>
@@ -161,7 +161,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lD3-Qo-mC4" userLabel="LbsPickerContainer">
                                         <rect key="frame" x="0.0" y="226" width="320" height="0.0"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5tp-o6-Qxm" userLabel="LbsPicker" customClass="AKPickerView" customModule="GymBuddyUp" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5tp-o6-Qxm" userLabel="LbsPicker" customClass="AKPickerView" customModule="SideKcK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
@@ -178,7 +178,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAS-Am-TLN" userLabel="RepsPickerContainer">
                                         <rect key="frame" x="0.0" y="226" width="320" height="0.0"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58n-AC-YOR" userLabel="RepsPicker" customClass="AKPickerView" customModule="GymBuddyUp" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58n-AC-YOR" userLabel="RepsPicker" customClass="AKPickerView" customModule="SideKcK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
@@ -371,7 +371,7 @@
         <!--Tracking Pop Over View Controller-->
         <scene sceneID="wKz-EQ-9AG">
             <objects>
-                <viewController storyboardIdentifier="trackingTodo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9v-5Y-B2V" customClass="TrackingPopOverViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="trackingTodo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9v-5Y-B2V" customClass="TrackingPopOverViewController" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pue-YZ-3GJ"/>
                         <viewControllerLayoutGuide type="bottom" id="cll-tR-fb6"/>
@@ -404,7 +404,7 @@
         <!--Done Modal View Controller-->
         <scene sceneID="Br2-9J-E0p">
             <objects>
-                <viewController storyboardIdentifier="DoneModalVC" modalPresentationStyle="overCurrentContext" id="rXB-N3-hsm" customClass="DoneModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DoneModalVC" modalPresentationStyle="overCurrentContext" id="rXB-N3-hsm" customClass="DoneModalViewController" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nr-nF-UNO"/>
                         <viewControllerLayoutGuide type="bottom" id="xy1-ST-k9K"/>
@@ -508,7 +508,7 @@
         <!--Break Modal View Controller-->
         <scene sceneID="gqH-Lt-VJ4">
             <objects>
-                <viewController storyboardIdentifier="BreakTimeVC" modalPresentationStyle="overCurrentContext" id="U5E-1K-A4K" customClass="BreakModalViewController" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BreakTimeVC" modalPresentationStyle="overCurrentContext" id="U5E-1K-A4K" customClass="BreakModalViewController" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Oe-It-v6O"/>
                         <viewControllerLayoutGuide type="bottom" id="LjH-DF-2g9"/>
@@ -526,7 +526,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhw-Pf-eqd" customClass="RPCircularProgress" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhw-Pf-eqd" customClass="RPCircularProgress" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="100" y="129" width="120" height="120"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22 s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rI-uA-oVo">

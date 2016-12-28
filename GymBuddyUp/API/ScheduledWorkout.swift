@@ -49,6 +49,7 @@ class ScheduledWorkout {
     var recur: Int
     var planId: String
     var skipOn: [NSDate]
+    var invite: Invite?
     
     init(id:String, data: NSDictionary)
     {

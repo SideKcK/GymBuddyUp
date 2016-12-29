@@ -52,9 +52,16 @@ class Discover {
                     if data["available"] as? Bool != false && data["access"] as? Int > 1{
                         // add id to data dictionary
                         data["id"] = key
+                        
                         let invite = Invite(JSON:data)!
-                        if invite.inviterId != currentUserId && invite.isAvailable == true {
-                            result.append(invite)
+                        print("invite.publishedTime: " + String(invite.publishedTime.timeIntervalSince1970))
+                        if let isBlocked = User.currentUser?.blockedUserList[invite.inviterId]{
+                        
+                        }else{
+                            let currentTime = NSDate()
+                            if invite.inviterId != currentUserId && invite.isAvailable == true && currentTime < invite.publishedTime {
+                                result.append(invite)
+                            }
                         }
                     }
                     
@@ -65,12 +72,14 @@ class Discover {
             query.observeReadyWithBlock({
                 query.removeObserverWithFirebaseHandle(observerHandle)
                 dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {
+                    
                     dispatch_group_leave(geoQueryDispatchGroup)
                 }
             })
         }
         
         dispatch_group_notify(geoQueryDispatchGroup, dispatch_get_main_queue()) {
+            result = result.reverse()
             completion(result, nil)
         }
     }

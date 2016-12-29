@@ -10,6 +10,7 @@
 		9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */; };
 		9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */; };
 		9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA91D878FC2000FC787 /* Plan.storyboard */; };
+		9F9C4BB41DD417CC00FD4B21 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C4BB31DD417CC00FD4B21 /* Report.swift */; };
 		9FA0DF111D6FB7CE003CACEE /* BestRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */; };
 		9FA0DF131D700601003CACEE /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0DF121D700601003CACEE /* Tracking.swift */; };
 		B6B4366A1D76C2FA003EF548 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B436691D76C2FA003EF548 /* Friend.swift */; };
@@ -29,6 +30,7 @@
 		B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */; };
 		B6F00BAC1D66B3E400B09177 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA31D66B3E400B09177 /* User.swift */; };
 		B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */; };
+		C112B9FF1DDBD88B00066D9F /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112B9FE1DDBD88B00066D9F /* TermsVC.swift */; };
 		C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */; };
 		C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */; };
 		C11F64E21D6670D400FFF5DB /* DoneModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */; };
@@ -140,6 +142,7 @@
 		8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinVC.swift; sourceTree = "<group>"; };
 		9F4D9DAA1D878FC2000FC787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
+		9F9C4BB31DD417CC00FD4B21 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		9FA0DF101D6FB7CE003CACEE /* BestRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestRecord.swift; sourceTree = "<group>"; };
 		9FA0DF121D700601003CACEE /* Tracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		B6B436691D76C2FA003EF548 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 		B6F00BA31D66B3E400B09177 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6F00BAD1D66B40400B09177 /* GymBuddyUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GymBuddyUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
+		C112B9FE1DDBD88B00066D9F /* TermsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsVC.swift; path = VCs/TermsVC.swift; sourceTree = "<group>"; };
 		C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KKParamsLabel.swift; sourceTree = "<group>"; };
 		C11F64E11D6670D400FFF5DB /* DoneModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneModalViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				B6F00B9F1D66B3E400B09177 /* Library.swift */,
 				B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */,
 				9FA0DF121D700601003CACEE /* Tracking.swift */,
+				9F9C4BB31DD417CC00FD4B21 /* Report.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -569,6 +574,7 @@
 				C64EC1FB1D1B6B5A000DA37A /* GenderVC.swift */,
 				C6860BFC1D8A69E10081C89D /* LoginVC.swift */,
 				C6860BFE1D8B90950081C89D /* ResetPwVC.swift */,
+				C112B9FE1DDBD88B00066D9F /* TermsVC.swift */,
 			);
 			name = SignupLogin;
 			sourceTree = "<group>";
@@ -798,7 +804,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -876,6 +882,7 @@
 				C649C5691CE3EB1A00258994 /* SignupLoginNavVC.swift in Sources */,
 				C6860BFB1D8918FA0081C89D /* MeCreditTermVC.swift in Sources */,
 				C6AF1EE11D6BFFB300B69D08 /* FontScheme.swift in Sources */,
+				C112B9FF1DDBD88B00066D9F /* TermsVC.swift in Sources */,
 				C6CD01F01D3B34DA00D64A06 /* PlanAddMainVC.swift in Sources */,
 				C649C5611CE3C08700258994 /* ColorScheme.swift in Sources */,
 				C64943041D67B45D002C9D49 /* MessageCell.swift in Sources */,
@@ -894,6 +901,7 @@
 				B6F00B851D66B34600B09177 /* GFGeoHashQuery.m in Sources */,
 				C66B08191D4D55D3003B0872 /* PlanExerciseVC.swift in Sources */,
 				C1F08E851D78EDA700E6CA77 /* Conversation.swift in Sources */,
+				9F9C4BB41DD417CC00FD4B21 /* Report.swift in Sources */,
 				C64943011D67B3BB002C9D49 /* InboxMainVC.swift in Sources */,
 				C6304E1C1D639FD800EE7110 /* WorkoutCell.swift in Sources */,
 				C607BA451D57A3A100B1348B /* InviteMainVC.swift in Sources */,

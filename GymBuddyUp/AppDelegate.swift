@@ -64,7 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.currentUser?.userBecameActive()
         User.currentUser?.syncWithLastestUserInfo(nil)
         LocationCache.sharedInstance.setup()
+        /*Report.blockUser("1E2tZysv4ndvNSb8Cx2f53Z5r433",completion: { error in
         
+        })
+        Report.addReport("1", reportItemId: "1E2tZysv4ndvNSb8Cx2f53Z5r433",completion: { error in
+            
+        })*/
         /*********************/
         // Test the fuck out //
         /*********************/

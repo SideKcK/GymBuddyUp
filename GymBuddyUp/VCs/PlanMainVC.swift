@@ -305,12 +305,13 @@ class PlanMainVC: UIViewController {
 //        })
     }
     @IBAction func onTodayButton(sender: AnyObject) {
-        self.calendarView.toggleCurrentDayView()
 
-        //calendarView.changeMode(.WeekView)
-        //add selection circle to todays dayview
-        
-    }
+        print("on today button")
+        calendarView.changeMode(.WeekView) {
+            print("changed mode")
+            self.calendarView.toggleCurrentDayView()
+        }
+       }
     
     
     @IBAction func onNewPlanButton(sender: AnyObject) {
@@ -524,9 +525,9 @@ extension PlanMainVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
         if let titleView = navigationItem.titleView as? UILabel {
             titleView.text = dayView.date.monthDescription
         }
-        
+        let currentDate = NSDate()
         selectedDate = dayView.date.convertedDate()?.startOf(.Day)
-        if selectedDate < NSDate() {
+        if selectedDate < NSDate() && dateToString(selectedDate) != dateToString(currentDate){
             if addPlanToTopConstraint.constant != -66 {
                 addPlanToTopConstraint.constant = -66
             }

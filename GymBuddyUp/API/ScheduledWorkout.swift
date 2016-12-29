@@ -217,6 +217,7 @@ class ScheduledWorkout {
                             dispatch_group_leave(myGroup)
                         }
                     }
+        
                     dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
                         completion(workouts: allworkouts, error: nil)
                     })

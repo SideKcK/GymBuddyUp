@@ -9,13 +9,14 @@
 import UIKit
 import ChameleonFramework
 import KRProgressHUD
-class SignupVC: UIViewController {
+class SignupVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var profileButton: UIButton!
     
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorView: UIStackView!
     @IBOutlet weak var tryLabel: UILabel!
     
+    @IBOutlet weak var eulaTextView: UITextView!
     
     @IBOutlet weak var statusView: UIImageView!
     @IBOutlet weak var emailField: UITextField!
@@ -30,15 +31,15 @@ class SignupVC: UIViewController {
     
     var alertController: UIAlertController!
     var profileImage: UIImage!
-    
+    var keyboardStatus = false
     let textColor = ColorScheme.g2Text
     let tintColor = ColorScheme.p1Tint
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVisual()
-
-        self.hideKeyboardWhenTappedAround()
+        setupView()
+//        self.hideKeyboardWhenTappedAround()
 
         profileImage = UIImage(named: "dumbbell")
         
@@ -60,9 +61,74 @@ class SignupVC: UIViewController {
         setupButton()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func setupView() {
+        
+        eulaTextView.delegate = self
+        eulaTextView.userInteractionEnabled = true
+        let attributedString = NSMutableAttributedString(string: "By signing up, you agree to our End User Licence Agreement.")
+        attributedString.addAttribute(NSLinkAttributeName, value: "", range: NSRange(location: 32, length: 16))
+        eulaTextView.attributedText = attributedString
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        if keyboardStatus == false {
+            Log.info("keyboardWillShow")
+            keyboardStatus = true
+            adjustingHeight(true, notification: notification)
+        }
+
+    }
+    
+    func keyboardWillHide(notification:NSNotification) {
+        if keyboardStatus == true {
+            Log.info("keyboardWillHide")
+            keyboardStatus = false
+            adjustingHeight(false, notification: notification)
+        }
+    }
+    
+    func adjustingHeight(show:Bool, notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        if show == true {
+            let changeInHeight = (CGRectGetHeight(keyboardFrame) / 2) * (show ? -1 : 1)
+            UIView.animateWithDuration(animationDurarion, animations: { () -> Void in
+                self.centerLine.constant += changeInHeight
+            })
+        } else {
+            UIView.animateWithDuration(animationDurarion, animations: { () -> Void in
+                self.centerLine.constant = 20
+            })
+        }
+
+        
+    }
+    
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+        Log.info("clicked")
+        let navVC = self.navigationController
+        let termsWebViewVC = TermsVC()
+        navVC?.pushViewController(termsWebViewVC, animated: false)
+        return true
+    }
+    
     func setupVisual() {
         self.view.backgroundColor = ColorScheme.s3Bg
-  
+        
         errorLabel.hidden = true
         errorView.hidden = true
         statusView.hidden = true
@@ -123,15 +189,11 @@ class SignupVC: UIViewController {
     }
 
     @IBAction func onEditDidBegin(sender: AnyObject) {
-        UIView.animateWithDuration(1.0) {
-            self.centerLine.constant -= 40
-        }
+
     }
     
     @IBAction func onEditDidEnd(sender: AnyObject) {
-        UIView.animateWithDuration(1.0) {
-            self.centerLine.constant += 40
-        }
+
     }
     
     @IBAction func onEditChanged(sender: AnyObject) {

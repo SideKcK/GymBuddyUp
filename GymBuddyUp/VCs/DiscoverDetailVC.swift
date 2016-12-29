@@ -99,10 +99,26 @@ class DiscoverDetailVC: UIViewController {
         gymButton.titleLabel?.font = FontScheme.T2
     }
     
+    func onGymButton (sender: UIButton) {
+        guard let placeId = event.gym?.placeid else {
+            return
+        }
+        
+        GoogleAPI.sharedInstance.getGymById(placeId) { (gym, error) in
+            if error == nil {
+                self.performSegueWithIdentifier("toGymMapSegue", sender: gym)
+            } else {
+                print(error)
+            }
+        }
+        
+    }
+    
     func setupViews() {
         statusView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
         planView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
-        
+        gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
+        gymButton.setTitle(event.gym?.name, forState: .Normal)
         resetActionButton()
         joinStack.hidden = false
         profileView.image = UIImage(named: "dumbbell")
@@ -176,6 +192,7 @@ class DiscoverDetailVC: UIViewController {
             Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
             return
         }
+        
         Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in
             if error == nil {
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -184,6 +201,7 @@ class DiscoverDetailVC: UIViewController {
                 statusView.displayView()
             } else {
                 Log.info("join failed")
+                Log.info(error?.localizedDescription)
             }
 
         }

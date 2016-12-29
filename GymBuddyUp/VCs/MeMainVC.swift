@@ -102,8 +102,10 @@ class MeMainVC: UIViewController {
         let headerW = CGRectGetWidth(self.view.frame)
         profileView.frame = CGRect(x: headerW/2 - headerW/6, y: kHeaderHeight - profileRadius / 2.0, width: profileRadius, height: profileRadius)
         profileView.makeThumbnail(ColorScheme.p1Tint)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MeMainVC.tapProfile(_:)))
-        profileView.addGestureRecognizer(tap)
+        if(isCurrent){
+            let tap = UITapGestureRecognizer(target: self, action: #selector(MeMainVC.tapProfile(_:)))
+            profileView.addGestureRecognizer(tap)
+        }
         profileView.userInteractionEnabled = true
         //title background
         self.titleBGView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kHeaderHeight)

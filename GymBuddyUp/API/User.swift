@@ -497,9 +497,9 @@ class User {
                 print (error)
             }
         }
-        //let currentLocation = LocationCache.sharedInstance.currentLocation
+        let currentLocation = LocationCache.sharedInstance.currentLocation
         
-        let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
+        //let currentLocation = CLLocation(latitude: 30.563, longitude: -96.311)
         
         updateLastSeenLocation(currentLocation){ (err) in
             //            print(err)

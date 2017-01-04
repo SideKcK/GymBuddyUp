@@ -30,6 +30,7 @@
 		B6F00BAB1D66B3E400B09177 /* ScheduledWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA21D66B3E400B09177 /* ScheduledWorkout.swift */; };
 		B6F00BAC1D66B3E400B09177 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F00BA31D66B3E400B09177 /* User.swift */; };
 		B6F415CD1D6A8CBA0031F8F7 /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F415CC1D6A8CBA0031F8F7 /* Discover.swift */; };
+		BC2EE0FDFCF97D43885F1746 /* Pods_SideKcK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E36299B7E50D25CA77D96AD /* Pods_SideKcK.framework */; };
 		C112B9FF1DDBD88B00066D9F /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112B9FE1DDBD88B00066D9F /* TermsVC.swift */; };
 		C11F64DB1D6595FA00FFF5DB /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DA1D6595FA00FFF5DB /* AKPickerView.swift */; };
 		C11F64E01D66596200FFF5DB /* KKParamsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11F64DF1D66596200FFF5DB /* KKParamsLabel.swift */; };
@@ -137,9 +138,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		252D2C53CD17124FE2C90160 /* Pods-SideKcK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideKcK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SideKcK/Pods-SideKcK.release.xcconfig"; sourceTree = "<group>"; };
 		5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.release.xcconfig"; sourceTree = "<group>"; };
 		5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddyUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp.debug.xcconfig"; sourceTree = "<group>"; };
 		8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddyUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D6E52503F411C6A036B2D5D /* Pods-SideKcK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideKcK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SideKcK/Pods-SideKcK.debug.xcconfig"; sourceTree = "<group>"; };
+		8E36299B7E50D25CA77D96AD /* Pods_SideKcK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SideKcK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinVC.swift; sourceTree = "<group>"; };
 		9F4D9DAA1D878FC2000FC787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Plan.storyboard; sourceTree = "<group>"; };
 		9F9C4BB31DD417CC00FD4B21 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */,
+				BC2EE0FDFCF97D43885F1746 /* Pods_SideKcK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +303,8 @@
 			children = (
 				5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */,
 				5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */,
+				8D6E52503F411C6A036B2D5D /* Pods-SideKcK.debug.xcconfig */,
+				252D2C53CD17124FE2C90160 /* Pods-SideKcK.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -670,6 +677,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */,
+				8E36299B7E50D25CA77D96AD /* Pods_SideKcK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -774,7 +782,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SideKcK/Pods-SideKcK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B18F7A12CA9DC1BF136E170C /* [CP] Copy Pods Resources */ = {
@@ -789,7 +797,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBuddyUp/Pods-GymBuddyUp-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SideKcK/Pods-SideKcK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EAFC887F1C0146EE600483F6 /* [CP] Check Pods Manifest.lock */ = {
@@ -1101,7 +1109,7 @@
 		};
 		C649C55A1CE2C31C00258994 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DDB769693B4797FCAD24440 /* Pods-GymBuddyUp.debug.xcconfig */;
+			baseConfigurationReference = 8D6E52503F411C6A036B2D5D /* Pods-SideKcK.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1139,7 +1147,7 @@
 		};
 		C649C55B1CE2C31C00258994 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5360AE00851DB8194874EFBF /* Pods-GymBuddyUp.release.xcconfig */;
+			baseConfigurationReference = 252D2C53CD17124FE2C90160 /* Pods-SideKcK.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

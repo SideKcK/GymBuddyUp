@@ -250,6 +250,16 @@ class MeMainVC: UIViewController {
         }
     }
     
+    func onAddFriend (sender: UIButton) {
+        Friend.sendFriendRequest(user.userId) { (error: NSError?) in
+            if (error == nil) {
+                Log.info("requent sent!")
+                sender.setTitle("✉️ Reqeust Sent", forState: UIControlState.Normal)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     func onActionButton (sender: UIButton) {
         self.performSegueWithIdentifier("toEditProfileSegue", sender: sender)
     }
@@ -289,10 +299,26 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.chatButton.hidden = true
             cell.reportButton.hidden = true
             cell.blockButton.hidden = true
-            cell.actionButton.hidden = !isCurrent
+            if isCurrent {
+                cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
+            } else {
+                Friend.isCurrentUserFriendWith(asyncId, completion: { (status: Friend.FriendStatus) in
+                    switch status {
+                    case .isFriend:
+                        cell.actionButton.setTitle("Buddy", forState: .Normal)
+                        break
+                    case .notFriend:
+                        cell.actionButton.setTitle("Add Friend", forState: .Normal)
+                        cell.actionButton.addTarget(self, action: #selector(self.onAddFriend(_:)), forControlEvents: .TouchUpInside)
+                        break
+                    case .requestPending:
+                        cell.actionButton.setTitle("Reqeust Sent", forState: .Normal)
+                        break
+                    }
+                })
+                
+            }
             if asyncId != User.currentUser?.userId {
-                cell.chatButton.hidden = false
-                cell.chatButton.hidden = false
                 cell.chatButton.hidden = false
             }
             
@@ -302,7 +328,6 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
                 cell.gymLabel.text = gymName
             }
 
-            cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             cell.selectionStyle = .None
             return cell
         }else if indexPath.row == cells.count - 3 {

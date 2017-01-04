@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol UserProfileCellAddFriend {
+    func userProfileCell(profileCell: UserProfileCell, selectedUserId: String)
+}
+
 class UserProfileCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var workoutNumLabel: UILabel!
@@ -30,6 +34,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var requestStack: UIStackView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
+    @IBOutlet weak var addFriendButton: UIButton!
 
     var asyncIdentifer = ""
 

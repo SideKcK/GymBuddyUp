@@ -26,6 +26,7 @@ class PlanMainVC: UIViewController {
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
     var gyms = [NSDate: [Gym]]()
+    var invites = [NSDate: [Invite]]()
     var trackedPlan = [NSDate: [Bool]]()
     var dayPlans = [Plan]()
     var selectedDate: NSDate!
@@ -92,6 +93,7 @@ class PlanMainVC: UIViewController {
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
             self.workouts[date] = workouts
             self.gyms[date] = []
+            self.invites[date] = []
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {
@@ -134,6 +136,8 @@ class PlanMainVC: UIViewController {
                     self.plans[day] = []
                     self.gyms[day] = []
                     self.trackedPlan[day] = []
+                    self.invites[day] = []
+
                     dispatch_group_leave(fetchPlanTaskGroup)
                 }
                     
@@ -143,6 +147,7 @@ class PlanMainVC: UIViewController {
                         if error == nil {
                             self.plans[day] = plans
                             self.gyms[day] = [Gym](count: plans.count, repeatedValue: Gym())
+                            self.invites[day] = [Invite](count: plans.count, repeatedValue: Invite())
                         }
                         else {
                             Log.error("Error getting plans for this week error = \(error?.localizedDescription)")
@@ -455,7 +460,8 @@ class PlanMainVC: UIViewController {
                 desVC.plan =  plans[selectedDate]![row]
                 desVC.workout = workouts[selectedDate]![row]
                 desVC.gym = gyms[selectedDate]![row]
-               
+                desVC.invite = invites[selectedDate]![row]
+
             }
            
         }
@@ -655,7 +661,29 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                 cell.layoutIfNeeded()
                 cell.layoutSubviews()
                 Log.info("senTo = \(_invite.sentTo)")
-                if _invite.sentTo != nil{
+                Log.info("isAvailable = \(_invite.isAvailable)")
+                if _invite.isAvailable == false {
+                    if _invite.inviterId == User.currentUser?.userId {
+                        if _invite.inviteeId != nil {
+                            User.getUserArrayFromIdList([_invite.inviteeId!], successHandler: { (user: [User]) in
+                                guard let screenName = user[0].screenName else {return}
+                                cell.statusLabel.text = "Workout with \(screenName)"
+                            })
+                        }else {
+                            cell.statusLabel.text = "Workout with unnamed user"
+                        }
+                    }else {
+                        if _invite.inviterId != nil {
+                            User.getUserArrayFromIdList([_invite.inviterId!], successHandler: { (user: [User]) in
+                                guard let screenName = user[0].screenName else {return}
+                                cell.statusLabel.text = "Workout with \(screenName)"
+                            })
+                        }else {
+                            cell.statusLabel.text = "Workout with unnamed user"
+                        }
+                    
+                    }
+                }else if _invite.sentTo != nil{
                     if _invite.sentTo != "public" && _invite.sentTo != "friends" {
                         User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
                             guard let screenName = user[0].screenName else {return}
@@ -666,6 +694,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
                 gyms[selectedDate]![index] = _invite.gym!
+                invites[selectedDate]![index] = _invite
             } else {
                 Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workoutId, date: selectedDate, completion: { (error: NSError?, invite: Invite?) in
                     if let _invite = invite where error == nil {
@@ -683,7 +712,28 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                             cell.layoutIfNeeded()
                             cell.layoutSubviews()
                             tableView.endUpdates()
-                            if _invite.sentTo != nil {
+                            if _invite.isAvailable == false {
+                                if _invite.inviterId == User.currentUser?.userId {
+                                    if _invite.inviteeId != nil {
+                                        User.getUserArrayFromIdList([_invite.inviteeId!], successHandler: { (user: [User]) in
+                                            guard let screenName = user[0].screenName else {return}
+                                            cell.statusLabel.text = "Workout with \(screenName)"
+                                        })
+                                    }else {
+                                        cell.statusLabel.text = "Workout with unnamed user"
+                                    }
+                                }else {
+                                    if _invite.inviterId != nil {
+                                        User.getUserArrayFromIdList([_invite.inviterId!], successHandler: { (user: [User]) in
+                                            guard let screenName = user[0].screenName else {return}
+                                            cell.statusLabel.text = "Workout with \(screenName)"
+                                        })
+                                    }else {
+                                        cell.statusLabel.text = "Workout with unnamed user"
+                                    }
+                                    
+                                }
+                            }else if _invite.sentTo != nil {
                                 if _invite.inviterId != User.currentUser?.userId {
                                     if let user = UserCache.sharedInstance.cache[_invite.inviterId] {
                                         if let screenName = user.screenName {
@@ -727,8 +777,10 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
                         }else{
                             self.gyms[self.selectedDate]![index] = Gym()
                         }
+                        self.invites[self.selectedDate]![index] = _invite
                     }else{
                         self.gyms[self.selectedDate]![index] = Gym()
+                        self.invites[self.selectedDate]![index] = Invite()
                     }
                 })
             }
@@ -736,6 +788,7 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
         
         }else{
             self.gyms[self.selectedDate]![index] = Gym()
+            self.invites[self.selectedDate]![index] = Invite()
         }
         
         var isTracked = false

@@ -112,27 +112,32 @@ class Discover {
                         if let obj = userWorkoutInviteRef.value as? NSDictionary {
                     
                             for (key, value) in obj {
-                                dispatch_group_enter(getInvitesTaskGrp1)
+                                //dispatch_group_enter(getInvitesTaskGrp1)
                                 let inviteid = (value as! NSDictionary)["invite"] as! String
                                 print("invite :::::" + inviteid)
                                 // now get this invite object
-                                workoutInviteRef.child(inviteid).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
-                                    if(inviteSnapshot.value is NSNull){
-                                        print("invite is null")
-                                    }else{
-                                        var inviteData = inviteSnapshot.value as! [String: AnyObject]
-                                        inviteData["id"] = key
-                                        if let invite = Invite(JSON: inviteData){
-                                            if invite.isAvailable != false && invite.accessLevel != 2 {
-                                                print("invite is not null " + invite.id)
-                                                invites.append(invite)
+                                let access = (value as! NSDictionary)["access"] as! Int
+                                if(access != 0){
+                                    dispatch_group_enter(getInvitesTaskGrp1)
+                                    
+                                    workoutInviteRef.child(inviteid).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
+                                        if(inviteSnapshot.value is NSNull){
+                                            print("invite is null")
+                                        }else{
+                                            var inviteData = inviteSnapshot.value as! [String: AnyObject]
+                                            inviteData["id"] = key
+                                            if let invite = Invite(JSON: inviteData){
+                                                if invite.isAvailable != false && invite.accessLevel != 2 {
+                                                    print("invite is not null " + invite.id)
+                                                    invites.append(invite)
+                                                }
                                             }
+                                            
                                         }
-                                
-                                    }
                         
-                                    dispatch_group_leave(getInvitesTaskGrp1)
-                                })
+                                        dispatch_group_leave(getInvitesTaskGrp1)
+                                    })
+                                }
                             }
                         }
                         dispatch_group_notify(getInvitesTaskGrp1, dispatch_get_main_queue()) {

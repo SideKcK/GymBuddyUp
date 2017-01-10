@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BF459C803E3032E46FA073C /* Pods_GymBuddyUp.framework */; };
 		9F4D9DA81D8667B9000FC787 /* CheckinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA71D8667B9000FC787 /* CheckinVC.swift */; };
 		9F4D9DAB1D878FC2000FC787 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F4D9DA91D878FC2000FC787 /* Plan.storyboard */; };
 		9F9C4BB41DD417CC00FD4B21 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C4BB31DD417CC00FD4B21 /* Report.swift */; };
@@ -290,7 +289,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9324413A0BE328491CEFFAA2 /* Pods_GymBuddyUp.framework in Frameworks */,
 				BC2EE0FDFCF97D43885F1746 /* Pods_SideKcK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,7 +810,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -43,10 +43,11 @@ class PlanDetailVC: UIViewController {
     var workout: ScheduledWorkout!
     var plan: Plan!
     var trackedPlan: TrackedPlan?
-    var sendTo = 2
+    var sendTo = ""
     var startTime: NSDate!
     var gym: Gym?
     var isInvite = false
+    var invite: Invite?
     
     override func viewDidLoad() {
         Log.info("PlanDetailVC fired")
@@ -55,6 +56,7 @@ class PlanDetailVC: UIViewController {
         checkinImage.hidden = true
         checkinLabel.hidden = true
         self.title = weekMonthDateString(selectedDate)
+        print("Inside viewDidLoad")
         if let _invite = workout.invite{
             isInvite = true
             if let _gym = _invite.gym{
@@ -62,6 +64,12 @@ class PlanDetailVC: UIViewController {
                 self.gym = _gym
             }
             self.timeLabel.text = timeString(_invite.workoutTime)
+        }
+        if invite != nil {
+            if invite!.id != "-1"{
+                sendTo = invite!.sentTo
+                print("sendTo : " + sendTo)
+            }
         }
         let currentDate = NSDate()
         let getTrackedItemGroup = dispatch_group_create()
@@ -95,6 +103,7 @@ class PlanDetailVC: UIViewController {
             }
             dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
                 self.setTableView()
+                print("self.isInvite 1:" + String(self.isInvite))
                 self.setViews(self.isInvite)
                 self.setupVisual()
                 
@@ -113,6 +122,7 @@ class PlanDetailVC: UIViewController {
                 self.gymButton.hidden = true
             }
             setTableView()
+            print("self.isInvite 2:" + String(isInvite))
             setViews(isInvite)
             setupVisual()
             self.title = weekMonthDateString(self.selectedDate)
@@ -190,8 +200,8 @@ class PlanDetailVC: UIViewController {
                 checkinLabel.hidden = !isEmpty
             }else{
                 workoutButton.hidden = true
-                if(allowFind){
-                    findButton.hidden = false
+                if(!allowFind){
+                    findButton.hidden = true
                 }else{
                     findButton.hidden = invited
                 }
@@ -211,13 +221,81 @@ class PlanDetailVC: UIViewController {
     }
     
     func setStatusBar() {
-        if sendTo == 1 {
+        /*if sendTo == "friends" {
             statusLabel.text = "Searching a gymbuddy in Buddy List"
-        } else if sendTo == 2 {
+        } else if sendTo == "public" {
             statusLabel.text = "Searching a gymbuddy in Public"
-        } else {
-            statusLabel.text = " invited"
+        } else if sendTo != ""{
+            User.getUserArrayFromIdList([sendTo], successHandler: { (user: [User]) in
+                guard let screenName = user[0].screenName else {return}
+                self.statusLabel.text =  "Invitation sent to \(screenName)"
+            })
+        }*/
+        let _invite = invite!
+        if _invite.isAvailable == false {
+            if _invite.inviterId == User.currentUser?.userId {
+                if _invite.inviteeId != nil {
+                    User.getUserArrayFromIdList([_invite.inviteeId!], successHandler: { (user: [User]) in
+                        guard let screenName = user[0].screenName else {return}
+                        self.statusLabel.text = "Workout with \(screenName)"
+                    })
+                }else {
+                    self.statusLabel.text = "Workout with unnamed user"
+                }
+            }else {
+                if _invite.inviterId != nil {
+                    User.getUserArrayFromIdList([_invite.inviterId!], successHandler: { (user: [User]) in
+                        guard let screenName = user[0].screenName else {return}
+                        self.statusLabel.text = "Workout with \(screenName)"
+                    })
+                }else {
+                    self.statusLabel.text = "Workout with unnamed user"
+                }
+                
+            }
+        }else if _invite.sentTo != nil {
+            if _invite.inviterId != User.currentUser?.userId {
+                if let user = UserCache.sharedInstance.cache[_invite.inviterId] {
+                    if let screenName = user.screenName {
+                        self.statusLabel.text = "Workout with \(screenName)"
+                    } else {
+                        self.statusLabel.text = "Workout with unnamed user"
+                    }
+                    
+                } else {
+                    User.getUserArrayFromIdList([_invite.inviterId], successHandler: { (users: [User]) in
+                        if users.count > 0 {
+                            UserCache.sharedInstance.cache[_invite.inviterId] = users[0]
+                            guard let screenName = users[0].screenName else {return}
+                            self.statusLabel.text = "Workout with \(screenName)"
+                        }
+                    })
+                }
+            } else {
+                if let recipientId = _invite.sentTo {
+                    if _invite.sentTo != "public" && _invite.sentTo != "friends" {
+                        if let user = UserCache.sharedInstance.cache[recipientId] where user.screenName != nil {
+                            self.statusLabel.text = "Invitation sent to \(user.screenName!)"
+                        } else {
+                            User.getUserArrayFromIdList([_invite.sentTo], successHandler: { (user: [User]) in
+                                guard let screenName = user[0].screenName else {return}
+                                self.statusLabel.text = "Invitation sent to \(screenName)"
+                            })
+                        }
+                    } else {
+                        if recipientId == "friends" {
+                            statusLabel.text = "Searching a gymbuddy in Buddy List"
+                        } else if recipientId == "public" {
+                            statusLabel.text = "Searching a gymbuddy in Public"
+                        }
+                    }
+                    
+                } else {
+                    self.statusLabel.text = "Invitation sent to unknown user"
+                }
+            }
         }
+
     }
     
     func checkIsEmptyExercise() -> Bool{
@@ -331,7 +409,7 @@ class PlanDetailVC: UIViewController {
     @IBAction func onCancelInviteButton(sender: AnyObject) {
         print("cancel invite")
         var message = ""
-        if sendTo == 1 || sendTo == 2{
+        if sendTo == "friends" || sendTo == "public"{
             message = "Cancel broadcasting?"
         }else {
             message = "Cancel invitation?"
@@ -417,6 +495,7 @@ class PlanDetailVC: UIViewController {
             }
             dispatch_group_notify(getTrackedItemGroup, dispatch_get_main_queue()) {
                 self.setTableView()
+                print("Inside reloadPlan")
                 self.setViews(false)
                 self.setupVisual()
                 self.timeLabel.text = timeString(NSDate())

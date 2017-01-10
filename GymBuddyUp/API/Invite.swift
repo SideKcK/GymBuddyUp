@@ -38,6 +38,11 @@ class Invite : Mappable {
         
     }
     
+    init () {
+        //self.canceledByInviter = false
+        self.id = "-1"
+    
+    }
     // Mappable
     func mapping(map: Map) {
         id <- map["id"] // there is not field named id

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3QE-q7-zSr">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3QE-q7-zSr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10,7 +10,7 @@
         <!--Me-->
         <scene sceneID="ELA-NH-Ggs">
             <objects>
-                <viewController storyboardIdentifier="MeMainVC" title="Me" id="mv2-Eg-HHb" customClass="MeMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeMainVC" title="Me" id="mv2-Eg-HHb" customClass="MeMainVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MSs-wE-zmR"/>
                         <viewControllerLayoutGuide type="bottom" id="1XB-ur-XwH"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="276" id="T3H-3H-6Vq" customClass="UserProfileCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="276" id="T3H-3H-6Vq" customClass="UserProfileCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="276"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3H-3H-6Vq" id="IxG-Yx-V54">
@@ -60,7 +60,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="An3-ew-gym">
+                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="An3-ew-gym">
                                                     <rect key="frame" x="40" y="94" width="240" height="34"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qb-GX-Gs0">
@@ -94,18 +94,18 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnT-pC-s8s">
-                                                    <rect key="frame" x="287" y="8" width="25" height="25"/>
+                                                    <rect key="frame" x="282" y="8" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="1SX-Eu-Uf1"/>
-                                                        <constraint firstAttribute="width" constant="25" id="M1q-jI-nbW"/>
+                                                        <constraint firstAttribute="height" constant="30" id="1SX-Eu-Uf1"/>
+                                                        <constraint firstAttribute="width" constant="30" id="M1q-jI-nbW"/>
                                                     </constraints>
                                                     <state key="normal" image="Message"/>
                                                     <connections>
                                                         <action selector="psButton:" destination="mv2-Eg-HHb" eventType="touchUpInside" id="8oj-4L-wPb"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xR-Al-ZX4">
-                                                    <rect key="frame" x="254" y="8" width="25" height="25"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xR-Al-ZX4">
+                                                    <rect key="frame" x="249" y="8" width="25" height="25"/>
                                                     <color key="backgroundColor" red="1" green="0.91065734967301903" blue="0.41335889005368487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="aE5-ua-czp"/>
@@ -156,14 +156,25 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Boz-fD-nsS">
-                                                    <rect key="frame" x="221" y="8" width="25" height="25"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Boz-fD-nsS">
+                                                    <rect key="frame" x="216" y="8" width="25" height="25"/>
                                                     <color key="backgroundColor" red="1" green="0.14853076784516372" blue="0.21298294540066343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="L2I-cK-SFg"/>
                                                         <constraint firstAttribute="height" constant="25" id="QD9-iv-EFL"/>
                                                     </constraints>
                                                     <state key="normal" image="Message"/>
+                                                </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuZ-WG-aho">
+                                                    <rect key="frame" x="100" y="94" width="120" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="Nhb-7S-3SG"/>
+                                                        <constraint firstAttribute="width" constant="120" id="m1o-Z8-jpD"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Add Friend">
+                                                        <color key="titleColor" red="0.1819814891" green="0.69426733259999995" blue="0.53024792669999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -185,12 +196,15 @@
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="top" secondItem="ZoS-v2-c1D" secondAttribute="bottom" constant="20" id="KN9-fl-cuk"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="baseline" secondItem="Jgy-Sg-X8c" secondAttribute="baseline" id="LLc-tg-uY2"/>
                                                 <constraint firstItem="Pkk-6c-JY9" firstAttribute="leading" secondItem="IxG-Yx-V54" secondAttribute="leadingMargin" constant="34" id="LbY-fQ-upp"/>
+                                                <constraint firstItem="XuZ-WG-aho" firstAttribute="bottom" secondItem="An3-ew-gym" secondAttribute="bottom" id="LcW-3N-KlO"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="top" secondItem="Jgy-Sg-X8c" secondAttribute="top" id="PTg-MZ-yfp"/>
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="leading" secondItem="oxd-aC-5FB" secondAttribute="trailing" constant="8" id="R3Y-5U-CPk"/>
                                                 <constraint firstItem="Jgy-Sg-X8c" firstAttribute="top" secondItem="oxd-aC-5FB" secondAttribute="bottom" constant="6.5" id="R8a-55-IIW"/>
                                                 <constraint firstItem="ZoS-v2-c1D" firstAttribute="top" secondItem="MXh-C5-cZb" secondAttribute="bottom" constant="9" id="UQE-SY-Ooh"/>
+                                                <constraint firstItem="XuZ-WG-aho" firstAttribute="centerX" secondItem="IxG-Yx-V54" secondAttribute="centerX" id="XgX-eO-DaP"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="leading" secondItem="Jgy-Sg-X8c" secondAttribute="trailing" constant="9" id="b8m-D7-OEd"/>
                                                 <constraint firstItem="ZoS-v2-c1D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IxG-Yx-V54" secondAttribute="leadingMargin" constant="12" id="gS6-mD-5R5"/>
+                                                <constraint firstItem="XuZ-WG-aho" firstAttribute="top" secondItem="dPH-0v-j13" secondAttribute="bottom" constant="5" id="hzl-a2-cpE"/>
                                                 <constraint firstItem="kKe-Vg-dLq" firstAttribute="baseline" secondItem="oxd-aC-5FB" secondAttribute="baseline" id="iyg-A3-N3i"/>
                                                 <constraint firstItem="Jgy-Sg-X8c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kKe-Vg-dLq" secondAttribute="bottom" constant="6" id="jjm-QF-taC"/>
                                                 <constraint firstItem="TmN-YZ-Bxg" firstAttribute="top" secondItem="kKe-Vg-dLq" secondAttribute="bottom" constant="7" id="mUB-vZ-lxC"/>
@@ -213,6 +227,7 @@
                                         <connections>
                                             <outlet property="acceptButton" destination="1qb-GX-Gs0" id="j1K-X2-3Qk"/>
                                             <outlet property="actionButton" destination="MXh-C5-cZb" id="VMR-Bv-zfa"/>
+                                            <outlet property="addFriendButton" destination="XuZ-WG-aho" id="gEg-hb-bze"/>
                                             <outlet property="blockButton" destination="0xR-Al-ZX4" id="Jfj-j0-kZF"/>
                                             <outlet property="chatButton" destination="tnT-pC-s8s" id="WR3-ar-WAW"/>
                                             <outlet property="descriptionLabel" destination="Pkk-6c-JY9" id="HOE-Oq-tED"/>
@@ -229,7 +244,7 @@
                                             <outlet property="workoutNumLabel" destination="mDx-5O-Dfb" id="0ox-Q1-RKv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserBuddyOverviewCell" rowHeight="44" id="RPv-S6-u31" customClass="UserBuddyOverviewCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserBuddyOverviewCell" rowHeight="44" id="RPv-S6-u31" customClass="UserBuddyOverviewCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="368" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RPv-S6-u31" id="0mV-Mu-unB">
@@ -280,7 +295,7 @@
                                             <outlet property="buddyView" destination="s8y-t1-Jh5" id="f92-Sl-wwM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutCell" rowHeight="44" id="FIy-Yg-Dg7" customClass="UserWorkoutOverviewCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutCell" rowHeight="44" id="FIy-Yg-Dg7" customClass="UserWorkoutOverviewCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="412" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FIy-Yg-Dg7" id="spe-Co-jiP">
@@ -313,7 +328,7 @@
                                             <outlet property="nameLabel" destination="LTc-o5-3EB" id="Zg5-AT-iy0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutHistoryCell" rowHeight="44" id="7T0-OP-S1c" customClass="UserWorkoutHistoryCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutHistoryCell" rowHeight="44" id="7T0-OP-S1c" customClass="UserWorkoutHistoryCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="456" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7T0-OP-S1c" id="zDS-Cz-ddH">
@@ -396,7 +411,7 @@
         <!--Change Password-->
         <scene sceneID="pZu-sy-OdX">
             <objects>
-                <tableViewController id="JHZ-vi-PsT" customClass="MePasswordVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="JHZ-vi-PsT" customClass="MePasswordVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="d93-nX-bwS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -525,7 +540,7 @@
         <!--Me Credit TermVC-->
         <scene sceneID="AsK-sd-7bh">
             <objects>
-                <tableViewController id="x9j-hn-ogQ" customClass="MeCreditTermVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="x9j-hn-ogQ" customClass="MeCreditTermVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="xbN-6m-i7z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -594,7 +609,7 @@
         <!--Settings-->
         <scene sceneID="EZs-CS-9EJ">
             <objects>
-                <tableViewController id="K6F-Px-taC" customClass="SettingsVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="K6F-Px-taC" customClass="SettingsVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IXt-4V-kzh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -721,7 +736,7 @@
         <!--Buddies-->
         <scene sceneID="qZ2-cK-5EZ">
             <objects>
-                <viewController id="q8B-y2-eXI" customClass="MeBuddiesVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="q8B-y2-eXI" customClass="MeBuddiesVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n7f-Ku-BWB"/>
                         <viewControllerLayoutGuide type="bottom" id="UBf-Xw-RfX"/>
@@ -793,7 +808,7 @@
         <!--Edit Profile-->
         <scene sceneID="Vuw-aq-wmD">
             <objects>
-                <tableViewController id="VBR-Qk-MO3" customClass="MeUpdateVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VBR-Qk-MO3" customClass="MeUpdateVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hjl-Ob-Ppz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1037,7 +1052,7 @@
         <!--Find New Buddies-->
         <scene sceneID="XhU-rF-2g3">
             <objects>
-                <viewController storyboardIdentifier="MeFindVC" id="f7d-Bi-wnq" customClass="MeFindVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeFindVC" id="f7d-Bi-wnq" customClass="MeFindVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tdZ-SN-cG8"/>
                         <viewControllerLayoutGuide type="bottom" id="xHn-bl-Izw"/>
@@ -1120,7 +1135,7 @@
         <image name="settings" width="17" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jtv-XO-ezw"/>
+        <segue reference="awI-hR-Ire"/>
         <segue reference="Yzq-VB-49f"/>
     </inferredMetricsTieBreakers>
 </document>

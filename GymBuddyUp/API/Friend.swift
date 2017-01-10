@@ -26,7 +26,6 @@ class Friend {
     
     static var authenticationError : NSError = NSError(domain: FIRAuthErrorDomain, code: FIRAuthErrorCode.ErrorCodeUserTokenExpired.rawValue, userInfo: nil)
     
-    
     class func sendFriendRequest(recipientId: String, completion: (NSError?) -> Void) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
             if error != nil {
@@ -107,8 +106,7 @@ class Friend {
         }
     }
     
-    class func getFriendList(userId: String, completion: ([String]) -> Void)
-    {
+    class func getFriendList(userId: String, completion: ([String]) -> Void) {
         var friends = [String]()
         friendRef.child(userId).queryOrderedByChild("is_friend").queryEqualToValue(1).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
                 for friend in snapshot.children {
@@ -120,11 +118,17 @@ class Friend {
     }
     
     class func isCurrentUserFriendWith(userToCheckWith:String, completion: FriendStatus -> Void) {
-        friendRef.child((User.currentUser?.userId)!).child(userToCheckWith).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+        guard let currentUserId = User.currentUser?.userId else {
+            Log.info("No current user")
+            return
+        }
+        friendRef.child(currentUserId).child(userToCheckWith).observeSingleEventOfType(.Value, withBlock: {(snapshot) in
             if let val = snapshot.value as? NSDictionary {
                 let isFriend = val["is_friend"] as? Int
                 if isFriend == 1 {
                     completion(FriendStatus.isFriend)
+                    Log.info("is friend")
+
                 }
                 else if isFriend == 0 {
                     completion(FriendStatus.requestPending)
@@ -133,6 +137,7 @@ class Friend {
             
             else {
                 completion(FriendStatus.notFriend)
+                Log.info("nof friend")
             }
             
         })

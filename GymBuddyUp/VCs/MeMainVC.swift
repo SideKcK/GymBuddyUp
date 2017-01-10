@@ -299,6 +299,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.chatButton.hidden = true
             cell.reportButton.hidden = true
             cell.blockButton.hidden = true
+            cell.actionButton.hidden = !isCurrent
             if isCurrent {
                 cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             } else {

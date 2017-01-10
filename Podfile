@@ -4,7 +4,7 @@ platform :ios, '8.0'
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'GymBuddyUp' do
+target 'SideKcK' do
     pod 'ChameleonFramework/Swift', '~> 2.1.0'
     pod 'Alamofire', '~> 3.4'
     pod 'AlamofireImage', '~> 2.4'

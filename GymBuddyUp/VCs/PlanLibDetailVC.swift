@@ -103,6 +103,12 @@ class PlanLibDetailVC: UIViewController {
             desVC.plans.removeAll()
             desVC.reloadPlans(sender as! NSDate)
         }
+
+        if segue.identifier ==  "toExerciseDetailSegue" {
+            if let desVC = segue.destinationViewController as? PlanExerciseVC {
+                desVC.exercise = sender as! Exercise
+            }
+        }
     }
  
 

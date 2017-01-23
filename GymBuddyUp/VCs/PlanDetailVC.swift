@@ -231,7 +231,8 @@ class PlanDetailVC: UIViewController {
                 self.statusLabel.text =  "Invitation sent to \(screenName)"
             })
         }*/
-        let _invite = invite!
+        if let _invite = invite{
+            if _invite.id != "-1" {
         if _invite.isAvailable == false {
             if _invite.inviterId == User.currentUser?.userId {
                 if _invite.inviteeId != nil {
@@ -294,6 +295,7 @@ class PlanDetailVC: UIViewController {
                     self.statusLabel.text = "Invitation sent to unknown user"
                 }
             }
+                }}
         }
 
     }

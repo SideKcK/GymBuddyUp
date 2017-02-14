@@ -21,7 +21,8 @@ class PlanMainVC: UIViewController {
     @IBOutlet weak var todayButton: UIBarButtonItem!
     
     @IBOutlet weak var addPlanToTopConstraint: NSLayoutConstraint!
-    
+    var refreshControl: UIRefreshControl!
+
     var dots = [NSDate]()
     var workouts = [NSDate: [ScheduledWorkout]]()
     var plans = [NSDate: [Plan]]()
@@ -39,6 +40,7 @@ class PlanMainVC: UIViewController {
         setupVisual()
         setCalendar()
         setTableView()
+        setupRefresh()
         addPlanButton.addShadow()
         getPlansThisWeek(selectedDate)
         setupChangesListener()
@@ -49,6 +51,17 @@ class PlanMainVC: UIViewController {
             Log.info("found a new invitation")
             self.getPlansThisWeek(self.selectedDate)
         }
+    }
+    
+    func setupRefresh() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        reloadPlans(selectedDate)
+        refreshControl.endRefreshing()
     }
     
     func setupVisual() {

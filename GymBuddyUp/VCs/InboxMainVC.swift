@@ -38,6 +38,8 @@ class InboxMainVC: UIViewController {
     var segControl: HMSegmentedControl!
     let timeStampFormatter = NSDateFormatter()
 
+    var refreshControl: UIRefreshControl!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +56,18 @@ class InboxMainVC: UIViewController {
     func setupMisc() {
         timeStampFormatter.timeZone = NSTimeZone.localTimeZone()
         timeStampFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+
     }
     
-    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+
     
     @IBAction func testBarButtonClick(sender: AnyObject) {
         Log.info("test button clicked")

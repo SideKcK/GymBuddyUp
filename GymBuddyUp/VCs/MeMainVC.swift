@@ -218,7 +218,7 @@ class MeMainVC: UIViewController {
         let sMonth = (1.years).agoFromDate(eMonth.startOf(.Month))
         let getScheduledWorkoutGroup = dispatch_group_create()
         dispatch_group_enter(getScheduledWorkoutGroup)
-        Tracking.getTrackedPlanTimeSpan(sMonth, endDate: eMonth){ (trackedPlans, error) in
+        Tracking.getTrackedPlanTimeSpan(sMonth, endDate: eMonth, userId: user.userId){ (trackedPlans, error) in
             print("getTrackedPlanTimeSpan " +  String(trackedPlans?.count))
             if let trackedPlans = trackedPlans {
                 self.trackings = trackedPlans
@@ -300,6 +300,7 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.reportButton.hidden = true
             cell.blockButton.hidden = true
             cell.actionButton.hidden = !isCurrent
+            cell.addFriendButton.hidden = isCurrent
             if isCurrent {
                 cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             } else {

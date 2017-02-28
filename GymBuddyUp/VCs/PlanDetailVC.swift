@@ -14,7 +14,7 @@ import KRProgressHUD
 }
 
 @objc protocol showTrackingInfoDelegate {
-    optional func showTrackingTable(trackedPlan: AnyObject)
+    optional func showTrackingTable()
 }
 class PlanDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -48,7 +48,7 @@ class PlanDetailVC: UIViewController {
     var gym: Gym?
     var isInvite = false
     var invite: Invite?
-    
+    var delegate: reloadPlanInfoDelegate?
     override func viewDidLoad() {
         Log.info("PlanDetailVC fired")
         super.viewDidLoad()
@@ -128,9 +128,15 @@ class PlanDetailVC: UIViewController {
             self.title = weekMonthDateString(self.selectedDate)
         }
         
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Bordered, target: self, action: "back:")
+        self.navigationItem.leftBarButtonItem = newBackButton
         // Do any additional setup after loading the view.
     }
-    
+    func back(sender: UIBarButtonItem) {
+        self.delegate?.reloadPlanInfo!()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     override func viewWillAppear(animated: Bool) {
         if let row = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(row, animated: true)
@@ -443,6 +449,7 @@ class PlanDetailVC: UIViewController {
                 desVC.plan = plan
                 desVC.time = selectedDate
                 desVC.setNavBarItem()
+                desVC.planDetailDelegate = self
             }
         }
         
@@ -463,6 +470,7 @@ class PlanDetailVC: UIViewController {
         }
 
         if let desVC = segue.destinationViewController as? PlanMainVC {
+            print("Going to PlanMainVC")
             if let send = sender as? String {
                 if send == "delete" || send == "repeat"{
                     desVC.reloadPlans(desVC.selectedDate)
@@ -506,6 +514,19 @@ class PlanDetailVC: UIViewController {
                 KRProgressHUD.dismiss()
             }
             
+        }
+        ScheduledWorkout.getScheduledWorkoutsById(workout.id) { (workout) in
+            self.workout = workout
+            Invite.getWorkoutInviteByScheduledWorkoutIdAndDate(workout.id, date: self.selectedDate, completion: { (error: NSError?, invite: Invite?) in
+                if let _invite = invite where error == nil {
+                    self.workout.invite = _invite
+                    self.invite = _invite
+                    
+                }
+                self.viewDidLoad()
+                KRProgressHUD.dismiss()
+            })
+           
         }
     }
 }
@@ -577,7 +598,7 @@ extension PlanDetailVC: showCheckInButtonDelegate, showTrackingInfoDelegate {
         }
     }
     
-    func showTrackingTable(trackedPlan: AnyObject){
+    func showTrackingTable(){
         self.reloadPlan()
     }
 }

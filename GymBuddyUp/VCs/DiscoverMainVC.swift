@@ -13,6 +13,9 @@ import KRProgressHUD
 import Alamofire
 import AlamofireImage
 
+@objc protocol reloadDiscoverMainDelegate {
+    optional func reloadDiscoverMain()
+}
 class DiscoverMainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segView: UIView!
@@ -242,6 +245,7 @@ class DiscoverMainVC: UIViewController {
             let row = sender as? Int {
                 desVC.event = events[row]
                 desVC.plan = plans[row]
+                desVC.reloaddiscovermainDelegate = self
             }
         
         if let desVC = segue.destinationViewController as? GymMapVC,
@@ -337,4 +341,12 @@ extension DiscoverMainVC: UITableViewDelegate, UITableViewDataSource {
         
     }
 
+}
+
+extension DiscoverMainVC: reloadDiscoverMainDelegate {
+    
+    func reloadDiscoverMain(){
+        reloadData()
+    }
+    
 }

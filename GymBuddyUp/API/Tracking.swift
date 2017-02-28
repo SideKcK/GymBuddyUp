@@ -322,11 +322,11 @@ class Tracking {
         }
     }
     
-    class func getTrackedPlanTimeSpan(startDate: NSDate, endDate: NSDate, completion: (trackedPlan: [TrackedPlan]?, error: NSError?)-> Void) {
+    class func getTrackedPlanTimeSpan(startDate: NSDate, endDate: NSDate, userId: String!, completion: (trackedPlan: [TrackedPlan]?, error: NSError?)-> Void) {
         // Query
         print("=========== Before getTrackedPlanTimeSpan!")
 
-        trackedPlanRef.child(User.currentUser!.userId).queryOrderedByChild("start_time").queryStartingAtValue(dateToInt(startDate))
+        trackedPlanRef.child(userId).queryOrderedByChild("start_time").queryStartingAtValue(dateToInt(startDate))
             .queryEndingAtValue(dateToInt(endDate)).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
                 var results:[TrackedPlan] = []
                 

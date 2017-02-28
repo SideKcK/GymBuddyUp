@@ -540,7 +540,7 @@ class TrackMainVC: UIViewController, AKPickerViewDelegate, AKPickerViewDataSourc
     func doneTrackingCallback() {
         self.dismissViewControllerAnimated(true, completion: nil)
         if self.trackedPlan != nil {
-            self.delegate?.showTrackingTable!(self.trackedPlan!)
+            self.delegate?.showTrackingTable!()
         }
     }
     

@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return CLLocation(latitude: foundLatitude, longitude: foundLongitude)
         }
-
+        
     }
     
     func userDidLogout() {

@@ -117,7 +117,8 @@ class Discover {
                                 print("invite :::::" + inviteid)
                                 // now get this invite object
                                 let access = (value as! NSDictionary)["access"] as! Int
-                                if(access != 0){
+                                let sentTo = (value as! NSDictionary)["sent_to"] as! String
+                                if(access != 0 || (access == 0 && sentTo == User.currentUser?.userId)){
                                     dispatch_group_enter(getInvitesTaskGrp1)
                                     
                                     workoutInviteRef.child(inviteid).observeSingleEventOfType(.Value, withBlock: { (inviteSnapshot) in
@@ -125,7 +126,7 @@ class Discover {
                                             print("invite is null")
                                         }else{
                                             var inviteData = inviteSnapshot.value as! [String: AnyObject]
-                                            inviteData["id"] = key
+                                            inviteData["id"] = inviteid
                                             if let invite = Invite(JSON: inviteData){
                                                 if invite.isAvailable != false && invite.accessLevel != 2 {
                                                     print("invite is not null " + invite.id)

@@ -223,5 +223,15 @@ class ScheduledWorkout {
                     })
             
                 }
+    class func getScheduledWorkoutsById(id: String, complete: (ScheduledWorkout)-> Void) {
+        // Query
+        workoutCalendarRef.child(User.currentUser!.userId).child(id).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let data = snapshot.value as? NSDictionary{
+                let results = ScheduledWorkout(id: id, data: data)
+                complete(results)
+            }
+        })
+        
+    }
 
 }

@@ -35,7 +35,7 @@ class DiscoverDetailVC: UIViewController {
 
     var event: Invite!
     var plan: Plan!
-
+    var reloaddiscovermainDelegate: reloadDiscoverMainDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +52,10 @@ class DiscoverDetailVC: UIViewController {
         setupVisual()
         if event != nil {
             setupData()
+            
         }
+        resetActionButton()
+       // joinButton.addTarget(self, action: #selector(DiscoverDetailVC.onBigJoinButton), forControlEvents: .TouchUpInside)
     }
     
     func setupData() {
@@ -74,6 +77,18 @@ class DiscoverDetailVC: UIViewController {
         joinButton.hidden = true
         joinStack.hidden = true
         planButton.hidden = true
+        if (event.accessLevel == 0){
+            joinButton.hidden = true
+            joinStack.hidden = false
+            stackJoinButton.hidden = false
+            stackRejectButton.hidden = false
+ 
+        }else {
+            joinButton.hidden = false
+            joinStack.hidden = true
+            stackJoinButton.hidden = true
+            stackRejectButton.hidden = true
+        }
     }
     
     func setupVisual() {
@@ -119,8 +134,7 @@ class DiscoverDetailVC: UIViewController {
         planView.layer.addBorder(.Bottom, color: ColorScheme.g2Text, thickness: 0.5)
         gymButton.addTarget(self, action: #selector(onGymButton), forControlEvents: .TouchUpInside)
         gymButton.setTitle(event.gym?.name, forState: .Normal)
-        resetActionButton()
-        joinStack.hidden = false
+
         profileView.image = UIImage(named: "dumbbell")
         if let user = UserCache.sharedInstance.cache[event.inviterId] {
             nameLabel.text = user.screenName
@@ -187,7 +201,7 @@ class DiscoverDetailVC: UIViewController {
     
     @IBAction func onJoinButton(sender: AnyObject) {
         //join this workout invite
-        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
+        /*guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
             Log.info("onJoinButton unwrap failed check nil values")
             Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
             return
@@ -199,16 +213,46 @@ class DiscoverDetailVC: UIViewController {
                 let statusView = StatusView()
                 statusView.setMessage("Done! Enjoy working out with \(user.screenName!)")
                 statusView.displayView()
+                
             } else {
                 Log.info("join failed")
                 Log.info(error?.localizedDescription)
             }
-
-        }
-
+            if let delegate = self.reloaddiscovermainDelegate{
+                delegate.reloadDiscoverMain!()
+            }
+        }*/
+        onBigJoinButton()
         
     }
-    
+    func onBigJoinButton() {
+        //join this workout invite
+        print("Inside onBigJoinButton")
+        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
+            Log.info("onJoinButton unwrap failed check nil values")
+            Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
+            return
+        }
+        print("inviteId :" + inviteId)
+        Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in
+            if error == nil {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let statusView = StatusView()
+                statusView.setMessage("Done! Enjoy working out with \(user.screenName!)")
+                statusView.displayView()
+                
+            } else {
+                Log.info("join failed")
+                Log.info(error?.localizedDescription)
+            }
+            if let delegate = self.reloaddiscovermainDelegate{
+                delegate.reloadDiscoverMain!()
+            }
+        }
+        
+        
+    }
+
     @IBAction func onRejectButton(sender: AnyObject) {
         //reject invite
         guard let inviteId = event?.id else {
@@ -236,13 +280,13 @@ class DiscoverDetailVC: UIViewController {
             return
         }
         
-        Invite.cancelWorkoutInvite(inviteId) { (error: NSError?) in
+        /*Invite.cancelWorkoutInvite(inviteId) { (error: NSError?) in
             if error == nil {
                 Log.info("canceled successfully")
             } else {
                 Log.info("cancel failed")
             }
-        }
+        }*/
         
         self.dismissViewControllerAnimated(true, completion: nil)
 

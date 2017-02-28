@@ -22,7 +22,7 @@ class InviteMainVC: UIViewController {
     var gymButton : UIButton!
     var showDatePicker = false
     var datePickerHeight: NSLayoutConstraint!
-    
+    var planDetailDelegate: showTrackingInfoDelegate?
     enum SendType {
         case DirectInvitation
         case BroadcastBuddies
@@ -118,12 +118,14 @@ class InviteMainVC: UIViewController {
             break
         }
         
-
+        if let delegate = planDetailDelegate{
+            delegate.showTrackingTable!()
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
         let statusView = StatusView()
         statusView.setMessage("Invitation sent")
         statusView.displayView()
-
+        
     }
     
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s9k-o9-SP4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s9k-o9-SP4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -47,7 +47,7 @@
         <!--Create Invite-->
         <scene sceneID="975-FI-y4L">
             <objects>
-                <viewController storyboardIdentifier="InviteMainVC" id="n2l-yh-60L" customClass="InviteMainVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteMainVC" id="n2l-yh-60L" customClass="InviteMainVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IUe-89-6Zu"/>
                         <viewControllerLayoutGuide type="bottom" id="ejI-G5-ilf"/>
@@ -60,7 +60,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteDateCell" rowHeight="250" id="tlk-in-OKu" customClass="InviteDateCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteDateCell" rowHeight="250" id="tlk-in-OKu" customClass="InviteDateCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tlk-in-OKu" id="URB-iQ-aXl">
@@ -117,7 +117,7 @@
                                             <outlet property="datePickerHeight" destination="YmP-n5-bGv" id="JMj-V6-4Vn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteGymCell" rowHeight="102" id="HFQ-QI-q8O" customClass="InviteGymCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteGymCell" rowHeight="102" id="HFQ-QI-q8O" customClass="InviteGymCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="342" width="320" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HFQ-QI-q8O" id="yXV-3g-gD9">
@@ -159,7 +159,7 @@
                                             <outlet property="gymLabel" destination="zwg-au-DqK" id="y32-ox-Nt0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteToCell" rowHeight="104" id="whf-dx-dMZ" customClass="InviteToCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteToCell" rowHeight="104" id="whf-dx-dMZ" customClass="InviteToCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="444" width="320" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="whf-dx-dMZ" id="ySJ-hf-VKx">
@@ -253,7 +253,7 @@
         <!--Choose Plan-->
         <scene sceneID="Zz1-LY-7YR">
             <objects>
-                <viewController id="BEH-LG-AFU" customClass="InvitePlanVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BEH-LG-AFU" customClass="InvitePlanVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Q4-iq-ft7"/>
                         <viewControllerLayoutGuide type="bottom" id="LOY-1W-lSx"/>
@@ -279,7 +279,7 @@
                                 <rect key="frame" x="0.0" y="264" width="414" height="428"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlanCell" rowHeight="144" id="Za7-60-SL6" customClass="InviteNoPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlanCell" rowHeight="144" id="Za7-60-SL6" customClass="InviteNoPlanCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Za7-60-SL6" id="ul3-ax-yCf">
@@ -351,7 +351,7 @@
                                             <outlet property="titleLabel" destination="cR4-Ve-VrQ" id="EBu-2U-UQf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addPlanCell" rowHeight="72" id="BPK-69-HIX" customClass="InviteAddPlanCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addPlanCell" rowHeight="72" id="BPK-69-HIX" customClass="InviteAddPlanCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="172" width="414" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="BPK-69-HIX" id="zJN-nN-ViG">
@@ -457,7 +457,7 @@
         <!--Choose a Category-->
         <scene sceneID="OZf-wJ-heO">
             <objects>
-                <viewController id="Pcz-2p-1l8" customClass="NoPlanCatVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Pcz-2p-1l8" customClass="NoPlanCatVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X0r-uz-hGO"/>
                         <viewControllerLayoutGuide type="bottom" id="1SG-bb-QE6"/>
@@ -476,7 +476,7 @@
                                 <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noPlanCatCell" rowHeight="85" id="HhR-ob-tlf" customClass="InviteNoPlanCatCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noPlanCatCell" rowHeight="85" id="HhR-ob-tlf" customClass="InviteNoPlanCatCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HhR-ob-tlf" id="mQB-4l-sGQ">
@@ -530,7 +530,7 @@
         <!--Location-->
         <scene sceneID="xCr-wT-n05">
             <objects>
-                <viewController storyboardIdentifier="InviteGymVC" id="Cxn-Xy-Rvw" customClass="InviteGymVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteGymVC" id="Cxn-Xy-Rvw" customClass="InviteGymVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n55-4a-RbD"/>
                         <viewControllerLayoutGuide type="bottom" id="BNv-cG-xpn"/>
@@ -543,7 +543,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GymCell" rowHeight="70" id="MGk-ge-tvQ" customClass="GymCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GymCell" rowHeight="70" id="MGk-ge-tvQ" customClass="GymCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MGk-ge-tvQ" id="daV-sG-u93">
@@ -631,7 +631,7 @@
         <!--Buddies-->
         <scene sceneID="uMb-M5-WwJ">
             <objects>
-                <viewController storyboardIdentifier="MeBuddiesVC" id="5tf-jQ-3lk" customClass="InviteBuddiesVC" customModule="GymBuddyUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeBuddiesVC" id="5tf-jQ-3lk" customClass="InviteBuddiesVC" customModule="SideKcK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ADM-US-akT"/>
                         <viewControllerLayoutGuide type="bottom" id="n60-ea-DWc"/>
@@ -644,7 +644,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="80" id="tHG-4p-QLg" customClass="BuddyCell" customModule="GymBuddyUp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuddyCell" rowHeight="80" id="tHG-4p-QLg" customClass="BuddyCell" customModule="SideKcK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tHG-4p-QLg" id="oLz-IK-j2t">

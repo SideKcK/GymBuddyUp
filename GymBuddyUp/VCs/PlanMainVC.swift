@@ -11,6 +11,10 @@ import CVCalendar
 import SwiftDate
 import KRProgressHUD
 
+@objc protocol reloadPlanInfoDelegate {
+    optional func reloadPlanInfo()
+}
+
 class PlanMainVC: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
@@ -105,8 +109,8 @@ class PlanMainVC: UIViewController {
         KRProgressHUD.show()
         ScheduledWorkout.getScheduledWorkoutsForDate(date) { (workouts) in
             self.workouts[date] = workouts
-            self.gyms[date] = []
-            self.invites[date] = []
+            self.gyms[date] = [Gym](count: workouts.count, repeatedValue: Gym())
+            self.invites[date] = [Invite](count: workouts.count, repeatedValue: Invite())
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {
@@ -474,9 +478,9 @@ class PlanMainVC: UIViewController {
                 desVC.workout = workouts[selectedDate]![row]
                 desVC.gym = gyms[selectedDate]![row]
                 desVC.invite = invites[selectedDate]![row]
-
+                
             }
-           
+           desVC.delegate = self
         }
         if segue.identifier == "toPlanLibrarySegue" {
             if let desVC = segue.destinationViewController as? PlanLibNavVC {
@@ -842,4 +846,12 @@ extension PlanMainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("toPlanDetailSegue", sender: indexPath.row)
     }
+}
+
+extension PlanMainVC: reloadPlanInfoDelegate {
+    
+    func reloadPlanInfo(){
+        reloadPlans(selectedDate)
+    }
+
 }

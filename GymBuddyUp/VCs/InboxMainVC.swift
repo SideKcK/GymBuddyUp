@@ -296,7 +296,9 @@ class InboxMainVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let navVC = segue.destinationViewController as? UINavigationController, let desVC = navVC.topViewController as? DiscoverDetailVC {
             guard let senderDict = sender as? [String : AnyObject] else {return}
+            
             desVC.event = senderDict["invite"] as! Invite
+           print("before goto DiscoverDetailVC " + desVC.event.inviterId)
             desVC.plan = senderDict["plan"] as! Plan
         }
     }
@@ -466,6 +468,8 @@ extension InboxMainVC: UITableViewDelegate, UITableViewDataSource {
             let inboxMessageId = inboxInvitations[indexPath.row]
             let inboxMessage = inboxInvitationDict[inboxMessageId]
             guard let workoutId = inboxMessage?.associatedId else {return}
+            Log.info("workoutId: " + workoutId)
+            Log.info("inboxMessageId: " + inboxMessageId)
             Invite.getWorkoutInviteById(workoutId, completion: { (error: NSError?, invite: Invite?) in
                 if error == nil {
                     guard let _invite = invite else {return}

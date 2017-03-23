@@ -419,7 +419,7 @@ class User {
         })
     }
     
-    class func getUserByFacebookId (facebookId: String, successHandler: (User)->()) {
+    class func getUserByFacebookId (facebookId: String, successHandler: (User)->(), failureHandler: (NSError) -> Void) {
         let ref:FIRDatabaseReference! = FIRDatabase.database().reference().child("user_info")
         let gcdGetUserGroup = dispatch_group_create()
         var ret = User()
@@ -427,7 +427,7 @@ class User {
         dispatch_group_enter(gcdGetUserGroup)
         print("facebook_id : " + facebookId)
         ref.queryOrderedByChild("facebook_id").queryEqualToValue(facebookId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            print("queryEqualToValue : " + facebookId)
+            
             ret = User()
             let queryResults = snapshot.value as! NSDictionary
             for userId in queryResults.allKeys {
@@ -438,6 +438,7 @@ class User {
                 }
                  print("ret.screenName" + ret.screenName!)
                 if let _goals = data["goal"] as? [Int] {
+                    print("inside goals")
                     for key in _goals{
                         ret.goals.append(Goal(rawValue: key)!)
                         print(String(key))
@@ -469,15 +470,16 @@ class User {
                 ret.userRef = ref.child(ret.userId)
             }
 
-            
+            print("queryEqualToValuefacebook_id : " + facebookId)
             dispatch_group_leave(gcdGetUserGroup)
         }) { (error) in
-            print(error.localizedDescription)
+            print("error" + error.localizedDescription)
             dispatch_group_leave(gcdGetUserGroup)
         }
         
         
         dispatch_group_notify(gcdGetUserGroup, dispatch_get_main_queue(), {
+            print("successHandler")
             successHandler(ret)
         })
     }

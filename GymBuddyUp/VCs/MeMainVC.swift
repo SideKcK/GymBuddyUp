@@ -300,20 +300,24 @@ extension MeMainVC: UITableViewDelegate, UITableViewDataSource {
             cell.reportButton.hidden = true
             cell.blockButton.hidden = true
             cell.actionButton.hidden = !isCurrent
-            cell.addFriendButton.hidden = isCurrent
+            //cell.addFriendButton.hidden = isCurrent
             if isCurrent {
                 cell.actionButton.addTarget(self, action: #selector(MeMainVC.onActionButton(_:)), forControlEvents: .TouchUpInside)
             } else {
+                
                 Friend.isCurrentUserFriendWith(asyncId, completion: { (status: Friend.FriendStatus) in
                     switch status {
                     case .isFriend:
+                        cell.actionButton.hidden = false
                         cell.actionButton.setTitle("Buddy", forState: .Normal)
                         break
                     case .notFriend:
+                        cell.actionButton.hidden = false
                         cell.actionButton.setTitle("Add Friend", forState: .Normal)
                         cell.actionButton.addTarget(self, action: #selector(self.onAddFriend(_:)), forControlEvents: .TouchUpInside)
                         break
                     case .requestPending:
+                        cell.actionButton.hidden = false
                         cell.actionButton.setTitle("Reqeust Sent", forState: .Normal)
                         break
                     }

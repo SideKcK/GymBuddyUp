@@ -244,6 +244,10 @@ class DiscoverDetailVC: UIViewController {
             } else {
                 Log.info("join failed")
                 Log.info(error?.localizedDescription)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let statusView = StatusView()
+                statusView.setMessage("This invitation has been taken by others. :(")
+                statusView.displayView()
             }
             if let delegate = self.reloaddiscovermainDelegate{
                 delegate.reloadDiscoverMain!()

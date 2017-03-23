@@ -15,6 +15,7 @@ import FirebaseMessaging
 import FBSDKCoreKit
 import SwiftDate
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -64,16 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.currentUser?.userBecameActive()
         User.currentUser?.syncWithLastestUserInfo(nil)
         LocationCache.sharedInstance.setup()
-        /*Report.blockUser("1E2tZysv4ndvNSb8Cx2f53Z5r433",completion: { error in
-        
-        })
-        Report.addReport("1", reportItemId: "1E2tZysv4ndvNSb8Cx2f53Z5r433",completion: { error in
-            
-        })*/
-        /*********************/
-        // Test the fuck out //
-        /*********************/
-        
+        User.currentUser?.getTokenForcingRefresh() {idToken, error in
+            print("idToken! : " + idToken!)
+        }
+
+               
         func getRandomLocation(origin: CLLocation , withinRadius: Int) -> CLLocation {
             let x0 = origin.coordinate.longitude
             let y0 = origin.coordinate.latitude

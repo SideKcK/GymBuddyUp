@@ -208,7 +208,7 @@ class Friend {
         let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
         var userList = [User]()
         if let tokenString = User.currentUser?.facebookAccesstoken{
-            let fetchWorkoutDispatchGroup = dispatch_group_create()
+            
             let blockedUserList = User.currentUser!.blockedUserList
             let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: params, tokenString: tokenString, version: nil, HTTPMethod: "GET")
             request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
@@ -224,21 +224,27 @@ class Friend {
                         let _key  = key as! String
                         switch(_key){
                         case "data":
-                             let stringMirror = Mirror(reflecting: value)
+                            let stringMirror = Mirror(reflecting: value)
                             print(stringMirror.subjectType)
                             let data : NSArray = (value as? NSArray)!
-                            dispatch_group_enter(fetchWorkoutDispatchGroup)
+                            let fetchWorkoutDispatchGroup = dispatch_group_create()
+                            
                             for friend in data{
                                 print("inside discoverFBFriends no error NSArray")
                                 let _friend = friend as! NSDictionary
+                                dispatch_group_enter(fetchWorkoutDispatchGroup)
                                 User.getUserByFacebookId(_friend["id"] as! String,successHandler: { (user: User) in
                                     print(user.screenName)
                                     if let isBlocked = blockedUserList[user.userId!]{
                                     }else{
                                         userList.append(user)
                                     }
+                                    print("before release fetchWorkoutDispatchGroup")
                                     dispatch_group_leave(fetchWorkoutDispatchGroup)
-                                })
+                                    }, failureHandler: {(error) in
+                                    dispatch_group_leave(fetchWorkoutDispatchGroup)
+                                
+                                } )
                                 print("Facebook id :" + String(friend["id"]))
                             }
                              dispatch_group_notify(fetchWorkoutDispatchGroup, dispatch_get_main_queue()) {

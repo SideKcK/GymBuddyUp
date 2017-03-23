@@ -1135,7 +1135,7 @@
         <image name="settings" width="17" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="awI-hR-Ire"/>
         <segue reference="Yzq-VB-49f"/>
+        <segue reference="Jtv-XO-ezw"/>
     </inferredMetricsTieBreakers>
 </document>

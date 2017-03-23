@@ -111,6 +111,14 @@ class PlanMainVC: UIViewController {
             self.workouts[date] = workouts
             self.gyms[date] = [Gym](count: workouts.count, repeatedValue: Gym())
             self.invites[date] = [Invite](count: workouts.count, repeatedValue: Invite())
+            for temWorkout in workouts {
+                let dateString = date.toString()
+                let cacheId = temWorkout.id + dateString!
+                if let _invite = InvitationCache.sharedInstance.cache[cacheId] {
+                    InvitationCache.sharedInstance.cache[cacheId] = nil
+                }
+            }
+            
             if let planIds = Plan.planIDsWithArray(workouts) {
                 Library.getPlansById(planIds, completion: { (plans, error) in
                     if error == nil {

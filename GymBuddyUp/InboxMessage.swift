@@ -67,6 +67,7 @@ class InboxMessage {
         associatedId = _associatedId
         senderId = _senderId
         senderName = _senderName
+        print("senderName: " + senderName!)
         isIgnore = false
         isProcessed = false
         timeStamp = NSDate(timeIntervalSince1970: _timeStamp / 1000)
@@ -102,7 +103,7 @@ class InboxMessage {
         } else if type == .WorkoutInviteReceived {
             switch action {
             case .Accept:
-                Invite.acceptWorkoutInvite(messageId, completion: { (error: NSError?) in
+                Invite.acceptWorkoutInvite(associatedId!, completion: { (error: NSError?) in
                     pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
                     Log.info("accepted successfully")
 

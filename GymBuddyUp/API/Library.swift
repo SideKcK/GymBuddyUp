@@ -67,14 +67,17 @@ class Library {
             
             for planSnapshot in snapshot.children {
                 let planId = (planSnapshot as! FIRDataSnapshot).key
-                dispatch_group_enter(getPlanTaskGrp)
-                getPlanById(planId, completion: { (plan, error) in
-                    if let plan = plan {
-                        print("getting plan", planId)
-                        plans.append(plan)
-                        dispatch_group_leave(getPlanTaskGrp)
-                    }
-                })
+                let status =  (planSnapshot as! FIRDataSnapshot).value as! Bool
+                if  status == true{
+                    dispatch_group_enter(getPlanTaskGrp)
+                    getPlanById(planId, completion: { (plan, error) in
+                        if let plan = plan {
+                            print("getting plan", planId)
+                            plans.append(plan)
+                            dispatch_group_leave(getPlanTaskGrp)
+                        }
+                    })
+                }
             }
             
             dispatch_group_notify(getPlanTaskGrp, dispatch_get_main_queue()) {

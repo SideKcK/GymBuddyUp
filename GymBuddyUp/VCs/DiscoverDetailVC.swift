@@ -228,13 +228,13 @@ class DiscoverDetailVC: UIViewController {
     func onBigJoinButton() {
         //join this workout invite
         print("Inside onBigJoinButton")
-        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId] else {
+        guard let inviteId = event?.id, user = UserCache.sharedInstance.cache[event.inviterId], workoutTime = event?.workoutTime else {
             Log.info("onJoinButton unwrap failed check nil values")
             Log.info("event?.id=\(event?.id) user = \(UserCache.sharedInstance.cache[event.inviterId])")
             return
         }
         print("inviteId :" + inviteId)
-        Invite.acceptWorkoutInvite(inviteId) { (error: NSError?) in
+        Invite.acceptWorkoutInvite(inviteId, workoutTime: workoutTime) { (error: NSError?) in
             if error == nil {
                 self.dismissViewControllerAnimated(true, completion: nil)
                 let statusView = StatusView()

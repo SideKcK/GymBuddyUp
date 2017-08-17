@@ -120,7 +120,7 @@ class Invite : Mappable {
 
     }
     
-    class func acceptWorkoutInvite(inviteId: String, completion: (NSError?) -> Void ) {
+    class func acceptWorkoutInvite(inviteId: String, workoutTime: NSDate, completion: (NSError?) -> Void ) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
             if error != nil {
                 return completion(error)
@@ -129,10 +129,11 @@ class Invite : Mappable {
             let parameters = [
                 "token": idToken!,
                 "operation": "workout_invite_accept",
-                "workoutId": inviteId
+                "workoutId": inviteId,
+                "workout_time": dateToString(workoutTime) 
             ]
             
-            Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/prod/sidekck-notifications", parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, "https://y1avc048jl.execute-api.us-east-1.amazonaws.com/dev/notification", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {

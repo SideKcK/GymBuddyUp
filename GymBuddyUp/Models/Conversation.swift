@@ -32,7 +32,7 @@ class Conversation {
         self.isNew = isNew
     }
     
-    class func sendMessageToUser(recipientId: String, completion: (NSError?) -> Void) {
+    class func sendMessageToUser(recipientId: String, message_text:String, completion: (NSError?) -> Void) {
         User.currentUser?.getTokenForcingRefresh() {idToken, error in
             if error != nil {
                 return completion(error)
@@ -41,11 +41,13 @@ class Conversation {
             let parameters = [
                 "token": idToken!,
                 "operation": "chat_message",
-                "recipientId": recipientId
+                "recipientId": recipientId,
+                "message_text": message_text
             ]
-            
+            //print("recipientId" + recipientId)
             Alamofire.request(.POST, "https://kr24xu120j.execute-api.us-east-1.amazonaws.com/prod/sidekck-notifications", parameters: parameters, encoding: .JSON)
                 .responseJSON { response in
+                    //print("response: " + response.response.debugDescription)
                     // Handle ERROR response from lambda server
                     if !(Range(200..<300).contains((response.response?.statusCode)!)) {
                         let error = NSError(domain: "APIErrorDomain", code: (response.response?.statusCode)!, userInfo: ["result":response.result.value!])

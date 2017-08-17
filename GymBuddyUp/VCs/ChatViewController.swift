@@ -169,7 +169,7 @@ class ChatViewController: JSQMessagesViewController {
                 "createAt": timeStamp
             ]
             itemRef.setValue(messageItem)
-            Conversation.sendMessageToUser(reId, completion: { (error: NSError?) in
+            Conversation.sendMessageToUser(reId, message_text: text, completion: { (error: NSError?) in
                 if error != nil {
                     Log.error("chatVC notification error = \(error?.localizedDescription)")
                 }

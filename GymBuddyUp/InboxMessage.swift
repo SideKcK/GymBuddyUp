@@ -103,7 +103,7 @@ class InboxMessage {
         } else if type == .WorkoutInviteReceived {
             switch action {
             case .Accept:
-                Invite.acceptWorkoutInvite(associatedId!, completion: { (error: NSError?) in
+                Invite.acceptWorkoutInvite(associatedId!, workoutTime: timeStamp!, completion: { (error: NSError?) in
                     pushNotificatoinRef.child("\(userId)/\(self.messageId)/processed").setValue(true)
                     Log.info("accepted successfully")
 

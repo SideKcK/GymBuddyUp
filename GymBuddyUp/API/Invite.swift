@@ -229,6 +229,7 @@ class Invite : Mappable {
         inviteData["plan"] = planId
         inviteData["gym"] = gym.toDictionary()
         inviteData["workout_time"] = workoutTime.timeIntervalSince1970
+        inviteData["workout_date"] = dateToString(workoutTime)
         inviteData["published_at"] = FIRServerValue.timestamp()
         inviteData["available"] = true
         
